@@ -1,1 +1,20 @@
 @import "tailwindcss";
+/* @plugin "@tailwindcss/forms"; */
+
+@theme {
+  --color-eu-blue: #003399;
+  --color-eu-blue-dark: #002b80;
+}
+
+/* https://rsms.me/inter/ */
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
