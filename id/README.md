@@ -31,18 +31,30 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
   ```
 
 - **Run the setup script:**
+
   ```bash
   ./setup.sh
   ```
+
   This will:
+
   - install asdf and its bun plugin
   - install the required versions of Bun
   - install the application dependencies
   - install a pre-commit hook for formatting
-- **Run the development server:**
+
+- **Prepare the development database:**
 
   ```bash
-  cd id && bun dev
+  cd id
+  createdb noo_id
+  bun db:migrate
+  ```
+
+- **Start the development server:**
+
+  ```bash
+  bun dev
   ```
 
 - Visit [http://localhost:13000](http://localhost:13000) to access the application.
