@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 13000",
-    "dev:tls": "next dev --turbopack --experimental-https -p 13000",
+    "dev": "PORT=${PORT:-13000} next dev --turbopack",
+    "dev:tls": "PORT=${PORT:-13000} next dev --turbopack --experimental-https",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "playwright test"
   },
   "dependencies": {
     "next": "15.1.7",
