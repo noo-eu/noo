@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+@theme {
+  --color-eu-blue: #003399;
+  --color-eu-blue-dark: #002b80;
+}
+
+/* https://rsms.me/inter/ */
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+body {
+  @apply bg-indigo-50 dark:bg-zinc-900 text-gray-900 dark:text-gray-100;
+}
+
+.noo {
+  font-family: "DynaPuff", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: normal;
+  font-variation-settings: "wdth" 100;
+
+  /* DynaPuff shows up a bit off-center */
+  top: 0.03em;
+  position: relative;
+}

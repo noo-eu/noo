@@ -31,18 +31,30 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
   ```
 
 - **Run the setup script:**
+
   ```bash
   ./setup.sh
   ```
+
   This will:
+
   - install asdf and its bun plugin
   - install the required versions of Bun
   - install the application dependencies
   - install a pre-commit hook for formatting
-- **Run the development server:**
+
+- **Prepare the development database:**
 
   ```bash
-  cd id && bun dev
+  cd id
+  createdb noo_id
+  bun db:migrate
+  ```
+
+- **Start the development server:**
+
+  ```bash
+  bun dev
   ```
 
 - Visit [http://localhost:13000](http://localhost:13000) to access the application.
@@ -56,6 +68,40 @@ bun dev:tls
 ```
 
 The first time you run this command, mkcert will create a local CA and install it in your system's trust store. You may be prompted to enter your password to allow this. Subsequent runs will not require this step.
+
+### Testing
+
+We use [Playwright](https://playwright.dev/) for end-to-end testing.
+
+Before running the tests, create the test database:
+
+```bash
+createdb noo_id_test
+```
+
+Ensure the schema is up to date:
+
+```bash
+NODE_ENV=test bun db:push
+```
+
+Load the test fixtures:
+
+```bash
+bun db:test:fixtures
+```
+
+Finally, run the tests:
+
+```bash
+bun run test
+```
+
+To assist in debugging, you can run the tests in headful mode:
+
+```bash
+bun run test:ui
+```
 
 ## License
 

@@ -32,11 +32,19 @@ export default defineConfig({
     trace: "on-first-retry",
 
     ignoreHTTPSErrors: true,
+
+    video: {
+      mode: "on",
+      size: {
+        width: 1920,
+        height: 1080,
+      },
+    },
   },
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "PORT=23000 bun run dev:tls",
+    command: "TEST=1 PORT=23000 bun run dev:tls",
     url: "https://localhost:23000",
     reuseExistingServer: !process.env.CI,
     ignoreHTTPSErrors: true,
@@ -46,7 +54,10 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 },
+      },
     },
 
     {
