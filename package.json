@@ -2,7 +2,7 @@
   "name": "noo",
   "private": true,
   "scripts": {
-    "prepare": "husky"
+    "prepare": "bun run --bun husky"
   },
   "workspaces": [
     "id", "mail"
