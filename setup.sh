@@ -25,6 +25,7 @@ fi
 
 echo "Installing asdf plugins..."
 asdf plugin add bun
+asdf plugin add nodejs
 
 echo "Installing required runtime versions..."
 asdf install
