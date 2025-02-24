@@ -57,6 +57,20 @@ bun dev:tls
 
 The first time you run this command, mkcert will create a local CA and install it in your system's trust store. You may be prompted to enter your password to allow this. Subsequent runs will not require this step.
 
+### Testing
+
+We use [Playwright](https://playwright.dev/) for end-to-end testing. You can run the tests with:
+
+```bash
+bun run test
+```
+
+To assist in debugging, you can run the tests in headful mode:
+
+```bash
+bun run test:ui
+```
+
 ## License
 
 The noo project adopts a custom hybrid license, allowing unrestricted use for personal, community, and non-commercial purposes. Run this at home, hack it, and share it with your friends. For details about the noo license, please refer to the [LICENSE](../LICENSE.md) file.
