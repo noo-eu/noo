@@ -82,7 +82,7 @@ createdb noo_id_test
 Ensure the schema is up to date:
 
 ```bash
-NODE_ENV=test bun db:push
+bun db:test:push
 ```
 
 Load the test fixtures:
