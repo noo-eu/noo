@@ -4,6 +4,9 @@ import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { SignupService } from "@/services/SignupService";
 import { cookies } from "next/headers";
+import { SessionsService } from "@/services/SessionsService";
+import { schema } from "@/db";
+import { getIpAddress, getUserAgent } from "@/utils";
 
 function translateErrors(
   t: (key: string) => string,
@@ -49,9 +52,9 @@ async function getSignupData() {
 export async function signupStep1(prevState: unknown, formData: FormData) {
   const svc = new SignupService(formData);
   const errors = await svc.runStep1();
-  const t = await getTranslations("signup.errors");
 
   if (errors) {
+    const t = await getTranslations("signup.errors");
     return {
       errors: translateErrors(t, errors),
       values: svc.params,
@@ -66,9 +69,9 @@ export async function signupStep1(prevState: unknown, formData: FormData) {
 export async function signupStep2(prevState: unknown, formData: FormData) {
   const svc = new SignupService(formData);
   const errors = await svc.runStep2();
-  const t = await getTranslations("signup.errors");
 
   if (errors) {
+    const t = await getTranslations("signup.errors");
     return {
       errors: translateErrors(t, errors),
       values: svc.params,
@@ -83,9 +86,9 @@ export async function signupStep2(prevState: unknown, formData: FormData) {
 export async function signupStep3(prevState: unknown, formData: FormData) {
   const svc = new SignupService(formData);
   const errors = await svc.runStep3();
-  const t = await getTranslations("signup.errors");
 
   if (errors) {
+    const t = await getTranslations("signup.errors");
     return {
       errors: translateErrors(t, errors),
       values: svc.params,
@@ -97,18 +100,43 @@ export async function signupStep3(prevState: unknown, formData: FormData) {
   redirect("/signup/terms");
 }
 
+async function startSession(user: typeof schema.users.$inferSelect) {
+  const cookieStore = await cookies();
+  const sessionManager = new SessionsService(
+    cookieStore.get("auth")?.value || "",
+  );
+  await sessionManager.startSession(
+    user.id,
+    await getIpAddress(),
+    await getUserAgent(),
+  );
+
+  cookieStore.set("auth", sessionManager.buildCookie(), {
+    maxAge: 60 * 60 * 24 * 400,
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+}
+
 export async function signupStep4(_: unknown, formData: FormData) {
   const svc = new SignupService();
 
   const signupData = await getSignupData();
+
+  // Whatever the result, we won't need the signup data anymore
+  const cookieStore = await cookies();
+  cookieStore.set("signup", "", { maxAge: 0 });
+
   if (!signupData) {
     redirect("/signup");
   }
 
-  const errors = await svc.runStep4(signupData);
-  if (errors) {
+  const result = await svc.runStep4(signupData);
+  if (result.success) {
+    startSession(result.user);
+    redirect("/signup/success");
+  } else {
     redirect("/signup");
   }
-
-  redirect("/signup/success");
 }

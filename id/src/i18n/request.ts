@@ -47,6 +47,7 @@ export default getRequestConfig(async () => {
     locale,
     messages: {
       ...(await loadJSON5(`src/messages/common/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },
   };
