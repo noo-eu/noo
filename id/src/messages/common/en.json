@@ -1,0 +1,14 @@
+{
+  "common": {
+    "next": "Next",
+    "optional": "Optional",
+    "terms": "Terms",
+    "privacy": "Privacy",
+
+    "passwordField": {
+      "show": "Show password",
+      "ariaLabelShow": "Show password as plain text. Warning: this will display your password on the screen.",
+      "hide": "Hide password"
+    }
+  }
+}

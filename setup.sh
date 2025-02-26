@@ -23,6 +23,13 @@ then
     fi
 fi
 
+# check if postgres is installed
+if ! command -v psql &> /dev/null
+then
+    echo "Postgres is not installed. Please check the recommended installation instructions for your operating system (https://github.com/noo-eu/noo#expected-environment)."
+    exit 1
+fi
+
 echo "Installing asdf plugins..."
 asdf plugin add bun
 asdf plugin add nodejs

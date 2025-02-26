@@ -1,0 +1,14 @@
+{
+  "common": {
+    "next": "Avanti",
+    "optional": "Opzionale",
+    "terms": "Termini",
+    "privacy": "Privacy",
+
+    "passwordField": {
+      "show": "Mostra password",
+      "ariaLabelShow": "Mostra password come testo normale. Attenzione: questo renderà visibile la tua password sullo schermo.",
+      "hide": "Nascondi password"
+    }
+  }
+}
