@@ -27,19 +27,18 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "https://localhost:23000",
+    ignoreHTTPSErrors: true,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
 
-    ignoreHTTPSErrors: true,
-
-    video: {
-      mode: "on",
-      size: {
-        width: 1920,
-        height: 1080,
-      },
-    },
+    // video: {
+    //   mode: "on",
+    //   size: {
+    //     width: 1920,
+    //     height: 1080,
+    //   },
+    // },
   },
 
   /* Run your local dev server before starting the tests */
@@ -56,7 +55,8 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        viewport: { width: 1920, height: 1080 },
+        // Uncomment when recording videos.
+        // viewport: { width: 1920, height: 1080 },
       },
     },
 
