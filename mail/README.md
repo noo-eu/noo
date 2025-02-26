@@ -27,7 +27,7 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
 
   ```bash
   git clone https://github.com/noo-eu/noo.git
-  cd noo/id
+  cd noo
   ```
 
 - **Run the setup script:**
@@ -38,9 +38,11 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
   - install asdf and its bun plugin
   - install the required versions of Bun
   - install the application dependencies
+
 - **Run the development server:**
 
   ```bash
+  cd mail
   bun dev
   ```
 
