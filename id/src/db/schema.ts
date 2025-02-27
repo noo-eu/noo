@@ -1,6 +1,13 @@
-import { pgTable, text, unique, uuid } from "drizzle-orm/pg-core";
+import {
+  inet,
+  pgTable,
+  text,
+  timestamp,
+  unique,
+  uuid,
+} from "drizzle-orm/pg-core";
 
-export const domains = pgTable("tenants", {
+export const tenants = pgTable("tenants", {
   id: uuid().primaryKey().defaultRandom(),
   name: text().notNull(),
   domain: text().unique().notNull(),
@@ -10,7 +17,7 @@ export const users = pgTable(
   "users",
   {
     id: uuid().primaryKey().defaultRandom(),
-    tenantId: uuid("tenant_id").references(() => domains.id, {
+    tenantId: uuid("tenant_id").references(() => tenants.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     }),
@@ -27,3 +34,18 @@ export const users = pgTable(
       .nullsNotDistinct(),
   ],
 );
+
+export const sessions = pgTable("sessions", {
+  id: uuid().primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  verifierDigest: text("verifier_digest").notNull(),
+  ip: inet().notNull(),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  lastUsedAt: timestamp("last_used_at").notNull().defaultNow(),
+});

@@ -1,8 +1,9 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { existsSync } from "node:fs";
+import * as schema from "./schema";
 
 let DATABASE_NAME = "noo_id";
-if (process.env.TEST === "1") {
+if (process.env.TEST === "1" || process.env.NODE_ENV === "test") {
   DATABASE_NAME = "noo_id_test";
 }
 
@@ -34,7 +35,7 @@ if (!process.env.DATABASE_URL) {
   }
 }
 
-import * as schema from "./schema";
+const databaseUrl = process.env.DATABASE_URL!;
 
-export const databaseUrl = process.env.DATABASE_URL!;
+export { schema, databaseUrl };
 export default drizzle(databaseUrl, { schema });

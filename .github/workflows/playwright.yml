@@ -1,4 +1,4 @@
-name: "[id] Playwright Tests"
+name: "[id] Tests"
 on:
   push:
     branches: [ main ]
@@ -13,6 +13,40 @@ env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_id_test
 
 jobs:
+  unit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: id
+    
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: noo_id_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.2.3
+    - name: Install dependencies
+      run: bun install
+    - name: Prepare the database
+      run: |
+        bun db:test:push
+        bun db:test:fixtures
+    - name: Run unit tests
+      run: bun run test:unit
+
   test:
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -48,7 +82,7 @@ jobs:
         bun db:test:push
         bun db:test:fixtures
     - name: Run Playwright tests
-      run: bun run playwright test
+      run: bun run test:e2e
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

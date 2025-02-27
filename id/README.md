@@ -82,7 +82,11 @@ createdb noo_id_test
 Ensure the schema is up to date:
 
 ```bash
+<<<<<<< HEAD
 bun db:test:push
+=======
+NODE_ENV=test bun db:push
+>>>>>>> edcf41a (Add signup flow)
 ```
 
 Load the test fixtures:

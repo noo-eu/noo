@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Sign in to your <noo></noo> account",
+    "username": "Username or email",
+    "password": "Password",
+    "submit": "Sign in",
+    "error": "The credentials you entered are incorrect"
+  }
+}

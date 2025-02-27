@@ -3,6 +3,12 @@
     "next": "Siguiente",
     "optional": "Opcional",
     "terms": "Términos",
-    "privacy": "Privacidad"
+    "privacy": "Privacidad",
+
+    "passwordField": {
+      "show": "Mostrar contraseña",
+      "ariaLabelShow": "Mostrar contraseña como texto plano. Advertencia: esto mostrará tu contraseña en la pantalla.",
+      "hide": "Ocultar contraseña"
+    }
   }
 }

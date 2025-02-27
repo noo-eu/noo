@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Inicia sesión en tu cuenta de <noo></noo>",
+    "username": "Nombre de usuario o correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "error": "Las credenciales que ingresaste son incorrectas"
+  }
+}
