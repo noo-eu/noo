@@ -13,7 +13,7 @@ env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_id_test
 
 jobs:
-  test:
+  unit:
     runs-on: ubuntu-latest
     defaults:
       run:
