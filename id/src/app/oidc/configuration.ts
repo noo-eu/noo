@@ -59,7 +59,7 @@ export const TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED = [
   "none",
 ];
 
-export const ACR_VALUES_SUPPORTED = ["simple", "mfa", "eidas"];
+export const ACR_VALUES_SUPPORTED = ["simple", "mfa"];
 
 export function buildConfiguration(request: Request, domain?: string) {
   const host = request.headers.get("host");

@@ -19,5 +19,6 @@ export async function POST(
     return new Response("Unauthorized", { status: 401 });
   }
 
-  return oidcClientRegistration(request, tenant);
+  const body = await request.json();
+  return oidcClientRegistration(body, tenant);
 }

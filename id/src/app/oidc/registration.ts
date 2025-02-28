@@ -53,11 +53,10 @@ const registrationResponse = registrationRequest.extend({
 type RegistrationResponse = z.infer<typeof registrationResponse>;
 
 export async function oidcClientRegistration(
-  request: Request,
+  request: Record<string, unknown>,
   tenant: typeof schema.tenants.$inferSelect,
 ) {
-  const body = await request.json();
-  const parseResult = registrationRequest.safeParse(body);
+  const parseResult = registrationRequest.safeParse(request);
   if (!parseResult.success) {
     const badField = parseResult.error.issues[0].path.join(".");
     const message = parseResult.error.issues[0].message;
@@ -76,11 +75,11 @@ export async function oidcClientRegistration(
   config.subject_type ||= "pairwise";
   config.require_auth_time ||= false;
 
-  const clientName = extractLocalizedField(body, "client_name");
-  const logoUri = extractLocalizedField(body, "logo_uri");
-  const clientUri = extractLocalizedField(body, "client_uri");
-  const policyUri = extractLocalizedField(body, "policy_uri");
-  const tosUri = extractLocalizedField(body, "tos_uri");
+  const clientName = extractLocalizedField(request, "client_name");
+  const logoUri = extractLocalizedField(request, "logo_uri");
+  const clientUri = extractLocalizedField(request, "client_uri");
+  const policyUri = extractLocalizedField(request, "policy_uri");
+  const tosUri = extractLocalizedField(request, "tos_uri");
 
   const configValidationResult = await validateRegistration(config);
   if (configValidationResult) {
@@ -143,7 +142,7 @@ async function validateRegistration(
   );
   if (config.response_types.length === 0) {
     return buildErrorResponse(
-      "invalid_response_type",
+      "invalid_client_metadata",
       "No supported response types.",
     );
   }
@@ -168,9 +167,19 @@ async function validateRegistration(
 
   // Validate that contacts are valid email addresses
   if (config.contacts) {
+    if (config.contacts.length > 5) {
+      return buildErrorResponse(
+        "invalid_client_metadata",
+        "Too many contacts.",
+      );
+    }
+
     for (const contact of config.contacts) {
       if (!contact.includes("@")) {
-        return buildErrorResponse("invalid_contact", "Invalid email address.");
+        return buildErrorResponse(
+          "invalid_client_metadata",
+          "Invalid email address.",
+        );
       }
     }
   }
@@ -185,7 +194,10 @@ async function validateRegistration(
   if (config.jwks_uri) {
     const jwksUri = new URL(config.jwks_uri);
     if (jwksUri.protocol !== "https:") {
-      return buildErrorResponse("invalid_jwks_uri", "JWKS URI must use HTTPS.");
+      return buildErrorResponse(
+        "invalid_client_metadata",
+        "JWKS URI must use HTTPS.",
+      );
     }
   }
 
@@ -193,7 +205,7 @@ async function validateRegistration(
     const sectorIdentifierUri = new URL(config.sector_identifier_uri);
     if (sectorIdentifierUri.protocol !== "https:") {
       return buildErrorResponse(
-        "invalid_sector_identifier_uri",
+        "invalid_client_metadata",
         "Sector Identifier URI must use HTTPS.",
       );
     }
@@ -212,7 +224,7 @@ async function validateRegistration(
 
       if (!sectorIdentifierResponse.ok) {
         return buildErrorResponse(
-          "invalid_sector_identifier_uri",
+          "invalid_client_metadata",
           "Failed to fetch sector identifier URI.",
         );
       }
@@ -220,13 +232,13 @@ async function validateRegistration(
       sectorIdentifierData = await sectorIdentifierResponse.json();
       if (!Array.isArray(sectorIdentifierData)) {
         return buildErrorResponse(
-          "invalid_sector_identifier_uri",
+          "invalid_client_metadata",
           "Sector Identifier URI must return an array.",
         );
       }
     } catch {
       return buildErrorResponse(
-        "invalid_sector_identifier_uri",
+        "invalid_client_metadata",
         "Failed to fetch sector identifier URI.",
       );
     }
@@ -234,7 +246,7 @@ async function validateRegistration(
     for (const uri of config.redirect_uris) {
       if (!sectorIdentifierData.includes(uri)) {
         return buildErrorResponse(
-          "invalid_sector_identifier_uri",
+          "invalid_client_metadata",
           "All Redirect URIs must be included in sector identifier.",
         );
       }
@@ -252,7 +264,7 @@ async function validateRegistration(
       config.response_types[0] !== "code"
     ) {
       return buildErrorResponse(
-        "invalid_id_token_signed_response_alg",
+        "invalid_client_metadata",
         "ID Token signing algorithm cannot be 'none' for this response type.",
       );
     }
@@ -265,7 +277,7 @@ async function validateRegistration(
     )
   ) {
     return buildErrorResponse(
-      "invalid_id_token_signed_response_alg",
+      "invalid_client_metadata",
       "Unsupported ID Token signing algorithm.",
     );
   }
@@ -287,7 +299,7 @@ async function validateRegistration(
     )
   ) {
     return buildErrorResponse(
-      "invalid_userinfo_signed_response_alg",
+      "invalid_client_metadata",
       "Unsupported Userinfo signing algorithm.",
     );
   }
@@ -309,7 +321,7 @@ async function validateRegistration(
     )
   ) {
     return buildErrorResponse(
-      "invalid_request_object_signing_alg",
+      "invalid_client_metadata",
       "Unsupported Request Object signing algorithm.",
     );
   }
@@ -331,7 +343,7 @@ async function validateRegistration(
     )
   ) {
     return buildErrorResponse(
-      "invalid_token_endpoint_auth_method",
+      "invalid_client_metadata",
       "Unsupported Token Endpoint authentication method.",
     );
   }
@@ -344,14 +356,14 @@ async function validateRegistration(
     config.token_endpoint_auth_signing_alg === "none"
   ) {
     return buildErrorResponse(
-      "invalid_token_endpoint_auth_signing_alg",
+      "invalid_client_metadata",
       "Unsupported Token Endpoint authentication signing algorithm.",
     );
   }
 
   if (config.default_max_age && config.default_max_age < 0) {
     return buildErrorResponse(
-      "invalid_default_max_age",
+      "invalid_client_metadata",
       "Default max age must be greater than or equal to 0.",
     );
   }
@@ -364,14 +376,14 @@ async function validateRegistration(
     const initiateLoginUri = new URL(config.initiate_login_uri);
     if (initiateLoginUri.protocol !== "https:") {
       return buildErrorResponse(
-        "invalid_initiate_login_uri",
+        "invalid_client_metadata",
         "Initiate Login URI must use HTTPS.",
       );
     }
   }
 }
 
-function validateRedirectUris(
+export function validateRedirectUris(
   redirect_uris: string[],
   application_type: unknown,
 ) {
@@ -401,7 +413,7 @@ function validateRedirectUris(
   } else if (application_type === "native") {
     for (const uri of redirect_uris) {
       if (uri.startsWith("http://")) {
-        const host = new URL(uri).host;
+        const host = new URL(uri).hostname;
         if (host !== "localhost" && host !== "127.0.0.1" && host !== "[::1]") {
           return buildErrorResponse(
             "invalid_redirect_uri",
@@ -486,6 +498,13 @@ function oidcClientToResponse(
           response[`${key}#${locale}`] = localized[key][locale];
         }
       }
+    }
+  }
+
+  // Strip out null values
+  for (const key in response) {
+    if (response[key] === null) {
+      delete response[key];
     }
   }
 
