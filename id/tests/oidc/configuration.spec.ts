@@ -33,7 +33,7 @@ test.describe("Public provider", () => {
         response_types_supported: expect.arrayContaining([
           "code",
           "id_token",
-          "token id_token",
+          "id_token token",
         ]),
         subject_types_supported: expect.any(Array),
         id_token_signing_alg_values_supported: expect.arrayContaining([
@@ -60,6 +60,34 @@ test.describe("Public provider", () => {
           expect(config[key]).not.toHaveLength(0);
         }
       }
+    });
+  });
+});
+
+test.describe("Private provider", () => {
+  test.describe("OpenID Configuration", () => {
+    test("it responds with a valid OpenID Configuration", async ({
+      request,
+      baseURL,
+    }) => {
+      const response = await request.get(
+        "/oidc/acme.fr/.well-known/openid-configuration",
+      );
+
+      // A successful response MUST use the 200 OK HTTP status code
+      expect(response.status()).toBe(200);
+
+      const config = await response.json();
+      expect(config).toMatchObject({
+        issuer: `${baseURL}/oidc/acme.fr`,
+        registration_endpoint: `${baseURL}/oidc/acme.fr/register`,
+      });
+
+      // It responds with 404 if the domain is not registered
+      const response404 = await request.get(
+        "/oidc/microsoft.com/.well-known/openid-configuration",
+      );
+      expect(response404.status()).toBe(404);
     });
   });
 });

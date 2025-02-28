@@ -1,4 +1,3 @@
-import { schema } from "@/db";
 import {
   createSession,
   deleteSession,
@@ -7,6 +6,7 @@ import {
   refreshSession,
 } from "@/db/sessions";
 import { findUserByEmailOrUsername, findUserById } from "@/db/users";
+import { checkVerifier, createVerifier } from "@/utils";
 import argon2 from "argon2";
 import crypto from "node:crypto";
 
@@ -28,7 +28,6 @@ export class SessionsService {
 
   constructor(private cookie: string) {
     this.tokens = cookie.split(" ").filter((t) => t.length > 0);
-    console.log("Tokens", this.tokens);
   }
 
   buildCookie() {
@@ -56,18 +55,13 @@ export class SessionsService {
 
   async startSession(userId: string, ip: string, userAgent: string) {
     const sid = crypto.randomUUID();
-    const verifier = crypto.randomBytes(32);
-    const salt = crypto.randomBytes(16);
 
-    const digest = this.hashSessionVerifier(verifier, salt);
-    const saltb64 = salt.toString("base64").replace(/=/g, "");
-    const digestb64 = digest.toString("base64").replace(/=/g, "");
-    const verifierDigest = `$sha256$${saltb64}$${digestb64}`;
+    const { verifier, digest } = createVerifier();
 
     await createSession({
       id: sid,
       userId: userId,
-      verifierDigest: verifierDigest,
+      verifierDigest: digest,
       ip,
       userAgent,
     });
@@ -115,16 +109,7 @@ export class SessionsService {
           return false;
         }
 
-        const [_, func, b64Salt, b64Digest] = stored.verifierDigest.split("$");
-        if (func !== "sha256" || !b64Salt || !b64Digest) {
-          // Corrupted verifier :(
-          return false;
-        }
-
-        const salt = Buffer.from(b64Salt, "base64");
-        const digest = Buffer.from(b64Digest, "base64");
-
-        return this.verifySessionVerifier(cookie.verifier, salt, digest);
+        return checkVerifier(cookie.verifier, stored.verifierDigest);
       })
       .map(({ cookie }) => cookie);
 
@@ -150,12 +135,12 @@ export class SessionsService {
 
   private decodeSessionToken(
     token: string,
-  ): { sid: string; verifier: Buffer } | null {
+  ): { sid: string; verifier: string } | null {
     if (token.length !== 64) {
       return null;
     }
 
-    const decoded = Buffer.from(token, "base64");
+    const decoded = Buffer.from(token, "base64url");
     if (decoded.length !== 48) {
       // This can happen if the "sessionId" contains invalid characters
       return null;
@@ -163,26 +148,26 @@ export class SessionsService {
 
     return {
       sid: this.bufferToUUID(decoded.subarray(0, 16)),
-      verifier: decoded.subarray(16, 48),
+      verifier: decoded.subarray(16).toString("base64url"),
     };
   }
 
-  private decodeAll(): { sid: string; verifier: Buffer }[] {
+  private decodeAll(): { sid: string; verifier: string }[] {
     return this.tokens
       .map((token) => this.decodeSessionToken(token))
       .filter((decoded) => decoded !== null);
   }
 
-  private encodeAll(sessions: { sid: string; verifier: Buffer }[]): string[] {
+  private encodeAll(sessions: { sid: string; verifier: string }[]): string[] {
     return sessions.map((session) =>
       this.encodeSession(session.sid, session.verifier),
     );
   }
 
-  private encodeSession(sid: string, verifier: Buffer): string {
+  private encodeSession(sid: string, verifier: string): string {
     let buff = Buffer.from(sid.replace(/-/g, ""), "hex");
-    buff = Buffer.concat([buff, verifier]);
-    return buff.toString("base64").replace(/=/g, "");
+    buff = Buffer.concat([buff, Buffer.from(verifier, "base64url")]);
+    return buff.toString("base64url");
   }
 
   private bufferToUUID(buffer: Buffer): string {

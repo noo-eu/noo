@@ -9,7 +9,6 @@ export default function SignupPage() {
   const [_, formAction, pending] = useActionState(signupStep4, undefined);
 
   const t = useTranslations("signup");
-  const commonT = useTranslations("common");
 
   return (
     <>

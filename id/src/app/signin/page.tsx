@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 
 type State = {
   username?: string;
-  error?: any;
+  error?: unknown;
 };
 
 export default function SignupPage() {

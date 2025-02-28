@@ -44,7 +44,7 @@ async function getSignupData() {
 
   try {
     return JSON.parse(Buffer.from(existingData, "base64").toString("utf-8"));
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -105,11 +105,15 @@ async function startSession(user: typeof schema.users.$inferSelect) {
   const sessionManager = new SessionsService(
     cookieStore.get("auth")?.value || "",
   );
+
   await sessionManager.startSession(
     user.id,
     await getIpAddress(),
     await getUserAgent(),
   );
+
+  // Delete old, expired, tampered sessions
+  await sessionManager.cleanup();
 
   cookieStore.set("auth", sessionManager.buildCookie(), {
     maxAge: 60 * 60 * 24 * 400,
@@ -119,7 +123,7 @@ async function startSession(user: typeof schema.users.$inferSelect) {
   });
 }
 
-export async function signupStep4(_: unknown, formData: FormData) {
+export async function signupStep4(_: unknown, __: FormData) {
   const svc = new SignupService();
 
   const signupData = await getSignupData();
