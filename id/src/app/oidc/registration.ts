@@ -8,6 +8,7 @@ import {
   ACR_VALUES_SUPPORTED,
 } from "./configuration";
 import { createOidcClient } from "@/db/oidc_clients";
+import { jwks } from "./jwks";
 
 const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),
@@ -21,7 +22,7 @@ const registrationRequest = z.object({
   policy_uri: z.string().optional(),
   tos_uri: z.string().optional(),
   jwks_uri: z.string().optional(),
-  jwks: z.any().optional(),
+  jwks: jwks.optional(),
   sector_identifier_uri: z.string().optional(),
   subject_type: z.string().optional(),
   id_token_signed_response_alg: z.string().optional(),
