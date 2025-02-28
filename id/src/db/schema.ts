@@ -14,6 +14,7 @@ export const tenants = pgTable("tenants", {
   id: uuid().primaryKey().defaultRandom(),
   name: text().notNull(),
   domain: text().unique().notNull(),
+  oidcRegistrationTokenDigest: text("oidc_registration_token_digest").notNull(),
 });
 
 export const users = pgTable(
@@ -59,7 +60,6 @@ export const oidcClients = pgTable("oidc_clients", {
     onDelete: "cascade",
     onUpdate: "cascade",
   }),
-  clientId: text("client_id").notNull(),
   clientSecret: text("client_secret").notNull(),
   redirectUris: text("redirect_uris").array().notNull(),
   responseTypes: text("response_types").array().notNull().default(["code"]),
@@ -81,14 +81,8 @@ export const oidcClients = pgTable("oidc_clients", {
   idTokenSignedResponseAlg: text("id_token_signed_response_alg")
     .notNull()
     .default("RS256"),
-  idTokenEncryptedResponseAlg: text("id_token_encrypted_response_alg"),
-  idTokenEncryptedResponseEnc: text("id_token_encrypted_response_enc"),
   userinfoSignedResponseAlg: text("userinfo_signed_response_alg"),
-  userinfoEncryptedResponseAlg: text("userinfo_encrypted_response_alg"),
-  userinfoEncryptedResponseEnc: text("userinfo_encrypted_response_enc"),
   requestObjectSigningAlg: text("request_object_signing_alg"),
-  requestObjectEncryptionAlg: text("request_object_encryption_alg"),
-  requestObjectEncryptionEnc: text("request_object_encryption_enc"),
   tokenEndpointAuthMethod: text("token_endpoint_auth_method")
     .notNull()
     .default("client_secret_basic"),
@@ -99,4 +93,5 @@ export const oidcClients = pgTable("oidc_clients", {
   initiateLoginUri: text("initiate_login_uri"),
   requestUris: text("request_uris").array(),
   postLogoutRedirectUris: text("post_logout_redirect_uris").array(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });

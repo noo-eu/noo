@@ -189,7 +189,7 @@ async function validateStep3(
   };
 
   let classCount = 0;
-  for (const [name, pattern] of Object.entries(classes)) {
+  for (const [_, pattern] of Object.entries(classes)) {
     if (pattern.test(data.password)) {
       classCount++;
     }

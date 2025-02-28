@@ -5,12 +5,10 @@ import { useTranslations } from "next-intl";
 export type Props = Omit<TextFieldProps, "type">;
 
 export function PasswordField(props: Props) {
-  let { aroundLabel, ...rest } = props;
-  let [visible, setVisible] = useState(false);
-
+  const [visible, setVisible] = useState(false);
   const t = useTranslations("common.passwordField");
 
-  aroundLabel ??= (children) => (
+  props.aroundLabel ??= (children) => (
     <div className="flex justify-between">
       {children}
       <button
@@ -24,11 +22,5 @@ export function PasswordField(props: Props) {
     </div>
   );
 
-  return (
-    <TextField
-      type={visible ? "text" : "password"}
-      aroundLabel={aroundLabel}
-      {...rest}
-    />
-  );
+  return <TextField type={visible ? "text" : "password"} {...props} />;
 }

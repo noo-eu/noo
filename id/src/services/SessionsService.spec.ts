@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeAll } from "bun:test";
+import { describe, it, expect } from "bun:test";
 import { SessionsService } from "./SessionsService";
 import db from "@/db";
 import { sessions } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
 describe("SessionsService", async () => {
-  let userId: string = (await db.query.users.findFirst())!.id;
+  const userId: string = (await db.query.users.findFirst())!.id;
 
   describe("buildCookie", () => {
     it("returns the value to place in the cookie", () => {
@@ -20,7 +20,7 @@ describe("SessionsService", async () => {
       await service.startSession(userId, "1.2.3.4", "Mozilla/5.0");
 
       const cookie = service.buildCookie();
-      expect(cookie).toMatch(/^[A-Za-z0-9+\/=]+$/);
+      expect(cookie).toMatch(/^[A-Za-z0-9_-]+$/);
 
       // extract the session ID from the cookie
       const decoded = Buffer.from(cookie, "base64");
