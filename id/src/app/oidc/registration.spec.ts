@@ -207,6 +207,49 @@ describe("OIDC Client Registration", async () => {
     });
   });
 
+  test("it makes sure that jwks is a valid JSON Web Key Set", async () => {
+    const invalid = [
+      {},
+      { keys: [{}] },
+      { keys: [{ kty: "RSA" }] },
+      { keys: [{ kty: "RSA", e: "AQAB", n: "abc" }] },
+      { keys: [{ kty: "RSA", x: "asd" }] },
+      { keys: [{ kty: "RSA", x: "asd", y: "asd" }] },
+      { keys: [{ kty: "EC", crv: "P-256" }] },
+      { keys: [{ kty: "EC", n: "abc" }] },
+      { keys: [{ kty: "OKP", crv: "P-256", x: "abc" }] },
+    ];
+
+    const valid = [
+      { keys: [{ kid: "123", kty: "RSA", e: "AQAB", n: "abc" }] },
+      { keys: [{ kid: "123", kty: "EC", crv: "P-256", x: "abc", y: "abc" }] },
+      { keys: [{ kid: "123", kty: "OKP", crv: "Ed25519", x: "abc" }] },
+    ];
+
+    for (const jwks of invalid) {
+      const result = await perform({
+        redirect_uris: ["https://example.com/callback"],
+        jwks,
+      });
+
+      expect(result).toMatchObject({
+        error: "invalid_client_metadata",
+        error_description: expect.any(String),
+      });
+    }
+
+    for (const jwks of valid) {
+      const result = await perform({
+        redirect_uris: ["https://example.com/callback"],
+        jwks,
+      });
+
+      expect(result).toMatchObject({
+        client_id: expect.any(String),
+      });
+    }
+  });
+
   describe("sector_identifier_uri", async () => {
     test("it requires sector_identifier_uri to be an HTTPS url", async () => {
       const result = await perform({

@@ -51,6 +51,14 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
   bun db:migrate
   ```
 
+- **Generate your key set:**
+
+  An OIDC IdP needs a set of keys to sign tokens.
+
+  ```bash
+  bun run keys:rotate
+  ```
+
 - **Start the development server:**
 
   ```bash
@@ -82,11 +90,7 @@ createdb noo_id_test
 Ensure the schema is up to date:
 
 ```bash
-<<<<<<< HEAD
 bun db:test:push
-=======
-NODE_ENV=test bun db:push
->>>>>>> edcf41a (Add signup flow)
 ```
 
 Load the test fixtures:
