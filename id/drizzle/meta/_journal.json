@@ -15,6 +15,13 @@
       "when": 1740605168895,
       "tag": "0001_grey_puma",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740743169474,
+      "tag": "0002_outstanding_glorian",
+      "breakpoints": true
     }
   ]
 }

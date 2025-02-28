@@ -14,7 +14,7 @@ export const tenants = pgTable("tenants", {
   id: uuid().primaryKey().defaultRandom(),
   name: text().notNull(),
   domain: text().unique().notNull(),
-  oidcRegistrationTokenDigest: text("oidc_registration_token_digest").notNull(),
+  oidcRegistrationTokenDigest: text("oidc_registration_token_digest"),
 });
 
 export const users = pgTable(

@@ -13,6 +13,10 @@ export async function POST(
     notFound();
   }
 
+  if (!tenant.oidcRegistrationTokenDigest) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   // Verify the Bearer token against the tenant key
   const token = await getBearerToken();
   if (!token || !checkVerifier(token, tenant.oidcRegistrationTokenDigest)) {
