@@ -14,7 +14,7 @@ export async function GET(
   }
 
   const parameters = Object.fromEntries(request.nextUrl.searchParams);
-  return oidcAuthorization(parameters, tenant);
+  return oidcAuthorization(parameters, tenant, request);
 }
 
 export async function POST(
@@ -33,5 +33,5 @@ export async function POST(
     parameters[key] = value.toString();
   });
 
-  return oidcAuthorization(parameters, tenant);
+  return oidcAuthorization(parameters, tenant, request);
 }

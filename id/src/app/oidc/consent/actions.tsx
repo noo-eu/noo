@@ -2,11 +2,13 @@
 
 import { getCurrentSession, getCurrentUser } from "@/app/page";
 import { createOidcAuthorizationCode } from "@/db/oidc_authorization_codes";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
-export async function getOidcAuthorizationCookie() {
-  const cookieStore = await cookies();
+export async function getOidcAuthorizationCookie(
+  cookieStore: ReadonlyRequestCookies,
+) {
   console.log("anma ", cookieStore.getAll());
   const oidcAuthRequestCookie = cookieStore.get(
     "oidc_authorization_request",
@@ -26,8 +28,8 @@ export async function getOidcAuthorizationCookie() {
   }
 }
 
-export async function afterConsent() {
-  const oidcAuthRequest = await getOidcAuthorizationCookie();
+export async function afterConsent(cookieStore: ReadonlyRequestCookies) {
+  const oidcAuthRequest = await getOidcAuthorizationCookie(cookieStore);
   console.log("oidcAuthRequest", oidcAuthRequest);
   if (!oidcAuthRequest) {
     return {};
@@ -56,5 +58,5 @@ export async function consentFormSubmit(_: unknown, formData: FormData) {
     return notFound();
   }
 
-  return afterConsent();
+  return afterConsent(await cookies());
 }

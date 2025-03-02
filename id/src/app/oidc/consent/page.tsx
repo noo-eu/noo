@@ -3,9 +3,15 @@ import { notFound } from "next/navigation";
 import { findOidcConsent } from "@/db/oidc_consents";
 import { getCurrentUser } from "@/app/page";
 import { afterConsent, getOidcAuthorizationCookie } from "./actions";
+import { cookies } from "next/headers";
+
+export const revalidate = 0;
 
 export default async function OidcConsentPage() {
-  const oidcAuthRequest = await getOidcAuthorizationCookie();
+  const cookieStore = await cookies();
+  console.log("anma ", cookieStore.getAll());
+
+  const oidcAuthRequest = await getOidcAuthorizationCookie(cookieStore);
   if (!oidcAuthRequest) {
     console.error("No OIDC authorization request cookie found");
     return notFound();
@@ -31,7 +37,7 @@ export default async function OidcConsentPage() {
   // The simple "openid" scope is always granted
   if (allScopesGranted || (scope.length === 0 && scope[0] === "openid")) {
     // Redirect to the client
-    return afterConsent();
+    return afterConsent(await cookies());
   }
 
   return (

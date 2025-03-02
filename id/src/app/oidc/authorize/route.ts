@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ domain: string }> },
 ) {
   const parameters = Object.fromEntries(request.nextUrl.searchParams);
-  return oidcAuthorization(parameters);
+  return oidcAuthorization(parameters, null, request);
 }
 
 export async function POST(
@@ -19,5 +19,5 @@ export async function POST(
     parameters[key] = value.toString();
   });
 
-  return oidcAuthorization(parameters);
+  return oidcAuthorization(parameters, null, request);
 }

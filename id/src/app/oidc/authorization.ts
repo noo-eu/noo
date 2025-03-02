@@ -4,10 +4,12 @@ import { SessionsService } from "@/services/SessionsService";
 import { and, eq, isNull } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function oidcAuthorization(
   request: Record<string, string | undefined>,
   tenant?: typeof schema.tenants.$inferSelect,
+  httpRequest?: NextRequest,
 ) {
   const preflightResult = await preflightCheck(request, tenant);
   if (preflightResult[1]) {
@@ -90,18 +92,22 @@ export async function oidcAuthorization(
       if (activeSessions.length === 0) {
         // No active sessions, show redirect to login screen
         request.tenant_id = tenant?.id;
-        await cookieStore.set(
-          "oidc_authorization_request",
-          JSON.stringify(request),
-          {
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-          },
+
+        const headers = new Headers();
+        headers.set(
+          "Set-Cookie",
+          `oidc_authorization_request=${JSON.stringify(request)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         );
 
-        return redirect(
-          `/signin?continue=${encodeURIComponent("/oidc/consent")}`,
+        return NextResponse.redirect(
+          new URL(
+            `/signin?continue=${encodeURIComponent("/oidc/consent")}`,
+            `${httpRequest?.headers.get("x-forwarded-proto")}://${httpRequest?.headers.get("host")}`,
+          ),
+          {
+            status: 303,
+            headers,
+          },
         );
       } else if (activeSessions.length === 1) {
         // Only one active session, show consent screen
@@ -124,17 +130,22 @@ export async function oidcAuthorization(
         } else {
           // User has not yet consented, show consent screen
           request.tenant_id = tenant?.id;
-          await cookieStore.set(
-            "oidc_authorization_request",
-            JSON.stringify(request),
-            {
-              httpOnly: true,
-              secure: true,
-              sameSite: "strict",
-            },
+          const headers = new Headers();
+          headers.set(
+            "Set-Cookie",
+            `oidc_authorization_request=${JSON.stringify(request)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
           );
 
-          return redirect(`/oidc/consent`);
+          return NextResponse.redirect(
+            new URL(
+              `/oidc/consent`,
+              `${httpRequest?.headers.get("x-forwarded-proto")}://${httpRequest?.headers.get("host")}`,
+            ),
+            {
+              status: 303,
+              headers,
+            },
+          );
         }
       } else {
         // Multiple active sessions, show account picker
