@@ -2,7 +2,7 @@ import { SessionsService } from "@/services/SessionsService";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function getCurrentUser() {
+export async function getCurrentUser() {
   const cookieStore = await cookies();
   const sessionManager = new SessionsService(
     cookieStore.get("auth")?.value || "",

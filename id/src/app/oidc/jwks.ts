@@ -2,7 +2,7 @@ import { readdir, readFile } from "fs";
 import { z } from "zod";
 
 const baseKey = z.object({
-  kid: z.string(),
+  kid: z.string().optional(),
   use: z.enum(["sig", "enc"]).optional(),
   alg: z.string().optional(),
   x5c: z.array(z.string()).optional(),

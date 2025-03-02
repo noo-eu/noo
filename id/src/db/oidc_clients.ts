@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import db, { schema } from ".";
 
 export async function createOidcClient(
@@ -6,4 +7,10 @@ export async function createOidcClient(
   return (
     await db.insert(schema.oidcClients).values(attributes).returning()
   ).pop()!;
+}
+
+export async function findOidcClient(id: string) {
+  return db.query.oidcClients.findFirst({
+    where: eq(schema.oidcClients.id, id),
+  });
 }

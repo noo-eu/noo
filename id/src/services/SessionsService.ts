@@ -8,6 +8,7 @@ import {
 import { findUserByEmailOrUsername, findUserById } from "@/db/users";
 import { checkVerifier, createVerifier } from "@/utils";
 import argon2 from "argon2";
+import { cookies } from "next/headers";
 import crypto from "node:crypto";
 
 // Multiple users can be logged in at the same time on the same device. We keep
@@ -88,7 +89,9 @@ export class SessionsService {
       return undefined;
     }
 
-    // TODO: check the verifier digest
+    if (!checkVerifier(sessionData.verifier, session.verifierDigest)) {
+      return undefined;
+    }
 
     return findUserById(session.userId);
   }
@@ -103,17 +106,22 @@ export class SessionsService {
       stored: existingSessions.find((s) => s.id === d.sid)!,
     }));
 
-    const validSessions = paired
-      .filter(({ cookie, stored }) => {
-        if (!stored) {
-          return false;
-        }
+    const validPairs = paired.filter(({ cookie, stored }) => {
+      if (!stored) {
+        return false;
+      }
 
-        return checkVerifier(cookie.verifier, stored.verifierDigest);
-      })
-      .map(({ cookie }) => cookie);
+      return checkVerifier(cookie.verifier, stored.verifierDigest);
+    });
 
-    this.tokens = this.encodeAll(validSessions);
+    const validTokens = validPairs.map(({ cookie }) => cookie);
+    this.tokens = this.encodeAll(validTokens);
+
+    return validPairs.map(({ stored }) => stored);
+  }
+
+  async activeSessions() {
+    return await this.cleanup();
   }
 
   private loadSession(sessionId: string) {

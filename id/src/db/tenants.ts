@@ -8,5 +8,5 @@ export async function findTenantByDomainName(domainName: string) {
 }
 
 export async function createTenant(tenant: typeof schema.tenants.$inferInsert) {
-  return db.insert(schema.tenants).values(tenant).returning();
+  return (await db.insert(schema.tenants).values(tenant).returning()).pop()!;
 }

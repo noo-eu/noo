@@ -4,6 +4,7 @@ import {
   integer,
   jsonb,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   unique,
@@ -95,3 +96,43 @@ export const oidcClients = pgTable("oidc_clients", {
   postLogoutRedirectUris: text("post_logout_redirect_uris").array(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
+  id: text().primaryKey(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  data: jsonb("data").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const oidcConsents = pgTable(
+  "oidc_consents",
+  {
+    clientId: uuid("client_id")
+      .notNull()
+      .references(() => oidcClients.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    scopes: text("scopes").array().notNull().default([]),
+    claims: text("claims").array().notNull().default([]),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.clientId, table.userId] })],
+);
