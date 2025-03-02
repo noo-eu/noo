@@ -47,6 +47,7 @@ export default defineConfig({
     url: "https://localhost:23000",
     reuseExistingServer: !process.env.CI,
     ignoreHTTPSErrors: true,
+    stdout: process.env.CI ? undefined : "pipe",
   },
 
   /* Configure projects for major browsers */

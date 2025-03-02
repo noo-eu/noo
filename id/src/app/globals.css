@@ -30,6 +30,6 @@ body {
   font-variation-settings: "wdth" 100;
 
   /* DynaPuff shows up a bit off-center */
-  top: 0.03em;
-  position: relative;
+  /* top: 0.03em; */
+  /* position: relative; */
 }

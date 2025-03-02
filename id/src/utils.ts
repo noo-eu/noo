@@ -61,10 +61,30 @@ export function checkVerifier(verifier: string, verifierDigest: string) {
   const salt = Buffer.from(saltEnc, "base64url");
   const digest = Buffer.from(digestEnc, "base64url");
 
-  const newDigest = crypto
-    .createHash("sha256")
-    .update(Buffer.concat([salt, verifierBuf]))
-    .digest();
+  const newDigest = sha256(Buffer.concat([salt, verifierBuf])).digest();
 
   return crypto.timingSafeEqual(digest, newDigest);
+}
+
+export function hexToBase62(hex: string) {
+  const ALPHABET =
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let asNumber = BigInt(`0x${hex}`);
+
+  let result = "";
+  while (asNumber > 0) {
+    const remainder = Number(asNumber % BigInt(ALPHABET.length));
+    result = ALPHABET[remainder] + result;
+    asNumber /= BigInt(ALPHABET.length);
+  }
+
+  return result;
+}
+
+export function uuidToBase62(uuid: string) {
+  return hexToBase62(uuid.replace(/-/g, ""));
+}
+
+export function sha256(input: Buffer | string) {
+  return crypto.createHash("sha256").update(input);
 }

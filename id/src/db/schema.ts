@@ -4,6 +4,7 @@ import {
   integer,
   jsonb,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   unique,
@@ -50,7 +51,9 @@ export const sessions = pgTable("sessions", {
   verifierDigest: text("verifier_digest").notNull(),
   ip: inet().notNull(),
   userAgent: text("user_agent"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  lastAuthenticatedAt: timestamp("last_authenticated_at")
+    .notNull()
+    .defaultNow(),
   lastUsedAt: timestamp("last_used_at").notNull().defaultNow(),
 });
 
@@ -94,4 +97,70 @@ export const oidcClients = pgTable("oidc_clients", {
   requestUris: text("request_uris").array(),
   postLogoutRedirectUris: text("post_logout_redirect_uris").array(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
+  id: text().primaryKey(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  authTime: timestamp("auth_time").notNull(),
+  redirectUri: text("redirect_uri"),
+  scopes: text("scopes").array().notNull().default([]),
+  claims: text("claims").array().notNull().default([]),
+  nonce: text(),
+  data: jsonb("data").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const oidcConsents = pgTable(
+  "oidc_consents",
+  {
+    clientId: uuid("client_id")
+      .notNull()
+      .references(() => oidcClients.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    scopes: text("scopes").array().notNull().default([]),
+    claims: text("claims").array().notNull().default([]),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.clientId, table.userId] })],
+);
+
+export const oidcAccessTokens = pgTable("oidc_access_tokens", {
+  id: uuid().primaryKey().defaultRandom(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  nonce: text(),
+  scopes: text().array().notNull().default([]),
+  claims: text().array().notNull().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(),
 });

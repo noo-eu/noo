@@ -65,3 +65,11 @@ export async function isUsernameAvailable(
 
   return !existing;
 }
+
+const Users = {
+  find: findUserById,
+  create: createUser,
+};
+
+export default Users;
+export type User = typeof schema.users.$inferSelect;

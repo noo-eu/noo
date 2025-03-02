@@ -2,7 +2,7 @@ import { getRequestConfig } from "next-intl/server";
 import { headers } from "next/headers";
 import acceptLanguage from "accept-language";
 
-acceptLanguage.languages([
+export const SUPPORTED_LANGUAGES = [
   "en",
   "bg",
   "hr",
@@ -27,7 +27,9 @@ acceptLanguage.languages([
   "sl",
   "es",
   "sv",
-]);
+];
+
+acceptLanguage.languages(SUPPORTED_LANGUAGES);
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";

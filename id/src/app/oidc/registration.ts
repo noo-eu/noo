@@ -63,6 +63,8 @@ export async function oidcClientRegistration(
     const message = parseResult.error.issues[0].message;
     const errorDescription = `The property ${badField} is invalid: ${message}`;
 
+    console.error(parseResult.error);
+
     return buildErrorResponse(
       badField == "redirect_uris"
         ? "invalid_redirect_uri"
@@ -395,6 +397,15 @@ export function validateRedirectUris(
     );
   }
 
+  for (const uri of redirect_uris) {
+    if (uri.includes("#") || uri.includes("?")) {
+      return buildErrorResponse(
+        "invalid_redirect_uri",
+        "Redirect URIs must not contain fragments or query strings.",
+      );
+    }
+  }
+
   if (application_type === "web") {
     for (const uri of redirect_uris) {
       if (!uri.startsWith("https://") && !process.env.TEST) {
@@ -404,7 +415,8 @@ export function validateRedirectUris(
         );
       }
 
-      if (uri.includes("://localhost") && !process.env.TEST) {
+      const host = new URL(uri).hostname;
+      if (host == "localhost" && !process.env.TEST) {
         return buildErrorResponse(
           "invalid_redirect_uri",
           "Redirect URIs must not use localhost.",
