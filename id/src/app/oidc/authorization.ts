@@ -51,20 +51,45 @@ export async function oidcAuthorization(
 
   switch (request.prompt) {
     case "none":
-    // The OP expects the user to be already authenticated and consented.
-    // If this is not the case, the request is rejected with interaction_required.
-    //
-    // The spec leaves open a small undefined behaviour. Multiple sessions
-    // could be active at the same time at the OP (us). The only way to
-    // distinguish between them is by the id_token_hint parameter, which is
-    // RECOMMENDED, but not REQUIRED.
-    //
-    // Our strategy will be as follows:
-    //   1. If we have an id_token_hint, we'll use it to find the session.
-    //   2. If we don't have an id_token_hint, we'll check which of the
-    //      active sessions have consented to the client.
-    //   3. If we have multiple sessions that match the criteria, we'll
-    //      return an interaction_required error.
+      // The OP expects the user to be already authenticated and consented.
+      // If this is not the case, the request is rejected with interaction_required.
+      const sessionsService = new SessionsService(sessionCookie);
+      await sessionsService.cleanup();
+
+      const allSessions = await sessionsService.activeSessions();
+      if (allSessions.length === 0) {
+        return returnToClient(request.response_mode, request.redirect_uri, {
+          error: "login_required",
+          error_description: "The user must be authenticated",
+          state: request.state,
+        });
+      } else if (allSessions.length === 1) {
+        const session = allSessions[0];
+        if (session.consent) {
+          // The user has already consented to the client
+          return redirect(`/oidc/continue`);
+        } else {
+          // The user has not yet consented to the client
+          return returnToClient(request.response_mode, request.redirect_uri, {
+            error: "consent_required",
+            error_description: "The user must consent to the client",
+            state: request.state,
+          });
+        }
+      } else {
+        // The spec leaves open a small undefined behaviour. Multiple sessions
+        // could be active at the same time at the OP (us). The only way to
+        // distinguish between them is by the id_token_hint parameter, which is
+        // RECOMMENDED, but not REQUIRED.
+        //
+        // Our strategy will be as follows:
+        //   1. If we have an id_token_hint, we'll use it to find the session.
+        //   2. If we don't have an id_token_hint, we'll check which of the
+        //      active sessions have consented to the client.
+        //   3. If we have multiple sessions that match the criteria, we'll
+        //      return an interaction_required error.
+        // TODO
+      }
     case "login":
     // We are requested to re-authenticate the user. This could be used to
     // protect specific high-value operations.
@@ -196,7 +221,7 @@ function returnToClient(
     });
 
     // Redirect the user to the URL
-    return Response.redirect(redirectUri!, 303);
+    return Response.redirect(url.toString(), 303);
   } else if (responseMode == "fragment") {
     const url = new URL(redirectUri!);
 
@@ -206,7 +231,7 @@ function returnToClient(
     });
 
     // Redirect the user to the URL
-    return Response.redirect(redirectUri!, 303);
+    return Response.redirect(url.toString(), 303);
   } else if (responseMode == "form_post") {
     return buildFormPostResponse(redirectUri!, data);
   } else {
