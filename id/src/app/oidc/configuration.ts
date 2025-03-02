@@ -69,8 +69,8 @@ export function buildConfiguration(request: Request, domain?: string) {
   const config: ProviderMetadata = {
     issuer,
     authorization_endpoint: `${issuer}/authorize`,
-    token_endpoint: `${issuer}/token`,
-    userinfo_endpoint: `${issuer}/userinfo`,
+    token_endpoint: `${proto}://${host}/oidc/token`,
+    userinfo_endpoint: `${proto}://${host}/oidc/userinfo`,
     jwks_uri: `${proto}://${host}/oidc/jwks.json`,
     scopes_supported: ["openid", "profile", "email"],
     response_types_supported: RESPONSE_TYPES_SUPPORTED,

@@ -11,6 +11,15 @@ export async function getCurrentUser() {
   return sessionManager.getUser();
 }
 
+export async function getCurrentSession() {
+  const cookieStore = await cookies();
+  const sessionManager = new SessionsService(
+    cookieStore.get("auth")?.value || "",
+  );
+
+  return (await sessionManager.activeSessions())[0];
+}
+
 export default async function Home() {
   const user = await getCurrentUser();
   if (!user) {

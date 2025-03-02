@@ -1,4 +1,5 @@
 import { readdir, readFile } from "fs";
+import { createLocalJWKSet, importJWK } from "jose";
 import { z } from "zod";
 
 const baseKey = z.object({
@@ -13,6 +14,12 @@ const rsaKey = baseKey.extend({
   kty: z.literal("RSA"),
   n: z.string(),
   e: z.string(),
+  d: z.string().optional(),
+  p: z.string().optional(),
+  q: z.string().optional(),
+  dp: z.string().optional(),
+  dq: z.string().optional(),
+  qi: z.string().optional(),
 });
 
 const ecKey = baseKey.extend({
@@ -20,12 +27,14 @@ const ecKey = baseKey.extend({
   crv: z.string(),
   x: z.string(),
   y: z.string(),
+  d: z.string().optional(),
 });
 
 const edKey = baseKey.extend({
   kty: z.literal("OKP"),
   crv: z.literal("Ed25519"),
   x: z.string(),
+  d: z.string().optional(),
 });
 
 const keySchema = z.union([rsaKey, ecKey, edKey]);
@@ -65,6 +74,7 @@ async function exportKey(key: CryptoKey) {
     unknown
   >;
 
+  delete obj.alg;
   delete obj.ext;
   delete obj.key_ops;
 
@@ -151,7 +161,7 @@ function jwkToPublicJwk(jwk: Record<string, unknown>) {
   return obj;
 }
 
-async function loadKeysRaw() {
+export async function loadKeysRaw() {
   const legacyKeys = await loadKeysFromDir("keys/old");
   const currentKeys = await loadKeysFromDir("keys/current");
 
@@ -161,7 +171,9 @@ async function loadKeysRaw() {
   };
 }
 
-function loadKeysFromDir(path: string): Promise<Record<string, unknown>[]> {
+export function loadKeysFromDir(
+  path: string,
+): Promise<Record<string, unknown>[]> {
   return new Promise((resolve, reject) => {
     readdir(path, async (err, files) => {
       if (err) {
@@ -196,6 +208,28 @@ function loadKeyRaw(path: string): Promise<Record<string, unknown>> {
       }
     });
   });
+}
+
+export async function getKeyByAlg(alg: string) {
+  const keys = (await getKeys()).current;
+
+  for (const key of keys) {
+    if (key.alg === alg) {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  for (const key of keys) {
+    if (alg == "RS256" && key.kty === "RSA") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "ES256" && key.kty === "EC") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "EdDSA" && key.kty === "OKP") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  return null;
 }
 
 // async function importKey(key: Record<string, unknown>): Promise<CryptoKey> {

@@ -3,7 +3,7 @@ import db, { schema } from ".";
 
 export async function createOidcAuthorizationCode(
   clientId: string,
-  userId: string,
+  sessionId: string,
   data: unknown,
 ) {
   return (
@@ -14,7 +14,7 @@ export async function createOidcAuthorizationCode(
           "base64url",
         ),
         clientId,
-        userId,
+        sessionId,
         data,
       })
       .returning()
@@ -25,4 +25,10 @@ export async function findOidcAuthorizationCode(id: string) {
   return db.query.oidcAuthorizationCodes.findFirst({
     where: eq(schema.oidcAuthorizationCodes.id, id),
   });
+}
+
+export async function deleteOidcAuthorizationCode(id: string) {
+  return db
+    .delete(schema.oidcAuthorizationCodes)
+    .where(eq(schema.oidcAuthorizationCodes.id, id));
 }

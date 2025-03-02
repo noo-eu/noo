@@ -65,6 +65,8 @@ export class SessionsService {
       verifierDigest: digest,
       ip,
       userAgent,
+      createdAt: new Date(),
+      lastUsedAt: new Date(),
     });
 
     this.tokens.push(this.encodeSession(sid, verifier));

@@ -105,9 +105,9 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
       onDelete: "cascade",
       onUpdate: "cascade",
     }),
-  userId: uuid("user_id")
+  sessionId: uuid("session_id")
     .notNull()
-    .references(() => users.id, {
+    .references(() => sessions.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     }),
@@ -136,3 +136,24 @@ export const oidcConsents = pgTable(
   },
   (table) => [primaryKey({ columns: [table.clientId, table.userId] })],
 );
+
+export const oidcAccessTokens = pgTable("oidc_access_tokens", {
+  id: uuid().primaryKey().defaultRandom(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  nonce: text(),
+  scopes: text().array().notNull().default([]),
+  claims: text().array().notNull().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(),
+});

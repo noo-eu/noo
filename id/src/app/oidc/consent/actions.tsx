@@ -1,12 +1,13 @@
 "use server";
 
-import { getCurrentUser } from "@/app/page";
+import { getCurrentSession, getCurrentUser } from "@/app/page";
 import { createOidcAuthorizationCode } from "@/db/oidc_authorization_codes";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
 export async function getOidcAuthorizationCookie() {
   const cookieStore = await cookies();
+  console.log("anma ", cookieStore.getAll());
   const oidcAuthRequestCookie = cookieStore.get(
     "oidc_authorization_request",
   )?.value;
@@ -14,8 +15,12 @@ export async function getOidcAuthorizationCookie() {
     return null;
   }
 
+  console.warn("oidcAuthRequestCookie", oidcAuthRequestCookie);
+
   try {
-    return JSON.parse(oidcAuthRequestCookie);
+    // URL-decode the cookie value
+    const oidcAuthRequest = decodeURIComponent(oidcAuthRequestCookie);
+    return JSON.parse(oidcAuthRequest);
   } catch {
     return null;
   }
@@ -34,14 +39,12 @@ export async function afterConsent() {
     return notFound();
   }
 
-  console.log("user", user);
-
   const code = await createOidcAuthorizationCode(
     oidcAuthRequest.client_id,
-    user.id,
+    (await getCurrentSession()).id,
     oidcAuthRequest,
   );
-  console.log("code", code);
+
   return redirect(
     `${oidcAuthRequest.redirect_uri}?code=${code.id}&state=${oidcAuthRequest.state}`,
   );
