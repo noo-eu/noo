@@ -1,7 +1,6 @@
 import Form from "./Form";
 import { redirect } from "next/navigation";
-import { findOidcConsent } from "@/db/oidc_consents";
-import { afterConsent, getOidcAuthorizationCookie } from "./actions";
+import { getOidcAuthorizationCookie } from "./actions";
 import { getUserForSession } from "@/lib/SessionsService";
 import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";

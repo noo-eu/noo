@@ -29,8 +29,8 @@ const claimsSchema = z.object({
 
 export type Claims = z.infer<typeof claimsSchema>;
 
-type ResponseType = (typeof RESPONSE_TYPES_SUPPORTED)[number];
-type ResponseMode = "query" | "fragment" | "form_post";
+export type ResponseType = (typeof RESPONSE_TYPES_SUPPORTED)[number];
+export type ResponseMode = "query" | "fragment" | "form_post";
 
 export type AuthorizationRequest = {
   tenantId?: string;
@@ -78,7 +78,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   if (rawParams.claims) {
     try {
       params.claims = claimsSchema.parse(JSON.parse(rawParams.claims));
-    } catch (e) {
+    } catch {
       return returnToClient(params, {
         error: "invalid_request",
         error_description: "The claims parameter is invalid",
@@ -111,7 +111,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
 
   switch (params.prompt) {
     case "none":
-      return authorizationNone(request, params, client, tenant);
+      return authorizationNone(params, client);
     case "select_account":
       // We are requested to prompt the user to select an account. This could be
       // used to switch between multiple accounts.
@@ -130,7 +130,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
       // protect specific high-value operations.
       params.max_age = 0;
     default:
-      return authorizationStandard(request, params, client, tenant);
+      return authorizationStandard(request, params, client);
   }
 }
 
@@ -397,10 +397,8 @@ function normalizeClaims(params: AuthorizationRequest) {
 }
 
 async function authorizationNone(
-  req: HttpRequest,
   params: AuthorizationRequest,
   client: OidcClient,
-  tenant?: Tenant,
 ) {
   // The RP expects the user to be already authenticated and consented.
   // If this is not the case, the request is rejected.
@@ -490,7 +488,6 @@ async function authorizationStandard(
   req: HttpRequest,
   params: AuthorizationRequest,
   client: OidcClient,
-  tenant?: Tenant,
 ) {
   // No specific requirement.
   //

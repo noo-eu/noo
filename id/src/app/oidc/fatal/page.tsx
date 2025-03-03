@@ -1,7 +1,5 @@
 "use client";
 
-import { Noo } from "@/components/Noo";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function OidcFatalErrorPage() {

@@ -9,6 +9,7 @@ import {
 } from "./configuration";
 import { createOidcClient } from "@/db/oidc_clients";
 import { jwks } from "./jwks";
+import { ResponseType } from "@/lib/oidc/authorization";
 
 const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),
@@ -139,7 +140,7 @@ async function validateRegistration(
   // Ensure only supported response types are set
   config.response_types ||= ["code"];
   config.response_types = config.response_types?.filter((rt: string) =>
-    RESPONSE_TYPES_SUPPORTED.includes(rt),
+    RESPONSE_TYPES_SUPPORTED.includes(rt as ResponseType),
   );
   if (config.response_types.length === 0) {
     return buildErrorResponse(

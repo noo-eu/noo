@@ -5,7 +5,7 @@ import { consentFormSubmit } from "./actions";
 import { Button } from "@/components/Button";
 
 export default function Form({ sessionId }: { sessionId: string }) {
-  const [state, formAction, pending] = useActionState(consentFormSubmit, {});
+  const [_, formAction, pending] = useActionState(consentFormSubmit, {});
 
   return (
     <div className="mt-8">

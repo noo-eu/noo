@@ -91,8 +91,8 @@ export function buildConfiguration(request: Request, domain?: string) {
     token_endpoint: `${proto}://${host}/oidc/token`,
     userinfo_endpoint: `${proto}://${host}/oidc/userinfo`,
     jwks_uri: `${proto}://${host}/oidc/jwks.json`,
-    scopes_supported: ["openid", "profile", "email"],
-    response_types_supported: RESPONSE_TYPES_SUPPORTED,
+    scopes_supported: ["openid", "profile", "email", "address", "phone"],
+    response_types_supported: [...RESPONSE_TYPES_SUPPORTED],
     subject_types_supported: ["public", "pairwise"],
     grant_types_supported: GRANT_TYPES_SUPPORTED,
     id_token_signing_alg_values_supported:

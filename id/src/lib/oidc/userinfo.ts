@@ -64,7 +64,7 @@ async function handle(req: HttpRequest) {
 
   const user = (await findUserById(at.userId))!;
 
-  // @ts-ignore
+  // @ts-expect-error jsonb is unknown
   const requestedClaims = Object.keys(at.claims.userinfo || {});
 
   if (requestedClaims.includes("name")) {

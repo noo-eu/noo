@@ -25,7 +25,7 @@ function clientName(client: OidcClient, preferredLocale: string) {
 }
 
 function cleanupClaims(claims: string[]): string[] {
-  let clean: string[] = [];
+  const clean: string[] = [];
   for (const claim of claims) {
     switch (claim) {
       case "name":
