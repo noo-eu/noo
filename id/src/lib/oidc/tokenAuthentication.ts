@@ -80,8 +80,6 @@ export async function authenticateClientSecretJwt(
     return false;
   }
 
-  console.log("ASS", req.baseUrl);
-
   try {
     await jose.jwtVerify(
       client_assertion,

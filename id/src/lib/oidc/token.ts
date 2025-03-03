@@ -1,12 +1,15 @@
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
-import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import OidcAuthorizationCodes, {
+  OidcAuthorizationCode,
+} from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import { authenticateClient } from "./tokenAuthentication";
 import { createIdToken } from "./idToken";
 import { sha256 } from "@/utils";
 import crypto from "crypto";
+import { validatePkce } from "./pkce";
 
 export const tokenEndpoint = composeMiddleware(
   preventCache,
@@ -57,31 +60,15 @@ async function authorizationCodeFlow(
     }
   }
 
-  // PKCE validation
-  if (code.codeChallenge) {
-    if (!params.code_verifier) {
-      return Response.json({ error: "invalid_request" }, { status: 400 });
-    }
-
-    let challenge;
-    switch (code.codeChallengeMethod) {
-      case "plain":
-        challenge = params.code_verifier;
-        break;
-      case "S256":
-        challenge = sha256(params.code_verifier).digest("base64url");
-        break;
-      default:
-        return Response.json({ error: "invalid_request" }, { status: 400 });
-    }
-
-    if (
-      !crypto.timingSafeEqual(
-        Buffer.from(challenge),
-        Buffer.from(code.codeChallenge),
-      )
-    ) {
-      return Response.json({ error: "invalid_grant" }, { status: 400 });
+  if (code.codeChallenge && code.codeChallengeMethod) {
+    // We've been asked to verify the PKCE challenge
+    const earlyReturn = validatePkce(
+      params.code_verifier,
+      code.codeChallengeMethod,
+      code.codeChallenge,
+    );
+    if (earlyReturn) {
+      return Response.json({ error: earlyReturn }, { status: 400 });
     }
   }
 
