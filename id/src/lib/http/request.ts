@@ -137,13 +137,14 @@ export class HttpRequest {
 
   get formParams(): Promise<Record<string, string | undefined>> {
     return this.formData.then((formData) => {
-      return formData.entries().reduce(
-        (params, [key, value]) => {
-          params[key] = value.toString();
-          return params;
-        },
-        {} as Record<string, string>,
-      );
+      const entries = formData.entries();
+      const params: Record<string, string> = {};
+
+      for (const [key, value] of entries) {
+        params[key] = value.toString();
+      }
+
+      return params;
     });
   }
 
