@@ -63,8 +63,6 @@ export async function oidcClientRegistration(
     const message = parseResult.error.issues[0].message;
     const errorDescription = `The property ${badField} is invalid: ${message}`;
 
-    console.error(parseResult.error);
-
     return buildErrorResponse(
       badField == "redirect_uris"
         ? "invalid_redirect_uri"
