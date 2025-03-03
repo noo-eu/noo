@@ -1,10 +1,10 @@
-import { NextRequest } from "next/server";
 import { findTenantByDomainName } from "@/db/tenants";
 import { notFound } from "next/navigation";
 import { oidcAuthorization } from "@/lib/oidc/authorization";
+import { HttpRequest } from "@/lib/http/request";
 
 export async function GET(
-  request: NextRequest,
+  request: Request,
   { params }: { params: Promise<{ domain: string }> },
 ) {
   const domain = (await params).domain;
@@ -13,8 +13,7 @@ export async function GET(
     notFound();
   }
 
-  const parameters = Object.fromEntries(request.nextUrl.searchParams);
-  return oidcAuthorization(parameters, tenant, request);
+  return oidcAuthorization(new HttpRequest(request), tenant);
 }
 
 export async function POST(
@@ -27,11 +26,5 @@ export async function POST(
     notFound();
   }
 
-  const formData = await request.formData();
-  const parameters: Record<string, string> = {};
-  formData.forEach((value, key) => {
-    parameters[key] = value.toString();
-  });
-
-  return oidcAuthorization(parameters, tenant, request);
+  return oidcAuthorization(new HttpRequest(request), tenant);
 }

@@ -237,7 +237,8 @@ async function validateRegistration(
           "Sector Identifier URI must return an array.",
         );
       }
-    } catch {
+    } catch (e) {
+      console.error(e);
       return buildErrorResponse(
         "invalid_client_metadata",
         "Failed to fetch sector identifier URI.",
@@ -396,6 +397,7 @@ export function validateRedirectUris(
   }
 
   for (const uri of redirect_uris) {
+    // TODO: query strings must be allowed (fragment is correctly not allowed)
     if (uri.includes("#") || uri.includes("?")) {
       return buildErrorResponse(
         "invalid_redirect_uri",

@@ -11,15 +11,6 @@ export async function getCurrentUser() {
   return sessionManager.getUser();
 }
 
-export async function getCurrentSession() {
-  const cookieStore = await cookies();
-  const sessionManager = new SessionsService(
-    cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
-  );
-
-  return (await sessionManager.activeSessions())[0];
-}
-
 export default async function Home() {
   const user = await getCurrentUser();
   if (!user) {

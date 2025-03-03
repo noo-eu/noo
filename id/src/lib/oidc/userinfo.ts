@@ -64,17 +64,36 @@ async function handle(req: HttpRequest) {
 
   const user = (await findUserById(at.userId))!;
 
-  if (at.scopes.includes("profile")) {
+  // @ts-ignore
+  const requestedClaims = Object.keys(at.claims.userinfo || {});
+
+  if (requestedClaims.includes("name")) {
     claims.name = `${user.firstName} ${user.lastName}`;
+  }
+
+  if (requestedClaims.includes("given_name")) {
     claims.given_name = user.firstName;
+  }
+
+  if (requestedClaims.includes("family_name")) {
     claims.family_name = user.lastName;
+  }
+
+  if (requestedClaims.includes("preferred_username")) {
     claims.preferred_username = user.username;
   }
 
-  if (at.scopes.includes("email")) {
+  if (requestedClaims.includes("email")) {
     claims.email = user.username + "@" + (tenant?.domain || "noomail.eu");
+  }
+
+  if (requestedClaims.includes("email_verified")) {
     claims.email_verified = true;
   }
+
+  // TODO: picture, profile, phone_number, address, locale, zoneinfo, updated_at
+
+  // TODO: check client.userinfoSignedResponseAlg. If set, JWT encode the claims
 
   return Response.json(claims);
 }

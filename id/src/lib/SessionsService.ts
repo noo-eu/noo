@@ -58,7 +58,7 @@ export class SessionsService {
 
     const { verifier, digest } = createVerifier();
 
-    await Sessions.create({
+    const session = await Sessions.create({
       id: sid,
       userId: userId,
       verifierDigest: digest,
@@ -73,7 +73,7 @@ export class SessionsService {
 
     this.tokens.push(this.encodeSession(sid, verifier));
 
-    return this.buildCookie();
+    return session;
   }
 
   async deleteSession(sid: string) {
@@ -106,7 +106,7 @@ export class SessionsService {
     return Users.find(session.userId);
   }
 
-  async getUserBySid(sessionId: string) {
+  async getSessionBySid(sessionId: string) {
     const allSessions = this.decodeAll();
     const session = allSessions.find((s) => s.sid === sessionId);
     if (!session) {
@@ -122,7 +122,16 @@ export class SessionsService {
       return undefined;
     }
 
-    return Users.find(storedSession.userId);
+    return storedSession;
+  }
+
+  async getUserBySid(sessionId: string) {
+    const session = await this.getSessionBySid(sessionId);
+    if (!session) {
+      return undefined;
+    }
+
+    return Users.find(session.userId);
   }
 
   async cleanup() {
@@ -152,7 +161,7 @@ export class SessionsService {
   async activeSessions(maxAge?: number) {
     const active = await this.cleanup();
 
-    if (maxAge) {
+    if (maxAge !== undefined) {
       const now = new Date();
       return active.filter((s) => {
         const diff = now.getTime() - s.lastUsedAt.getTime();

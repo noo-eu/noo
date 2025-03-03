@@ -19,8 +19,12 @@ export async function findBy(conditions: SQL) {
   });
 }
 
-export function createSession(attributes: typeof schema.sessions.$inferInsert) {
-  return db.insert(schema.sessions).values(attributes);
+export async function createSession(
+  attributes: typeof schema.sessions.$inferInsert,
+) {
+  return (
+    await db.insert(schema.sessions).values(attributes).returning()
+  ).pop()!;
 }
 
 export function refreshSession(
@@ -33,7 +37,7 @@ export function refreshSession(
     ip,
     userAgent,
     lastUsedAt: new Date(),
-    authenticatedAt: authenticatedAt ? authenticatedAt : undefined,
+    lastAuthenticatedAt: authenticatedAt ? authenticatedAt : undefined,
   };
 
   return db

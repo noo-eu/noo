@@ -5,6 +5,8 @@ import OidcClients from "@/db/oidc_clients";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import { authenticateClient } from "./tokenAuthentication";
 import { createIdToken } from "./idToken";
+import { sha256 } from "@/utils";
+import crypto from "crypto";
 
 export const tokenEndpoint = composeMiddleware(
   preventCache,
@@ -28,8 +30,12 @@ async function handle(req: HttpRequest) {
 
 async function authorizationCodeFlow(
   req: HttpRequest,
-  params: Record<string, string>,
+  params: Record<string, string | undefined>,
 ) {
+  if (!params.code) {
+    return Response.json({ error: "invalid_request" }, { status: 400 });
+  }
+
   const code = await OidcAuthorizationCodes.find(params.code);
   if (!code) {
     return Response.json({ error: "invalid_grant" }, { status: 400 });
@@ -47,6 +53,34 @@ async function authorizationCodeFlow(
     // The only exception to the rule is that the redirect_uri may be omitted if
     // the client only uses a single redirect_uri.
     if (client.redirectUris.length != 1 || params.redirect_uri !== undefined) {
+      return Response.json({ error: "invalid_grant" }, { status: 400 });
+    }
+  }
+
+  // PKCE validation
+  if (code.data.code_challenge) {
+    if (!params.code_verifier) {
+      return Response.json({ error: "invalid_request" }, { status: 400 });
+    }
+
+    let challenge;
+    switch (code.data.code_challenge_method) {
+      case "plain":
+        challenge = params.code_verifier;
+        break;
+      case "S256":
+        challenge = sha256(params.code_verifier).digest("base64url");
+        break;
+      default:
+        return Response.json({ error: "invalid_request" }, { status: 400 });
+    }
+
+    if (
+      !crypto.timingSafeEqual(
+        Buffer.from(challenge),
+        Buffer.from(code.data.code_challenge),
+      )
+    ) {
       return Response.json({ error: "invalid_grant" }, { status: 400 });
     }
   }

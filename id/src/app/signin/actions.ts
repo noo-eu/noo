@@ -34,28 +34,30 @@ export async function signin(_: unknown, formData: FormData) {
   const cookie = await getSessionCookie();
   const svc = new SessionsService(cookie);
 
-  const existing = await svc.sessionFor(user);
-  if (existing) {
+  let session = await svc.sessionFor(user);
+  if (session) {
     // Update the lastAuthenticatedAt timestamp, which is used for the OIDC auth_time claim
     await svc.reauthenticate(
-      existing.id,
+      session.id,
       await getIpAddress(),
       await getUserAgent(),
     );
   } else {
-    await setSessionCookie(
-      await svc.startSession(
-        user.id,
-        await getIpAddress(),
-        await getUserAgent(),
-      ),
+    session = await svc.startSession(
+      user.id,
+      await getIpAddress(),
+      await getUserAgent(),
     );
+
+    await setSessionCookie(svc.buildCookie());
   }
 
   let continueUrl = params.continue;
   if (!continueUrl || !continueUrl.startsWith("/")) {
     continueUrl = "/";
   }
+
+  continueUrl = continueUrl.replace("__sid__", session.id);
 
   redirect(continueUrl);
 }

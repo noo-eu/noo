@@ -1,10 +1,5 @@
 import { schema } from "@/db";
-import {
-  getSessionCookie,
-  SESSION_COOKIE_NAME,
-  SessionsService,
-} from "@/lib/SessionsService";
-import { cookies } from "next/headers";
+import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { redirect } from "next/navigation";
 import { HttpRequest } from "../http/request";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
@@ -12,7 +7,6 @@ import { z } from "zod";
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
 import { buildSubClaim, decodeIdToken } from "./idToken";
 import { Tenant } from "@/db/tenants";
-import { Client } from "pg";
 import OidcConsents from "@/db/oidc_consents";
 import { createCode } from "@/app/oidc/consent/actions";
 import { Session } from "@/db/sessions";
@@ -33,12 +27,12 @@ const claimsSchema = z.object({
   id_token: claimRequestSchema.optional(),
 });
 
-type Claims = z.infer<typeof claimsSchema>;
+export type Claims = z.infer<typeof claimsSchema>;
 
 type ResponseType = (typeof RESPONSE_TYPES_SUPPORTED)[number];
 type ResponseMode = "query" | "fragment" | "form_post";
 
-type AuthorizationRequest = {
+export type AuthorizationRequest = {
   tenantId?: string;
 
   client_id: string;
@@ -201,7 +195,9 @@ async function preflightCheck(
     return fatalError("missing_response_type");
   }
 
-  if (RESPONSE_TYPES_SUPPORTED.includes(params.response_type as ResponseType)) {
+  if (
+    !RESPONSE_TYPES_SUPPORTED.includes(params.response_type as ResponseType)
+  ) {
     return fatalError("unsupported_response_type");
   }
 
@@ -510,7 +506,7 @@ async function authorizationStandard(
 
   const sessions = new SessionsService(await getSessionCookie());
   const activeSessions = await sessions.activeSessions(
-    params.max_age ? params.max_age * 1000 : undefined,
+    params.max_age !== undefined ? params.max_age * 1000 : undefined,
   );
 
   const matchingSessions = params.id_token_hint
@@ -524,7 +520,9 @@ async function authorizationStandard(
     return new Response(null, {
       status: 303,
       headers: {
-        Location: req.buildUrl("/oidc/signin", { continue: "/oidc/consent" }),
+        Location: req.buildUrl("/signin", {
+          continue: "/oidc/consent?sid=__sid__",
+        }),
         "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
       },
     });
@@ -539,7 +537,7 @@ async function authorizationStandard(
       return new Response(null, {
         status: 303,
         headers: {
-          Location: req.buildUrl("/oidc/continue", { session_id: session.id }),
+          Location: req.buildUrl("/oidc/continue", { sid: session.id }),
           "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
@@ -548,7 +546,7 @@ async function authorizationStandard(
       return new Response(null, {
         status: 303,
         headers: {
-          Location: req.buildUrl("/oidc/consent", { session_id: session.id }),
+          Location: req.buildUrl("/oidc/consent", { sid: session.id }),
           "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
