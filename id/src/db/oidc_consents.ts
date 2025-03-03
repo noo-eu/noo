@@ -19,3 +19,9 @@ export async function findOidcConsent(clientId: string, userId: string) {
     }
   );
 }
+
+const OidcConsents = {
+  findOrInitialize: findOidcConsent,
+};
+
+export default OidcConsents;

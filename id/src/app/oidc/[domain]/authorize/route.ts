@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { findTenantByDomainName } from "@/db/tenants";
 import { notFound } from "next/navigation";
-import { oidcAuthorization } from "../../authorization";
+import { oidcAuthorization } from "@/lib/oidc/authorization";
 
 export async function GET(
   request: NextRequest,

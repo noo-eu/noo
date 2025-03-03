@@ -115,10 +115,11 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
     }),
   authTime: timestamp("auth_time").notNull(),
   redirectUri: text("redirect_uri"),
-  scopes: text("scopes").array().notNull().default([]),
-  claims: text("claims").array().notNull().default([]),
+  scopes: text().array().notNull().default([]),
+  // Claims here are a JSON object as defined by the OIDC spec
+  claims: jsonb().notNull().default({}),
   nonce: text(),
-  data: jsonb("data").notNull(),
+  data: jsonb().notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -137,8 +138,9 @@ export const oidcConsents = pgTable(
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
-    scopes: text("scopes").array().notNull().default([]),
-    claims: text("claims").array().notNull().default([]),
+    scopes: text().array().notNull().default([]),
+    // Claims here are a simple array of claims that the user has consented to provide
+    claims: text().array().notNull().default([]),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (table) => [primaryKey({ columns: [table.clientId, table.userId] })],
@@ -160,7 +162,8 @@ export const oidcAccessTokens = pgTable("oidc_access_tokens", {
     }),
   nonce: text(),
   scopes: text().array().notNull().default([]),
-  claims: text().array().notNull().default([]),
+  // Claims here are a JSON object as defined by the OIDC spec
+  claims: jsonb().notNull().default({}),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   expiresAt: timestamp("expires_at").notNull(),
 });

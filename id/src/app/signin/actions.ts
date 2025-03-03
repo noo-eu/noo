@@ -1,55 +1,61 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-import { SessionsService } from "@/services/SessionsService";
-import { schema } from "@/db";
+import {
+  getSessionCookie,
+  SessionsService,
+  setSessionCookie,
+} from "@/lib/SessionsService";
 import { getIpAddress, getUserAgent } from "@/utils";
+import { z } from "zod";
+import Users from "@/db/users";
 
-export async function signin(prevState: unknown, formData: FormData) {
-  const cookieStore = await cookies();
-  const svc = new SessionsService(cookieStore.get("auth")?.value || "");
+const signinSchema = z.object({
+  username: z.string(),
+  password: z.string(),
+  continue: z.string().optional(),
+});
 
-  const user = await svc.authenticate(
-    (formData.get("username") as string).trim(),
-    (formData.get("password") as string).trim(),
+export async function signin(_: unknown, formData: FormData) {
+  const { username, password, ...params } = signinSchema.parse(
+    Object.fromEntries(formData.entries()),
   );
 
-  let continueUrl = formData.get("continue")?.toString();
+  const user = await Users.authenticate(username.trim(), password.trim());
+  if (!user) {
+    return { username, error: 1 };
+  }
+
+  if (user.otpSecret) {
+    // TODO: create a 5 minute token and redirect to /otp?token=...
+    throw new Error("OTP step not implemented");
+  }
+
+  const cookie = await getSessionCookie();
+  const svc = new SessionsService(cookie);
+
+  const existing = await svc.sessionFor(user);
+  if (existing) {
+    // Update the lastAuthenticatedAt timestamp, which is used for the OIDC auth_time claim
+    await svc.reauthenticate(
+      existing.id,
+      await getIpAddress(),
+      await getUserAgent(),
+    );
+  } else {
+    await setSessionCookie(
+      await svc.startSession(
+        user.id,
+        await getIpAddress(),
+        await getUserAgent(),
+      ),
+    );
+  }
+
+  let continueUrl = params.continue;
   if (!continueUrl || !continueUrl.startsWith("/")) {
     continueUrl = "/";
   }
 
-  if (user) {
-    await startSession(user);
-    redirect(continueUrl);
-  } else {
-    return {
-      username: formData.get("username") as string,
-      error: 1,
-    };
-  }
-}
-
-async function startSession(user: typeof schema.users.$inferSelect) {
-  const cookieStore = await cookies();
-  const sessionManager = new SessionsService(
-    cookieStore.get("auth")?.value || "",
-  );
-
-  await sessionManager.startSession(
-    user.id,
-    await getIpAddress(),
-    await getUserAgent(),
-  );
-
-  // Delete old, expired, tampered sessions
-  await sessionManager.cleanup();
-
-  cookieStore.set("auth", sessionManager.buildCookie(), {
-    maxAge: 60 * 60 * 24 * 400,
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-  });
+  redirect(continueUrl);
 }

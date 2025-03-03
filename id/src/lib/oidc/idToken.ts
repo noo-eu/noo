@@ -1,6 +1,6 @@
 import { OidcClient } from "@/db/oidc_clients";
 import { HttpRequest } from "../http/request";
-import { SignJWT, UnsecuredJWT } from "jose";
+import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
 import { getKeyByAlg } from "@/app/oidc/jwks";
 import Tenants from "@/db/tenants";
 import { hexToBase62, sha256, uuidToBase62 } from "@/utils";
@@ -44,6 +44,19 @@ export async function createIdToken(
       .setIssuedAt()
       .setSubject(subClaim)
       .sign(key);
+  }
+}
+
+export async function decodeIdToken(idToken: string, alg: string) {
+  try {
+    if (alg == "none") {
+      return UnsecuredJWT.decode(idToken).payload;
+    } else {
+      const { key } = (await getKeyByAlg(alg))!;
+      return (await jwtVerify(idToken, key)).payload;
+    }
+  } catch {
+    return undefined;
   }
 }
 

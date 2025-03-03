@@ -6,7 +6,7 @@ import db from "@/db";
 describe("OIDC Client Registration", async () => {
   const tenant = (await db.query.tenants.findFirst())!;
 
-  const perform = async (request: any) => {
+  const perform = async (request: Record<string, unknown>) => {
     const response = await oidcClientRegistration(request, tenant);
     return await response.json();
   };
@@ -88,7 +88,6 @@ describe("OIDC Client Registration", async () => {
 
     // undefined is returned when the validation passes
     for (const uri of acceptedNativeRedirectUris) {
-      console.log("Testing", uri);
       expect(validateRedirectUris([uri], "native")).toBeUndefined();
     }
 

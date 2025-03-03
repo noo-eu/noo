@@ -135,7 +135,7 @@ export class HttpRequest {
     return this.request.json();
   }
 
-  get formParams(): Promise<Record<string, string>> {
+  get formParams(): Promise<Record<string, string | undefined>> {
     return this.formData.then((formData) => {
       return formData.entries().reduce(
         (params, [key, value]) => {
@@ -145,5 +145,28 @@ export class HttpRequest {
         {} as Record<string, string>,
       );
     });
+  }
+
+  get params(): Promise<Record<string, string | undefined>> {
+    const query = this.queryParams;
+    if (this.isPost() && this.isFormData()) {
+      return this.formParams.then((formParams) => ({
+        ...query,
+        ...formParams,
+      }));
+    }
+
+    return Promise.resolve(query);
+  }
+
+  buildUrl(path: string, query?: Record<string, string>): string {
+    const url = new URL(path, this.baseUrl);
+    if (query) {
+      for (const [key, value] of Object.entries(query)) {
+        url.searchParams.set(key, value);
+      }
+    }
+
+    return url.toString();
   }
 }

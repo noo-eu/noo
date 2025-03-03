@@ -13,8 +13,8 @@ export async function findTenantById(id: string) {
   });
 }
 
-export async function findTenantBy(conditions: SQL) {
-  return db.query.tenants.findFirst({
+export async function findTenantsBy(conditions: SQL) {
+  return db.query.tenants.findMany({
     where: conditions,
   });
 }
@@ -25,7 +25,6 @@ export async function createTenant(tenant: typeof schema.tenants.$inferInsert) {
 
 const Tenants = {
   find: findTenantById,
-  findBy: findTenantBy,
   create: createTenant,
 };
 

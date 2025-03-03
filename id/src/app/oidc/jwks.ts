@@ -117,12 +117,12 @@ export async function getKeys(): Promise<{
       keysCache = await loadKeysRaw();
       keysCacheTime = Date.now();
     } catch (err) {
-      console.log("Failed to load new keys from disk:", err);
+      console.error("Failed to load new keys from disk:", err);
       if (!keysCache) {
         throw err;
       }
 
-      console.log("Falling back to using the old keys");
+      console.warn("Falling back to using the old keys");
     }
   }
 

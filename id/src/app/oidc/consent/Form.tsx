@@ -10,11 +10,17 @@ export default function Form() {
   return (
     <div>
       <form action={formAction}>
-        <Button type="submit" name="consent" pending={pending} value={"yes"}>
-          Yes
+        <Button
+          type="submit"
+          name="consent"
+          disabled={pending}
+          value={"no"}
+          kind="secondary"
+        >
+          Cancel
         </Button>
-        <Button type="submit" name="consent" pending={pending} value={"no"}>
-          No
+        <Button type="submit" name="consent" disabled={pending} value={"yes"}>
+          Continue
         </Button>
       </form>
     </div>

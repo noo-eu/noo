@@ -38,7 +38,11 @@ type ProviderMetadata = {
   op_tos_uri?: string;
 };
 
-export const RESPONSE_TYPES_SUPPORTED = ["code", "id_token", "id_token token"];
+export const RESPONSE_TYPES_SUPPORTED = [
+  "code",
+  "id_token",
+  "id_token token",
+] as const;
 
 export const GRANT_TYPES_SUPPORTED = [
   "authorization_code",

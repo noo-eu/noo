@@ -1,25 +1,29 @@
 import Form from "./Form";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { findOidcConsent } from "@/db/oidc_consents";
-import { getCurrentUser } from "@/app/page";
 import { afterConsent, getOidcAuthorizationCookie } from "./actions";
-import { cookies } from "next/headers";
+import { getUserForSession } from "@/lib/SessionsService";
 
 export const revalidate = 0;
 
-export default async function OidcConsentPage() {
-  const cookieStore = await cookies();
-
-  const oidcAuthRequest = await getOidcAuthorizationCookie(cookieStore);
+export default async function OidcConsentPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sid: string }>;
+}) {
+  const oidcAuthRequest = await getOidcAuthorizationCookie();
   if (!oidcAuthRequest) {
-    console.error("No OIDC authorization request cookie found");
-    return notFound();
+    return redirect("/");
   }
 
-  const user = await getCurrentUser();
+  const sessionId = (await searchParams).sid;
+  if (!sessionId) {
+    return redirect("/");
+  }
+
+  const user = await getUserForSession(sessionId);
   if (!user) {
-    console.error("No user found");
-    return notFound();
+    return redirect("/");
   }
 
   // At this point we have authenticated the user, we have to determine if the
@@ -36,7 +40,7 @@ export default async function OidcConsentPage() {
   // The simple "openid" scope is always granted
   if (allScopesGranted || (scope.length === 0 && scope[0] === "openid")) {
     // Redirect to the client
-    return afterConsent(await cookies());
+    return afterConsent();
   }
 
   return (

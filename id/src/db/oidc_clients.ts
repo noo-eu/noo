@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import db, { schema } from ".";
 
 export async function createOidcClient(
@@ -15,8 +15,20 @@ export async function findOidcClient(id: string) {
   });
 }
 
+export async function findOidcClientWithTenant(id: string, tenantId?: string) {
+  return db.query.oidcClients.findFirst({
+    where: and(
+      eq(schema.oidcClients.id, id),
+      tenantId
+        ? eq(schema.oidcClients.tenantId, tenantId)
+        : isNull(schema.oidcClients.tenantId),
+    ),
+  });
+}
+
 const OidcClients = {
   find: findOidcClient,
+  findWithTenant: findOidcClientWithTenant,
   create: createOidcClient,
 };
 

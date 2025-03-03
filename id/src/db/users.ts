@@ -1,6 +1,7 @@
 import db, { schema } from ".";
 import { and, eq, isNull } from "drizzle-orm";
 import { findTenantByDomainName } from "./tenants";
+import argon2 from "argon2";
 
 export async function findUserById(userId: string) {
   return db.query.users.findFirst({
@@ -66,9 +67,29 @@ export async function isUsernameAvailable(
   return !existing;
 }
 
+async function authenticate(username: string, password: string) {
+  const user = await findUserByEmailOrUsername(username);
+  if (!user) {
+    return null;
+  }
+
+  // Check if the password is correct
+  try {
+    if (await argon2.verify(user.passwordDigest!, password)) {
+      return user;
+    }
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+
+  return null;
+}
+
 const Users = {
   find: findUserById,
   create: createUser,
+  authenticate,
 };
 
 export default Users;
