@@ -42,13 +42,22 @@ export default defineConfig({
   },
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "TEST=1 PORT=23000 bun run dev",
-    url: "https://localhost:23000",
-    reuseExistingServer: !process.env.CI,
-    ignoreHTTPSErrors: true,
-    stdout: process.env.CI ? undefined : "pipe",
-  },
+  webServer: [
+    {
+      command: "TEST=1 PORT=23000 bun run dev",
+      url: "https://localhost:23000",
+      reuseExistingServer: !process.env.CI,
+      ignoreHTTPSErrors: true,
+      stdout: process.env.CI ? undefined : "pipe",
+    },
+    {
+      command: "bun ./tests/callbackServer.ts",
+      url: "https://localhost:22999/cb",
+      reuseExistingServer: !process.env.CI,
+      ignoreHTTPSErrors: true,
+      stdout: process.env.CI ? undefined : "pipe",
+    },
+  ],
 
   /* Configure projects for major browsers */
   projects: [

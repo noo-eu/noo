@@ -22,7 +22,7 @@ async function handle(req: HttpRequest) {
       return await authorizationCodeFlow(req, params);
     default:
       return Response.json(
-        { error: "unsupported_grant_type" },
+        { error: "unsupported_grant_type" + JSON.stringify(params) },
         { status: 400 },
       );
   }

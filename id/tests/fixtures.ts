@@ -33,6 +33,9 @@ async function main() {
     clientSecret: "super-s3cret",
     redirectUris: ["https://localhost:22999/cb"],
     subjectType: "pairwise",
+    grantTypes: ["authorization_code"],
+    responseTypes: ["code"],
+    tokenEndpointAuthMethod: "client_secret_basic",
   });
 }
 
