@@ -58,13 +58,13 @@ async function authorizationCodeFlow(
   }
 
   // PKCE validation
-  if (code.data.code_challenge) {
+  if (code.codeChallenge) {
     if (!params.code_verifier) {
       return Response.json({ error: "invalid_request" }, { status: 400 });
     }
 
     let challenge;
-    switch (code.data.code_challenge_method) {
+    switch (code.codeChallengeMethod) {
       case "plain":
         challenge = params.code_verifier;
         break;
@@ -78,7 +78,7 @@ async function authorizationCodeFlow(
     if (
       !crypto.timingSafeEqual(
         Buffer.from(challenge),
-        Buffer.from(code.data.code_challenge),
+        Buffer.from(code.codeChallenge),
       )
     ) {
       return Response.json({ error: "invalid_grant" }, { status: 400 });

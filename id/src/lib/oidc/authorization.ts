@@ -8,8 +8,8 @@ import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
 import { buildSubClaim, decodeIdToken } from "./idToken";
 import { Tenant } from "@/db/tenants";
 import OidcConsents from "@/db/oidc_consents";
-import { createCode } from "@/app/oidc/consent/actions";
 import { Session } from "@/db/sessions";
+import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 
 const claimRequestSchema = z.record(
   z.string(),
@@ -616,4 +616,24 @@ async function verifyConsent(
   }
 
   return true;
+}
+
+export async function createCode(
+  session: Session,
+  request: AuthorizationRequest,
+) {
+  return await OidcAuthorizationCodes.create({
+    id: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
+      "base64url",
+    ),
+    clientId: request.client_id,
+    userId: session.userId,
+    redirectUri: request.redirect_uri,
+    scopes: request.scopes,
+    claims: request.claims,
+    nonce: request.nonce,
+    authTime: session.lastAuthenticatedAt,
+    codeChallenge: request.code_challenge,
+    codeChallengeMethod: request.code_challenge_method,
+  });
 }

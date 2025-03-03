@@ -1,5 +1,6 @@
 import { OidcClient } from "@/db/oidc_clients";
 import { HttpRequest } from "../http/request";
+import * as jose from "jose";
 
 export async function authenticateClient(req: HttpRequest, client: OidcClient) {
   switch (client.tokenEndpointAuthMethod) {
@@ -8,8 +9,9 @@ export async function authenticateClient(req: HttpRequest, client: OidcClient) {
     case "client_secret_post":
       return await authenticateClientSecretPost(req, client);
     case "client_secret_jwt":
+      return await authenticateClientSecretJwt(req, client);
     case "private_key_jwt":
-      throw new Error("Unsupported token endpoint authentication method");
+      throw new Error("private_key_jwt is not implemented");
     case "none":
       // The Client does not authenticate itself at the Token Endpoint, either
       // because it uses only the Implicit Flow (and so does not use the Token
@@ -21,7 +23,10 @@ export async function authenticateClient(req: HttpRequest, client: OidcClient) {
   }
 }
 
-function authenticateClientSecretBasic(req: HttpRequest, client: OidcClient) {
+export function authenticateClientSecretBasic(
+  req: HttpRequest,
+  client: OidcClient,
+) {
   if (!req.authorization) {
     return false;
   }
@@ -37,13 +42,59 @@ function authenticateClientSecretBasic(req: HttpRequest, client: OidcClient) {
   return clientId === client.id && clientSecret === client.clientSecret;
 }
 
-async function authenticateClientSecretPost(
+export async function authenticateClientSecretPost(
   req: HttpRequest,
   client: OidcClient,
 ) {
+  if (!req.isPost() || !req.isFormData()) {
+    return false;
+  }
+
   const params = await req.formParams;
   return (
     params.client_id === client.id &&
     params.client_secret === client.clientSecret
   );
+}
+
+export async function authenticateClientSecretJwt(
+  req: HttpRequest,
+  client: OidcClient,
+) {
+  if (!req.isPost() || !req.isFormData()) {
+    return false;
+  }
+
+  const params = await req.formParams;
+
+  const client_assertion_type = params.client_assertion_type;
+  if (
+    client_assertion_type !==
+    "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+  ) {
+    return false;
+  }
+
+  const client_assertion = params.client_assertion;
+  if (!client_assertion) {
+    return false;
+  }
+
+  console.log("ASS", req.baseUrl);
+
+  try {
+    await jose.jwtVerify(
+      client_assertion,
+      new TextEncoder().encode(client.clientSecret),
+      {
+        audience: `${req.baseUrl}/oidc/token`,
+        issuer: client.id,
+        subject: client.id,
+      },
+    );
+  } catch (e) {
+    return false;
+  }
+
+  return true;
 }

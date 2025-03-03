@@ -3,7 +3,11 @@
 import { createOidcAuthorizationCode } from "@/db/oidc_authorization_codes";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
-import { AuthorizationRequest, Claims } from "@/lib/oidc/authorization";
+import {
+  AuthorizationRequest,
+  Claims,
+  createCode,
+} from "@/lib/oidc/authorization";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
@@ -24,25 +28,6 @@ export async function getOidcAuthorizationCookie() {
   } catch {
     return null;
   }
-}
-
-export async function createCode(
-  session: Session,
-  request: AuthorizationRequest,
-) {
-  return await createOidcAuthorizationCode({
-    id: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
-      "base64url",
-    ),
-    clientId: request.client_id,
-    userId: session.userId,
-    redirectUri: request.redirect_uri,
-    scopes: request.scopes,
-    claims: request.claims,
-    nonce: request.nonce,
-    authTime: session.lastAuthenticatedAt,
-    data: request,
-  });
 }
 
 export async function afterConsent(sessionId: string) {

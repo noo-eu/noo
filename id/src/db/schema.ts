@@ -119,7 +119,8 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
   // Claims here are a JSON object as defined by the OIDC spec
   claims: jsonb().notNull().default({}),
   nonce: text(),
-  data: jsonb().notNull(),
+  codeChallenge: text("code_challenge"),
+  codeChallengeMethod: text("code_challenge_method"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
