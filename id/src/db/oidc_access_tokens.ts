@@ -10,6 +10,10 @@ export async function createOidcAccessToken(
 }
 
 export async function findOidcAccessToken(id: string) {
+  if (!id.match(/^[0-9a-f-]{36}$/)) {
+    return null;
+  }
+
   return db.query.oidcAccessTokens.findFirst({
     where: eq(schema.oidcAccessTokens.id, id),
   });
