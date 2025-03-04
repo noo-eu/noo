@@ -5,6 +5,7 @@ import { findUserById } from "@/db/users";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { buildSubClaim } from "./idToken";
+import { requestedUserClaims } from "./userClaims";
 
 export const userinfoEndpoint = composeMiddleware(
   preventCache,
@@ -53,6 +54,8 @@ async function handle(req: HttpRequest) {
     issuer += `/${tenant.domain}`;
   }
 
+  const user = (await findUserById(at.userId))!;
+
   const claims: Record<string, unknown> = {
     iss: issuer,
     sub: buildSubClaim(client, at.userId),
@@ -60,38 +63,8 @@ async function handle(req: HttpRequest) {
     exp: Math.floor(new Date().getTime() / 1000) + 3600,
     iat: Math.floor(new Date().getTime() / 1000),
     nonce: at.nonce,
+    ...requestedUserClaims(at.claims, user),
   };
-
-  const user = (await findUserById(at.userId))!;
-
-  // @ts-expect-error jsonb is unknown
-  const requestedClaims = Object.keys(at.claims.userinfo || {});
-
-  if (requestedClaims.includes("name")) {
-    claims.name = `${user.firstName} ${user.lastName}`;
-  }
-
-  if (requestedClaims.includes("given_name")) {
-    claims.given_name = user.firstName;
-  }
-
-  if (requestedClaims.includes("family_name")) {
-    claims.family_name = user.lastName;
-  }
-
-  if (requestedClaims.includes("preferred_username")) {
-    claims.preferred_username = user.username;
-  }
-
-  if (requestedClaims.includes("email")) {
-    claims.email = user.username + "@" + (tenant?.domain || "noomail.eu");
-  }
-
-  if (requestedClaims.includes("email_verified")) {
-    claims.email_verified = true;
-  }
-
-  // TODO: picture, profile, phone_number, address, locale, zoneinfo, updated_at
 
   // TODO: check client.userinfoSignedResponseAlg. If set, JWT encode the claims
 

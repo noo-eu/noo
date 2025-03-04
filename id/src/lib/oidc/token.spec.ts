@@ -222,6 +222,37 @@ describe("Token endpoint", () => {
         nonce: code.nonce,
       });
     });
+
+    test("returns the claims requested in the id_token", async () => {
+      const code = await makeCode({
+        claims: JSON.stringify({
+          id_token: {
+            given_name: null,
+          },
+          userinfo: {
+            family_name: null,
+          },
+        }),
+      });
+
+      const response = await tokenEndpoint(
+        makeRequest({
+          body: { grant_type: "authorization_code", code: code.id },
+          headers: { Authorization: basicHeader },
+        }),
+      );
+
+      expect(response.status).toBe(200);
+      const body = await response.json();
+      const idToken = body.id_token;
+
+      const idTokenParts = idToken.split(".");
+      expect(idTokenParts).toHaveLength(3);
+      const payload = JSON.parse(atob(idTokenParts[1]));
+
+      expect(payload.given_name).toBe("John");
+      expect(Object.keys(payload)).not.toContain("family_name");
+    });
   });
 
   test("sets CORS headers", async () => {
