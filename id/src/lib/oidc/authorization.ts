@@ -1,15 +1,15 @@
-import { schema } from "@/db";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { redirect } from "next/navigation";
-import { HttpRequest } from "../http/request";
-import OidcClients, { OidcClient } from "@/db/oidc_clients";
-import { z } from "zod";
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
-import { buildSubClaim, decodeIdToken } from "./idToken";
-import { Tenant } from "@/db/tenants";
+import { schema } from "@/db";
+import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
-import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import { Tenant } from "@/db/tenants";
+import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+import { HttpRequest } from "../http/request";
+import { buildSubClaim, decodeIdToken } from "./idToken";
 
 const claimRequestSchema = z.record(
   z.string(),

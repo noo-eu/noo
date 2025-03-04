@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import { existsSync } from "node:fs";
+import { existsSync } from "fs";
 import * as schema from "./schema";
 
 let DATABASE_NAME = "noo_id";
@@ -37,5 +37,5 @@ if (!process.env.DATABASE_URL) {
 
 const databaseUrl = process.env.DATABASE_URL!;
 
-export { schema, databaseUrl };
+export { databaseUrl, schema };
 export default drizzle(databaseUrl, { schema });

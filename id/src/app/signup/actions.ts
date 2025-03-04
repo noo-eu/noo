@@ -1,12 +1,12 @@
 "use server";
 
-import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
-import { SignupService } from "@/services/SignupService";
-import { cookies } from "next/headers";
-import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
 import { schema } from "@/db";
+import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
+import { SignupService } from "@/lib/SignupService";
 import { getIpAddress, getUserAgent } from "@/utils";
+import { getTranslations } from "next-intl/server";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 function translateErrors(
   t: (key: string) => string,

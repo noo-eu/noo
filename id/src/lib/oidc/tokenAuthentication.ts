@@ -1,6 +1,6 @@
 import { OidcClient } from "@/db/oidc_clients";
-import { HttpRequest } from "../http/request";
 import * as jose from "jose";
+import { HttpRequest } from "../http/request";
 
 export async function authenticateClient(req: HttpRequest, client: OidcClient) {
   switch (client.tokenEndpointAuthMethod) {

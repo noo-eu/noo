@@ -1,14 +1,14 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import Users from "@/db/users";
 import {
   getSessionCookie,
   SessionsService,
   setSessionCookie,
 } from "@/lib/SessionsService";
 import { getIpAddress, getUserAgent } from "@/utils";
+import { redirect } from "next/navigation";
 import { z } from "zod";
-import Users from "@/db/users";
 
 const signinSchema = z.object({
   username: z.string(),

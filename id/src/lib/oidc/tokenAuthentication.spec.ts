@@ -1,12 +1,12 @@
-import { describe, test, expect } from "bun:test";
+import OidcClients from "@/db/oidc_clients";
+import { HttpRequest } from "@/lib/http/request";
+import { describe, expect, test } from "bun:test";
+import * as jose from "jose";
 import {
   authenticateClientSecretBasic,
   authenticateClientSecretJwt,
   authenticateClientSecretPost,
 } from "./tokenAuthentication";
-import { HttpRequest } from "@/lib/http/request";
-import OidcClients from "@/db/oidc_clients";
-import * as jose from "jose";
 
 const client = await OidcClients.find("00000000-0000-0000-0000-000000000001");
 const basicHeader = "Basic " + btoa(`${client!.id}:${client!.clientSecret}`);

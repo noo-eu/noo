@@ -15,7 +15,7 @@
     "db:studio": "drizzle-kit studio",
     "db:test:push": "TEST=1 drizzle-kit push",
     "db:test:fixtures": "TEST=1 bun run ./tests/fixtures.ts",
-    "keys:rotate": "bun run ./src/rotateKeys.ts"
+    "keys:rotate": "bun run ./scripts/rotateKeys.ts"
   },
   "dependencies": {
     "accept-language": "^3.0.20",

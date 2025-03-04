@@ -1,11 +1,11 @@
-import { HttpRequest } from "../http/request";
-import { composeMiddleware, cors, preventCache } from "../middlewares";
+import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
-import OidcAccessTokens from "@/db/oidc_access_tokens";
-import { authenticateClient } from "./tokenAuthentication";
+import { HttpRequest } from "../http/request";
+import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { createIdToken } from "./idToken";
 import { validatePkce } from "./pkce";
+import { authenticateClient } from "./tokenAuthentication";
 
 export const tokenEndpoint = composeMiddleware(
   preventCache,

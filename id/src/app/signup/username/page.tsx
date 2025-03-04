@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
-import { signupStep2 } from "../actions";
 import { Button } from "@/components/Button";
 import { TextField } from "@/components/TextField";
 import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+import { signupStep2 } from "../actions";
 
 type State = {
   values: {

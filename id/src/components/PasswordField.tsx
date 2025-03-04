@@ -1,6 +1,6 @@
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { TextField, Props as TextFieldProps } from "./TextField";
-import { useTranslations } from "next-intl";
 
 export type Props = Omit<TextFieldProps, "type">;
 

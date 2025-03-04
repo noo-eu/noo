@@ -1,10 +1,10 @@
+import OidcAccessTokens from "@/db/oidc_access_tokens";
+import OidcClients from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
+import { findUserById } from "@/db/users";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { buildSubClaim } from "./idToken";
-import { findUserById } from "@/db/users";
-import OidcAccessTokens from "@/db/oidc_access_tokens";
-import OidcClients from "@/db/oidc_clients";
 
 export const userinfoEndpoint = composeMiddleware(
   preventCache,

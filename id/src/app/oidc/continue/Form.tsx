@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
-import { consentFormSubmit } from "./actions";
 import { Button } from "@/components/Button";
 import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+import { consentFormSubmit } from "./actions";
 
 export default function Form({ sessionId }: { sessionId: string }) {
   const [_, formAction, pending] = useActionState(consentFormSubmit, {});

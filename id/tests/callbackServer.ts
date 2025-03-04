@@ -22,6 +22,7 @@ Bun.serve({
       return Response.json(response);
     },
   },
+  // @ts-ignore looks like types are wrong as this works
   tls: {
     key: Bun.file("certificates/localhost-key.pem"),
     cert: Bun.file("certificates/localhost.pem"),

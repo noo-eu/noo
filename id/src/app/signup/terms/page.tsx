@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
-import { signupStep4 } from "../actions";
 import { Button } from "@/components/Button";
 import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+import { signupStep4 } from "../actions";
 
 export default function SignupPage() {
   const [_, formAction, pending] = useActionState(signupStep4, undefined);

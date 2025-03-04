@@ -1,7 +1,7 @@
-import db, { schema } from ".";
-import { and, eq, isNull } from "drizzle-orm";
-import { findTenantByDomainName } from "./tenants";
 import argon2 from "argon2";
+import { and, eq, isNull } from "drizzle-orm";
+import db, { schema } from ".";
+import { findTenantByDomainName } from "./tenants";
 
 export async function findUserById(userId: string) {
   return db.query.users.findFirst({
