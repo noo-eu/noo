@@ -41,11 +41,6 @@ async function handle(req: HttpRequest) {
     return new Response(null, { status: 401 });
   }
 
-  if (at.expiresAt < new Date()) {
-    OidcAccessTokens.delete(at.id);
-    return new Response(null, { status: 401 });
-  }
-
   const client = await OidcClients.find(at.clientId);
   if (!client) {
     return new Response(null, { status: 401 });
