@@ -65,6 +65,7 @@ export const oidcClients = pgTable("oidc_clients", {
     onUpdate: "cascade",
   }),
   clientSecret: text("client_secret").notNull(),
+  registrationAccessTokenDigest: text("registration_access_token_digest"),
   redirectUris: text("redirect_uris").array().notNull(),
   responseTypes: text("response_types").array().notNull().default(["code"]),
   grantTypes: text("grant_types")

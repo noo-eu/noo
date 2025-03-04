@@ -2,6 +2,7 @@ import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
 import Users from "@/db/users";
+import { uuidToHumanId } from "@/utils";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { createIdToken } from "./idToken";
@@ -104,7 +105,7 @@ async function authorizationCodeFlow(
   });
 
   return Response.json({
-    access_token: at.id,
+    access_token: uuidToHumanId(at.id, "oidc_at"),
     token_type: "Bearer",
     expires_in: 3600,
     id_token: idToken,

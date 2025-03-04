@@ -1,5 +1,6 @@
 import OidcClients from "@/db/oidc_clients";
 import { HttpRequest } from "@/lib/http/request";
+import { uuidToHumanId } from "@/utils";
 import { describe, expect, test } from "bun:test";
 import * as jose from "jose";
 import {
@@ -9,9 +10,10 @@ import {
 } from "./tokenAuthentication";
 
 const client = await OidcClients.find("00000000-0000-0000-0000-000000000001");
-const basicHeader = "Basic " + btoa(`${client!.id}:${client!.clientSecret}`);
+const humanClientId = uuidToHumanId(client!.id, "oidc");
+const basicHeader = "Basic " + btoa(`${humanClientId}:${client!.clientSecret}`);
 const postData =
-  "client_id=" + client!.id + "&client_secret=" + client!.clientSecret;
+  "client_id=" + humanClientId + "&client_secret=" + client!.clientSecret;
 
 describe("authenticateClientSecretBasic", async () => {
   test("returns true if the client is authenticated", async () => {
@@ -96,8 +98,8 @@ describe("authenticateClientSecretPost", async () => {
 describe("authenticateClientSecretJwt", async () => {
   const validJwt = await new jose.SignJWT()
     .setProtectedHeader({ alg: "HS256" })
-    .setIssuer(client!.id)
-    .setSubject(client!.id)
+    .setIssuer(humanClientId)
+    .setSubject(humanClientId)
     .setAudience("https://localhost:23000/oidc/token")
     .setJti("123")
     .setExpirationTime("5m")
@@ -106,8 +108,8 @@ describe("authenticateClientSecretJwt", async () => {
 
   const invalidJwt = await new jose.SignJWT()
     .setProtectedHeader({ alg: "HS256" })
-    .setIssuer(client!.id)
-    .setSubject(client!.id)
+    .setIssuer(humanClientId)
+    .setSubject(humanClientId)
     .setAudience("https://localhost:23000") // Invalid audience
     .setJti("123")
     .setExpirationTime("5m")
@@ -116,8 +118,8 @@ describe("authenticateClientSecretJwt", async () => {
 
   const badSignature = await new jose.SignJWT()
     .setProtectedHeader({ alg: "HS256" })
-    .setIssuer(client!.id)
-    .setSubject(client!.id)
+    .setIssuer(humanClientId)
+    .setSubject(humanClientId)
     .setAudience("https://localhost:23000") // Invalid audience
     .setJti("123")
     .setExpirationTime("5m")

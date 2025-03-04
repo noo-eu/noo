@@ -9,7 +9,9 @@ import { jwks } from "@/app/oidc/jwks";
 import { schema } from "@/db";
 import { createOidcClient } from "@/db/oidc_clients";
 import { ResponseType } from "@/lib/oidc/authorization";
+import { createVerifier, uuidToHumanId } from "@/utils";
 import { z } from "zod";
+import { HttpRequest } from "../http/request";
 
 const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),
@@ -55,10 +57,18 @@ const registrationResponse = registrationRequest.extend({
 type RegistrationResponse = z.infer<typeof registrationResponse>;
 
 export async function oidcClientRegistration(
-  request: Record<string, unknown>,
+  request: HttpRequest,
   tenant: typeof schema.tenants.$inferSelect,
 ) {
-  const parseResult = registrationRequest.safeParse(request);
+  const params = (await request.json) as Record<string, unknown>;
+  if (typeof params !== "object") {
+    return buildErrorResponse(
+      "invalid_client_metadata",
+      "Request body must be a JSON object.",
+    );
+  }
+
+  const parseResult = registrationRequest.safeParse(params);
   if (!parseResult.success) {
     const badField = parseResult.error.issues[0].path.join(".");
     const message = parseResult.error.issues[0].message;
@@ -77,23 +87,26 @@ export async function oidcClientRegistration(
   config.subject_type ||= "pairwise";
   config.require_auth_time ||= false;
 
-  const clientName = extractLocalizedField(request, "client_name");
-  const logoUri = extractLocalizedField(request, "logo_uri");
-  const clientUri = extractLocalizedField(request, "client_uri");
-  const policyUri = extractLocalizedField(request, "policy_uri");
-  const tosUri = extractLocalizedField(request, "tos_uri");
+  const clientName = extractLocalizedField(params, "client_name");
+  const logoUri = extractLocalizedField(params, "logo_uri");
+  const clientUri = extractLocalizedField(params, "client_uri");
+  const policyUri = extractLocalizedField(params, "policy_uri");
+  const tosUri = extractLocalizedField(params, "tos_uri");
 
   const configValidationResult = await validateRegistration(config);
   if (configValidationResult) {
     return configValidationResult;
   }
 
-  const secretBytes = crypto.getRandomValues(new Uint8Array(33));
-  const clientSecret = btoa(String.fromCharCode(...secretBytes));
+  const secretBytes = crypto.getRandomValues(new Uint8Array(32));
+  const clientSecret = "oidc_s_" + Buffer.from(secretBytes).toString("base64");
+
+  const registrationAccessToken = createVerifier();
 
   const client = await createOidcClient({
     tenantId: tenant.id,
     clientSecret,
+    registrationAccessTokenDigest: registrationAccessToken.digest,
     redirectUris: config.redirect_uris,
     responseTypes: config.response_types,
     grantTypes: config.grant_types,
@@ -121,9 +134,18 @@ export async function oidcClientRegistration(
     postLogoutRedirectUris: config.post_logout_redirect_uris,
   });
 
-  return Response.json(oidcClientToResponse(client), {
-    status: 201,
+  const registrationUri = request.buildUrl(`/oidc/${tenant.domain}/register`, {
+    client_id: uuidToHumanId(client.id, "oidc"),
   });
+
+  return Response.json(
+    oidcClientToResponse(
+      client,
+      registrationAccessToken.verifier,
+      registrationUri,
+    ),
+    { status: 201 },
+  );
 }
 
 async function validateRegistration(
@@ -239,7 +261,6 @@ async function validateRegistration(
         );
       }
     } catch (e) {
-      console.error(e);
       return buildErrorResponse(
         "invalid_client_metadata",
         "Failed to fetch sector identifier URI.",
@@ -467,9 +488,11 @@ function extractLocalizedField(config: Record<string, unknown>, field: string) {
 
 function oidcClientToResponse(
   client: typeof schema.oidcClients.$inferSelect,
+  accessToken?: string,
+  registrationUri?: string,
 ): RegistrationResponse {
   const response: Record<string, unknown> = {
-    client_id: client.id,
+    client_id: uuidToHumanId(client.id, "oidc"),
     client_id_issued_at: client.createdAt.getTime(),
     client_secret: client.clientSecret,
     client_secret_expires_at: 0,
@@ -494,6 +517,11 @@ function oidcClientToResponse(
     request_uris: client.requestUris,
     post_logout_redirect_uris: client.postLogoutRedirectUris,
   };
+
+  if (accessToken) {
+    response.registration_access_token = accessToken;
+    response.registration_client_uri = registrationUri;
+  }
 
   const localized: Record<string, Record<string, string> | null> = {
     client_name: client.clientName as Record<string, string> | null,

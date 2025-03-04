@@ -1,4 +1,5 @@
 import { OidcClient } from "@/db/oidc_clients";
+import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import * as jose from "jose";
 import { HttpRequest } from "../http/request";
 
@@ -40,9 +41,14 @@ export function authenticateClientSecretBasic(
     .toString()
     .split(":");
 
+  const clientIdRaw = humanIdToUuid(clientId, "oidc");
+  if (!clientIdRaw) {
+    return false;
+  }
+
   // The clientSecret may be URL encoded
   const clientSecret = decodeURIComponent(clientSecretEncoded);
-  return clientId === client.id && clientSecret === client.clientSecret;
+  return clientIdRaw === client.id && clientSecret === client.clientSecret;
 }
 
 export async function authenticateClientSecretPost(
@@ -54,9 +60,13 @@ export async function authenticateClientSecretPost(
   }
 
   const params = await req.formParams;
+  const clientIdRaw = humanIdToUuid(params.client_id || "", "oidc");
+  if (!clientIdRaw) {
+    return false;
+  }
+
   return (
-    params.client_id === client.id &&
-    params.client_secret === client.clientSecret
+    clientIdRaw === client.id && params.client_secret === client.clientSecret
   );
 }
 
@@ -83,14 +93,16 @@ export async function authenticateClientSecretJwt(
     return false;
   }
 
+  const clientId = uuidToHumanId(client.id, "oidc");
+
   try {
     await jose.jwtVerify(
       client_assertion,
       new TextEncoder().encode(client.clientSecret),
       {
         audience: `${req.baseUrl}/oidc/token`,
-        issuer: client.id,
-        subject: client.id,
+        issuer: clientId,
+        subject: clientId,
       },
     );
   } catch (e) {

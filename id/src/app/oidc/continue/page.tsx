@@ -2,6 +2,7 @@ import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { AuthorizationRequest } from "@/lib/oidc/authorization";
 import { getUserForSession } from "@/lib/SessionsService";
+import { humanIdToUuid } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { getOidcAuthorizationCookie } from "./actions";
@@ -54,7 +55,9 @@ export default async function OidcContinuePage({
   // user has already given consent. If the user has already given consent, we
   // can redirect to the client.
 
-  const client = await OidcClients.find(oidcAuthRequest.client_id);
+  const client = await OidcClients.find(
+    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
+  );
   if (!client) {
     console.warn("Client not found");
     return redirect("/");

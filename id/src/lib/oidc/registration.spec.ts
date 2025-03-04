@@ -1,13 +1,25 @@
 import { describe, expect, test } from "bun:test";
 
 import db from "@/db";
+import { HttpRequest } from "../http/request";
 import { oidcClientRegistration, validateRedirectUris } from "./registration";
 
 describe("OIDC Client Registration", async () => {
   const tenant = (await db.query.tenants.findFirst())!;
 
   const perform = async (request: Record<string, unknown>) => {
-    const response = await oidcClientRegistration(request, tenant);
+    const raw = new Request("https://localhost:23000/oidc/acme.fr/register", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer not-tested`,
+        Host: "localhost:23000",
+        "X-Forwarded-Proto": "https",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+
+    const response = await oidcClientRegistration(new HttpRequest(raw), tenant);
     return await response.json();
   };
 

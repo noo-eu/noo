@@ -80,7 +80,6 @@ async function authenticate(username: string, password: string) {
       return user;
     }
   } catch (err) {
-    console.error(err);
     return null;
   }
 

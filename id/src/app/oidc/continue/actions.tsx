@@ -3,6 +3,7 @@
 import OidcConsents from "@/db/oidc_consents";
 import { Claims, createCode } from "@/lib/oidc/authorization";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { humanIdToUuid } from "@/utils";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
@@ -38,7 +39,7 @@ export async function afterConsent(sessionId: string) {
 
   await storeConsent(
     session.userId,
-    oidcAuthRequest.client_id,
+    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
     oidcAuthRequest.scopes,
     oidcAuthRequest.claims,
   );

@@ -2,6 +2,7 @@ import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcClients from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
 import { findUserById } from "@/db/users";
+import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { buildSubClaim } from "./idToken";
@@ -36,7 +37,12 @@ async function handle(req: HttpRequest) {
     return new Response(null, { status: 401 });
   }
 
-  const at = await OidcAccessTokens.find(token);
+  const tokenRaw = humanIdToUuid(token, "oidc_at");
+  if (!tokenRaw) {
+    return new Response(null, { status: 401 });
+  }
+
+  const at = await OidcAccessTokens.find(tokenRaw);
   if (!at) {
     return new Response(null, { status: 401 });
   }
@@ -59,7 +65,7 @@ async function handle(req: HttpRequest) {
   const claims: Record<string, unknown> = {
     iss: issuer,
     sub: buildSubClaim(client, at.userId),
-    aud: client.id,
+    aud: uuidToHumanId(client.id, "oidc"),
     exp: Math.floor(new Date().getTime() / 1000) + 3600,
     iat: Math.floor(new Date().getTime() / 1000),
     nonce: at.nonce,
