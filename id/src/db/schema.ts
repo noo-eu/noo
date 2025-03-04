@@ -119,7 +119,10 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
   scopes: text().array().notNull().default([]),
 
   // Claims here are a JSON object as defined by the OIDC spec
-  claims: jsonb().notNull().default({}),
+  claims: jsonb().notNull().default({}).$type<{
+    userinfo?: Record<string, unknown>;
+    id_token?: Record<string, unknown>;
+  }>(),
   nonce: text(),
   codeChallenge: text("code_challenge"),
   codeChallengeMethod: text("code_challenge_method"),
@@ -166,7 +169,10 @@ export const oidcAccessTokens = pgTable("oidc_access_tokens", {
   nonce: text(),
   scopes: text().array().notNull().default([]),
   // Claims here are a JSON object as defined by the OIDC spec
-  claims: jsonb().notNull().default({}),
+  claims: jsonb().notNull().default({}).$type<{
+    userinfo?: Record<string, unknown>;
+    id_token?: Record<string, unknown>;
+  }>(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   expiresAt: timestamp("expires_at").notNull(),
 });

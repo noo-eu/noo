@@ -6,6 +6,7 @@ import { findTenantByDomainName } from "./tenants";
 export async function findUserById(userId: string) {
   return db.query.users.findFirst({
     where: eq(schema.sessions.id, userId),
+    with: { tenant: true },
   });
 }
 
@@ -94,3 +95,6 @@ const Users = {
 
 export default Users;
 export type User = typeof schema.users.$inferSelect;
+export type UserWithTenant = typeof schema.users.$inferSelect & {
+  tenant: Awaited<ReturnType<typeof findTenantByDomainName>> | null;
+};

@@ -1,11 +1,13 @@
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
+import Users from "@/db/users";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { createIdToken } from "./idToken";
 import { validatePkce } from "./pkce";
 import { authenticateClient } from "./tokenAuthentication";
+import { requestedUserClaims } from "./userClaims";
 
 export const tokenEndpoint = composeMiddleware(
   preventCache,
@@ -85,7 +87,10 @@ async function authorizationCodeFlow(
     expiresAt: new Date(Date.now() + 3600 * 1000),
   });
 
+  const user = (await Users.find(code.userId))!;
+
   const idToken = await createIdToken(req, client, code.userId, code.authTime, {
+    ...requestedUserClaims(code.claims.id_token, user),
     nonce: code.nonce,
   });
 
