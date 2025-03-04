@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Téigh go dtí do leathanach baile <noo></noo>",
+    "consent": {
+      "title": "Tá tú ag síniú isteach i <strong>{name}</strong> le do chuntas <noo></noo>.",
+      "description": "Tá <strong>{name}</strong> ag iarraidh cead rochtana ar an eolas seo a leanas:",
+      "claims": {
+        "name": "Do ainm iomlán",
+        "username": "Do ainm úsáideora",
+        "profile": "Do phictiúr próifíle",
+        "email": "Do sheoladh ríomhphoist noo",
+        "phone_number": "Do uimhir ghutháin",
+        "address": "Do sheoladh poist",
+        "gender": "An inscne a aithníonn tú leis",
+        "birthdate": "Do dháta breithe"
+      }
+    },
+    "fatal": {
+      "title": "Tharla earráid",
+      "description": "Rinne tú iarracht logáil isteach i bhfeidhmchlár tríú páirtí, ach níl an feidhmchlár ag obair i gceart. Bain triail eile as níos déanaí nó déan teagmháil le húinéir an fheidhmchláir leis an eolas seo a leanas:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Roghnaigh cuntas"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Veuillez entrer votre prénom",
+      "name_too_long": "Votre nom est trop long",
+      "name_too_short": "Votre nom est trop court",
+      "name_invalid": "Votre nom comporte des caractères invalides",
+      "username_required": "Veuillez saisir votre nouveau pseudonyme",
+      "username_first_char": "Votre pseudonyme doit commencer par une lettre ou un chiffre",
+      "username_last_char": "Votre pseudonyme doit se terminer par une lettre ou un chiffre",
+      "username_length": "Votre pseudonyme doit faire entre 6 et 30 caractères",
+      "username_invalid": "Votre pseudonyme peut contenir uniquement des lettres, des nombres et des points (.)",
+      "username_two_dots": "Votre pseudonyme ne peut pas contenir deux points (.) consécutifs",
+      "username_taken": "Ce pseudonyme est déjà pris",
+      "password_required": "Veuillez saisir votre mot de passe",
+      "password_length": "Utilisez au moins 10 caractères",
+      "password_too_long": "Votre mot de passe est trop long",
+      "password_classes": "Veuillez utiliser un mot de passe plus sécurisé. Mélangez lettres, nombres et symboles",
+      "invalid_data": "Une erreur est survenue. Veuillez vérifier les données saisies"
+    },
+    "create_your_account": "Créez votre compte ",
+    "step1": {
+      "title": "Entrez votre nom",
+      "first_name": "Prénom",
+      "last_name": "Nom de famille"
+    },
+    "step2": {
+      "title": "Choisissez votre adresse e-mail",
+      "username": "Adresse e-mail"
+    },
+    "step3": {
+      "title": "Créez un mot de passe sécurisé",
+      "password": "Mot de passe"
+    },
+    "step4": {
+      "title": "Dernière chose... ",
+      "description": " <p>Un compte permet d'accéder à une variété de services, tels que l'envoi de courriers électroniques, le stockage de fichiers et plus encore.</p> <p><terms>Membres - Conditions d'utilisation</terms> expliquent ce qui vous attend lorsque vous utilisez les services, tandis que la Politique de confidentialité d'<privacy>Membres</privacy> décrit comment nous traitons l'information générée ou recueillie en utilisant les services.</p> <p>pour créer un compte et utiliser les services, vous devez accepter les Conditions d'utilisation et la politique de confidentialité d'<noo>Membres</noo>.</p>",
+      "accept": "Acceptez et continuez"
+    }
+  }
+}

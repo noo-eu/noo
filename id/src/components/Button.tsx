@@ -1,10 +1,27 @@
 type Props = {
   pending?: boolean;
+  kind?: "primary" | "secondary";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+const kindClasses = {
+  primary:
+    "bg-blue-600 hover:bg-blue-700 text-white focus-visible:outline-blue-700",
+  secondary:
+    "bg-gray-300 hover:bg-gray-400 text-gray-800 focus-visible:outline-gray-700",
+};
+
 export function Button(props: Props) {
-  const { className = "", pending, children, ...rest } = props;
-  const cls = `${className} cursor-pointer rounded-md bg-blue-600 px-6 py-2.5 font-semibold text-white shadow-xs hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700`;
+  const {
+    className = "",
+    pending,
+    children,
+    kind = "primary",
+    ...rest
+  } = props;
+  const cls = `
+    ${className} cursor-pointer rounded-md px-6 py-2.5 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2
+    ${kindClasses[kind]}
+  `;
 
   rest.disabled = rest.disabled || pending;
 

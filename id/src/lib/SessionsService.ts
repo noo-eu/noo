@@ -1,13 +1,8 @@
-import {
-  createSession,
-  deleteSession,
-  findSessionById,
-  findSessionByIds,
-  refreshSession,
-} from "@/db/sessions";
-import { findUserByEmailOrUsername, findUserById } from "@/db/users";
+import Sessions, { refreshSession, Session } from "@/db/sessions";
+import Users, { User } from "@/db/users";
 import { checkVerifier, createVerifier } from "@/utils";
-import argon2 from "argon2";
+import { inArray } from "drizzle-orm";
+import { cookies } from "next/headers";
 import crypto from "node:crypto";
 
 // Multiple users can be logged in at the same time on the same device. We keep
@@ -23,10 +18,34 @@ import crypto from "node:crypto";
 // is a hash of the verifier, stored in PHC string format. We currently use
 // SHA-256 for the verifier hash with a 16-byte salt.
 
+export const SESSION_COOKIE_NAME = "_noo_auth";
+
+export async function getSessionCookie() {
+  const cookieStore = await cookies();
+  return cookieStore.get(SESSION_COOKIE_NAME)?.value || "";
+}
+
+export async function setSessionCookie(value: string) {
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE_NAME, value, {
+    maxAge: 60 * 60 * 24 * 400,
+    httpOnly: true,
+    secure: true,
+    // TODO: determine if "none" is really required, or if "lax" is sufficient
+    sameSite: "none",
+  });
+}
+
+export async function getUserForSession(sessionId: string) {
+  const cookie = await getSessionCookie();
+  const service = new SessionsService(cookie);
+  return service.getUserBySid(sessionId);
+}
+
 export class SessionsService {
   private tokens: string[];
 
-  constructor(private cookie: string) {
+  constructor(cookie: string) {
     this.tokens = cookie.split(" ").filter((t) => t.length > 0);
   }
 
@@ -34,47 +53,39 @@ export class SessionsService {
     return this.tokens.join(" ");
   }
 
-  async authenticate(username: string, password: string) {
-    const user = await findUserByEmailOrUsername(username);
-    if (!user) {
-      return null;
-    }
-
-    // Check if the password is correct
-    try {
-      if (await argon2.verify(user.passwordDigest!, password)) {
-        return user;
-      }
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-
-    return null;
-  }
-
   async startSession(userId: string, ip: string, userAgent: string) {
     const sid = crypto.randomUUID();
 
     const { verifier, digest } = createVerifier();
 
-    await createSession({
+    const session = await Sessions.create({
       id: sid,
       userId: userId,
       verifierDigest: digest,
       ip,
       userAgent,
+      lastAuthenticatedAt: new Date(),
+      lastUsedAt: new Date(),
     });
 
+    // Cleanup the old or tampered sessions from the cookie
+    await this.cleanup();
+
     this.tokens.push(this.encodeSession(sid, verifier));
+
+    return session;
   }
 
   async deleteSession(sid: string) {
-    return await deleteSession(sid);
+    return await Sessions.delete(sid);
   }
 
   async updateSession(sid: string, ip: string, userAgent: string) {
     return await refreshSession(sid, ip, userAgent);
+  }
+
+  async reauthenticate(sid: string, ip: string, userAgent: string) {
+    return await refreshSession(sid, ip, userAgent, new Date());
   }
 
   async getUser(sessionIndex: number = 0) {
@@ -88,9 +99,39 @@ export class SessionsService {
       return undefined;
     }
 
-    // TODO: check the verifier digest
+    if (!checkVerifier(sessionData.verifier, session.verifierDigest)) {
+      return undefined;
+    }
 
-    return findUserById(session.userId);
+    return Users.find(session.userId);
+  }
+
+  async getSessionBySid(sessionId: string) {
+    const allSessions = this.decodeAll();
+    const session = allSessions.find((s) => s.sid === sessionId);
+    if (!session) {
+      return undefined;
+    }
+
+    const storedSession = await this.loadSession(session.sid);
+    if (!storedSession) {
+      return undefined;
+    }
+
+    if (!checkVerifier(session.verifier, storedSession.verifierDigest)) {
+      return undefined;
+    }
+
+    return storedSession;
+  }
+
+  async getUserBySid(sessionId: string) {
+    const session = await this.getSessionBySid(sessionId);
+    if (!session) {
+      return undefined;
+    }
+
+    return Users.find(session.userId);
   }
 
   async cleanup() {
@@ -103,25 +144,45 @@ export class SessionsService {
       stored: existingSessions.find((s) => s.id === d.sid)!,
     }));
 
-    const validSessions = paired
-      .filter(({ cookie, stored }) => {
-        if (!stored) {
-          return false;
-        }
+    const validPairs = paired.filter(({ cookie, stored }) => {
+      if (!stored) {
+        return false;
+      }
 
-        return checkVerifier(cookie.verifier, stored.verifierDigest);
-      })
-      .map(({ cookie }) => cookie);
+      return checkVerifier(cookie.verifier, stored.verifierDigest);
+    });
 
-    this.tokens = this.encodeAll(validSessions);
+    const validTokens = validPairs.map(({ cookie }) => cookie);
+    this.tokens = this.encodeAll(validTokens);
+
+    return validPairs.map(({ stored }) => stored);
+  }
+
+  async activeSessions(maxAge?: number) {
+    const active = await this.cleanup();
+
+    if (maxAge !== undefined) {
+      const now = new Date();
+      return active.filter((s) => {
+        const diff = now.getTime() - s.lastUsedAt.getTime();
+        return diff < maxAge;
+      });
+    }
+
+    return active;
+  }
+
+  async sessionFor(user: User): Promise<Session | undefined> {
+    const sessions = await this.activeSessions();
+    return sessions.find((s) => s.userId === user.id);
   }
 
   private loadSession(sessionId: string) {
-    return findSessionById(sessionId);
+    return Sessions.find(sessionId);
   }
 
   private loadSessions(sids: string[]) {
-    return findSessionByIds(sids);
+    return Sessions.findBy(inArray(Sessions.schema.id, sids));
   }
 
   private getSessionData(index: number) {

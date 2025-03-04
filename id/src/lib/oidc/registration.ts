@@ -6,9 +6,10 @@ import {
   ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED,
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
   ACR_VALUES_SUPPORTED,
-} from "./configuration";
+} from "@/app/oidc/configuration";
 import { createOidcClient } from "@/db/oidc_clients";
-import { jwks } from "./jwks";
+import { jwks } from "@/app/oidc/jwks";
+import { ResponseType } from "@/lib/oidc/authorization";
 
 const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),
@@ -139,7 +140,7 @@ async function validateRegistration(
   // Ensure only supported response types are set
   config.response_types ||= ["code"];
   config.response_types = config.response_types?.filter((rt: string) =>
-    RESPONSE_TYPES_SUPPORTED.includes(rt),
+    RESPONSE_TYPES_SUPPORTED.includes(rt as ResponseType),
   );
   if (config.response_types.length === 0) {
     return buildErrorResponse(
@@ -237,7 +238,8 @@ async function validateRegistration(
           "Sector Identifier URI must return an array.",
         );
       }
-    } catch {
+    } catch (e) {
+      console.error(e);
       return buildErrorResponse(
         "invalid_client_metadata",
         "Failed to fetch sector identifier URI.",
@@ -395,6 +397,16 @@ export function validateRedirectUris(
     );
   }
 
+  for (const uri of redirect_uris) {
+    // TODO: query strings must be allowed (fragment is correctly not allowed)
+    if (uri.includes("#") || uri.includes("?")) {
+      return buildErrorResponse(
+        "invalid_redirect_uri",
+        "Redirect URIs must not contain fragments or query strings.",
+      );
+    }
+  }
+
   if (application_type === "web") {
     for (const uri of redirect_uris) {
       if (!uri.startsWith("https://") && !process.env.TEST) {
@@ -404,7 +416,8 @@ export function validateRedirectUris(
         );
       }
 
-      if (uri.includes("://localhost") && !process.env.TEST) {
+      const host = new URL(uri).hostname;
+      if (host == "localhost" && !process.env.TEST) {
         return buildErrorResponse(
           "invalid_redirect_uri",
           "Redirect URIs must not use localhost.",

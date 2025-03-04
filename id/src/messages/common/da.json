@@ -1,0 +1,21 @@
+{
+  "common": {
+    "next": "Til næste",
+    "continue": "Fortsæt",
+    "cancel": "Afbryd",
+    "optional": "Ikke påkrævet",
+    "terms": "Vilkår",
+    "privacy": "Privatlivspolitik",
+    "passwordField": {
+      "show": "Vis adgangskode",
+      "ariaLabelShow": "Vis adgangskoden i klartekst. Advarsel: Dette vil vise din adgangskode på skærmen.",
+      "hide": "Skjul adgangskode",
+      "viVis": "Vis adgangskode",
+      "ariaLabelViVis": "Vis adgangskoden i tydelig tekst. Advarsel: Der vises din adgangskode på skærmen.",
+      "skjul": "Skjul adgangskode",
+      "vis": "Vis password",
+      "ariaLabelVis": "Til visning af password på skærmen. Advarsel: Dette vil vise dit password.",
+      "gem": "Gemme password"
+    }
+  }
+}

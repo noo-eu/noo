@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Anna ensimmäinen nimi",
+      "name_too_long": "Nimi on liian pitkä",
+      "name_too_short": "Nimi on liian lyhyt",
+      "name_invalid": "Nimessä on virheellisiä merkkiä",
+      "username_required": "Anna uusi käyttäjänimi",
+      "username_first_char": "Käyttäjänimen tulee aloittua kirjaimella tai numerolla",
+      "username_last_char": "Käyttäjänimen tulee päättyä kirjaimella tai numerolla",
+      "username_length": "Käyttäjänimi on oltava vähintään 6 ja enintään 30 merkkiä pitkä",
+      "username_invalid": "Käyttäjänimessä voi olla vain kirjaimeet, numerot ja pisteet (.)",
+      "username_two_dots": "Käyttäjänimessä ei voi olla kaksi peräkkäistä pistettä (.)",
+      "username_taken": "Tämä käyttäjänimi on jo varattu",
+      "password_required": "Anna salasana",
+      "password_length": "Käytä vähintään 10 merkkiä",
+      "password_too_long": "Syötetty salasana oli liian pitkä",
+      "password_classes": "Salaasanassa tulee olla erilaisia kirjaimia, numeroita ja merkkejä. Erityisen vahva salasana on parasta.",
+      "invalid_data": "Jokin meni pieleen. Tarkistele syötetyt tiedot"
+    },
+    "create_your_account": "Luo »»« -tili",
+    "step1": {
+      "title": "Anna henkilöllisyys",
+      "first_name": "Etunimi",
+      "last_name": "Sukunimi"
+    },
+    "step2": {
+      "title": "Valitse sähköpostiosoite",
+      "username": "Sähköpostiosoite"
+    },
+    "step3": {
+      "title": "Luo vahva salasana",
+      "password": "Salasana"
+    },
+    "step4": {
+      "title": "Viimeinen hetki...",
+      "description": "        <p>»« -tili antaa sinulle pääsyn kattavalle palveluihin, esim. sähköpostille, tiedostojen tallentamiselle ja muille.",
+      "accept": "Hyväksy ehdot ja jatka"
+    }
+  }
+}

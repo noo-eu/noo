@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Faça login na sua conta",
+    "username": "Nome de usuário ou e-mail",
+    "password": "Senha",
+    "submit": "Entrar",
+    "error": "As credenciais digitadas estão incorretas"
+  }
+}

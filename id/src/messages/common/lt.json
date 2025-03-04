@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Toliau",
+    "continue": "Tęstytis",
+    "cancel": "Atšaukti",
+    "optional": "Aptinkamai",
+    "terms": "Nuostatos",
+    "privacy": "Privatumas",
+    "passwordField": {
+      "show": "Rodyti slaptažodį",
+      "ariaLabelShow": "Rodyti slaptažodį tiesiems. Pražiūrėkite: tuo metu Jūsų slaptažodis bus rodomas ekrane.",
+      "hide": "Slaptažodį paslėpti"
+    }
+  }
+}

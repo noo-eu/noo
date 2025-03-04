@@ -1,10 +1,11 @@
 {
   "common": {
     "next": "Siguiente",
+    "continue": "Continuar",
+    "cancel": "Cancelar",
     "optional": "Opcional",
     "terms": "Términos",
     "privacy": "Privacidad",
-
     "passwordField": {
       "show": "Mostrar contraseña",
       "ariaLabelShow": "Mostrar contraseña como texto plano. Advertencia: esto mostrará tu contraseña en la pantalla.",

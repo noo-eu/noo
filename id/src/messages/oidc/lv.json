@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Dodieties uz savu <noo></noo> sākumlapu",
+    "consent": {
+      "title": "Jūs piesakāties <strong>{name}</strong> ar savu <noo></noo> kontu.",
+      "description": "<strong>{name}</strong> pieprasa piekļuvi šādai informācijai:",
+      "claims": {
+        "name": "Jūsu pilns vārds",
+        "username": "Jūsu lietotājvārds",
+        "profile": "Jūsu profila attēls",
+        "email": "Jūsu noo e-pasta adrese",
+        "phone_number": "Jūsu tālruņa numurs",
+        "address": "Jūsu pasta adrese",
+        "gender": "Dzimums, ar kuru jūs identificējaties",
+        "birthdate": "Jūsu dzimšanas datums"
+      }
+    },
+    "fatal": {
+      "title": "Kaut kas nogāja greizi",
+      "description": "Jūs mēģinājāt pieteikties trešās puses lietotnē, bet tā nedarbojas pareizi. Lūdzu, mēģiniet vēlreiz vēlāk vai sazinieties ar lietotnes īpašnieku, norādot šo informāciju:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Izvēlieties kontu"
+    }
+  }
+}

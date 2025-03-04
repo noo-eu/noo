@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Gehe zu deinem <noo></noo> Startseite",
+    "consent": {
+      "title": "Du meldest dich bei <strong>{name}</strong> mit deinem <noo></noo>-Konto an.",
+      "description": "<strong>{name}</strong> fordert Zugriff auf die folgenden Informationen an:",
+      "claims": {
+        "name": "Dein vollständiger Name",
+        "username": "Dein Benutzername",
+        "profile": "Dein Profilbild",
+        "email": "Deine noo-E-Mail-Adresse",
+        "phone_number": "Deine Telefonnummer",
+        "address": "Deine Postanschrift",
+        "gender": "Das Geschlecht, mit dem du dich identifizierst",
+        "birthdate": "Dein Geburtsdatum"
+      }
+    },
+    "fatal": {
+      "title": "Etwas ist schiefgelaufen",
+      "description": "Du hast versucht, dich bei einer Drittanbieteranwendung anzumelden, aber die Anwendung funktioniert nicht richtig. Bitte versuche es später noch einmal oder kontaktiere den Anwendungsinhaber mit den folgenden Informationen:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Wähle ein Konto"
+    }
+  }
+}

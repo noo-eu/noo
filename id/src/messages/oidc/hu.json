@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Lépjen be a saját <noo></noo> kezdőlapjára",
+    "consent": {
+      "title": "<strong>{name}</strong> fiókba jelentkezik be a <noo></noo> fiókjával.",
+      "description": "<strong>{name}</strong> az alábbi információkhoz kér hozzáférést:",
+      "claims": {
+        "name": "Teljes neve",
+        "username": "Felhasználóneve",
+        "profile": "Profilképe",
+        "email": "A noo e-mail címe",
+        "phone_number": "Telefonszáma",
+        "address": "Postacíme",
+        "gender": "A nem, amellyel azonosul",
+        "birthdate": "Születési dátuma"
+      }
+    },
+    "fatal": {
+      "title": "Hiba történt",
+      "description": "Megpróbált bejelentkezni egy harmadik féltől származó alkalmazásba, de az alkalmazás nem működik megfelelően. Kérjük, próbálja meg később, vagy lépjen kapcsolatba az alkalmazás tulajdonosával az alábbi információkkal:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Válasszon egy fiókot"
+    }
+  }
+}

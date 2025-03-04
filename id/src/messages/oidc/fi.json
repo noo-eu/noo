@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Siirry <noo></noo> kotisivullesi",
+    "consent": {
+      "title": "Kirjaudut sisään palveluun <strong>{name}</strong> käyttäen <noo></noo>-tiliäsi.",
+      "description": "<strong>{name}</strong> pyytää pääsyä seuraaviin tietoihin:",
+      "claims": {
+        "name": "Koko nimesi",
+        "username": "Käyttäjätunnuksesi",
+        "profile": "Profiilikuvasi",
+        "email": "Noo-sähköpostiosoitteesi",
+        "phone_number": "Puhelinnumerosi",
+        "address": "Postiosoitteesi",
+        "gender": "Sukupuoli, johon identifioidut",
+        "birthdate": "Syntymäaikasi"
+      }
+    },
+    "fatal": {
+      "title": "Jokin meni pieleen",
+      "description": "Yritit kirjautua kolmannen osapuolen sovellukseen, mutta sovellus ei toimi oikein. Yritä myöhemmin uudelleen tai ota yhteyttä sovelluksen omistajaan seuraavilla tiedoilla:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Valitse tili"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "L-Aħħar",
+    "continue": "Ippetċerha",
+    "cancel": "Tillem",
+    "optional": "Mhux Obligatorju",
+    "terms": "Iktara l-Termini",
+    "privacy": "Privatetà",
+    "passwordField": {
+      "show": "Ara ssoja",
+      "ariaLabelShow": "Tara s-soja bħala test plain. Attenzjoni: hekk il-ġoġobba tiegħek se titqegħed fuq is-screen.",
+      "hide": "Tillem issa"
+    }
+  }
+}

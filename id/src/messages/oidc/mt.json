@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Mur fil-paġna ewlenija tiegħek ta' <noo></noo>",
+    "consent": {
+      "title": "Qed tidħol f'<strong>{name}</strong> bl-kont tiegħek ta' <noo></noo>.",
+      "description": "<strong>{name}</strong> qed jitlob aċċess għad-dejta li ġejja:",
+      "claims": {
+        "name": "L-isem sħiħ tiegħek",
+        "username": "L-isem tal-utent tiegħek",
+        "profile": "Ir-ritratt tal-profil tiegħek",
+        "email": "L-indirizz elettroniku noo tiegħek",
+        "phone_number": "In-numru tat-telefon tiegħek",
+        "address": "L-indirizz postali tiegħek",
+        "gender": "Il-ġeneru li tidentifika bih",
+        "birthdate": "Id-data tat-twelid tiegħek"
+      }
+    },
+    "fatal": {
+      "title": "Ġara xi ħaġa ħażina",
+      "description": "Ippruvajt tidħol f’applikazzjoni ta’ terza persuna, iżda l-applikazzjoni ma taħdimx kif suppost. Jekk jogħġbok erġa’ pprova aktar tard jew ikkuntattja lis-sid tal-applikazzjoni b’din l-informazzjoni:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Agħżel kont"
+    }
+  }
+}

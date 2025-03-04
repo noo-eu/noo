@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Eikite į savo <noo></noo> pagrindinį puslapį",
+    "consent": {
+      "title": "Jūs prisijungiate prie <strong>{name}</strong> naudodami savo <noo></noo> paskyrą.",
+      "description": "<strong>{name}</strong> prašo prieigos prie šios informacijos:",
+      "claims": {
+        "name": "Jūsų vardas ir pavardė",
+        "username": "Jūsų naudotojo vardas",
+        "profile": "Jūsų profilio nuotrauka",
+        "email": "Jūsų noo el. pašto adresas",
+        "phone_number": "Jūsų telefono numeris",
+        "address": "Jūsų pašto adresas",
+        "gender": "Jūsų lytis",
+        "birthdate": "Jūsų gimimo data"
+      }
+    },
+    "fatal": {
+      "title": "Įvyko klaida",
+      "description": "Bandėte prisijungti prie trečiosios šalies programos, tačiau programa neveikia tinkamai. Bandykite dar kartą vėliau arba susisiekite su programos savininku, pateikdami šią informaciją:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Pasirinkite paskyrą"
+    }
+  }
+}

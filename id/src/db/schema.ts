@@ -1,9 +1,11 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   inet,
   integer,
   jsonb,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   unique,
@@ -50,7 +52,9 @@ export const sessions = pgTable("sessions", {
   verifierDigest: text("verifier_digest").notNull(),
   ip: inet().notNull(),
   userAgent: text("user_agent"),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  lastAuthenticatedAt: timestamp("last_authenticated_at")
+    .notNull()
+    .defaultNow(),
   lastUsedAt: timestamp("last_used_at").notNull().defaultNow(),
 });
 
@@ -95,3 +99,92 @@ export const oidcClients = pgTable("oidc_clients", {
   postLogoutRedirectUris: text("post_logout_redirect_uris").array(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
+  id: text().primaryKey(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  authTime: timestamp("auth_time").notNull(),
+  redirectUri: text("redirect_uri"),
+  scopes: text().array().notNull().default([]),
+  // Claims here are a JSON object as defined by the OIDC spec
+  claims: jsonb().notNull().default({}),
+  nonce: text(),
+  codeChallenge: text("code_challenge"),
+  codeChallengeMethod: text("code_challenge_method"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const oidcConsents = pgTable(
+  "oidc_consents",
+  {
+    clientId: uuid("client_id")
+      .notNull()
+      .references(() => oidcClients.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    scopes: text().array().notNull().default([]),
+    // Claims here are a simple array of claims that the user has consented to provide
+    claims: text().array().notNull().default([]),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.clientId, table.userId] })],
+);
+
+export const oidcAccessTokens = pgTable("oidc_access_tokens", {
+  id: uuid().primaryKey().defaultRandom(),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => oidcClients.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  nonce: text(),
+  scopes: text().array().notNull().default([]),
+  // Claims here are a JSON object as defined by the OIDC spec
+  claims: jsonb().notNull().default({}),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(),
+});
+
+export const sessionRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const userRelations = relations(users, ({ one, many }) => ({
+  sessions: many(sessions),
+  tenant: one(tenants, {
+    fields: [users.tenantId],
+    references: [tenants.id],
+  }),
+}));
+
+export const tenantRelations = relations(tenants, ({ many }) => ({
+  users: many(users),
+}));

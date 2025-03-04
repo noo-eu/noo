@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Weiter",
+    "continue": "Fortfahren",
+    "cancel": "Abbrechen",
+    "optional": "Nicht zwingend",
+    "terms": "Allgemeine Bedingungen",
+    "privacy": "Datenschutz",
+    "passwordField": {
+      "show": "Passwort anzeigen",
+      "ariaLabelShow": "Das Passwort als einfaches Textfeld anzeigen. Achtung: dabei wird Ihr Passwort auf dem Bildschirm sichtbar!",
+      "hide": "Passwort verstecken"
+    }
+  }
+}

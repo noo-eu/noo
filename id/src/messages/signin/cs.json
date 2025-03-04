@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Přihlaste se do svého účtu",
+    "username": "Uživatelské jméno nebo e-mail",
+    "password": "Heslo",
+    "submit": "Přihlásit se",
+    "error": "Špatně zadané přihlašovací údaje"
+  }
+}

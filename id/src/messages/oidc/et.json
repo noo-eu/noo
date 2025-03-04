@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Mine oma <noo></noo> avalehele",
+    "consent": {
+      "title": "Logite sisse <strong>{name}</strong> oma <noo></noo> kontoga.",
+      "description": "<strong>{name}</strong> soovib juurdepääsu järgmisele teabele:",
+      "claims": {
+        "name": "Teie täielik nimi",
+        "username": "Teie kasutajanimi",
+        "profile": "Teie profiilipilt",
+        "email": "Teie noo e-posti aadress",
+        "phone_number": "Teie telefoninumber",
+        "address": "Teie postiaadress",
+        "gender": "Sugu, millega ennast identifitseerite",
+        "birthdate": "Teie sünnikuupäev"
+      }
+    },
+    "fatal": {
+      "title": "Midagi läks valesti",
+      "description": "Proovisite sisse logida kolmanda osapoole rakendusse, kuid see ei tööta õigesti. Palun proovige hiljem uuesti või võtke rakenduse omanikuga ühendust, edastades järgmise teabe:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Valige konto"
+    }
+  }
+}

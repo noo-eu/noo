@@ -1,8 +1,9 @@
 import { readdir, readFile } from "fs";
+import { importJWK } from "jose";
 import { z } from "zod";
 
 const baseKey = z.object({
-  kid: z.string(),
+  kid: z.string().optional(),
   use: z.enum(["sig", "enc"]).optional(),
   alg: z.string().optional(),
   x5c: z.array(z.string()).optional(),
@@ -13,6 +14,12 @@ const rsaKey = baseKey.extend({
   kty: z.literal("RSA"),
   n: z.string(),
   e: z.string(),
+  d: z.string().optional(),
+  p: z.string().optional(),
+  q: z.string().optional(),
+  dp: z.string().optional(),
+  dq: z.string().optional(),
+  qi: z.string().optional(),
 });
 
 const ecKey = baseKey.extend({
@@ -20,12 +27,14 @@ const ecKey = baseKey.extend({
   crv: z.string(),
   x: z.string(),
   y: z.string(),
+  d: z.string().optional(),
 });
 
 const edKey = baseKey.extend({
   kty: z.literal("OKP"),
   crv: z.literal("Ed25519"),
   x: z.string(),
+  d: z.string().optional(),
 });
 
 const keySchema = z.union([rsaKey, ecKey, edKey]);
@@ -65,6 +74,7 @@ async function exportKey(key: CryptoKey) {
     unknown
   >;
 
+  delete obj.alg;
   delete obj.ext;
   delete obj.key_ops;
 
@@ -97,7 +107,7 @@ let keysCache: {
   current: Record<string, unknown>[];
 } | null = null;
 let keysCacheTime = 0;
-let keysCacheExpiry = 5 * 60 * 1000;
+const keysCacheExpiry = 5 * 60 * 1000;
 export async function getKeys(): Promise<{
   legacy: Record<string, unknown>[];
   current: Record<string, unknown>[];
@@ -107,12 +117,12 @@ export async function getKeys(): Promise<{
       keysCache = await loadKeysRaw();
       keysCacheTime = Date.now();
     } catch (err) {
-      console.log("Failed to load new keys from disk:", err);
+      console.error("Failed to load new keys from disk:", err);
       if (!keysCache) {
         throw err;
       }
 
-      console.log("Falling back to using the old keys");
+      console.warn("Falling back to using the old keys");
     }
   }
 
@@ -151,7 +161,7 @@ function jwkToPublicJwk(jwk: Record<string, unknown>) {
   return obj;
 }
 
-async function loadKeysRaw() {
+export async function loadKeysRaw() {
   const legacyKeys = await loadKeysFromDir("keys/old");
   const currentKeys = await loadKeysFromDir("keys/current");
 
@@ -161,7 +171,9 @@ async function loadKeysRaw() {
   };
 }
 
-function loadKeysFromDir(path: string): Promise<Record<string, unknown>[]> {
+export function loadKeysFromDir(
+  path: string,
+): Promise<Record<string, unknown>[]> {
   return new Promise((resolve, reject) => {
     readdir(path, async (err, files) => {
       if (err) {
@@ -198,16 +210,24 @@ function loadKeyRaw(path: string): Promise<Record<string, unknown>> {
   });
 }
 
-// async function importKey(key: Record<string, unknown>): Promise<CryptoKey> {
-// switch (key.kty) {
-//   case "RSA":
-//     console.log("Importing RSA key", key);
-//     return await crypto.subtle.importKey("jwk", key, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, true, ["sign", "verify"])!;
-//   case "EC":
-//     return await crypto.subtle.importKey("jwk", key, { name: "ECDSA", namedCurve: "P256" }, true, ["sign"])!;
-//   case "OKP":
-//     return await crypto.subtle.importKey("jwk", key, "Ed25519", true, ["sign"])!;
-//   default:
-//     throw new Error("Unknown key type " + key.kty);
-// }
-// }
+export async function getKeyByAlg(alg: string) {
+  const keys = (await getKeys()).current;
+
+  for (const key of keys) {
+    if (key.alg === alg) {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  for (const key of keys) {
+    if (alg == "RS256" && key.kty === "RSA") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "ES256" && key.kty === "EC") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "EdDSA" && key.kty === "OKP") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  return null;
+}

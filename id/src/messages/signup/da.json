@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Skub venligst dit første navn ind",
+      "name_too_long": "Navnet du har skrevet er for længere",
+      "name_too_short": "Navnet du har skrevet er for kort",
+      "name_invalid": "Navnet indeholder nogle ugyldige tegn",
+      "username_required": "Venligst indtast dit nye brugernavn",
+      "username_first_char": "Dit bruger navn skal starte med en bogstav eller et tal",
+      "username_last_char": "Din bruger navn skal slutte med et bogstav eller et tal",
+      "username_length": "Din brugernavn skal være mellem 6 og 30 tegn langt",
+      "username_invalid": "Dit brugernavn kan kun indeholde bogstaver, tal og punktum (.)",
+      "username_two_dots": "Din bruger navn må ikke have to punktum i træk",
+      "username_taken": "Brugernavnet er allerede taget",
+      "password_required": "Venligst indtast dit adgangskode",
+      "password_length": "Venligst brug 10 eller flere tegn",
+      "password_too_long": "Det adgangskode du har skrevet er for langt",
+      "password_classes": "Brug et stærkere adgangskode. Brug en blanding af bogstaver, tal og tegn",
+      "invalid_data": "Der gik noget galt. Tjek venligst de data du har indtastet"
+    },
+    "create_your_account": "Opret din <b>Konto</b>",
+    "step1": {
+      "title": "Indtast dit navn",
+      "first_name": "Fornavn",
+      "last_name": "Efternavn"
+    },
+    "step2": {
+      "title": "Vælg en email adresse",
+      "username": "Email adresse"
+    },
+    "step3": {
+      "title": "Skab et stærkt adgangskode",
+      "password": "Adgangskode"
+    },
+    "step4": {
+      "title": "Det sidste...",
+      "description": "<p>En <b>Konto</b> giver dig adgang til en række tjenester, såsom email, fil lagring og meget mere.</p><p> <terms><b>Virksomheds</b>'s Betingelser for Service</terms> forklarer hvad du kan forvente, når du bruger tjenesterne, mens <privacy><b>Virksomheds</b>'s Privatpolitiske</privacy> beskriver hvordan vi håndterer oplysninger der er genereret eller samlet under brug af tjenesterne.</p> <p>For at oprette en <b>Konto</b> og bruge tjenesterne må du acceptere <b>Virksomheds</b>'s Betingelser for Service og Privatpolitiske.</p>",
+      "accept": "Accepter og fortsæt"
+    }
+  }
+}

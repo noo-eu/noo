@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Įveskite savo pavardę",
+      "name_too_long": "Įvestas vardas yra per ilgas",
+      "name_too_short": "Įvestas vardas yra per trumpas",
+      "name_invalid": "Įveste pavardė yra netinkuota",
+      "username_required": "Įveskite savo naują vartotojo vardą",
+      "username_first_char": "Vartotojo vardo pradžia turi būti raidė ar skaičius",
+      "username_last_char": "Vartotojo vardo pabaiga turi būti raidė ar skaičius",
+      "username_length": "Vartotojo vardas turi būti nuo 6 iki 30 simbolių ilgio",
+      "username_invalid": "Vartotojo vardo galime naudoti tik raidę, skaičių ir tašką (.)",
+      "username_two_dots": "Vartotojo vardo negalima turėti dviejų iš eilį taško (.)",
+      "username_taken": "Šis vartotojo vardas yra užimtas",
+      "password_required": "Įveskite savo slaptažodį",
+      "password_length": "Panaudokite 10 arba daugiau simbolių",
+      "password_too_long": "Įvestas slaptažodis yra per ilgas",
+      "password_classes": "Panaudokite stipresnę slapyvardą. Naudojokite raidžių, skaičių ir simbolių mišinį",
+      "invalid_data": "Kitaip nei teisingai. Rodykite įvestus duomenis"
+    },
+    "create_your_account": "Sukurkite savo <noo></noo> paskyrą",
+    "step1": {
+      "title": "Įveskite savo vardą",
+      "first_name": "Pavardė",
+      "last_name": "Šeima"
+    },
+    "step2": {
+      "title": "Pasirinkite savo el. paštos adresą",
+      "username": "El.pašto adresas"
+    },
+    "step3": {
+      "title": "Sukurkite stipresnį slaptažodį",
+      "password": "Slaptažodis"
+    },
+    "step4": {
+      "title": "Įvykdyti vieną kartą...",
+      "description": "        <p>A <noo></noo> paskyra leidžia jus prisijungti iki serijos paslaugų, kaip taip pat el. pašto, failų saugyklos ir daugiau.</p>        <p><terms><noo></noo> Taisyklės apie paskyrai taisyklę</terms> aiškina, ką galite išlikti naudodami paslaugas, tuo tarpu <privacy><noo></noo>' Privatumo politika</privacy> aprašo, kaip mes valdomas informacijos ir jaukų generuota ar gaunama per naudojimo paslaugų.</p>        <p>Norėdami sukurti savęs paskyrai ir naudoti jos paslaugas, turite priimti visą <noo></noo> Taisyklę apie slapyvardus ir Privatumo politiką.</p>",
+      "accept": "Prisijunkite ir tęskite"
+    }
+  }
+}

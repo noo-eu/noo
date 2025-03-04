@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Nastavi",
+    "continue": "Nastavi",
+    "cancel": "Otkaži",
+    "optional": "Izborno",
+    "terms": "Uslovi korisničkog ugovora",
+    "privacy": "Pravilnik o zaštiti osobnih podataka",
+    "passwordField": {
+      "show": "Prikaži lozinku",
+      "ariaLabelShow": "Izračunaj moju lozinku. Upozorenje: Lozinka će biti prikazana na ekranu.",
+      "hide": " sakrij lozinku"
+    }
+  }
+}

@@ -6,7 +6,7 @@ import db from "@/db";
 describe("OIDC Client Registration", async () => {
   const tenant = (await db.query.tenants.findFirst())!;
 
-  const perform = async (request: any) => {
+  const perform = async (request: Record<string, unknown>) => {
     const response = await oidcClientRegistration(request, tenant);
     return await response.json();
   };
@@ -42,6 +42,28 @@ describe("OIDC Client Registration", async () => {
     });
   });
 
+  test("it refuses to redirect_uris with query string or fragments", async () => {
+    const result = await perform({
+      redirect_uris: Array(20).fill(
+        "https://example.com/callback?query=string",
+      ),
+    });
+
+    expect(result).toMatchObject({
+      error: "invalid_redirect_uri",
+      error_description: expect.any(String),
+    });
+
+    const result2 = await perform({
+      redirect_uris: Array(20).fill("https://example.com/callback#fragment"),
+    });
+
+    expect(result2).toMatchObject({
+      error: "invalid_redirect_uri",
+      error_description: expect.any(String),
+    });
+  });
+
   test("it rejects application_types other than web or native", async () => {
     const result = await perform({
       redirect_uris: ["https://example.com/callback"],
@@ -62,7 +84,6 @@ describe("OIDC Client Registration", async () => {
       "http://[::1]:9999/test/callback",
       "myapp://callback",
       "myapp://callback/with/path",
-      "myapp://callback/with?query=string",
     ];
 
     // undefined is returned when the validation passes
@@ -212,7 +233,6 @@ describe("OIDC Client Registration", async () => {
       {},
       { keys: [{}] },
       { keys: [{ kty: "RSA" }] },
-      { keys: [{ kty: "RSA", e: "AQAB", n: "abc" }] },
       { keys: [{ kty: "RSA", x: "asd" }] },
       { keys: [{ kty: "RSA", x: "asd", y: "asd" }] },
       { keys: [{ kty: "EC", crv: "P-256" }] },
@@ -221,6 +241,7 @@ describe("OIDC Client Registration", async () => {
     ];
 
     const valid = [
+      { keys: [{ kty: "RSA", e: "AQAB", n: "abc" }] }, // `kid` is optional
       { keys: [{ kid: "123", kty: "RSA", e: "AQAB", n: "abc" }] },
       { keys: [{ kid: "123", kty: "EC", crv: "P-256", x: "abc", y: "abc" }] },
       { keys: [{ kid: "123", kty: "OKP", crv: "Ed25519", x: "abc" }] },
@@ -228,7 +249,7 @@ describe("OIDC Client Registration", async () => {
 
     for (const jwks of invalid) {
       const result = await perform({
-        redirect_uris: ["https://example.com/callback"],
+        redirect_uris: ["https://example.com/bad"],
         jwks,
       });
 
@@ -240,7 +261,7 @@ describe("OIDC Client Registration", async () => {
 
     for (const jwks of valid) {
       const result = await perform({
-        redirect_uris: ["https://example.com/callback"],
+        redirect_uris: ["https://example.com/good"],
         jwks,
       });
 

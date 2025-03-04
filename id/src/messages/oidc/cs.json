@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Přejděte na svou domovskou stránku <noo></noo>",
+    "consent": {
+      "title": "Přihlašujete se do <strong>{name}</strong> pomocí svého účtu <noo></noo>.",
+      "description": "<strong>{name}</strong> žádá o přístup k následujícím informacím:",
+      "claims": {
+        "name": "Vaše celé jméno",
+        "username": "Vaše uživatelské jméno",
+        "profile": "Vaše profilová fotografie",
+        "email": "Vaše e-mailová adresa noo",
+        "phone_number": "Vaše telefonní číslo",
+        "address": "Vaše poštovní adresa",
+        "gender": "Pohlaví, se kterým se identifikujete",
+        "birthdate": "Váš datum narození"
+      }
+    },
+    "fatal": {
+      "title": "Něco se pokazilo",
+      "description": "Pokusili jste se přihlásit do aplikace třetí strany, ale aplikace nefunguje správně. Zkuste to prosím později nebo kontaktujte vlastníka aplikace s následujícími informacemi:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Vyberte účet"
+    }
+  }
+}

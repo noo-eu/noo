@@ -2,32 +2,34 @@ import { getRequestConfig } from "next-intl/server";
 import { headers } from "next/headers";
 import acceptLanguage from "accept-language";
 
-acceptLanguage.languages([
+export const SUPPORTED_LANGUAGES = [
   "en",
   "bg",
-  "hr",
   "cs",
   "da",
-  "nl",
+  "de",
+  "el",
+  "es",
   "et",
   "fi",
   "fr",
-  "de",
-  "el",
-  "hu",
   "ga",
+  "hr",
+  "hu",
   "it",
-  "lv",
   "lt",
+  "lv",
   "mt",
+  "nl",
   "pl",
   "pt",
   "ro",
   "sk",
   "sl",
-  "es",
   "sv",
-]);
+];
+
+acceptLanguage.languages(SUPPORTED_LANGUAGES);
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
@@ -47,6 +49,7 @@ export default getRequestConfig(async () => {
     locale,
     messages: {
       ...(await loadJSON5(`src/messages/common/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/oidc/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },

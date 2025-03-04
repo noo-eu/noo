@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Log ind på din <konto></konto> ",
+    "username": "Brugernavn eller email",
+    "password": "Adgangskode",
+    "submit": "Log ind",
+    "error": "Det er ikke godt agørende, hvad du har skrevet"
+  }
+}

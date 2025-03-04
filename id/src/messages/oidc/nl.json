@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Ga naar je <noo></noo> startpagina",
+    "consent": {
+      "title": "Je meldt je aan bij <strong>{name}</strong> met je <noo></noo>-account.",
+      "description": "<strong>{name}</strong> vraagt toegang tot de volgende informatie:",
+      "claims": {
+        "name": "Je volledige naam",
+        "username": "Je gebruikersnaam",
+        "profile": "Je profielfoto",
+        "email": "Je noo e-mailadres",
+        "phone_number": "Je telefoonnummer",
+        "address": "Je postadres",
+        "gender": "Het geslacht waarmee je je identificeert",
+        "birthdate": "Je geboortedatum"
+      }
+    },
+    "fatal": {
+      "title": "Er is iets misgegaan",
+      "description": "Je hebt geprobeerd in te loggen bij een applicatie van een derde partij, maar de applicatie werkt niet correct. Probeer het later opnieuw of neem contact op met de eigenaar van de applicatie met de volgende informatie:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Kies een account"
+    }
+  }
+}

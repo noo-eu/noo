@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Tovább",
+    "continue": "Folytatás",
+    "cancel": "Mégsem",
+    "optional": "Nem kötelező",
+    "terms": "Szerződésfeltételek",
+    "privacy": "Adatvédelem",
+    "passwordField": {
+      "show": "Jelenítsd meg a jelszót!",
+      "ariaLabelShow": "Jelenítsd meg a jelszót. Figyelmeztetés: ezzel a művelettel a képernyőn fogják látni a jelszavadat.",
+      "hide": "Rejtse el a jelszót!"
+    }
+  }
+}

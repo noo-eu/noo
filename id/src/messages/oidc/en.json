@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Go to your <noo></noo> home",
+    "consent": {
+      "title": "You are signing into <strong>{name}</strong> with your <noo></noo> account.",
+      "description": "<strong>{name}</strong> is requesting access to the following information",
+      "claims": {
+        "name": "Your full name",
+        "username": "Your username",
+        "profile": "Your profile picture",
+        "email": "Your noo email address",
+        "phone_number": "Your phone number",
+        "address": "Your postal address",
+        "gender": "The gender you identify with",
+        "birthdate": "Your date of birth"
+      }
+    },
+    "fatal": {
+      "title": "Something went wrong",
+      "description": "You tried to sign in to a third-party application, but the application is not working correctly. Please try again later or contact the application owner with the following information:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Choose an account"
+    }
+  }
+}

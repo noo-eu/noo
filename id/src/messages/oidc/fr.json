@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Accédez à votre page d'accueil <noo></noo>",
+    "consent": {
+      "title": "Vous vous connectez à <strong>{name}</strong> avec votre compte <noo></noo>.",
+      "description": "<strong>{name}</strong> demande l'accès aux informations suivantes :",
+      "claims": {
+        "name": "Votre nom complet",
+        "username": "Votre nom d'utilisateur",
+        "profile": "Votre photo de profil",
+        "email": "Votre adresse e-mail noo",
+        "phone_number": "Votre numéro de téléphone",
+        "address": "Votre adresse postale",
+        "gender": "Le genre auquel vous vous identifiez",
+        "birthdate": "Votre date de naissance"
+      }
+    },
+    "fatal": {
+      "title": "Un problème est survenu",
+      "description": "Vous avez essayé de vous connecter à une application tierce, mais celle-ci ne fonctionne pas correctement. Veuillez réessayer plus tard ou contacter le propriétaire de l'application avec les informations suivantes :",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Choisissez un compte"
+    }
+  }
+}

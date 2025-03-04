@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Passer à l'étape suivante",
+    "continue": "Continuer",
+    "cancel": "Annuler",
+    "optional": "Facultatif",
+    "terms": "Mentions légales",
+    "privacy": "Confidentialité",
+    "passwordField": {
+      "show": "Afficher le mot de passe",
+      "ariaLabelShow": "Afficher le mot de passe en clair. Attention, cela affichera votre mot de passe à l'écran.",
+      "hide": "Cacher le mot de passe"
+    }
+  }
+}

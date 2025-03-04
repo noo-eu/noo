@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Pojdite na svojo domačo stran <noo></noo>",
+    "consent": {
+      "title": "Prijavljate se v <strong>{name}</strong> s svojim računom <noo></noo>.",
+      "description": "<strong>{name}</strong> zahteva dostop do naslednjih podatkov:",
+      "claims": {
+        "name": "Vaše polno ime",
+        "username": "Vaše uporabniško ime",
+        "profile": "Vaša profilna slika",
+        "email": "Vaš noo e-poštni naslov",
+        "phone_number": "Vaša telefonska številka",
+        "address": "Vaš poštni naslov",
+        "gender": "Spol, s katerim se identificirate",
+        "birthdate": "Vaš datum rojstva"
+      }
+    },
+    "fatal": {
+      "title": "Prišlo je do napake",
+      "description": "Poskusili ste se prijaviti v aplikacijo tretje osebe, vendar aplikacija ne deluje pravilno. Poskusite znova pozneje ali se obrnite na lastnika aplikacije s spodnjimi podatki:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Izberite račun"
+    }
+  }
+}

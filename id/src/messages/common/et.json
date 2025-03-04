@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Järgmine",
+    "continue": "Kontrolli välja",
+    "cancel": "Tühista",
+    "optional": "Valikuline",
+    "terms": "Märõded ja tingimused",
+    "privacy": "Õiguskaitse teatis",
+    "passwordField": {
+      "show": "Käivita parooli nägemine",
+      "ariaLabelShow": "Parool näidata tekstina ekraanile. Märkus: see näitab teie parooli ekraanil!",
+      "hide": "Peida parool"
+    }
+  }
+}

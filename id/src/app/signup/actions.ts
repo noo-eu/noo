@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { SignupService } from "@/services/SignupService";
 import { cookies } from "next/headers";
-import { SessionsService } from "@/services/SessionsService";
+import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
 import { schema } from "@/db";
 import { getIpAddress, getUserAgent } from "@/utils";
 
@@ -103,7 +103,7 @@ export async function signupStep3(prevState: unknown, formData: FormData) {
 async function startSession(user: typeof schema.users.$inferSelect) {
   const cookieStore = await cookies();
   const sessionManager = new SessionsService(
-    cookieStore.get("auth")?.value || "",
+    cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
   );
 
   await sessionManager.startSession(
@@ -115,7 +115,7 @@ async function startSession(user: typeof schema.users.$inferSelect) {
   // Delete old, expired, tampered sessions
   await sessionManager.cleanup();
 
-  cookieStore.set("auth", sessionManager.buildCookie(), {
+  cookieStore.set(SESSION_COOKIE_NAME, sessionManager.buildCookie(), {
     maxAge: 60 * 60 * 24 * 400,
     httpOnly: true,
     secure: true,

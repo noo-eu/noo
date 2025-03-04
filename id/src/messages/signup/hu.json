@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Kérem adjonk meg a nevét",
+      "name_too_long": "A megadott név túl hosszú",
+      "name_too_short": "A megadott név túl rövid",
+      "name_invalid": "A beállított név nem megfelelő",
+      "username_required": "Kérem adja meg a új felhasználónevet",
+      "username_first_char": "A felhasználónevnél a kezdőbetűnek betűnek vagy számnak kell lennie",
+      "username_last_char": "A felhasználónevnél az utolsó karakternek betűnek vagy számnak kell lennie",
+      "username_length": "A felhasználónévnek legfeljebb 30 karakterben kell állnia",
+      "username_invalid": "A felhasználónév csak betűkkel, számokkal és ponttal (.) kivethető",
+      "username_two_dots": "A felhasználónév nem lehet két ponttal ellátva",
+      "username_taken": "Ez a felhasználónév már foglalt",
+      "password_required": "Kérem adjonk meg a jelszavát",
+      "password_length": "Kérek több karaktert (legalább 10)",
+      "password_too_long": "A beállított jelszó túl hosszú",
+      "password_classes": "Kérek erősebb jelszót. Vegyen bele betűkkel, számokkal és jelekkel.",
+      "invalid_data": "Valami probléma történt. Ellenőrizze a megadott adatot"
+    },
+    "create_your_account": "Hozzon létre saját <noo></noo> fiókot",
+    "step1": {
+      "title": "Adjonk meg a nevét",
+      "first_name": "Név",
+      "last_name": "Családneve"
+    },
+    "step2": {
+      "title": "Válassza ki az e-mail címét",
+      "username": "E-mail cím"
+    },
+    "step3": {
+      "title": "Hozzon létre egy erős jelszót",
+      "password": "Jelszó"
+    },
+    "step4": {
+      "title": "Azt még az utolsó...",
+      "description": "        <p>Egy <noo></noo> fiók lehetővé teszi a számítógépes rendszerhez való hozzáférést, mint például e-mailek, fájl tárolás és sok más dolog.</p>        <p><terms><noo></noo>'s Szolgáltatási feltételei</terms> magyarázzák el a jövőbeni használathoz várhatókat. Míg <privacy><noo></noo>'-nak személyiségi politikája van.</p>        <p>Hogy létrehozhatna egy <noo></noo> fiókot, és a szolgáltatásokat használva, elfogadja <noo></noo>'s Szolgáltatási feltételeit és <noo></noo>'-nak személyiségi politikáját.</p>",
+      "accept": "Elfogadom és folytassam"
+    }
+  }
+}
