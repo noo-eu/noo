@@ -8,13 +8,13 @@ The noo project is building an European ecosystem of digital products. Read more
 
 ## Features
 
-- [ ] **OpenID Connect:** noo id follows the OIDC specification to ensure compatibility with a wide range of applications.
-- [ ] **Multi-tenancy:** businesses and enterprises signing up to noo with a private domain will automatically be provisioned their own private OIDC IdP instance. For example, a business registering with `example.es` will be allocated an endpoint at:
+- [x] **OpenID Connect:** noo id follows the OIDC specification to ensure compatibility with a wide range of applications.
+- [x] **Multi-tenancy:** businesses and enterprises signing up to noo with a private domain will automatically be provisioned their own private OIDC IdP instance. For example, a business registering with `example.es` will be allocated an endpoint at:
   ```
   https://id.noo.eu/oidc/example.es/.well-known/openid-configuration
   ```
-- [ ] **Dynamic Client Registration:** private instances support [OIDC Dynamic client Registration](https://openid.net/specs/openid-connect-registration-1_0.html), allowing businesses to register clients in their dedicated namespace.
-- [ ] **Multi-Session Support:** users can maintain multiple sessions concurrently and switch between them seamlessly.
+- [x] **Dynamic Client Registration:** private instances support [OIDC Dynamic client Registration](https://openid.net/specs/openid-connect-registration-1_0.html), allowing businesses to register clients in their dedicated namespace.
+- [x] **Multi-Session Support:** users can maintain multiple sessions concurrently and switch between them seamlessly.
 - [ ] **Passkeys and MFA**
 - [ ] **Audit logs**
 - [ ] **European eIDAS integration:** noo id will integrate with European eIDAS solutions such as the Swedish BankID, Estonian eID, Italian SPID/CIE, and others. This will enable verified identities and help establish a robust ecosystem for digital identity management in Europe.
