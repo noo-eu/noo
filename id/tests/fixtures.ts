@@ -9,6 +9,7 @@ async function main() {
   await reset(db, schema);
 
   await createUser({
+    id: "00000000-0000-0000-0000-000000000001",
     username: "jo.Hn.doE1",
     normalizedUsername: "johndoe1",
     firstName: "John",

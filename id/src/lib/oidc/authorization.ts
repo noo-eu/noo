@@ -118,7 +118,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
       return new Response(null, {
         status: 303,
         headers: {
-          Location: request.buildUrl("/oidc/switch"),
+          Location: request.buildUrl("/switch"),
           "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
@@ -553,7 +553,7 @@ async function authorizationStandard(
     return new Response(null, {
       status: 303,
       headers: {
-        Location: req.buildUrl("/oidc/switch"),
+        Location: req.buildUrl("/switch"),
         "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
       },
     });

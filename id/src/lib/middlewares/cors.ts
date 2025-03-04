@@ -3,9 +3,12 @@ import { HttpRequest } from "../http/request";
 
 export function cors(methods: string[]) {
   return async (request: HttpRequest, next?: Middleware) => {
-    const response = next
-      ? await next(request)
-      : Response.json({ error: "Not Found" }, { status: 404 });
+    let response = new Response(null, { status: 204 });
+    if (request.method !== "OPTIONS") {
+      response = next
+        ? await next(request)
+        : Response.json({ error: "Not Found" }, { status: 404 });
+    }
 
     if (response.headers.get("Access-Control-Allow-Origin")) {
       // The response already has CORS headers, return it as-is

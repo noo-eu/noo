@@ -16,6 +16,7 @@ export function findSessionByIds(sessionIds: string[]) {
 export async function findBy(conditions: SQL) {
   return db.query.sessions.findMany({
     where: conditions,
+    with: { user: { with: { tenant: true } } },
   });
 }
 

@@ -1,14 +1,10 @@
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
-import OidcAuthorizationCodes, {
-  OidcAuthorizationCode,
-} from "@/db/oidc_authorization_codes";
+import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import { authenticateClient } from "./tokenAuthentication";
 import { createIdToken } from "./idToken";
-import { sha256 } from "@/utils";
-import crypto from "crypto";
 import { validatePkce } from "./pkce";
 
 export const tokenEndpoint = composeMiddleware(
@@ -25,7 +21,7 @@ async function handle(req: HttpRequest) {
       return await authorizationCodeFlow(req, params);
     default:
       return Response.json(
-        { error: "unsupported_grant_type" + JSON.stringify(params) },
+        { error: "unsupported_grant_type" },
         { status: 400 },
       );
   }
@@ -48,7 +44,7 @@ async function authorizationCodeFlow(
   const client = (await OidcClients.find(code.clientId))!;
 
   // Authenticate the client following the agreed client authentication method
-  if (!authenticateClient(req, client)) {
+  if (!(await authenticateClient(req, client))) {
     return Response.json({ error: "forbidden" }, { status: 403 });
   }
 

@@ -37,6 +37,18 @@ describe("authenticateClientSecretBasic", async () => {
       authenticateClientSecretBasic(new HttpRequest(rawRequest), client!),
     ).toBe(false);
   });
+
+  test("returns false if the client is not authenticated (bad auth header)", async () => {
+    const rawRequest = new Request("https://example.com", {
+      headers: {
+        Authorization: "Bearer " + btoa(`${client!.id}:wrong-secret`),
+      },
+    });
+
+    expect(
+      authenticateClientSecretBasic(new HttpRequest(rawRequest), client!),
+    ).toBe(false);
+  });
 });
 
 describe("authenticateClientSecretPost", async () => {
@@ -178,6 +190,14 @@ describe("authenticateClientSecretJwt", async () => {
         "X-Forwarded-Proto": "https",
       },
     });
+
+    expect(
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+    ).toBe(false);
+  });
+
+  test("returns false if the authentication is attempted on a GET request (can this even happen?)", async () => {
+    const rawRequest = new Request("https://example.com");
 
     expect(
       await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
