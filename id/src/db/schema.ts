@@ -117,6 +117,7 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
   authTime: timestamp("auth_time").notNull(),
   redirectUri: text("redirect_uri"),
   scopes: text().array().notNull().default([]),
+
   // Claims here are a JSON object as defined by the OIDC spec
   claims: jsonb().notNull().default({}),
   nonce: text(),
