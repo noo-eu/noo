@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Vul alstublieft uw voornaam in",
+      "name_too_long": "Uw naam is te lang",
+      "name_too_short": "Uw naam is te kort",
+      "name_invalid": "De naam bevat ongeldige tekens",
+      "username_required": "Vul alstublieft uw nieuwe gebruikersnaam in",
+      "username_first_char": "Uw gebruikersnaam moet met een letter of cijfer beginnen",
+      "username_last_char": "Uw gebruikersnaam moet met een letter of cijfer eindigen",
+      "username_length": "Uw gebruikersnaam moet tussen de 6 en 30 tekens zijn",
+      "username_invalid": "Uw gebruikersnaam mag alleen letters, cijfers en punten bevatten",
+      "username_two_dots": "Uw gebruikersnaam mag niet twee punten achter elkaar bevatten",
+      "username_taken": "Deze gebruikersnaam is al in gebruik",
+      "password_required": "Vul alstublieft uw wachtwoord in",
+      "password_length": "Gebruik alstublieft 10 of meer tekens",
+      "password_too_long": "Het ingevoerde wachtwoord is te lang",
+      "password_classes": "Gebruik een sterker wachtwoord. Meng letters, cijfers en symboolen",
+      "invalid_data": "Er ging iets mis. Controleer de gegevens die u ingevuld heeft"
+    },
+    "create_your_account": "Maak uw <noo></noo> account aan",
+    "step1": {
+      "title": "Vul uw naam in",
+      "first_name": "Voornaam",
+      "last_name": "Achternaam"
+    },
+    "step2": {
+      "title": "Kies uw emailadres",
+      "username": "Emailadres"
+    },
+    "step3": {
+      "title": "Maak een sterk wachtwoord aan",
+      "password": "Wachtwoord"
+    },
+    "step4": {
+      "title": "Een laatste ding...",
+      "description": "        <p>Een <noo></noo> account geeft u toegang tot een reeks diensten, zoals email, bestandsopslag en meer.</p>        <p><terms><noo></noo>'s Algemene Voorwaarden</terms> leggen uit wat u kunt verwachten als u de diensten gebruikt, terwijl <privacy><noo></noo>'s Privacybeleid</privacy> beschrijft hoe we informatie behandelen die wordt gegenereerd of verzameld tijdens het gebruik van de diensten.</p>        <p>Bij het aanmaken van een <noo></noo> account en gebruik maken van de diensten moet u toestemmen met <noo></noo>'s Algemene Voorwaarden en Privacybeleid.</p>",
+      "accept": "Accepteer en ga door"
+    }
+  }
+}

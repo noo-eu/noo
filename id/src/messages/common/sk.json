@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Ďalšie",
+    "continue": "Pokračovať",
+    "cancel": "Zrušiť",
+    "optional": "Voliteľné",
+    "terms": "Podmienky",
+    "privacy": "Špecifický prístup k osobným údajom",
+    "passwordField": {
+      "show": "Zobraziť heslo",
+      "ariaLabelShow": "Zobraziť heslo vo forme čisté. Upozornenie: Toto znázorňuje vaše heslo na obrazovke.",
+      "hide": "Skryť heslo"
+    }
+  }
+}

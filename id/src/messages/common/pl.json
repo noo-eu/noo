@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Dalej",
+    "continue": "Zapisać dalej",
+    "cancel": "Anuluj",
+    "optional": "Nieobowiązkowe",
+    "terms": "Regulamin",
+    "privacy": "Prywatność",
+    "passwordField": {
+      "show": "Pokaż hasło",
+      "ariaLabelShow": "Pokaż hasło w postaci prostego tekstu. Uwaga: twoje hasło pojawi się na ekranie.",
+      "hide": "Ukryj hasło"
+    }
+  }
+}

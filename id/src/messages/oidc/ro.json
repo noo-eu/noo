@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Accesați pagina dvs. de start <noo></noo>",
+    "consent": {
+      "title": "Vă autentificați în <strong>{name}</strong> cu contul dvs. <noo></noo>.",
+      "description": "<strong>{name}</strong> solicită acces la următoarele informații:",
+      "claims": {
+        "name": "Numele dvs. complet",
+        "username": "Numele dvs. de utilizator",
+        "profile": "Fotografia dvs. de profil",
+        "email": "Adresa dvs. de e-mail noo",
+        "phone_number": "Numărul dvs. de telefon",
+        "address": "Adresa dvs. poștală",
+        "gender": "Genul cu care vă identificați",
+        "birthdate": "Data dvs. de naștere"
+      }
+    },
+    "fatal": {
+      "title": "A apărut o problemă",
+      "description": "Ați încercat să vă conectați la o aplicație terță, dar aceasta nu funcționează corect. Încercați din nou mai târziu sau contactați proprietarul aplicației cu următoarele informații:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Alegeți un cont"
+    }
+  }
+}

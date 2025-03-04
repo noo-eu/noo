@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Kirjaudu tiliisi sisään",
+    "username": "Käyttäjätunnus tai sähköposti",
+    "password": "Salasana",
+    "submit": "Kirjaudu sisään",
+    "error": "Antamasi tiedot eivät ole oikein"
+  }
+}

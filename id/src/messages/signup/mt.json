@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Tajjeb tibba' isim tkun ħadd",
+      "name_too_long": "Ism kemm ġej il-ħafna",
+      "name_too_short": "Ism kemm jew wisq qalih",
+      "name_invalid": "Ism ma jiekolx kollox",
+      "username_required": "Tajjeb tibba' Ħtiża",
+      "username_first_char": "L-Ħtiża għaddejja b'murr u numru",
+      "username_last_char": "L-Ħtiża tirqa b'murr u numru",
+      "username_length": "L-Ħtiża tmissi ħafna ta' 6 u 30 karattri",
+      "username_invalid": "Iċ-Ħtiża tikkabbarb li tkun ikollha leter, numri u puntu (.)",
+      "username_two_dots": "L-Ħtiża ma tistax jkollha żewġ puntu (.) barra",
+      "username_taken": "Dan l'Ħtiża huwa ħażin",
+      "password_required": "Tajjeb tibba' passwurd",
+      "password_length": "Tibba' tkun ta' 10 karattri jew wisq zewġ",
+      "password_too_long": "Il-passwurd li ħdejja huwa il-ħafna",
+      "password_classes": "Tibba' tiksol passwurd qawwi. Tiksol jekk tibda bl-isem, numru u simboli",
+      "invalid_data": "Ġejt farruża kollox. Tibba' tkun ħadd maħsub li qed tgħidlek"
+    },
+    "create_your_account": "Tiswa' akkaunt tiegħek",
+    "step1": {
+      "title": "Idda' isim",
+      "first_name": "Isim",
+      "last_name": "Surnamu"
+    },
+    "step2": {
+      "title": "Għid id-dominju tal-email",
+      "username": "Email"
+    },
+    "step3": {
+      "title": "Tiswa' passwurd qawwi",
+      "password": "Passwurd"
+    },
+    "step4": {
+      "title": "L-ahħar t'ismu...",
+      "description": "   <p>Hemm <noo></noo> taqsej tkun itella' f'din l-paġna u għodda oħra, biss.</p>   <p><terms><noo></noo> Terms of Service</terms> jispjega lilhekk kemm ser tieħu taħdem fl-għoddiet, waqt <privacy><noo></noo>'s Privacy Policy</privacy> jiżdied għall-kelba l-istorja tal-mixnara u tan-nomijiet.</p>   <p>Għalmaħħ ta' tiswa' akkaunt tiegħek u tkun itella' f'din il-paġna u għoddeta, jekk jogħbok għall-terms of service.</p>",
+      "accept": "Taqblu u ċedi"
+    }
+  }
+}

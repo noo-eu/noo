@@ -3,7 +3,7 @@
     "home": "Vai alla tua home <noo></noo>",
     "consent": {
       "title": "Stai accedendo a <strong>{name}</strong> con il tuo account <noo></noo>.",
-      "description": "<strong>{name}</strong> ha richiesto accesso a queste informazioni:",
+      "description": "<strong>{name}</strong> ha richiesto l'accesso a queste informazioni:",
       "claims": {
         "name": "Il tuo nome completo",
         "username": "Il tuo nome utente",

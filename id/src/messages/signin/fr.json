@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Se connecter à votre compte <noo></noo>",
+    "username": "Nom d'utilisateur ou adresse e-mail",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "error": "Les informations que vous avez saisies sont incorrectes"
+  }
+}

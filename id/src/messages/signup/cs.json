@@ -1,0 +1,41 @@
+{
+  "signup": {
+    "errors": {
+      "first_name_required": "Zadejte prosím vaše jméno",
+      "name_too_long": "Vaše jméno je příliš dlouhé",
+      "name_too_short": "Vaše jméno je příliš krátké",
+      "name_invalid": "Váš název obsahuje neplatné znaky",
+      "username_required": "Zadejte prosím nové jméno účtu",
+      "username_first_char": "Jméno účtu musí začínat písmenem nebo číslem",
+      "username_last_char": "Jméno účtu musí končit písmenem nebo číslem",
+      "username_length": "Jméno účtu musí mít délku mezi 6 a 30 znaky",
+      "username_invalid": "Vaše jméno účtu může obsahovat pouze písmena, čísla a tečky (.)",
+      "username_two_dots": "Vaše jméno účtu nemůže obsahovat dva body (.) vedle sebe",
+      "username_taken": "Toto jméno účtu je již zabrané",
+      "password_required": "Zadejte prosím heslo",
+      "password_length": "Prosíme použijte více než 10 znaků",
+      "password_too_long": "Vaše heslo je příliš dlouhé",
+      "password_classes": "Prosíme použijte silnější heslo. Používejte mix písmen, čísel a symbolů",
+      "invalid_data": "Co se stalo špatně. Prosím zkontrolujte zadaná data"
+    },
+    "create_your_account": "Vytvořte si své <neu></neu> účet",
+    "step1": {
+      "title": "Zadejte jméno",
+      "first_name": "Křestní jméno",
+      "last_name": "Příjmení"
+    },
+    "step2": {
+      "title": "Vyberte si emailovou adresu",
+      "username": "Emailová adresa"
+    },
+    "step3": {
+      "title": "Vytvořte silné heslo",
+      "password": "Heslo"
+    },
+    "step4": {
+      "title": "To poslední...",
+      "description": "        <p>Account umožňuje přístup ke řadu služeb, jako jsou emailová adresa, ukládání souborů a další.</p>        <p><terms><neu></neu>'s Smlouva o službách</terms> vysvětluje, co očekávat při používání služeb, zatímco <privacy><neu></neu>' Politika soukromí</privacy> popisuje způsob zpracování informací založených nebo shromážděných během používání služeb.</p>        <p>Aby se vám mohlo vytvořit účet a používat služby, musíte přijmout smlouvu o službách a politiku soukromí <neu></neu>'</p>",
+      "accept": "Přijměte a pokračujte"
+    }
+  }
+}

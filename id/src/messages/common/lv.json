@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Nākamais",
+    "continue": "Turpināt",
+    "cancel": "Atcelt",
+    "optional": "Reizē pieejams",
+    "terms": "Noteikumi",
+    "privacy": "Privātība",
+    "passwordField": {
+      "show": "Rādīte parole",
+      "ariaLabelShow": "Rādīte parole kā vienkāršu tekstu. Piezīme: šis izvirsis jūsu paroli uz ekrāna.",
+      "hide": "Slēpt parole"
+    }
+  }
+}

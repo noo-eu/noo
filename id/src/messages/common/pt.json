@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Próximo",
+    "continue": "Continuar",
+    "cancel": "Cancelar",
+    "optional": "Opcional",
+    "terms": "Termos de Uso",
+    "privacy": "Privacidade",
+    "passwordField": {
+      "show": "Mostrar senha",
+      "ariaLabelShow": "Mostrar a senha como texto plano. Atenção: isso irá exibir sua senha na tela.",
+      "hide": "Esconder senha"
+    }
+  }
+}

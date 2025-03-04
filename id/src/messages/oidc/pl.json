@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Przejdź do swojej strony głównej <noo></noo>",
+    "consent": {
+      "title": "Logujesz się do <strong>{name}</strong> za pomocą konta <noo></noo>.",
+      "description": "<strong>{name}</strong> prosi o dostęp do następujących informacji:",
+      "claims": {
+        "name": "Twoje pełne imię i nazwisko",
+        "username": "Twoja nazwa użytkownika",
+        "profile": "Twoje zdjęcie profilowe",
+        "email": "Twój adres e-mail noo",
+        "phone_number": "Twój numer telefonu",
+        "address": "Twój adres pocztowy",
+        "gender": "Płeć, z którą się identyfikujesz",
+        "birthdate": "Twoja data urodzenia"
+      }
+    },
+    "fatal": {
+      "title": "Coś poszło nie tak",
+      "description": "Próbowałeś zalogować się do aplikacji zewnętrznej, ale nie działa ona poprawnie. Spróbuj ponownie później lub skontaktuj się z właścicielem aplikacji, podając następujące informacje:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Wybierz konto"
+    }
+  }
+}

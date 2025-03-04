@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Zaloguj się do swojego konta",
+    "username": "Nazwa użytkownika lub adres e-mail",
+    "password": "Hasło",
+    "submit": "Zaloguj się",
+    "error": "Błędne dane logowania"
+  }
+}

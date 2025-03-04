@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Táimid ag dul chun tosaigh",
+    "continue": "Lean ar aghaidh",
+    "cancel": "Dún anois",
+    "optional": "Ar ionad",
+    "terms": "Coincheapanna",
+    "privacy": "Priváitás",
+    "passwordField": {
+      "show": "Taispeáin ainm ghutha",
+      "ariaLabelShow": "Taispeáin ainm ghutha mar chnuasach falamh. Faoi chúirt: tógfar ainm ghutha ar scáth na leathanaigh.",
+      "hide": "Dún ainm ghutha"
+    }
+  }
+}

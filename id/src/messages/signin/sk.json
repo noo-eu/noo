@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Prihláste sa do vášho <noo></noo> účtu",
+    "username": "Užívateľské meno alebo e-mail",
+    "password": "Heslo",
+    "submit": "Prihlásiť sa",
+    "error": "Zadané údaje sú neplatné"
+  }
+}

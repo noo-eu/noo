@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Nästa",
+    "continue": "Kontrollera",
+    "cancel": "Avbryt",
+    "optional": "Valfritt",
+    "terms": "Villkor",
+    "privacy": "Personuppgiftspolicy",
+    "passwordField": {
+      "show": "Visa lösenord",
+      "ariaLabelShow": "Visa lösenord i klartext. Varning: Detta kommer att visa ditt lösenord på skärmen.",
+      "hide": "Dölj lösenord"
+    }
+  }
+}

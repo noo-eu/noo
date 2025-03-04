@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Gå til din <noo></noo> startside",
+    "consent": {
+      "title": "Du logger ind på <strong>{name}</strong> med din <noo></noo>-konto.",
+      "description": "<strong>{name}</strong> anmoder om adgang til følgende oplysninger:",
+      "claims": {
+        "name": "Dit fulde navn",
+        "username": "Dit brugernavn",
+        "profile": "Dit profilbillede",
+        "email": "Din noo-e-mailadresse",
+        "phone_number": "Dit telefonnummer",
+        "address": "Din postadresse",
+        "gender": "Det køn, du identificerer dig med",
+        "birthdate": "Din fødselsdato"
+      }
+    },
+    "fatal": {
+      "title": "Noget gik galt",
+      "description": "Du forsøgte at logge ind på en tredjepartsapplikation, men applikationen fungerer ikke korrekt. Prøv igen senere, eller kontakt applikationens ejer med følgende oplysninger:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Vælg en konto"
+    }
+  }
+}

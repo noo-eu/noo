@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Naslednji",
+    "continue": "Nadaljuj",
+    "cancel": "Prekliči",
+    "optional": "Ni obvezno",
+    "terms": "Pogoji uporabe",
+    "privacy": "Varstvo podatkov",
+    "passwordField": {
+      "show": "Pokaži geslo",
+      "ariaLabelShow": "Pokaži geslo v čiste obliki. Opozorilo: tvoje geslo se bo prikazalo na zaslonu.",
+      "hide": "Skrij geslo"
+    }
+  }
+}

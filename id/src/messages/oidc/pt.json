@@ -1,0 +1,27 @@
+{
+  "oidc": {
+    "home": "Aceda à sua página inicial <noo></noo>",
+    "consent": {
+      "title": "Está a iniciar sessão em <strong>{name}</strong> com a sua conta <noo></noo>.",
+      "description": "<strong>{name}</strong> está a solicitar acesso às seguintes informações:",
+      "claims": {
+        "name": "O seu nome completo",
+        "username": "O seu nome de utilizador",
+        "profile": "A sua foto de perfil",
+        "email": "O seu endereço de e-mail noo",
+        "phone_number": "O seu número de telefone",
+        "address": "O seu endereço postal",
+        "gender": "O género com o qual se identifica",
+        "birthdate": "A sua data de nascimento"
+      }
+    },
+    "fatal": {
+      "title": "Ocorreu um erro",
+      "description": "Tentou iniciar sessão numa aplicação de terceiros, mas esta não está a funcionar corretamente. Tente novamente mais tarde ou contacte o proprietário da aplicação com as seguintes informações:",
+      "error": "OpenID Connect Error: {error}"
+    },
+    "switch": {
+      "title": "Escolha uma conta"
+    }
+  }
+}

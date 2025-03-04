@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Seuraava",
+    "continue": "Jatka",
+    "cancel": "Peru",
+    "optional": "Valinnainen",
+    "terms": "Säännökset",
+    "privacy": "Tietosuoja",
+    "passwordField": {
+      "show": "Näytä salasana",
+      "ariaLabelShow": "Näytä salasana tekstimuodossa. Huomioi, että tämä näyttää salasanasi ruudulle.",
+      "hide": "Piilota salasana"
+    }
+  }
+}

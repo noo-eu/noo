@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Volgende",
+    "continue": "Doorlopen",
+    "cancel": "Annuleren",
+    "optional": "Optioneel",
+    "terms": "Algemene voorwaarden",
+    "privacy": "Gebruikersvoorwaarden",
+    "passwordField": {
+      "show": "Wachtwoord weergeven",
+      "ariaLabelShow": "Wachtwoord in duidelijke tekst weergeven. Waarschuwing: dit zal je wachtwoord op het scherm tonen.",
+      "hide": "Wachtwoord verbergen"
+    }
+  }
+}

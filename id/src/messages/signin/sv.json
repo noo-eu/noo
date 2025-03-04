@@ -1,0 +1,9 @@
+{
+  "signin": {
+    "title": "Logga in på ditt konto",
+    "username": "Användarnamn eller e-postadress",
+    "password": "Lösenord",
+    "submit": "Logga in",
+    "error": "Felaktiga uppgifter"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "common": {
+    "next": "Înainte",
+    "continue": "Continuă",
+    "cancel": "Anulare",
+    "optional": "Facultativ",
+    "terms": "Termeni și condiții",
+    "privacy": "Confidențialitate",
+    "passwordField": {
+      "show": "Arată parola",
+      "ariaLabelShow": "Vezi parola în textul normal. Avertare: aceasta va afișa parola pe ecran.",
+      "hide": "Ascunde parola"
+    }
+  }
+}
