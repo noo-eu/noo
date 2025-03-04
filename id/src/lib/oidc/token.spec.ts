@@ -195,6 +195,22 @@ describe("Token endpoint", () => {
       expect(await response2.json()).toEqual({ error: "invalid_grant" });
     });
 
+    test("the code expires in a short time", async () => {
+      const code = await makeCode({
+        // 5 minutes ago
+        createdAt: new Date(Date.now() - 5 * 60 * 1000),
+      });
+      const response = await tokenEndpoint(
+        makeRequest({
+          body: { grant_type: "authorization_code", code: code.id },
+          headers: { Authorization: basicHeader },
+        }),
+      );
+
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({ error: "invalid_grant" });
+    });
+
     test("it returns a valid id_token", async () => {
       const code = await makeCode();
       const response = await tokenEndpoint(

@@ -9,6 +9,10 @@ import { validatePkce } from "./pkce";
 import { authenticateClient } from "./tokenAuthentication";
 import { requestedUserClaims } from "./userClaims";
 
+// The FAPI 2.0 profile requires that the authorization code is only valid for
+// one minute or less.
+const AUTHORIZATION_CODE_LIFETIME = 60 * 1000;
+
 export const tokenEndpoint = composeMiddleware(
   preventCache,
   cors(["POST"]),
@@ -76,6 +80,11 @@ async function authorizationCodeFlow(
   // "all tokens previously issued based on that authorization code". We could
   // store a "code" field in the access tokens table.
   await OidcAuthorizationCodes.delete(params.code);
+
+  // Reject the request if the code has expired
+  if (code.createdAt.getTime() + AUTHORIZATION_CODE_LIFETIME < Date.now()) {
+    return Response.json({ error: "invalid_grant" }, { status: 400 });
+  }
 
   // Create and return the access token
   const at = await OidcAccessTokens.create({

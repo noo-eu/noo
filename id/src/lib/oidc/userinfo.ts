@@ -46,7 +46,7 @@ async function handle(req: HttpRequest) {
     return new Response(null, { status: 401 });
   }
 
-  let issuer = req.baseUrl;
+  let issuer = `${req.baseUrl}/oidc`;
   const tenant = client.tenantId
     ? await Tenants.find(client.tenantId)
     : undefined;
@@ -63,7 +63,7 @@ async function handle(req: HttpRequest) {
     exp: Math.floor(new Date().getTime() / 1000) + 3600,
     iat: Math.floor(new Date().getTime() / 1000),
     nonce: at.nonce,
-    ...requestedUserClaims(at.claims, user),
+    ...requestedUserClaims(at.claims.userinfo, user),
   };
 
   // TODO: check client.userinfoSignedResponseAlg. If set, JWT encode the claims

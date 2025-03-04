@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq, gt } from "drizzle-orm";
 import db, { schema } from ".";
 
 export async function createOidcAccessToken(
@@ -10,8 +10,15 @@ export async function createOidcAccessToken(
 }
 
 export async function findOidcAccessToken(id: string) {
+  if (!id.match(/^[0-9a-f-]{36}$/)) {
+    return null;
+  }
+
   return db.query.oidcAccessTokens.findFirst({
-    where: eq(schema.oidcAccessTokens.id, id),
+    where: and(
+      eq(schema.oidcAccessTokens.id, id),
+      gt(schema.oidcAccessTokens.expiresAt, new Date()),
+    ),
   });
 }
 
