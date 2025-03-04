@@ -1,5 +1,7 @@
 {
   "common": {
+    "yes": "Yes",
+    "no": "No",
     "next": "Next",
     "continue": "Continue",
     "cancel": "Cancel",

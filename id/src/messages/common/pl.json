@@ -10,6 +10,8 @@
       "show": "Pokaż hasło",
       "ariaLabelShow": "Pokaż hasło w postaci prostego tekstu. Uwaga: twoje hasło pojawi się na ekranie.",
       "hide": "Ukryj hasło"
-    }
+    },
+    "yes": "Tak",
+    "no": "Nie"
   }
 }

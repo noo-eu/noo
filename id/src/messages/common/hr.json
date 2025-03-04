@@ -10,6 +10,8 @@
       "show": "Prikaži lozinku",
       "ariaLabelShow": "Izračunaj moju lozinku. Upozorenje: Lozinka će biti prikazana na ekranu.",
       "hide": " sakrij lozinku"
-    }
+    },
+    "yes": "Da",
+    "no": "Ne"
   }
 }

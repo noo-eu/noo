@@ -11,12 +11,18 @@ test.describe("Private provider", () => {
       // The domain must have been registered first
       let response = await request.post("/oidc/microsoft.com/register", {
         data: requestObject,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       expect(response.status()).toBe(404);
 
       // Failure is expected without a Bearer token
       response = await request.post("/oidc/acme.fr/register", {
         data: requestObject,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       expect(response.status()).toBe(401);
 
@@ -26,6 +32,7 @@ test.describe("Private provider", () => {
         // See fixtures.ts for the token
         headers: {
           Authorization: "Bearer yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE",
+          "Content-Type": "application/json",
         },
       });
 

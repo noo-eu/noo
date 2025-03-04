@@ -10,6 +10,8 @@
       "show": "Afficher le mot de passe",
       "ariaLabelShow": "Afficher le mot de passe en clair. Attention, cela affichera votre mot de passe à l'écran.",
       "hide": "Cacher le mot de passe"
-    }
+    },
+    "yes": "Oui",
+    "no": "Non"
   }
 }

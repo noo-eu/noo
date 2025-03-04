@@ -16,6 +16,8 @@
       "vis": "Vis password",
       "ariaLabelVis": "Til visning af password på skærmen. Advarsel: Dette vil vise dit password.",
       "gem": "Gemme password"
-    }
+    },
+    "yes": "Ja",
+    "no": "Nej"
   }
 }

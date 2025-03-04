@@ -10,6 +10,8 @@
       "show": "Pokaži geslo",
       "ariaLabelShow": "Pokaži geslo v čiste obliki. Opozorilo: tvoje geslo se bo prikazalo na zaslonu.",
       "hide": "Skrij geslo"
-    }
+    },
+    "yes": "Da",
+    "no": "Ne"
   }
 }

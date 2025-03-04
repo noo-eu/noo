@@ -1,10 +1,10 @@
 "use server";
 
 import OidcConsents from "@/db/oidc_consents";
-import { Claims, createCode } from "@/lib/oidc/authorization";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { Claims } from "@/lib/oidc/authorization";
 import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
+import { afterConsent } from "../continue/actions";
 
 export async function getOidcAuthorizationCookie() {
   const cookieStore = await cookies();
@@ -22,32 +22,6 @@ export async function getOidcAuthorizationCookie() {
   } catch {
     return null;
   }
-}
-
-export async function afterConsent(sessionId: string) {
-  const oidcAuthRequest = await getOidcAuthorizationCookie();
-  if (!oidcAuthRequest) {
-    return {};
-  }
-
-  const sessionManager = new SessionsService(await getSessionCookie());
-  const session = await sessionManager.getSessionBySid(sessionId);
-  if (!session) {
-    return notFound();
-  }
-
-  await storeConsent(
-    session.userId,
-    oidcAuthRequest.client_id,
-    oidcAuthRequest.scopes,
-    oidcAuthRequest.claims,
-  );
-
-  const code = await createCode(session, oidcAuthRequest);
-
-  return redirect(
-    `${oidcAuthRequest.redirect_uri}?code=${code.id}&state=${oidcAuthRequest.state}`,
-  );
 }
 
 export async function consentFormSubmit(_: unknown, formData: FormData) {

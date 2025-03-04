@@ -1,4 +1,4 @@
-import { getKeyByAlg } from "@/app/oidc/jwks";
+import { getKeyByAlg, getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import { OidcClient } from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
 import { hexToBase62, sha256, uuidToBase62, uuidToHumanId } from "@/utils";
@@ -48,14 +48,19 @@ export async function createIdToken(
 }
 
 export async function decodeIdToken(idToken: string, alg: string) {
+  return (await decodeIdTokenWhole(idToken, alg))?.payload;
+}
+
+export async function decodeIdTokenWhole(idToken: string, alg: string) {
   try {
     if (alg == "none") {
       return UnsecuredJWT.decode(idToken).payload;
     } else {
-      const { key } = (await getKeyByAlg(alg))!;
-      return (await jwtVerify(idToken, key)).payload;
+      const { key } = (await getVerifyingKeyByAlg(alg))!;
+      return await jwtVerify(idToken, key);
     }
-  } catch {
+  } catch (e) {
+    console.error(e);
     return undefined;
   }
 }
