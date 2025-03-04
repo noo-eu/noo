@@ -1,10 +1,12 @@
+import OidcClients from "@/db/oidc_clients";
 import { findTenantByDomainName } from "@/db/tenants";
+import { HttpRequest } from "@/lib/http/request";
 import { oidcClientRegistration } from "@/lib/oidc/registration";
-import { checkVerifier, getBearerToken } from "@/utils";
+import { checkVerifier, getBearerToken, humanIdToUuid } from "@/utils";
 import { notFound } from "next/navigation";
 
 export async function POST(
-  request: Request,
+  raw: Request,
   { params }: { params: Promise<{ domain: string }> },
 ) {
   const domain = (await params).domain;
@@ -23,6 +25,45 @@ export async function POST(
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const body = await request.json();
-  return oidcClientRegistration(body, tenant);
+  const request = new HttpRequest(raw);
+  return oidcClientRegistration(request, tenant);
+}
+
+export async function DELETE(
+  raw: Request,
+  { params }: { params: Promise<{ domain: string }> },
+) {
+  const domain = (await params).domain;
+  const tenant = await findTenantByDomainName(domain);
+  if (!tenant) {
+    notFound();
+  }
+
+  const clientId = new HttpRequest(raw).queryParams.client_id;
+  if (!clientId) {
+    return new Response("Bad Request", { status: 400 });
+  }
+
+  const clientIdRaw = humanIdToUuid(clientId, "oidc");
+  if (!clientIdRaw) {
+    return new Response("Bad Request", { status: 400 });
+  }
+
+  const client = await OidcClients.findWithTenant(clientIdRaw, tenant.id);
+  if (!client) {
+    return new Response("Not Found", { status: 404 });
+  }
+
+  if (!client.registrationAccessTokenDigest) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  // Verify the Bearer token against the tenant key
+  const token = await getBearerToken();
+  if (!token || !checkVerifier(token, client.registrationAccessTokenDigest)) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  await OidcClients.destroy(client.id);
+  return new Response(null, { status: 204 });
 }

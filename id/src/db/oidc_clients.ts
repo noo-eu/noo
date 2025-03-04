@@ -26,10 +26,15 @@ export async function findOidcClientWithTenant(id: string, tenantId?: string) {
   });
 }
 
+async function destroy(id: string) {
+  return db.delete(schema.oidcClients).where(eq(schema.oidcClients.id, id));
+}
+
 const OidcClients = {
   find: findOidcClient,
   findWithTenant: findOidcClientWithTenant,
   create: createOidcClient,
+  destroy,
 };
 
 export default OidcClients;

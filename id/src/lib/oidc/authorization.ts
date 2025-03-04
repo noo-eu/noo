@@ -6,6 +6,7 @@ import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { humanIdToUuid } from "@/utils";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { HttpRequest } from "../http/request";
@@ -204,7 +205,12 @@ async function preflightCheck(
   // We now need to load the client from the database, as the
   // request_object_signing_alg parameter may be required
 
-  const client = await OidcClients.findWithTenant(params.client_id, tenant?.id);
+  const clientId = humanIdToUuid(params.client_id, "oidc");
+  if (!clientId) {
+    return fatalError("invalid_client_id");
+  }
+
+  const client = await OidcClients.findWithTenant(clientId, tenant?.id);
   if (!client) {
     return fatalError("invalid_client_id");
   }
@@ -623,10 +629,12 @@ export async function createCode(
   request: AuthorizationRequest,
 ) {
   return await OidcAuthorizationCodes.create({
-    id: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
-      "base64url",
-    ),
-    clientId: request.client_id,
+    id:
+      "oidc_code_" +
+      Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
+        "base64url",
+      ),
+    clientId: humanIdToUuid(request.client_id, "oidc")!,
     userId: session.userId,
     redirectUri: request.redirect_uri,
     scopes: request.scopes,

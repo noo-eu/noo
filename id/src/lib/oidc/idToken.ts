@@ -1,7 +1,7 @@
 import { getKeyByAlg } from "@/app/oidc/jwks";
 import { OidcClient } from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
-import { hexToBase62, sha256, uuidToBase62 } from "@/utils";
+import { hexToBase62, sha256, uuidToBase62, uuidToHumanId } from "@/utils";
 import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
 import { HttpRequest } from "../http/request";
 
@@ -28,7 +28,7 @@ export async function createIdToken(
   if (client.idTokenSignedResponseAlg == "none") {
     return new UnsecuredJWT(claims)
       .setIssuer(issuer)
-      .setAudience(client.id)
+      .setAudience(uuidToHumanId(client.id, "oidc"))
       .setExpirationTime("1h")
       .setIssuedAt()
       .setSubject(subClaim)
@@ -39,7 +39,7 @@ export async function createIdToken(
     return new SignJWT({ ...claims })
       .setProtectedHeader({ alg: client.idTokenSignedResponseAlg, kid })
       .setIssuer(issuer)
-      .setAudience(client.id)
+      .setAudience(uuidToHumanId(client.id, "oidc"))
       .setExpirationTime("1h")
       .setIssuedAt()
       .setSubject(subClaim)

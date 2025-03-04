@@ -1,4 +1,5 @@
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import { uuidToHumanId } from "@/utils";
 import { describe, expect, test } from "bun:test";
 import { HttpRequest } from "../http/request";
 import { tokenEndpoint } from "./token";
@@ -40,9 +41,11 @@ describe("Token endpoint", () => {
   describe("grant_type=authorization_code", () => {
     const makeCode = async (attributes = {}) =>
       await OidcAuthorizationCodes.create({
-        id: Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
-          "base64url",
-        ),
+        id:
+          "oidc_code_" +
+          Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
+            "base64url",
+          ),
         clientId: "00000000-0000-0000-0000-000000000001",
         redirectUri: "https://localhost:22999/cb",
         userId: "00000000-0000-0000-0000-000000000001",
@@ -51,11 +54,14 @@ describe("Token endpoint", () => {
         ...attributes,
       });
 
+    const humanClientId = uuidToHumanId(
+      "00000000-0000-0000-0000-000000000001",
+      "oidc",
+    );
+
     const basicHeader =
       "Basic " +
-      Buffer.from("00000000-0000-0000-0000-000000000001:super-s3cret").toString(
-        "base64url",
-      );
+      Buffer.from(`${humanClientId}:super-s3cret`).toString("base64url");
 
     test("requires a code", async () => {
       const response = await tokenEndpoint(
@@ -231,7 +237,7 @@ describe("Token endpoint", () => {
       expect(payload).toMatchObject({
         iss: "https://localhost:23000/oidc",
         sub: expect.stringContaining("usr_"),
-        aud: "00000000-0000-0000-0000-000000000001",
+        aud: "oidc_1",
         exp: expect.any(Number),
         iat: expect.any(Number),
         auth_time: expect.any(Number),

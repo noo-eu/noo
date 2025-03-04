@@ -1,4 +1,5 @@
 import OidcAccessTokens from "@/db/oidc_access_tokens";
+import { uuidToHumanId } from "@/utils";
 import { describe, expect, test } from "bun:test";
 import { HttpRequest } from "../http/request";
 import { userinfoEndpoint } from "./userinfo";
@@ -55,7 +56,7 @@ describe("Userinfo endpoint", () => {
 
     const response = await userinfoEndpoint(
       makeRequest({
-        headers: { Authorization: "Bearer " + at.id },
+        headers: { Authorization: "Bearer " + uuidToHumanId(at.id, "oidc_at") },
       }),
     );
 
@@ -67,7 +68,7 @@ describe("Userinfo endpoint", () => {
 
     const response = await userinfoEndpoint(
       makeRequest({
-        body: { access_token: at.id },
+        body: { access_token: uuidToHumanId(at.id, "oidc_at") },
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       }),
     );
@@ -83,7 +84,7 @@ describe("Userinfo endpoint", () => {
 
     const response = await userinfoEndpoint(
       makeRequest({
-        headers: { Authorization: "Bearer " + at.id },
+        headers: { Authorization: "Bearer " + uuidToHumanId(at.id, "oidc_at") },
       }),
     );
 
@@ -94,7 +95,7 @@ describe("Userinfo endpoint", () => {
     const at = await makeAccessToken();
     const response = await userinfoEndpoint(
       makeRequest({
-        headers: { Authorization: "Bearer " + at.id },
+        headers: { Authorization: "Bearer " + uuidToHumanId(at.id, "oidc_at") },
       }),
     );
 
@@ -104,7 +105,7 @@ describe("Userinfo endpoint", () => {
     expect(body).toMatchObject({
       iss: "https://localhost:23000/oidc",
       sub: expect.stringContaining("usr_"),
-      aud: "00000000-0000-0000-0000-000000000001",
+      aud: uuidToHumanId("00000000-0000-0000-0000-000000000001", "oidc"),
       exp: expect.any(Number),
       iat: expect.any(Number),
       nonce: at.nonce,
@@ -125,7 +126,7 @@ describe("Userinfo endpoint", () => {
 
     const response = await userinfoEndpoint(
       makeRequest({
-        headers: { Authorization: "Bearer " + at.id },
+        headers: { Authorization: "Bearer " + uuidToHumanId(at.id, "oidc_at") },
       }),
     );
 
