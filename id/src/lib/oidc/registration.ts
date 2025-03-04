@@ -6,9 +6,9 @@ import {
   ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED,
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
   ACR_VALUES_SUPPORTED,
-} from "./configuration";
+} from "@/app/oidc/configuration";
 import { createOidcClient } from "@/db/oidc_clients";
-import { jwks } from "./jwks";
+import { jwks } from "@/app/oidc/jwks";
 import { ResponseType } from "@/lib/oidc/authorization";
 
 const registrationRequest = z.object({

@@ -6,6 +6,8 @@ import { getUserForSession } from "@/lib/SessionsService";
 import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { AuthorizationRequest } from "@/lib/oidc/authorization";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 0;
 
@@ -71,6 +73,8 @@ export default async function OidcConsentPage({
 }: {
   searchParams: Promise<{ sid: string }>;
 }) {
+  const t = await getTranslations("oidc");
+
   const oidcAuthRequest =
     (await getOidcAuthorizationCookie()) as AuthorizationRequest;
   if (!oidcAuthRequest) {
@@ -135,15 +139,21 @@ export default async function OidcConsentPage({
   return (
     <div>
       <p className="mb-4 text-lg">
-        You are signing into <strong>{name}</strong> with your <Noo /> account.
+        {t.rich("consent.title", {
+          name,
+          noo: () => <Noo />,
+          strong: (children) => <strong>{children}</strong>,
+        })}
       </p>
       <p className="my-4">
-        <strong>{name}</strong> is requesting access to the following
-        information:
+        {t.rich("consent.description", {
+          name,
+          strong: (children) => <strong>{children}</strong>,
+        })}
       </p>
       <ul className="list-disc px-4 flex flex-col space-y-1">
         {cleanClaims.map((claim) => (
-          <li key={claim}>{claim}</li>
+          <li key={claim}>{t("consent.claims." + claim)}</li>
         ))}
       </ul>
 

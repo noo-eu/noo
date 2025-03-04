@@ -3,9 +3,12 @@
 import { useActionState } from "react";
 import { consentFormSubmit } from "./actions";
 import { Button } from "@/components/Button";
+import { useTranslations } from "next-intl";
 
 export default function Form({ sessionId }: { sessionId: string }) {
   const [_, formAction, pending] = useActionState(consentFormSubmit, {});
+
+  const t = useTranslations("common");
 
   return (
     <div className="mt-8">
@@ -19,10 +22,10 @@ export default function Form({ sessionId }: { sessionId: string }) {
             value={"no"}
             kind="secondary"
           >
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="submit" name="consent" disabled={pending} value={"yes"}>
-            Continue
+            {t("continue")}
           </Button>
         </div>
       </form>

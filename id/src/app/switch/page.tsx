@@ -1,4 +1,5 @@
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { getTranslations } from "next-intl/server";
 
 async function getSessions() {
   const manager = new SessionsService(await getSessionCookie());
@@ -7,10 +8,11 @@ async function getSessions() {
 
 export default async function AccountSwitcherPage() {
   const sessions = await getSessions();
+  const t = await getTranslations("oidc");
 
   return (
     <>
-      <h1 className="text-3xl text-center mb-8">Choose an account</h1>
+      <h1 className="text-3xl text-center mb-8">{t("switch.title")}</h1>
 
       <div className="flex flex-col gap-1">
         {sessions.map((session) => (

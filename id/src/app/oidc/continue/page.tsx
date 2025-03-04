@@ -5,6 +5,8 @@ import { getUserForSession } from "@/lib/SessionsService";
 import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { AuthorizationRequest } from "@/lib/oidc/authorization";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 0;
 
@@ -28,6 +30,8 @@ export default async function OidcContinuePage({
 }: {
   searchParams: Promise<{ sid: string }>;
 }) {
+  const t = await getTranslations("oidc");
+
   const oidcAuthRequest =
     (await getOidcAuthorizationCookie()) as AuthorizationRequest;
   if (!oidcAuthRequest) {
@@ -62,7 +66,11 @@ export default async function OidcContinuePage({
   return (
     <div>
       <p className="mb-4 text-lg">
-        You are signing into <strong>{name}</strong> with your <Noo /> account.
+        {t.rich("consent.title", {
+          name,
+          strong: (children) => <strong>{children}</strong>,
+          noo: () => <Noo />,
+        })}
       </p>
 
       <Form sessionId={sessionId} />

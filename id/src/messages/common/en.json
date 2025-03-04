@@ -1,6 +1,8 @@
 {
   "common": {
     "next": "Next",
+    "continue": "Continue",
+    "cancel": "Cancel",
     "optional": "Optional",
     "terms": "Terms",
     "privacy": "Privacy",

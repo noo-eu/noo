@@ -1,6 +1,7 @@
 "use client";
 
 import { Noo } from "@/components/Noo";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function OidcLayout({
@@ -8,6 +9,8 @@ export default function OidcLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("oidc");
+
   return (
     <div className="sm:flex flex-col justify-center min-h-screen dark:bg-black/40 dark:sm:bg-transparent">
       <div className="sm:my-16 flex flex-col justify-center items-center min-h-screen sm:block sm:min-h-auto">
@@ -24,7 +27,9 @@ export default function OidcLayout({
             href="/"
             className="text-xs sm:hover:bg-blue-200 sm:dark:hover:bg-white/20 sm:p-2.5 rounded-md"
           >
-            Go to your <Noo /> home
+            {t.rich("home", {
+              noo: () => <Noo />,
+            })}
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { findTenantByDomainName } from "@/db/tenants";
-import { oidcClientRegistration } from "../../registration";
+import { oidcClientRegistration } from "@/lib/oidc/registration";
 import { checkVerifier, getBearerToken } from "@/utils";
 
 export async function POST(

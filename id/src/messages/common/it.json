@@ -1,6 +1,8 @@
 {
   "common": {
     "next": "Avanti",
+    "continue": "Continua",
+    "cancel": "Annulla",
     "optional": "Opzionale",
     "terms": "Termini",
     "privacy": "Privacy",

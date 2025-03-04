@@ -36,9 +36,12 @@ export function authenticateClientSecretBasic(
     return false;
   }
 
-  const [clientId, clientSecret] = Buffer.from(token, "base64")
+  const [clientId, clientSecretEncoded] = Buffer.from(token, "base64")
     .toString()
     .split(":");
+
+  // The clientSecret may be URL encoded
+  const clientSecret = decodeURIComponent(clientSecretEncoded);
   return clientId === client.id && clientSecret === client.clientSecret;
 }
 
