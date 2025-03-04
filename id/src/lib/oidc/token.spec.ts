@@ -1,7 +1,7 @@
-import { describe, test, expect } from "bun:test";
-import { tokenEndpoint } from "./token";
-import { HttpRequest } from "../http/request";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import { describe, expect, test } from "bun:test";
+import { HttpRequest } from "../http/request";
+import { tokenEndpoint } from "./token";
 
 describe("Token endpoint", () => {
   const makeRequest = (

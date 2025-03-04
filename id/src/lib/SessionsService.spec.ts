@@ -1,8 +1,8 @@
-import { describe, it, expect } from "bun:test";
-import { SessionsService } from "./SessionsService";
 import db from "@/db";
 import { sessions } from "@/db/schema";
+import { describe, expect, it } from "bun:test";
 import { and, eq } from "drizzle-orm";
+import { SessionsService } from "./SessionsService";
 
 describe("SessionsService", async () => {
   const userId: string = (await db.query.users.findFirst())!.id;

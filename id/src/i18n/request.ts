@@ -1,6 +1,6 @@
+import acceptLanguage from "accept-language";
 import { getRequestConfig } from "next-intl/server";
 import { headers } from "next/headers";
-import acceptLanguage from "accept-language";
 
 export const SUPPORTED_LANGUAGES = [
   "en",

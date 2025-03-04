@@ -1,12 +1,11 @@
-import Form from "./Form";
-import { redirect } from "next/navigation";
-import { getOidcAuthorizationCookie } from "./actions";
-import { getUserForSession } from "@/lib/SessionsService";
 import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { AuthorizationRequest } from "@/lib/oidc/authorization";
-import { useTranslations } from "next-intl";
+import { getUserForSession } from "@/lib/SessionsService";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { getOidcAuthorizationCookie } from "./actions";
+import Form from "./Form";
 
 export const revalidate = 0;
 

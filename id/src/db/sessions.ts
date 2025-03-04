@@ -1,5 +1,5 @@
-import db, { schema } from ".";
 import { eq, inArray, SQL } from "drizzle-orm";
+import db, { schema } from ".";
 
 export function find(sessionId: string) {
   return db.query.sessions.findFirst({

@@ -1,3 +1,4 @@
+import { generateNewKeySet } from "@/app/oidc/jwks";
 import {
   mkdirSync,
   readdirSync,
@@ -5,7 +6,6 @@ import {
   unlinkSync,
   writeFileSync,
 } from "fs";
-import { generateNewKeySet } from "./app/oidc/jwks";
 
 mkdirSync("keys/current", { recursive: true });
 mkdirSync("keys/old", { recursive: true });

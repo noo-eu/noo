@@ -1,5 +1,5 @@
-import db, { schema } from ".";
 import { eq, SQL } from "drizzle-orm";
+import db, { schema } from ".";
 
 export async function findTenantByDomainName(domainName: string) {
   return db.query.tenants.findFirst({

@@ -1,5 +1,5 @@
 import db from "@/db";
-import { oidcAuthorizationCodes, oidcAccessTokens } from "@/db/schema";
+import { oidcAccessTokens, oidcAuthorizationCodes } from "@/db/schema";
 import { lt } from "drizzle-orm";
 
 // This file defines a long running recurring task to cleanup expired OIDC entities
@@ -30,4 +30,8 @@ async function cleanup() {
 
 export function startCleanupTask() {
   setInterval(cleanup, 5 * 60 * 1000);
+}
+
+if (require.main === module) {
+  startCleanupTask();
 }

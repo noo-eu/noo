@@ -1,9 +1,9 @@
-import { OidcClient } from "@/db/oidc_clients";
-import { HttpRequest } from "../http/request";
-import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
 import { getKeyByAlg } from "@/app/oidc/jwks";
+import { OidcClient } from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
 import { hexToBase62, sha256, uuidToBase62 } from "@/utils";
+import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
+import { HttpRequest } from "../http/request";
 
 export async function createIdToken(
   req: HttpRequest,

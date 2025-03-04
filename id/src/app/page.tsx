@@ -22,6 +22,8 @@ export default async function Home() {
       <h1 className="text-4xl font-medium mt-16">
         Welcome back, {user.firstName}!
       </h1>
+
+      <p>This is a placeholder page.</p>
     </div>
   );
 }

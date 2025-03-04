@@ -1,7 +1,7 @@
 import { findTenantByDomainName } from "@/db/tenants";
-import { notFound } from "next/navigation";
-import { oidcAuthorization } from "@/lib/oidc/authorization";
 import { HttpRequest } from "@/lib/http/request";
+import { oidcAuthorization } from "@/lib/oidc/authorization";
+import { notFound } from "next/navigation";
 
 export async function GET(
   request: Request,

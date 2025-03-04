@@ -1,5 +1,5 @@
-import { describe, test, expect } from "bun:test";
-import { createVerifier, checkVerifier } from "./utils";
+import { describe, expect, test } from "bun:test";
+import { checkVerifier, createVerifier } from "./utils";
 
 describe("createVerifier", () => {
   test("creates a verifier and digest", () => {

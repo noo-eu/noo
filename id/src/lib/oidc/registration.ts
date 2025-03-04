@@ -1,15 +1,15 @@
-import { schema } from "@/db";
-import { z } from "zod";
 import {
-  RESPONSE_TYPES_SUPPORTED,
+  ACR_VALUES_SUPPORTED,
   GRANT_TYPES_SUPPORTED,
   ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED,
+  RESPONSE_TYPES_SUPPORTED,
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
-  ACR_VALUES_SUPPORTED,
 } from "@/app/oidc/configuration";
-import { createOidcClient } from "@/db/oidc_clients";
 import { jwks } from "@/app/oidc/jwks";
+import { schema } from "@/db";
+import { createOidcClient } from "@/db/oidc_clients";
 import { ResponseType } from "@/lib/oidc/authorization";
+import { z } from "zod";
 
 const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),

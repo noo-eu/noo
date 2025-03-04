@@ -1,7 +1,7 @@
-import { describe, test, expect } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-import { oidcClientRegistration, validateRedirectUris } from "./registration";
 import db from "@/db";
+import { oidcClientRegistration, validateRedirectUris } from "./registration";
 
 describe("OIDC Client Registration", async () => {
   const tenant = (await db.query.tenants.findFirst())!;

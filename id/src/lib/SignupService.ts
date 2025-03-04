@@ -1,6 +1,6 @@
-import { z } from "zod";
-import argon2 from "argon2";
 import { createUser, isUsernameAvailable } from "@/db/users";
+import argon2 from "argon2";
+import { z } from "zod";
 
 const step1Schema = z.object({
   first_name: z.string(),

@@ -1,6 +1,6 @@
 import { ReactNode, useId } from "react";
-import { TextInput } from "./TextInput";
 import { Label } from "./Label";
+import { TextInput } from "./TextInput";
 
 export type Props = {
   label: ReactNode;

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("JWKs Endpoint", () => {
   test("it responds with a valid JWK Set", async ({ request }) => {
