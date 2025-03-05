@@ -1,8 +1,10 @@
+import { getKeyByAlg } from "@/app/oidc/jwks";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcClients from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
 import { findUserById } from "@/db/users";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
+import { SignJWT } from "jose";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { buildSubClaim } from "./idToken";
@@ -68,11 +70,21 @@ async function handle(req: HttpRequest) {
     aud: uuidToHumanId(client.id, "oidc"),
     exp: Math.floor(new Date().getTime() / 1000) + 3600,
     iat: Math.floor(new Date().getTime() / 1000),
-    nonce: at.nonce,
     ...requestedUserClaims(at.claims.userinfo, user),
   };
 
-  // TODO: check client.userinfoSignedResponseAlg. If set, JWT encode the claims
+  if (client.userinfoSignedResponseAlg) {
+    const { kid, key } = (await getKeyByAlg(client.userinfoSignedResponseAlg))!;
+    const signed = await new SignJWT(claims)
+      .setProtectedHeader({ alg: client.userinfoSignedResponseAlg, kid })
+      .sign(key);
 
-  return Response.json(claims);
+    return new Response(signed, {
+      headers: {
+        "Content-Type": "application/jwt",
+      },
+    });
+  } else {
+    return Response.json(claims);
+  }
 }
