@@ -1,6 +1,6 @@
 import Sessions, { refreshSession, Session } from "@/db/sessions";
 import Users, { User } from "@/db/users";
-import { checkVerifier, createVerifier } from "@/utils";
+import { checkVerifier, createVerifier, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import crypto from "node:crypto";
@@ -19,6 +19,7 @@ import crypto from "node:crypto";
 // SHA-256 for the verifier hash with a 16-byte salt.
 
 export const SESSION_COOKIE_NAME = "_noo_auth";
+export const SESSION_CHECK_COOKIE_NAME = "_noo_auth_check";
 
 export async function getSessionCookie() {
   const cookieStore = await cookies();
@@ -34,6 +35,16 @@ export async function setSessionCookie(value: string) {
     // TODO: determine if "none" is really required, or if "lax" is sufficient
     sameSite: "none",
   });
+
+  cookieStore.set(
+    SESSION_CHECK_COOKIE_NAME,
+    sha256(value).digest("base64url"),
+    {
+      maxAge: 60 * 60 * 24 * 400,
+      secure: true,
+      sameSite: "none",
+    },
+  );
 }
 
 export async function getUserForSession(sessionId: string) {

@@ -54,9 +54,11 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - the OIDC session check iframe
      */
     {
-      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
+      source:
+        "/((?!api|_next/static|_next/image|favicon.ico|oidc/[^/]+/session).*)",
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },

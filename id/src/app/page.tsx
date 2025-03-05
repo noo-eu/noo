@@ -18,8 +18,8 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex justify-center h-screen">
-      <h1 className="text-4xl font-medium mt-16">
+    <div className="flex flex-col items-center h-screen">
+      <h1 className="text-4xl font-medium my-16">
         Welcome back, {user.firstName}!
       </h1>
 

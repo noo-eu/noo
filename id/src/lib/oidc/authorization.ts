@@ -1,4 +1,5 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
+import { buildSessionState } from "@/app/oidc/continue/actions";
 import { schema } from "@/db";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
@@ -6,7 +7,7 @@ import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { humanIdToUuid } from "@/utils";
+import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { HttpRequest } from "../http/request";
@@ -496,9 +497,11 @@ async function authorizationNone(
       });
     } else {
       const code = await createCode(session, params);
+      const clientId = uuidToHumanId(code.clientId, "oidc");
 
       return returnToClient(params, {
         code: code.id,
+        session_state: await buildSessionState(clientId, params.redirect_uri),
       });
     }
   }
@@ -601,7 +604,7 @@ async function extractIdTokenSub(
     return undefined;
   }
 
-  return claims.sub;
+  return claims.sub as string;
 }
 
 async function matchesIdTokenHint(
