@@ -108,7 +108,6 @@ describe("Userinfo endpoint", () => {
       aud: uuidToHumanId("00000000-0000-0000-0000-000000000001", "oidc"),
       exp: expect.any(Number),
       iat: expect.any(Number),
-      nonce: at.nonce,
     });
   });
 
