@@ -2,11 +2,12 @@
 
 import Users from "@/db/users";
 import {
-  getSessionCookie,
+  SESSION_COOKIE_NAME,
   SessionsService,
   setSessionCookie,
 } from "@/lib/SessionsService";
 import { getIpAddress, getUserAgent } from "@/utils";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -31,7 +32,8 @@ export async function signin(_: unknown, formData: FormData) {
     throw new Error("OTP step not implemented");
   }
 
-  const cookie = await getSessionCookie();
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(SESSION_COOKIE_NAME)?.value || "";
   const svc = new SessionsService(cookie);
 
   let session = await svc.sessionFor(user);

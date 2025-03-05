@@ -6,8 +6,12 @@ import {
   createCode,
   returnToClientUrl,
 } from "@/lib/oidc/authorization";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { humanIdToUuid } from "@/utils";
+import {
+  getSessionCookie,
+  SESSION_CHECK_COOKIE_NAME,
+  SessionsService,
+} from "@/lib/SessionsService";
+import { humanIdToUuid, sha256 } from "@/utils";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
@@ -41,9 +45,11 @@ export async function afterConsent(sessionId: string) {
     return notFound();
   }
 
+  const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
+
   await storeConsent(
     session.userId,
-    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
+    clientId,
     oidcAuthRequest.scopes,
     oidcAuthRequest.claims,
   );
@@ -52,7 +58,10 @@ export async function afterConsent(sessionId: string) {
 
   const url = returnToClientUrl(oidcAuthRequest, {
     code: code.id,
-    session_state: "asdasd",
+    session_state: await buildSessionState(
+      oidcAuthRequest.client_id,
+      oidcAuthRequest.redirect_uri,
+    ),
   });
   if (url) {
     return redirect(url);
@@ -71,6 +80,23 @@ export async function consentFormSubmit(_: unknown, formData: FormData) {
   }
 
   return afterConsent(sessionId);
+}
+
+export async function buildSessionState(clientId: string, redirectUri: string) {
+  const cookieStore = await cookies();
+  const checkCookie = cookieStore.get(SESSION_CHECK_COOKIE_NAME)?.value;
+  if (!checkCookie) {
+    throw new Error("No check session cookie found");
+  }
+
+  const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString(
+    "base64url",
+  );
+
+  const origin = new URL(redirectUri).origin;
+  const state = clientId + " " + origin + " " + checkCookie + " " + salt;
+
+  return `${sha256(state).digest("base64url")}.${salt}`;
 }
 
 async function storeConsent(
