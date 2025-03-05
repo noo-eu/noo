@@ -10,6 +10,8 @@
       "show": "Taispeáin ainm ghutha",
       "ariaLabelShow": "Taispeáin ainm ghutha mar chnuasach falamh. Faoi chúirt: tógfar ainm ghutha ar scáth na leathanaigh.",
       "hide": "Dún ainm ghutha"
-    }
+    },
+    "yes": "Tá",
+    "no": "Níl"
   }
 }

@@ -10,6 +10,8 @@
       "show": "Arată parola",
       "ariaLabelShow": "Vezi parola în textul normal. Avertare: aceasta va afișa parola pe ecran.",
       "hide": "Ascunde parola"
-    }
+    },
+    "yes": "Da",
+    "no": "Nu"
   }
 }

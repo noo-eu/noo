@@ -19,7 +19,7 @@ async function main() {
       "$argon2id$v=19$m=65536,t=3,p=4$9TQmMdbZltXuRxsUSrrOEw$b4iWu+Qcc9WybZYKLnw14LSM6D5IJ9oks6LHj8jqD9M",
   });
 
-  await createTenant({
+  const tenant = await createTenant({
     name: "Acme Sarl",
     domain: "acme.fr",
     // yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE
@@ -31,6 +31,19 @@ async function main() {
   await createOidcClient({
     id: "00000000-0000-0000-0000-000000000001",
     clientName: { "": "Test Public OIDC Client" },
+    clientSecret: "super-s3cret",
+    redirectUris: ["https://localhost:22999/cb"],
+    subjectType: "pairwise",
+    grantTypes: ["authorization_code"],
+    responseTypes: ["code"],
+    tokenEndpointAuthMethod: "client_secret_basic",
+  });
+
+  // Tenant OIDC Client
+  await createOidcClient({
+    id: "00000000-0000-0000-0000-000000000002",
+    tenantId: tenant.id,
+    clientName: { "": "Acme Sarl's app" },
     clientSecret: "super-s3cret",
     redirectUris: ["https://localhost:22999/cb"],
     subjectType: "pairwise",

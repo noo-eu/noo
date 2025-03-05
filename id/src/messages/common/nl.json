@@ -10,6 +10,8 @@
       "show": "Wachtwoord weergeven",
       "ariaLabelShow": "Wachtwoord in duidelijke tekst weergeven. Waarschuwing: dit zal je wachtwoord op het scherm tonen.",
       "hide": "Wachtwoord verbergen"
-    }
+    },
+    "yes": "Ja",
+    "no": "Nee"
   }
 }

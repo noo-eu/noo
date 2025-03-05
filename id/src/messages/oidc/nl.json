@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Kies een account"
+    },
+    "end_session": {
+      "title": "Uitschrijven",
+      "description": "{name, select, undefined {Uitgelogd van een derde partijtoepassing.} other {Uitgelogd van <strong>{name}</strong> .}}",
+      "query": "Wil je ook je sessie op <noo> beëindigen?"
     }
   }
 }

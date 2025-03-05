@@ -10,6 +10,8 @@
       "show": "Näytä salasana",
       "ariaLabelShow": "Näytä salasana tekstimuodossa. Huomioi, että tämä näyttää salasanasi ruudulle.",
       "hide": "Piilota salasana"
-    }
+    },
+    "yes": "Kyllä",
+    "no": "Ei"
   }
 }

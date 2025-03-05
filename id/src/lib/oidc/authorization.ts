@@ -135,7 +135,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   }
 }
 
-function returnToClient(
+export function returnToClientUrl(
   request: AuthorizationRequest,
   data: Record<string, string | undefined>,
 ) {
@@ -152,7 +152,7 @@ function returnToClient(
       });
 
       // Redirect the user to the URL
-      return Response.redirect(url.toString(), 303);
+      return url.toString();
     }
     case "fragment": {
       const url = new URL(request.redirect_uri);
@@ -163,10 +163,24 @@ function returnToClient(
       });
 
       // Redirect the user to the URL
-      return Response.redirect(url.toString(), 303);
+      return url.toString();
     }
     case "form_post":
-      return buildFormPostResponse(request.redirect_uri, data);
+      return null;
+  }
+}
+
+export function returnToClient(
+  request: AuthorizationRequest,
+  data: Record<string, string | undefined>,
+) {
+  const url = returnToClientUrl(request, data);
+  if (url) {
+    return Response.redirect(url, 303);
+  } else if (request.response_mode === "form_post") {
+    return buildFormPostResponse(request.redirect_uri, data);
+  } else {
+    return fatalError("bad_response_mode");
   }
 }
 

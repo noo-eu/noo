@@ -74,7 +74,9 @@ export const oidcClients = pgTable("oidc_clients", {
     .default(["authorization_code"]),
   applicationType: text("application_type").notNull().default("web"),
   contacts: text("contacts").array(),
-  clientName: jsonb("client_name"),
+  clientName: jsonb("client_name").$type<{
+    [key: string]: string;
+  }>(),
   logoUri: jsonb("logo_uri"),
   clientUri: jsonb("client_uri"),
   policyUri: jsonb("policy_uri"),

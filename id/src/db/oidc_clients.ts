@@ -1,3 +1,4 @@
+import { humanIdToUuid } from "@/utils";
 import { and, eq, isNull } from "drizzle-orm";
 import db, { schema } from ".";
 
@@ -10,6 +11,10 @@ export async function createOidcClient(
 }
 
 export async function findOidcClient(id: string) {
+  if (id.startsWith("oidc_")) {
+    id = humanIdToUuid(id, "oidc")!;
+  }
+
   return db.query.oidcClients.findFirst({
     where: eq(schema.oidcClients.id, id),
   });

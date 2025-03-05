@@ -47,6 +47,11 @@ test.describe("OpenID Authorization endpoint", () => {
           },
         });
 
+        const humanClientId = uuidToHumanId(
+          "00000000-0000-0000-0000-000000000001",
+          "oidc",
+        );
+
         // Exchange the code for an access token
         const tokenResponse = await request.post("/oidc/token", {
           data: new URLSearchParams({
@@ -58,7 +63,7 @@ test.describe("OpenID Authorization endpoint", () => {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Authorization: `Basic ${Buffer.from(
-              "00000000-0000-0000-0000-000000000001:super-s3cret",
+              `${humanClientId}:super-s3cret`,
             ).toString("base64")}`,
           },
         });

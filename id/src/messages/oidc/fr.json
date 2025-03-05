@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Choisissez un compte"
+    },
+    "end_session": {
+      "title": "Déconnexion",
+      "description": "{name, select, undefined {Vous avez déconnecté d'une application tierce.} other {Vous vous êtes déconnecté(e) de <strong>{name}</strong> .}}",
+      "query": "Souhaitez-vous également terminer la session sur <noo></noo> ?"
     }
   }
 }

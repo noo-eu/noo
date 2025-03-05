@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Choose an account"
+    },
+    "end_session": {
+      "title": "Sign out",
+      "description": "{name, select, undefined {You signed out from a third party application.} other {You signed out from <strong>{name}</strong>.}}",
+      "query": "Do you want to sign out from <noo></noo> as well?"
     }
   }
 }

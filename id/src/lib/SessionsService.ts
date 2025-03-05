@@ -76,6 +76,21 @@ export class SessionsService {
     return session;
   }
 
+  async endSession(sid: string) {
+    this.tokens = this.tokens.filter((t) => {
+      const decoded = this.decodeSessionToken(t);
+      return decoded?.sid !== sid;
+    });
+
+    return await this.deleteSession(sid);
+  }
+
+  async endAllSessions() {
+    const sessions = this.decodeAll();
+    this.tokens = [];
+    await Promise.all(sessions.map((s) => this.deleteSession(s.sid)));
+  }
+
   async deleteSession(sid: string) {
     return await Sessions.delete(sid);
   }

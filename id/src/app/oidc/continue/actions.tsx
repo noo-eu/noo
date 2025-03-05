@@ -1,7 +1,11 @@
 "use server";
 
 import OidcConsents from "@/db/oidc_consents";
-import { Claims, createCode } from "@/lib/oidc/authorization";
+import {
+  Claims,
+  createCode,
+  returnToClientUrl,
+} from "@/lib/oidc/authorization";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { cookies } from "next/headers";
@@ -46,9 +50,17 @@ export async function afterConsent(sessionId: string) {
 
   const code = await createCode(session, oidcAuthRequest);
 
-  return redirect(
-    `${oidcAuthRequest.redirect_uri}?code=${code.id}&state=${oidcAuthRequest.state}`,
-  );
+  const url = returnToClientUrl(oidcAuthRequest, {
+    code: code.id,
+    session_state: "asdasd",
+  });
+  if (url) {
+    return redirect(url);
+  } else if (oidcAuthRequest.response_mode === "form_post") {
+    throw new Error("form_post not implemented for all scenarios");
+  } else {
+    throw new Error("unsupported response_mode");
+  }
 }
 
 export async function consentFormSubmit(_: unknown, formData: FormData) {

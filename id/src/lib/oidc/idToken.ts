@@ -1,4 +1,4 @@
-import { getKeyByAlg } from "@/app/oidc/jwks";
+import { getKeyByAlg, getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import { OidcClient } from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
 import { hexToBase62, sha256, uuidToBase62, uuidToHumanId } from "@/utils";
@@ -47,15 +47,38 @@ export async function createIdToken(
   }
 }
 
-export async function decodeIdToken(idToken: string, alg: string) {
+export async function decodeIdToken(
+  idToken: string,
+  alg: string,
+): Promise<Record<string, unknown> | undefined> {
+  return (await decodeIdTokenWhole(idToken, alg))?.payload as
+    | Record<string, unknown>
+    | undefined;
+}
+
+export function getIdTokenAlg(idToken: string): string | undefined {
+  const [header] = idToken.split(".");
+  if (!header) {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(Buffer.from(header, "base64").toString()).alg;
+  } catch {
+    return undefined;
+  }
+}
+
+export async function decodeIdTokenWhole(idToken: string, alg: string) {
   try {
     if (alg == "none") {
       return UnsecuredJWT.decode(idToken).payload;
     } else {
-      const { key } = (await getKeyByAlg(alg))!;
-      return (await jwtVerify(idToken, key)).payload;
+      const { key } = (await getVerifyingKeyByAlg(alg))!;
+      return await jwtVerify(idToken, key);
     }
-  } catch {
+  } catch (e) {
+    console.error(e);
     return undefined;
   }
 }

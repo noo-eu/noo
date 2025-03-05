@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Wybierz konto"
+    },
+    "end_session": {
+      "title": "Wyloguj się",
+      "description": "{name, select, undefined {Zostałeś wylogowany z aplikacji trzeciego parta.</strong>}}",
+      "query": "Czy chcesz rozwiązać swoją sesję na <noo></noo> również?"
     }
   }
 }

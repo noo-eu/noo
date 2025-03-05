@@ -10,6 +10,8 @@
       "show": "Mostrar senha",
       "ariaLabelShow": "Mostrar a senha como texto plano. Atenção: isso irá exibir sua senha na tela.",
       "hide": "Esconder senha"
-    }
+    },
+    "yes": "Sim",
+    "no": "Não"
   }
 }

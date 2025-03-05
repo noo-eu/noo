@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Alegeți un cont"
+    },
+    "end_session": {
+      "title": "Deconectare",
+      "description": "{name, select, undefined {Ai deconectat dintr-o aplicație terță.} other {Ai deconectat cu succes din <strong>{name}</strong>}}",
+      "query": "Dorești să te deconectezi și din <noo></noo>?"
     }
   }
 }

@@ -10,6 +10,8 @@
       "show": "Rodyti slaptažodį",
       "ariaLabelShow": "Rodyti slaptažodį tiesiems. Pražiūrėkite: tuo metu Jūsų slaptažodis bus rodomas ekrane.",
       "hide": "Slaptažodį paslėpti"
-    }
+    },
+    "yes": "Taip",
+    "no": "Ne"
   }
 }

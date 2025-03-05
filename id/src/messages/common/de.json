@@ -10,6 +10,8 @@
       "show": "Passwort anzeigen",
       "ariaLabelShow": "Das Passwort als einfaches Textfeld anzeigen. Achtung: dabei wird Ihr Passwort auf dem Bildschirm sichtbar!",
       "hide": "Passwort verstecken"
-    }
+    },
+    "yes": "Ja",
+    "no": "Nein"
   }
 }

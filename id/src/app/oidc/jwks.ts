@@ -231,3 +231,27 @@ export async function getKeyByAlg(alg: string) {
 
   return null;
 }
+
+export async function getVerifyingKeyByAlg(alg: string) {
+  const keys = (await getKeys()).current.concat((await getKeys()).legacy);
+
+  const pkeys = keys.map(jwkToPublicJwk);
+
+  for (const key of pkeys) {
+    if (key.alg === alg) {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  for (const key of pkeys) {
+    if (alg == "RS256" && key.kty === "RSA") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "ES256" && key.kty === "EC") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    } else if (alg == "EdDSA" && key.kty === "OKP") {
+      return { kid: key.kid as string, key: await importJWK(key, alg) };
+    }
+  }
+
+  return null;
+}

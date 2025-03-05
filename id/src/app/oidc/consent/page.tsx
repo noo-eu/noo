@@ -6,12 +6,13 @@ import { getUserForSession } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { afterConsent, getOidcAuthorizationCookie } from "./actions";
+import { afterConsent } from "../continue/actions";
+import { getOidcAuthorizationCookie } from "./actions";
 import Form from "./Form";
 
 export const revalidate = 0;
 
-function clientName(client: OidcClient, preferredLocale: string) {
+export function clientName(client: OidcClient, preferredLocale: string) {
   const clientName = client.clientName as Record<string, string>;
 
   if (clientName[preferredLocale]) {

@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Izberite račun"
+    },
+    "end_session": {
+      "title": "Odjavi se",
+      "description": "{name, select, undefined {Se odjavili ste iz tretje stranske aplikacije.} other {Se odjavili ste iz <strong>{name}</strong>.}}",
+      "query": "Ali bi radocel z odjavo tega na <noo></noo>?"
     }
   }
 }

@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Vyberte si účet"
+    },
+    "end_session": {
+      "title": "Zrušiť prihlašenie",
+      "description": "{name, select, undefined {Zrušil si sa z aplikácie tretieho páru.} other {Zrušil si sa z <strong>{name}</strong>.}}",
+      "query": "Chceš ukončiť aj prihlašovanie na <noo></noo>?"
     }
   }
 }

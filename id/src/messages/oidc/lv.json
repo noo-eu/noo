@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Izvēlieties kontu"
+    },
+    "end_session": {
+      "title": "Atsauksies sērijai",
+      "description": "{name, select, undefined {Jūs atsaucajāties no trešo pusēju aplikācijas.} other {Jūs atsaucajāties no <strong>{name}</strong>.}}",
+      "query": "Vai vēlaties turpmāk terminē sērijas arī uz <noo>?"
     }
   }
 }

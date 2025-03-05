@@ -10,6 +10,8 @@
       "show": "Zobrazit heslo",
       "ariaLabelShow": "Zobrazit heslo v čisté podobě. Varování: tím se zobrazí na obrazovce.",
       "hide": "Skryt heslo"
-    }
+    },
+    "yes": "Ano",
+    "no": "Ne"
   }
 }

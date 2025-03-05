@@ -1,5 +1,5 @@
-import { readdir } from "node:fs/promises";
 import { SUPPORTED_LANGUAGES } from "@/i18n/request";
+import { readdir } from "node:fs/promises";
 
 const files = await readdir("src/messages", { recursive: true });
 
@@ -131,7 +131,7 @@ async function translate(
   };
 
   // Is this LLM abuse?
-  let prompt = `It is of vital importance that you correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. Do not translate literally and **do not translate the object keys**. Only output JSON, without any surronding text: `;
+  let prompt = `It is of vital importance that you correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. The translations may use the ICU Message Format. Do not translate literally and **do not translate the object keys**. Do not leave the value empty. Only output JSON, without any surronding text: `;
   prompt += JSON.stringify(requests, null, 2);
 
   const response = await fetch("http://localhost:11434/api/generate", {

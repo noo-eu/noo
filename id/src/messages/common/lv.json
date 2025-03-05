@@ -10,6 +10,8 @@
       "show": "Rādīte parole",
       "ariaLabelShow": "Rādīte parole kā vienkāršu tekstu. Piezīme: šis izvirsis jūsu paroli uz ekrāna.",
       "hide": "Slēpt parole"
-    }
+    },
+    "yes": "Jā",
+    "no": "Nē"
   }
 }

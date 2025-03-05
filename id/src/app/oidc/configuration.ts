@@ -36,6 +36,8 @@ type ProviderMetadata = {
   require_request_uri_registration?: boolean;
   op_policy_uri?: string;
   op_tos_uri?: string;
+  check_session_iframe?: string;
+  end_session_endpoint?: string;
 };
 
 export const RESPONSE_TYPES_SUPPORTED = [
@@ -105,10 +107,12 @@ export function buildConfiguration(request: Request, domain?: string) {
       TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
     claims_supported: CLAIMS_SUPPORTED,
     ui_locales_supported: SUPPORTED_LANGUAGES,
+    check_session_iframe: `${proto}://${host}/oidc/session`,
   };
 
   if (domain) {
     config.registration_endpoint = `${issuer}/register`;
+    config.end_session_endpoint = `${issuer}/end_session`;
   }
 
   return config;

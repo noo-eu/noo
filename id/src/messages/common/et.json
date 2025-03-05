@@ -10,6 +10,8 @@
       "show": "Käivita parooli nägemine",
       "ariaLabelShow": "Parool näidata tekstina ekraanile. Märkus: see näitab teie parooli ekraanil!",
       "hide": "Peida parool"
-    }
+    },
+    "yes": "Jah",
+    "no": "Ei"
   }
 }
