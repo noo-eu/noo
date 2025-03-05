@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Escolha uma conta"
+    },
+    "end_session": {
+      "title": "Desconectar",
+      "description": "{name, select, undefined {Você saiu de uma aplicação terceirizada.} other {Você saiu do <strong>{name}</strong>.}}",
+      "query": "Você gostaria de encerrar a sessão também no {noo}?"
     }
   }
 }

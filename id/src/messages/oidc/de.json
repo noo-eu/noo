@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Wähle ein Konto"
+    },
+    "end_session": {
+      "title": "Abmelden",
+      "description": "{name, select, undefined {Sie haben sich von einem Drittanbieter-Tool abgemeldet.} other {Sie haben sich von <strong>{name}</strong> abgemeldet.}}",
+      "query": "Möchten Sie auch Ihr Sitzungsdatum auf <noo></noo> beenden?"
     }
   }
 }

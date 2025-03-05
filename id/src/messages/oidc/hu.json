@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Válasszon egy fiókot"
+    },
+    "end_session": {
+      "title": "Kijelentkezés",
+      "description": "{name, select, undefined {Harmadik szerepű alkalmazásból kijelentkezett.} other {<strong>{name}</strong> nevű fiókból kijelentkezett.}}",
+      "query": "Tartsa a megfelelő fiókot is?"
     }
   }
 }

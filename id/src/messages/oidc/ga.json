@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Roghnaigh cuntas"
+    },
+    "end_session": {
+      "title": "Schrú agus amuigh",
+      "description": "{name, select, undefined {Tá tú tar éis dul amuigh ón gcomhghuaillíocht tríú páirteach.} other {Tá tú tar éis dul amuigh as <strong>{name}</strong>.}}",
+      "query": "An bhfuil de a shuíomh agus scrú íoc ar <noo></noo> freisin?"
     }
   }
 }

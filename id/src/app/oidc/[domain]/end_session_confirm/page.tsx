@@ -1,78 +1,114 @@
 import { Noo } from "@/components/Noo";
-import OidcClients from "@/db/oidc_clients";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import OidcClients, { OidcClient } from "@/db/oidc_clients";
+import { Session } from "@/db/sessions";
+import {
+  getSessionCookie,
+  SessionsService,
+  setSessionCookie,
+} from "@/lib/SessionsService";
 import { buildSubClaim } from "@/lib/oidc/idToken";
-import { humanIdToUuid } from "@/utils";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import { clientName } from "../../consent/page";
 import { Form } from "./Form";
+
+const isValidRedirectUri = (
+  client?: OidcClient,
+  postLogoutRedirectUri?: string,
+) => {
+  if (!client || !postLogoutRedirectUri) {
+    return false;
+  }
+
+  return (
+    !client.postLogoutRedirectUris ||
+    client.postLogoutRedirectUris.includes(postLogoutRedirectUri)
+  );
+};
+
+function finish(
+  client: OidcClient | undefined,
+  postLogoutRedirectUri: string | undefined,
+  state: string | undefined,
+) {
+  if (!isValidRedirectUri(client, postLogoutRedirectUri)) {
+    return redirect("/");
+  }
+
+  const postRedirect = new URL(postLogoutRedirectUri!);
+  if (state) {
+    postRedirect.searchParams.set("state", state);
+  }
+
+  return redirect(postRedirect.toString());
+}
 
 export default async function EndSession({
   searchParams,
 }: {
   searchParams: Promise<{
-    clientId: string;
-    sub: string;
+    clientId?: string;
+    sub?: string;
     postLogoutRedirectUri?: string;
     state?: string;
   }>;
 }) {
   const query = await searchParams;
+  const t = await getTranslations("oidc");
 
-  const client = await OidcClients.find(humanIdToUuid(query.clientId, "oidc")!);
-  if (!client) {
-    return redirect("/");
+  let client: OidcClient | undefined;
+  if (query.clientId) {
+    client = await OidcClients.find(query.clientId);
+    if (!client) {
+      return redirect("/");
+    }
   }
 
-  const clientName = client.clientName
-    ? client.clientName[""]
-    : new URL(client.redirectUris[0]).hostname;
-
-  const sessions = await new SessionsService(
-    await getSessionCookie(),
-  ).activeSessions();
-  const matchingSession = sessions.find(
-    (sess) => buildSubClaim(client, sess.userId) == query.sub,
-  );
-
-  if (!matchingSession) {
-    return redirect("/");
-  }
+  const name = client ? clientName(client, "en") : undefined;
 
   const submitAction = async (data: FormData) => {
     "use server";
 
     const decision = data.get("decision") as string;
-    if (decision === "yes") {
-      await new SessionsService(await getSessionCookie()).endSession(
-        matchingSession.id,
+    if (decision === "no") {
+      return finish(client, query.postLogoutRedirectUri, query.state);
+    }
+
+    const svc = await new SessionsService(await getSessionCookie());
+    const sessions = await svc.activeSessions();
+
+    let matchingSession: Session | undefined;
+    if (query.sub && client) {
+      matchingSession = sessions.find(
+        (sess) => buildSubClaim(client, sess.userId) == query.sub,
       );
+
+      if (!matchingSession) {
+        return redirect("/");
+      }
     }
 
-    if (!query.postLogoutRedirectUri) {
-      return redirect("/");
+    if (!matchingSession) {
+      await svc.endAllSessions();
+    } else {
+      await svc.endSession(matchingSession.id);
     }
 
-    if (
-      client.postLogoutRedirectUris &&
-      !client.postLogoutRedirectUris.includes(query.postLogoutRedirectUri)
-    ) {
-      return redirect("/");
-    }
+    await setSessionCookie(svc.buildCookie());
 
-    const postRedirect = new URL(query.postLogoutRedirectUri);
-    if (query.state) {
-      postRedirect.searchParams.set("state", query.state);
-    }
-    return redirect(postRedirect.toString());
+    return finish(client, query.postLogoutRedirectUri, query.state);
   };
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-medium">Terminate your session</h1>
-      <p>You logged out from {clientName}.</p>
+      <h1 className="text-xl font-medium">{t("end_session.title")}</h1>
       <p>
-        Would you like to terminate your session on <Noo /> as well?
+        {t.rich("end_session.description", {
+          name,
+          strong: (children) => <strong>{children}</strong>,
+        })}
       </p>
+      <p>{t.rich("end_session.query", { noo: () => <Noo /> })}</p>
       <Form submitAction={submitAction} />
     </div>
   );

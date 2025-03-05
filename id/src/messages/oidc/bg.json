@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Изберете акаунт"
+    },
+    "end_session": {
+      "title": "Повече от този сесия",
+      "description": "{name, select, undefined {Също така сте излезли от трета партия приложение.} other {Излязли също така от <strong>{name}</strong>.}}",
+      "query": "Хотели ли бихте да прерушите и тази сесия на {server_name}?"
     }
   }
 }

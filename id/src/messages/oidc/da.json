@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Vælg en konto"
+    },
+    "end_session": {
+      "title": "Afmeld",
+      "description": "{name, select, undefined {Du logged ud af et tredjepartsprogram.}} andre {Du logged ud af <strong>{navn}</strong>.",
+      "query": "Vil du også logge ud af <noo></noo>?"
     }
   }
 }

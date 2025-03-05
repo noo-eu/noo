@@ -85,6 +85,12 @@ export class SessionsService {
     return await this.deleteSession(sid);
   }
 
+  async endAllSessions() {
+    const sessions = this.decodeAll();
+    this.tokens = [];
+    await Promise.all(sessions.map((s) => this.deleteSession(s.sid)));
+  }
+
   async deleteSession(sid: string) {
     return await Sessions.delete(sid);
   }

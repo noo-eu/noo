@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Valitse tili"
+    },
+    "end_session": {
+      "title": "Kirjaudu ulos",
+      "description": "{name, select, undefined {Olet kirjautunut ulos kolmannen osapuolen sovelluksesta.} other {Olet kirjautunut ulos <strong>{name}</strong>-sovelluksesta.}}",
+      "query": "Haluatko myös lopettaa käyttökokemuksesi tästä laitteesta <noo></noo>?"
     }
   }
 }

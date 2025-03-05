@@ -47,8 +47,26 @@ export async function createIdToken(
   }
 }
 
-export async function decodeIdToken(idToken: string, alg: string) {
-  return (await decodeIdTokenWhole(idToken, alg))?.payload;
+export async function decodeIdToken(
+  idToken: string,
+  alg: string,
+): Promise<Record<string, unknown> | undefined> {
+  return (await decodeIdTokenWhole(idToken, alg))?.payload as
+    | Record<string, unknown>
+    | undefined;
+}
+
+export function getIdTokenAlg(idToken: string): string | undefined {
+  const [header] = idToken.split(".");
+  if (!header) {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(Buffer.from(header, "base64").toString()).alg;
+  } catch {
+    return undefined;
+  }
 }
 
 export async function decodeIdTokenWhole(idToken: string, alg: string) {

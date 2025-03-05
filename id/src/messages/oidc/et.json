@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Valige konto"
+    },
+    "end_session": {
+      "title": "Logi välja",
+      "description": "{name, select, undefined {Said ükskord välja teise tarkvara kasutaja.} other {Said välja <strong>{name}</strong>.}}",
+      "query": "Kas soovid ka seejärel seansi selle <noo>kauga</noo> kesktelga lõpetada?"
     }
   }
 }

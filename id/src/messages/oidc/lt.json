@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Pasirinkite paskyrą"
+    },
+    "end_session": {
+      "title": "Atsijungimas",
+      "description": "{name, select, undefined {Atsijunge iš trečiosjų programės.}} other {{strong name}, Jūs atsijunge.}}}",
+      "query": "Ar norite panaikinti savo sesiją <noo> taip pat?"
     }
   }
 }

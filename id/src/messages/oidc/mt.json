@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Agħżel kont"
+    },
+    "end_session": {
+      "title": "Inħobb qatt",
+      "description": "{name, select, undefined {Inħobb qatt min app kawżina tal-terzi.} other {Inħobb qatt min <strong>{name}</strong>.}}",
+      "query": "Għaddej int titjib ix-xewqa ta' tneħħ il-session fuq <noo></noo> użajtkema ukol?"
     }
   }
 }

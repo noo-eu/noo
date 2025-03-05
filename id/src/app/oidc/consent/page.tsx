@@ -12,7 +12,7 @@ import Form from "./Form";
 
 export const revalidate = 0;
 
-function clientName(client: OidcClient, preferredLocale: string) {
+export function clientName(client: OidcClient, preferredLocale: string) {
   const clientName = client.clientName as Record<string, string>;
 
   if (clientName[preferredLocale]) {

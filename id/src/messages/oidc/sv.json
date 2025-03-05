@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Välj ett konto"
+    },
+    "end_session": {
+      "title": "Logga ut",
+      "description": "{name, select, undefined {Du loggade ut från ett tredjepartsprogram.} other {Du loggade ut från <strong>{name}</strong>.}}",
+      "query": "Vill du också avsluta ditt inloggningsläge på {noo}?"
     }
   }
 }

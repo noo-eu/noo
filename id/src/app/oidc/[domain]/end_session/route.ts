@@ -1,8 +1,17 @@
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { findTenantByDomainName } from "@/db/tenants";
 import { HttpRequest } from "@/lib/http/request";
-import { decodeIdToken } from "@/lib/oidc/idToken";
+import { decodeIdToken, getIdTokenAlg } from "@/lib/oidc/idToken";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
+
+// See: https://openid.net/specs/openid-connect-rpinitiated-1_0.html.
+//
+// This nightmare of an endpoint is used by OIDC clients to log out users out of
+// the OIDC provider, after they have logged out of the client.
+//
+// The specification allows for a number of parameters to be passed to the
+// endpoint, which are all optional (which is a bad idea), but when passed, they
+// must be validated.
 
 export async function POST(
   raw: Request,
@@ -38,12 +47,19 @@ export async function GET(
   );
 }
 
+function failure(request: HttpRequest) {
+  return Response.redirect(
+    request.buildUrl("/oidc/fatal", { error: "invalid_request" }),
+    303,
+  );
+}
+
 async function prepareEndSession(request: HttpRequest, domain: string) {
   const query = await request.params;
 
   const tenant = await findTenantByDomainName(domain);
   if (!tenant) {
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not found", { status: 404 });
   }
 
   const idTokenHint = query.id_token_hint;
@@ -53,57 +69,60 @@ async function prepareEndSession(request: HttpRequest, domain: string) {
   if (humanClientId) {
     const clientId = humanIdToUuid(humanClientId, "oidc");
     if (!clientId) {
-      return new Response("Not Found", { status: 404 });
+      return failure(request);
     }
 
     client = await OidcClients.findWithTenant(clientId, tenant.id);
+    if (!client) {
+      return failure(request);
+    }
   }
 
-  if (!idTokenHint) {
-    return new Response("Not Found", { status: 404 });
+  let decoded: Record<string, unknown> | undefined;
+  let alg: string | undefined;
+  if (idTokenHint) {
+    alg = client?.idTokenSignedResponseAlg;
+    if (!alg) {
+      // Determine the algorithm used in the ID token.
+      // While this may seem unsafe, we double-check the algorithm against the client's
+      // expected algorithm in the next step.
+      alg = getIdTokenAlg(idTokenHint);
+    }
+
+    decoded = await decodeIdToken(idTokenHint, alg!);
+    if (!decoded || !decoded.sub || !decoded.iss || !decoded.aud) {
+      return failure(request);
+    }
   }
 
-  let alg = client?.idTokenSignedResponseAlg;
-  if (!alg) {
-    // Determine the algorithm used in the ID token.
-    // While this may seem unsafe, we double-check the algorithm against the client's
-    // expected algorithm in the next step.
-    const header = JSON.parse(atob(idTokenHint.split(".")[0]));
-    alg = header.alg;
-  }
+  const params: Record<string, string> = {};
 
-  const decoded = (await decodeIdToken(idTokenHint, alg!)) as Record<
-    string,
-    string
-  >;
-  console.log("Decoded ID token", decoded);
-  if (!decoded) {
-    return new Response("Not Found", { status: 404 });
-  }
-
-  if (!client) {
+  if (!client && decoded) {
     const humanClientId = Array.isArray(decoded.aud)
       ? decoded.aud[0]
       : decoded.aud;
     const clientId = humanIdToUuid(humanClientId!, "oidc")!;
     client = await OidcClients.findWithTenant(clientId, tenant.id);
     if (!client || alg !== client.idTokenSignedResponseAlg) {
-      return new Response("Not Found", { status: 404 });
+      return failure(request);
     }
   }
 
-  if (decoded.iss !== `${request.baseUrl}/oidc/${domain}`) {
-    return new Response("Not Found", { status: 404 });
+  if (decoded) {
+    if (decoded.iss !== `${request.baseUrl}/oidc/${domain}`) {
+      return failure(request);
+    }
+
+    if (humanClientId && decoded.aud !== humanClientId) {
+      return failure(request);
+    }
+
+    params.sub = decoded.sub as string;
   }
 
-  if (humanClientId && decoded.aud !== humanClientId) {
-    return new Response("Not Found", { status: 404 });
+  if (client) {
+    params.clientId = uuidToHumanId(client.id, "oidc");
   }
-
-  const params: Record<string, string> = {
-    clientId: uuidToHumanId(client.id, "oidc"),
-    sub: decoded.sub!,
-  };
 
   if (query.post_logout_redirect_uri) {
     params.postLogoutRedirectUri = query.post_logout_redirect_uri;

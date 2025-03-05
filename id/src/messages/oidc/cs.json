@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Vyberte účet"
+    },
+    "end_session": {
+      "title": "Odhlásit se",
+      "description": "{name, select, undefined {Odhlásili jste z aplikace třetí strany.} other {Odhlásili jste z <strong>{name}</strong>.}}",
+      "query": "Chcete také ukončit svou session na <noo></noo>?"
     }
   }
 }

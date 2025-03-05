@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Scegli un account"
+    },
+    "end_session": {
+      "title": "Termina sessione",
+      "description": "{name, select, undefined {Hai appena terminato la sessione con un'applicazione di terze parti.} other {Hai appena terminato la sessione con <strong>{name}</strong>.}}",
+      "query": "Vuoi terminare anche la tua sessione <noo></noo>?"
     }
   }
 }

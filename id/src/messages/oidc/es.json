@@ -22,6 +22,11 @@
     },
     "switch": {
       "title": "Elige una cuenta"
+    },
+    "end_session": {
+      "title": "Cerrar sesión",
+      "description": "{name, select, undefined {Has cerrado sesión de una aplicación tercera.} other {Ha cerrado sesión de <strong>{name}</strong>.}}",
+      "query": "¿Desea terminar la sesión en {noo} también?"
     }
   }
 }
