@@ -419,11 +419,10 @@ export function validateRedirectUris(
   }
 
   for (const uri of redirect_uris) {
-    // TODO: query strings must be allowed (fragment is correctly not allowed)
-    if (uri.includes("#") || uri.includes("?")) {
+    if (uri.includes("#")) {
       return buildErrorResponse(
         "invalid_redirect_uri",
-        "Redirect URIs must not contain fragments or query strings.",
+        "Redirect URIs must not contain fragments.",
       );
     }
   }

@@ -1,5 +1,6 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
 import { buildSessionState } from "@/app/oidc/continue/actions";
+import { getKeyByAlg } from "@/app/oidc/jwks";
 import { schema } from "@/db";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
@@ -8,6 +9,7 @@ import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
+import { SignJWT } from "jose";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { HttpRequest } from "../http/request";
@@ -121,7 +123,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
         status: 303,
         headers: {
           Location: request.buildUrl("/switch"),
-          "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": `oidc_authorization_request=${await signParams(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
     case "consent":
@@ -535,6 +537,8 @@ async function authorizationStandard(
       )
     : activeSessions;
 
+  const signedParams = await signParams(params);
+
   if (matchingSessions.length === 0) {
     // No active sessions, show redirect to login screen
     return new Response(null, {
@@ -543,7 +547,7 @@ async function authorizationStandard(
         Location: req.buildUrl("/signin", {
           continue: "/oidc/consent?sid=__sid__",
         }),
-        "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+        "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
       },
     });
   } else if (matchingSessions.length === 1) {
@@ -558,7 +562,7 @@ async function authorizationStandard(
         status: 303,
         headers: {
           Location: req.buildUrl("/oidc/continue", { sid: session.id }),
-          "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
     } else {
@@ -567,7 +571,7 @@ async function authorizationStandard(
         status: 303,
         headers: {
           Location: req.buildUrl("/oidc/consent", { sid: session.id }),
-          "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
     }
@@ -577,7 +581,7 @@ async function authorizationStandard(
       status: 303,
       headers: {
         Location: req.buildUrl("/switch"),
-        "Set-Cookie": `oidc_authorization_request=${JSON.stringify(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+        "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
       },
     });
   }
@@ -661,4 +665,13 @@ export async function createCode(
     codeChallenge: request.code_challenge,
     codeChallengeMethod: request.code_challenge_method,
   });
+}
+
+async function signParams(params: AuthorizationRequest) {
+  const { key, kid } = (await getKeyByAlg("EdDSA"))!;
+  return await new SignJWT(params)
+    .setProtectedHeader({ alg: "EdDSA", kid })
+    .setIssuedAt()
+    .setExpirationTime("1h")
+    .sign(key);
 }
