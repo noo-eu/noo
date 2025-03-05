@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Vytvorte si <noo>účet</noo>",
     "errors": {
       "first_name_required": "Prosím, zadejte vaše meno",
+      "invalid_data": "Náš systém prekvapil. Prosím, zkontrolujte údaje, ktoré ste zadali",
+      "name_invalid": "Meno obsahuje neplatné znaky",
       "name_too_long": "Meno, ktoré ste zadali je príliš dlhé",
       "name_too_short": "Meno, ktoré ste zadali je príliš krátké",
-      "name_invalid": "Meno obsahuje neplatné znaky",
-      "username_required": "Prosím, zadejte vaše nové prihlasovacie meno",
+      "password_classes": "Prosím, použite silnejšie heslo. Používejte mliešenie písmen, čísel a symbolov",
+      "password_length": "Prosím, použite 10 alebo viac znakov",
+      "password_required": "Prosím, zadejte vaše heslo",
+      "password_too_long": "Zadane heslo je príliš dlhé",
       "username_first_char": "Prihlasovacie meno musí začínať písmenom alebo číslom",
+      "username_invalid": "Prihlasovacie meno môže obsahovať iba písmená, čísla a bodky (.)",
       "username_last_char": "Prihlasovacie meno musí skončiť písmenom alebo číslom",
       "username_length": "Prihlasovacie meno musí mať dĺžku medzi 6 a 30 znakov",
-      "username_invalid": "Prihlasovacie meno môže obsahovať iba písmená, čísla a bodky (.)",
-      "username_two_dots": "Prihlasovacie meno nemôže obsahovať dve body (.) v rade",
+      "username_required": "Prosím, zadejte vaše nové prihlasovacie meno",
       "username_taken": "Toto prihlasovacie meno je już použité",
-      "password_required": "Prosím, zadejte vaše heslo",
-      "password_length": "Prosím, použite 10 alebo viac znakov",
-      "password_too_long": "Zadane heslo je príliš dlhé",
-      "password_classes": "Prosím, použite silnejšie heslo. Používejte mliešenie písmen, čísel a symbolov",
-      "invalid_data": "Náš systém prekvapil. Prosím, zkontrolujte údaje, ktoré ste zadali"
+      "username_two_dots": "Prihlasovacie meno nemôže obsahovať dve body (.) v rade"
     },
-    "create_your_account": "Vytvorte si <noo>účet</noo>",
     "step1": {
-      "title": "Zadajte vaše meno",
       "first_name": "Meno",
-      "last_name": "Priezvisko"
+      "last_name": "Priezvisko",
+      "title": "Zadajte vaše meno"
     },
     "step2": {
       "title": "Vyberte svoju e-mailovú adresu",
       "username": "E-mailová adresa"
     },
     "step3": {
-      "title": "Vytvorte silné heslo",
-      "password": "Heslo"
+      "password": "Heslo",
+      "title": "Vytvorte silné heslo"
     },
     "step4": {
-      "title": "Ešte jedno...",
-      "description": "        <p>A <konta></konta> umožní vám prístup k rôznym službám ako napríklad email, úložisko súborov a viac.</p>        <p><terms>Konkrétne <konta></konta> Terms of Service</terms> vysvetľujú, čo môžete očakávať pri používaní služieb, zatiaľčo <privacy><konta></konta> Privacy Policy</privacy> opisuje, ako sa s vašou osobnými údajmi bude nakladanie.</p>        <p>Aby ste mohli vytvoriť <konta></konta>, prihliadnete k jeho Terms of Service a Privacy Policu.</p>",
-      "accept": "Prijať a pokračovať"
+      "accept": "Prijať a pokračovať",
+      "description": "        <p>A <noo></noo> umožní vám prístup k rôznym službám ako napríklad email, úložisko súborov a viac.</p>        <p><terms>Konkrétne <noo></noo> Terms of Service</terms> vysvetľujú, čo môžete očakávať pri používaní služieb, zatiaľčo <privacy><noo></noo> Privacy Policy</privacy> opisuje, ako sa s vašou osobnými údajmi bude nakladanie.</p>        <p>Aby ste mohli vytvoriť <noo></noo>, prihliadnete k jeho Terms of Service a Privacy Policu.</p>",
+      "title": "Ešte jedno..."
     }
   }
 }

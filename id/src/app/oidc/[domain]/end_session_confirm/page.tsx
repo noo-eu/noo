@@ -6,10 +6,10 @@ import {
   SessionsService,
   setSessionCookie,
 } from "@/lib/SessionsService";
+import { getClientName } from "@/lib/oidc/clientUtils";
 import { buildSubClaim } from "@/lib/oidc/idToken";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { clientName } from "../../consent/page";
 import { Form } from "./Form";
 
 const isValidRedirectUri = (
@@ -64,7 +64,7 @@ export default async function EndSession({
     }
   }
 
-  const name = client ? clientName(client, "en") : undefined;
+  const name = client ? getClientName(client, "en") : undefined;
 
   const submitAction = async (data: FormData) => {
     "use server";

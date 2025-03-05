@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Volgende",
-    "continue": "Doorlopen",
     "cancel": "Annuleren",
+    "continue": "Doorlopen",
+    "madeWith": "Gemaakt met ❤️ en ☕️ in de Europese Unie",
+    "next": "Volgende",
+    "no": "Nee",
     "optional": "Optioneel",
-    "terms": "Algemene voorwaarden",
-    "privacy": "Gebruikersvoorwaarden",
     "passwordField": {
-      "show": "Wachtwoord weergeven",
       "ariaLabelShow": "Wachtwoord in duidelijke tekst weergeven. Waarschuwing: dit zal je wachtwoord op het scherm tonen.",
-      "hide": "Wachtwoord verbergen"
+      "hide": "Wachtwoord verbergen",
+      "show": "Wachtwoord weergeven"
     },
-    "yes": "Ja",
-    "no": "Nee"
+    "privacy": "Gebruikersvoorwaarden",
+    "terms": "Algemene voorwaarden",
+    "yes": "Ja"
   }
 }

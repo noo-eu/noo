@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Ga naar je <noo></noo> startpagina",
+    "change_account": "Verander account",
     "consent": {
-      "title": "Je meldt je aan bij <strong>{name}</strong> met je <noo></noo>-account.",
-      "description": "<strong>{name}</strong> vraagt toegang tot de volgende informatie:",
       "claims": {
-        "name": "Je volledige naam",
-        "username": "Je gebruikersnaam",
-        "profile": "Je profielfoto",
-        "email": "Je noo e-mailadres",
-        "phone_number": "Je telefoonnummer",
         "address": "Je postadres",
+        "birthdate": "Je geboortedatum",
+        "email": "Je noo e-mailadres",
         "gender": "Het geslacht waarmee je je identificeert",
-        "birthdate": "Je geboortedatum"
-      }
-    },
-    "fatal": {
-      "title": "Er is iets misgegaan",
-      "description": "Je hebt geprobeerd in te loggen bij een applicatie van een derde partij, maar de applicatie werkt niet correct. Probeer het later opnieuw of neem contact op met de eigenaar van de applicatie met de volgende informatie:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Kies een account"
+        "name": "Je volledige naam",
+        "phone_number": "Je telefoonnummer",
+        "profile": "Je profielfoto",
+        "username": "Je gebruikersnaam"
+      },
+      "description": "<strong>{name}</strong> vraagt toegang tot de volgende informatie:",
+      "title": "Je toetst je in bij <details>{name}</details>."
     },
     "end_session": {
-      "title": "Uitschrijven",
       "description": "{name, select, undefined {Uitgelogd van een derde partijtoepassing.} other {Uitgelogd van <strong>{name}</strong> .}}",
-      "query": "Wil je ook je sessie op <noo> beëindigen?"
+      "query": "Wil je ook je sessie op <noo> beëindigen?",
+      "title": "Uitschrijven"
+    },
+    "fatal": {
+      "description": "Je hebt geprobeerd in te loggen bij een applicatie van een derde partij, maar de applicatie werkt niet correct. Probeer het later opnieuw of neem contact op met de eigenaar van de applicatie met de volgende informatie:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Er is iets misgegaan"
+    },
+    "home": "Ga naar je <noo></noo> startpagina",
+    "switch": {
+      "description": "om door te gaan naar <details>{name}</details>",
+      "legalComplete": "Voordat je inlogt, moet je de <privacy>privacyvoorwaarden</privacy> en <terms>gebruiksvoorwaarden</terms> van {client} controleren.",
+      "legalNone": "Voordat je inlogt, moet je de juridische documenten van {client} controleren.",
+      "legalPrivacy": "Voordat je inlogt, moet je de <privacy>privacyvoorwaarden</privacy> van {client} controleren.",
+      "legalTerms": "Voordat je inlogt, moet je de <terms>gebruiksvoorwaarden</terms> van {client} controleren.",
+      "pageTitle": "Inloggen met <noo></noo>",
+      "signin": "Een ander account gebruiken",
+      "title": "Kies een account"
     }
   }
 }

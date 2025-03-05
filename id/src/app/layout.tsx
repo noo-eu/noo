@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -33,7 +34,10 @@ export default async function RootLayout({
             href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
           />
         </head>
-        <body>{children}</body>
+        <body className="min-h-screen bg-gray-100 dark:bg-gray-800 flex flex-col">
+          {children}
+          <Footer />
+        </body>
       </NextIntlClientProvider>
     </html>
   );

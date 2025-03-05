@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Prijavite se na vaš <noo></noo> račun",
-    "username": "Korisničko ime ili email",
+    "error": "Vaše prijave su netočne",
     "password": "Lozinka",
     "submit": "Prijavi se",
-    "error": "Vaše prijave su netočne"
+    "title": "Prijavite se na vaš <noo></noo> račun",
+    "username": "Korisničko ime ili email"
   }
 }

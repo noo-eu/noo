@@ -1,4 +1,4 @@
-import { SUPPORTED_LANGUAGES } from "@/i18n/request";
+import { SUPPORTED_LANGUAGES } from "@/i18n";
 
 type ProviderMetadata = {
   issuer: string;

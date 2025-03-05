@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Eikite į savo <noo></noo> pagrindinį puslapį",
+    "change_account": "Pakeiti paskyrą",
     "consent": {
-      "title": "Jūs prisijungiate prie <strong>{name}</strong> naudodami savo <noo></noo> paskyrą.",
-      "description": "<strong>{name}</strong> prašo prieigos prie šios informacijos:",
       "claims": {
-        "name": "Jūsų vardas ir pavardė",
-        "username": "Jūsų naudotojo vardas",
-        "profile": "Jūsų profilio nuotrauka",
-        "email": "Jūsų noo el. pašto adresas",
-        "phone_number": "Jūsų telefono numeris",
         "address": "Jūsų pašto adresas",
+        "birthdate": "Jūsų gimimo data",
+        "email": "Jūsų noo el. pašto adresas",
         "gender": "Jūsų lytis",
-        "birthdate": "Jūsų gimimo data"
-      }
-    },
-    "fatal": {
-      "title": "Įvyko klaida",
-      "description": "Bandėte prisijungti prie trečiosios šalies programos, tačiau programa neveikia tinkamai. Bandykite dar kartą vėliau arba susisiekite su programos savininku, pateikdami šią informaciją:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Pasirinkite paskyrą"
+        "name": "Jūsų vardas ir pavardė",
+        "phone_number": "Jūsų telefono numeris",
+        "profile": "Jūsų profilio nuotrauka",
+        "username": "Jūsų naudotojo vardas"
+      },
+      "description": "<strong>{name}</strong> prašo prieigos prie šios informacijos:",
+      "title": "Jūs prisijungeite į <details>{name}</details>."
     },
     "end_session": {
-      "title": "Atsijungimas",
       "description": "{name, select, undefined {Atsijunge iš trečiosjų programės.}} other {{strong name}, Jūs atsijunge.}}}",
-      "query": "Ar norite panaikinti savo sesiją <noo> taip pat?"
+      "query": "Ar norite panaikinti savo sesiją <noo> taip pat?",
+      "title": "Atsijungimas"
+    },
+    "fatal": {
+      "description": "Bandėte prisijungti prie trečiosios šalies programos, tačiau programa neveikia tinkamai. Bandykite dar kartą vėliau arba susisiekite su programos savininku, pateikdami šią informaciją:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Įvyko klaida"
+    },
+    "home": "Eikite į savo <noo></noo> pagrindinį puslapį",
+    "switch": {
+      "description": "kad galėtumėte tęsti <details>{name}</details>",
+      "legalComplete": "Prieš prisijungdami, turite patikrinti <privacy>privatumo taisykles</privacy> ir <terms>naudojimo sąlygas</terms> {client}.",
+      "legalNone": "Prieš prisijungdami, turite patikrinti {client} teisinius dokumentus.",
+      "legalPrivacy": "Prieš prisijungdami, turite patikrinti <privacy>privatumo taisykles</privacy> {client}.",
+      "legalTerms": "Prieš prisijungdami, turite patikrinti <terms>naudojimo sąlygas</terms> {client}.",
+      "pageTitle": "Prisijungimas naudojant <noo></noo>",
+      "signin": "Naudokite kitą paskyrą",
+      "title": "Pasirinkite paskyrą"
     }
   }
 }

@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Gehe zu deinem <noo></noo> Startseite",
+    "change_account": "Konto ändern",
     "consent": {
-      "title": "Du meldest dich bei <strong>{name}</strong> mit deinem <noo></noo>-Konto an.",
-      "description": "<strong>{name}</strong> fordert Zugriff auf die folgenden Informationen an:",
       "claims": {
-        "name": "Dein vollständiger Name",
-        "username": "Dein Benutzername",
-        "profile": "Dein Profilbild",
-        "email": "Deine noo-E-Mail-Adresse",
-        "phone_number": "Deine Telefonnummer",
         "address": "Deine Postanschrift",
+        "birthdate": "Dein Geburtsdatum",
+        "email": "Deine noo-E-Mail-Adresse",
         "gender": "Das Geschlecht, mit dem du dich identifizierst",
-        "birthdate": "Dein Geburtsdatum"
-      }
-    },
-    "fatal": {
-      "title": "Etwas ist schiefgelaufen",
-      "description": "Du hast versucht, dich bei einer Drittanbieteranwendung anzumelden, aber die Anwendung funktioniert nicht richtig. Bitte versuche es später noch einmal oder kontaktiere den Anwendungsinhaber mit den folgenden Informationen:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Wähle ein Konto"
+        "name": "Dein vollständiger Name",
+        "phone_number": "Deine Telefonnummer",
+        "profile": "Dein Profilbild",
+        "username": "Dein Benutzername"
+      },
+      "description": "<strong>{name}</strong> fordert Zugriff auf die folgenden Informationen an:",
+      "title": "Du meldest dich bei <details>{name}</details> an."
     },
     "end_session": {
-      "title": "Abmelden",
       "description": "{name, select, undefined {Sie haben sich von einem Drittanbieter-Tool abgemeldet.} other {Sie haben sich von <strong>{name}</strong> abgemeldet.}}",
-      "query": "Möchten Sie auch Ihr Sitzungsdatum auf <noo></noo> beenden?"
+      "query": "Möchten Sie auch Ihr Sitzungsdatum auf <noo></noo> beenden?",
+      "title": "Abmelden"
+    },
+    "fatal": {
+      "description": "Du hast versucht, dich bei einer Drittanbieteranwendung anzumelden, aber die Anwendung funktioniert nicht richtig. Bitte versuche es später noch einmal oder kontaktiere den Anwendungsinhaber mit den folgenden Informationen:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Etwas ist schiefgelaufen"
+    },
+    "home": "Gehe zu deinem <noo></noo> Startseite",
+    "switch": {
+      "description": "weiter zu <details>{name}</details>",
+      "legalComplete": "Bevor Sie sich anmelden, müssen Sie die <privacy>Datenschutzrichtlinien</privacy> und die <terms>Nutzungsbedingungen</terms> für {client} überprüfen.",
+      "legalNone": "Bevor Sie sich anmelden, müssen Sie die rechtlichen Dokumente für {client} überprüfen.",
+      "legalPrivacy": "Bevor Sie sich anmelden, müssen Sie die <privacy>Datenschutzrichtlinien</privacy> für {client} überprüfen.",
+      "legalTerms": "Bevor Sie sich anmelden, müssen Sie die <terms>Nutzungsbedingungen</terms> für {client} überprüfen.",
+      "pageTitle": "Über <noo></noo> anmelden",
+      "signin": "Anderes Konto verwenden",
+      "title": "Konto auswählen"
     }
   }
 }

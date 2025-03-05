@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Crie sua conta <noo></noo>",
     "errors": {
       "first_name_required": "Por favor, insira seu primeiro nome",
+      "invalid_data": "Algo deu errado. Por favor, verifique os dados que você digitou",
+      "name_invalid": "O nome contém alguns caracteres inválidos",
       "name_too_long": "O nome que você digitou é muito longo",
       "name_too_short": "O nome que você digitou é muito curto",
-      "name_invalid": "O nome contém alguns caracteres inválidos",
-      "username_required": "Por favor, insira seu novo apelido",
+      "password_classes": "Por favor, use uma senha mais forte. Use uma mistura de letras, números e símbolos",
+      "password_length": "Por favor, use pelo menos 10 caracteres",
+      "password_required": "Por favor, insira sua senha",
+      "password_too_long": "A senha que você digitou é muito longa",
       "username_first_char": "Seu apelido deve iniciar com uma letra ou número",
+      "username_invalid": "Seu apelido pode conter apenas letras, números e pontos (.)",
       "username_last_char": "Seu apelido deve terminar com uma letra ou número",
       "username_length": "Seu apelido deve ter entre 6 e 30 caracteres",
-      "username_invalid": "Seu apelido pode conter apenas letras, números e pontos (.)",
-      "username_two_dots": "Seu apelido não pode conter dois pontos (.) em sequência",
+      "username_required": "Por favor, insira seu novo apelido",
       "username_taken": "Este apelido está ocupado",
-      "password_required": "Por favor, insira sua senha",
-      "password_length": "Por favor, use pelo menos 10 caracteres",
-      "password_too_long": "A senha que você digitou é muito longa",
-      "password_classes": "Por favor, use uma senha mais forte. Use uma mistura de letras, números e símbolos",
-      "invalid_data": "Algo deu errado. Por favor, verifique os dados que você digitou"
+      "username_two_dots": "Seu apelido não pode conter dois pontos (.) em sequência"
     },
-    "create_your_account": "Crie sua conta <noo></noo>",
     "step1": {
-      "title": "Insira seu nome",
       "first_name": "Primeiro nome",
-      "last_name": "Sobrenome"
+      "last_name": "Sobrenome",
+      "title": "Insira seu nome"
     },
     "step2": {
       "title": "Escolha sua endereço de e-mail",
       "username": "Endereço de e-mail"
     },
     "step3": {
-      "title": "Crie uma senha forte",
-      "password": "Senha"
+      "password": "Senha",
+      "title": "Crie uma senha forte"
     },
     "step4": {
-      "title": "Uma última coisa...",
+      "accept": "Aceite e continuar",
       "description": "        <p>Uma conta <noo></noo> permite que você acesse um conjunto de serviços, como e-mail, armazenamento de arquivos e mais.</p>        <p><terms>Todos os Termos de Serviço da <noo></noo></terms> explicam o que você deve esperar ao usar os serviços, enquanto <privacy>A Política de Privacidade da <noo></noo></privacy> descreve como lidamos com as informações geradas ou coletadas quando você usa os serviços.</p>        <p>Pelo fato de criar uma conta <noo></noo> e usar os serviços, você precisa aceitar os <terms>Todos os Termos de Serviço</terms> da <noo></noo> e a <privacy>A Política de Privacidade</privacy> dela.</p>",
-      "accept": "Aceite e continuar"
+      "title": "Uma última coisa..."
     }
   }
 }

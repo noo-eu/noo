@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Ustvari svoj <noo></noo> račun",
     "errors": {
       "first_name_required": "Vpišite svoje ime",
+      "invalid_data": "Nekoč je šlo neki spor. Preverite podatke, ki ste jih vnesli",
+      "name_invalid": "Ime vsebuje neveljavné znake",
       "name_too_long": "Ime, ki ste ga vnesli, je predolg",
       "name_too_short": "Ime, ki ste ga vnesli, je prekratko",
-      "name_invalid": "Ime vsebuje neveljavné znake",
-      "username_required": "Vpišite novo ime uporabnika",
+      "password_classes": "Uporabite močnejše geslo. Uporabite kombinacijo črk, številic in simbolov",
+      "password_length": "Uporabite vsaj 10 znakov",
+      "password_required": "Vpišite geslo",
+      "password_too_long": "Geslo, ki ste ga vnesli, je predolg",
       "username_first_char": "Uporabniško ime mora začeti s črko ali številko",
+      "username_invalid": "Uporabniško ime lahko vsebuje le črke, številke in točkamo (.)",
       "username_last_char": "Uporabniško ime mora končati z črko ali število",
       "username_length": "Uporabniško ime mora vsebovati med 6 in 30 znaki",
-      "username_invalid": "Uporabniško ime lahko vsebuje le črke, številke in točkamo (.)",
-      "username_two_dots": "Uporabniško ime ne more vsebovati dveh zaporednih točkamo (.)",
+      "username_required": "Vpišite novo ime uporabnika",
       "username_taken": "Ta uporabniško ime je že zasedeno",
-      "password_required": "Vpišite geslo",
-      "password_length": "Uporabite vsaj 10 znakov",
-      "password_too_long": "Geslo, ki ste ga vnesli, je predolg",
-      "password_classes": "Uporabite močnejše geslo. Uporabite kombinacijo črk, številic in simbolov",
-      "invalid_data": "Nekoč je šlo neki spor. Preverite podatke, ki ste jih vnesli"
+      "username_two_dots": "Uporabniško ime ne more vsebovati dveh zaporednih točkamo (.)"
     },
-    "create_your_account": "Ustvari svoj <noo></noo> račun",
     "step1": {
-      "title": "Vnesite vaše ime",
       "first_name": "Ime",
-      "last_name": "Priimek"
+      "last_name": "Priimek",
+      "title": "Vnesite vaše ime"
     },
     "step2": {
       "title": "Izberite vaš email naslov",
       "username": "Email naslov"
     },
     "step3": {
-      "title": "Ustvari močno geslo",
-      "password": "Geslo"
+      "password": "Geslo",
+      "title": "Ustvari močno geslo"
     },
     "step4": {
-      "title": "Zadnja stvar...",
+      "accept": "Sprejemite in nadaljujte",
       "description": "        <p>A <noo></noo> račun vam omogoči dostop do vrste storitev, kot so email, shranjevanje datotek in več. </p>       <p><terms><noo></noo>'s Pogoji uporabe</terms> objasnjajo, kaj se lahko pričakuje, ko uporabljate storitve, medtem ko je <privacy><noo></noo>'s Politika o varnosti' opisana, kako upravljamo informacije, ki so nastale ali zbrane med vašim uporabljanjem storitev. </p>       <p>Da bi ustvarili <noo></noo> račun in uporabljali storitve, morate sprejeti <noo></noo>'s Pogoje o uporabi in Politiko o varnosti.</p>",
-      "accept": "Sprejemite in nadaljujte"
+      "title": "Zadnja stvar..."
     }
   }
 }

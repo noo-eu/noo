@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Mur fil-paġna ewlenija tiegħek ta' <noo></noo>",
+    "change_account": "Tgib aċħunt",
     "consent": {
-      "title": "Qed tidħol f'<strong>{name}</strong> bl-kont tiegħek ta' <noo></noo>.",
-      "description": "<strong>{name}</strong> qed jitlob aċċess għad-dejta li ġejja:",
       "claims": {
-        "name": "L-isem sħiħ tiegħek",
-        "username": "L-isem tal-utent tiegħek",
-        "profile": "Ir-ritratt tal-profil tiegħek",
-        "email": "L-indirizz elettroniku noo tiegħek",
-        "phone_number": "In-numru tat-telefon tiegħek",
         "address": "L-indirizz postali tiegħek",
+        "birthdate": "Id-data tat-twelid tiegħek",
+        "email": "L-indirizz elettroniku noo tiegħek",
         "gender": "Il-ġeneru li tidentifika bih",
-        "birthdate": "Id-data tat-twelid tiegħek"
-      }
-    },
-    "fatal": {
-      "title": "Ġara xi ħaġa ħażina",
-      "description": "Ippruvajt tidħol f’applikazzjoni ta’ terza persuna, iżda l-applikazzjoni ma taħdimx kif suppost. Jekk jogħġbok erġa’ pprova aktar tard jew ikkuntattja lis-sid tal-applikazzjoni b’din l-informazzjoni:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Agħżel kont"
+        "name": "L-isem sħiħ tiegħek",
+        "phone_number": "In-numru tat-telefon tiegħek",
+        "profile": "Ir-ritratt tal-profil tiegħek",
+        "username": "L-isem tal-utent tiegħek"
+      },
+      "description": "<strong>{name}</strong> qed jitlob aċċess għad-dejta li ġejja:",
+      "title": "Imorħux inti l-isigna fil-<details>{name}</details>."
     },
     "end_session": {
-      "title": "Inħobb qatt",
       "description": "{name, select, undefined {Inħobb qatt min app kawżina tal-terzi.} other {Inħobb qatt min <strong>{name}</strong>.}}",
-      "query": "Għaddej int titjib ix-xewqa ta' tneħħ il-session fuq <noo></noo> użajtkema ukol?"
+      "query": "Għaddej int titjib ix-xewqa ta' tneħħ il-session fuq <noo></noo> użajtkema ukol?",
+      "title": "Inħobb qatt"
+    },
+    "fatal": {
+      "description": "Ippruvajt tidħol f’applikazzjoni ta’ terza persuna, iżda l-applikazzjoni ma taħdimx kif suppost. Jekk jogħġbok erġa’ pprova aktar tard jew ikkuntattja lis-sid tal-applikazzjoni b’din l-informazzjoni:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Ġara xi ħaġa ħażina"
+    },
+    "home": "Mur fil-paġna ewlenija tiegħek ta' <noo></noo>",
+    "switch": {
+      "description": "biex tkompli ma' <details>{name}</details>",
+      "legalComplete": "Qabel tiddaħħal, trid tivverifika l-<privacy>politika tal-privatezza</privacy> u t-<terms>termini tal-użu</terms> ta’ {client}.",
+      "legalNone": "Qabel tiddaħħal, trid tivverifika l-dokumenti legali ta’ {client}.",
+      "legalPrivacy": "Qabel tiddaħħal, trid tivverifika l-<privacy>politika tal-privatezza</privacy> ta’ {client}.",
+      "legalTerms": "Qabel tiddaħħal, trid tivverifika l-<terms>termini tal-użu</terms> ta’ {client}.",
+      "pageTitle": "Idħol b'<noo></noo>",
+      "signin": "Uża kont ieħor",
+      "title": "Agħżel kont"
     }
   }
 }

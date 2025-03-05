@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/Button";
+import { Button } from "@/components/shared/Button";
 import { useTranslations } from "next-intl";
 
 export function Form({

@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Sisene oma <a href='#'>pildi galerii</a> kontoris",
-    "username": "Kasutajanimi või e-post",
+    "error": "Vale parool või kasutajatunnus",
     "password": "Parool",
     "submit": "Sisene",
-    "error": "Vale parool või kasutajatunnus"
+    "title": "Logi sisse oma <noo></noo> kontole",
+    "username": "Kasutajanimi või e-post"
   }
 }

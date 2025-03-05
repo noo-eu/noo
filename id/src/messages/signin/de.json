@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Melde dich bei deinem Konto an",
-    "username": "Benutzername oder E-Mail-Adresse",
+    "error": "Die eingegebenen Zugangsdaten sind falsch",
     "password": "Passwort",
     "submit": "Anmelden",
-    "error": "Die eingegebenen Zugangsdaten sind falsch"
+    "title": "Melden Sie sich bei <noo></noo> an",
+    "username": "Benutzername oder E-Mail-Adresse"
   }
 }

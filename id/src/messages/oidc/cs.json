@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Přejděte na svou domovskou stránku <noo></noo>",
+    "change_account": "Změnit účet",
     "consent": {
-      "title": "Přihlašujete se do <strong>{name}</strong> pomocí svého účtu <noo></noo>.",
-      "description": "<strong>{name}</strong> žádá o přístup k následujícím informacím:",
       "claims": {
-        "name": "Vaše celé jméno",
-        "username": "Vaše uživatelské jméno",
-        "profile": "Vaše profilová fotografie",
-        "email": "Vaše e-mailová adresa noo",
-        "phone_number": "Vaše telefonní číslo",
         "address": "Vaše poštovní adresa",
+        "birthdate": "Váš datum narození",
+        "email": "Vaše e-mailová adresa noo",
         "gender": "Pohlaví, se kterým se identifikujete",
-        "birthdate": "Váš datum narození"
-      }
-    },
-    "fatal": {
-      "title": "Něco se pokazilo",
-      "description": "Pokusili jste se přihlásit do aplikace třetí strany, ale aplikace nefunguje správně. Zkuste to prosím později nebo kontaktujte vlastníka aplikace s následujícími informacemi:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Vyberte účet"
+        "name": "Vaše celé jméno",
+        "phone_number": "Vaše telefonní číslo",
+        "profile": "Vaše profilová fotografie",
+        "username": "Vaše uživatelské jméno"
+      },
+      "description": "<strong>{name}</strong> žádá o přístup k následujícím informacím:",
+      "title": "Přihlašujete se do <details>{name}</details>."
     },
     "end_session": {
-      "title": "Odhlásit se",
       "description": "{name, select, undefined {Odhlásili jste z aplikace třetí strany.} other {Odhlásili jste z <strong>{name}</strong>.}}",
-      "query": "Chcete také ukončit svou session na <noo></noo>?"
+      "query": "Chcete také ukončit svou session na <noo></noo>?",
+      "title": "Odhlásit se"
+    },
+    "fatal": {
+      "description": "Pokusili jste se přihlásit do aplikace třetí strany, ale aplikace nefunguje správně. Zkuste to prosím později nebo kontaktujte vlastníka aplikace s následujícími informacemi:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Něco se pokazilo"
+    },
+    "home": "Přejděte na svou domovskou stránku <noo></noo>",
+    "switch": {
+      "description": "pro pokračování na <details>{name}</details>",
+      "legalComplete": "Před přihlášením musíte zkontrolovat <privacy>zásady ochrany osobních údajů</privacy> a <terms>podmínky použití</terms> pro {client}.",
+      "legalNone": "Před přihlášením musíte zkontrolovat právní dokumenty pro {client}.",
+      "legalPrivacy": "Před přihlášením musíte zkontrolovat <privacy>zásady ochrany osobních údajů</privacy> pro {client}.",
+      "legalTerms": "Před přihlášením musíte zkontrolovat <terms>podmínky použití</terms> pro {client}.",
+      "pageTitle": "Přihlaste se pomocí <noo></noo>",
+      "signin": "Použít jiný účet",
+      "title": "Vyberte účet"
     }
   }
 }

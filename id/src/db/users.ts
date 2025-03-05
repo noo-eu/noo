@@ -79,7 +79,7 @@ async function authenticate(username: string, password: string) {
     if (await argon2.verify(user.passwordDigest!, password)) {
       return user;
     }
-  } catch (err) {
+  } catch {
     return null;
   }
 

@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Cuir cuntas nua iúl leat, faoi na nóibíochtaí",
     "errors": {
       "first_name_required": "Cuir ainm chéad in iúl leat",
+      "invalid_data": "Níl aon dhuine ag déanamh caidé do scéim agus cuir cuntas á chur síos",
+      "name_invalid": "Tá sárchríochtaí sna háinm atá thuigheamar",
       "name_too_long": "Tá an t-ainm atá thuigheamar tá fada",
       "name_too_short": "Tá an t-ainm atá thuigheamar ró-bhreac",
-      "name_invalid": "Tá sárchríochtaí sna háinm atá thuigheamar",
-      "username_required": "Cuir ainm úr iúl leat",
+      "password_classes": "Cuir pàs níos láidir in iúl leat. Cuir síos ar litreacha, nuar nó síneadh i dtaobh agus fead síos ar háinm úr atá thuigheamar.",
+      "password_length": "Caibidil a chur síos fad é is a shár go dtí 10 caibidil.",
+      "password_required": "Cuir pàs in iúl leat",
+      "password_too_long": "Tá an pass atá thuigheamar fada, mé téir a shaor.",
       "username_first_char": "Caith a hainm úr a thosaigh le litir nó nuar agus caibidil.",
+      "username_invalid": "Cuir fead síos ar háinm úr atá thuigheamar, cuntas litreacha, nuar nó pointí (.).",
       "username_last_char": "Ba chóra duit a hainm úr a chur de thréimhse le litir nó nuar",
       "username_length": "Tá a hainm úr agus mé téir a chaighdean idir 6 is 30 caibidil.",
-      "username_invalid": "Cuir fead síos ar háinm úr atá thuigheamar, cuntas litreacha, nuar nó pointí (.).",
-      "username_two_dots": "Níl dhá pointi (.). Tá fáilte ag abairtí a chur saor ó na pointí .",
+      "username_required": "Cuir ainm úr iúl leat",
       "username_taken": "Tá an t-ainm úr atá thuigheamar taréis.",
-      "password_required": "Cuir pàs in iúl leat",
-      "password_length": "Caibidil a chur síos fad é is a shár go dtí 10 caibidil.",
-      "password_too_long": "Tá an pass atá thuigheamar fada, mé téir a shaor.",
-      "password_classes": "Cuir pàs níos láidir in iúl leat. Cuir síos ar litreacha, nuar nó síneadh i dtaobh agus fead síos ar háinm úr atá thuigheamar.",
-      "invalid_data": "Níl aon dhuine ag déanamh caidé do scéim agus cuir cuntas á chur síos"
+      "username_two_dots": "Níl dhá pointi (.). Tá fáilte ag abairtí a chur saor ó na pointí ."
     },
-    "create_your_account": "Cuir cuntas nua iúl leat, faoi na nóibíochtaí",
     "step1": {
-      "title": "Tóg ainm dóitse leat ",
       "first_name": "Ainm chéad duitse",
-      "last_name": "Saoi thuigheamar duitse"
+      "last_name": "Saoi thuigheamar duitse",
+      "title": "Tóg ainm dóitse leat "
     },
     "step2": {
       "title": "Cuir do chuid-réiligh in áirithe",
       "username": "Gniomhaíocht réiligh"
     },
     "step3": {
-      "title": "Cruthaigh dianpháirt scoile",
-      "password": "Páirt scoile"
+      "password": "Páirt scoile",
+      "title": "Cruthaigh dianpháirt scoile"
     },
     "step4": {
-      "title": "Talamh fada na bóidhe...",
+      "accept": "Tuirsiú na seirbhísí seo agus dul ar aghaidh",
       "description": "        <p>Go bhféidir, ciallaíonn áireamh réiligh duit d'aistear le líonad breise, cosúil le post, stórais fiáin agus níos mó.</p>        <p>Téarmaí Seirbhís <terms><noo></noo>'</terms> télann tú cad é a bhfuil iontu má tá tú ag ullmhú na seirbhísí seo, nó Torthaí Príobháideachta <privacy><noo></noo>' agus Póilitic Príobháideachta <privacy>'s faoi mheastáin do dhéanamh ar dhuinn trí threor a bhfuil tú á fhorbairt le líonad breise.</p>        <p>Go gcúramas, chuir do chuid-réiligh in áirithe agus úsáid na seirbhísí seo, má tá tuirse tú d'acuirti an Torthaí Seirbhis <terms><noo></noo>' agus Póilitic Príobháideachta <privacy>'.</p>",
-      "accept": "Tuirsiú na seirbhísí seo agus dul ar aghaidh"
+      "title": "Talamh fada na bóidhe..."
     }
   }
 }

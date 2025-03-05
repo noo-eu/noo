@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Przejdź do swojej strony głównej <noo></noo>",
+    "change_account": "Zmień konto",
     "consent": {
-      "title": "Logujesz się do <strong>{name}</strong> za pomocą konta <noo></noo>.",
-      "description": "<strong>{name}</strong> prosi o dostęp do następujących informacji:",
       "claims": {
-        "name": "Twoje pełne imię i nazwisko",
-        "username": "Twoja nazwa użytkownika",
-        "profile": "Twoje zdjęcie profilowe",
-        "email": "Twój adres e-mail noo",
-        "phone_number": "Twój numer telefonu",
         "address": "Twój adres pocztowy",
+        "birthdate": "Twoja data urodzenia",
+        "email": "Twój adres e-mail noo",
         "gender": "Płeć, z którą się identyfikujesz",
-        "birthdate": "Twoja data urodzenia"
-      }
-    },
-    "fatal": {
-      "title": "Coś poszło nie tak",
-      "description": "Próbowałeś zalogować się do aplikacji zewnętrznej, ale nie działa ona poprawnie. Spróbuj ponownie później lub skontaktuj się z właścicielem aplikacji, podając następujące informacje:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Wybierz konto"
+        "name": "Twoje pełne imię i nazwisko",
+        "phone_number": "Twój numer telefonu",
+        "profile": "Twoje zdjęcie profilowe",
+        "username": "Twoja nazwa użytkownika"
+      },
+      "description": "<strong>{name}</strong> prosi o dostęp do następujących informacji:",
+      "title": "Zgadzasz się na dostęp do <details>{name}</details>."
     },
     "end_session": {
-      "title": "Wyloguj się",
       "description": "{name, select, undefined {Zostałeś wylogowany z aplikacji trzeciego parta.</strong>}}",
-      "query": "Czy chcesz rozwiązać swoją sesję na <noo></noo> również?"
+      "query": "Czy chcesz rozwiązać swoją sesję na <noo></noo> również?",
+      "title": "Wyloguj się"
+    },
+    "fatal": {
+      "description": "Próbowałeś zalogować się do aplikacji zewnętrznej, ale nie działa ona poprawnie. Spróbuj ponownie później lub skontaktuj się z właścicielem aplikacji, podając następujące informacje:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Coś poszło nie tak"
+    },
+    "home": "Przejdź do strony głównej <noo></noo>",
+    "switch": {
+      "description": "aby kontynuować w <details>{name}</details>",
+      "legalComplete": "Przed zalogowaniem się musisz sprawdzić <privacy>politykę prywatności</privacy> i <terms>warunki korzystania</terms> {client}.",
+      "legalNone": "Przed zalogowaniem się musisz sprawdzić dokumenty prawne {client}.",
+      "legalPrivacy": "Przed zalogowaniem się musisz sprawdzić <privacy>politykę prywatności</privacy> {client}.",
+      "legalTerms": "Przed zalogowaniem się musisz sprawdzić <terms>warunki korzystania</terms> {client}.",
+      "pageTitle": "Zaloguj się przez <noo></noo>",
+      "signin": "Użyj innego konta",
+      "title": "Wybierz konto"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Iestāties savam <bortu></bortu> kontam",
-    "username": "Vārds vai e-pasta adrese",
+    "error": "Jūsu ievadīto informāciju nav pareiza",
     "password": "Parole",
     "submit": "Iestāties",
-    "error": "Jūsu ievadīto informāciju nav pareiza"
+    "title": "Iestāties savam <noo></noo> kontam",
+    "username": "Vārds vai e-pasta adrese"
   }
 }

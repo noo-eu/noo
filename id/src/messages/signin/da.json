@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Log ind på din <konto></konto> ",
-    "username": "Brugernavn eller email",
+    "error": "Det er ikke godt agørende, hvad du har skrevet",
     "password": "Adgangskode",
     "submit": "Log ind",
-    "error": "Det er ikke godt agørende, hvad du har skrevet"
+    "title": "Log ind på din <noo></noo> konto",
+    "username": "Brugernavn eller email"
   }
 }

@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Conectează-te la contul tău",
-    "username": "Nume de utilizator sau adresa de e-mail",
+    "error": "Datele pe care le-ai introdus sunt incorecte",
     "password": "Parolă",
     "submit": "Autentificare",
-    "error": "Datele pe care le-ai introdus sunt incorecte"
+    "title": "Autentificare în contul <noo></noo>",
+    "username": "Nume de utilizator sau adresa de e-mail"
   }
 }

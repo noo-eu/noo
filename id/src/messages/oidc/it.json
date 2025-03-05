@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Vai alla tua home <noo></noo>",
+    "change_account": "Cambia account",
     "consent": {
-      "title": "Stai accedendo a <strong>{name}</strong> con il tuo account <noo></noo>.",
-      "description": "<strong>{name}</strong> ha richiesto l'accesso a queste informazioni:",
       "claims": {
-        "name": "Il tuo nome completo",
-        "username": "Il tuo nome utente",
-        "profile": "L'immagine del tuo profilo",
-        "email": "Il tuo indirizzo email noo",
-        "phone_number": "Il tuo numero di telefono",
         "address": "Il tuo indirizzo postale",
+        "birthdate": "La tua data di nascita",
+        "email": "Il tuo indirizzo email noo",
         "gender": "Il genere con cui ti identifichi",
-        "birthdate": "La tua data di nascita"
-      }
-    },
-    "fatal": {
-      "title": "Qualcosa è andato storto",
-      "description": "Hai provato ad accedere ad una applicazione di terze parti, ma non sta funzionando correttamente. Per favore, riprova più tardi, o contatta lo sviluppatore con queste informazioni:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Scegli un account"
+        "name": "Il tuo nome completo",
+        "phone_number": "Il tuo numero di telefono",
+        "profile": "L'immagine del tuo profilo",
+        "username": "Il tuo nome utente"
+      },
+      "description": "<strong>{name}</strong> ha richiesto l'accesso a queste informazioni:",
+      "title": "Stai accedendo a <details>{name}</details>."
     },
     "end_session": {
-      "title": "Termina sessione",
       "description": "{name, select, undefined {Hai appena terminato la sessione con un'applicazione di terze parti.} other {Hai appena terminato la sessione con <strong>{name}</strong>.}}",
-      "query": "Vuoi terminare anche la tua sessione <noo></noo>?"
+      "query": "Vuoi terminare anche la tua sessione <noo></noo>?",
+      "title": "Termina sessione"
+    },
+    "fatal": {
+      "description": "Hai provato ad accedere ad una applicazione di terze parti, ma non sta funzionando correttamente. Per favore, riprova più tardi, o contatta lo sviluppatore con queste informazioni:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Qualcosa è andato storto"
+    },
+    "home": "Vai alla tua home <noo></noo>",
+    "switch": {
+      "description": "per continuare su <details>{name}</details>",
+      "legalComplete": "Prima di accedere, dovresti rivedere le <privacy>condizioni sulla privacy</privacy> e le <terms>condizioni d'uso</terms> di {client}.",
+      "legalNone": "Prima di accedere, dovresti rivedere i documenti legali di {client}.",
+      "legalPrivacy": "Prima di accedere, dovresti rivedere le <privacy>condizioni sulla privacy</privacy> di {client}.",
+      "legalTerms": "Prima di accedere, dovresti rivedere le <terms>condizioni d'uso</terms> di {client}.",
+      "pageTitle": "Accedi con <noo></noo>",
+      "signin": "Utilizza un altro account",
+      "title": "Scegli un account"
     }
   }
 }

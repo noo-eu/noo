@@ -1,30 +1,93 @@
-import { Noo } from "@/components/Noo";
-import OidcClients, { OidcClient } from "@/db/oidc_clients";
+import OidcClients from "@/db/oidc_clients";
 import { findOidcConsent } from "@/db/oidc_consents";
-import { AuthorizationRequest } from "@/lib/oidc/authorization";
+import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
+import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { getUserForSession } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
-import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { afterConsent } from "../continue/actions";
-import { getOidcAuthorizationCookie } from "./actions";
-import Form from "./Form";
+import { Content } from "./Content";
 
 export const revalidate = 0;
 
-export function clientName(client: OidcClient, preferredLocale: string) {
-  const clientName = client.clientName as Record<string, string>;
-
-  if (clientName[preferredLocale]) {
-    return clientName[preferredLocale];
-  } else if (clientName[""]) {
-    return clientName[""];
-  } else if (Object.keys(clientName).length > 0) {
-    return Object.values(clientName)[0];
+export default async function OidcConsentPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sid: string }>;
+}) {
+  const oidcAuthRequest = await getOidcAuthorizationRequest();
+  if (!oidcAuthRequest) {
+    console.warn("No OIDC auth request found");
+    return redirect("/");
   }
 
-  // Fallback to redirect URI host
-  return new URL(client.redirectUris[0]).hostname;
+  const sessionId = (await searchParams).sid;
+  if (!sessionId) {
+    console.warn("No session ID found");
+    return redirect("/");
+  }
+
+  const user = await getUserForSession(sessionId);
+  if (!user) {
+    console.warn("No user found for session");
+    return redirect("/");
+  }
+
+  // At this point we have authenticated the user, we have to determine if the
+  // user has already given consent. If the user has already given consent, we
+  // can redirect to the client.
+
+  const consent = await findOidcConsent(
+    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
+    user.id,
+  );
+  const client = await OidcClients.find(consent.clientId);
+  if (!client) {
+    console.warn("Client not found");
+    return redirect("/");
+  }
+
+  const locale = await getLocale();
+  const clientFields = {
+    name: getLocalizedOidcField(client, "clientName", locale)!,
+  };
+
+  const scopes = oidcAuthRequest.scopes;
+  const claims = oidcAuthRequest.claims;
+  const claimKeys = new Set(
+    Object.keys(claims.id_token || {}).concat(
+      Object.keys(claims.userinfo || {}),
+    ),
+  );
+
+  // openid is automatically granted
+  consent.scopes.push("openid");
+
+  const missingScopes = scopes.filter((s) => !consent?.scopes.includes(s));
+  const missingClaims = Array.from(claimKeys).filter(
+    (c) => !consent?.claims.includes(c),
+  );
+
+  if (missingScopes.length > 0) {
+    // We're sent to /consent if we're missing scopes or claims
+    // However, the /switch page also sends us here when an account is selected.
+    // In that case, we can fastForward and confirm the consent (if it was previously granted).
+    if (scopes.length === 1 && scopes[0] === "openid" && claimKeys.size === 0) {
+      return redirect("/oidc/continue?sid=" + sessionId);
+    }
+  }
+
+  const cleanClaims = cleanupClaims(missingClaims);
+  const fastForward = missingScopes.length === 0 && cleanClaims.length === 0;
+
+  return (
+    <Content
+      client={clientFields}
+      missingClaims={cleanClaims}
+      fastForward={fastForward}
+      user={{ name: "test", email: "lol" }}
+    />
+  );
 }
 
 function cleanupClaims(claims: string[]): string[] {
@@ -67,104 +130,4 @@ function cleanupClaims(claims: string[]): string[] {
   }
 
   return Array.from(new Set(clean));
-}
-
-export default async function OidcConsentPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ sid: string }>;
-}) {
-  const t = await getTranslations("oidc");
-
-  const oidcAuthRequest =
-    (await getOidcAuthorizationCookie()) as AuthorizationRequest | null;
-
-  console.log("oidcAuthRequest", oidcAuthRequest);
-
-  if (!oidcAuthRequest) {
-    console.warn("No OIDC auth request found");
-    return redirect("/");
-  }
-
-  const sessionId = (await searchParams).sid;
-  if (!sessionId) {
-    console.warn("No session ID found");
-    return redirect("/");
-  }
-
-  const user = await getUserForSession(sessionId);
-  if (!user) {
-    console.warn("No user found for session");
-    return redirect("/");
-  }
-
-  // At this point we have authenticated the user, we have to determine if the
-  // user has already given consent. If the user has already given consent, we
-  // can redirect to the client.
-
-  const consent = await findOidcConsent(
-    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
-    user.id,
-  );
-  const client = await OidcClients.find(consent.clientId);
-  if (!client) {
-    console.warn("Client not found");
-    return redirect("/");
-  }
-
-  const name = clientName(client, "en");
-
-  const scopes = oidcAuthRequest.scopes;
-  const claims = oidcAuthRequest.claims;
-  const claimKeys = new Set(
-    Object.keys(claims.id_token || {}).concat(
-      Object.keys(claims.userinfo || {}),
-    ),
-  );
-
-  // openid is automatically granted
-  consent.scopes.push("openid");
-
-  const missingScopes = scopes.filter((s) => !consent?.scopes.includes(s));
-  const missingClaims = Array.from(claimKeys).filter(
-    (c) => !consent?.claims.includes(c),
-  );
-
-  if (scopes.length === 1 && scopes[0] === "openid" && claimKeys.size === 0) {
-    return redirect("/oidc/continue?sid=" + sessionId);
-  }
-
-  if (missingClaims.length === 0 && missingScopes.length === 0) {
-    return afterConsent(sessionId);
-  }
-
-  const cleanClaims = cleanupClaims(missingClaims);
-  if (cleanClaims.length === 0 && missingScopes.length === 0) {
-    return afterConsent(sessionId);
-  }
-
-  return (
-    <div>
-      <p className="mb-4 text-lg">
-        {t.rich("consent.title", {
-          name,
-          noo: () => <Noo />,
-          strong: (children) => <strong>{children}</strong>,
-        })}
-      </p>
-      <p className="my-4">
-        {t.rich("consent.description", {
-          name,
-          strong: (children) => <strong>{children}</strong>,
-        })}
-      </p>
-      <ul className="list-disc px-4 flex flex-col space-y-1">
-        {cleanClaims.map((claim) => (
-          <li key={claim}>{t("consent.claims." + claim)}</li>
-        ))}
-      </ul>
-
-      <Form sessionId={sessionId} />
-    </div>
-  );
 }

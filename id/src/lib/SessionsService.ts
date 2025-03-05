@@ -53,6 +53,11 @@ export async function getUserForSession(sessionId: string) {
   return service.getUserBySid(sessionId);
 }
 
+export async function getSessions() {
+  const manager = new SessionsService(await getSessionCookie());
+  return manager.activeSessions();
+}
+
 export class SessionsService {
   private tokens: string[];
 

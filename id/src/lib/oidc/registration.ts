@@ -260,7 +260,7 @@ async function validateRegistration(
           "Sector Identifier URI must return an array.",
         );
       }
-    } catch (e) {
+    } catch {
       return buildErrorResponse(
         "invalid_client_metadata",
         "Failed to fetch sector identifier URI.",

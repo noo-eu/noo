@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Mine oma <noo></noo> avalehele",
+    "change_account": "Konto muuta",
     "consent": {
-      "title": "Logite sisse <strong>{name}</strong> oma <noo></noo> kontoga.",
-      "description": "<strong>{name}</strong> soovib juurdepääsu järgmisele teabele:",
       "claims": {
-        "name": "Teie täielik nimi",
-        "username": "Teie kasutajanimi",
-        "profile": "Teie profiilipilt",
-        "email": "Teie noo e-posti aadress",
-        "phone_number": "Teie telefoninumber",
         "address": "Teie postiaadress",
+        "birthdate": "Teie sünnikuupäev",
+        "email": "Teie noo e-posti aadress",
         "gender": "Sugu, millega ennast identifitseerite",
-        "birthdate": "Teie sünnikuupäev"
-      }
-    },
-    "fatal": {
-      "title": "Midagi läks valesti",
-      "description": "Proovisite sisse logida kolmanda osapoole rakendusse, kuid see ei tööta õigesti. Palun proovige hiljem uuesti või võtke rakenduse omanikuga ühendust, edastades järgmise teabe:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Valige konto"
+        "name": "Teie täielik nimi",
+        "phone_number": "Teie telefoninumber",
+        "profile": "Teie profiilipilt",
+        "username": "Teie kasutajanimi"
+      },
+      "description": "<strong>{name}</strong> soovib juurdepääsu järgmisele teabele:",
+      "title": "Sul on vajadus kirja andmisega <details>{name}</details> juurde sisselogeda."
     },
     "end_session": {
-      "title": "Logi välja",
       "description": "{name, select, undefined {Said ükskord välja teise tarkvara kasutaja.} other {Said välja <strong>{name}</strong>.}}",
-      "query": "Kas soovid ka seejärel seansi selle <noo>kauga</noo> kesktelga lõpetada?"
+      "query": "Kas soovid ka seejärel seansi selle <noo>kauga</noo> kesktelga lõpetada?",
+      "title": "Logi välja"
+    },
+    "fatal": {
+      "description": "Proovisite sisse logida kolmanda osapoole rakendusse, kuid see ei tööta õigesti. Palun proovige hiljem uuesti või võtke rakenduse omanikuga ühendust, edastades järgmise teabe:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Midagi läks valesti"
+    },
+    "home": "Mine oma <noo></noo> avalehele",
+    "switch": {
+      "description": "et jätkata rakenduses <details>{name}</details>",
+      "legalComplete": "Enne sisselogimist peate kontrollima <privacy>privaatsustingimusi</privacy> ja <terms>kasutustingimusi</terms> {client}.",
+      "legalNone": "Enne sisselogimist peate kontrollima {client} õigusdokumente.",
+      "legalPrivacy": "Enne sisselogimist peate kontrollima <privacy>privaatsustingimusi</privacy> {client}.",
+      "legalTerms": "Enne sisselogimist peate kontrollima <terms>kasutustingimusi</terms> {client}.",
+      "pageTitle": "Logi sisse <noo></noo>",
+      "signin": "Kasuta teist kontot",
+      "title": "Valige konto"
     }
   }
 }

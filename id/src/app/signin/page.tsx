@@ -1,56 +1,47 @@
-"use client";
-
-import { Button } from "@/components/Button";
 import { Noo } from "@/components/Noo";
-import { PasswordField } from "@/components/PasswordField";
-import { TextField } from "@/components/TextField";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { useActionState } from "react";
-import { signin } from "./actions";
+import { PageModal } from "@/components/PageModal";
+import { PresentClient } from "@/components/PresentClient";
+import { SignInWithNoo } from "@/components/SignInWithNoo";
+import OidcClients from "@/db/oidc_clients";
+import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
+import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Form } from "./Form";
+import { PresentNoo } from "./PresentNoo";
 
-type State = {
-  username?: string;
-  error?: unknown;
-};
-
-export default function SignupPage() {
-  const [state, formAction, pending] = useActionState(signin, {} as State);
-  const t = useTranslations("signin");
-
-  const continueUrl = useSearchParams().get("continue");
+export default async function SigninPage() {
+  const oidcAuthorization = await getOidcAuthorizationRequest();
 
   return (
     <>
-      <h1 className="text-3xl text-center mb-8">
-        {t.rich("title", { noo: () => <Noo /> })}
-      </h1>
-
-      {state.error && (
-        <div className="bg-red-100 text-red-800 p-4 rounded mb-6">
-          {t("error")}
+      {oidcAuthorization && <SignInWithNoo />}
+      <PageModal.Modal>
+        <LeftPanel />
+        <div>
+          <Form />
         </div>
-      )}
-
-      <form action={formAction} className="space-y-8">
-        <TextField
-          label={t("username")}
-          name="username"
-          defaultValue={state.username}
-        />
-
-        <PasswordField label={t("password")} name="password" />
-
-        {continueUrl && (
-          <input type="hidden" name="continue" value={continueUrl} />
-        )}
-
-        <div className="flex justify-end mt-12">
-          <Button type="submit" pending={pending} data-testid="signinSubmit">
-            {t("submit")}
-          </Button>
-        </div>
-      </form>
+      </PageModal.Modal>
     </>
   );
+}
+
+async function LeftPanel() {
+  const oidcAuthorization = await getOidcAuthorizationRequest();
+  const t = await getTranslations("signin");
+  const locale = await getLocale();
+
+  if (oidcAuthorization) {
+    const client = (await OidcClients.find(oidcAuthorization.client_id))!;
+
+    const clientFields = {
+      name: getLocalizedOidcField(client, "clientName", locale)!,
+      logo: getLocalizedOidcField(client, "logoUri", locale),
+    };
+
+    const title = t.rich("title", { noo: () => <Noo /> });
+
+    return <PresentClient client={clientFields} title={title} />;
+  }
+
+  return <PresentNoo />;
 }

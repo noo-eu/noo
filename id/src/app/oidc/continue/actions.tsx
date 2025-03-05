@@ -2,11 +2,14 @@
 
 import OidcConsents from "@/db/oidc_consents";
 import {
-  AuthorizationRequest,
   Claims,
   createCode,
   returnToClientUrl,
 } from "@/lib/oidc/authorization";
+import {
+  deleteOidcAuthorizationCookie,
+  getOidcAuthorizationRequest,
+} from "@/lib/oidc/utils";
 import {
   getSessionCookie,
   SESSION_CHECK_COOKIE_NAME,
@@ -15,14 +18,11 @@ import {
 import { humanIdToUuid, sha256 } from "@/utils";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import {
-  deleteOidcAuthorizationCookie,
-  getOidcAuthorizationCookie,
-} from "../consent/actions";
 
 export async function afterConsent(sessionId: string) {
-  const oidcAuthRequest =
-    (await getOidcAuthorizationCookie()) as AuthorizationRequest | null;
+  "use server";
+
+  const oidcAuthRequest = await getOidcAuthorizationRequest();
   if (!oidcAuthRequest) {
     return {};
   }

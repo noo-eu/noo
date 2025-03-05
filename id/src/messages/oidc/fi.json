@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Siirry <noo></noo> kotisivullesi",
+    "change_account": "Vaihda tili",
     "consent": {
-      "title": "Kirjaudut sisään palveluun <strong>{name}</strong> käyttäen <noo></noo>-tiliäsi.",
-      "description": "<strong>{name}</strong> pyytää pääsyä seuraaviin tietoihin:",
       "claims": {
-        "name": "Koko nimesi",
-        "username": "Käyttäjätunnuksesi",
-        "profile": "Profiilikuvasi",
-        "email": "Noo-sähköpostiosoitteesi",
-        "phone_number": "Puhelinnumerosi",
         "address": "Postiosoitteesi",
+        "birthdate": "Syntymäaikasi",
+        "email": "Noo-sähköpostiosoitteesi",
         "gender": "Sukupuoli, johon identifioidut",
-        "birthdate": "Syntymäaikasi"
-      }
-    },
-    "fatal": {
-      "title": "Jokin meni pieleen",
-      "description": "Yritit kirjautua kolmannen osapuolen sovellukseen, mutta sovellus ei toimi oikein. Yritä myöhemmin uudelleen tai ota yhteyttä sovelluksen omistajaan seuraavilla tiedoilla:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Valitse tili"
+        "name": "Koko nimesi",
+        "phone_number": "Puhelinnumerosi",
+        "profile": "Profiilikuvasi",
+        "username": "Käyttäjätunnuksesi"
+      },
+      "description": "<strong>{name}</strong> pyytää pääsyä seuraaviin tietoihin:",
+      "title": "Kirjaudut sisään <details>{name}</details>.-palveluun."
     },
     "end_session": {
-      "title": "Kirjaudu ulos",
       "description": "{name, select, undefined {Olet kirjautunut ulos kolmannen osapuolen sovelluksesta.} other {Olet kirjautunut ulos <strong>{name}</strong>-sovelluksesta.}}",
-      "query": "Haluatko myös lopettaa käyttökokemuksesi tästä laitteesta <noo></noo>?"
+      "query": "Haluatko myös lopettaa käyttökokemuksesi tästä laitteesta <noo></noo>?",
+      "title": "Kirjaudu ulos"
+    },
+    "fatal": {
+      "description": "Yritit kirjautua kolmannen osapuolen sovellukseen, mutta sovellus ei toimi oikein. Yritä myöhemmin uudelleen tai ota yhteyttä sovelluksen omistajaan seuraavilla tiedoilla:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Jokin meni pieleen"
+    },
+    "home": "Siirry <noo></noo> kotisivullesi",
+    "switch": {
+      "description": "jatkaaksesi sovelluksessa <details>{name}</details>",
+      "legalComplete": "Ennen kirjautumista sinun on tarkistettava <privacy>tietosuojakäytännöt</privacy> ja <terms>käyttöehdot</terms> {client}.",
+      "legalNone": "Ennen kirjautumista sinun on tarkistettava {client} oikeusasiakirjat.",
+      "legalPrivacy": "Ennen kirjautumista sinun on tarkistettava <privacy>tietosuojakäytännöt</privacy> {client}.",
+      "legalTerms": "Ennen kirjautumista sinun on tarkistettava <terms>käyttöehdot</terms> {client}.",
+      "pageTitle": "Kirjaudu sisään <noo></noo>",
+      "signin": "Käytä toista tiliä",
+      "title": "Valitse tili"
     }
   }
 }

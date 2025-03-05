@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Belépd a <noo></noo> fiókodba",
-    "username": "Felhasználónév vagy e-mail",
+    "error": "A megadott adatok nem stimmelnek",
     "password": "Jelszó",
     "submit": "Bejelentkezés",
-    "error": "A megadott adatok nem stimmelnek"
+    "title": "Belépd a <noo></noo> fiókodba",
+    "username": "Felhasználónév vagy e-mail"
   }
 }

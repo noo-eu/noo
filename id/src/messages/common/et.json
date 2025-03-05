@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Järgmine",
-    "continue": "Kontrolli välja",
     "cancel": "Tühista",
+    "continue": "Kontrolli välja",
+    "madeWith": "Loodud ❤️ ja ☕️ Euroopa Liidus",
+    "next": "Järgmine",
+    "no": "Ei",
     "optional": "Valikuline",
-    "terms": "Märõded ja tingimused",
-    "privacy": "Õiguskaitse teatis",
     "passwordField": {
-      "show": "Käivita parooli nägemine",
       "ariaLabelShow": "Parool näidata tekstina ekraanile. Märkus: see näitab teie parooli ekraanil!",
-      "hide": "Peida parool"
+      "hide": "Peida parool",
+      "show": "Käivita parooli nägemine"
     },
-    "yes": "Jah",
-    "no": "Ei"
+    "privacy": "Õiguskaitse teatis",
+    "terms": "Märõded ja tingimused",
+    "yes": "Jah"
   }
 }

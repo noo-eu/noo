@@ -1,4 +1,5 @@
-import { SUPPORTED_LANGUAGES } from "@/i18n/request";
+import { SUPPORTED_LANGUAGES } from "@/i18n";
+import json5 from "json5";
 import { readdir } from "node:fs/promises";
 
 const files = await readdir("src/messages", { recursive: true });
@@ -14,10 +15,21 @@ for (const directory of directories) {
     if (!files.includes(`${directory}/${language}.json`)) {
       await Bun.write(`src/messages/${directory}/${language}.json`, "{}");
     }
+
+    // Check if --force-sort is passed
+    if (process.argv.includes("--force-sort")) {
+      const content = await Bun.file(
+        `src/messages/${directory}/${language}.json`,
+      ).text();
+      const parsed = json5.parse(content);
+      const sorted = sort(parsed);
+      Bun.write(
+        `src/messages/${directory}/${language}.json`,
+        JSON.stringify(sorted, null, 2),
+      );
+    }
   }
 }
-
-import json5 from "json5";
 
 // Check that translation files have no missing keys
 for (const directory of directories) {
@@ -40,7 +52,7 @@ for (const directory of directories) {
       );
       const result = await translate(source, language);
 
-      const final = merge(other, result);
+      const final = sort(merge(other, result));
       Bun.write(
         `src/messages/${directory}/${language}.json`,
         JSON.stringify(final, null, 2),
@@ -75,6 +87,7 @@ function recursiveKeyCheck(
         delete other[key];
       }
 
+      // @ts-expect-error trim is only on strings, but we know it's a string
       if (!other[key] || other[key].trim() === "") {
         misses.push(`${prefix}${key}`);
         other[key] = "";
@@ -172,4 +185,25 @@ function merge(base: TranslationFile, translation: Record<string, string>) {
   }
 
   return base;
+}
+
+function sort(obj: TranslationFile): TranslationFile {
+  if (typeof obj !== "object" || obj === null) {
+    return obj;
+  }
+
+  const keys = Object.keys(obj).sort();
+  const sorted: TranslationFile = {};
+
+  // Add each key-value pair to the new object in sorted order
+  // Sort nested objects recursively
+  for (const key of keys) {
+    if (typeof obj[key] === "object") {
+      sorted[key] = sort(obj[key]);
+    } else {
+      sorted[key] = obj[key];
+    }
+  }
+
+  return sorted;
 }

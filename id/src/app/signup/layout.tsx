@@ -1,8 +1,6 @@
-"use client";
-
+import { ModalFooter } from "@/components/ModalFooter";
 import { Noo } from "@/components/Noo";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 export default function SignupPage({
   children,
@@ -22,19 +20,8 @@ export default function SignupPage({
           {children}
         </div>
 
-        <div className="w-full sm:max-w-lg sm:mx-auto flex justify-end space-x-4 my-4 px-8 sm:px-0">
-          <Link
-            href="/"
-            className="text-xs hover:bg-blue-200 dark:hover:bg-white/20 p-2.5 rounded-md"
-          >
-            {t("common.terms")}
-          </Link>
-          <Link
-            href="/"
-            className="text-xs hover:bg-blue-200 dark:hover:bg-white/20 p-2.5 rounded-md"
-          >
-            {t("common.privacy")}
-          </Link>
+        <div className="sm:max-w-lg sm:mx-auto">
+          <ModalFooter />
         </div>
       </div>
     </div>

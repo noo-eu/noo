@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Tír an ás sin don ghlúin ",
-    "username": "Ciall nó rphost",
+    "error": "Níl na cheadaithe agat a theastaigh ",
     "password": "Páirtíochta",
     "submit": "Tóga isteach",
-    "error": "Níl na cheadaithe agat a theastaigh "
+    "title": "Logáil isteach i do chuntas <noo></noo>",
+    "username": "Ciall nó rphost"
   }
 }
