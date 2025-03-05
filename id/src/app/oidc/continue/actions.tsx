@@ -2,6 +2,7 @@
 
 import OidcConsents from "@/db/oidc_consents";
 import {
+  AuthorizationRequest,
   Claims,
   createCode,
   returnToClientUrl,
@@ -14,27 +15,14 @@ import {
 import { humanIdToUuid, sha256 } from "@/utils";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-
-export async function getOidcAuthorizationCookie() {
-  const cookieStore = await cookies();
-  const oidcAuthRequestCookie = cookieStore.get(
-    "oidc_authorization_request",
-  )?.value;
-  if (!oidcAuthRequestCookie) {
-    return null;
-  }
-
-  try {
-    // URL-decode the cookie value
-    const oidcAuthRequest = decodeURIComponent(oidcAuthRequestCookie);
-    return JSON.parse(oidcAuthRequest);
-  } catch {
-    return null;
-  }
-}
+import {
+  deleteOidcAuthorizationCookie,
+  getOidcAuthorizationCookie,
+} from "../consent/actions";
 
 export async function afterConsent(sessionId: string) {
-  const oidcAuthRequest = await getOidcAuthorizationCookie();
+  const oidcAuthRequest =
+    (await getOidcAuthorizationCookie()) as AuthorizationRequest | null;
   if (!oidcAuthRequest) {
     return {};
   }
@@ -55,6 +43,8 @@ export async function afterConsent(sessionId: string) {
   );
 
   const code = await createCode(session, oidcAuthRequest);
+
+  await deleteOidcAuthorizationCookie();
 
   const url = returnToClientUrl(oidcAuthRequest, {
     code: code.id,

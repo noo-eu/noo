@@ -54,25 +54,24 @@ describe("OIDC Client Registration", async () => {
     });
   });
 
-  test("it refuses to redirect_uris with query string or fragments", async () => {
+  test("it refuses redirect_uris with fragments", async () => {
     const result = await perform({
-      redirect_uris: Array(20).fill(
-        "https://example.com/callback?query=string",
-      ),
+      redirect_uris: ["https://example.com/callback#fragment"],
     });
 
     expect(result).toMatchObject({
       error: "invalid_redirect_uri",
       error_description: expect.any(String),
     });
+  });
 
-    const result2 = await perform({
-      redirect_uris: Array(20).fill("https://example.com/callback#fragment"),
+  test("it allows redirect_uris with query strings", async () => {
+    const result = await perform({
+      redirect_uris: ["https://example.com/callback?query=string"],
     });
 
-    expect(result2).toMatchObject({
-      error: "invalid_redirect_uri",
-      error_description: expect.any(String),
+    expect(result).toMatchObject({
+      client_id: expect.any(String),
     });
   });
 

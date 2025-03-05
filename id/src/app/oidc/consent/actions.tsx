@@ -2,9 +2,21 @@
 
 import OidcConsents from "@/db/oidc_consents";
 import { Claims } from "@/lib/oidc/authorization";
+import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { afterConsent } from "../continue/actions";
+import { getVerifyingKeyByAlg } from "../jwks";
+
+async function decode(token: string) {
+  try {
+    const { key } = (await getVerifyingKeyByAlg("EdDSA"))!;
+    return (await jwtVerify(token, key)).payload;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
 
 export async function getOidcAuthorizationCookie() {
   const cookieStore = await cookies();
@@ -15,13 +27,16 @@ export async function getOidcAuthorizationCookie() {
     return null;
   }
 
-  try {
-    // URL-decode the cookie value
-    const oidcAuthRequest = decodeURIComponent(oidcAuthRequestCookie);
-    return JSON.parse(oidcAuthRequest);
-  } catch {
-    return null;
-  }
+  // URL-decode the cookie value
+  const oidcAuthRequest = decodeURIComponent(oidcAuthRequestCookie);
+
+  // Verify the signature
+  return await decode(oidcAuthRequest);
+}
+
+export async function deleteOidcAuthorizationCookie() {
+  const cookieStore = await cookies();
+  cookieStore.delete("oidc_authorization_request");
 }
 
 export async function consentFormSubmit(_: unknown, formData: FormData) {

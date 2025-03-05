@@ -5,7 +5,7 @@ import { getUserForSession } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { getOidcAuthorizationCookie } from "./actions";
+import { getOidcAuthorizationCookie } from "../consent/actions";
 import Form from "./Form";
 
 export const revalidate = 0;

@@ -77,7 +77,10 @@ export default async function OidcConsentPage({
   const t = await getTranslations("oidc");
 
   const oidcAuthRequest =
-    (await getOidcAuthorizationCookie()) as AuthorizationRequest;
+    (await getOidcAuthorizationCookie()) as AuthorizationRequest | null;
+
+  console.log("oidcAuthRequest", oidcAuthRequest);
+
   if (!oidcAuthRequest) {
     console.warn("No OIDC auth request found");
     return redirect("/");
