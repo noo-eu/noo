@@ -1,12 +1,13 @@
 "use server";
 
 import Users from "@/db/users";
+import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
+import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import {
   SESSION_COOKIE_NAME,
   SessionsService,
   setSessionCookie,
 } from "@/lib/SessionsService";
-import { getIpAddress, getUserAgent } from "@/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -54,12 +55,17 @@ export async function signin(_: unknown, formData: FormData) {
     await setSessionCookie(svc.buildCookie());
   }
 
-  let continueUrl = params.continue;
-  if (!continueUrl || !continueUrl.startsWith("/")) {
-    continueUrl = "/";
+  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
+  if (!oidcAuthorizationRequest) {
+    let continueUrl = params.continue;
+    if (!continueUrl || !continueUrl.startsWith("/")) {
+      continueUrl = "/";
+    }
+
+    continueUrl = continueUrl.replace("__sid__", session.id);
+
+    redirect(continueUrl);
+  } else {
+    redirect(`/oidc/consent?sid=${session.id}`);
   }
-
-  continueUrl = continueUrl.replace("__sid__", session.id);
-
-  redirect(continueUrl);
 }

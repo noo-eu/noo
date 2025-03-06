@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Nākamais",
-    "continue": "Turpināt",
     "cancel": "Atcelt",
+    "continue": "Turpināt",
+    "madeWith": "Izveidots ar ❤️ un ☕️ Eiropas Savienībā",
+    "next": "Nākamais",
+    "no": "Nē",
     "optional": "Reizē pieejams",
-    "terms": "Noteikumi",
-    "privacy": "Privātība",
     "passwordField": {
-      "show": "Rādīte parole",
       "ariaLabelShow": "Rādīte parole kā vienkāršu tekstu. Piezīme: šis izvirsis jūsu paroli uz ekrāna.",
-      "hide": "Slēpt parole"
+      "hide": "Slēpt parole",
+      "show": "Rādīte parole"
     },
-    "yes": "Jā",
-    "no": "Nē"
+    "privacy": "Privātība",
+    "terms": "Noteikumi",
+    "yes": "Jā"
   }
 }

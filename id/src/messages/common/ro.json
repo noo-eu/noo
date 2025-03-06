@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Înainte",
-    "continue": "Continuă",
     "cancel": "Anulare",
+    "continue": "Continuă",
+    "madeWith": "Făcut cu ❤️ și ☕️ în Uniunea Europeană",
+    "next": "Înainte",
+    "no": "Nu",
     "optional": "Facultativ",
-    "terms": "Termeni și condiții",
-    "privacy": "Confidențialitate",
     "passwordField": {
-      "show": "Arată parola",
       "ariaLabelShow": "Vezi parola în textul normal. Avertare: aceasta va afișa parola pe ecran.",
-      "hide": "Ascunde parola"
+      "hide": "Ascunde parola",
+      "show": "Arată parola"
     },
-    "yes": "Da",
-    "no": "Nu"
+    "privacy": "Confidențialitate",
+    "terms": "Termeni și condiții",
+    "yes": "Da"
   }
 }

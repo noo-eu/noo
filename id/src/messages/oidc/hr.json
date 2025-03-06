@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Idi na svoju početnu stranicu <noo></noo>",
+    "change_account": "Promijeni račun",
     "consent": {
-      "title": "Prijavljujete se na <strong>{name}</strong> pomoću svog <noo></noo> računa.",
-      "description": "<strong>{name}</strong> traži pristup sljedećim informacijama:",
       "claims": {
-        "name": "Vaše puno ime",
-        "username": "Vaše korisničko ime",
-        "profile": "Vaša profilna slika",
-        "email": "Vaša noo adresa e-pošte",
-        "phone_number": "Vaš telefonski broj",
         "address": "Vaša poštanska adresa",
+        "birthdate": "Vaš datum rođenja",
+        "email": "Vaša noo adresa e-pošte",
         "gender": "Spol s kojim se identificirate",
-        "birthdate": "Vaš datum rođenja"
-      }
-    },
-    "fatal": {
-      "title": "Nešto je pošlo po zlu",
-      "description": "Pokušali ste se prijaviti u aplikaciju treće strane, ali aplikacija ne radi ispravno. Pokušajte ponovno kasnije ili kontaktirajte vlasnika aplikacije s sljedećim informacijama:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Odaberite račun"
+        "name": "Vaše puno ime",
+        "phone_number": "Vaš telefonski broj",
+        "profile": "Vaša profilna slika",
+        "username": "Vaše korisničko ime"
+      },
+      "description": "<strong>{name}</strong> traži pristup sljedećim informacijama:",
+      "title": "Potrebno je da se pristupa <details>{name}</details>."
     },
     "end_session": {
-      "title": "Odjava",
       "description": "{name, select, undefined {U odjavio/la se iz treće strane aplikacije.} other {U odjavio/la se iz <strong>{name}</strong>.}}",
-      "query": "Želite li razriješiti i ovo sesiju na <noo></noo>?"
+      "query": "Želite li razriješiti i ovo sesiju na <noo></noo>?",
+      "title": "Odjava"
+    },
+    "fatal": {
+      "description": "Pokušali ste se prijaviti u aplikaciju treće strane, ali aplikacija ne radi ispravno. Pokušajte ponovno kasnije ili kontaktirajte vlasnika aplikacije s sljedećim informacijama:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Nešto je pošlo po zlu"
+    },
+    "home": "Idi na svoju početnu stranicu <noo></noo>",
+    "switch": {
+      "description": "da nastavak na <details>{name}</details>",
+      "legalComplete": "Prije prijave morate provjeriti <privacy>pravila o privatnosti</privacy> i <terms>uvjete korištenja</terms> {client}.",
+      "legalNone": "Prije prijave morate provjeriti pravne dokumente {client}.",
+      "legalPrivacy": "Prije prijave morate provjeriti <privacy>pravila o privatnosti</privacy> {client}.",
+      "legalTerms": "Prije prijave morate provjeriti <terms>uvjete korištenja</terms> {client}.",
+      "pageTitle": "Prijavite se putem <noo></noo>",
+      "signin": "Koristite drugi račun",
+      "title": "Odaberite račun"
     }
   }
 }

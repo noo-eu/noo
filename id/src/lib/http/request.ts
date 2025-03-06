@@ -52,6 +52,20 @@ export class HttpRequest {
     return this.header("Authorization");
   }
 
+  get bearerToken(): string | null {
+    const auth = this.authorization;
+    if (!auth) {
+      return null;
+    }
+
+    const parts = auth.split(" ");
+    if (parts.length !== 2 || parts[0].toLowerCase() !== "bearer") {
+      return null;
+    }
+
+    return parts[1];
+  }
+
   get protocol(): string {
     return this.request.headers.get("X-Forwarded-Proto") ?? "http";
   }

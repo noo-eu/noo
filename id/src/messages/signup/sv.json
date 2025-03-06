@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Skapa ditt konto på <noo></noo>",
     "errors": {
       "first_name_required": "Fyll i ditt förnamn",
+      "invalid_data": "Något gick fel. Kolla igenom det data du skrivit in",
+      "name_invalid": "Namnet innehåller några ogiltiga tecken",
       "name_too_long": "Namnet du skrivit är för långt",
       "name_too_short": "Namnet du skrivit är för kort",
-      "name_invalid": "Namnet innehåller några ogiltiga tecken",
-      "username_required": "Fyll i ditt nya användarnamn",
+      "password_classes": "Använd ett starkare lösenord. Använd en blandning av bokstäver, siffror och tecken",
+      "password_length": "Använd åtminstone 10 tecken",
+      "password_required": "Fyll i ditt lösenord",
+      "password_too_long": "Lösenordet du skrivit är för långt",
       "username_first_char": "Ditt användarnamn måste börja med en bokstav eller siffra",
+      "username_invalid": "Ditt användarnamn får bara innehålla bokstäver, siffror och punkter (.)",
       "username_last_char": "Ditt användarnamn måste sluta med en bokstav eller siffra",
       "username_length": "Ditt användarnamn måste vara mellan 6 och 30 tecken",
-      "username_invalid": "Ditt användarnamn får bara innehålla bokstäver, siffror och punkter (.)",
-      "username_two_dots": "Ditt användarnamn får inte innehålla två punkter i rad",
+      "username_required": "Fyll i ditt nya användarnamn",
       "username_taken": "Det här användarnamnet är redan taget",
-      "password_required": "Fyll i ditt lösenord",
-      "password_length": "Använd åtminstone 10 tecken",
-      "password_too_long": "Lösenordet du skrivit är för långt",
-      "password_classes": "Använd ett starkare lösenord. Använd en blandning av bokstäver, siffror och tecken",
-      "invalid_data": "Något gick fel. Kolla igenom det data du skrivit in"
+      "username_two_dots": "Ditt användarnamn får inte innehålla två punkter i rad"
     },
-    "create_your_account": "Skapa ditt <konto></konto>",
     "step1": {
-      "title": "Fyll i ditt namn",
       "first_name": "Förnamn",
-      "last_name": "Efternamn"
+      "last_name": "Efternamn",
+      "title": "Fyll i ditt namn"
     },
     "step2": {
       "title": "Välj din e-postadress",
       "username": "E-postadress"
     },
     "step3": {
-      "title": "Skapa ett starkt lösenord",
-      "password": "Lösenord"
+      "password": "Lösenord",
+      "title": "Skapa ett starkt lösenord"
     },
     "step4": {
-      "title": "Det sista...",
-      "description": "        <p>Ett <konto></konto> tillåter dig att ha åtkomst till en mängd tjänster, som e-post, filminne och mera.</p>        <p><villkor><konto></konto>'s Villkor</villkor> förklarar vad du kan förvänta dig när du använder tjänsterna, medan <confidentialitet><konto></konto>'s Sekretesspolicy</confidentialitet> beskriver hur vi hanterar information som genereras eller samlas in när du använder tjänsterna.</p>        <p>För att skapa ett <konto></konto> och använda tjänsterna måste du acceptera att läsa <konto></konto>'s Villkor och Sekretesspolicy.</p>",
-      "accept": "Acceptera och fortsätta"
+      "accept": "Acceptera och fortsätta",
+      "description": "        <p>Ett <noo></noo> tillåter dig att ha åtkomst till en mängd tjänster, som e-post, filminne och mera.</p>        <p><terms><noo></noo>'s Villkor</terms> förklarar vad du kan förvänta dig när du använder tjänsterna, medan <privacy><noo></noo>'s Sekretesspolicy</privacy> beskriver hur vi hanterar information som genereras eller samlas in när du använder tjänsterna.</p>        <p>För att skapa ett <noo></noo> och använda tjänsterna måste du acceptera att läsa <noo></noo>'s Villkor och Sekretesspolicy.</p>",
+      "title": "Det sista..."
     }
   }
 }

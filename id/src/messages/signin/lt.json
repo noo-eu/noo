@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Prisijungti į savo Ľamų account",
-    "username": "Šlovės vardas arba el. paštas",
+    "error": "Įvesti duomenys yra neteisingi",
     "password": "Slaptažodis",
     "submit": "Prisijungti",
-    "error": "Įvesti duomenys yra neteisingi"
+    "title": "Prisijunkite prie savo <noo></noo> paskyros",
+    "username": "Šlovės vardas arba el. paštas"
   }
 }

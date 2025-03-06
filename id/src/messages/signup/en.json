@@ -1,44 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Create your <noo></noo> account",
     "errors": {
       "first_name_required": "Please enter your first name",
+      "invalid_data": "Something went wrong. Please check the data you entered",
+      "name_invalid": "The name contains some invalid characters",
       "name_too_long": "The name you entered is too long",
       "name_too_short": "The name you entered is too short",
-      "name_invalid": "The name contains some invalid characters",
-      "username_required": "Please enter your new username",
+      "password_classes": "Please use a stronger password. Use a mix of letters, numbers and symbols",
+      "password_length": "Please use 10 or more characters",
+      "password_required": "Please enter your password",
+      "password_too_long": "The password you entered is too long",
       "username_first_char": "Your username must start with a letter or number",
+      "username_invalid": "Your username can contain only letters, numbers and dots (.)",
       "username_last_char": "Your username must end with a letter or number",
       "username_length": "Your username must be between 6 and 30 characters",
-      "username_invalid": "Your username can contain only letters, numbers and dots (.)",
-      "username_two_dots": "Your username cannot contain two dots (.) in a row",
+      "username_required": "Please enter your new username",
       "username_taken": "This username is taken",
-      "password_required": "Please enter your password",
-      "password_length": "Please use 10 or more characters",
-      "password_too_long": "The password you entered is too long",
-      "password_classes": "Please use a stronger password. Use a mix of letters, numbers and symbols",
-      "invalid_data": "Something went wrong. Please check the data you entered"
+      "username_two_dots": "Your username cannot contain two dots (.) in a row"
     },
-    "create_your_account": "Create your <noo></noo> account",
     "step1": {
-      "title": "Enter your name",
       "first_name": "First name",
-      "last_name": "Surname"
+      "last_name": "Surname",
+      "title": "Enter your name"
     },
     "step2": {
       "title": "Choose your email address",
       "username": "Email address"
     },
     "step3": {
-      "title": "Create a strong password",
-      "password": "Password"
+      "password": "Password",
+      "title": "Create a strong password"
     },
     "step4": {
-      "title": "One last thing...",
-      "description": "\
-        <p>A <noo></noo> account allows you to access a range of services, such as email, file storage, and more.</p>\
-        <p><terms><noo></noo>'s Terms of Service</terms> explain what to expect as you use the services, while <privacy><noo></noo>'s Privacy Policy</privacy> describes how we handle information generated or gathered as you use the services.</p>\
-        <p>In order to create a <noo></noo> account and use the services, you must accept to <noo></noo>'s Terms of Service and Privacy Policy.</p>",
-      "accept": "Accept and continue"
+      "accept": "Accept and continue",
+      "description": "        <p>A <noo></noo> account allows you to access a range of services, such as email, file storage, and more.</p>        <p><terms><noo></noo>'s Terms of Service</terms> explain what to expect as you use the services, while <privacy><noo></noo>'s Privacy Policy</privacy> describes how we handle information generated or gathered as you use the services.</p>        <p>In order to create a <noo></noo> account and use the services, you must accept to <noo></noo>'s Terms of Service and Privacy Policy.</p>",
+      "title": "One last thing..."
     }
   }
 }

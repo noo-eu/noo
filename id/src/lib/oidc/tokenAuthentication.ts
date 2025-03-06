@@ -105,7 +105,7 @@ export async function authenticateClientSecretJwt(
         subject: clientId,
       },
     );
-  } catch (e) {
+  } catch {
     return false;
   }
 

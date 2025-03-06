@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Izveido savu <noo></noo> kontu",
     "errors": {
       "first_name_required": "Ievadi tuvi vārdu",
+      "invalid_data": "Kāda kļūda notika. Lūdzu, pārbaudiet ievadīto datu saknes.",
+      "name_invalid": "Ievadītais vārds satur neleistus simbolus",
       "name_too_long": "Vārds, ko iestatāji, ir pārliels",
       "name_too_short": "Jāievada vismaz viens būtīgs raksts",
-      "name_invalid": "Ievadītais vārds satur neleistus simbolus",
-      "username_required": "Lūdzu, ievadi jaunu lietotāju vārdu",
+      "password_classes": "Lūdzu, izvēlati stipru paroli ar burtiem, skaitļiem un simboliem.",
+      "password_length": "Ievadi vismaz 10 rakstus garu parole.",
+      "password_required": "Lūdzu, ievadi paroli",
+      "password_too_long": "Parole, ko iestatāji, ir pārliela.",
       "username_first_char": "Lietotāja vārds jāsāk ar burtu vai skaitli",
+      "username_invalid": "Jaukurts lietotāja vārds var saturēt tikai burtus, skaitļus un punktus (.).",
       "username_last_char": "Lietotāja vārds jābeidz ar burtu vai skaitli",
       "username_length": "Lietotāja vārds ir jābūt 6 nozīmēm garšam un ne mazāk kā 30",
-      "username_invalid": "Jaukurts lietotāja vārds var saturēt tikai burtus, skaitļus un punktus (.).",
-      "username_two_dots": "Lietotāja vārds nav var izmantot vienīgi divus punktus (.) pēc kārtas.",
+      "username_required": "Lūdzu, ievadi jaunu lietotāju vārdu",
       "username_taken": "Šis lietotāja vārds ir izmantots",
-      "password_required": "Lūdzu, ievadi paroli",
-      "password_length": "Ievadi vismaz 10 rakstus garu parole.",
-      "password_too_long": "Parole, ko iestatāji, ir pārliela.",
-      "password_classes": "Lūdzu, izvēlati stipru paroli ar burtiem, skaitļiem un simboliem.",
-      "invalid_data": "Kāda kļūda notika. Lūdzu, pārbaudiet ievadīto datu saknes."
+      "username_two_dots": "Lietotāja vārds nav var izmantot vienīgi divus punktus (.) pēc kārtas."
     },
-    "create_your_account": "Izveido savu <noo></noo> kontu",
     "step1": {
-      "title": "Ievadi tuvi vārdu",
       "first_name": "Vārds",
-      "last_name": "Uzvārds"
+      "last_name": "Uzvārds",
+      "title": "Ievadi tuvi vārdu"
     },
     "step2": {
       "title": "Izvēlieties e-pasta adresi",
       "username": "E-pasta adrese"
     },
     "step3": {
-      "title": "Radīt stipru paroli",
-      "password": "Parole"
+      "password": "Parole",
+      "title": "Radīt stipru paroli"
     },
     "step4": {
-      "title": "Pilna izlase...",
+      "accept": "Piemēroti",
       "description": "        <p>Pārbaudiet savus kontu raksturus. Ja esi pieņēmis, un gribīsi tās izmantot</p>        <p><terms>Lietotāja pakalpojumu noteikumi</terms> ir raksti, kas papildus informacijas dēļu konta izmantošanai</p>        <p><privacy>Kontu privatības politika</privacy>, kurā norakstīts, kā jāizvada datu saknes pirms konta izmantošanas</p>",
-      "accept": "Piemēroti"
+      "title": "Pilna izlase..."
     }
   }
 }

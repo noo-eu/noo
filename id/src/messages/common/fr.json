@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Passer à l'étape suivante",
-    "continue": "Continuer",
     "cancel": "Annuler",
+    "continue": "Continuer",
+    "madeWith": "Fait avec ❤️ et ☕️ dans l'Union Européenne",
+    "next": "Passer à l'étape suivante",
+    "no": "Non",
     "optional": "Facultatif",
-    "terms": "Mentions légales",
-    "privacy": "Confidentialité",
     "passwordField": {
-      "show": "Afficher le mot de passe",
       "ariaLabelShow": "Afficher le mot de passe en clair. Attention, cela affichera votre mot de passe à l'écran.",
-      "hide": "Cacher le mot de passe"
+      "hide": "Cacher le mot de passe",
+      "show": "Afficher le mot de passe"
     },
-    "yes": "Oui",
-    "no": "Non"
+    "privacy": "Confidentialité",
+    "terms": "Mentions légales",
+    "yes": "Oui"
   }
 }

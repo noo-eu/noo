@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/Button";
-import { PasswordField } from "@/components/PasswordField";
+import { Button } from "@/components/shared/Button";
+import { PasswordField } from "@/components/shared/PasswordField";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { signupStep3 } from "../actions";

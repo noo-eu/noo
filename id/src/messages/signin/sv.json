@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Logga in på ditt konto",
-    "username": "Användarnamn eller e-postadress",
+    "error": "Felaktiga uppgifter",
     "password": "Lösenord",
     "submit": "Logga in",
-    "error": "Felaktiga uppgifter"
+    "title": "Logga in på ditt <noo></noo>-konto",
+    "username": "Användarnamn eller e-postadress"
   }
 }

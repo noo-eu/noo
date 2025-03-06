@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Lépjen be a saját <noo></noo> kezdőlapjára",
+    "change_account": "Fiók módosítása",
     "consent": {
-      "title": "<strong>{name}</strong> fiókba jelentkezik be a <noo></noo> fiókjával.",
-      "description": "<strong>{name}</strong> az alábbi információkhoz kér hozzáférést:",
       "claims": {
-        "name": "Teljes neve",
-        "username": "Felhasználóneve",
-        "profile": "Profilképe",
-        "email": "A noo e-mail címe",
-        "phone_number": "Telefonszáma",
         "address": "Postacíme",
+        "birthdate": "Születési dátuma",
+        "email": "A noo e-mail címe",
         "gender": "A nem, amellyel azonosul",
-        "birthdate": "Születési dátuma"
-      }
-    },
-    "fatal": {
-      "title": "Hiba történt",
-      "description": "Megpróbált bejelentkezni egy harmadik féltől származó alkalmazásba, de az alkalmazás nem működik megfelelően. Kérjük, próbálja meg később, vagy lépjen kapcsolatba az alkalmazás tulajdonosával az alábbi információkkal:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Válasszon egy fiókot"
+        "name": "Teljes neve",
+        "phone_number": "Telefonszáma",
+        "profile": "Profilképe",
+        "username": "Felhasználóneve"
+      },
+      "description": "<strong>{name}</strong> az alábbi információkhoz kér hozzáférést:",
+      "title": "Az Ön beleegyezéséhez csatlakozik a <details>{name}</details>."
     },
     "end_session": {
-      "title": "Kijelentkezés",
       "description": "{name, select, undefined {Harmadik szerepű alkalmazásból kijelentkezett.} other {<strong>{name}</strong> nevű fiókból kijelentkezett.}}",
-      "query": "Tartsa a megfelelő fiókot is?"
+      "query": "Tartsa a megfelelő fiókot is?",
+      "title": "Kijelentkezés"
+    },
+    "fatal": {
+      "description": "Megpróbált bejelentkezni egy harmadik féltől származó alkalmazásba, de az alkalmazás nem működik megfelelően. Kérjük, próbálja meg később, vagy lépjen kapcsolatba az alkalmazás tulajdonosával az alábbi információkkal:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Hiba történt"
+    },
+    "home": "Lépjen be a saját <noo></noo> kezdőlapjára",
+    "switch": {
+      "description": "a <details>{name}</details> alkalmazásba való belépéshez",
+      "legalComplete": "Bejelentkezés előtt ellenőriznie kell a <privacy>adatvédelmi irányelveket</privacy> és a <terms>használati feltételeket</terms> {client}.",
+      "legalNone": "Bejelentkezés előtt ellenőriznie kell a {client} jogi dokumentumait.",
+      "legalPrivacy": "Bejelentkezés előtt ellenőriznie kell a <privacy>adatvédelmi irányelveket</privacy> {client}.",
+      "legalTerms": "Bejelentkezés előtt ellenőriznie kell a <terms>használati feltételeket</terms> {client}.",
+      "pageTitle": "Bejelentkezés <noo></noo>-fiókkal",
+      "signin": "Másik fiók használata",
+      "title": "Válasszon fiókot"
     }
   }
 }

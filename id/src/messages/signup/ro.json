@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Creați contul dvs.",
     "errors": {
       "first_name_required": "Vă rugăm să introduceți primul nume",
+      "invalid_data": "Ceva nu a mers bine. Vă rog să verificați datele introduse",
+      "name_invalid": "Numele conține caractere nevalabile",
       "name_too_long": "Numele introdus este prea lung",
       "name_too_short": "Numele introdus este prea scurt",
-      "name_invalid": "Numele conține caractere nevalabile",
-      "username_required": "Vă rugăm să introduceți nouul nume de utilizator",
+      "password_classes": "Vă rugăm să utilizați o parolă mai puternică. Folosiți o amestec de litere, numere și simboluri",
+      "password_length": "Vă rugăm să utilizați 10 sau mai multe caractere",
+      "password_required": "Vă rugăm să introduceți parola",
+      "password_too_long": "Parola introdusă este prea lungă",
       "username_first_char": "Numărul de utilizator trebuie să înceapă cu literă sau cifră",
+      "username_invalid": "Numărul de utilizator poate conține doar litere, numere și puncte (. )",
       "username_last_char": "Numărul de utilizator trebuie să se încheie cu literă sau cifră",
       "username_length": "Numărul de utilizator trebuie să fie între 6 și 30 caractere",
-      "username_invalid": "Numărul de utilizator poate conține doar litere, numere și puncte (. )",
-      "username_two_dots": "Numărul de utilizator nu poate conține două puncte (.) consecutive",
+      "username_required": "Vă rugăm să introduceți nouul nume de utilizator",
       "username_taken": "Acest număr de utilizator este luat",
-      "password_required": "Vă rugăm să introduceți parola",
-      "password_length": "Vă rugăm să utilizați 10 sau mai multe caractere",
-      "password_too_long": "Parola introdusă este prea lungă",
-      "password_classes": "Vă rugăm să utilizați o parolă mai puternică. Folosiți o amestec de litere, numere și simboluri",
-      "invalid_data": "Ceva nu a mers bine. Vă rog să verificați datele introduse"
+      "username_two_dots": "Numărul de utilizator nu poate conține două puncte (.) consecutive"
     },
-    "create_your_account": "Creați contul dvs.",
     "step1": {
-      "title": "Introduceți numele vostru",
       "first_name": "Prenume",
-      "last_name": "Nume de familie"
+      "last_name": "Nume de familie",
+      "title": "Introduceți numele vostru"
     },
     "step2": {
       "title": "Alegeți adresa dumneavoastră de e-mail",
       "username": "Adresă de e-mail"
     },
     "step3": {
-      "title": "Creați o parolă puternică",
-      "password": "Parolă"
+      "password": "Parolă",
+      "title": "Creați o parolă puternică"
     },
     "step4": {
-      "title": "O ultimă chestie...",
-      "description": "        <p>Un cont permite accesul la o varietate de servicii, cum ar fi email-ul, stocarea fișierelor și mai multe.</p>        <p><terms>Termenii Serviciilor <noo></noo>'</terms> explică ce puteți aștepta în timp ce utilizați serviciile, în timp ce <privacy>Polița de Securitate a <noo></noo>'</privacy> descrie cum gestim informațiile generate sau culese atunci când utilizați serviciile.</p>        <p>Pentru a crea un cont și să folosiți serviciile, trebuie să acceptați Termenii Serviciilor și Polița de Securitate <noo></noo>.</p>",
-      "accept": "Acceptați și continuați"
+      "accept": "Acceptați și continuați",
+      "description": "        <p>Un cont permite accesul la o varietate de servicii, cum ar fi email-ul, stocarea fișierelor și mai multe.</p>        <p><terms>Termenii Serviciilor <noo></noo></terms> explică ce puteți aștepta în timp ce utilizați serviciile, în timp ce <privacy>Polița de Securitate a <noo></noo></privacy> descrie cum gestim informațiile generate sau culese atunci când utilizați serviciile.</p>        <p>Pentru a crea un cont și să folosiți serviciile, trebuie să acceptați Termenii Serviciilor și Polița de Securitate <noo></noo>.</p>",
+      "title": "O ultimă chestie..."
     }
   }
 }

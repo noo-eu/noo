@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Utwórz swoje konto",
     "errors": {
       "first_name_required": "Podaj swój imię",
+      "invalid_data": "Coś poszło nie tak. Sprawdź dane, które wpisałeś",
+      "name_invalid": "Nazwa zawiera niepoprawne znaki",
       "name_too_long": "Nazwa jest zbyt długa",
       "name_too_short": "Nazwa jest za krótka",
-      "name_invalid": "Nazwa zawiera niepoprawne znaki",
-      "username_required": "Podaj nowe nazwę użytkownika",
+      "password_classes": "Zrób bardziej silne hasło. Skorzystaj z mieszanki liter, cyfr i symboli",
+      "password_length": "Użyj co najmniej 10 znaków",
+      "password_required": "Podaj hasło",
+      "password_too_long": "Hasło, które podałeś jest zbyt długie",
       "username_first_char": "Nazwa użytkownika musi zaczynać się literą lub liczbą",
+      "username_invalid": "Nazwa użytkownika może zawierać tylko litery, cyfry i kropki (.)",
       "username_last_char": "Nazwa użytkownika musi kończyć się literą lub liczbą",
       "username_length": "Nazwa użytkownika powinna mieścić się między 6 a 30 znaków",
-      "username_invalid": "Nazwa użytkownika może zawierać tylko litery, cyfry i kropki (.)",
-      "username_two_dots": "Nazwa użytkownika nie może zawierać dwóch kropek z rzędu",
+      "username_required": "Podaj nowe nazwę użytkownika",
       "username_taken": "Ta nazwa jest zajęta",
-      "password_required": "Podaj hasło",
-      "password_length": "Użyj co najmniej 10 znaków",
-      "password_too_long": "Hasło, które podałeś jest zbyt długie",
-      "password_classes": "Zrób bardziej silne hasło. Skorzystaj z mieszanki liter, cyfr i symboli",
-      "invalid_data": "Coś poszło nie tak. Sprawdź dane, które wpisałeś"
+      "username_two_dots": "Nazwa użytkownika nie może zawierać dwóch kropek z rzędu"
     },
-    "create_your_account": "Utwórz swoje konto",
     "step1": {
-      "title": "Wpisz swoje imię",
       "first_name": "Imię",
-      "last_name": "Nazwisko"
+      "last_name": "Nazwisko",
+      "title": "Wpisz swoje imię"
     },
     "step2": {
       "title": "Wybierz adres e-mail",
       "username": "Adres e-mail"
     },
     "step3": {
-      "title": "Utwórz silne hasło",
-      "password": "Hasło"
+      "password": "Hasło",
+      "title": "Utwórz silne hasło"
     },
     "step4": {
-      "title": "Ostatnie sprawy...",
-      "description": "        <p>Aktualny <b></b> konto pozwala na dostęp do szerokiej gamy usług, takich jak e-mail, przechowywanie plików i więcej.</p>        <p><terms><b></b> warunki korzystania</terms> wyjaśniają, co możesz spodziewać się w trakcie korzystania z usług, podczas gdy <privacy><b></b> polityka prywatności</privacy> opisuje, jak obsłużyliśmy informacje generowane lub zebrane przy użyciu usług.</p>        <p>Aby utworzyć konto w <b></b> i skorzystać z usług, musisz zaakceptować <b></b> warunki korzystania i politykę prywatności.</p>",
-      "accept": "Zaakceptuj i kontynuuj"
+      "accept": "Zaakceptuj i kontynuuj",
+      "description": "<p>Konto <noo></noo> umożliwia dostęp do szeregu usług, takich jak poczta e-mail, przechowywanie plików i wiele innych.</p><p><terms>Warunki korzystania z usługi <noo></noo></terms> wyjaśniają, czego można się spodziewać podczas korzystania z usług, podczas gdy <privacy>Polityka prywatności <noo></noo></privacy> opisuje sposób, w jaki przetwarzamy informacje generowane lub gromadzone podczas korzystania z usług.</p><p>Aby utworzyć konto <noo></noo> i korzystać z usług, musisz zaakceptować Warunki korzystania z usługi i Politykę prywatności <noo></noo>.</p>",
+      "title": "Ostatnie sprawy..."
     }
   }
 }

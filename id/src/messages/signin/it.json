@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Accedi al tuo account <noo></noo>",
-    "username": "Nome utente o email",
+    "error": "Le credenziali inserite non sono corrette",
     "password": "Password",
     "submit": "Accedi",
-    "error": "Le credenziali inserite non sono corrette"
+    "title": "Accedi al tuo account <noo></noo>",
+    "username": "Nome utente o email"
   }
 }

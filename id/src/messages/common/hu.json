@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Tovább",
-    "continue": "Folytatás",
     "cancel": "Mégsem",
+    "continue": "Folytatás",
+    "madeWith": "Készült ❤️ és ☕️ az Európai Unióban",
+    "next": "Tovább",
+    "no": "Nem",
     "optional": "Nem kötelező",
-    "terms": "Szerződésfeltételek",
-    "privacy": "Adatvédelem",
     "passwordField": {
-      "show": "Jelenítsd meg a jelszót!",
       "ariaLabelShow": "Jelenítsd meg a jelszót. Figyelmeztetés: ezzel a művelettel a képernyőn fogják látni a jelszavadat.",
-      "hide": "Rejtse el a jelszót!"
+      "hide": "Rejtse el a jelszót!",
+      "show": "Jelenítsd meg a jelszót!"
     },
-    "yes": "Igen",
-    "no": "Nem"
+    "privacy": "Adatvédelem",
+    "terms": "Szerződésfeltételek",
+    "yes": "Igen"
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/Button";
-import { TextField } from "@/components/TextField";
+import { Button } from "@/components/shared/Button";
+import { TextField } from "@/components/shared/TextField";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { signupStep2 } from "../actions";

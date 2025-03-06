@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Aanmeld bij je <em>mijn</em> account",
-    "username": "Gebruikersnaam of e-mailadres",
+    "error": "De ingevoerde gegevens zijn niet correct",
     "password": "Wachtwoord",
     "submit": "Inloggen",
-    "error": "De ingevoerde gegevens zijn niet correct"
+    "title": "Aanmeld bij je <noo></noo>-account",
+    "username": "Gebruikersnaam of e-mailadres"
   }
 }

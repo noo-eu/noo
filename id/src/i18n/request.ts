@@ -1,38 +1,12 @@
 import acceptLanguage from "accept-language";
 import { getRequestConfig } from "next-intl/server";
-import { headers } from "next/headers";
-
-export const SUPPORTED_LANGUAGES = [
-  "en",
-  "bg",
-  "cs",
-  "da",
-  "de",
-  "el",
-  "es",
-  "et",
-  "fi",
-  "fr",
-  "ga",
-  "hr",
-  "hu",
-  "it",
-  "lt",
-  "lv",
-  "mt",
-  "nl",
-  "pl",
-  "pt",
-  "ro",
-  "sk",
-  "sl",
-  "sv",
-];
+import { cookies, headers } from "next/headers";
 
 acceptLanguage.languages(SUPPORTED_LANGUAGES);
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
+import { SUPPORTED_LANGUAGES } from ".";
 
 async function loadJSON5(filename: string) {
   const json5 = await readFile(filename, "utf8");
@@ -40,10 +14,17 @@ async function loadJSON5(filename: string) {
 }
 
 export default getRequestConfig(async () => {
-  const reqHeaders = await headers();
-  const lngHeader = reqHeaders.get("accept-language");
+  const cookieStore = await cookies();
+  const lngCookie = cookieStore.get("_noo_locale")?.value;
+  let locale: string | undefined;
+  if (lngCookie && SUPPORTED_LANGUAGES.includes(lngCookie)) {
+    locale = lngCookie;
+  } else {
+    const reqHeaders = await headers();
+    const lngHeader = reqHeaders.get("accept-language");
 
-  const locale = acceptLanguage.get(lngHeader) || "en";
+    locale = acceptLanguage.get(lngHeader) || "en";
+  }
 
   return {
     locale,

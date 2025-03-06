@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Loo oma <noo></noo> konto",
     "errors": {
       "first_name_required": "Palun sisesta oma esimene nimi",
+      "invalid_data": "Midagi läks valesti. Palun kontrollida sisestatud andmeid",
+      "name_invalid": "Sisestatud nimes on salajne sisu",
       "name_too_long": "Sisestatud nimi on liiga pikk",
       "name_too_short": "Sisestatud nimi on liiga lühike",
-      "name_invalid": "Sisestatud nimes on salajne sisu",
-      "username_required": "Palun sisesta oma uus kasutajanimi",
+      "password_classes": "Palun kasuta võimekamat parooli. Kasutage kirju, numbreid ja sümboli segamiseks.",
+      "password_length": "Vältige kasutamast vähem kui 10 tähemärgi pikkusi.",
+      "password_required": "Palun sisesta oma parool",
+      "password_too_long": "Sisestatud parool on liiga pikk",
       "username_first_char": "Kasutajanimetus peab algusest alates koosneda kirja või numbritest",
+      "username_invalid": "Kasutajanimetus võib sisaldada ainult kirju, numbreid ja punkte (. ).",
       "username_last_char": "Kasutajanimetus peab lõpuks koosneda kirja või numbritest",
       "username_length": "Kasutajanimetus peab olla vahemikus 6-30 tähemärgist",
-      "username_invalid": "Kasutajanimetus võib sisaldada ainult kirju, numbreid ja punkte (. ).",
-      "username_two_dots": "Kasutajanimetus ei tohi sisaldada kahe punkti perioodit () üksteist.",
+      "username_required": "Palun sisesta oma uus kasutajanimi",
       "username_taken": "See kasutajanimetus on juba võetud",
-      "password_required": "Palun sisesta oma parool",
-      "password_length": "Vältige kasutamast vähem kui 10 tähemärgi pikkusi.",
-      "password_too_long": "Sisestatud parool on liiga pikk",
-      "password_classes": "Palun kasuta võimekamat parooli. Kasutage kirju, numbreid ja sümboli segamiseks.",
-      "invalid_data": "Midagi läks valesti. Palun kontrollida sisestatud andmeid"
+      "username_two_dots": "Kasutajanimetus ei tohi sisaldada kahe punkti perioodit () üksteist."
     },
-    "create_your_account": "Loo oma <noo></noo> konto",
     "step1": {
-      "title": "Sisesta nimi",
       "first_name": "Eesnimi",
-      "last_name": "Perekonnanimi"
+      "last_name": "Perekonnanimi",
+      "title": "Sisesta nimi"
     },
     "step2": {
       "title": "Vali oma email",
       "username": "Email"
     },
     "step3": {
-      "title": "Loo tugev parool",
-      "password": "Parool"
+      "password": "Parool",
+      "title": "Loo tugev parool"
     },
     "step4": {
-      "title": "Jätku see viimne... ",
+      "accept": "Tahaksin vastu võtta ning edasi",
       "description": "   <p> Üks <noo></noo>konto võimaldab teil ligipääsu mitme teenusele nagu sõnumid, failide püstitamine ning rohkem.</p>    <p><terms><noo></noo> nõuded kasutamiseks</terms> selgitavad, mis kindlust käseldav, samuti <privacy><noo></noo>kõnelub ehk <noo></noo>'i privatsuskaitsepoliitika' kirjeldab süsteemi info läbivormimist või selle pildamisest. </p>    <p>Kui soovite luua <noo></noo>konto ja kasutada teenuseid, peate vastama <noo></noo>'ile nõuetes kasutamiseks ja privatsuskaitsepoliitikale.</p>",
-      "accept": "Tahaksin vastu võtta ning edasi"
+      "title": "Jätku see viimne... "
     }
   }
 }

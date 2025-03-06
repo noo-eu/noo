@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "L-Aħħar",
-    "continue": "Ippetċerha",
     "cancel": "Tillem",
+    "continue": "Ippetċerha",
+    "madeWith": "Mhux ❤️ u ☕️ fl-Unjoni Ewropea",
+    "next": "L-Aħħar",
+    "no": "Mhux",
     "optional": "Mhux Obligatorju",
-    "terms": "Iktara l-Termini",
-    "privacy": "Privatetà",
     "passwordField": {
-      "show": "Ara ssoja",
       "ariaLabelShow": "Tara s-soja bħala test plain. Attenzjoni: hekk il-ġoġobba tiegħek se titqegħed fuq is-screen.",
-      "hide": "Tillem issa"
+      "hide": "Tillem issa",
+      "show": "Ara ssoja"
     },
-    "yes": "Jekk",
-    "no": "Mhux"
+    "privacy": "Privatetà",
+    "terms": "Iktara l-Termini",
+    "yes": "Jekk"
   }
 }

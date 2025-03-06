@@ -1,33 +1,4 @@
 import crypto from "crypto";
-import { headers } from "next/headers";
-
-export async function getIpAddress() {
-  const headerStore = await headers();
-  const ipHeader =
-    headerStore.get("x-real-ip") ||
-    headerStore.get("x-forwarded-for") ||
-    "0.0.0.0";
-  return ipHeader.split(",")[0];
-}
-
-export async function getUserAgent() {
-  const headerStore = await headers();
-  return headerStore.get("user-agent") || "";
-}
-
-export async function getBearerToken() {
-  const headerStore = await headers();
-  const authHeader = headerStore.get("authorization");
-  if (!authHeader) {
-    return null;
-  }
-
-  if (!authHeader.startsWith("Bearer ")) {
-    return null;
-  }
-
-  return authHeader.split(" ")[1];
-}
 
 export function sha256(input: Buffer | string) {
   return crypto.createHash("sha256").update(input);

@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Ve a tu página de inicio de <noo></noo>",
+    "change_account": "Cambiar cuenta",
     "consent": {
-      "title": "Estás iniciando sesión en <strong>{name}</strong> con tu cuenta de <noo></noo>.",
-      "description": "<strong>{name}</strong> ha solicitado acceso a la siguiente información:",
       "claims": {
-        "name": "Tu nombre completo",
-        "username": "Tu nombre de usuario",
-        "profile": "Tu foto de perfil",
-        "email": "Tu dirección de correo electrónico noo",
-        "phone_number": "Tu número de teléfono",
         "address": "Tu dirección postal",
+        "birthdate": "Tu fecha de nacimiento",
+        "email": "Tu dirección de correo electrónico noo",
         "gender": "El género con el que te identificas",
-        "birthdate": "Tu fecha de nacimiento"
-      }
-    },
-    "fatal": {
-      "title": "Algo salió mal",
-      "description": "Intentaste iniciar sesión en una aplicación de terceros, pero la aplicación no está funcionando correctamente. Por favor, inténtalo de nuevo más tarde o contacta al desarrollador con la siguiente información:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Elige una cuenta"
+        "name": "Tu nombre completo",
+        "phone_number": "Tu número de teléfono",
+        "profile": "Tu foto de perfil",
+        "username": "Tu nombre de usuario"
+      },
+      "description": "<strong>{name}</strong> ha solicitado acceso a la siguiente información:",
+      "title": "Usted está iniciando sesión en <details>{name}</details>"
     },
     "end_session": {
-      "title": "Cerrar sesión",
       "description": "{name, select, undefined {Has cerrado sesión de una aplicación tercera.} other {Ha cerrado sesión de <strong>{name}</strong>.}}",
-      "query": "¿Desea terminar la sesión en {noo} también?"
+      "query": "¿Desea terminar la sesión en {noo} también?",
+      "title": "Cerrar sesión"
+    },
+    "fatal": {
+      "description": "Intentaste iniciar sesión en una aplicación de terceros, pero la aplicación no está funcionando correctamente. Por favor, inténtalo de nuevo más tarde o contacta al desarrollador con la siguiente información:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Algo salió mal"
+    },
+    "home": "Ve a tu página de inicio de <noo></noo>",
+    "switch": {
+      "description": "para continuar en <details>{name}</details>",
+      "legalComplete": "Antes de iniciar sesión, deberías revisar los <terms>terminos y condiciones</terms> y la <privacy>politica de privacidad</privacy> de {client}.",
+      "legalNone": "Antes de iniciar sesión, deberías revisar los documentos legales de {client}.",
+      "legalPrivacy": "Antes de iniciar sesión, deberías revisar la <privacy>politica de privacidad</privacy> de {client}.",
+      "legalTerms": "Antes de iniciar sesión, deberías revisar los <terms>terminos y condiciones</terms> de {client}.",
+      "pageTitle": "Inicia sesión con <noo></noo>",
+      "signin": "Usa otra cuenta",
+      "title": "Elige una cuenta"
     }
   }
 }

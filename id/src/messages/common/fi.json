@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Seuraava",
-    "continue": "Jatka",
     "cancel": "Peru",
+    "continue": "Jatka",
+    "madeWith": "Tehnyt ❤️ ja ☕️ Euroopan unionissa",
+    "next": "Seuraava",
+    "no": "Ei",
     "optional": "Valinnainen",
-    "terms": "Säännökset",
-    "privacy": "Tietosuoja",
     "passwordField": {
-      "show": "Näytä salasana",
       "ariaLabelShow": "Näytä salasana tekstimuodossa. Huomioi, että tämä näyttää salasanasi ruudulle.",
-      "hide": "Piilota salasana"
+      "hide": "Piilota salasana",
+      "show": "Näytä salasana"
     },
-    "yes": "Kyllä",
-    "no": "Ei"
+    "privacy": "Tietosuoja",
+    "terms": "Säännökset",
+    "yes": "Kyllä"
   }
 }

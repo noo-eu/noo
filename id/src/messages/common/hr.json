@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Nastavi",
-    "continue": "Nastavi",
     "cancel": "Otkaži",
+    "continue": "Nastavi",
+    "madeWith": "Napravljeno s ❤️ i ☕️ u Europskoj uniji",
+    "next": "Nastavi",
+    "no": "Ne",
     "optional": "Izborno",
-    "terms": "Uslovi korisničkog ugovora",
-    "privacy": "Pravilnik o zaštiti osobnih podataka",
     "passwordField": {
-      "show": "Prikaži lozinku",
       "ariaLabelShow": "Izračunaj moju lozinku. Upozorenje: Lozinka će biti prikazana na ekranu.",
-      "hide": " sakrij lozinku"
+      "hide": " sakrij lozinku",
+      "show": "Prikaži lozinku"
     },
-    "yes": "Da",
-    "no": "Ne"
+    "privacy": "Pravilnik o zaštiti osobnih podataka",
+    "terms": "Uslovi korisničkog ugovora",
+    "yes": "Da"
   }
 }

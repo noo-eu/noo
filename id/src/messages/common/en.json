@@ -1,17 +1,18 @@
 {
   "common": {
-    "yes": "Yes",
-    "no": "No",
-    "next": "Next",
-    "continue": "Continue",
     "cancel": "Cancel",
+    "continue": "Continue",
+    "madeWith": "Made with ❤️ and ☕️ in the European Union",
+    "next": "Next",
+    "no": "No",
     "optional": "Optional",
-    "terms": "Terms",
-    "privacy": "Privacy",
     "passwordField": {
-      "show": "Show password",
       "ariaLabelShow": "Show password as plain text. Warning: this will display your password on the screen.",
-      "hide": "Hide password"
-    }
+      "hide": "Hide password",
+      "show": "Show password"
+    },
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "yes": "Yes"
   }
 }

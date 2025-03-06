@@ -2,7 +2,7 @@ import OidcClients from "@/db/oidc_clients";
 import { findTenantByDomainName } from "@/db/tenants";
 import { HttpRequest } from "@/lib/http/request";
 import { oidcClientRegistration } from "@/lib/oidc/registration";
-import { checkVerifier, getBearerToken, humanIdToUuid } from "@/utils";
+import { checkVerifier, humanIdToUuid } from "@/utils";
 import { notFound } from "next/navigation";
 
 export async function POST(
@@ -19,13 +19,14 @@ export async function POST(
     return new Response("Unauthorized", { status: 401 });
   }
 
+  const request = new HttpRequest(raw);
+
   // Verify the Bearer token against the tenant key
-  const token = await getBearerToken();
+  const token = request.bearerToken;
   if (!token || !checkVerifier(token, tenant.oidcRegistrationTokenDigest)) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const request = new HttpRequest(raw);
   return oidcClientRegistration(request, tenant);
 }
 
@@ -39,7 +40,8 @@ export async function DELETE(
     notFound();
   }
 
-  const clientId = new HttpRequest(raw).queryParams.client_id;
+  const request = new HttpRequest(raw);
+  const clientId = request.queryParams.client_id;
   if (!clientId) {
     return new Response("Bad Request", { status: 400 });
   }
@@ -59,7 +61,7 @@ export async function DELETE(
   }
 
   // Verify the Bearer token against the tenant key
-  const token = await getBearerToken();
+  const token = request.bearerToken;
   if (!token || !checkVerifier(token, client.registrationAccessTokenDigest)) {
     return new Response("Unauthorized", { status: 401 });
   }

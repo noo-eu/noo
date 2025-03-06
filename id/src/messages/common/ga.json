@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Táimid ag dul chun tosaigh",
-    "continue": "Lean ar aghaidh",
     "cancel": "Dún anois",
+    "continue": "Lean ar aghaidh",
+    "madeWith": "Déanta le ❤️ agus ☕️ san Aontas Eorpach",
+    "next": "Táimid ag dul chun tosaigh",
+    "no": "Níl",
     "optional": "Ar ionad",
-    "terms": "Coincheapanna",
-    "privacy": "Priváitás",
     "passwordField": {
-      "show": "Taispeáin ainm ghutha",
       "ariaLabelShow": "Taispeáin ainm ghutha mar chnuasach falamh. Faoi chúirt: tógfar ainm ghutha ar scáth na leathanaigh.",
-      "hide": "Dún ainm ghutha"
+      "hide": "Dún ainm ghutha",
+      "show": "Taispeáin ainm ghutha"
     },
-    "yes": "Tá",
-    "no": "Níl"
+    "privacy": "Priváitás",
+    "terms": "Coincheapanna",
+    "yes": "Tá"
   }
 }

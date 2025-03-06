@@ -1,41 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Erstellen Sie Ihr <noo></noo> Konto",
     "errors": {
       "first_name_required": "Bitte geben Sie Ihren Vornamen ein",
+      "invalid_data": "Etwas ist schiefgelaufen. Bitte überprüfen Sie die eingegebenen Daten",
+      "name_invalid": "Der Name enthält einige ungültige Zeichen",
       "name_too_long": "Der Name, den Sie eingeben haben, ist zu lang",
       "name_too_short": "Der Name, den Sie eingeben haben, ist zu kurz",
-      "name_invalid": "Der Name enthält einige ungültige Zeichen",
-      "username_required": "Bitte geben Sie Ihren neuen Benutzernamen ein",
+      "password_classes": "Bitte verwenden Sie ein stärkeres Passwort. Mischen Sie Buchstaben, Zahlen und Symbole",
+      "password_length": "Bitte verwenden Sie 10 oder mehr Zeichen",
+      "password_required": "Bitte geben Sie Ihr Passwort ein",
+      "password_too_long": "Das Passwort, das Sie eingeben haben, ist zu lang",
       "username_first_char": "Ihr Benutzername muss mit einer Buchstaben- oder Ziffernzeichen beginnen",
+      "username_invalid": "Ihr Benutzername kann nur Buchstaben, Zahlen und Punkte (.) enthalten",
       "username_last_char": "Ihr Benutzername muss mit einem Buchstaben- oder Ziffernzeichen enden",
       "username_length": "Ihr Benutzername muss zwischen 6 und 30 Zeichen lang sein",
-      "username_invalid": "Ihr Benutzername kann nur Buchstaben, Zahlen und Punkte (.) enthalten",
-      "username_two_dots": "Ihr Benutzername darf keine zwei aufeinanderfolgenden Punkte (.) enthalten",
+      "username_required": "Bitte geben Sie Ihren neuen Benutzernamen ein",
       "username_taken": "Dieser Benutzername ist bereits vergeben",
-      "password_required": "Bitte geben Sie Ihr Passwort ein",
-      "password_length": "Bitte verwenden Sie 10 oder mehr Zeichen",
-      "password_too_long": "Das Passwort, das Sie eingeben haben, ist zu lang",
-      "password_classes": "Bitte verwenden Sie ein stärkeres Passwort. Mischen Sie Buchstaben, Zahlen und Symbole",
-      "invalid_data": "Etwas ist schiefgelaufen. Bitte überprüfen Sie die eingegebenen Daten"
+      "username_two_dots": "Ihr Benutzername darf keine zwei aufeinanderfolgenden Punkte (.) enthalten"
     },
-    "create_your_account": "Erstellen Sie Ihr <noo></noo> Konto",
     "step1": {
-      "title": "Geben Sie Ihren Namen ein",
       "first_name": "Vorname",
-      "last_name": "Nachname"
+      "last_name": "Nachname",
+      "title": "Geben Sie Ihren Namen ein"
     },
     "step2": {
       "title": "Wählen Sie Ihre E-Mail-Adresse",
       "username": "E-Mail-Adresse"
     },
     "step3": {
-      "title": "Erstellen Sie ein starkes Passwort",
-      "password": "Passwort"
+      "password": "Passwort",
+      "title": "Erstellen Sie ein starkes Passwort"
     },
     "step4": {
-      "title": "Ein letztes Mal...",
+      "accept": "Akzeptieren und fortfahren",
       "description": "        <p>Ein <noo></noo> Konto ermöglicht Ihnen Zugriff auf eine Reihe von Diensten, wie z.B. E-Mail, Dateispeicherung und mehr.</p>        <p><terms><noo></noo>'s Nutzungsbedingungen</terms> erklären, was Sie erwarten können, wenn Sie die Dienste nutzen, während <privacy><noo></noo>'s Datenschutzerklärung</privacy> beschreibt, wie wir Informationen verarbeiten und speichern, die während der Nutzung der Dienste generiert oder gesammelt werden.</p>        <p>Um ein <noo></noo> Konto zu erstellen und die Dienste nutzen zu können, müssen Sie sich mit den Nutzungsbedingungen und der Datenschutzerklärung von <noo></noo> einverstanden erklären.</p>",
-      "accept": "Akzeptieren und fortfahren"
+      "title": "Ein letztes Mal..."
     }
   }
 }

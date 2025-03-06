@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Go to your <noo></noo> home",
+    "change_account": "Change account",
     "consent": {
-      "title": "You are signing into <strong>{name}</strong> with your <noo></noo> account.",
-      "description": "<strong>{name}</strong> is requesting access to the following information",
       "claims": {
-        "name": "Your full name",
-        "username": "Your username",
-        "profile": "Your profile picture",
-        "email": "Your noo email address",
-        "phone_number": "Your phone number",
         "address": "Your postal address",
+        "birthdate": "Your date of birth",
+        "email": "Your noo email address",
         "gender": "The gender you identify with",
-        "birthdate": "Your date of birth"
-      }
-    },
-    "fatal": {
-      "title": "Something went wrong",
-      "description": "You tried to sign in to a third-party application, but the application is not working correctly. Please try again later or contact the application owner with the following information:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Choose an account"
+        "name": "Your full name",
+        "phone_number": "Your phone number",
+        "profile": "Your profile picture",
+        "username": "Your username"
+      },
+      "description": "<strong>{name}</strong> is requesting access to the following information",
+      "title": "You are signing into <details>{name}</details>."
     },
     "end_session": {
-      "title": "Sign out",
       "description": "{name, select, undefined {You signed out from a third party application.} other {You signed out from <strong>{name}</strong>.}}",
-      "query": "Do you want to sign out from <noo></noo> as well?"
+      "query": "Do you want to sign out from <noo></noo> as well?",
+      "title": "Sign out"
+    },
+    "fatal": {
+      "description": "You tried to sign in to a third-party application, but the application is not working correctly. Please try again later or contact the application owner with the following information:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Something went wrong"
+    },
+    "home": "Go to your <noo></noo> home",
+    "switch": {
+      "description": "to continue to <details>{name}</details>",
+      "legalComplete": "Before signing in, you should review {client}'s <privacy>privacy policy</privacy> and <terms>terms of service</terms>.",
+      "legalNone": "Before signing in, you should review {client}'s legal documents.",
+      "legalPrivacy": "Before signing in, you should review {client}'s <privacy>privacy policy</privacy>.",
+      "legalTerms": "Before signing in, you should review {client}'s <terms>terms of service</terms>.",
+      "pageTitle": "Sign in with <noo></noo>",
+      "signin": "Use another account",
+      "title": "Choose an account"
     }
   }
 }

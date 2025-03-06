@@ -1,39 +1,27 @@
-import { Noo } from "@/components/Noo";
-import OidcClients, { OidcClient } from "@/db/oidc_clients";
-import { AuthorizationRequest } from "@/lib/oidc/authorization";
+import { AccountBox } from "@/components/AccountBox";
+import { Legal } from "@/components/Legal";
+import { PageModal } from "@/components/PageModal";
+import { PresentClient } from "@/components/PresentClient";
+import { SignInWithNoo } from "@/components/SignInWithNoo";
+import OidcClients from "@/db/oidc_clients";
+import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
+import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { getUserForSession } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { getOidcAuthorizationCookie } from "../consent/actions";
 import Form from "./Form";
 
 export const revalidate = 0;
-
-function clientName(client: OidcClient, preferredLocale: string) {
-  const clientName = client.clientName as Record<string, string>;
-
-  if (clientName[preferredLocale]) {
-    return clientName[preferredLocale];
-  } else if (clientName[""]) {
-    return clientName[""];
-  } else if (Object.keys(clientName).length > 0) {
-    return Object.values(clientName)[0];
-  }
-
-  // Fallback to redirect URI host
-  return new URL(client.redirectUris[0]).hostname;
-}
 
 export default async function OidcContinuePage({
   searchParams,
 }: {
   searchParams: Promise<{ sid: string }>;
 }) {
-  const t = await getTranslations("oidc");
+  const t = await getTranslations();
 
-  const oidcAuthRequest =
-    (await getOidcAuthorizationCookie()) as AuthorizationRequest;
+  const oidcAuthRequest = await getOidcAuthorizationRequest();
   if (!oidcAuthRequest) {
     console.warn("No OIDC auth request found");
     return redirect("/");
@@ -63,19 +51,45 @@ export default async function OidcContinuePage({
     return redirect("/");
   }
 
-  const name = clientName(client, "en");
+  const locale = await getLocale();
+
+  const clientFields = {
+    name: getLocalizedOidcField(client, "clientName", locale)!,
+    logo: getLocalizedOidcField(client, "logoUri", locale),
+    privacyUrl: getLocalizedOidcField(client, "policyUri", locale),
+    tosUrl: getLocalizedOidcField(client, "tosUri", locale),
+  };
+
+  const userFields = {
+    name: `${user.firstName} ${user.lastName}`.trim(),
+    email: `${user.username}@${user.tenant?.domain || "noomail.eu"}`,
+  };
 
   return (
-    <div>
-      <p className="mb-4 text-lg">
-        {t.rich("consent.title", {
-          name,
-          strong: (children) => <strong>{children}</strong>,
-          noo: () => <Noo />,
-        })}
-      </p>
+    <PageModal>
+      <SignInWithNoo />
+      <PageModal.Modal>
+        <PresentClient
+          client={clientFields}
+          descriptionKey="consent.title"
+          descriptionClassName="text-2xl"
+          append={
+            <Legal client={clientFields} className="me-16 hidden lg:block" />
+          }
+        />
+        <div>
+          <AccountBox user={userFields} />
+          <p className="mb-4">
+            <a href="/switch" className="link py-2.5 inline-block">
+              {t("oidc.change_account")}
+            </a>
+          </p>
 
-      <Form sessionId={sessionId} />
-    </div>
+          <Form sessionId={sessionId} />
+
+          <Legal client={clientFields} className="mt-8 lg:hidden" />
+        </div>
+      </PageModal.Modal>
+    </PageModal>
   );
 }

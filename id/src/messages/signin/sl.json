@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Prijavi se na svoj račun",
-    "username": "Uporabniško ime ali e-poštni naslov",
+    "error": "Vnešeni podatki so napačni",
     "password": "Geslo",
     "submit": "Prijava",
-    "error": "Vnešeni podatki so napačni"
+    "title": "Prijavite se na račun <noo></noo>",
+    "username": "Uporabniško ime ali e-poštni naslov"
   }
 }

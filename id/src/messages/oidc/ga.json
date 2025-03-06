@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Téigh go dtí do leathanach baile <noo></noo>",
+    "change_account": "Cuir in iúl go huabharneodach",
     "consent": {
-      "title": "Tá tú ag síniú isteach i <strong>{name}</strong> le do chuntas <noo></noo>.",
-      "description": "Tá <strong>{name}</strong> ag iarraidh cead rochtana ar an eolas seo a leanas:",
       "claims": {
-        "name": "Do ainm iomlán",
-        "username": "Do ainm úsáideora",
-        "profile": "Do phictiúr próifíle",
-        "email": "Do sheoladh ríomhphoist noo",
-        "phone_number": "Do uimhir ghutháin",
         "address": "Do sheoladh poist",
+        "birthdate": "Do dháta breithe",
+        "email": "Do sheoladh ríomhphoist noo",
         "gender": "An inscne a aithníonn tú leis",
-        "birthdate": "Do dháta breithe"
-      }
-    },
-    "fatal": {
-      "title": "Tharla earráid",
-      "description": "Rinne tú iarracht logáil isteach i bhfeidhmchlár tríú páirtí, ach níl an feidhmchlár ag obair i gceart. Bain triail eile as níos déanaí nó déan teagmháil le húinéir an fheidhmchláir leis an eolas seo a leanas:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Roghnaigh cuntas"
+        "name": "Do ainm iomlán",
+        "phone_number": "Do uimhir ghutháin",
+        "profile": "Do phictiúr próifíle",
+        "username": "Do ainm úsáideora"
+      },
+      "description": "Tá <strong>{name}</strong> ag iarraidh cead rochtana ar an eolas seo a leanas:",
+      "title": "Táimid ag tabhairt isteach i <details>{name}</details>. "
     },
     "end_session": {
-      "title": "Schrú agus amuigh",
       "description": "{name, select, undefined {Tá tú tar éis dul amuigh ón gcomhghuaillíocht tríú páirteach.} other {Tá tú tar éis dul amuigh as <strong>{name}</strong>.}}",
-      "query": "An bhfuil de a shuíomh agus scrú íoc ar <noo></noo> freisin?"
+      "query": "An bhfuil de a shuíomh agus scrú íoc ar <noo></noo> freisin?",
+      "title": "Schrú agus amuigh"
+    },
+    "fatal": {
+      "description": "Rinne tú iarracht logáil isteach i bhfeidhmchlár tríú páirtí, ach níl an feidhmchlár ag obair i gceart. Bain triail eile as níos déanaí nó déan teagmháil le húinéir an fheidhmchláir leis an eolas seo a leanas:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Tharla earráid"
+    },
+    "home": "Téigh go dtí do leathanach baile <noo></noo>",
+    "switch": {
+      "description": "chun leanúint ar aghaidh i <details>{name}</details>",
+      "legalComplete": "Roimh logáil isteach, caithfidh tú na <privacy>rialacha príobháideachta</privacy> agus na <terms>rialacha úsáide</terms> a sheiceáil {client}.",
+      "legalNone": "Roimh logáil isteach, caithfidh tú doiciméid dlíthiúla {client} a sheiceáil.",
+      "legalPrivacy": "Roimh logáil isteach, caithfidh tú na <privacy>rialacha príobháideachta</privacy> a sheiceáil {client}.",
+      "legalTerms": "Roimh logáil isteach, caithfidh tú na <terms>rialacha úsáide</terms> a sheiceáil {client}.",
+      "pageTitle": "Logáil isteach le <noo></noo>",
+      "signin": "Úsáid cuntas eile",
+      "title": "Roghnaigh cuntas"
     }
   }
 }

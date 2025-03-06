@@ -1,32 +1,40 @@
 {
   "oidc": {
-    "home": "Gå til din <noo></noo> startside",
+    "change_account": "Skift konto",
     "consent": {
-      "title": "Du logger ind på <strong>{name}</strong> med din <noo></noo>-konto.",
-      "description": "<strong>{name}</strong> anmoder om adgang til følgende oplysninger:",
       "claims": {
-        "name": "Dit fulde navn",
-        "username": "Dit brugernavn",
-        "profile": "Dit profilbillede",
-        "email": "Din noo-e-mailadresse",
-        "phone_number": "Dit telefonnummer",
         "address": "Din postadresse",
+        "birthdate": "Din fødselsdato",
+        "email": "Din noo-e-mailadresse",
         "gender": "Det køn, du identificerer dig med",
-        "birthdate": "Din fødselsdato"
-      }
-    },
-    "fatal": {
-      "title": "Noget gik galt",
-      "description": "Du forsøgte at logge ind på en tredjepartsapplikation, men applikationen fungerer ikke korrekt. Prøv igen senere, eller kontakt applikationens ejer med følgende oplysninger:",
-      "error": "OpenID Connect Error: {error}"
-    },
-    "switch": {
-      "title": "Vælg en konto"
+        "name": "Dit fulde navn",
+        "phone_number": "Dit telefonnummer",
+        "profile": "Dit profilbillede",
+        "username": "Dit brugernavn"
+      },
+      "description": "<strong>{name}</strong> anmoder om adgang til følgende oplysninger:",
+      "title": "Du logger ind i <details>{name}</details>."
     },
     "end_session": {
-      "title": "Afmeld",
       "description": "{name, select, undefined {Du logged ud af et tredjepartsprogram.}} andre {Du logged ud af <strong>{navn}</strong>.",
-      "query": "Vil du også logge ud af <noo></noo>?"
+      "query": "Vil du også logge ud af <noo></noo>?",
+      "title": "Afmeld"
+    },
+    "fatal": {
+      "description": "Du forsøgte at logge ind på en tredjepartsapplikation, men applikationen fungerer ikke korrekt. Prøv igen senere, eller kontakt applikationens ejer med følgende oplysninger:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Noget gik galt"
+    },
+    "home": "Gå til din <noo></noo> startside",
+    "switch": {
+      "description": "for at fortsætte til <details>{name}</details>",
+      "legalComplete": "Før du logger ind, skal du gennemgå <privacy>privatlivspolitikken</privacy> og <terms>brugsbetingelserne</terms> for {client}.",
+      "legalNone": "Før du logger ind, skal du gennemgå de juridiske dokumenter for {client}.",
+      "legalPrivacy": "Før du logger ind, skal du gennemgå <privacy>privatlivspolitikken</privacy> for {client}.",
+      "legalTerms": "Før du logger ind, skal du gennemgå <terms>brugsbetingelserne</terms> for {client}.",
+      "pageTitle": "Log ind med <noo></noo>",
+      "signin": "Brug en anden konto",
+      "title": "Vælg konto"
     }
   }
 }

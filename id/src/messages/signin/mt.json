@@ -1,9 +1,9 @@
 {
   "signin": {
-    "title": "Inhobb il-ħajja tiegħek fi <noo></noo>",
-    "username": "Isem utenza jew indirizz email",
+    "error": "L-identifikatur u l-passport li introduċi huma ħela",
     "password": "Parola d'accessu",
     "submit": "Inhobb issirvi",
-    "error": "L-identifikatur u l-passport li introduċi huma ħela"
+    "title": "Inhobb il-ħajja tiegħek fi <noo></noo>",
+    "username": "Isem utenza jew indirizz email"
   }
 }

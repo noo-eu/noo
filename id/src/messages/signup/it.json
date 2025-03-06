@@ -1,44 +1,41 @@
 {
   "signup": {
+    "create_your_account": "Crea il tuo account <noo></noo>",
     "errors": {
       "first_name_required": "Per favore, inserisci il tuo nome",
+      "invalid_data": "Qualcosa è andato storto. Per favore, controlla i dati inseriti",
+      "name_invalid": "Il nome contiene caratteri non validi",
       "name_too_long": "Il nome inserito è troppo lungo",
       "name_too_short": "Il nome inserito è troppo breve",
-      "name_invalid": "Il nome contiene caratteri non validi",
-      "username_required": "Per favore, inserisci il tuo nuovo nome utente",
+      "password_classes": "Per favore, usa una password più sicura. Usa una combinazione di lettere, numeri e simboli",
+      "password_length": "Per favore, usa 10 o più caratteri",
+      "password_required": "Per favore, inserisci una password",
+      "password_too_long": "La password inserita è troppo lunga",
       "username_first_char": "Il primo carattere del tuo nome utente deve essere una lettera o un numero",
+      "username_invalid": "Il tuo nome utente può contenere solo lettere, numeri e punti (.)",
       "username_last_char": "L'ultimo carattere del tuo nome utente deve essere una lettera o un numero",
       "username_length": "Il tuo nome utente deve essere compreso tra 6 e 30 caratteri",
-      "username_invalid": "Il tuo nome utente può contenere solo lettere, numeri e punti (.)",
-      "username_two_dots": "Il tuo nome utente non può contenere due punti (.) consecutivi",
+      "username_required": "Per favore, inserisci il tuo nuovo nome utente",
       "username_taken": "Questo nome utente è già in uso",
-      "password_required": "Per favore, inserisci una password",
-      "password_length": "Per favore, usa 10 o più caratteri",
-      "password_too_long": "La password inserita è troppo lunga",
-      "password_classes": "Per favore, usa una password più sicura. Usa una combinazione di lettere, numeri e simboli",
-      "invalid_data": "Qualcosa è andato storto. Per favore, controlla i dati inseriti"
+      "username_two_dots": "Il tuo nome utente non può contenere due punti (.) consecutivi"
     },
-    "create_your_account": "Crea il tuo account <noo></noo>",
     "step1": {
-      "title": "Inserisci il tuo nome",
       "first_name": "Nome",
-      "last_name": "Cognome"
+      "last_name": "Cognome",
+      "title": "Inserisci il tuo nome"
     },
     "step2": {
       "title": "Scegli il tuo nuovo indirizzo email",
       "username": "Indirizzo email"
     },
     "step3": {
-      "title": "Crea una password sicura",
-      "password": "Password"
+      "password": "Password",
+      "title": "Crea una password sicura"
     },
     "step4": {
-      "title": "Un'ultima cosa...",
-      "description": "\
-        <p>Un account <noo></noo> ti consente di accedere a una varietà di servizi, come email, archiviazione di file e altro.</p>\
-        <p>I <terms>Termini di Servicio di <noo></noo></terms> spiegano cosa aspettarsi quando si utilizzano i servizi, mentre la <privacy>Privacy Policy di <noo></noo></privacy> descrive come gestiamo le informazioni generate o raccolte durante l'utilizzo dei servizi.</p>\
-        <p>Per creare un account <noo></noo> e usare i servizi, devi accettare i Termini di Servizio e la Privacy Policy.</p>",
-      "accept": "Accetta e continua"
+      "accept": "Accetta e continua",
+      "description": "        <p>Un account <noo></noo> ti consente di accedere a una varietà di servizi, come email, archiviazione di file e altro.</p>        <p>I <terms>Termini di Servicio di <noo></noo></terms> spiegano cosa aspettarsi quando si utilizzano i servizi, mentre la <privacy>Privacy Policy di <noo></noo></privacy> descrive come gestiamo le informazioni generate o raccolte durante l'utilizzo dei servizi.</p>        <p>Per creare un account <noo></noo> e usare i servizi, devi accettare i Termini di Servizio e la Privacy Policy.</p>",
+      "title": "Un'ultima cosa..."
     }
   }
 }

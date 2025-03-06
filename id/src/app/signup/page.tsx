@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/Button";
-import { TextField } from "@/components/TextField";
+import { Button } from "@/components/shared/Button";
+import { TextField } from "@/components/shared/TextField";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { signupStep1 } from "./actions";
@@ -46,6 +46,7 @@ export default function SignupPage() {
           name="first_name"
           defaultValue={state.values.first_name}
           error={state.errors.first_name}
+          autoCapitalize="words"
         />
 
         <TextField
@@ -59,6 +60,7 @@ export default function SignupPage() {
           name="last_name"
           defaultValue={state.values.last_name}
           error={state.errors.last_name}
+          autoCapitalize="words"
         />
 
         <div className="flex justify-end mt-12">

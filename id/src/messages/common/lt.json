@@ -1,17 +1,18 @@
 {
   "common": {
-    "next": "Toliau",
-    "continue": "Tęstytis",
     "cancel": "Atšaukti",
+    "continue": "Tęstytis",
+    "madeWith": "Sukurta su ❤️ ir ☕️ Europos Sąjungoje",
+    "next": "Toliau",
+    "no": "Ne",
     "optional": "Aptinkamai",
-    "terms": "Nuostatos",
-    "privacy": "Privatumas",
     "passwordField": {
-      "show": "Rodyti slaptažodį",
       "ariaLabelShow": "Rodyti slaptažodį tiesiems. Pražiūrėkite: tuo metu Jūsų slaptažodis bus rodomas ekrane.",
-      "hide": "Slaptažodį paslėpti"
+      "hide": "Slaptažodį paslėpti",
+      "show": "Rodyti slaptažodį"
     },
-    "yes": "Taip",
-    "no": "Ne"
+    "privacy": "Privatumas",
+    "terms": "Nuostatos",
+    "yes": "Taip"
   }
 }

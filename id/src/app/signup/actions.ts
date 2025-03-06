@@ -1,9 +1,9 @@
 "use server";
 
 import { schema } from "@/db";
+import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
 import { SignupService } from "@/lib/SignupService";
-import { getIpAddress, getUserAgent } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
