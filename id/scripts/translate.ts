@@ -152,7 +152,7 @@ async function translate(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       prompt,
-      model: "llama3.1",
+      model: "gemma2",
       format: "json",
       stream: false,
     }),
