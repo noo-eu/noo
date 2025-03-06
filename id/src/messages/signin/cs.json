@@ -4,6 +4,7 @@
     "error": "Špatně zadané přihlašovací údaje",
     "password": "Heslo",
     "submit": "Přihlásit se",
+    "tenant_error": "Přihlaste, přihlaste se pomocí účtu {domain}",
     "title": "Přihlaste se k účtu <noo></noo>",
     "username": "Uživatelské jméno nebo e-mail"
   }

@@ -4,6 +4,7 @@
     "error": "Zadané údaje sú neplatné",
     "password": "Heslo",
     "submit": "Prihlásiť sa",
+    "tenant_error": "Prihláste sa na účet {domain}",
     "title": "Prihláste sa do vášho <noo></noo> účtu",
     "username": "Užívateľské meno alebo e-mail"
   }

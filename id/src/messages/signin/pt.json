@@ -4,6 +4,7 @@
     "error": "As credenciais digitadas estão incorretas",
     "password": "Senha",
     "submit": "Entrar",
+    "tenant_error": "Por favor, entre com uma conta {domain}",
     "title": "Entrar na sua conta <noo></noo>",
     "username": "Nome de usuário ou e-mail"
   }

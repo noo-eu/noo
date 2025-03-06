@@ -4,6 +4,7 @@
     "error": "Die eingegebenen Zugangsdaten sind falsch",
     "password": "Passwort",
     "submit": "Anmelden",
+    "tenant_error": "Bitte mit einem {domain}-Konto anmelden",
     "title": "Melden Sie sich bei <noo></noo> an",
     "username": "Benutzername oder E-Mail-Adresse"
   }

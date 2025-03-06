@@ -4,6 +4,7 @@
     "error": "Níl na cheadaithe agat a theastaigh ",
     "password": "Páirtíochta",
     "submit": "Tóga isteach",
+    "tenant_error": "Logáil isteach le cuntas {domain}",
     "title": "Logáil isteach i do chuntas <noo></noo>",
     "username": "Ciall nó rphost"
   }

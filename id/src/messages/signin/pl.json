@@ -4,6 +4,7 @@
     "error": "Błędne dane logowania",
     "password": "Hasło",
     "submit": "Zaloguj się",
+    "tenant_error": "Zaloguj się na konto {domain}",
     "title": "Zaloguj się na swoje konta <noo></noo>",
     "username": "Nazwa użytkownika lub adres e-mail"
   }

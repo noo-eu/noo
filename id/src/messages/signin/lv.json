@@ -4,6 +4,7 @@
     "error": "Jūsu ievadīto informāciju nav pareiza",
     "password": "Parole",
     "submit": "Iestāties",
+    "tenant_error": "Lūdzu, iestājieties ar {domain} kontu",
     "title": "Iestāties savam <noo></noo> kontam",
     "username": "Vārds vai e-pasta adrese"
   }

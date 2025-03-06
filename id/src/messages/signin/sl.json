@@ -4,6 +4,7 @@
     "error": "Vnešeni podatki so napačni",
     "password": "Geslo",
     "submit": "Prijava",
+    "tenant_error": "Prijavite se s računom {domain}",
     "title": "Prijavite se na račun <noo></noo>",
     "username": "Uporabniško ime ali e-poštni naslov"
   }

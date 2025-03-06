@@ -1,11 +1,11 @@
 {
   "signin": {
+    "create_account": "Create an account",
     "error": "The credentials you entered are incorrect",
     "password": "Password",
     "submit": "Sign in",
+    "tenant_error": "Please sign in using a {domain} account",
     "title": "Sign in to your <noo></noo> account",
-    "username": "Username or email",
-    "create_account": "Create an account",
-    "tenant_error": "You have to sign in with a {domain} account"
+    "username": "Username or email"
   }
 }
