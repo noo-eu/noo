@@ -32,6 +32,7 @@
       "legalNone": "Innan du loggar in måste du kontrollera {client}s juridiska dokument.",
       "legalPrivacy": "Innan du loggar in måste du kontrollera <privacy>sekretesspolicy</privacy> för {client}.",
       "legalTerms": "Innan du loggar in måste du kontrollera <terms>användarvillkor</terms> för {client}.",
+      "metaTitle": "Logga in - noo id",
       "pageTitle": "Logga in med <noo></noo>",
       "signin": "Använd ett annat konto",
       "title": "Välj ett konto"

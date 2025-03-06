@@ -32,6 +32,7 @@
       "legalNone": "Prieš prisijungdami, turite patikrinti {client} teisinius dokumentus.",
       "legalPrivacy": "Prieš prisijungdami, turite patikrinti <privacy>privatumo taisykles</privacy> {client}.",
       "legalTerms": "Prieš prisijungdami, turite patikrinti <terms>naudojimo sąlygas</terms> {client}.",
+      "metaTitle": "Prisijungimas - noo id",
       "pageTitle": "Prisijungimas naudojant <noo></noo>",
       "signin": "Naudokite kitą paskyrą",
       "title": "Pasirinkite paskyrą"

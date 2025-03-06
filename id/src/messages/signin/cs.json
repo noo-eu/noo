@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Založte si účet",
     "error": "Špatně zadané přihlašovací údaje",
+    "metaTitle": "Přihlášení - noo",
     "password": "Heslo",
     "submit": "Přihlásit se",
     "tenant_error": "Přihlaste, přihlaste se pomocí účtu {domain}",

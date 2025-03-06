@@ -32,6 +32,7 @@
       "legalNone": "Înainte de a vă conecta, trebuie să verificați documentele legale ale {client}.",
       "legalPrivacy": "Înainte de a vă conecta, trebuie să verificați <privacy>politica de confidențialitate</privacy> a {client}.",
       "legalTerms": "Înainte de a vă conecta, trebuie să verificați <terms>termenii de utilizare</terms> ai {client}.",
+      "metaTitle": "Conectare - noo id",
       "pageTitle": "Conectați-vă cu <noo></noo>",
       "signin": "Utilizați un alt cont",
       "title": "Alegeți un cont"

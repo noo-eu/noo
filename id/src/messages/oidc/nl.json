@@ -32,6 +32,7 @@
       "legalNone": "Voordat je inlogt, moet je de juridische documenten van {client} controleren.",
       "legalPrivacy": "Voordat je inlogt, moet je de <privacy>privacyvoorwaarden</privacy> van {client} controleren.",
       "legalTerms": "Voordat je inlogt, moet je de <terms>gebruiksvoorwaarden</terms> van {client} controleren.",
+      "metaTitle": "Inloggen - noo id",
       "pageTitle": "Inloggen met <noo></noo>",
       "signin": "Een ander account gebruiken",
       "title": "Kies een account"

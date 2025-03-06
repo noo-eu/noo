@@ -19,6 +19,7 @@
       "username_taken": "Toto prihlasovacie meno je już použité",
       "username_two_dots": "Prihlasovacie meno nemôže obsahovať dve body (.) v rade"
     },
+    "metaTitle": "Vytvoriť si účet",
     "step1": {
       "first_name": "Meno",
       "last_name": "Priezvisko",

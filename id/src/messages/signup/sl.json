@@ -19,6 +19,7 @@
       "username_taken": "Ta uporabniško ime je že zasedeno",
       "username_two_dots": "Uporabniško ime ne more vsebovati dveh zaporednih točkamo (.)"
     },
+    "metaTitle": "Ustvari svoj račun noo",
     "step1": {
       "first_name": "Ime",
       "last_name": "Priimek",

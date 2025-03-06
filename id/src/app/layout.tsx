@@ -6,7 +6,6 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "noo id",
-  description: "Sign in to your noo account",
 };
 
 export default async function RootLayout({

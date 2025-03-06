@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Rakstīt kontu",
     "error": "Jūsu ievadīto informāciju nav pareiza",
+    "metaTitle": "Pieteikties - noo",
     "password": "Parole",
     "submit": "Iestāties",
     "tenant_error": "Lūdzu, iestājieties ar {domain} kontu",

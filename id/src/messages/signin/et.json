@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Konto loomine",
     "error": "Vale parool või kasutajatunnus",
+    "metaTitle": "Logi sisse - noo",
     "password": "Parool",
     "submit": "Sisene",
     "tenant_error": "Palun logige sisse {domain} kontoga",

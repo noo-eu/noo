@@ -32,6 +32,7 @@
       "legalNone": "Prima di accedere, dovresti rivedere i documenti legali di {client}.",
       "legalPrivacy": "Prima di accedere, dovresti rivedere le <privacy>condizioni sulla privacy</privacy> di {client}.",
       "legalTerms": "Prima di accedere, dovresti rivedere le <terms>condizioni d'uso</terms> di {client}.",
+      "metaTitle": "Accedi - noo id",
       "pageTitle": "Accedi con <noo></noo>",
       "signin": "Utilizza un altro account",
       "title": "Scegli un account"

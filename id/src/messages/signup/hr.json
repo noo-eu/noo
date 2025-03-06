@@ -19,6 +19,7 @@
       "username_taken": "Korisničko ime je zauzeto",
       "username_two_dots": "Vaše korisničko ime ne smije sadržavati dvije točke (.) uz redom"
     },
+    "metaTitle": "Kreiraj svoj noo račun",
     "step1": {
       "first_name": "Prvo ime",
       "last_name": "Prezime",

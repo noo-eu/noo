@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Zarejestruj się",
     "error": "Błędne dane logowania",
+    "metaTitle": "Zaloguj się - noo",
     "password": "Hasło",
     "submit": "Zaloguj się",
     "tenant_error": "Zaloguj się na konto {domain}",

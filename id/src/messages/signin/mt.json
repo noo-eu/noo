@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Inhobb il-ħsib tissemma",
     "error": "L-identifikatur u l-passport li introduċi huma ħela",
+    "metaTitle": "Idħol f'noo",
     "password": "Parola d'accessu",
     "submit": "Inhobb issirvi",
     "tenant_error": "Jekk jogħġbok idħol bil-kont ta '{domain}",

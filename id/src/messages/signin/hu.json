@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Regisztráció",
     "error": "A megadott adatok nem stimmelnek",
+    "metaTitle": "Belépés - noo",
     "password": "Jelszó",
     "submit": "Bejelentkezés",
     "tenant_error": "Jelentkezzen be a(z) {domain} fiókkal",

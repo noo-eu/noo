@@ -32,6 +32,7 @@
       "legalNone": "Pirms pieteikšanās jums jāpārbauda {client} juridiskos dokumentus.",
       "legalPrivacy": "Pirms pieteikšanās jums jāpārbauda <privacy>privātuma politiku</privacy> {client}.",
       "legalTerms": "Pirms pieteikšanās jums jāpārbauda <terms>lietošanas noteikumus</terms> {client}.",
+      "metaTitle": "Pieteikties — noo id",
       "pageTitle": "Piesakieties ar <noo></noo>",
       "signin": "Izmantojiet citu kontu",
       "title": "Izvēlieties kontu"

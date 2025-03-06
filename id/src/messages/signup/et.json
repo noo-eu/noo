@@ -19,6 +19,7 @@
       "username_taken": "See kasutajanimetus on juba võetud",
       "username_two_dots": "Kasutajanimetus ei tohi sisaldada kahe punkti perioodit () üksteist."
     },
+    "metaTitle": "Loo oma noo konto",
     "step1": {
       "first_name": "Eesnimi",
       "last_name": "Perekonnanimi",

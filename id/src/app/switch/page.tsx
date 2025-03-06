@@ -10,6 +10,15 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Legal } from "../../components/Legal";
 
+export async function generateMetadata() {
+  const t = await getTranslations("oidc");
+
+  return {
+    title: t("switch.metaTitle"),
+    description: "",
+  };
+}
+
 export default async function AccountSwitcherPage() {
   const sessions = await getSessions();
   const oidcAuthRequest = await getOidcAuthorizationRequest();

@@ -32,6 +32,7 @@
       "legalNone": "Bejelentkezés előtt ellenőriznie kell a {client} jogi dokumentumait.",
       "legalPrivacy": "Bejelentkezés előtt ellenőriznie kell a <privacy>adatvédelmi irányelveket</privacy> {client}.",
       "legalTerms": "Bejelentkezés előtt ellenőriznie kell a <terms>használati feltételeket</terms> {client}.",
+      "metaTitle": "Belépés - noo id",
       "pageTitle": "Bejelentkezés <noo></noo>-fiókkal",
       "signin": "Másik fiók használata",
       "title": "Válasszon fiókot"

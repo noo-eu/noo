@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Ustvari račun",
     "error": "Vnešeni podatki so napačni",
+    "metaTitle": "Prijava - noo",
     "password": "Geslo",
     "submit": "Prijava",
     "tenant_error": "Prijavite se s računom {domain}",

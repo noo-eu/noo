@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Sukurti paskyrai",
     "error": "Įvesti duomenys yra neteisingi",
+    "metaTitle": "Prisijungti - noo",
     "password": "Slaptažodis",
     "submit": "Prisijungti",
     "tenant_error": "Prisijunkite prie {domain} paskyros",

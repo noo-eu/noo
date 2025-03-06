@@ -19,6 +19,7 @@
       "username_taken": "Det här användarnamnet är redan taget",
       "username_two_dots": "Ditt användarnamn får inte innehålla två punkter i rad"
     },
+    "metaTitle": "Skapa ditt noo-konto",
     "step1": {
       "first_name": "Förnamn",
       "last_name": "Efternamn",

@@ -32,6 +32,7 @@
       "legalNone": "Bevor Sie sich anmelden, müssen Sie die rechtlichen Dokumente für {client} überprüfen.",
       "legalPrivacy": "Bevor Sie sich anmelden, müssen Sie die <privacy>Datenschutzrichtlinien</privacy> für {client} überprüfen.",
       "legalTerms": "Bevor Sie sich anmelden, müssen Sie die <terms>Nutzungsbedingungen</terms> für {client} überprüfen.",
+      "metaTitle": "Anmelden - noo id",
       "pageTitle": "Über <noo></noo> anmelden",
       "signin": "Anderes Konto verwenden",
       "title": "Konto auswählen"

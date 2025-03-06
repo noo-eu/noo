@@ -19,6 +19,7 @@
       "username_taken": "Ese nombre de usuario ya está en uso",
       "username_two_dots": "Tu nombre de usuario no puede contener puntos (.) consecutivos"
     },
+    "metaTitle": "Crea tu cuenta noo",
     "step1": {
       "first_name": "Nombre",
       "last_name": "Apellidos",

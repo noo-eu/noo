@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Opret en konto",
     "error": "Det er ikke godt agørende, hvad du har skrevet",
+    "metaTitle": "Log ind - noo",
     "password": "Adgangskode",
     "submit": "Log ind",
     "tenant_error": "Vær venlig at logge ind med en {domain}-konto",

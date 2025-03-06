@@ -19,6 +19,7 @@
       "username_taken": "Toto jméno účtu je již zabrané",
       "username_two_dots": "Vaše jméno účtu nemůže obsahovat dva body (.) vedle sebe"
     },
+    "metaTitle": "Vytvořte si účet na noo",
     "step1": {
       "first_name": "Křestní jméno",
       "last_name": "Příjmení",

@@ -32,6 +32,7 @@
       "legalNone": "Antes de iniciar sessão, deve rever os documentos legais de {client}.",
       "legalPrivacy": "Antes de iniciar sessão, deve rever a <privacy>política de privacidade</privacy> de {client}.",
       "legalTerms": "Antes de iniciar sessão, deve rever os <terms>termos de utilização</terms> de {client}.",
+      "metaTitle": "Faça login - noo id",
       "pageTitle": "Iniciar sessão com <noo></noo>",
       "signin": "Usar outra conta",
       "title": "Escolha uma conta"

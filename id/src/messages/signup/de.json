@@ -19,6 +19,7 @@
       "username_taken": "Dieser Benutzername ist bereits vergeben",
       "username_two_dots": "Ihr Benutzername darf keine zwei aufeinanderfolgenden Punkte (.) enthalten"
     },
+    "metaTitle": "Dein kostenloses noo-Konto erstellen",
     "step1": {
       "first_name": "Vorname",
       "last_name": "Nachname",

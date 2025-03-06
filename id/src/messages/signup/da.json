@@ -19,6 +19,7 @@
       "username_taken": "Brugernavnet er allerede taget",
       "username_two_dots": "Din bruger navn må ikke have to punktum i træk"
     },
+    "metaTitle": "Opret din noo konto",
     "step1": {
       "first_name": "Fornavn",
       "last_name": "Efternavn",

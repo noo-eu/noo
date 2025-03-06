@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Eenaccount aanmaken",
     "error": "De ingevoerde gegevens zijn niet correct",
+    "metaTitle": "Inloggen - noo",
     "password": "Wachtwoord",
     "submit": "Inloggen",
     "tenant_error": "Meld je aan met een {domain}-account",

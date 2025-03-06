@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Vytvorte si účet",
     "error": "Zadané údaje sú neplatné",
+    "metaTitle": "Prihlásenie - noo",
     "password": "Heslo",
     "submit": "Prihlásiť sa",
     "tenant_error": "Prihláste sa na účet {domain}",

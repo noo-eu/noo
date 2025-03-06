@@ -32,6 +32,7 @@
       "legalNone": "Pred prihlásením sa musíte overiť právne dokumenty {client}.",
       "legalPrivacy": "Pred prihlásením sa musíte overiť <privacy>zásady ochrany osobných údajov</privacy> {client}.",
       "legalTerms": "Pred prihlásením sa musíte overiť <terms>podmienky používania</terms> {client}.",
+      "metaTitle": "Prihlásenie - noo id",
       "pageTitle": "Prihlásiť sa pomocou <noo></noo>",
       "signin": "Použiť iný účet",
       "title": "Vyberte účet"

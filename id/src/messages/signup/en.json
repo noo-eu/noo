@@ -19,6 +19,7 @@
       "username_taken": "This username is taken",
       "username_two_dots": "Your username cannot contain two dots (.) in a row"
     },
+    "metaTitle": "Create your noo account",
     "step1": {
       "first_name": "First name",
       "last_name": "Surname",

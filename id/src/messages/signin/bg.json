@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Създаване на акаунт",
     "error": "Грешните данни, които сте въвели са неверни",
+    "metaTitle": "Влози в <noo>",
     "password": "Парола",
     "submit": "Влози се",
     "tenant_error": "Моля, влезте с акаунт от {domain}",

@@ -32,6 +32,7 @@
       "legalNone": "Before signing in, you should review {client}'s legal documents.",
       "legalPrivacy": "Before signing in, you should review {client}'s <privacy>privacy policy</privacy>.",
       "legalTerms": "Before signing in, you should review {client}'s <terms>terms of service</terms>.",
+      "metaTitle": "Sign in - noo id",
       "pageTitle": "Sign in with <noo></noo>",
       "signin": "Use another account",
       "title": "Choose an account"

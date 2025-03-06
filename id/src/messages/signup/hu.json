@@ -19,6 +19,7 @@
       "username_taken": "Ez a felhasználónév már foglalt",
       "username_two_dots": "A felhasználónév nem lehet két ponttal ellátva"
     },
+    "metaTitle": "Létrehozd noo fiókodat",
     "step1": {
       "first_name": "Név",
       "last_name": "Családneve",

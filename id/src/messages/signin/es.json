@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Regístrate",
     "error": "Las credenciales que ingresaste son incorrectas",
+    "metaTitle": "Iniciar sesión - noo",
     "password": "Contraseña",
     "submit": "Iniciar sesión",
     "tenant_error": "Por favor, inicia sesión con una cuenta de {domain}",

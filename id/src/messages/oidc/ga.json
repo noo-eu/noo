@@ -32,6 +32,7 @@
       "legalNone": "Roimh logáil isteach, caithfidh tú doiciméid dlíthiúla {client} a sheiceáil.",
       "legalPrivacy": "Roimh logáil isteach, caithfidh tú na <privacy>rialacha príobháideachta</privacy> a sheiceáil {client}.",
       "legalTerms": "Roimh logáil isteach, caithfidh tú na <terms>rialacha úsáide</terms> a sheiceáil {client}.",
+      "metaTitle": "Logáil isteach - noo id",
       "pageTitle": "Logáil isteach le <noo></noo>",
       "signin": "Úsáid cuntas eile",
       "title": "Roghnaigh cuntas"

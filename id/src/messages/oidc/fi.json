@@ -5,7 +5,7 @@
       "claims": {
         "address": "Postiosoitteesi",
         "birthdate": "Syntymäaikasi",
-        "email": "Noo-sähköpostiosoitteesi",
+        "email": "noo-sähköpostiosoitteesi",
         "gender": "Sukupuoli, johon identifioidut",
         "name": "Koko nimesi",
         "phone_number": "Puhelinnumerosi",
@@ -32,6 +32,7 @@
       "legalNone": "Ennen kirjautumista sinun on tarkistettava {client} oikeusasiakirjat.",
       "legalPrivacy": "Ennen kirjautumista sinun on tarkistettava <privacy>tietosuojakäytännöt</privacy> {client}.",
       "legalTerms": "Ennen kirjautumista sinun on tarkistettava <terms>käyttöehdot</terms> {client}.",
+      "metaTitle": "Kirjaudu sisään - noo id",
       "pageTitle": "Kirjaudu sisään <noo></noo>",
       "signin": "Käytä toista tiliä",
       "title": "Valitse tili"

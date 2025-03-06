@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Create an account",
     "error": "The credentials you entered are incorrect",
+    "metaTitle": "Sign in - noo",
     "password": "Password",
     "submit": "Sign in",
     "tenant_error": "Please sign in using a {domain} account",

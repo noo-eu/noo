@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Creează contul",
     "error": "Datele pe care le-ai introdus sunt incorecte",
+    "metaTitle": "Conectare - noo",
     "password": "Parolă",
     "submit": "Autentificare",
     "tenant_error": "Vă rugăm să vă autentificați cu un cont {domain}",

@@ -32,6 +32,7 @@
       "legalNone": "Przed zalogowaniem się musisz sprawdzić dokumenty prawne {client}.",
       "legalPrivacy": "Przed zalogowaniem się musisz sprawdzić <privacy>politykę prywatności</privacy> {client}.",
       "legalTerms": "Przed zalogowaniem się musisz sprawdzić <terms>warunki korzystania</terms> {client}.",
+      "metaTitle": "Zaloguj się - noo id",
       "pageTitle": "Zaloguj się przez <noo></noo>",
       "signin": "Użyj innego konta",
       "title": "Wybierz konto"

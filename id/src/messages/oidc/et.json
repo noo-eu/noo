@@ -32,6 +32,7 @@
       "legalNone": "Enne sisselogimist peate kontrollima {client} õigusdokumente.",
       "legalPrivacy": "Enne sisselogimist peate kontrollima <privacy>privaatsustingimusi</privacy> {client}.",
       "legalTerms": "Enne sisselogimist peate kontrollima <terms>kasutustingimusi</terms> {client}.",
+      "metaTitle": "Logi sisse - noo id",
       "pageTitle": "Logi sisse <noo></noo>",
       "signin": "Kasuta teist kontot",
       "title": "Valige konto"

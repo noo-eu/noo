@@ -32,6 +32,7 @@
       "legalNone": "Prije prijave morate provjeriti pravne dokumente {client}.",
       "legalPrivacy": "Prije prijave morate provjeriti <privacy>pravila o privatnosti</privacy> {client}.",
       "legalTerms": "Prije prijave morate provjeriti <terms>uvjete korištenja</terms> {client}.",
+      "metaTitle": "Prijava - noo id",
       "pageTitle": "Prijavite se putem <noo></noo>",
       "signin": "Koristite drugi račun",
       "title": "Odaberite račun"

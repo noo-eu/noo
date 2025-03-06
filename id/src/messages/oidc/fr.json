@@ -32,6 +32,7 @@
       "legalNone": "Avant de vous connecter, il faut passer en revue les documents juridiques du {client}",
       "legalPrivacy": "Avant de vous connecter, il faut passer en revue la <privacy>politique de confidentialité</privacy> du {client}",
       "legalTerms": "Avant de vous connecter, il faut passer en revue les <terms>modalités d'utilisation</terms> du {client}",
+      "metaTitle": "Connexion - noo id",
       "pageTitle": "Se connecter avec <noo></noo>",
       "signin": "Utiliser un autre compte",
       "title": "Choisissez un compte"

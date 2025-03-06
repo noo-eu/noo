@@ -19,6 +19,7 @@
       "username_taken": "Tämä käyttäjänimi on jo varattu",
       "username_two_dots": "Käyttäjänimessä ei voi olla kaksi peräkkäistä pistettä (.)"
     },
+    "metaTitle": "Luo uusi noo-tilisi",
     "step1": {
       "first_name": "Etunimi",
       "last_name": "Sukunimi",

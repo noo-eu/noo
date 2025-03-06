@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Registrujte se",
     "error": "Vaše prijave su netočne",
+    "metaTitle": "Prijava - noo",
     "password": "Lozinka",
     "submit": "Prijavi se",
     "tenant_error": "Prijavite se pomoću računa {domain}",

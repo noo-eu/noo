@@ -1,6 +1,16 @@
 import { Noo } from "@/components/Noo";
 import { PageModal } from "@/components/PageModal";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata() {
+  const t = await getTranslations("signup");
+
+  return {
+    title: t("metaTitle"),
+    description: "",
+  };
+}
 
 export default function SignupPage({
   children,
