@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Luo »»« -tili",
+    "create_your_account": "Luo tili <noo></noo>",
     "errors": {
       "first_name_required": "Anna ensimmäinen nimi",
       "invalid_data": "Jokin meni pieleen. Tarkistele syötetyt tiedot",

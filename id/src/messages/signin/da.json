@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Opret en konto",
     "error": "Det er ikke godt agørende, hvad du har skrevet",
     "password": "Adgangskode",
     "submit": "Log ind",

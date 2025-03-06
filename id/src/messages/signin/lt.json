@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Sukurti paskyrai",
     "error": "Įvesti duomenys yra neteisingi",
     "password": "Slaptažodis",
     "submit": "Prisijungti",

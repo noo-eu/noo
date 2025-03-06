@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Utwórz swoje konto",
+    "create_your_account": "Utwórz konto <noo></noo>",
     "errors": {
       "first_name_required": "Podaj swój imię",
       "invalid_data": "Coś poszło nie tak. Sprawdź dane, które wpisałeś",

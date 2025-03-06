@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Konto loomine",
     "error": "Vale parool või kasutajatunnus",
     "password": "Parool",
     "submit": "Sisene",

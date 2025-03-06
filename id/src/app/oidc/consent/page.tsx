@@ -24,13 +24,18 @@ export default async function OidcConsentPage({
   const sessionId = (await searchParams).sid;
   if (!sessionId) {
     console.warn("No session ID found");
-    return redirect("/");
+    return redirect("/switch");
   }
 
   const user = await getUserForSession(sessionId);
   if (!user) {
     console.warn("No user found for session");
-    return redirect("/");
+    return redirect("/switch");
+  }
+
+  if (oidcAuthRequest.tenantId && oidcAuthRequest.tenantId !== user.tenantId) {
+    console.warn("Tenant mismatch");
+    return redirect("/switch");
   }
 
   // At this point we have authenticated the user, we have to determine if the
@@ -79,13 +84,17 @@ export default async function OidcConsentPage({
 
   const cleanClaims = cleanupClaims(missingClaims);
   const fastForward = missingScopes.length === 0 && cleanClaims.length === 0;
+  const userFields = {
+    name: `${user.firstName} ${user.lastName}`.trim(),
+    email: `${user.username}@${user.tenant?.domain || "noomail.eu"}`,
+  };
 
   return (
     <Content
       client={clientFields}
       missingClaims={cleanClaims}
       fastForward={fastForward}
-      user={{ name: "test", email: "lol" }}
+      user={userFields}
     />
   );
 }

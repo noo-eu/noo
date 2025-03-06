@@ -1,9 +1,17 @@
 import { ModalFooter } from "@/components/ModalFooter";
 
-export function PageModal({ children }: { children: React.ReactNode }) {
+export function PageModal({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div className="sm:flex flex-col justify-center mt-8 sm:mt-auto">
-      <div className="sm:my-16 flex flex-col justify-between sm:block sm:min-h-auto sm:max-w-4xl sm:mx-auto lg:w-full">
+      <div
+        className={`sm:my-16 flex flex-col justify-between sm:block sm:min-h-auto sm:max-w-4xl sm:mx-auto lg:w-full ${className}`}
+      >
         {children}
 
         <ModalFooter />
@@ -12,9 +20,17 @@ export function PageModal({ children }: { children: React.ReactNode }) {
   );
 }
 
-PageModal.Modal = function Modal({ children }: { children: React.ReactNode }) {
+PageModal.Modal = function Modal({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <section className="px-8 sm:p-12 w-full sm:rounded-lg sm:shadow-lg sm:backdrop-blur-xs sm:bg-white/40 dark:sm:bg-black/40 lg:grid lg:grid-cols-2 gap-8">
+    <section
+      className={`${className} px-8 sm:p-12 w-full sm:rounded-lg sm:shadow-lg sm:backdrop-blur-xs sm:bg-white/40 dark:sm:bg-black/40 lg:grid lg:grid-cols-2 gap-8 dark:sm:shadow-with-highlights`}
+    >
       {children}
     </section>
   );

@@ -29,14 +29,16 @@ export default async function OidcContinuePage({
 
   const sessionId = (await searchParams).sid;
   if (!sessionId) {
-    console.warn("No session ID found");
-    return redirect("/");
+    return redirect("/switch");
   }
 
   const user = await getUserForSession(sessionId);
   if (!user) {
-    console.warn("No user found for session");
-    return redirect("/");
+    return redirect("/switch");
+  }
+
+  if (oidcAuthRequest.tenantId && oidcAuthRequest.tenantId !== user.tenantId) {
+    return redirect("/switch");
   }
 
   // At this point we have authenticated the user, we have to determine if the
@@ -47,7 +49,6 @@ export default async function OidcContinuePage({
     humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
   );
   if (!client) {
-    console.warn("Client not found");
     return redirect("/");
   }
 

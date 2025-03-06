@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Vytvorte si <noo>účet</noo>",
+    "create_your_account": "Vytvorte si účet <noo></noo>",
     "errors": {
       "first_name_required": "Prosím, zadejte vaše meno",
       "invalid_data": "Náš systém prekvapil. Prosím, zkontrolujte údaje, ktoré ste zadali",

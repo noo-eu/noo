@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Eenaccount aanmaken",
     "error": "De ingevoerde gegevens zijn niet correct",
     "password": "Wachtwoord",
     "submit": "Inloggen",

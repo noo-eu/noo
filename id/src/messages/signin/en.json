@@ -4,6 +4,8 @@
     "password": "Password",
     "submit": "Sign in",
     "title": "Sign in to your <noo></noo> account",
-    "username": "Username or email"
+    "username": "Username or email",
+    "create_account": "Create an account",
+    "tenant_error": "You have to sign in with a {domain} account"
   }
 }

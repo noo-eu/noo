@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Rekisteröidy",
     "error": "Antamasi tiedot eivät ole oikein",
     "password": "Salasana",
     "submit": "Kirjaudu sisään",

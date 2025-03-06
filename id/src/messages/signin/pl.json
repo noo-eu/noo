@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Zarejestruj się",
     "error": "Błędne dane logowania",
     "password": "Hasło",
     "submit": "Zaloguj się",

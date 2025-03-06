@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Založte si účet",
     "error": "Špatně zadané přihlašovací údaje",
     "password": "Heslo",
     "submit": "Přihlásit se",

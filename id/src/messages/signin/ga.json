@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Cruthaigh a chuntas",
     "error": "Níl na cheadaithe agat a theastaigh ",
     "password": "Páirtíochta",
     "submit": "Tóga isteach",

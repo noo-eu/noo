@@ -2,6 +2,7 @@
 
 import { schema } from "@/db";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
+import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
 import { SignupService } from "@/lib/SignupService";
 import { getTranslations } from "next-intl/server";
@@ -106,7 +107,7 @@ async function startSession(user: typeof schema.users.$inferSelect) {
     cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
   );
 
-  await sessionManager.startSession(
+  const session = await sessionManager.startSession(
     user.id,
     await getIpAddress(),
     await getUserAgent(),
@@ -121,6 +122,8 @@ async function startSession(user: typeof schema.users.$inferSelect) {
     secure: true,
     sameSite: "none",
   });
+
+  return session;
 }
 
 export async function signupStep4(_: unknown, __: FormData) {
@@ -138,8 +141,14 @@ export async function signupStep4(_: unknown, __: FormData) {
 
   const result = await svc.runStep4(signupData);
   if (result.success) {
-    startSession(result.user);
-    redirect("/signup/success");
+    const session = await startSession(result.user);
+
+    const oidcAuthorization = await getOidcAuthorizationRequest();
+    if (oidcAuthorization) {
+      redirect("/oidc/consent?sid=" + session.id);
+    } else {
+      redirect("/signup/success");
+    }
   } else {
     redirect("/signup");
   }

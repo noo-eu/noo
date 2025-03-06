@@ -1,5 +1,6 @@
 "use server";
 
+import Tenants from "@/db/tenants";
 import Users from "@/db/users";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
@@ -25,7 +26,20 @@ export async function signin(_: unknown, formData: FormData) {
 
   const user = await Users.authenticate(username.trim(), password.trim());
   if (!user) {
-    return { username, error: 1 };
+    return { username, error: "credentials" };
+  }
+
+  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
+  if (oidcAuthorizationRequest?.tenantId) {
+    if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
+      const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
+
+      return {
+        username,
+        error: "tenant",
+        domain: tenant!.domain,
+      };
+    }
   }
 
   if (user.otpSecret) {
@@ -55,7 +69,6 @@ export async function signin(_: unknown, formData: FormData) {
     await setSessionCookie(svc.buildCookie());
   }
 
-  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
   if (!oidcAuthorizationRequest) {
     let continueUrl = params.continue;
     if (!continueUrl || !continueUrl.startsWith("/")) {

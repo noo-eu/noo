@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Opret din <b>Konto</b>",
+    "create_your_account": "Opret din konto <noo></noo>",
     "errors": {
       "first_name_required": "Skub venligst dit første navn ind",
       "invalid_data": "Der gik noget galt. Tjek venligst de data du har indtastet",

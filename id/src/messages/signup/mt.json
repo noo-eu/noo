@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Tiswa' akkaunt tiegħek",
+    "create_your_account": "Opru kont tiegħek <noo></noo>",
     "errors": {
       "first_name_required": "Tajjeb tibba' isim tkun ħadd",
       "invalid_data": "Ġejt farruża kollox. Tibba' tkun ħadd maħsub li qed tgħidlek",

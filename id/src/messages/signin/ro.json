@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Creează contul",
     "error": "Datele pe care le-ai introdus sunt incorecte",
     "password": "Parolă",
     "submit": "Autentificare",

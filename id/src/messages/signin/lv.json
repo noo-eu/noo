@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Rakstīt kontu",
     "error": "Jūsu ievadīto informāciju nav pareiza",
     "password": "Parole",
     "submit": "Iestāties",

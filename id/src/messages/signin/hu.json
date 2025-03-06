@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Regisztráció",
     "error": "A megadott adatok nem stimmelnek",
     "password": "Jelszó",
     "submit": "Bejelentkezés",

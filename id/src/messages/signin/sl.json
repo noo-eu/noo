@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Ustvari račun",
     "error": "Vnešeni podatki so napačni",
     "password": "Geslo",
     "submit": "Prijava",

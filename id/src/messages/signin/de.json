@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Konto erstellen",
     "error": "Die eingegebenen Zugangsdaten sind falsch",
     "password": "Passwort",
     "submit": "Anmelden",

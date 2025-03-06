@@ -1,5 +1,6 @@
 {
   "signin": {
+    "create_account": "Registrujte se",
     "error": "Vaše prijave su netočne",
     "password": "Lozinka",
     "submit": "Prijavi se",

@@ -2,6 +2,7 @@ import { PageModal } from "@/components/PageModal";
 import { PresentClient } from "@/components/PresentClient";
 import { SignInWithNoo } from "@/components/SignInWithNoo";
 import OidcClients from "@/db/oidc_clients";
+import { User } from "@/db/users";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { getSessions } from "@/lib/SessionsService";
@@ -34,6 +35,13 @@ export default async function AccountSwitcherPage() {
     tosUrl: getLocalizedOidcField(client, "tosUri", locale),
   };
 
+  const canUse = (user: User) => {
+    if (oidcAuthRequest.tenantId) {
+      return user.tenantId === oidcAuthRequest.tenantId;
+    }
+    return true;
+  };
+
   return (
     <PageModal>
       <SignInWithNoo />
@@ -44,8 +52,12 @@ export default async function AccountSwitcherPage() {
             {sessions.map((session) => (
               <li key={session.id}>
                 <a
-                  href={`/oidc/consent?sid=${session.id}`}
-                  className="block hover:bg-gray-100 dark:hover:bg-gray-800 py-3 px-5 rounded-lg flex"
+                  href={
+                    canUse(session.user)
+                      ? `/oidc/consent?sid=${session.id}`
+                      : "#"
+                  }
+                  className={`block py-3 px-5 rounded-lg flex ${canUse(session.user) ? "hover:bg-gray-200 dark:hover:bg-gray-800" : "text-gray-400 grayscale cursor-default"}`}
                 >
                   <div className="me-4">
                     <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-lg select-none">
@@ -67,7 +79,7 @@ export default async function AccountSwitcherPage() {
             <li>
               <a
                 href={`/signin`}
-                className="block hover:bg-gray-100 dark:hover:bg-gray-800 py-6 px-5 rounded-lg flex"
+                className="block hover:bg-gray-200 dark:hover:bg-gray-800 py-6 px-5 rounded-lg flex"
               >
                 <div className="text-md font-semibold flex gap-4">
                   <div className="w-12 text-center">
