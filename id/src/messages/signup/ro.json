@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Creați contul dvs.",
+    "create_your_account": "Creați-vă contul <noo></noo>",
     "errors": {
       "first_name_required": "Vă rugăm să introduceți primul nume",
       "invalid_data": "Ceva nu a mers bine. Vă rog să verificați datele introduse",

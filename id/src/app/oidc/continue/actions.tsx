@@ -1,6 +1,8 @@
 "use server";
 
+import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
+import Users from "@/db/users";
 import {
   Claims,
   createCode,
@@ -34,6 +36,15 @@ export async function afterConsent(sessionId: string) {
   }
 
   const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
+  const client = await OidcClients.find(clientId);
+  const user = await Users.find(session.userId);
+  if (!client || !user) {
+    return notFound();
+  }
+
+  if (client.tenantId && client.tenantId !== user.tenantId) {
+    return notFound();
+  }
 
   await storeConsent(
     session.userId,

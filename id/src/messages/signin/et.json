@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Konto loomine",
     "error": "Vale parool või kasutajatunnus",
     "password": "Parool",
     "submit": "Sisene",
+    "tenant_error": "Palun logige sisse {domain} kontoga",
     "title": "Logi sisse oma <noo></noo> kontole",
     "username": "Kasutajanimi või e-post"
   }

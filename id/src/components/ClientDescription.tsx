@@ -10,15 +10,15 @@ type Props = {
 export function ClientDescription({ name, descriptionKey }: Props) {
   const t = useTranslations("oidc");
 
-  return t.rich(descriptionKey || "switch.description", {
-    name,
-    details: (children) => (
-      <a
-        className="font-medium link cursor-pointer"
-        onClick={() => alert("TODO")}
-      >
-        {children}
-      </a>
-    ),
-  });
+  return (
+    <>
+      {t.rich(descriptionKey || "switch.description", {
+        name,
+        details: (children) => (
+          // TODO: Show contacts and host of redirect_uri on click
+          <span className="font-medium">{children}</span>
+        ),
+      })}
+    </>
+  );
 }

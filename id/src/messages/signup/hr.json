@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Stvorite svoj račun",
+    "create_your_account": "Stvorite vas račun <noo></noo>",
     "errors": {
       "first_name_required": "Unesite vase prvo ime",
       "invalid_data": "Nešto nije u redu. Provjerite unesena podatka",

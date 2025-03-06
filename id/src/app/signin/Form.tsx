@@ -4,13 +4,15 @@ import { Button } from "@/components/shared/Button";
 import { PasswordField } from "@/components/shared/PasswordField";
 import { TextField } from "@/components/shared/TextField";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { signin } from "./actions";
 
 type State = {
   username?: string;
-  error?: unknown;
+  error?: string;
+  domain?: string;
 };
 
 export function Form() {
@@ -22,7 +24,9 @@ export function Form() {
     <>
       {state.error && (
         <div className="bg-red-100 text-red-800 p-4 rounded mb-6">
-          {t("error")}
+          {state.error == "credentials" && t("error")}
+          {state.error == "tenant" &&
+            t("tenant_error", { domain: state.domain! })}
         </div>
       )}
       <form action={formAction} className="space-y-8">
@@ -35,7 +39,10 @@ export function Form() {
         {continueUrl && (
           <input type="hidden" name="continue" value={continueUrl} />
         )}
-        <div className="flex justify-end mt-12">
+        <div className="flex justify-end items-center mt-12">
+          <Link href="/signup" className="py-2.5 px-2 link font-medium me-4">
+            {t("create_account")}
+          </Link>
           <Button type="submit" pending={pending} data-testid="signinSubmit">
             {t("submit")}
           </Button>

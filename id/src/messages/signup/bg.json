@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Създаване на Вашия <noo> </noo> профил",
+    "create_your_account": "Създайте профил <noo></noo>",
     "errors": {
       "first_name_required": "Моля, въведете вашето име",
       "invalid_data": "Дееното сте грешно. Проверете въведените Ви данни",

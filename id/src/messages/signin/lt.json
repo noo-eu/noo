@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Sukurti paskyrai",
     "error": "Įvesti duomenys yra neteisingi",
     "password": "Slaptažodis",
     "submit": "Prisijungti",
+    "tenant_error": "Prisijunkite prie {domain} paskyros",
     "title": "Prisijunkite prie savo <noo></noo> paskyros",
     "username": "Šlovės vardas arba el. paštas"
   }

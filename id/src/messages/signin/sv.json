@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Skapa ett konto",
     "error": "Felaktiga uppgifter",
     "password": "Lösenord",
     "submit": "Logga in",
+    "tenant_error": "Logga in med ett {domain}-konto",
     "title": "Logga in på ditt <noo></noo>-konto",
     "username": "Användarnamn eller e-postadress"
   }

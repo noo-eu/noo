@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Regisztráció",
     "error": "A megadott adatok nem stimmelnek",
     "password": "Jelszó",
     "submit": "Bejelentkezés",
+    "tenant_error": "Jelentkezzen be a(z) {domain} fiókkal",
     "title": "Belépd a <noo></noo> fiókodba",
     "username": "Felhasználónév vagy e-mail"
   }

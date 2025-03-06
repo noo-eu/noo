@@ -45,6 +45,7 @@ export default function SignupPage() {
           error={state.errors.username}
           suffix="@noomail.eu"
           autoComplete="username"
+          autoFocus
         />
 
         <div className="flex justify-end mt-12">

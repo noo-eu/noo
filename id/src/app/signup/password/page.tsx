@@ -44,6 +44,7 @@ export default function SignupPage() {
           defaultValue={state.values.password}
           error={state.errors.password}
           autoComplete="new-password"
+          autoFocus
         />
 
         <div className="flex justify-end mt-12">

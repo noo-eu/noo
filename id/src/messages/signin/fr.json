@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Créez un compte",
     "error": "Les informations que vous avez saisies sont incorrectes",
     "password": "Mot de passe",
     "submit": "Se connecter",
+    "tenant_error": "Veuillez vous connecter avec un compte {domain}",
     "title": "Se connecter à votre compte <noo></noo>",
     "username": "Nom d'utilisateur ou adresse e-mail"
   }

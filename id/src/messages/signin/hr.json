@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Registrujte se",
     "error": "Vaše prijave su netočne",
     "password": "Lozinka",
     "submit": "Prijavi se",
+    "tenant_error": "Prijavite se pomoću računa {domain}",
     "title": "Prijavite se na vaš <noo></noo> račun",
     "username": "Korisničko ime ili email"
   }

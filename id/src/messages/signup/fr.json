@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Créez votre compte ",
+    "create_your_account": "Créez votre compte <noo></noo>",
     "errors": {
       "first_name_required": "Veuillez entrer votre prénom",
       "invalid_data": "Une erreur est survenue. Veuillez vérifier les données saisies",

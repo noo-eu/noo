@@ -1,6 +1,6 @@
 {
   "signup": {
-    "create_your_account": "Cuir cuntas nua iúl leat, faoi na nóibíochtaí",
+    "create_your_account": "Cruthaigh do chuntas <noo></noo>",
     "errors": {
       "first_name_required": "Cuir ainm chéad in iúl leat",
       "invalid_data": "Níl aon dhuine ag déanamh caidé do scéim agus cuir cuntas á chur síos",

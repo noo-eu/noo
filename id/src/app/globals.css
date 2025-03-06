@@ -2,8 +2,9 @@
 
 @theme {
   --color-eu-blue: #003399;
-  --color-eu-blue-dark: #002b80;
-  --color-hc-link: #759aff;
+  --color-eu-blue-hover: #0055cc;
+  --color-hc-link: #7799ff;
+  --color-hc-link-hover: #4c6ff0;
 }
 
 /* https://rsms.me/inter/ */
@@ -36,5 +37,12 @@ body {
 }
 
 .link {
-  @apply text-eu-blue dark:text-hc-link;
+  @apply text-eu-blue hover:text-eu-blue-hover dark:text-hc-link dark:hover:text-hc-link-hover;
+}
+
+@utility shadow-with-highlights {
+  box-shadow:
+    0 5px 40px 10px rgba(60, 60, 60, 0.5),
+    rgba(0, 0, 0, 0.5) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.5) 0px 4px 6px -4px;
 }

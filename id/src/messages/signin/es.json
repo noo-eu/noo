@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Regístrate",
     "error": "Las credenciales que ingresaste son incorrectas",
     "password": "Contraseña",
     "submit": "Iniciar sesión",
+    "tenant_error": "Por favor, inicia sesión con una cuenta de {domain}",
     "title": "Inicia sesión en tu cuenta de <noo></noo>",
     "username": "Nombre de usuario o correo electrónico"
   }

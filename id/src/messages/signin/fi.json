@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Rekisteröidy",
     "error": "Antamasi tiedot eivät ole oikein",
     "password": "Salasana",
     "submit": "Kirjaudu sisään",
+    "tenant_error": "Kirjaudu sisään {domain}-tilillä",
     "title": "Kirjaudu sisään <noo></noo>-tilillesi",
     "username": "Käyttäjätunnus tai sähköposti"
   }

@@ -544,9 +544,7 @@ async function authorizationStandard(
     return new Response(null, {
       status: 303,
       headers: {
-        Location: req.buildUrl("/signin", {
-          continue: "/oidc/consent?sid=__sid__",
-        }),
+        Location: req.buildUrl("/signin"),
         "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
       },
     });

@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Creează contul",
     "error": "Datele pe care le-ai introdus sunt incorecte",
     "password": "Parolă",
     "submit": "Autentificare",
+    "tenant_error": "Vă rugăm să vă autentificați cu un cont {domain}",
     "title": "Autentificare în contul <noo></noo>",
     "username": "Nume de utilizator sau adresa de e-mail"
   }

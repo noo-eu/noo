@@ -1,8 +1,10 @@
 {
   "signin": {
+    "create_account": "Eenaccount aanmaken",
     "error": "De ingevoerde gegevens zijn niet correct",
     "password": "Wachtwoord",
     "submit": "Inloggen",
+    "tenant_error": "Meld je aan met een {domain}-account",
     "title": "Aanmeld bij je <noo></noo>-account",
     "username": "Gebruikersnaam of e-mailadres"
   }
