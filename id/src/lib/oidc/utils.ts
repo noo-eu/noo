@@ -33,8 +33,7 @@ async function decode(token: string) {
   try {
     const { key } = (await getVerifyingKeyByAlg(OIDC_AUTH_COOKIE_ALG))!;
     return await jose.jwtVerify(token, key);
-  } catch (e) {
-    console.error(e);
+  } catch {
     return null;
   }
 }
