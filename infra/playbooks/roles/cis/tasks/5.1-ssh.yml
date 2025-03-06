@@ -1,0 +1,7 @@
+- name: Install SSH configuration
+  copy:
+    src: 50-noo-ssh.conf
+    dest: /etc/ssh/sshd_config.d/50-noo-ssh.conf
+    owner: root
+    group: root
+    mode: 0600

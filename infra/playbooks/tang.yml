@@ -1,0 +1,4 @@
+- hosts: tang
+  roles:
+    - role: tang
+      become: yes

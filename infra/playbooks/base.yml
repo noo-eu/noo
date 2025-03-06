@@ -1,0 +1,6 @@
+- name: Prepare the baseline
+  hosts: all
+  roles:
+    - common
+    - prometheus.prometheus.node_exporter
+    - cis

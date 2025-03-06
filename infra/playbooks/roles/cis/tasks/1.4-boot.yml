@@ -1,0 +1,21 @@
+# 1.4.1: Ensure bootloader password is set
+- name: Ensure bootloader password is set
+  copy:
+    dest: /etc/grub.d/99-noo
+    content: |
+      #!/bin/sh
+      cat << EOF
+      set superusers="noo-admin"
+      password_pbkdf2 noo-admin {{ grub_password }}
+      EOF
+    owner: root
+    group: root
+    mode: 0755
+  notify: Update GRUB
+
+- name: Allow boots without the password
+  lineinfile:
+    path: /etc/grub.d/10_linux
+    regexp: '^CLASS="--class gnu-linux --class gnu --class os"'
+    line: 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"'
+  notify: Update GRUB

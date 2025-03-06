@@ -1,0 +1,34 @@
+# 1.5.1: ASLR
+- name: Ensure Address Space Layout Randomization (ASLR) is enabled
+  sysctl:
+    name: kernel.randomize_va_space
+    value: 2
+    state: present
+    reload: true
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+
+# 1.5.2: Ensure ptrace_scope is restricted
+- name: Ensure ptrace_scope is restricted
+  sysctl:
+    name: kernel.yama.ptrace_scope
+    value: "{{ ptrace_scope }}"
+    state: present
+    reload: true
+
+# 1.5.3: Ensure core dumps are restricted
+- name: Ensure core dumps are restricted
+  copy:
+    dest: /etc/security/limits.d/50-noo.conf
+    content: |
+      * hard core 0
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Prevent setuid core dumps
+  sysctl:
+    name: fs.suid_dumpable
+    value: 0
+    state: present
+    reload: true
+    sysctl_file: /etc/sysctl.d/40-noo.conf

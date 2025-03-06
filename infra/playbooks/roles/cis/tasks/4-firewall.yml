@@ -1,0 +1,12 @@
+# 4.2.1: Ensure ufw is installed
+- name: Ensure ufw is installed
+  apt:
+    name: ufw
+    state: present
+
+- name: Allow all traffic from the private network (includes SSH)
+  ufw:
+    rule: allow
+    from: 10.0.0.0/8
+    proto: any
+    port: any

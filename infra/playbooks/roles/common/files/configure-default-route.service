@@ -1,0 +1,11 @@
+[Unit]
+Description=Configure default route to the gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/configure-default-route.sh
+
+[Install]
+WantedBy=multi-user.target

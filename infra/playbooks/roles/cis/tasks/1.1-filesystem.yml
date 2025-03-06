@@ -1,0 +1,101 @@
+# 1.1.1:
+# The very first requirement is to disable unused filesystem modules. A Level 1
+# requirement is that cramfs, freevxfs, hfs, hfsplus, jffs2, overlayfs,
+# squashfs, udf, and usb-storage should be disabled.
+#
+# For level two it extends the list with modules containing known CVEs. This
+# task will instead work out of a whitelist of filesystems that are allowed, and
+# disable all others.
+
+- name: List all installed FS modules
+  find:
+    paths: /lib/modules/{{ ansible_kernel }}/kernel/fs
+    patterns:
+      - '*.ko'
+      - '*.ko.zst'
+    recurse: yes
+  register: found_modules
+
+- name: Extract FS module names from paths
+  set_fact:
+    fs_modules: "{{ found_modules.files 
+                    | map(attribute='path') 
+                    | reject('regex', 'nls\/')
+                    | map('basename') 
+                    | map('replace', '.ko', '') 
+                    | map('replace', '.zst', '') 
+                    | list }}"
+
+- name: Determine modules to disable
+  set_fact:
+    modules_to_disable: "{{ fs_modules 
+                           | difference(allowed_filesystems)
+                           | sort }}"
+
+- name: Unload the modules
+  shell: |
+    for mod in {{ modules_to_disable | join(' ') }}; do
+      modprobe -r $mod
+    done
+  register: unload_result
+  changed_when: false
+
+- name: Create module denylist for filesystems
+  template:
+    src: block_modules.j2
+    dest: /etc/modprobe.d/99-filesystem-denylist.conf
+    owner: root
+    group: root
+    mode: 0644
+
+# 1.1.2.1:
+# - Ensure /tmp is a separate partition
+# - Ensure nodev/nosuid/noexec options are set on /tmp partition
+- name: Create the tmp.mount service definition
+  template:
+    src: tmp.mount.j2
+    dest: /etc/systemd/system/tmp.mount
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable the tmp.mount service
+  systemd:
+    name: tmp.mount
+    enabled: yes
+    state: started
+    daemon_reload: yes
+    masked: no
+
+# 1.1.2.2:
+# - Ensure /dev/shm is a separate partition
+# - Ensure nodev/nosuid/noexec options are set on /dev/shm partition
+# This first is already the case with Debian 12, however, noexec is not set.
+- name: Mark /dev/shm as noexec
+  mount:
+    path: /dev/shm
+    src: tmpfs
+    fstype: tmpfs
+    # The other options are found on the default mount 
+    opts: noexec,rw,nodev,nosuid,inode64
+    state: mounted
+
+# 1.1.2.3: Ensure separate partition exists for /home
+# Only required for Level 2 compliance.
+# [Not implemented]
+
+# 1.1.2.4: Ensure separate partition exists for /var
+# Only required for Level 2 compliance.
+# [Not implemented]
+
+# 1.1.2.5: Ensure separate partition exists for /var/tmp
+# Only required for Level 2 compliance.
+# [Not implemented]
+
+# 1.1.2.6: Ensure separate partition exists for /var/log
+# Only required for Level 2 compliance.
+# [Not implemented]
+
+# 1.1.2.7: Ensure separate partition exists for /var/log/audit
+# Only required for Level 2 compliance.
+# [Not implemented]

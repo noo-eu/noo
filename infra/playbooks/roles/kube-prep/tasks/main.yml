@@ -1,0 +1,82 @@
+- name: Allow ip_forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/80-noo-k8s.conf
+    sysctl_set: yes
+
+- name: Increase max_user_watches
+  sysctl:
+    name: fs.inotify.max_user_watches
+    value: 524288
+    state: present
+    sysctl_file: /etc/sysctl.d/80-noo-k8s.conf
+    sysctl_set: yes
+
+- name: Increase max_user_instances
+  sysctl:
+    name: fs.inotify.max_user_instances
+    value: 512
+    state: present
+    sysctl_file: /etc/sysctl.d/80-noo-k8s.conf
+    sysctl_set: yes
+
+- name: Load br_netfilter module
+  modprobe:
+    name: br_netfilter
+    state: present
+
+- name: Install required packages
+  apt:
+    pkg:
+      - containerd
+      - gnupg-agent
+    state: present
+
+- name: Check if containerd was previously configured
+  shell: grep -q "SystemdCgroup" /etc/containerd/config.toml
+  register: containerd_configured
+  ignore_errors: yes
+
+- name: Configure containerd
+  shell: containerd config default > /etc/containerd/config.toml
+  when: containerd_configured.failed
+
+- name: Set containerd to use SystemdCgroup
+  shell: sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+  when: containerd_configured.failed
+
+- name: Change the sandbox image
+  shell: sed -i 's/registry.k8s.io\/pause:3.6/k8s.gcr.io\/pause:3.10/' /etc/containerd/config.toml
+  when: containerd_configured.failed
+
+- name: Restart containerd
+  systemd:
+    name: containerd
+    state: restarted
+    enabled: yes
+  when: containerd_configured.failed
+
+- name: Create a pki directory
+  file:
+    path: /etc/kubernetes/pki
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Generate an encryption config
+  copy:
+    dest: /etc/kubernetes/pki/secrets-encryption.yaml
+    content: |
+      apiVersion: apiserver.config.k8s.io/v1
+      kind: EncryptionConfiguration
+      resources:
+        - resources:
+            - secrets
+          providers:
+            - aesgcm:
+                keys:
+                  - name: key1
+                    secret: {{ lookup('env', 'KUBERNETES_MASTER_KEY') }}

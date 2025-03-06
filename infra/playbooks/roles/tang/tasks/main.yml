@@ -1,0 +1,27 @@
+- name: Install tang
+  apt:
+    name: tang
+    state: present
+    update_cache: yes
+
+- name: Replace the tangd.socket file
+  copy:
+    src: tangd.socket
+    dest: /usr/lib/systemd/system/tangd.socket
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Allow access to tang from the private network
+  ufw:
+    rule: allow
+    port: 999
+    proto: tcp
+    src: 10.0.0.0/8
+
+- name: Enable the tang service
+  systemd:
+    name: tangd.socket
+    enabled: yes
+    state: started
+    daemon_reload: yes

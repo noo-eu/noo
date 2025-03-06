@@ -1,0 +1,41 @@
+alertmanager:
+  enabled: true
+
+grafana:
+  adminPassword: prom-operator
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.noo.eu
+
+    tls:
+      - hosts:
+        - grafana.noo.eu
+        secretName: grafana-general-tls
+
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+
+  persistence:
+    enabled: true
+    storageClassName: "zfs-manual"
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+prometheus:
+  prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+
+    volumeClaimTemplate:
+      spec:
+        storageClassName: zfs-manual
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 20Gi

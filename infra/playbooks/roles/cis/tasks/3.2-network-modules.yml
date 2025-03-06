@@ -1,0 +1,17 @@
+- name: Unload the modules
+  shell: |
+    for mod in {{ network_modules_denied | join(' ') }}; do
+      modprobe -r $mod
+    done
+  register: unload_result
+  changed_when: false
+
+- name: Create module denylist for network modules
+  template:
+    src: block_modules.j2
+    dest: /etc/modprobe.d/99-network-denylist.conf
+    owner: root
+    group: root
+    mode: 0644
+  vars:
+    modules_to_disable: "{{ network_modules_denied }}"

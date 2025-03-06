@@ -1,0 +1,11 @@
+- include_tasks: tasks/1.1-filesystem.yml
+- include_tasks: tasks/1.3-mac.yml
+- include_tasks: tasks/1.4-boot.yml
+- include_tasks: tasks/1.5-process-hardening.yml
+- include_tasks: tasks/1.6-motd.yml
+- include_tasks: tasks/2-services.yml
+- include_tasks: tasks/2.4-cron.yml
+- include_tasks: tasks/3.2-network-modules.yml
+- include_tasks: tasks/3.3-network-parameters.yml
+- include_tasks: tasks/4-firewall.yml
+- include_tasks: tasks/5.1-ssh.yml

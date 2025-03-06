@@ -1,0 +1,10 @@
+[Unit]
+Description=Tang Server socket
+
+[Socket]
+ListenStream=999
+Accept=true
+BindToDevice=enp7s0
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,36 @@
+- name: Get short version
+  set_fact:
+    kube_version_short: "{{ kube_version | regex_replace('\\.\\d+$', '') }}"
+
+- name: Fetch Kubernetes apt key
+  get_url:
+    url: https://pkgs.k8s.io/core:/stable:/v{{ kube_version_short }}/deb/Release.key
+    dest: /tmp/k8s-key.key
+
+- name: Create keyrings directory
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Dearmor Kubernetes key
+  shell: cat /tmp/k8s-key.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+- name: Add Kubernetes apt repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ kube_version_short }}/deb/ /"
+    filename: "kubernetes"
+    state: present
+
+- name: Install Kubernetes packages
+  apt:
+    name:
+      - kubelet={{ kube_version }}-1.1
+      - kubeadm={{ kube_version }}-1.1
+      - kubectl={{ kube_version }}-1.1
+    state: present
+    update_cache: yes

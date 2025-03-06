@@ -1,0 +1,4 @@
+{% for mod in modules_to_disable %}
+install {{ mod }} /bin/false
+blacklist {{ mod }}
+{% endfor %}

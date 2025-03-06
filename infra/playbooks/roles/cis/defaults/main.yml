@@ -1,0 +1,34 @@
+allowed_filesystems:
+  - ext4 # Root filesystem
+  - jbd2 # ext4 journaling
+  - overlay # Docker
+  - zfs  # Encrypted data storage
+
+  # Used by Debian
+  - binfmt_misc
+  - configfs
+  - efivarfs
+  - fat # EFI boot partition
+  - fuse # Used by snapd
+  - mbcache
+  - vfat # EFI boot partition
+
+  # Linux panic-related
+  - pstore
+  - pstore_blk
+  - pstore_zone
+  - ramoops
+
+grub_password: grub.pbkdf2.sha512.250000.34172C4A3C82C2182C1C2540520B6B71A8D82DF1C14921207EB4EAEEFDAD7E790282F8721349EDBD15FFA33AD62D243E34C52AADA1143D7C38AE9BA9745E2969.4246D190EB5A613D4EEA544BDA02830D3EFD034D5E771D4DFA5120075F77336706AE0863DD400FF297F33AF2EB2F9BDFD8F79213693A6BBF136E296256FAC0CD
+
+# 0: unrestricted
+# 1: only child processes can be traced
+# 2: only processes with CAP_SYS_PTRACE may use ptrace
+# 3: no processes may use ptrace (and cannot be changed)
+ptrace_scope: 2
+
+network_modules_denied:
+  - dccp
+  - rds
+  - sctp
+  - tipc

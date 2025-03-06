@@ -1,0 +1,78 @@
+- name: Load the ZFS module
+  modprobe:
+    name: zfs
+
+- name: Check if the encrypted key exists
+  stat:
+    path: /etc/zfs/zpool.key.clevis
+  register: encrypted_key
+
+- name: Create an encryption key for the ZFS pool
+  shell: "dd if=/dev/urandom of=/etc/zfs/zpool.key bs=32 count=1"
+  when: not encrypted_key.stat.exists
+
+- name: Encrypt the key using clevis
+  shell: "clevis encrypt tang '{\"url\":\"http://tang:999\"}' -y < /etc/zfs/zpool.key > /etc/zfs/zpool.key.clevis"
+  when: not encrypted_key.stat.exists
+
+- name: Check if ZFS pool exists
+  shell: "zpool list secure"
+  register: zpool_check
+  changed_when: false
+  failed_when: zpool_check.rc > 1
+  ignore_errors: true
+
+- name: Get block devices
+  shell: "lsblk -J -o NAME,SIZE,TYPE,MOUNTPOINT"
+  register: lsblk_output
+  when: zpool_check.rc != 0
+
+- name: Get the secondary disk
+  set_fact:
+    zfs_device: "/dev/{{ item.name }}"
+  loop: "{{ lsblk_output.stdout | from_json | json_query('blockdevices[?mountpoint==`null` && type==`disk` && children==null]') }}"
+  when: zpool_check.rc != 0
+
+- name: Output the secondary disk
+  debug:
+    var: zfs_device
+  when: zpool_check.rc != 0
+
+- name: Create a ZFS Pool with encryption
+  shell: "zpool create -f -O encryption=aes-256-gcm -O keyformat=raw -O keylocation=file:///etc/zfs/zpool.key secure {{ zfs_device }}"
+  when: zpool_check.rc != 0
+
+- name: Remove the unencrypted key
+  file:
+    state: absent
+    path: /etc/zfs/zpool.key
+
+- name: Install the ZFS automount systemd service
+  copy:
+    src: zfs-automount.service
+    dest: /etc/systemd/system/zfs-automount.service
+    mode: 0644
+  
+- name: Enable the ZFS automount systemd service
+  systemd:
+    name: zfs-automount
+    enabled: yes
+    daemon_reload: yes
+
+- name: Create a pgdata dataset
+  shell: "zfs create secure/pgdata"
+  when: zpool_check.rc != 0
+
+- name: Set the pgdata dataset to mountpoint /secure/pgdata
+  shell: "zfs set mountpoint=/secure/pgdata secure/pgdata"
+  when: zpool_check.rc != 0
+
+- name: Set postgres specific attributes
+  shell: "zfs set {{ item }} secure/pgdata"
+  when: zpool_check.rc != 0
+  with_items:
+    - "recordsize=16k"
+    - "compression=lz4"
+    - "atime=off"
+    - "primarycache=metadata"
+    - "xattr=sa"

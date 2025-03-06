@@ -1,0 +1,195 @@
+# 3.3.1 Ensure ip forwarding is disabled
+# This will have to be enabled on a NAT or Wireguard gateway.
+- name: Disable IPv4 forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+
+- name: Disable IPv6 forwarding
+  sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.2 Ensure packet redirect sending is disabled
+# This may need to be enabled on "sytems configured to act as a router."
+- name: Disable sending redirects
+  sysctl:
+    name: net.ipv4.conf.all.send_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Disable sending redirects
+  sysctl:
+    name: net.ipv4.conf.default.send_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.3 Ensure bogus ICMP responses are ignored
+- name: Ignore bogus ICMP responses
+  sysctl:
+    name: net.ipv4.icmp_ignore_bogus_error_responses
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.4 Ensure broadcast ICMP requests are ignored
+- name: Ignore broadcast ICMP requests
+  sysctl:
+    name: net.ipv4.icmp_echo_ignore_broadcasts
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.5 Ensure ICMP redirects are ignored
+- name: Ignore ICMP redirects
+  sysctl:
+    name: net.ipv4.conf.all.accept_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Ignore ICMP redirects
+  sysctl:
+    name: net.ipv4.conf.default.accept_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Ignore ICMP redirects for IPv6
+  sysctl:
+    name: net.ipv6.conf.all.accept_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Ignore ICMP redirects for IPv6
+  sysctl:
+    name: net.ipv6.conf.default.accept_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.6 Ensure secure ICMP redirects are not accepted
+- name: Ignore secure ICMP redirects
+  sysctl:
+    name: net.ipv4.conf.all.secure_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Ignore secure ICMP redirects
+  sysctl:
+    name: net.ipv4.conf.default.secure_redirects
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.7 Ensure reverse path filtering is enabled
+- name: Enable reverse path filtering
+  sysctl:
+    name: net.ipv4.conf.all.rp_filter
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Enable reverse path filtering
+  sysctl:
+    name: net.ipv4.conf.default.rp_filter
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.8 Ensure source routed packets are not accepted
+- name: Disable source routed packets
+  sysctl:
+    name: net.ipv4.conf.all.accept_source_route
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Disable source routed packets
+  sysctl:
+    name: net.ipv4.conf.default.accept_source_route
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Disable source routed packets for IPv6
+  sysctl:
+    name: net.ipv6.conf.all.accept_source_route
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Disable source routed packets for IPv6
+  sysctl:
+    name: net.ipv6.conf.default.accept_source_route
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.9 Ensure suspicious packets are logged
+- name: Log suspicious packets
+  sysctl:
+    name: net.ipv4.conf.all.log_martians
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Log suspicious packets
+  sysctl:
+    name: net.ipv4.conf.default.log_martians
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.10 Ensure tcp syn cookies is enabled
+- name: Enable TCP SYN cookies
+  sysctl:
+    name: net.ipv4.tcp_syncookies
+    value: 1
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+# 3.3.11 Ensure IPv6 router advertisements are not accepted
+- name: Disable IPv6 router advertisements
+  sysctl:
+    name: net.ipv6.conf.all.accept_ra
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl
+
+- name: Disable IPv6 router advertisements
+  sysctl:
+    name: net.ipv6.conf.default.accept_ra
+    value: 0
+    state: present
+    sysctl_file: /etc/sysctl.d/40-noo.conf
+  notify: Reload sysctl

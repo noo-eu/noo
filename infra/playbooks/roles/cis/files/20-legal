@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Access to this computer system is restricted to authorized users only. All
+activity is monitored and logged. Unauthorized users may be subject to criminal
+prosecution under the law and are subject to disciplinary action under company
+policies. If you are not an authorized user, you must disconnect immediately. By
+continuing to use this system, you indicate your awareness of and consent to
+these terms and conditions of use. LOG OFF IMMEDIATELY if you do not agree to
+the conditions stated in this warning."

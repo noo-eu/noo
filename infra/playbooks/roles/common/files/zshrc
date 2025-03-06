@@ -1,0 +1,23 @@
+# Fancy prompt
+export PS1='%n@%m %F{blue}%~ %(?.%F{green}.%F{red})%#%f '
+
+# Keep history of up to 1000 commands in memory
+export HISTSIZE=1000
+
+# Keep up to 10000 commands in the history file
+export SAVEHIST=10000
+
+# Save history with a timestamp
+export HISTTIMEFORMAT="%F %T "
+
+# Save history to ~/.zsh_history
+export HISTFILE=~/.zsh_history
+
+# Save to history file as soon as command is executed
+setopt inc_append_history
+
+# Share history between all sessions
+setopt share_history
+
+# Setup the completion system
+autoload -Uz compinit && compinit

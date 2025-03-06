@@ -1,0 +1,71 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: noo-main
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.4-6@sha256:4ebb83ad6701cf90cd16f4c0b502676238ffdb1169bf27c5ae60e9a5bdc7b925
+  instances: 3
+
+  minSyncReplicas: 1
+  maxSyncReplicas: 1
+
+  postgresql:
+    parameters:
+      timezone: UTC
+
+    # We label pg-1 and pg-2 as different sync-groups.
+    # While pg-3 (finland) has the same sync-group as pg-1.
+    # This setup forces CNPG to only consider pg-1 + pg-2 as sync-replicas.
+    # Or, should pg-1 fail, pg-2 + pg-3.
+    syncReplicaElectionConstraint:
+      enabled: true
+      nodeLabelsAntiAffinity:
+        - sync-group
+
+  storage:
+    size: 40Gi
+    storageClass: zfs-manual
+
+  monitoring:
+    enablePodMonitor: true
+
+  affinity:
+    podAntiAffinityType: required
+
+    # For a while...
+    tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+  
+  # Hetzner S3-compatible object storage does not support encryption.
+  # backup:
+  #   barmanObjectStore:
+  #     destinationPath: s3://noo-backups
+  #     s3:
+  #       bucket: noo-backups
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: aws-creds
+  #           key: ACCESS_KEY_ID
+  #         secretAccessKey:
+  #           name: aws-creds
+  #           key: ACCESS_SECRET_KEY
+  #     data:
+  #       compression: gzip
+  #       encryption: AES256
+  #     wal:
+  #       compression: gzip
+  #       encryption: AES256
+  #   retentionPolicy: "30d"
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: noo-main
+spec:
+  selector:
+    matchLabels:
+      "cnpg.io/cluster": noo-main
+  podMetricsEndpoints:
+  - port: metrics

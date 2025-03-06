@@ -1,0 +1,38 @@
+- name: Download and dearmor HashiCorp GPG key if not already present
+  become: true
+  get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg.asc
+    mode: '0644'
+  register: downloaded_key
+
+- name: Convert GPG key to dearmored format
+  become: true
+  command:
+    cmd: gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg /usr/share/keyrings/hashicorp-archive-keyring.gpg.asc
+  when: downloaded_key.changed
+  args:
+    creates: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+- name: Add HashiCorp APT repository
+  apt_repository:
+    repo: deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+    state: present
+    filename: hashicorp
+    update_cache: yes
+  become: true
+
+- name: Install Consul
+  apt:
+    pkg:
+      - consul
+      - consul-template
+    state: latest
+  become: true
+
+- name: Add the noo-admin user to the consul group
+  user:
+    name: noo-admin
+    groups: consul
+    append: yes
+  become: true

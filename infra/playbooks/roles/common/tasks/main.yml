@@ -1,0 +1,148 @@
+# - name: "Check OS version"
+#   assert:
+#     that: ansible_facts.distribution == 'Debian' and ansible_facts.distribution_major_version is version_compare('12', '==')
+#     fail_msg: "This playbook has only been tested against Debian 12. {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported."
+#     success_msg: "This playbook is running against Debian 12."
+
+- name: Set DNS servers
+  copy:
+    dest: /etc/resolvconf/resolv.conf.d/head
+    content: |
+      nameserver 1.1.1.1
+      nameserver 8.8.8.8
+      search internal.noo.eu
+
+- name: Regenerate resolv.conf
+  command: resolvconf -u
+
+- name: Make sure we're running the latest version of all installed packages
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Set the timezone to UTC
+  timezone:
+    name: UTC
+
+- name: Ensure journald.conf.d directory exists
+  file:
+    dest: /etc/systemd/journald.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install journald.conf
+  copy:
+    src: journald.conf
+    dest: /etc/systemd/journald.conf.d/noo.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Disable APT Recommends/Suggests, enable unattended-upgrades
+  copy:
+    dest: /etc/apt/apt.conf.d/99-noo-options
+    content: |
+      APT::Install-Recommends "false";
+      APT::Install-Suggests "false";
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install core packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - clevis
+      - curl
+      - fail2ban
+      - gnupg
+      - htop
+      - linux-headers-arm64
+      - lsb-release
+      - jq
+      - net-tools
+      - software-properties-common
+      - ufw
+      - unattended-upgrades
+      - vim
+      - zfs-dkms
+      - zfsutils-linux
+      - zsh
+    update_cache: yes
+
+- name: Disable fail2ban (it will be enabled on a per-server basis)
+  systemd:
+    name: fail2ban
+    enabled: no
+    state: stopped
+    daemon_reload: yes
+
+- name: Install noo SSH Certificate Authority
+  copy:
+    src: noo-ssh-ca.pub
+    dest: /etc/ssh/noo-ssh-ca.pub
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create a noo-admin group
+  group:
+    name: noo-admin
+    state: present
+
+- name: Create a noo-admin user
+  user:
+    name: noo-admin
+    groups: noo-admin
+    shell: /bin/zsh
+    home: /home/noo-admin
+    createhome: yes
+    append: no
+    state: present
+
+- name: Install zsh configuration
+  copy:
+    src: zshrc
+    dest: /home/noo-admin/.zshrc
+    owner: noo-admin
+    group: noo-admin
+    mode: 0644
+
+- name: Allow passwordless sudo for noo-admin
+  copy:
+    dest: /etc/sudoers.d/noo-admin
+    content: "noo-admin ALL=(ALL) NOPASSWD:ALL\n"
+    owner: root
+    group: root
+    mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
+
+- name: Install default-route script
+  copy:
+    src: configure-default-route.sh
+    dest: /usr/local/sbin/configure-default-route.sh
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install default-route service
+  copy:
+    src: configure-default-route.service
+    dest: /etc/systemd/system/configure-default-route.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable (for next boot) the default-route service
+  systemd:
+    name: configure-default-route.service
+    enabled: yes
+
+- name: Truncate the machine-id file
+  command: truncate -s 0 /etc/machine-id
+  when: "{{ base_build }}"

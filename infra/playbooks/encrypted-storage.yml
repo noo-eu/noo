@@ -1,0 +1,7 @@
+- hosts:
+  - postgres
+  - monitoring.internal.noo.eu
+  
+  roles:
+    - role: zfs
+      become: yes

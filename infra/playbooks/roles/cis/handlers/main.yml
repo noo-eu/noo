@@ -1,0 +1,11 @@
+- name: Update GRUB
+  command: update-grub
+
+- name: Restart systemd-timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: restarted
+    enabled: yes
+
+- name: Reload sysctl
+  command: sysctl -p

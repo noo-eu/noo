@@ -1,0 +1,71 @@
+# Note: make sure to load your KUBERNETES_MASTER_KEY environment variable before running this playbook
+
+- name: Initialize the first Kubernetes master
+  hosts: postgres-1.internal.noo.eu
+  become: yes
+  vars:
+    kube_version: "1.30.10"
+    pod_network_cidr: "192.168.0.0/16"
+    service_cidr: "10.96.0.0/12"
+    cluster_name: "noo-cluster"
+    control_plane_endpoint: "kube.internal.noo.eu:6443"  # Static IP or DNS, adjust as needed
+
+  pre_tasks:
+    - name: Fail if the master key is not set
+      fail:
+        msg: "The KUBERNETES_MASTER_KEY environment variable is not set"
+      when: not lookup('env', 'KUBERNETES_MASTER_KEY')
+
+  roles:
+    - role: kube-prep
+    - role: kube-install
+
+  tasks:
+    - name: Generate kubeadm config file
+      copy:
+        dest: /root/kubeadm-config.yaml
+        content: |
+          apiVersion: kubeadm.k8s.io/v1beta3
+          kind: InitConfiguration
+          nodeRegistration:
+            criSocket: unix:///var/run/containerd/containerd.sock
+          skipPhases:
+            - addon/kube-proxy
+          ---
+          apiVersion: kubeadm.k8s.io/v1beta3
+          kind: ClusterConfiguration
+          kubernetesVersion: v{{ kube_version }}
+          clusterName: {{ cluster_name }}
+          controlPlaneEndpoint: "{{ control_plane_endpoint }}"
+          networking:
+            podSubnet: "{{ pod_network_cidr }}"
+            serviceSubnet: "{{ service_cidr }}"
+          apiServer:
+            extraArgs:
+              encryption-provider-config: "/etc/kubernetes/pki/secrets-encryption.yaml"
+          ---
+          apiVersion: kubeproxy.config.k8s.io/v1alpha1
+          kind: KubeProxyConfiguration
+          mode: "iptables"
+
+    - name: Initialize control plane
+      command: kubeadm init --config=/root/kubeadm-config.yaml --upload-certs
+      register: kubeadm_output
+      changed_when: "kubeadm_output.rc == 0"
+      failed_when: "kubeadm_output.rc != 0"
+
+    - name: Display join command (safe for manual use)
+      debug:
+        var: kubeadm_output.stdout_lines
+
+    - name: Set up kubeconfig for root
+      shell: |
+        mkdir -p /root/.kube && cp -i /etc/kubernetes/admin.conf /root/.kube/config
+      args:
+        creates: /root/.kube/config
+
+    - name: Enable and start kubelet
+      systemd:
+        name: kubelet
+        enabled: yes
+        state: started

@@ -1,0 +1,19 @@
+[Unit]
+Description=Decrypt and mount ZFS filesystems
+DefaultDependencies=no
+After=network-online.target
+Before=zfs-mount.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "clevis decrypt < /etc/zfs/zpool.key.clevis | zfs load-key -L prompt secure && zfs mount -a"
+Restart=on-failure
+RestartSec=5
+RemainAfterExit=true
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=zfs-automount
+
+[Install]
+WantedBy=multi-user.target

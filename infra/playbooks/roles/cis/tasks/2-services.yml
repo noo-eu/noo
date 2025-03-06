@@ -1,0 +1,70 @@
+# 2.1: Ensure some server services are not installed
+- name: Ensure unused server services are not installed
+  apt:
+    pkg:
+      - apache2
+      - autofs
+      - avahi-daemon
+      - bind9
+      - cups
+      - dnsmasq
+      - dovecot-imapd
+      - dovecot-pop3d
+      - isc-dhcp-server
+      - nfs-kernel-server
+      - nginx # Re-install later if needed
+      - rpcbind
+      - rsync
+      - samba
+      - slapd
+      - snmpd # Will we want this?
+      - squid
+      - tftpd-hpa
+      - vsftpd
+      - x-server-common
+      - xinetd
+      - ypserv
+    state: absent
+    autoremove: true
+
+# 2.2: Ensure some client services are not installed
+- name: Ensure unused client services are not installed
+  apt:
+    pkg:
+      - ftp
+      - inetutils-telnet
+      - ldap-utils
+      - nis
+      - rsh-client
+      - talk
+      - telnet
+      - tnftp
+    state: absent
+    autoremove: true
+
+# 2.3: Ensure systemd-timesyncd configured with authorized timeserver
+- name: Create /etc/systemd/timesyncd.conf.d
+  file:
+    dest: /etc/systemd/timesyncd.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Ensure systemd-timesyncd is configured with authorized timeserver
+  copy:
+    dest: /etc/systemd/timesyncd.conf.d/99-noo.conf
+    content: |
+      [Time]
+      NTP=pool.ntp.org
+      FallbackNTP=0.europe.pool.ntp.org 1.europe.pool.ntp.org 2.europe.pool.ntp.org 3.europe.pool.ntp.org
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart systemd-timesyncd
+
+- name: Ensure systemd-timesyncd is enabled
+  service:
+    name: systemd-timesyncd
+    enabled: yes
+    state: started
