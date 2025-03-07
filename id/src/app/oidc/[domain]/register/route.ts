@@ -1,16 +1,15 @@
 import OidcClients from "@/db/oidc_clients";
-import { findTenantByDomainName } from "@/db/tenants";
 import { HttpRequest } from "@/lib/http/request";
 import { oidcClientRegistration } from "@/lib/oidc/registration";
 import { checkVerifier, humanIdToUuid } from "@/utils";
 import { notFound } from "next/navigation";
+import { getTenant } from "../../utils";
 
 export async function POST(
   raw: Request,
   { params }: { params: Promise<{ domain: string }> },
 ) {
-  const domain = (await params).domain;
-  const tenant = await findTenantByDomainName(domain);
+  const tenant = await getTenant(params);
   if (!tenant) {
     notFound();
   }
@@ -34,8 +33,7 @@ export async function DELETE(
   raw: Request,
   { params }: { params: Promise<{ domain: string }> },
 ) {
-  const domain = (await params).domain;
-  const tenant = await findTenantByDomainName(domain);
+  const tenant = await getTenant(params);
   if (!tenant) {
     notFound();
   }

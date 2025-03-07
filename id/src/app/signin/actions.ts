@@ -68,7 +68,7 @@ export async function signin(_: unknown, formData: FormData) {
 
   if (!oidcAuthorizationRequest) {
     let continueUrl = params.continue;
-    if (!continueUrl || !continueUrl.startsWith("/")) {
+    if (!continueUrl?.startsWith("/")) {
       continueUrl = "/";
     }
 

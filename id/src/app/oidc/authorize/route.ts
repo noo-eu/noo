@@ -4,10 +4,10 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const httpRequest = new HttpRequest(request);
-  return oidcAuthorization(httpRequest, undefined);
+  return oidcAuthorization(httpRequest);
 }
 
 export async function POST(request: NextRequest) {
   const httpRequest = new HttpRequest(request);
-  return oidcAuthorization(httpRequest, undefined);
+  return oidcAuthorization(httpRequest);
 }

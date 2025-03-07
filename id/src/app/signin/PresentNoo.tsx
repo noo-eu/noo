@@ -14,9 +14,7 @@ export async function PresentNoo() {
         width={64}
         height={64}
       />
-      <h1 className="text-2xl mb-8">
-        {t.rich("title", { noo: () => <Noo /> })}
-      </h1>
+      <h1 className="text-2xl mb-8">{t.rich("title", { noo: Noo })}</h1>
     </div>
   );
 }

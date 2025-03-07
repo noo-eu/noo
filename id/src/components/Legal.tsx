@@ -28,15 +28,17 @@ export function Legal({ client, className }: Props) {
       externalLink(client.tosUrl!, children),
   };
 
-  const legalMessage =
-    client.privacyUrl && client.tosUrl
-      ? "legalComplete"
-      : client.privacyUrl
-        ? "legalPrivacy"
-        : client.tosUrl
-          ? "legalTerms"
-          : "legalNone";
-  const legalText = t.rich(`switch.${legalMessage}`, legalParams);
+  let legalKey;
+  if (client.privacyUrl && client.tosUrl) {
+    legalKey = "legalComplete";
+  } else if (client.privacyUrl) {
+    legalKey = "legalPrivacy";
+  } else if (client.tosUrl) {
+    legalKey = "legalTerms";
+  } else {
+    legalKey = "legalNone";
+  }
+  const legalText = t.rich(`switch.${legalKey}`, legalParams);
 
   return <p className={`text-sm ${className}`}>{legalText}</p>;
 }

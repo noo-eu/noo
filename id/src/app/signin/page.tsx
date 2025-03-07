@@ -38,7 +38,7 @@ async function LeftPanel() {
       logo: getLocalizedOidcField(client, "logoUri", locale),
     };
 
-    const title = t.rich("title", { noo: () => <Noo /> });
+    const title = t.rich("title", { noo: Noo });
 
     return <PresentClient client={clientFields} title={title} />;
   }

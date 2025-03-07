@@ -1,13 +1,12 @@
 import { buildConfiguration } from "@/app/oidc/configuration";
-import { findTenantByDomainName } from "@/db/tenants";
+import { getTenant } from "@/oidc/utils";
 import { notFound } from "next/navigation";
 
 export async function GET(request, { params }) {
-  const domain = (await params).domain;
-  const tenant = await findTenantByDomainName(domain);
+  const tenant = await getTenant(params);
   if (!tenant) {
     notFound();
   }
 
-  return Response.json(buildConfiguration(request, domain));
+  return Response.json(buildConfiguration(request, tenant.domain));
 }

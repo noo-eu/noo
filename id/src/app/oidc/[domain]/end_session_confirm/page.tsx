@@ -108,7 +108,7 @@ export default async function EndSession({
           strong: (children) => <strong>{children}</strong>,
         })}
       </p>
-      <p>{t.rich("end_session.query", { noo: () => <Noo /> })}</p>
+      <p>{t.rich("end_session.query", { noo: Noo })}</p>
       <Form submitAction={submitAction} />
     </div>
   );

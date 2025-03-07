@@ -12,12 +12,10 @@ export async function findUserById(userId: string) {
 
 function parseEmail(email: string) {
   const [localPart, domain] = email.split("@");
+  const localUnaliased = localPart.split("+")[0];
+
   return {
-    username: localPart
-      .trim()
-      .toLocaleLowerCase()
-      .replaceAll(".", "")
-      .replace(/\+.*$/, ""),
+    username: localUnaliased.trim().toLocaleLowerCase().replaceAll(".", ""),
     domain:
       domain === "noomail.eu" ? undefined : domain?.trim().toLocaleLowerCase(),
   };

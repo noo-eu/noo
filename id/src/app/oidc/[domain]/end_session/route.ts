@@ -1,8 +1,10 @@
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
-import { findTenantByDomainName } from "@/db/tenants";
+import { Tenant } from "@/db/tenants";
 import { HttpRequest } from "@/lib/http/request";
 import { decodeIdToken, getIdTokenAlg } from "@/lib/oidc/idToken";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
+import { notFound } from "next/navigation";
+import { getTenant } from "../../utils";
 
 // See: https://openid.net/specs/openid-connect-rpinitiated-1_0.html.
 //
@@ -13,38 +15,32 @@ import { humanIdToUuid, uuidToHumanId } from "@/utils";
 // endpoint, which are all optional (which is a bad idea), but when passed, they
 // must be validated.
 
-export async function POST(
-  raw: Request,
-  { params }: { params: Promise<{ domain: string }> },
-) {
-  const request = new HttpRequest(raw);
-  const domain = (await params).domain;
-  const result = await prepareEndSession(request, domain);
-  if (result instanceof Response) {
-    return result;
-  }
-
-  return Response.redirect(
-    request.buildUrl(`/oidc/${domain}/end_session_confirm`, result),
-    303,
-  );
-}
-
 export async function GET(
   raw: Request,
   { params }: { params: Promise<{ domain: string }> },
 ) {
+  const tenant = await getTenant(params);
+  if (!tenant) {
+    return notFound();
+  }
+
   const request = new HttpRequest(raw);
-  const domain = (await params).domain;
-  const result = await prepareEndSession(request, domain);
+  const result = await prepareEndSession(request, tenant);
   if (result instanceof Response) {
     return result;
   }
 
   return Response.redirect(
-    request.buildUrl(`/oidc/${domain}/end_session_confirm`, result),
+    request.buildUrl(`/oidc/${tenant.domain}/end_session_confirm`, result),
     303,
   );
+}
+
+export async function POST(
+  raw: Request,
+  { params }: { params: Promise<{ domain: string }> },
+) {
+  return GET(raw, { params });
 }
 
 function failure(request: HttpRequest) {
@@ -54,13 +50,8 @@ function failure(request: HttpRequest) {
   );
 }
 
-async function prepareEndSession(request: HttpRequest, domain: string) {
+async function prepareEndSession(request: HttpRequest, tenant: Tenant) {
   const query = await request.params;
-
-  const tenant = await findTenantByDomainName(domain);
-  if (!tenant) {
-    return new Response("Not found", { status: 404 });
-  }
 
   const idTokenHint = query.id_token_hint;
   const humanClientId = query.client_id;
@@ -90,7 +81,7 @@ async function prepareEndSession(request: HttpRequest, domain: string) {
     }
 
     decoded = await decodeIdToken(idTokenHint, alg!);
-    if (!decoded || !decoded.sub || !decoded.iss || !decoded.aud) {
+    if (!decoded?.sub || !decoded.iss || !decoded.aud) {
       return failure(request);
     }
   }
@@ -109,7 +100,7 @@ async function prepareEndSession(request: HttpRequest, domain: string) {
   }
 
   if (decoded) {
-    if (decoded.iss !== `${request.baseUrl}/oidc/${domain}`) {
+    if (decoded.iss !== `${request.baseUrl}/oidc/${tenant.domain}`) {
       return failure(request);
     }
 

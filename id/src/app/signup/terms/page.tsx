@@ -1,5 +1,6 @@
 "use client";
 
+import { Noo } from "@/components/Noo";
 import { Button } from "@/components/shared/Button";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
@@ -18,7 +19,7 @@ export default function SignupPage() {
 
       <div className="text-sm">
         {t.rich("step4.description", {
-          noo: () => <strong className="noo">noo</strong>,
+          noo: Noo,
           p: (children) => <p className="mb-2">{children}</p>,
           terms: (children) => (
             <a href="/terms" target="_blank" className="text-blue-500">

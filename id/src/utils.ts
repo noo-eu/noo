@@ -57,7 +57,7 @@ export function hexToBase62(hex: string) {
 export function base62ToHex(base62: string) {
   let result = BigInt(0);
 
-  for (let char of base62) {
+  for (const char of base62) {
     const value = BigInt(BASE62_ALPHABET.indexOf(char));
     result = result * BigInt(BASE62_ALPHABET.length) + value;
   }
@@ -98,7 +98,7 @@ export function humanIdToUuid(humanId: string, expectedPrefix: string) {
 
 export async function asyncFilter<T>(
   arr: T[],
-  predicate: (value: T, index: number, array: any[]) => Promise<boolean>,
+  predicate: (value: T, index: number, array: T[]) => Promise<boolean>,
 ): Promise<T[]> {
   const results = await Promise.all(arr.map(predicate));
   return arr.filter((_, i) => results[i]);
@@ -106,7 +106,7 @@ export async function asyncFilter<T>(
 
 export async function asyncFind<T>(
   arr: T[],
-  predicate: (value: T, index: number, array: any[]) => Promise<boolean>,
+  predicate: (value: T, index: number, array: T[]) => Promise<boolean>,
 ): Promise<T | undefined> {
   for (const [i, value] of arr.entries()) {
     if (await predicate(value, i, arr)) {

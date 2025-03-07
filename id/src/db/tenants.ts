@@ -19,12 +19,19 @@ export async function findTenantsBy(conditions: SQL) {
   });
 }
 
+export async function findOneBy(conditions: SQL) {
+  return db.query.tenants.findFirst({
+    where: conditions,
+  });
+}
+
 export async function createTenant(tenant: typeof schema.tenants.$inferInsert) {
   return (await db.insert(schema.tenants).values(tenant).returning()).pop()!;
 }
 
 const Tenants = {
   find: findTenantById,
+  findBy: findOneBy,
   create: createTenant,
 };
 

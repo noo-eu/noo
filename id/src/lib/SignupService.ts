@@ -28,7 +28,7 @@ type Step4Result =
     };
 
 export class SignupService {
-  private formData: FormData;
+  private readonly formData: FormData;
   public params: Record<string, string> = {};
 
   constructor(formData: FormData = new FormData()) {
