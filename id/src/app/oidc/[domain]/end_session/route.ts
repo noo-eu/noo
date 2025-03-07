@@ -1,10 +1,10 @@
+import { getTenant } from "@/app/oidc/utils";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { Tenant } from "@/db/tenants";
 import { HttpRequest } from "@/lib/http/request";
 import { decodeIdToken, getIdTokenAlg } from "@/lib/oidc/idToken";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import { notFound } from "next/navigation";
-import { getTenant } from "../../utils";
 
 // See: https://openid.net/specs/openid-connect-rpinitiated-1_0.html.
 //

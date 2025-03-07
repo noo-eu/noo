@@ -10,7 +10,7 @@ export async function buildFormPostResponse(
   );
 
   const cspNonce = randomSalt(8, "base64url");
-  const cspHeader = `default-src 'none'; script-src 'nonce-${cspNonce}'; style-src 'nonce-${cspNonce}';`;
+  const cspHeader = `default-src 'self'; script-src 'nonce-${cspNonce}'; style-src 'nonce-${cspNonce}';`;
 
   const t = await getTranslations();
 
@@ -36,8 +36,12 @@ export async function buildFormPostResponse(
           }
         </style>
         <script nonce="${cspNonce}">
+          document.addEventListener("DOMContentLoaded", function() {
+            document.forms[0].submit();
+          });
+        </script>
       </head>
-      <body onload="document.forms[0].submit()">
+      <body>
         <form method="post" action="${redirectUri}">
           ${params.map(([key, value]) => `<input type="hidden" name="${key}" value="${value}">`).join("")}
           <noscript>

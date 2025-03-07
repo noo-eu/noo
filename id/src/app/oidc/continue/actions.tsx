@@ -2,8 +2,9 @@
 
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
-import { Claims, returnToClientUrl } from "@/lib/oidc/authorization";
+import { returnToClientUrl } from "@/lib/oidc/authorization";
 import { buildAuthorizationResponse } from "@/lib/oidc/authorization/response";
+import { Claims } from "@/lib/oidc/types";
 import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
@@ -57,7 +58,12 @@ export async function afterConsent(sessionId: string) {
   if (url) {
     return redirect(url);
   } else if (oidcAuthRequest.response_mode === "form_post") {
-    throw new Error("form_post not implemented for all scenarios");
+    const escapedUrl = encodeURIComponent(oidcAuthRequest.redirect_uri);
+    const escapedParams = encodeURIComponent(JSON.stringify(responseParams));
+
+    return redirect(
+      `/oidc/form_post?redirect_uri=${escapedUrl}&params=${escapedParams}`,
+    );
   } else {
     throw new Error("unsupported response_mode");
   }

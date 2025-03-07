@@ -1,5 +1,5 @@
 import { buildConfiguration } from "@/app/oidc/configuration";
-import { getTenant } from "@/oidc/utils";
+import { getTenant } from "@/app/oidc/utils";
 import { notFound } from "next/navigation";
 
 export async function GET(request, { params }) {

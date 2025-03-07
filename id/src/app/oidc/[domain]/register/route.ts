@@ -1,9 +1,9 @@
+import { getTenant } from "@/app/oidc/utils";
 import OidcClients from "@/db/oidc_clients";
 import { HttpRequest } from "@/lib/http/request";
 import { oidcClientRegistration } from "@/lib/oidc/registration";
 import { checkVerifier, humanIdToUuid } from "@/utils";
 import { notFound } from "next/navigation";
-import { getTenant } from "../../utils";
 
 export async function POST(
   raw: Request,

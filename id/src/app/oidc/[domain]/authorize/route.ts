@@ -1,7 +1,7 @@
+import { getTenant } from "@/app/oidc/utils";
 import { HttpRequest } from "@/lib/http/request";
 import { oidcAuthorization } from "@/lib/oidc/authorization";
 import { notFound } from "next/navigation";
-import { getTenant } from "../../utils";
 
 export async function GET(
   request: Request,

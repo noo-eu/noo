@@ -1,7 +1,7 @@
 import { getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import * as jose from "jose";
 import { cookies } from "next/headers";
-import { AuthorizationRequest } from "./authorization";
+import { AuthorizationRequest } from "./types";
 
 const OIDC_AUTH_COOKIE_NAME = "oidc_authorization_request";
 const OIDC_AUTH_COOKIE_ALG = "EdDSA";
