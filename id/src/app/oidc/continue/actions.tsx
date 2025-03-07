@@ -85,13 +85,7 @@ async function storeConsent(
   scopes: string[],
   claims: Claims,
 ) {
-  const claimKeys = Array.from(
-    new Set(
-      Object.keys(claims.userinfo || {}).concat(
-        Object.keys(claims.id_token || {}),
-      ),
-    ),
-  );
+  const claimKeys = Object.keys({ ...claims.userinfo, ...claims.id_token });
 
   const existing = await OidcConsents.find(clientId, userId);
   if (existing) {

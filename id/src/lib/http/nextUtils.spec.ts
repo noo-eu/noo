@@ -3,13 +3,15 @@ import { getIpAddress, getUserAgent } from "./nextUtils";
 
 describe("NextJS Utility Functions", () => {
   function mockHeaders(headers: Record<string, string>) {
-    // Mock the next/headers module
-    mock.module("next/headers", () => ({
+    const headersMock = {
       headers: () =>
         Promise.resolve({
           get: mock((name: string) => headers[name.toLowerCase()] ?? null),
         }),
-    }));
+    };
+
+    // Mock the next/headers module
+    mock.module("next/headers", () => headersMock);
   }
 
   describe("getIpAddress", () => {

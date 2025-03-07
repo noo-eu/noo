@@ -20,16 +20,20 @@ test.describe("Public provider", () => {
 
       // Issuer is required to be an https URL
       expect(baseURL).toEqual(expect.stringMatching(/^https?:\/\/[^/]+$/));
+      if (!baseURL) {
+        // Convince TypeScript that baseURL is defined
+        throw new Error("baseURL is not defined");
+      }
 
       const config = await response.json();
 
       // Check for REQUIRED fields
       expect(config).toMatchObject({
-        issuer: expect.stringMatching(baseURL!),
-        authorization_endpoint: expect.stringMatching(baseURL!),
-        token_endpoint: expect.stringMatching(baseURL!),
-        userinfo_endpoint: expect.stringMatching(baseURL!),
-        jwks_uri: expect.stringMatching(baseURL!),
+        issuer: expect.stringMatching(baseURL),
+        authorization_endpoint: expect.stringMatching(baseURL),
+        token_endpoint: expect.stringMatching(baseURL),
+        userinfo_endpoint: expect.stringMatching(baseURL),
+        jwks_uri: expect.stringMatching(baseURL),
         response_types_supported: expect.arrayContaining([
           "code",
           "id_token",

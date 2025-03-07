@@ -8,7 +8,6 @@ import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
-import { redirect } from "next/navigation";
 import { HttpRequest } from "../http/request";
 import { buildFormPostResponse } from "./authorization/formPost";
 import { buildAuthorizationResponse } from "./authorization/response";
@@ -165,7 +164,7 @@ export async function returnToClient(
 }
 
 function fatalError(error: string) {
-  return redirect(`/oidc/fatal?error=${error}`);
+  return Response.redirect(`/oidc/fatal?error=${error}`, 303);
 }
 
 type PreflightResult = {
@@ -295,6 +294,7 @@ function determineResponseMode(request: Record<string, string | undefined>) {
     case "code id_token":
     case "code token":
     case "code id_token token":
+    case "token":
       return "fragment";
     default:
       return undefined;
@@ -385,6 +385,7 @@ async function authorizationNone(
             client.id,
             params.scopes,
             params.claims,
+            true,
           ),
       );
 
@@ -414,6 +415,7 @@ async function authorizationNone(
         client.id,
         params.scopes,
         params.claims,
+        true,
       ))
     ) {
       // The user has not yet consented to the client
@@ -551,18 +553,22 @@ async function verifyConsent(
   clientId: string,
   scopes: string[],
   claims: Claims,
+  strict: boolean = false, // Whether openid must also be consented
 ) {
   const consent = await OidcConsents.findOrInitialize(clientId, userId);
 
   for (const scope of scopes) {
-    if (!consent.scopes.includes(scope)) {
+    // Check that the user has consented to each scope (except openid, which is
+    // implicitly granted)
+    if (!consent.scopes.includes(scope) && (scope !== "openid" || strict)) {
       return false;
     }
   }
 
-  const requestedClaims = Object.keys(
-    Object.assign({}, claims.userinfo, claims.id_token),
-  );
+  const requestedClaims = Object.keys({
+    ...claims.userinfo,
+    ...claims.id_token,
+  });
 
   for (const claim of requestedClaims) {
     if (!consent.claims.includes(claim)) {

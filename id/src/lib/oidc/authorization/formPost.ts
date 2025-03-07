@@ -1,5 +1,6 @@
+import { i18nConfig } from "@/i18n/request";
 import { randomSalt } from "@/utils";
-import { getTranslations } from "next-intl/server";
+import { createTranslator } from "next-intl";
 
 export async function buildFormPostResponse(
   redirectUri: string,
@@ -12,7 +13,7 @@ export async function buildFormPostResponse(
   const cspNonce = randomSalt(8, "base64url");
   const cspHeader = `default-src 'self'; script-src 'nonce-${cspNonce}'; style-src 'nonce-${cspNonce}';`;
 
-  const t = await getTranslations();
+  const t = createTranslator(await i18nConfig());
 
   // We have to render a form that will automatically submit itself to the
   // redirect_uri with the data as form parameters. We also have to provide a

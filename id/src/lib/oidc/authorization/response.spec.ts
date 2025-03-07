@@ -1,7 +1,7 @@
 import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
 import { beforeEach, describe, expect, mock, test } from "bun:test";
-import { AuthorizationRequest } from "../authorization";
+import { AuthorizationRequest } from "../types";
 import { buildAuthorizationResponse } from "./response";
 
 mock.module("@/db/oidc_authorization_codes", () => ({
@@ -83,7 +83,7 @@ describe("buildAuthorizationResponse", () => {
       nonce: "test-nonce",
     } as unknown as AuthorizationRequest;
 
-    await expect(
+    expect(
       buildAuthorizationResponse(mockClient, params, mockSession),
     ).rejects.toThrow("Unsupported or invalid response type");
   });

@@ -13,7 +13,7 @@ async function loadJSON5(filename: string) {
   return JSON5.parse(json5);
 }
 
-export default getRequestConfig(async () => {
+export async function i18nConfig() {
   const cookieStore = await cookies();
   const lngCookie = cookieStore.get("_noo_locale")?.value;
   let locale: string | undefined;
@@ -35,4 +35,6 @@ export default getRequestConfig(async () => {
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },
   };
-});
+}
+
+export default getRequestConfig(i18nConfig);

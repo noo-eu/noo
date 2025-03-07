@@ -87,7 +87,6 @@ describe("getCookies", () => {
     const headers = mockHeaders(";;;");
     const result = getCookies(headers);
 
-    console.log(result);
     expect(result).toEqual({});
   });
 

@@ -59,11 +59,7 @@ export default async function OidcConsentPage({
 
   const scopes = oidcAuthRequest.scopes;
   const claims = oidcAuthRequest.claims;
-  const claimKeys = new Set(
-    Object.keys(claims.id_token || {}).concat(
-      Object.keys(claims.userinfo || {}),
-    ),
-  );
+  const claimKeys = Object.keys({ ...claims.id_token, ...claims.userinfo });
 
   // openid is automatically granted
   consent.scopes.push("openid");
@@ -77,7 +73,11 @@ export default async function OidcConsentPage({
     // We're sent to /consent if we're missing scopes or claims
     // However, the /switch page also sends us here when an account is selected.
     // In that case, we can fastForward and confirm the consent (if it was previously granted).
-    if (scopes.length === 1 && scopes[0] === "openid" && claimKeys.size === 0) {
+    if (
+      scopes.length === 1 &&
+      scopes[0] === "openid" &&
+      claimKeys.length === 0
+    ) {
       return redirect("/oidc/continue?sid=" + sessionId);
     }
   }

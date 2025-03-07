@@ -9,11 +9,13 @@ import {
   authenticateClientSecretPost,
 } from "./tokenAuthentication";
 
-const client = await OidcClients.find("00000000-0000-0000-0000-000000000001");
-const humanClientId = uuidToHumanId(client!.id, "oidc");
-const basicHeader = "Basic " + btoa(`${humanClientId}:${client!.clientSecret}`);
+const client = (await OidcClients.find(
+  "00000000-0000-0000-0000-000000000001",
+))!;
+const humanClientId = uuidToHumanId(client.id, "oidc");
+const basicHeader = "Basic " + btoa(`${humanClientId}:${client.clientSecret}`);
 const postData =
-  "client_id=" + humanClientId + "&client_secret=" + client!.clientSecret;
+  "client_id=" + humanClientId + "&client_secret=" + client.clientSecret;
 
 describe("authenticateClientSecretBasic", async () => {
   test("returns true if the client is authenticated", async () => {
@@ -24,31 +26,31 @@ describe("authenticateClientSecretBasic", async () => {
     });
 
     expect(
-      authenticateClientSecretBasic(new HttpRequest(rawRequest), client!),
+      authenticateClientSecretBasic(new HttpRequest(rawRequest), client),
     ).toBe(true);
   });
 
   test("returns false if the client is not authenticated", async () => {
     const rawRequest = new Request("https://example.com", {
       headers: {
-        Authorization: "Basic " + btoa(`${client!.id}:wrong-secret`),
+        Authorization: "Basic " + btoa(`${client.id}:wrong-secret`),
       },
     });
 
     expect(
-      authenticateClientSecretBasic(new HttpRequest(rawRequest), client!),
+      authenticateClientSecretBasic(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 
   test("returns false if the client is not authenticated (bad auth header)", async () => {
     const rawRequest = new Request("https://example.com", {
       headers: {
-        Authorization: "Bearer " + btoa(`${client!.id}:wrong-secret`),
+        Authorization: "Bearer " + btoa(`${client.id}:wrong-secret`),
       },
     });
 
     expect(
-      authenticateClientSecretBasic(new HttpRequest(rawRequest), client!),
+      authenticateClientSecretBasic(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 });
@@ -64,13 +66,13 @@ describe("authenticateClientSecretPost", async () => {
     });
 
     expect(
-      await authenticateClientSecretPost(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretPost(new HttpRequest(rawRequest), client),
     ).toBe(true);
   });
 
   test("returns false if the client is not authenticated", async () => {
     const rawRequest = new Request("https://example.com", {
-      body: "client_id=" + client!.id + "&client_secret=wrong-secret",
+      body: "client_id=" + client.id + "&client_secret=wrong-secret",
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -78,7 +80,7 @@ describe("authenticateClientSecretPost", async () => {
     });
 
     expect(
-      await authenticateClientSecretPost(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretPost(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 
@@ -90,7 +92,7 @@ describe("authenticateClientSecretPost", async () => {
     });
 
     expect(
-      await authenticateClientSecretPost(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretPost(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 });
@@ -104,7 +106,7 @@ describe("authenticateClientSecretJwt", async () => {
     .setJti("123")
     .setExpirationTime("5m")
     .setIssuedAt()
-    .sign(Buffer.from(client!.clientSecret));
+    .sign(Buffer.from(client.clientSecret));
 
   const invalidJwt = await new jose.SignJWT()
     .setProtectedHeader({ alg: "HS256" })
@@ -114,7 +116,7 @@ describe("authenticateClientSecretJwt", async () => {
     .setJti("123")
     .setExpirationTime("5m")
     .setIssuedAt()
-    .sign(Buffer.from(client!.clientSecret));
+    .sign(Buffer.from(client.clientSecret));
 
   const badSignature = await new jose.SignJWT()
     .setProtectedHeader({ alg: "HS256" })
@@ -140,7 +142,7 @@ describe("authenticateClientSecretJwt", async () => {
     });
 
     expect(
-      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client),
     ).toBe(true);
   });
 
@@ -158,7 +160,7 @@ describe("authenticateClientSecretJwt", async () => {
     });
 
     expect(
-      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 
@@ -176,7 +178,7 @@ describe("authenticateClientSecretJwt", async () => {
     });
 
     expect(
-      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 
@@ -194,7 +196,7 @@ describe("authenticateClientSecretJwt", async () => {
     });
 
     expect(
-      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 
@@ -202,7 +204,7 @@ describe("authenticateClientSecretJwt", async () => {
     const rawRequest = new Request("https://example.com");
 
     expect(
-      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client!),
+      await authenticateClientSecretJwt(new HttpRequest(rawRequest), client),
     ).toBe(false);
   });
 });

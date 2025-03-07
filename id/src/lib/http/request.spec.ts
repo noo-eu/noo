@@ -114,7 +114,7 @@ describe("HttpRequest", () => {
         ...request,
         headers: {
           ...request.headers,
-          get: (name: string) => (name === "Authorization" ? null : null),
+          get: (name: string) => null,
         },
       } as unknown as Request);
       expect(noAuthRequest.bearerToken).toBeNull();
@@ -271,7 +271,7 @@ describe("HttpRequest", () => {
 
   describe("request body", () => {
     test("formData rejects for non-form requests", async () => {
-      await expect(httpRequest.formData).rejects.toThrow(
+      expect(httpRequest.formData).rejects.toThrow(
         "Request is not a form data",
       );
 
@@ -290,7 +290,7 @@ describe("HttpRequest", () => {
         formData: mock(() => Promise.resolve(new FormData())),
       } as unknown as Request);
 
-      await expect(formRequest.formData).resolves.toBeInstanceOf(FormData);
+      expect(formRequest.formData).resolves.toBeInstanceOf(FormData);
     });
 
     test("json rejects for non-JSON requests", async () => {
@@ -298,9 +298,7 @@ describe("HttpRequest", () => {
         ...request,
         json: mock(() => Promise.resolve({ data: "test" })),
       } as unknown as Request);
-      await expect(getJsonRequest.json).rejects.toThrow(
-        "Request is not a JSON",
-      );
+      expect(getJsonRequest.json).rejects.toThrow("Request is not a JSON");
 
       // Setup valid JSON POST request
       const postJsonRequest = new HttpRequest({
@@ -309,7 +307,7 @@ describe("HttpRequest", () => {
         json: mock(() => Promise.resolve({ data: "test" })),
       } as unknown as Request);
 
-      await expect(postJsonRequest.json).resolves.toEqual({ data: "test" });
+      expect(postJsonRequest.json).resolves.toEqual({ data: "test" });
     });
 
     test("formParams converts FormData to object", async () => {
@@ -343,7 +341,7 @@ describe("HttpRequest", () => {
         value: entriesMock,
       });
 
-      await expect(formRequest.formParams).resolves.toEqual({
+      expect(formRequest.formParams).resolves.toEqual({
         name: "test",
         value: "123",
       });
@@ -375,14 +373,14 @@ describe("HttpRequest", () => {
         value: entriesMock,
       });
 
-      await expect(formRequest.params).resolves.toEqual({
+      expect(formRequest.params).resolves.toEqual({
         query: "value",
         name: "test",
       });
     });
 
     test("params returns only query params for non-form requests", async () => {
-      await expect(httpRequest.params).resolves.toEqual({
+      expect(httpRequest.params).resolves.toEqual({
         query: "value",
       });
     });

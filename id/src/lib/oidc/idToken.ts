@@ -108,7 +108,7 @@ export function idTokenHash(client: OidcClient, value?: string) {
   // hash the access_token value with SHA-256, then take the left-most 128 bits
   // and base64url-encode them
 
-  let algorithm = "none";
+  let algorithm: string;
   switch (client.idTokenSignedResponseAlg) {
     case "HS256":
     case "RS256":

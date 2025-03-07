@@ -155,7 +155,12 @@ export class HttpRequest {
       const params: Record<string, string> = {};
 
       for (const [key, value] of entries) {
-        params[key] = value.toString();
+        const val = value.valueOf();
+        if (typeof val === "string") {
+          params[key] = val;
+        } else {
+          throw new Error("Form data value is not a string");
+        }
       }
 
       return params;
