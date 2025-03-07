@@ -56,8 +56,8 @@ export function hexToBase62(hex: string) {
 
 export function base62ToHex(base62: string) {
   let result = BigInt(0);
-  for (let i = 0; i < base62.length; i++) {
-    const char = base62[i];
+
+  for (let char of base62) {
     const value = BigInt(BASE62_ALPHABET.indexOf(char));
     result = result * BigInt(BASE62_ALPHABET.length) + value;
   }

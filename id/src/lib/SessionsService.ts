@@ -23,7 +23,7 @@ export const SESSION_CHECK_COOKIE_NAME = "_noo_auth_check";
 
 export async function getSessionCookie() {
   const cookieStore = await cookies();
-  return cookieStore.get(SESSION_COOKIE_NAME)?.value || "";
+  return cookieStore.get(SESSION_COOKIE_NAME)?.value ?? "";
 }
 
 export async function setSessionCookie(value: string) {
@@ -74,7 +74,7 @@ export class SessionsService {
 
     const { verifier, digest } = createVerifier();
 
-    const session = await Sessions.create({
+    await Sessions.create({
       id: sid,
       userId: userId,
       verifierDigest: digest,
@@ -89,7 +89,8 @@ export class SessionsService {
 
     this.tokens.push(this.encodeSession(sid, verifier));
 
-    return session;
+    // This returns the user along with the session
+    return (await Sessions.find(sid))!;
   }
 
   async endSession(sid: string) {

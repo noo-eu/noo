@@ -174,7 +174,7 @@ async function validateRegistration(
 
   // Validate grant types, tolerate missing grant_types
   config.grant_types ??= ["authorization_code"];
-  const all_response_types = config.response_types.join(" ") || "";
+  const all_response_types = config.response_types.join(" ");
   config.grant_types = config.grant_types.filter((gt: string) =>
     GRANT_TYPES_SUPPORTED.includes(gt),
   );

@@ -36,11 +36,13 @@ if (!process.env.DATABASE_URL) {
   }
 }
 
-const databaseUrl = process.env.DATABASE_URL!;
+const databaseUrl = process.env.DATABASE_URL;
 
 export { databaseUrl, schema };
 
 const client = drizzle(databaseUrl, { schema });
-await client.execute(sql`SET TIME ZONE 'UTC';`);
+/* await (causes all sorts of ESM problems */ client.execute(
+  sql`SET TIME ZONE 'UTC';`,
+);
 
 export default client;

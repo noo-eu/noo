@@ -3,7 +3,11 @@
 import { schema } from "@/db";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
+import {
+  getSessionCookie,
+  SESSION_COOKIE_NAME,
+  SessionsService,
+} from "@/lib/SessionsService";
 import { SignupService } from "@/lib/SignupService";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
@@ -103,9 +107,7 @@ export async function signupStep3(prevState: unknown, formData: FormData) {
 
 async function startSession(user: typeof schema.users.$inferSelect) {
   const cookieStore = await cookies();
-  const sessionManager = new SessionsService(
-    cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
-  );
+  const sessionManager = new SessionsService(await getSessionCookie());
 
   const session = await sessionManager.startSession(
     user.id,
