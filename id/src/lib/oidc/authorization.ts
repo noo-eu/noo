@@ -1,7 +1,6 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
 import { getKeyByAlg } from "@/app/oidc/jwks";
 import { schema } from "@/db";
-import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
@@ -104,7 +103,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
     params.claims = {};
   }
 
-  normalizeClaims(params);
+  scopesToClaims(params);
 
   params.max_age = client.defaultMaxAge ?? undefined;
   if (rawParams.max_age !== undefined) {
@@ -370,73 +369,45 @@ function buildFormPostResponse(
   });
 }
 
-function normalizeClaims(params: AuthorizationRequest) {
-  if (params.scopes.includes("profile")) {
+const SCOPES_TO_CLAIMS: Record<string, string[]> = {
+  profile: [
+    "name",
+    "family_name",
+    "given_name",
+    "middle_name",
+    "nickname",
+    "preferred_username",
+    "profile",
+    "picture",
+    "website",
+    "gender",
+    "birthdate",
+    "zoneinfo",
+    "locale",
+    "updated_at",
+  ],
+  email: ["email", "email_verified"],
+  phone: ["phone_number", "phone_number_verified"],
+  address: ["address"],
+};
+
+function scopesToClaims(params: AuthorizationRequest) {
+  for (const scope of params.scopes) {
+    if (!SCOPES_TO_CLAIMS[scope]) {
+      continue;
+    }
+
+    const newClaims = SCOPES_TO_CLAIMS[scope].map((claim) => [claim, null]);
+
     params.claims = {
       ...params.claims,
 
       userinfo: {
-        name: null,
-        family_name: null,
-        given_name: null,
-        middle_name: null,
-        nickname: null,
-        preferred_username: null,
-        profile: null,
-        picture: null,
-        website: null,
-        gender: null,
-        birthdate: null,
-        zoneinfo: null,
-        locale: null,
-        updated_at: null,
-
+        ...Object.fromEntries(newClaims),
         ...params.claims?.userinfo,
       },
     };
   }
-
-  if (params.scopes.includes("email")) {
-    params.claims = {
-      ...params.claims,
-
-      userinfo: {
-        email: null,
-        email_verified: null,
-
-        ...params.claims?.userinfo,
-      },
-    };
-  }
-
-  if (params.scopes.includes("phone")) {
-    params.claims = {
-      ...params.claims,
-
-      userinfo: {
-        phone_number: null,
-        phone_number_verified: null,
-
-        ...params.claims?.userinfo,
-      },
-    };
-  }
-
-  if (params.scopes.includes("address")) {
-    params.claims = {
-      ...params.claims,
-
-      userinfo: {
-        address: null,
-
-        ...params.claims?.userinfo,
-      },
-    };
-  }
-
-  params.scopes = params.scopes.filter(
-    (scope) => !["profile", "email", "phone", "address"].includes(scope),
-  );
 }
 
 async function authorizationNone(
@@ -519,7 +490,11 @@ async function authorizationNone(
         error_description: "The user must consent to the client",
       });
     } else {
-      const responseParams = await buildAuthorizationResponse(params, session);
+      const responseParams = await buildAuthorizationResponse(
+        client,
+        params,
+        session,
+      );
 
       return returnToClient(params, responseParams);
     }
@@ -648,9 +623,10 @@ async function verifyConsent(
     }
   }
 
-  const requestedClaims = Object.keys(claims.userinfo || {}).concat(
-    Object.keys(claims.id_token || {}),
+  const requestedClaims = Object.keys(
+    Object.assign({}, claims.userinfo, claims.id_token),
   );
+
   for (const claim of requestedClaims) {
     if (!consent.claims.includes(claim)) {
       return false;
@@ -658,28 +634,6 @@ async function verifyConsent(
   }
 
   return true;
-}
-
-export async function createCode(
-  session: Session,
-  request: AuthorizationRequest,
-) {
-  return await OidcAuthorizationCodes.create({
-    id:
-      "oidc_code_" +
-      Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
-        "base64url",
-      ),
-    clientId: humanIdToUuid(request.client_id, "oidc")!,
-    userId: session.userId,
-    redirectUri: request.redirect_uri,
-    scopes: request.scopes,
-    claims: request.claims,
-    nonce: request.nonce,
-    authTime: session.lastAuthenticatedAt,
-    codeChallenge: request.code_challenge,
-    codeChallengeMethod: request.code_challenge_method,
-  });
 }
 
 async function signParams(params: AuthorizationRequest) {

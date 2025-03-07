@@ -47,6 +47,7 @@ export async function afterConsent(sessionId: string) {
   await deleteOidcAuthorizationCookie();
 
   const responseParams = await buildAuthorizationResponse(
+    client,
     oidcAuthRequest,
     session,
   );

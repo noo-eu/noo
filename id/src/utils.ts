@@ -4,6 +4,10 @@ export function sha256(input: Buffer | string) {
   return crypto.createHash("sha256").update(input);
 }
 
+export function randomSalt(length: number, encoding?: BufferEncoding) {
+  return crypto.randomBytes(16).toString(encoding);
+}
+
 // This function generates a random opaque string that can be given to the
 // client to later use as proof of ownership. This can be used in a number of
 // ways, such as for session tokens, password reset tokens, API keys, etc. It

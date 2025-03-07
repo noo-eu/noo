@@ -47,6 +47,7 @@ export const RESPONSE_TYPES_SUPPORTED = [
   "code id_token",
   "code token",
   "code id_token token",
+  "token", // An OAuth 2.0 request
 ] as const;
 
 export const GRANT_TYPES_SUPPORTED = [

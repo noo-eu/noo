@@ -8,7 +8,7 @@ export function getCookies(headers: Headers): Record<string, string> {
     cookieHeader.split(";").reduce(
       (cookies, cookie) => {
         const [name, ...value] = cookie.split("=");
-        if (name === undefined) {
+        if (!name) {
           // Invalid cookie header, return early with the current state
           return cookies;
         }

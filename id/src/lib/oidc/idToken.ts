@@ -96,7 +96,11 @@ export function buildSubClaim(client: OidcClient, userId: string) {
   }
 }
 
-export function idTokenHash(client: OidcClient, value: string) {
+export function idTokenHash(client: OidcClient, value?: string) {
+  if (!value) {
+    return undefined;
+  }
+
   // Its value is the base64url encoding of the left-most half of the hash of
   // the octets of the ASCII representation of the <code/access_token> value,
   // where the hash algorithm used is the hash algorithm used in the alg Header

@@ -47,6 +47,11 @@ export async function setSessionCookie(value: string) {
   );
 }
 
+export async function getSessionCheckCookie() {
+  const cookieStore = await cookies();
+  return cookieStore.get(SESSION_CHECK_COOKIE_NAME)?.value ?? "";
+}
+
 export async function getUserForSession(sessionId: string) {
   const cookie = await getSessionCookie();
   const service = new SessionsService(cookie);

@@ -1,5 +1,5 @@
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
-import { uuidToHumanId } from "@/utils";
+import { randomSalt, uuidToHumanId } from "@/utils";
 import { describe, expect, test } from "bun:test";
 import { HttpRequest } from "../http/request";
 import { tokenEndpoint } from "./token";
@@ -41,11 +41,7 @@ describe("Token endpoint", () => {
   describe("grant_type=authorization_code", () => {
     const makeCode = async (attributes = {}) =>
       await OidcAuthorizationCodes.create({
-        id:
-          "oidc_code_" +
-          Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString(
-            "base64url",
-          ),
+        id: "oidc_code_" + randomSalt(32, "base64url"),
         clientId: "00000000-0000-0000-0000-000000000001",
         redirectUri: "https://localhost:22999/cb",
         userId: "00000000-0000-0000-0000-000000000001",

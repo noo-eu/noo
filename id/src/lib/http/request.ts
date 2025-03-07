@@ -82,7 +82,7 @@ export class HttpRequest {
     const ipHeader =
       this.request.headers.get("X-Forwarded-For") ??
       this.request.headers.get("X-Real-Ip") ??
-      "127.0.0.1";
+      "0.0.0.0";
     return ipHeader.split(",")[0];
   }
 
