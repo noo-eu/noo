@@ -60,7 +60,7 @@ export async function authenticateClientSecretPost(
   }
 
   const params = await req.formParams;
-  const clientIdRaw = humanIdToUuid(params.client_id || "", "oidc");
+  const clientIdRaw = humanIdToUuid(params.client_id ?? "", "oidc");
   if (!clientIdRaw) {
     return false;
   }

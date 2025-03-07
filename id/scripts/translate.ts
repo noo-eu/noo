@@ -76,12 +76,7 @@ function recursiveKeyCheck(
       if (typeof other[key] === "string" || !other[key]) {
         other[key] = {};
       }
-      recursiveKeyCheck(
-        reference[key] as TranslationFile,
-        other[key] as TranslationFile,
-        misses,
-        `${prefix}${key}.`,
-      );
+      recursiveKeyCheck(reference[key], other[key], misses, `${prefix}${key}.`);
     } else {
       if (typeof other[key] === "object") {
         delete other[key];

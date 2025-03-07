@@ -21,7 +21,7 @@ test.describe("OpenID Authorization endpoint", () => {
           `/oidc/authorize?${new URLSearchParams(basicRequest).toString()}`,
         );
 
-        await expect(page.getByText("Sign in")).toBeDefined();
+        expect(page.getByText("Sign in")).toBeDefined();
 
         await page.fill('input[name="username"]', "johndoe1");
         await page.fill('input[name="password"]', "super-s3cret");

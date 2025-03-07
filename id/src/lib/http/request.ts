@@ -80,8 +80,8 @@ export class HttpRequest {
 
   get remoteAddr(): string {
     const ipHeader =
-      this.request.headers.get("X-Forwarded-For") ||
-      this.request.headers.get("X-Real-Ip") ||
+      this.request.headers.get("X-Forwarded-For") ??
+      this.request.headers.get("X-Real-Ip") ??
       "127.0.0.1";
     return ipHeader.split(",")[0];
   }

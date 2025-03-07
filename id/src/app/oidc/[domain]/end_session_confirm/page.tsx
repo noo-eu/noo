@@ -74,7 +74,7 @@ export default async function EndSession({
       return finish(client, query.postLogoutRedirectUri, query.state);
     }
 
-    const svc = await new SessionsService(await getSessionCookie());
+    const svc = new SessionsService(await getSessionCookie());
     const sessions = await svc.activeSessions();
 
     let matchingSession: Session | undefined;

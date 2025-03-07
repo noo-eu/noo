@@ -33,6 +33,7 @@ describe("Userinfo endpoint", () => {
       clientId: "00000000-0000-0000-0000-000000000001",
       userId: "00000000-0000-0000-0000-000000000001",
       expiresAt: new Date(Date.now() + 3600 * 1000),
+      scopes: ["openid"],
       ...attributes,
     });
 
@@ -89,6 +90,20 @@ describe("Userinfo endpoint", () => {
     );
 
     expect(response.status).toBe(401);
+  });
+
+  test("requires the access token to have the openid scope (otherwise it's an OAuth access token)", async () => {
+    const at = await makeAccessToken({
+      scopes: ["email"],
+    });
+
+    const response = await userinfoEndpoint(
+      makeRequest({
+        headers: { Authorization: "Bearer " + uuidToHumanId(at.id, "oidc_at") },
+      }),
+    );
+
+    expect(response.status).toBe(403);
   });
 
   test("it returns claims about the user", async () => {

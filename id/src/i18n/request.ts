@@ -23,7 +23,7 @@ export default getRequestConfig(async () => {
     const reqHeaders = await headers();
     const lngHeader = reqHeaders.get("accept-language");
 
-    locale = acceptLanguage.get(lngHeader) || "en";
+    locale = acceptLanguage.get(lngHeader) ?? "en";
   }
 
   return {

@@ -1,13 +1,8 @@
-import { SESSION_COOKIE_NAME, SessionsService } from "@/lib/SessionsService";
-import { cookies } from "next/headers";
+import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { redirect } from "next/navigation";
 
 export async function getCurrentUser() {
-  const cookieStore = await cookies();
-  const sessionManager = new SessionsService(
-    cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
-  );
-
+  const sessionManager = new SessionsService(await getSessionCookie());
   return sessionManager.getUser();
 }
 

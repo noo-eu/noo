@@ -12,7 +12,7 @@ export function ClientDescription({ name, descriptionKey }: Props) {
 
   return (
     <>
-      {t.rich(descriptionKey || "switch.description", {
+      {t.rich(descriptionKey ?? "switch.description", {
         name,
         details: (children) => (
           // TODO: Show contacts and host of redirect_uri on click

@@ -39,7 +39,7 @@ export function refreshSession(
     ip,
     userAgent,
     lastUsedAt: new Date(),
-    lastAuthenticatedAt: authenticatedAt ? authenticatedAt : undefined,
+    lastAuthenticatedAt: authenticatedAt,
   };
 
   return db

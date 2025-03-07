@@ -2,6 +2,7 @@
   "name": "id",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "PORT=${PORT:-13000} next dev --turbopack --experimental-https",
     "dev:http": "PORT=${PORT:-13000} next dev --turbopack",
@@ -13,7 +14,7 @@
     "test:e2e:ui": "playwright test --ui",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:test:push": "TEST=1 drizzle-kit push",
+    "db:test:push": "TEST=1 bun run --bun drizzle-kit push",
     "db:test:fixtures": "TEST=1 bun run ./tests/fixtures.ts",
     "keys:rotate": "bun run ./scripts/rotateKeys.ts"
   },

@@ -10,7 +10,7 @@ export async function createOidcAccessToken(
 }
 
 export async function findOidcAccessToken(id: string) {
-  if (!id.match(/^[0-9a-f-]{36}$/)) {
+  if (!/^[0-9a-f-]{36}$/.exec(id)) {
     return null;
   }
 

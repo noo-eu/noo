@@ -51,6 +51,7 @@ describe("Token endpoint", () => {
         userId: "00000000-0000-0000-0000-000000000001",
         authTime: new Date(),
         nonce: "nonce",
+        scopes: ["openid"],
         ...attributes,
       });
 
@@ -274,6 +275,27 @@ describe("Token endpoint", () => {
 
       expect(payload.given_name).toBe("John");
       expect(Object.keys(payload)).not.toContain("family_name");
+    });
+
+    test("when the code doesn't have the openid scope, it doesn't return an id_token", async () => {
+      const code = await makeCode({ scopes: ["email"] });
+      const response = await tokenEndpoint(
+        makeRequest({
+          body: { grant_type: "authorization_code", code: code.id },
+          headers: { Authorization: basicHeader },
+        }),
+      );
+
+      expect(response.status).toBe(200);
+      const body = await response.json();
+      expect(body).not.toHaveProperty("id_token");
+
+      // An access token is still returned
+      expect(body).toMatchObject({
+        access_token: expect.any(String),
+        token_type: "Bearer",
+        expires_in: 3600,
+      });
     });
   });
 

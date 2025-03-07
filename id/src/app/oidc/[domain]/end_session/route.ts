@@ -98,10 +98,10 @@ async function prepareEndSession(request: HttpRequest, domain: string) {
   const params: Record<string, string> = {};
 
   if (!client && decoded) {
-    const humanClientId = Array.isArray(decoded.aud)
-      ? decoded.aud[0]
-      : decoded.aud;
-    const clientId = humanIdToUuid(humanClientId!, "oidc")!;
+    const humanClientId = (
+      Array.isArray(decoded.aud) ? decoded.aud[0] : decoded.aud
+    ) as string;
+    const clientId = humanIdToUuid(humanClientId, "oidc")!;
     client = await OidcClients.findWithTenant(clientId, tenant.id);
     if (!client || alg !== client.idTokenSignedResponseAlg) {
       return failure(request);

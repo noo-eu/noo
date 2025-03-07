@@ -49,6 +49,10 @@ async function handle(req: HttpRequest) {
     return new Response(null, { status: 401 });
   }
 
+  if (!at.scopes.includes("openid")) {
+    return new Response(null, { status: 403 });
+  }
+
   const client = await OidcClients.find(at.clientId);
   if (!client) {
     return new Response(null, { status: 401 });

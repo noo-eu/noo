@@ -203,8 +203,12 @@ function loadKeyRaw(path: string): Promise<Record<string, unknown>> {
       try {
         const key = keySchema.parse(JSON.parse(data.toString()));
         resolve(key);
-      } catch (err) {
-        reject(err);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          reject(err);
+        } else {
+          reject(new Error(`Failed to parse key: ${err}`));
+        }
       }
     });
   });

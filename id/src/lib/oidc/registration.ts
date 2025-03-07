@@ -3,6 +3,7 @@ import {
   GRANT_TYPES_SUPPORTED,
   ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED,
   RESPONSE_TYPES_SUPPORTED,
+  SUBJECT_TYPES_SUPPORTED,
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
 } from "@/app/oidc/configuration";
 import { jwks } from "@/app/oidc/jwks";
@@ -83,9 +84,9 @@ export async function oidcClientRegistration(
   }
 
   const config = parseResult.data;
-  config.application_type ||= "web";
-  config.subject_type ||= "pairwise";
-  config.require_auth_time ||= false;
+  config.application_type ??= "web";
+  config.subject_type ??= "pairwise";
+  config.require_auth_time ??= false;
 
   const clientName = extractLocalizedField(params, "client_name");
   const logoUri = extractLocalizedField(params, "logo_uri");
@@ -160,7 +161,7 @@ async function validateRegistration(
   }
 
   // Ensure only supported response types are set
-  config.response_types ||= ["code"];
+  config.response_types ??= ["code"];
   config.response_types = config.response_types?.filter((rt: string) =>
     RESPONSE_TYPES_SUPPORTED.includes(rt as ResponseType),
   );
@@ -172,19 +173,19 @@ async function validateRegistration(
   }
 
   // Validate grant types, tolerate missing grant_types
-  config.grant_types ||= ["authorization_code"];
-  const all_response_types = config.response_types.join(" ") || "";
+  config.grant_types ??= ["authorization_code"];
+  const all_response_types = config.response_types.join(" ");
   config.grant_types = config.grant_types.filter((gt: string) =>
     GRANT_TYPES_SUPPORTED.includes(gt),
   );
   if (!config.grant_types.includes("authorization_code")) {
-    if (all_response_types.match(/\bcode\b/)) {
+    if (/\bcode\b/.exec(all_response_types)) {
       config.grant_types.push("authorization_code");
     }
   }
 
   if (!config.grant_types.includes("implicit")) {
-    if (all_response_types.match(/token\b/)) {
+    if (/token\b/.exec(all_response_types)) {
       config.grant_types.push("implicit");
     }
   }
@@ -225,60 +226,17 @@ async function validateRegistration(
     }
   }
 
-  if (config.sector_identifier_uri && config.subject_type === "pairwise") {
-    const sectorIdentifierUri = new URL(config.sector_identifier_uri);
-    if (sectorIdentifierUri.protocol !== "https:") {
-      return buildErrorResponse(
-        "invalid_client_metadata",
-        "Sector Identifier URI must use HTTPS.",
-      );
-    }
-
-    let sectorIdentifierData;
-    try {
-      const sectorIdentifierResponse = await fetch(
-        config.sector_identifier_uri,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-          signal: AbortSignal.timeout(2000),
-        },
-      );
-
-      if (!sectorIdentifierResponse.ok) {
-        return buildErrorResponse(
-          "invalid_client_metadata",
-          "Failed to fetch sector identifier URI.",
-        );
-      }
-
-      sectorIdentifierData = await sectorIdentifierResponse.json();
-      if (!Array.isArray(sectorIdentifierData)) {
-        return buildErrorResponse(
-          "invalid_client_metadata",
-          "Sector Identifier URI must return an array.",
-        );
-      }
-    } catch {
-      return buildErrorResponse(
-        "invalid_client_metadata",
-        "Failed to fetch sector identifier URI.",
-      );
-    }
-
-    for (const uri of config.redirect_uris) {
-      if (!sectorIdentifierData.includes(uri)) {
-        return buildErrorResponse(
-          "invalid_client_metadata",
-          "All Redirect URIs must be included in sector identifier.",
-        );
-      }
-    }
+  if (!SUBJECT_TYPES_SUPPORTED.includes(config.subject_type as string)) {
+    config.subject_type = "pairwise";
   }
 
-  if (config.subject_type !== "pairwise" && config.subject_type !== "public") {
-    config.subject_type = "pairwise";
+  if (config.sector_identifier_uri && config.subject_type === "pairwise") {
+    const sectorIdentifierValidationResult =
+      await validateSectorIdentifier(config);
+
+    if (sectorIdentifierValidationResult) {
+      return sectorIdentifierValidationResult;
+    }
   }
 
   if (config.id_token_signed_response_alg === "none") {
@@ -294,7 +252,7 @@ async function validateRegistration(
     }
   }
 
-  config.id_token_signed_response_alg ||= "RS256";
+  config.id_token_signed_response_alg ??= "RS256";
   if (
     !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
       config.id_token_signed_response_alg,
@@ -308,11 +266,15 @@ async function validateRegistration(
 
   if (
     config.id_token_encrypted_response_alg ||
-    config.id_token_encrypted_response_enc
+    config.id_token_encrypted_response_enc ||
+    config.userinfo_encrypted_response_alg ||
+    config.userinfo_encrypted_response_enc ||
+    config.request_object_encryption_alg ||
+    config.request_object_encryption_enc
   ) {
     return buildErrorResponse(
       "invalid_client_metadata",
-      "ID Token encryption is not supported.",
+      "JWE is not supported.",
     );
   }
 
@@ -329,16 +291,6 @@ async function validateRegistration(
   }
 
   if (
-    config.userinfo_encrypted_response_alg ||
-    config.userinfo_encrypted_response_enc
-  ) {
-    return buildErrorResponse(
-      "invalid_client_metadata",
-      "Userinfo encryption is not supported.",
-    );
-  }
-
-  if (
     config.request_object_signing_alg &&
     !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
       config.request_object_signing_alg,
@@ -350,17 +302,7 @@ async function validateRegistration(
     );
   }
 
-  if (
-    config.request_object_encryption_alg ||
-    config.request_object_encryption_enc
-  ) {
-    return buildErrorResponse(
-      "invalid_client_metadata",
-      "Request Object encryption is not supported.",
-    );
-  }
-
-  config.token_endpoint_auth_method ||= "client_secret_basic";
+  config.token_endpoint_auth_method ??= "client_secret_basic";
   if (
     !TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED.includes(
       config.token_endpoint_auth_method,
@@ -428,39 +370,9 @@ export function validateRedirectUris(
   }
 
   if (application_type === "web") {
-    for (const uri of redirect_uris) {
-      if (!uri.startsWith("https://") && !process.env.TEST) {
-        return buildErrorResponse(
-          "invalid_redirect_uri",
-          "Redirect URIs must use HTTPS.",
-        );
-      }
-
-      const host = new URL(uri).hostname;
-      if (host == "localhost" && !process.env.TEST) {
-        return buildErrorResponse(
-          "invalid_redirect_uri",
-          "Redirect URIs must not use localhost.",
-        );
-      }
-    }
+    return validateWebRedirectUris(redirect_uris);
   } else if (application_type === "native") {
-    for (const uri of redirect_uris) {
-      if (uri.startsWith("http://")) {
-        const host = new URL(uri).hostname;
-        if (host !== "localhost" && host !== "127.0.0.1" && host !== "[::1]") {
-          return buildErrorResponse(
-            "invalid_redirect_uri",
-            "Native clients must use custom URI schemes or loopback addresses on HTTP.",
-          );
-        }
-      } else if (uri.startsWith("https://")) {
-        return buildErrorResponse(
-          "invalid_redirect_uri",
-          "Native clients must not use HTTPS.",
-        );
-      }
-    }
+    return validateNativeRedirectUris(redirect_uris);
   } else {
     return buildErrorResponse(
       "invalid_client_metadata",
@@ -562,4 +474,96 @@ function buildErrorResponse(error: string, error_description: string) {
       },
     },
   );
+}
+
+function validateWebRedirectUris(redirectUris: string[]) {
+  for (const uri of redirectUris) {
+    if (!uri.startsWith("https://") && !process.env.TEST) {
+      return buildErrorResponse(
+        "invalid_redirect_uri",
+        "Redirect URIs must use HTTPS.",
+      );
+    }
+
+    const host = new URL(uri).hostname;
+    if (host == "localhost" && !process.env.TEST) {
+      return buildErrorResponse(
+        "invalid_redirect_uri",
+        "Redirect URIs must not use localhost.",
+      );
+    }
+  }
+}
+
+function validateNativeRedirectUris(redirectUris: string[]) {
+  for (const uri of redirectUris) {
+    if (uri.startsWith("http://")) {
+      const host = new URL(uri).hostname;
+      if (host !== "localhost" && host !== "127.0.0.1" && host !== "[::1]") {
+        return buildErrorResponse(
+          "invalid_redirect_uri",
+          "Native clients must use custom URI schemes or loopback addresses on HTTP.",
+        );
+      }
+    } else if (uri.startsWith("https://")) {
+      return buildErrorResponse(
+        "invalid_redirect_uri",
+        "Native clients must not use HTTPS.",
+      );
+    }
+  }
+}
+
+async function validateSectorIdentifier(
+  config: z.infer<typeof registrationRequest>,
+) {
+  const sectorIdentifierUri = new URL(config.sector_identifier_uri!);
+  if (sectorIdentifierUri.protocol !== "https:") {
+    return buildErrorResponse(
+      "invalid_client_metadata",
+      "Sector Identifier URI must use HTTPS.",
+    );
+  }
+
+  let sectorIdentifierData;
+  try {
+    const sectorIdentifierResponse = await fetch(
+      config.sector_identifier_uri!,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+        signal: AbortSignal.timeout(2000),
+      },
+    );
+
+    if (!sectorIdentifierResponse.ok) {
+      return buildErrorResponse(
+        "invalid_client_metadata",
+        "Failed to fetch sector identifier URI.",
+      );
+    }
+
+    sectorIdentifierData = await sectorIdentifierResponse.json();
+    if (!Array.isArray(sectorIdentifierData)) {
+      return buildErrorResponse(
+        "invalid_client_metadata",
+        "Sector Identifier URI must return an array.",
+      );
+    }
+  } catch {
+    return buildErrorResponse(
+      "invalid_client_metadata",
+      "Failed to fetch sector identifier URI.",
+    );
+  }
+
+  for (const uri of config.redirect_uris) {
+    if (!sectorIdentifierData.includes(uri)) {
+      return buildErrorResponse(
+        "invalid_client_metadata",
+        "All Redirect URIs must be included in sector identifier.",
+      );
+    }
+  }
 }

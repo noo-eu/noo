@@ -106,21 +106,30 @@ async function authorizationCodeFlow(
     issuer += `/${tenant!.domain}`;
   }
 
-  const idToken = await createIdToken(
-    issuer,
-    client,
-    code.userId,
-    code.authTime,
-    {
-      ...requestedUserClaims(code.claims.id_token, user),
-      nonce: code.nonce,
-    },
-  );
+  if (code.scopes.includes("openid")) {
+    const idToken = await createIdToken(
+      issuer,
+      client,
+      code.userId,
+      code.authTime,
+      {
+        ...requestedUserClaims(code.claims.id_token, user),
+        nonce: code.nonce,
+      },
+    );
 
-  return Response.json({
-    access_token: uuidToHumanId(at.id, "oidc_at"),
-    token_type: "Bearer",
-    expires_in: 3600,
-    id_token: idToken,
-  });
+    return Response.json({
+      access_token: uuidToHumanId(at.id, "oidc_at"),
+      token_type: "Bearer",
+      expires_in: 3600,
+      id_token: idToken,
+    });
+  } else {
+    // Fallback to OAuth 2.0 behavior
+    return Response.json({
+      access_token: uuidToHumanId(at.id, "oidc_at"),
+      token_type: "Bearer",
+      expires_in: 3600,
+    });
+  }
 }
