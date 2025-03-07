@@ -1,5 +1,5 @@
 import Sessions, { refreshSession, Session } from "@/db/sessions";
-import Users, { User } from "@/db/users";
+import { User } from "@/db/users";
 import { checkVerifier, createVerifier, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
@@ -134,7 +134,7 @@ export class SessionsService {
       return undefined;
     }
 
-    return Users.find(session.userId);
+    return session.user;
   }
 
   async getSessionBySid(sessionId: string) {
@@ -162,7 +162,7 @@ export class SessionsService {
       return undefined;
     }
 
-    return Users.find(session.userId);
+    return session.user;
   }
 
   async cleanup() {

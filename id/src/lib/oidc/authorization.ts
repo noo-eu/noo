@@ -1,5 +1,4 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
-import { buildSessionState } from "@/app/oidc/continue/actions";
 import { getKeyByAlg } from "@/app/oidc/jwks";
 import { schema } from "@/db";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
@@ -8,11 +7,12 @@ import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { humanIdToUuid, uuidToHumanId } from "@/utils";
+import { humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { HttpRequest } from "../http/request";
+import { buildAuthorizationResponse } from "./authorization/response";
 import { buildSubClaim, decodeIdToken } from "./idToken";
 
 const claimRequestSchema = z.record(
@@ -37,6 +37,7 @@ export type ResponseType = (typeof RESPONSE_TYPES_SUPPORTED)[number];
 export type ResponseMode = "query" | "fragment" | "form_post";
 
 export type AuthorizationRequest = {
+  issuer: string;
   tenantId?: string;
 
   client_id: string;
@@ -58,9 +59,10 @@ export type AuthorizationRequest = {
 };
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
+  const issuer = `${request.baseUrl}/oidc${tenant ? `/${tenant.domain}` : ""}`;
   const rawParams = await request.params;
 
-  const preflightResult = await preflightCheck(rawParams, tenant);
+  const preflightResult = await preflightCheck(issuer, rawParams, tenant);
   if (preflightResult instanceof Response) {
     return preflightResult as unknown as Response;
   }
@@ -201,6 +203,7 @@ type PreflightResult = {
 // client. By the end of this function, the request parameters should be fully
 // resolved and ready for further validations.
 async function preflightCheck(
+  issuer: string,
   params: Record<string, string | undefined>,
   tenant?: typeof schema.tenants.$inferSelect,
 ): Promise<PreflightResult | Response> {
@@ -217,6 +220,10 @@ async function preflightCheck(
     !RESPONSE_TYPES_SUPPORTED.includes(params.response_type as ResponseType)
   ) {
     return fatalError("unsupported_response_type");
+  }
+
+  if (params.response_type.includes("id_token") && !params.nonce) {
+    return fatalError("implicit_missing_nonce");
   }
 
   // We now need to load the client from the database, as the
@@ -275,6 +282,7 @@ async function preflightCheck(
   return {
     client,
     params: {
+      issuer,
       client_id: params.client_id,
       response_type:
         params.response_type as (typeof RESPONSE_TYPES_SUPPORTED)[number],
@@ -498,13 +506,9 @@ async function authorizationNone(
         error_description: "The user must consent to the client",
       });
     } else {
-      const code = await createCode(session, params);
-      const clientId = uuidToHumanId(code.clientId, "oidc");
+      const responseParams = await buildAuthorizationResponse(params, session);
 
-      return returnToClient(params, {
-        code: code.id,
-        session_state: await buildSessionState(clientId, params.redirect_uri),
-      });
+      return returnToClient(params, responseParams);
     }
   }
 }

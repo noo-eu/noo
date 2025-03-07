@@ -44,6 +44,9 @@ export const RESPONSE_TYPES_SUPPORTED = [
   "code",
   "id_token",
   "id_token token",
+  "code id_token",
+  "code token",
+  "code id_token token",
 ] as const;
 
 export const GRANT_TYPES_SUPPORTED = [

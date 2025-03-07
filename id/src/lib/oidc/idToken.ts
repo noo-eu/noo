@@ -1,22 +1,20 @@
 import { getKeyByAlg, getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import { OidcClient } from "@/db/oidc_clients";
-import Tenants from "@/db/tenants";
 import { hexToBase62, sha256, uuidToBase62, uuidToHumanId } from "@/utils";
+import crypto from "crypto";
 import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
-import { HttpRequest } from "../http/request";
 
 export async function createIdToken(
-  req: HttpRequest,
+  issuer: string,
   client: OidcClient,
   userId: string,
   authTime: Date,
   additonalClaims: Record<string, unknown> = {},
 ) {
-  let issuer = `${req.baseUrl}/oidc`;
-  if (client.tenantId) {
-    const domain = (await Tenants.find(client.tenantId))!.domain;
-    issuer += `/${domain}`;
-  }
+  // Strip undefined values from the claims
+  Object.keys(additonalClaims).forEach(
+    (key) => additonalClaims[key] === undefined && delete additonalClaims[key],
+  );
 
   const claims = {
     auth_time: Math.floor(authTime.getTime() / 1000),
@@ -96,4 +94,46 @@ export function buildSubClaim(client: OidcClient, userId: string) {
     );
     return `usr_${hexToBase62(hash)}`;
   }
+}
+
+export function idTokenHash(client: OidcClient, value: string) {
+  // Its value is the base64url encoding of the left-most half of the hash of
+  // the octets of the ASCII representation of the <code/access_token> value,
+  // where the hash algorithm used is the hash algorithm used in the alg Header
+  // Parameter of the ID Token's JOSE Header. For instance, if the alg is RS256,
+  // hash the access_token value with SHA-256, then take the left-most 128 bits
+  // and base64url-encode them
+
+  let algorithm = "none";
+  switch (client.idTokenSignedResponseAlg) {
+    case "HS256":
+    case "RS256":
+    case "ES256":
+    case "PS256":
+      algorithm = "sha256";
+      break;
+    case "HS384":
+    case "RS384":
+    case "ES384":
+    case "PS384":
+      algorithm = "sha384";
+      break;
+    case "HS512":
+    case "RS512":
+    case "ES512":
+    case "PS512":
+    case "EdDSA":
+      algorithm = "sha512";
+      break;
+  }
+
+  if (algorithm == "none") {
+    return undefined;
+  }
+
+  // Hash the value, get the binary representation and take the left-most half,
+  // then base64url encode it.
+  const hash = crypto.createHash(algorithm).update(value).digest();
+  const leftHalf = hash.subarray(0, hash.length / 2);
+  return leftHalf.toString("base64url");
 }

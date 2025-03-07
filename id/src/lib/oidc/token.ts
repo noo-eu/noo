@@ -1,6 +1,7 @@
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import OidcClients from "@/db/oidc_clients";
+import Tenants from "@/db/tenants";
 import Users from "@/db/users";
 import { uuidToHumanId } from "@/utils";
 import { HttpRequest } from "../http/request";
@@ -99,10 +100,22 @@ async function authorizationCodeFlow(
 
   const user = (await Users.find(code.userId))!;
 
-  const idToken = await createIdToken(req, client, code.userId, code.authTime, {
-    ...requestedUserClaims(code.claims.id_token, user),
-    nonce: code.nonce,
-  });
+  let issuer = `${req.baseUrl}/oidc`;
+  if (client.tenantId) {
+    const tenant = await Tenants.find(client.tenantId);
+    issuer += `/${tenant!.domain}`;
+  }
+
+  const idToken = await createIdToken(
+    issuer,
+    client,
+    code.userId,
+    code.authTime,
+    {
+      ...requestedUserClaims(code.claims.id_token, user),
+      nonce: code.nonce,
+    },
+  );
 
   return Response.json({
     access_token: uuidToHumanId(at.id, "oidc_at"),

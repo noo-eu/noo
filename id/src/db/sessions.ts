@@ -4,6 +4,7 @@ import db, { schema } from ".";
 export function find(sessionId: string) {
   return db.query.sessions.findFirst({
     where: eq(schema.sessions.id, sessionId),
+    with: { user: { with: { tenant: true } } },
   });
 }
 
@@ -60,4 +61,4 @@ const Sessions = {
 };
 
 export default Sessions;
-export type Session = typeof schema.sessions.$inferSelect;
+export type Session = NonNullable<Awaited<ReturnType<typeof Sessions.find>>>;

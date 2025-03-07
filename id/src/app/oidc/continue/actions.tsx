@@ -2,23 +2,14 @@
 
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
-import Users from "@/db/users";
-import {
-  Claims,
-  createCode,
-  returnToClientUrl,
-} from "@/lib/oidc/authorization";
+import { Claims, returnToClientUrl } from "@/lib/oidc/authorization";
+import { buildAuthorizationResponse } from "@/lib/oidc/authorization/response";
 import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
 } from "@/lib/oidc/utils";
-import {
-  getSessionCookie,
-  SESSION_CHECK_COOKIE_NAME,
-  SessionsService,
-} from "@/lib/SessionsService";
-import { humanIdToUuid, sha256 } from "@/utils";
-import { cookies } from "next/headers";
+import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { humanIdToUuid } from "@/utils";
 import { notFound, redirect } from "next/navigation";
 
 export async function afterConsent(sessionId: string) {
@@ -37,33 +28,31 @@ export async function afterConsent(sessionId: string) {
 
   const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
   const client = await OidcClients.find(clientId);
-  const user = await Users.find(session.userId);
-  if (!client || !user) {
+  if (!client) {
     return notFound();
   }
 
-  if (client.tenantId && client.tenantId !== user.tenantId) {
+  const user = session.user;
+  if (client.tenantId && client.tenantId !== user.tenant?.id) {
     return notFound();
   }
 
   await storeConsent(
-    session.userId,
+    user.id,
     clientId,
     oidcAuthRequest.scopes,
     oidcAuthRequest.claims,
   );
 
-  const code = await createCode(session, oidcAuthRequest);
-
   await deleteOidcAuthorizationCookie();
 
-  const url = returnToClientUrl(oidcAuthRequest, {
-    code: code.id,
-    session_state: await buildSessionState(
-      oidcAuthRequest.client_id,
-      oidcAuthRequest.redirect_uri,
-    ),
-  });
+  const responseParams = await buildAuthorizationResponse(
+    oidcAuthRequest,
+    session,
+  );
+
+  const url = returnToClientUrl(oidcAuthRequest, responseParams);
+
   if (url) {
     return redirect(url);
   } else if (oidcAuthRequest.response_mode === "form_post") {
@@ -81,23 +70,6 @@ export async function consentFormSubmit(_: unknown, formData: FormData) {
   }
 
   return afterConsent(sessionId);
-}
-
-export async function buildSessionState(clientId: string, redirectUri: string) {
-  const cookieStore = await cookies();
-  const checkCookie = cookieStore.get(SESSION_CHECK_COOKIE_NAME)?.value;
-  if (!checkCookie) {
-    throw new Error("No check session cookie found");
-  }
-
-  const salt = Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString(
-    "base64url",
-  );
-
-  const origin = new URL(redirectUri).origin;
-  const state = clientId + " " + origin + " " + checkCookie + " " + salt;
-
-  return `${sha256(state).digest("base64url")}.${salt}`;
 }
 
 async function storeConsent(
