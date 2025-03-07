@@ -85,6 +85,8 @@ export const CLAIMS_SUPPORTED = [
   "family_name",
 ];
 
+export const SUBJECT_TYPES_SUPPORTED = ["public", "pairwise"];
+
 export function buildConfiguration(request: Request, domain?: string) {
   const host = request.headers.get("host");
   const proto = request.headers.get("x-forwarded-proto") || "https";
@@ -98,7 +100,7 @@ export function buildConfiguration(request: Request, domain?: string) {
     jwks_uri: `${proto}://${host}/oidc/jwks.json`,
     scopes_supported: ["openid", "profile", "email", "address", "phone"],
     response_types_supported: [...RESPONSE_TYPES_SUPPORTED],
-    subject_types_supported: ["public", "pairwise"],
+    subject_types_supported: SUBJECT_TYPES_SUPPORTED,
     grant_types_supported: GRANT_TYPES_SUPPORTED,
     id_token_signing_alg_values_supported:
       ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED,

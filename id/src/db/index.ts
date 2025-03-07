@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { existsSync } from "fs";
 import * as schema from "./schema";
@@ -38,4 +39,8 @@ if (!process.env.DATABASE_URL) {
 const databaseUrl = process.env.DATABASE_URL!;
 
 export { databaseUrl, schema };
-export default drizzle(databaseUrl, { schema });
+
+const client = drizzle(databaseUrl, { schema });
+await client.execute(sql`SET TIME ZONE 'UTC';`);
+
+export default client;

@@ -59,7 +59,7 @@ export type AuthorizationRequest = {
 };
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
-  const issuer = `${request.baseUrl}/oidc${tenant ? `/${tenant.domain}` : ""}`;
+  const issuer = `${request.baseUrl}/oidc${tenant ? "/" + tenant.domain : ""}`;
   const rawParams = await request.params;
 
   const preflightResult = await preflightCheck(issuer, rawParams, tenant);
@@ -72,13 +72,23 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   params.tenantId = tenant?.id;
 
   if (!params.scopes.includes("openid")) {
-    return returnToClient(params, {
-      error: "invalid_scope",
-      error_description: "The openid scope is required",
-    });
-
-    // TODO (decide): maybe we should treat this as an OAuth2 request instead of
-    // OIDC?
+    // Well, technically this is not an OIDC request, but an OAuth2 request.
+    // We will not be issuing an id_token, but we will still issue an access
+    // token (with no access to the userinfo endpoint). However, some OIDC
+    // specific parameters are not allowed.
+    if (
+      params.id_token_hint ||
+      params.login_hint ||
+      params.max_age ||
+      params.acr_values ||
+      ![undefined, "consent", "select_account"].includes(params.prompt) ||
+      !["code", "token"].includes(params.response_type)
+    ) {
+      return returnToClient(params, {
+        error: "invalid_request",
+        error_description: "The request is not an OIDC request",
+      });
+    }
   }
 
   if (rawParams.claims) {
@@ -96,7 +106,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
 
   normalizeClaims(params);
 
-  params.max_age = client.defaultMaxAge || undefined;
+  params.max_age = client.defaultMaxAge ?? undefined;
   if (rawParams.max_age !== undefined) {
     params.max_age = parseInt(rawParams.max_age);
     if (isNaN(params.max_age) || params.max_age <= 0) {
@@ -135,6 +145,8 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
       // We are requested to re-authenticate the user. This could be used to
       // protect specific high-value operations.
       params.max_age = 0;
+
+    // Fall through
     default:
       return authorizationStandard(request, params, client);
   }
@@ -304,7 +316,7 @@ async function preflightCheck(
 
 function determineResponseMode(request: Record<string, string | undefined>) {
   if (
-    ["query", "fragment", "form_post"].includes(request.response_mode || "")
+    ["query", "fragment", "form_post"].includes(request.response_mode ?? "")
   ) {
     return request.response_mode;
   } else if (request.response_mode) {
