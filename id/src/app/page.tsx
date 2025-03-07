@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export async function getCurrentUser() {
   const cookieStore = await cookies();
   const sessionManager = new SessionsService(
-    cookieStore.get(SESSION_COOKIE_NAME)?.value || "",
+    cookieStore.get(SESSION_COOKIE_NAME)?.value ?? "",
   );
 
   return sessionManager.getUser();

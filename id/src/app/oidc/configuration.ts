@@ -89,7 +89,7 @@ export const SUBJECT_TYPES_SUPPORTED = ["public", "pairwise"];
 
 export function buildConfiguration(request: Request, domain?: string) {
   const host = request.headers.get("host");
-  const proto = request.headers.get("x-forwarded-proto") || "https";
+  const proto = request.headers.get("x-forwarded-proto") ?? "https";
   const issuer = `${proto}://${host}/oidc` + (domain ? `/${domain}` : "");
 
   const config: ProviderMetadata = {
