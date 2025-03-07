@@ -5,8 +5,8 @@ import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
 import { getSessionCheckCookie } from "@/lib/SessionsService";
 import { humanIdToUuid, randomSalt, sha256, uuidToHumanId } from "@/utils";
-import { AuthorizationRequest } from "../authorization";
 import { createIdToken, idTokenHash } from "../idToken";
+import { AuthorizationRequest } from "../types";
 import { requestedUserClaims } from "../userClaims";
 
 // Creates the response object for the authorization request. This happens after

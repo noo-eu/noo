@@ -129,6 +129,10 @@ export function idTokenHash(client: OidcClient, value?: string) {
     case "EdDSA":
       algorithm = "sha512";
       break;
+    default:
+      throw new Error(
+        `Unsupported algorithm: ${client.idTokenSignedResponseAlg}`,
+      );
   }
 
   if (algorithm == "none") {

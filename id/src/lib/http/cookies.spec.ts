@@ -2,7 +2,7 @@ import { describe, expect, mock, test } from "bun:test";
 import { getCookies } from "./cookies";
 
 describe("getCookies", () => {
-  let mockHeaders = (ret: string | null) =>
+  const mockHeaders = (ret: string | null) =>
     ({
       get: mock(() => ret),
     }) as unknown as Headers;

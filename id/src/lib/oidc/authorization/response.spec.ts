@@ -37,8 +37,8 @@ mock.module("@/utils", () => ({
     if (id === "test-client-uuid" && prefix === "oidc") return "test-client-id";
     return "mock-human-id";
   }),
-  randomSalt: mock((length, encoding) => "random-salt"),
-  sha256: mock(() => ({ digest: (format: string) => "hashed-session-state" })),
+  randomSalt: mock(() => "random-salt"),
+  sha256: mock(() => ({ digest: () => "hashed-session-state" })),
 }));
 
 mock.module("../idToken", () => ({

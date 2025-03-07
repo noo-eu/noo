@@ -23,7 +23,7 @@ describe("composeMiddleware", () => {
 
   test("calls a single middleware correctly", async () => {
     // Create mock middleware that returns a 200 response
-    const middleware: Middleware = mock((req, next) => {
+    const middleware: Middleware = mock(() => {
       return Promise.resolve(new Response("Success", { status: 200 }));
     });
 
@@ -57,7 +57,7 @@ describe("composeMiddleware", () => {
       return next ? next(req) : new Response(null, { status: 404 });
     });
 
-    const middleware3: Middleware = mock(async (req, next) => {
+    const middleware3: Middleware = mock(async () => {
       callOrder.push(3);
       return new Response("Final handler", { status: 200 });
     });
@@ -84,11 +84,11 @@ describe("composeMiddleware", () => {
 
   test("middleware can short-circuit the chain", async () => {
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async (req, next) => {
+    const middleware1: Middleware = mock(async () => {
       return new Response("Short circuit", { status: 403 });
     });
 
-    const middleware2: Middleware = mock(async (req, next) => {
+    const middleware2: Middleware = mock(async () => {
       return new Response("Should not reach here", { status: 200 });
     });
 
@@ -115,11 +115,11 @@ describe("composeMiddleware", () => {
     const modifiedRequest = { modified: true } as unknown as HttpRequest;
 
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async (req, next) => {
+    const middleware1: Middleware = mock(async (_, next) => {
       return next ? next(modifiedRequest) : new Response(null, { status: 404 });
     });
 
-    const middleware2: Middleware = mock(async (req, next) => {
+    const middleware2: Middleware = mock(async (req) => {
       return new Response(
         JSON.stringify({ receivedModified: req === modifiedRequest }),
       );
@@ -155,7 +155,7 @@ describe("composeMiddleware", () => {
       }
     });
 
-    const middleware2: Middleware = mock(async (req, next) => {
+    const middleware2: Middleware = mock(async () => {
       throw new Error("Test error");
     });
 

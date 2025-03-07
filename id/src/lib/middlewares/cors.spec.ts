@@ -16,7 +16,7 @@ describe("cors middleware", () => {
 
   test("handles OPTIONS request with 204 status", async () => {
     // Create request with OPTIONS method
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "OPTIONS";
 
     // Set origin in request headers
@@ -51,7 +51,7 @@ describe("cors middleware", () => {
     );
 
     // Set method and origin
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "GET";
     mockRequest.headers["origin"] = "https://example.com";
 
@@ -79,9 +79,9 @@ describe("cors middleware", () => {
 
   test("uses * as default origin when Origin header is missing", async () => {
     // Create mock request without origin header
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "GET";
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.headers = {};
 
     // Create middleware with allowed methods
@@ -114,7 +114,7 @@ describe("cors middleware", () => {
 
   test("does not add CORS headers for non-allowed methods", async () => {
     // Create request with non-allowed method
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "DELETE";
 
     // Create mock next middleware
@@ -148,7 +148,7 @@ describe("cors middleware", () => {
     const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
 
     // Set method and origin
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "GET";
     mockRequest.headers["origin"] = "https://example.com";
 
@@ -174,9 +174,9 @@ describe("cors middleware", () => {
 
   test("uses * as default origin when Origin header is missing", async () => {
     // Create mock request without origin header
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "GET";
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.headers = {};
 
     // Create middleware with allowed methods
@@ -209,7 +209,7 @@ describe("cors middleware", () => {
 
   test("does not add CORS headers for non-allowed methods", async () => {
     // Create request with non-allowed method
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "DELETE";
 
     // Create mock next middleware
@@ -243,7 +243,7 @@ describe("cors middleware", () => {
     const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
 
     // Set method and origin
-    // @ts-ignore
+    // @ts-expect-error method is readonly :)
     mockRequest.method = "GET";
     mockRequest.headers["origin"] = "https://example.com";
 

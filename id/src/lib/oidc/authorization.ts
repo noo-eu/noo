@@ -9,53 +9,17 @@ import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { HttpRequest } from "../http/request";
+import { buildFormPostResponse } from "./authorization/formPost";
 import { buildAuthorizationResponse } from "./authorization/response";
 import { buildSubClaim, decodeIdToken } from "./idToken";
-
-const claimRequestSchema = z.record(
-  z.string(),
-  z.nullable(
-    z.object({
-      essential: z.boolean().optional(),
-      value: z.string().optional(),
-      values: z.array(z.string()).optional(),
-    }),
-  ),
-);
-
-const claimsSchema = z.object({
-  userinfo: claimRequestSchema.optional(),
-  id_token: claimRequestSchema.optional(),
-});
-
-export type Claims = z.infer<typeof claimsSchema>;
-
-export type ResponseType = (typeof RESPONSE_TYPES_SUPPORTED)[number];
-export type ResponseMode = "query" | "fragment" | "form_post";
-
-export type AuthorizationRequest = {
-  issuer: string;
-  tenantId?: string;
-
-  client_id: string;
-  response_type: ResponseType;
-  response_mode: ResponseMode;
-  redirect_uri: string;
-  scopes: string[];
-  claims: Claims;
-  state?: string;
-  nonce?: string;
-  prompt?: string;
-  max_age?: number;
-  ui_locales?: string;
-  id_token_hint?: string;
-  login_hint?: string;
-  acr_values?: string;
-  code_challenge?: string;
-  code_challenge_method?: string;
-};
+import {
+  AuthorizationRequest,
+  Claims,
+  claimsSchema,
+  ResponseMode,
+  ResponseType,
+} from "./types";
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   const issuer = `${request.baseUrl}/oidc${tenant ? "/" + tenant.domain : ""}`;
@@ -83,7 +47,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
       ![undefined, "consent", "select_account"].includes(params.prompt) ||
       !["code", "token"].includes(params.response_type)
     ) {
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "invalid_request",
         error_description: "The request is not an OIDC request",
       });
@@ -94,7 +58,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
     try {
       params.claims = claimsSchema.parse(JSON.parse(rawParams.claims));
     } catch {
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "invalid_request",
         error_description: "The claims parameter is invalid",
       });
@@ -109,7 +73,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   if (rawParams.max_age !== undefined) {
     params.max_age = parseInt(rawParams.max_age);
     if (isNaN(params.max_age) || params.max_age <= 0) {
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "invalid_request",
         error_description: "The max_age parameter must be a positive integer",
       });
@@ -186,7 +150,7 @@ export function returnToClientUrl(
   }
 }
 
-export function returnToClient(
+export async function returnToClient(
   request: AuthorizationRequest,
   data: Record<string, string | undefined>,
 ) {
@@ -194,7 +158,7 @@ export function returnToClient(
   if (url) {
     return Response.redirect(url, 303);
   } else if (request.response_mode === "form_post") {
-    return buildFormPostResponse(request.redirect_uri, data);
+    return await buildFormPostResponse(request.redirect_uri, data);
   } else {
     return fatalError("bad_response_mode");
   }
@@ -337,38 +301,6 @@ function determineResponseMode(request: Record<string, string | undefined>) {
   }
 }
 
-function buildFormPostResponse(
-  redirectUri: string,
-  data: Record<string, string | undefined>,
-) {
-  const params = Object.entries(data).filter(
-    ([_, value]) => value !== undefined,
-  );
-
-  // We have to render a form that will automatically submit itself to the
-  // redirect_uri with the data as form parameters.
-  const form = `
-    <html>
-      <head>
-        <title>Redirecting...</title>
-      </head>
-      <body onload="document.forms[0].submit()">
-        <form method="post" action="${redirectUri}">
-          ${params.map(([key, value]) => `<input type="hidden" name="${key}" value="${value}">`).join("")}
-          <noscript>
-            <input type="submit" value="Continue">
-          </noscript>
-        </form>
-      </body>
-    </html>
-  `;
-  return new Response(form, {
-    headers: {
-      "Content-Type": "text/html",
-    },
-  });
-}
-
 const SCOPES_TO_CLAIMS: Record<string, string[]> = {
   profile: [
     "name",
@@ -420,7 +352,7 @@ async function authorizationNone(
   const allSessions = await sessionsService.activeSessions();
 
   if (allSessions.length === 0) {
-    return returnToClient(params, {
+    return await returnToClient(params, {
       error: "login_required",
       error_description: "The user must be authenticated",
     });
@@ -450,7 +382,7 @@ async function authorizationNone(
         async (sess) =>
           await verifyConsent(
             sess.userId,
-            client,
+            client.id,
             params.scopes,
             params.claims,
           ),
@@ -463,7 +395,7 @@ async function authorizationNone(
 
     if (!session) {
       // No, or multiple sessions match the criteria
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "interaction_required",
         error_description: "The user must interact with the OP",
       });
@@ -472,20 +404,20 @@ async function authorizationNone(
       Date.now() - session.lastAuthenticatedAt.getTime() > params.max_age * 1000
     ) {
       // The session is too old
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "login_required",
         error_description: "The user must re-authenticate",
       });
     } else if (
       !(await verifyConsent(
         session.userId,
-        client,
+        client.id,
         params.scopes,
         params.claims,
       ))
     ) {
       // The user has not yet consented to the client
-      return returnToClient(params, {
+      return await returnToClient(params, {
         error: "consent_required",
         error_description: "The user must consent to the client",
       });
@@ -496,7 +428,7 @@ async function authorizationNone(
         session,
       );
 
-      return returnToClient(params, responseParams);
+      return await returnToClient(params, responseParams);
     }
   }
 }
@@ -545,7 +477,12 @@ async function authorizationStandard(
     const session = matchingSessions[0];
 
     if (
-      await verifyConsent(session.userId, client, params.scopes, params.claims)
+      await verifyConsent(
+        session.userId,
+        client.id,
+        params.scopes,
+        params.claims,
+      )
     ) {
       // User has already consented, show confirmation screen
       return new Response(null, {
@@ -611,11 +548,11 @@ async function matchesIdTokenHint(
 
 async function verifyConsent(
   userId: string,
-  client: OidcClient,
+  clientId: string,
   scopes: string[],
   claims: Claims,
 ) {
-  const consent = await OidcConsents.findOrInitialize(client.id, userId);
+  const consent = await OidcConsents.findOrInitialize(clientId, userId);
 
   for (const scope of scopes) {
     if (!consent.scopes.includes(scope)) {
