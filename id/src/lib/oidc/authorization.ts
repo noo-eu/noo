@@ -7,7 +7,7 @@ import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { humanIdToUuid } from "@/utils";
+import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -456,20 +456,21 @@ async function authorizationNone(
 
     let session: Session | undefined;
     if (params.id_token_hint) {
-      session = allSessions.find((sess) =>
-        matchesIdTokenHint(sess.userId, params.id_token_hint!, client),
+      session = await asyncFind(
+        allSessions,
+        async (sess) =>
+          await matchesIdTokenHint(sess.userId, params.id_token_hint!, client),
       );
     } else {
-      const matching = await Promise.all(
-        allSessions.filter(
-          async (sess) =>
-            await verifyConsent(
-              sess.userId,
-              client,
-              params.scopes,
-              params.claims,
-            ),
-        ),
+      const matching = await asyncFilter(
+        allSessions,
+        async (sess) =>
+          await verifyConsent(
+            sess.userId,
+            client,
+            params.scopes,
+            params.claims,
+          ),
       );
 
       if (matching.length == 1) {
@@ -536,7 +537,7 @@ async function authorizationStandard(
   );
 
   const matchingSessions = params.id_token_hint
-    ? activeSessions.filter((sess) =>
+    ? await asyncFilter(activeSessions, async (sess) =>
         matchesIdTokenHint(sess.userId, params.id_token_hint!, client),
       )
     : activeSessions;

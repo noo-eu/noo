@@ -95,3 +95,22 @@ export function humanIdToUuid(humanId: string, expectedPrefix: string) {
 
   return base62ToUuid(id);
 }
+
+export async function asyncFilter<T>(
+  arr: T[],
+  predicate: (value: T, index: number, array: any[]) => Promise<boolean>,
+): Promise<T[]> {
+  const results = await Promise.all(arr.map(predicate));
+  return arr.filter((_, i) => results[i]);
+}
+
+export async function asyncFind<T>(
+  arr: T[],
+  predicate: (value: T, index: number, array: any[]) => Promise<boolean>,
+): Promise<T | undefined> {
+  for (const [i, value] of arr.entries()) {
+    if (await predicate(value, i, arr)) {
+      return value;
+    }
+  }
+}
