@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import db, { schema } from ".";
 
-export async function createOidcAuthorizationCode(
+async function create(
   attributes: typeof schema.oidcAuthorizationCodes.$inferInsert,
 ) {
   return (
@@ -12,22 +12,22 @@ export async function createOidcAuthorizationCode(
   ).pop()!;
 }
 
-export async function findOidcAuthorizationCode(id: string) {
+async function find(id: string) {
   return db.query.oidcAuthorizationCodes.findFirst({
     where: eq(schema.oidcAuthorizationCodes.id, id),
   });
 }
 
-export async function deleteOidcAuthorizationCode(id: string) {
+async function destroy(id: string) {
   return db
     .delete(schema.oidcAuthorizationCodes)
     .where(eq(schema.oidcAuthorizationCodes.id, id));
 }
 
 const OidcAuthorizationCodes = {
-  find: findOidcAuthorizationCode,
-  create: createOidcAuthorizationCode,
-  delete: deleteOidcAuthorizationCode,
+  find: find,
+  create: create,
+  destroy: destroy,
 };
 
 export default OidcAuthorizationCodes;

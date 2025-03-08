@@ -1,4 +1,4 @@
-import { createUser, isUsernameAvailable } from "@/db/users";
+import Users, { User } from "@/db/users";
 import argon2 from "argon2";
 import { z } from "zod";
 
@@ -20,7 +20,7 @@ const finalSchema = step1Schema.merge(step2Schema).merge(step3Schema);
 type Step4Result =
   | {
       success: true;
-      user: Awaited<ReturnType<typeof createUser>>;
+      user: User;
     }
   | {
       success: false;
@@ -75,7 +75,7 @@ export class SignupService {
 
     return {
       success: true,
-      user: await createUser({
+      user: await Users.create({
         username: parsed.data.username,
         normalizedUsername: parsed.data.username
           .toLowerCase()
@@ -153,7 +153,7 @@ async function validateStep2(
   }
 
   // 6. Normalized usernames must be unique
-  const available = await isUsernameAvailable(normalizedUsername, null);
+  const available = await Users.isUsernameAvailable(normalizedUsername, null);
   if (!available) {
     return { username: "username_taken" };
   }

@@ -1,15 +1,13 @@
 import { and, eq, gt } from "drizzle-orm";
 import db, { schema } from ".";
 
-export async function createOidcAccessToken(
-  params: typeof schema.oidcAccessTokens.$inferInsert,
-) {
+async function create(params: typeof schema.oidcAccessTokens.$inferInsert) {
   return (
     await db.insert(schema.oidcAccessTokens).values(params).returning()
   ).pop()!;
 }
 
-export async function findOidcAccessToken(id: string) {
+async function find(id: string) {
   if (!/^[0-9a-f-]{36}$/.exec(id)) {
     return null;
   }
@@ -22,16 +20,16 @@ export async function findOidcAccessToken(id: string) {
   });
 }
 
-export async function deleteOidcAccessToken(id: string) {
+async function destroy(id: string) {
   return db
     .delete(schema.oidcAccessTokens)
     .where(eq(schema.oidcAccessTokens.id, id));
 }
 
 const OidcAccessTokens = {
-  find: findOidcAccessToken,
-  create: createOidcAccessToken,
-  delete: deleteOidcAccessToken,
+  find,
+  create,
+  destroy,
 };
 
 export default OidcAccessTokens;

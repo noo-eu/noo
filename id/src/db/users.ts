@@ -1,9 +1,9 @@
 import argon2 from "argon2";
 import { and, eq, isNull } from "drizzle-orm";
 import db, { schema } from ".";
-import { findTenantByDomainName } from "./tenants";
+import Tenants, { Tenant } from "./tenants";
 
-export async function findUserById(userId: string) {
+async function find(userId: string) {
   return db.query.users.findFirst({
     where: eq(schema.sessions.id, userId),
     with: { tenant: true },
@@ -21,11 +21,11 @@ function parseEmail(email: string) {
   };
 }
 
-export async function findUserByEmailOrUsername(email: string) {
+async function findUserByEmailOrUsername(email: string) {
   const { username, domain } = parseEmail(email);
 
   if (domain) {
-    const tenant = await findTenantByDomainName(domain);
+    const tenant = await Tenants.findBy(eq(schema.tenants.domain, domain));
     if (!tenant) {
       return null;
     }
@@ -46,11 +46,11 @@ export async function findUserByEmailOrUsername(email: string) {
   }
 }
 
-export async function createUser(attributes: typeof schema.users.$inferInsert) {
+async function create(attributes: typeof schema.users.$inferInsert) {
   return (await db.insert(schema.users).values(attributes).returning()).pop()!;
 }
 
-export async function isUsernameAvailable(
+async function isUsernameAvailable(
   normalizedUsername: string,
   tenantId: string | null,
 ) {
@@ -85,13 +85,14 @@ async function authenticate(username: string, password: string) {
 }
 
 const Users = {
-  find: findUserById,
-  create: createUser,
+  find,
+  create,
   authenticate,
+  isUsernameAvailable,
 };
 
 export default Users;
 export type User = typeof schema.users.$inferSelect;
-export type UserWithTenant = typeof schema.users.$inferSelect & {
-  tenant: Awaited<ReturnType<typeof findTenantByDomainName>> | null;
+export type UserWithTenant = User & {
+  tenant: Tenant | null;
 };

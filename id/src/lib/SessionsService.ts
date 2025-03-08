@@ -1,4 +1,5 @@
-import Sessions, { refreshSession, Session } from "@/db/sessions";
+import { schema } from "@/db";
+import Sessions, { Session } from "@/db/sessions";
 import { User } from "@/db/users";
 import { checkVerifier, createVerifier, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
@@ -114,15 +115,15 @@ export class SessionsService {
   }
 
   async deleteSession(sid: string) {
-    return await Sessions.delete(sid);
+    return await Sessions.destroy(sid);
   }
 
   async updateSession(sid: string, ip: string, userAgent: string) {
-    return await refreshSession(sid, ip, userAgent);
+    return await Sessions.refresh(sid, ip, userAgent);
   }
 
   async reauthenticate(sid: string, ip: string, userAgent: string) {
-    return await refreshSession(sid, ip, userAgent, new Date());
+    return await Sessions.refresh(sid, ip, userAgent, new Date());
   }
 
   async getUser(sessionIndex: number = 0) {
@@ -219,7 +220,7 @@ export class SessionsService {
   }
 
   private loadSessions(sids: string[]) {
-    return Sessions.findBy(inArray(Sessions.schema.id, sids));
+    return Sessions.select(inArray(schema.sessions.id, sids));
   }
 
   private getSessionData(index: number) {

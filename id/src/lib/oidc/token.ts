@@ -81,7 +81,7 @@ async function authorizationCodeFlow(
   // TODO: when a code is presented multiple times, the server should revoke
   // "all tokens previously issued based on that authorization code". We could
   // store a "code" field in the access tokens table.
-  await OidcAuthorizationCodes.delete(params.code);
+  await OidcAuthorizationCodes.destroy(params.code);
 
   // Reject the request if the code has expired
   if (code.createdAt.getTime() + AUTHORIZATION_CODE_LIFETIME < Date.now()) {

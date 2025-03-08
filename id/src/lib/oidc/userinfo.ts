@@ -2,7 +2,7 @@ import { getKeyByAlg } from "@/app/oidc/jwks";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcClients from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
-import { findUserById } from "@/db/users";
+import Users from "@/db/users";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import { SignJWT } from "jose";
 import { HttpRequest } from "../http/request";
@@ -66,7 +66,7 @@ async function handle(req: HttpRequest) {
     issuer += `/${tenant.domain}`;
   }
 
-  const user = (await findUserById(at.userId))!;
+  const user = (await Users.find(at.userId))!;
 
   const claims: Record<string, unknown> = {
     iss: issuer,

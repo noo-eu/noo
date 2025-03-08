@@ -1,14 +1,14 @@
 import db from "@/db";
-import { createOidcClient } from "@/db/oidc_clients";
+import OidcClients from "@/db/oidc_clients";
 import * as schema from "@/db/schema";
-import { createTenant } from "@/db/tenants";
-import { createUser } from "@/db/users";
+import Tenants from "@/db/tenants";
+import Users from "@/db/users";
 import { reset } from "drizzle-seed";
 
 async function main() {
   await reset(db, schema);
 
-  await createUser({
+  await Users.create({
     id: "00000000-0000-0000-0000-000000000001",
     username: "jo.Hn.doE1",
     normalizedUsername: "johndoe1",
@@ -19,7 +19,7 @@ async function main() {
       "$argon2id$v=19$m=65536,t=3,p=4$9TQmMdbZltXuRxsUSrrOEw$b4iWu+Qcc9WybZYKLnw14LSM6D5IJ9oks6LHj8jqD9M",
   });
 
-  const tenant = await createTenant({
+  const tenant = await Tenants.create({
     name: "Acme Sarl",
     domain: "acme.fr",
     // yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE
@@ -28,7 +28,7 @@ async function main() {
   });
 
   // Public OIDC Client (not scoped to any tenant)
-  await createOidcClient({
+  await OidcClients.create({
     id: "00000000-0000-0000-0000-000000000001",
     clientName: { "": "Test Public OIDC Client" },
     clientSecret: "super-s3cret",
@@ -40,7 +40,7 @@ async function main() {
   });
 
   // Tenant OIDC Client
-  await createOidcClient({
+  await OidcClients.create({
     id: "00000000-0000-0000-0000-000000000002",
     tenantId: tenant.id,
     clientName: { "": "Acme Sarl's app" },

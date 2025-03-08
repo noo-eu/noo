@@ -1,7 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import db, { schema } from ".";
 
-export async function findOidcConsent(clientId: string, userId: string) {
+async function findOrInitialize(clientId: string, userId: string) {
   return (
     (await find(clientId, userId)) || {
       userId,
@@ -13,7 +13,7 @@ export async function findOidcConsent(clientId: string, userId: string) {
   );
 }
 
-export async function find(clientId: string, userId: string) {
+async function find(clientId: string, userId: string) {
   return await db.query.oidcConsents.findFirst({
     where: and(
       eq(schema.oidcConsents.clientId, clientId),
@@ -22,13 +22,11 @@ export async function find(clientId: string, userId: string) {
   });
 }
 
-export async function create(
-  attributes: typeof schema.oidcConsents.$inferInsert,
-) {
+async function create(attributes: typeof schema.oidcConsents.$inferInsert) {
   return await db.insert(schema.oidcConsents).values(attributes);
 }
 
-export async function update(
+async function update(
   clientId: string,
   userId: string,
   attributes: typeof schema.oidcConsents.$inferSelect,
@@ -46,7 +44,7 @@ export async function update(
 
 const OidcConsents = {
   find,
-  findOrInitialize: findOidcConsent,
+  findOrInitialize,
   create,
   update,
 };

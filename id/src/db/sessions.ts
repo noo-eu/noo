@@ -1,35 +1,27 @@
-import { eq, inArray, SQL } from "drizzle-orm";
+import { eq, SQL } from "drizzle-orm";
 import db, { schema } from ".";
 
-export function find(sessionId: string) {
+function find(sessionId: string) {
   return db.query.sessions.findFirst({
     where: eq(schema.sessions.id, sessionId),
     with: { user: { with: { tenant: true } } },
   });
 }
 
-export function findSessionByIds(sessionIds: string[]) {
-  return db.query.sessions.findMany({
-    where: inArray(schema.sessions.id, sessionIds),
-  });
-}
-
-export async function findBy(conditions: SQL) {
+async function select(conditions: SQL) {
   return db.query.sessions.findMany({
     where: conditions,
     with: { user: { with: { tenant: true } } },
   });
 }
 
-export async function createSession(
-  attributes: typeof schema.sessions.$inferInsert,
-) {
+async function create(attributes: typeof schema.sessions.$inferInsert) {
   return (
     await db.insert(schema.sessions).values(attributes).returning()
   ).pop()!;
 }
 
-export function refreshSession(
+function refresh(
   sessionId: string,
   ip: string,
   userAgent: string,
@@ -48,16 +40,16 @@ export function refreshSession(
     .where(eq(schema.sessions.id, sessionId));
 }
 
-export function deleteSession(sessionId: string) {
+function destroy(sessionId: string) {
   return db.delete(schema.sessions).where(eq(schema.sessions.id, sessionId));
 }
 
 const Sessions = {
   find,
-  findBy,
-  create: createSession,
-  delete: deleteSession,
-  schema: schema.sessions,
+  select,
+  create,
+  destroy,
+  refresh,
 };
 
 export default Sessions;

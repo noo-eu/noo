@@ -7,7 +7,7 @@ import {
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
 } from "@/app/oidc/configuration";
 import { schema } from "@/db";
-import { createOidcClient } from "@/db/oidc_clients";
+import OidcClients from "@/db/oidc_clients";
 import {
   RegistrationRequest,
   registrationRequest,
@@ -64,7 +64,7 @@ export async function oidcClientRegistration(
 
   const registrationAccessToken = createVerifier();
 
-  const client = await createOidcClient({
+  const client = await OidcClients.create({
     tenantId: tenant.id,
     clientSecret,
     registrationAccessTokenDigest: registrationAccessToken.digest,

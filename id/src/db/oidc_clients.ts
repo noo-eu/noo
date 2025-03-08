@@ -2,15 +2,13 @@ import { humanIdToUuid } from "@/utils";
 import { and, eq, isNull } from "drizzle-orm";
 import db, { schema } from ".";
 
-export async function createOidcClient(
-  attributes: typeof schema.oidcClients.$inferInsert,
-) {
+async function create(attributes: typeof schema.oidcClients.$inferInsert) {
   return (
     await db.insert(schema.oidcClients).values(attributes).returning()
   ).pop()!;
 }
 
-export async function findOidcClient(id: string) {
+async function find(id: string) {
   if (id.startsWith("oidc_")) {
     id = humanIdToUuid(id, "oidc")!;
   }
@@ -20,7 +18,7 @@ export async function findOidcClient(id: string) {
   });
 }
 
-export async function findOidcClientWithTenant(id: string, tenantId?: string) {
+async function findWithTenant(id: string, tenantId?: string) {
   return db.query.oidcClients.findFirst({
     where: and(
       eq(schema.oidcClients.id, id),
@@ -36,9 +34,9 @@ async function destroy(id: string) {
 }
 
 const OidcClients = {
-  find: findOidcClient,
-  findWithTenant: findOidcClientWithTenant,
-  create: createOidcClient,
+  find,
+  findWithTenant,
+  create,
   destroy,
 };
 
