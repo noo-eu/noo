@@ -11,27 +11,51 @@
       "import": "./src/*.tsx"
     }
   },
-  "scripts": {},
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
   "dependencies": {
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.5",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-onboarding": "^8.6.4",
+    "@storybook/addon-themes": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/experimental-addon-test": "^8.6.4",
+    "@storybook/react": "^8.6.4",
+    "@storybook/react-vite": "^8.6.4",
+    "@storybook/test": "^8.6.4",
     "@tailwindcss/postcss": "^4.0.8",
+    "@tailwindcss/vite": "^4.0.12",
     "@types/bun": "^1.2.4",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
+    "@vitest/browser": "^3.0.8",
+    "@vitest/coverage-v8": "^3.0.8",
     "eslint": "^9",
+    "eslint-plugin-storybook": "^0.11.4",
+    "playwright": "^1.51.0",
     "postcss": "^8",
     "prettier": "^3.5.2",
-    "tailwindcss": "^4.0.8",
-    "typescript": "^5"
+    "storybook": "^8.6.4",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5",
+    "vitest": "^3.0.8"
   },
   "peerDependencies": {
     "next-intl": "*"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }

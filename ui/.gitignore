@@ -49,4 +49,4 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 
-/keys/
+*storybook.log

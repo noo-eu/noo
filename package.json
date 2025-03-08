@@ -5,10 +5,13 @@
     "prepare": "bun run --bun husky"
   },
   "workspaces": [
-    "id", "mail", "ui"
+    "id",
+    "mail",
+    "ui"
   ],
   "devDependencies": {
     "lint-staged": "^15.4.3",
     "husky": "^9.1.7"
-  }
+  },
+  "packageManager": "bun@1.2.3"
 }

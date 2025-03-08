@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useTranslations } from "use-intl";
 import { TextField, TextFieldProps } from "./TextField";
 
 export type PasswordFieldProps = Omit<TextFieldProps, "type">;
