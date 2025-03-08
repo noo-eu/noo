@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
-import { PasswordField } from "@/components/shared/PasswordField";
+import { Button, PasswordField } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { signupStep3 } from "../actions";

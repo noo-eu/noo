@@ -1,7 +1,7 @@
 "use client";
 
 import { Noo } from "@/components/Noo";
-import { Button } from "@/components/shared/Button";
+import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { signupStep4 } from "../actions";

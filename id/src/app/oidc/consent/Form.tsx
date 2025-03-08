@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
+import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";

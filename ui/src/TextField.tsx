@@ -2,7 +2,7 @@ import { ReactNode, useId } from "react";
 import { Label } from "./Label";
 import { TextInput } from "./TextInput";
 
-export type Props = {
+export type TextFieldProps = {
   label: ReactNode;
   suffix?: ReactNode;
   error?: string;
@@ -10,7 +10,7 @@ export type Props = {
   aroundLabel?: (children: ReactNode) => ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export function TextField(props: Props) {
+export function TextField(props: TextFieldProps) {
   const inputId = useId();
   const errorId = useId();
 

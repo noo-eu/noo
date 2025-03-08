@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
-import { PasswordField } from "@/components/shared/PasswordField";
-import { TextField } from "@/components/shared/TextField";
+import { Button, PasswordField, TextField } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

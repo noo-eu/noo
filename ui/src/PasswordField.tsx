@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { TextField, Props as TextFieldProps } from "./TextField";
+import { TextField, TextFieldProps } from "./TextField";
 
-export type Props = Omit<TextFieldProps, "type">;
+export type PasswordFieldProps = Omit<TextFieldProps, "type">;
 
-export function PasswordField(props: Props) {
+export function PasswordField(props: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
   const t = useTranslations("common.passwordField");
 

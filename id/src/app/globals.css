@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../../ui";
 
 @theme {
   --color-eu-blue: #003399;

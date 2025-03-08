@@ -19,6 +19,7 @@
     "keys:rotate": "bun run ./scripts/rotateKeys.ts"
   },
   "dependencies": {
+    "@noo/ui": "workspace:*",
     "accept-language": "^3.0.20",
     "argon2": "^0.41.1",
     "dotenv": "^16.4.7",
