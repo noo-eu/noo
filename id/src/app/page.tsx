@@ -1,9 +1,14 @@
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { ProfilePage } from "@/components/Profile";
+import {
+  getFirstSession,
+  getSessionCookie,
+  SessionsService,
+} from "@/lib/SessionsService";
 import { redirect } from "next/navigation";
 
-export async function getCurrentUser(sid?: string) {
+export async function getCurrentSession(sid?: string) {
   const sessionManager = new SessionsService(await getSessionCookie());
-  return sid ? sessionManager.getUserBySid(sid) : sessionManager.getUser(0);
+  return sid ? sessionManager.getSessionBySid(sid) : getFirstSession();
 }
 
 export default async function Home({
@@ -11,14 +16,10 @@ export default async function Home({
 }: {
   searchParams: Promise<{ sid?: string }>;
 }) {
-  const user = await getCurrentUser((await searchParams).sid);
-  if (!user) {
+  const session = await getCurrentSession((await searchParams).sid);
+  if (!session) {
     redirect("/signin");
   }
 
-  return (
-    <div className="flex flex-col items-center h-screen">
-      <h1 className="text-4xl font-medium my-16">Welcome, {user.firstName}!</h1>
-    </div>
-  );
+  return <ProfilePage session={session} />;
 }

@@ -125,12 +125,18 @@ export class HttpRequest {
     );
   }
 
+  isMultipart(): boolean {
+    return (
+      this.header("Content-Type")?.startsWith("multipart/form-data") ?? false
+    );
+  }
+
   isJson(): boolean {
     return this.header("Content-Type")?.startsWith("application/json") ?? false;
   }
 
   get formData(): Promise<FormData> {
-    if (!this.isPost() || !this.isFormData()) {
+    if (!this.isPost() || !(this.isFormData() || this.isMultipart())) {
       return Promise.reject(new Error("Request is not a form data"));
     }
 

@@ -1,10 +1,16 @@
-import { S3Client } from "bun";
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import { mkdir } from "fs/promises";
 
-type ValueType = string | ArrayBufferView | ArrayBuffer | SharedArrayBuffer;
+import fs from "fs";
+
+type ValueType = Buffer;
 
 interface ObjectStorage {
-  write(key: string, value: ValueType): Promise<void>;
+  write(key: string, value: ValueType): Promise<string>;
 
   delete(key: string): Promise<void>;
 }
@@ -23,11 +29,13 @@ class FileStorage implements ObjectStorage {
     const dir = fullPath.split("/").slice(0, -1).join("/");
 
     await mkdir(dir, { recursive: true });
-    await Bun.file(this.#ROOT + key).write(value);
+    await fs.promises.writeFile(fullPath, value);
+
+    return this.url(key);
   }
 
   async delete(key: string) {
-    await Bun.file(this.#ROOT + key).delete();
+    await fs.promises.unlink(this.#ROOT + key);
   }
 
   url(key: string) {
@@ -41,19 +49,30 @@ class S3Storage implements ObjectStorage {
   #scope: string;
 
   constructor(scope: string) {
-    this.#client = new S3Client({
-      bucket: scope,
-    });
+    this.#client = new S3Client({});
 
     this.#scope = scope;
   }
 
   async write(key: string, value: ValueType) {
-    await this.#client.file(key).write(value);
+    const command = new PutObjectCommand({
+      Bucket: this.#scope,
+      Key: key,
+      Body: value,
+    });
+
+    await this.#client.send(command);
+
+    return this.url(key);
   }
 
   async delete(key: string) {
-    await this.#client.file(key).delete();
+    const command = new DeleteObjectCommand({
+      Bucket: this.#scope,
+      Key: key,
+    });
+
+    await this.#client.send(command);
   }
 
   url(key: string) {

@@ -64,6 +64,11 @@ export async function getSessions() {
   return manager.activeSessions();
 }
 
+export async function getFirstSession() {
+  const manager = new SessionsService(await getSessionCookie());
+  return (await manager.activeSessions())[0];
+}
+
 export class SessionsService {
   private tokens: string[];
 
