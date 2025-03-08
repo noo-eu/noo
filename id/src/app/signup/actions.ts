@@ -59,7 +59,7 @@ export async function signupStep1(prevState: unknown, formData: FormData) {
   const errors = await svc.runStep1();
 
   if (errors) {
-    const t = await getTranslations("signup.errors");
+    const t = await getTranslations("profile.name.errors");
     return {
       errors: translateErrors(t, errors),
       values: svc.params,

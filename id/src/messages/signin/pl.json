@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Zarejestruj się",
-    "error": "Błędne dane logowania",
-    "metaTitle": "Zaloguj się - noo",
+    "create_account": "Załóż konto",
+    "error": "Wprowadzone dane są nieprawidłowe",
+    "metaTitle": "Zaloguj się – noo",
     "password": "Hasło",
     "submit": "Zaloguj się",
-    "tenant_error": "Zaloguj się na konto {domain}",
-    "title": "Zaloguj się na swoje konta <noo></noo>",
-    "username": "Nazwa użytkownika lub adres e-mail"
+    "tenant_error": "Zaloguj się przy użyciu konta {domain}",
+    "title": "Zaloguj się na swoje konto <noo></noo>",
+    "username": "Nazwa użytkownika lub e-mail"
   }
 }

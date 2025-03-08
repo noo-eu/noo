@@ -1,0 +1,36 @@
+{
+  "signup": {
+    "create_your_account": "Opprett dine <noo></noo> konto",
+    "errors": {
+      "invalid_data": "Noe gikk galt. Tjek den informasjon du har innført",
+      "password_classes": "Bruk et sterkere passord. Bruk en blanding av bokstaver, tall og symboler",
+      "password_length": "Bruk minst 10 tegn",
+      "password_required": "Angi venligvis passord",
+      "password_too_long": "Passordet du har innført er for langt",
+      "username_first_char": "Ditt brukernavn må starte med en bokstav eller et tall",
+      "username_invalid": "Ditt brukernavn kan bare inneholde bokstaver, tall og pilar (.)",
+      "username_last_char": "Ditt brukernavn må slutte med en bokstav eller et tall",
+      "username_length": "Ditt brukernavn må være mellom 6 og 30 tegn langt",
+      "username_required": "Angi venligvis ditt nye brukernavn",
+      "username_taken": "Dette brukernavnet er allerede tatt",
+      "username_two_dots": "Ditt brukernavn kan ikke inneholde to pilar (.) i rad"
+    },
+    "metaTitle": "Opprett dine noo konto",
+    "step1": {
+      "title": "Skriv inn navn"
+    },
+    "step2": {
+      "title": "Velg epostadresse",
+      "username": "Epostadresse"
+    },
+    "step3": {
+      "password": "Passord",
+      "title": "Opprett et sterkere passord"
+    },
+    "step4": {
+      "accept": "Godkjen og fortsett",
+      "description": "<p>Ett <noo></noo> konto gir deg tilgang til en rekke tjenester, slik som epost, filopplagning og mer.</p><p><terms><noo></noo>'s vilkår for bruk</terms> beskriver hva du kan forvente av våre tjenester, mens <privacy><noo></noo>'s privatlivspolicy</privacy> forteller hvordan vi håndterer informasjon generert eller samlet inn når du bruker våre tjenester.</p><p>Før du kan opprette en <noo></noo> konto og bruke våre tjenester, må du godkjenne <noo></noo>'s vilkår for bruk og privatlivspolicy</p>",
+      "title": "Etter sist..."
+    }
+  }
+}

@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Ustvari svoj <noo></noo> račun",
     "errors": {
-      "first_name_required": "Vpišite svoje ime",
       "invalid_data": "Nekoč je šlo neki spor. Preverite podatke, ki ste jih vnesli",
-      "name_invalid": "Ime vsebuje neveljavné znake",
-      "name_too_long": "Ime, ki ste ga vnesli, je predolg",
-      "name_too_short": "Ime, ki ste ga vnesli, je prekratko",
       "password_classes": "Uporabite močnejše geslo. Uporabite kombinacijo črk, številic in simbolov",
       "password_length": "Uporabite vsaj 10 znakov",
       "password_required": "Vpišite geslo",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Ustvari svoj račun noo",
     "step1": {
-      "first_name": "Ime",
-      "last_name": "Priimek",
       "title": "Vnesite vaše ime"
     },
     "step2": {

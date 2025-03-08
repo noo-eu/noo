@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
-import * as cookiesModule from "./cookies";
 import { HttpRequest } from "./request";
 
 describe("HttpRequest", () => {
@@ -13,6 +12,7 @@ describe("HttpRequest", () => {
     headers.set("Content-Type", "application/json");
     headers.set("X-Forwarded-Proto", "https");
     headers.set("User-Agent", "TestAgent");
+    headers.set("Cookie", "session=abc123");
 
     // Mock Request object
     request = {
@@ -27,10 +27,6 @@ describe("HttpRequest", () => {
     } as unknown as Request;
 
     httpRequest = new HttpRequest(request);
-
-    mock.module("./cookies", () => ({
-      getCookies: mock(() => ({ session: "abc123" })),
-    }));
   });
 
   afterEach(() => {
@@ -66,7 +62,6 @@ describe("HttpRequest", () => {
   describe("cookies", () => {
     test("cookies returns cookie object from getCookies", () => {
       expect(httpRequest.cookies).toEqual({ session: "abc123" });
-      expect(cookiesModule.getCookies).toHaveBeenCalledWith(request.headers);
     });
 
     test("cookie returns specific cookie value", () => {
@@ -80,6 +75,7 @@ describe("HttpRequest", () => {
       expect(httpRequest.headers).toEqual({
         host: "example.com",
         authorization: "Bearer token123",
+        cookie: "session=abc123",
         "content-type": "application/json",
         "x-forwarded-proto": "https",
         "user-agent": "TestAgent",
@@ -114,7 +110,7 @@ describe("HttpRequest", () => {
         ...request,
         headers: {
           ...request.headers,
-          get: (name: string) => null,
+          get: (_: string) => null,
         },
       } as unknown as Request);
       expect(noAuthRequest.bearerToken).toBeNull();

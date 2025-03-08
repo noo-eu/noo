@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Erstellen Sie Ihr <noo></noo> Konto",
     "errors": {
-      "first_name_required": "Bitte geben Sie Ihren Vornamen ein",
       "invalid_data": "Etwas ist schiefgelaufen. Bitte überprüfen Sie die eingegebenen Daten",
-      "name_invalid": "Der Name enthält einige ungültige Zeichen",
-      "name_too_long": "Der Name, den Sie eingeben haben, ist zu lang",
-      "name_too_short": "Der Name, den Sie eingeben haben, ist zu kurz",
       "password_classes": "Bitte verwenden Sie ein stärkeres Passwort. Mischen Sie Buchstaben, Zahlen und Symbole",
       "password_length": "Bitte verwenden Sie 10 oder mehr Zeichen",
       "password_required": "Bitte geben Sie Ihr Passwort ein",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Dein kostenloses noo-Konto erstellen",
     "step1": {
-      "first_name": "Vorname",
-      "last_name": "Nachname",
       "title": "Geben Sie Ihren Namen ein"
     },
     "step2": {

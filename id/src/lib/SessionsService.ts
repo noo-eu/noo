@@ -1,7 +1,7 @@
 import { schema } from "@/db";
 import Sessions, { Session } from "@/db/sessions";
 import { User } from "@/db/users";
-import { checkVerifier, createVerifier, sha256 } from "@/utils";
+import { checkVerifier, createVerifier, humanIdToUuid, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import crypto from "node:crypto";
@@ -32,7 +32,7 @@ export async function setSessionCookie(value: string) {
   cookieStore.set(SESSION_COOKIE_NAME, value, {
     maxAge: 60 * 60 * 24 * 400,
     httpOnly: true,
-    secure: true,
+    secure: false,
     // TODO: determine if "none" is really required, or if "lax" is sufficient
     sameSite: "none",
   });
@@ -42,7 +42,7 @@ export async function setSessionCookie(value: string) {
     sha256(value).digest("base64url"),
     {
       maxAge: 60 * 60 * 24 * 400,
-      secure: true,
+      secure: false,
       sameSite: "none",
     },
   );
@@ -64,6 +64,11 @@ export async function getSessions() {
   return manager.activeSessions();
 }
 
+export async function getFirstSession() {
+  const manager = new SessionsService(await getSessionCookie());
+  return (await manager.activeSessions())[0];
+}
+
 export class SessionsService {
   private tokens: string[];
 
@@ -71,8 +76,33 @@ export class SessionsService {
     this.tokens = cookie.split(" ").filter((t) => t.length > 0);
   }
 
+  static async new() {
+    return new SessionsService(await getSessionCookie());
+  }
+
   buildCookie() {
     return this.tokens.join(" ");
+  }
+
+  static async userFor(userId: string) {
+    const manager = await SessionsService.new();
+    const sessions = await manager.activeSessions();
+    const uuid = humanIdToUuid(userId, "usr");
+    if (!uuid) {
+      return undefined;
+    }
+
+    return sessions.find((s) => s.userId === uuid)?.user;
+  }
+
+  static async user(userId?: string) {
+    if (!userId) {
+      const manager = await SessionsService.new();
+      const sessions = await manager.activeSessions();
+      return sessions[0]?.user;
+    }
+
+    return await SessionsService.userFor(userId);
   }
 
   async startSession(userId: string, ip: string, userAgent: string) {

@@ -1,6 +1,7 @@
 import Users, { User } from "@/db/users";
 import argon2 from "argon2";
 import { z } from "zod";
+import { validateNameForm } from "./validations/name";
 
 const step1Schema = z.object({
   first_name: z.string(),
@@ -90,37 +91,13 @@ export class SignupService {
 
 async function validateStep1(
   data: z.infer<typeof step1Schema>,
-): Promise<Record<string, string> | null> {
-  // 1. first_name is required
-  if (data.first_name == "" || !data.first_name) {
-    return { first_name: "first_name_required" };
-  }
-
-  // 2. first_name + last_name must not exceed 50 characters
-  if (data.first_name.length + data.last_name.length > 50) {
-    return { first_name: "name_too_long" };
-  }
-
-  // 3. first name + last name must be at least 3 characters
-  if (data.first_name.length + data.last_name.length < 3) {
-    return { first_name: "name_too_short" };
-  }
-
-  // 4. the fields must contain proper names (not emojis, numbers, etc.)
-  if (!isValidName(data.first_name)) {
-    return { first_name: "name_invalid" };
-  }
-
-  if (data.last_name !== "" && !isValidName(data.last_name)) {
-    return { last_name: "name_invalid" };
-  }
-
-  return null;
+): Promise<Record<string, string> | undefined> {
+  return validateNameForm(data.first_name, data.last_name);
 }
 
 async function validateStep2(
   data: z.infer<typeof step2Schema>,
-): Promise<Record<string, string> | null> {
+): Promise<Record<string, string> | undefined> {
   // 1. username is required
   if (data.username == "" || !data.username) {
     return { username: "username_required" };
@@ -157,13 +134,11 @@ async function validateStep2(
   if (!available) {
     return { username: "username_taken" };
   }
-
-  return null;
 }
 
 async function validateStep3(
   data: z.infer<typeof step3Schema>,
-): Promise<Record<string, string> | null> {
+): Promise<Record<string, string> | undefined> {
   // 1. password is required
   if (data.password == "" || !data.password) {
     return { password: "password_required" };
@@ -198,8 +173,6 @@ async function validateStep3(
   if (classCount < 2) {
     return { password: "password_classes" };
   }
-
-  return null;
 }
 
 function hashPassword(password: string) {
@@ -212,9 +185,4 @@ function trim<T extends Record<string, string>>(data: T): T {
     trimmed[key] = data[key].trim();
   }
   return trimmed as T;
-}
-
-function isValidName(name: string) {
-  const namePattern = /^[\p{L}\p{M}\p{Zs}.'-]+$/u;
-  return namePattern.test(name);
 }

@@ -21,10 +21,6 @@
   }
 }
 
-body {
-  @apply bg-indigo-50 dark:bg-zinc-800 text-gray-900 dark:text-gray-100;
-}
-
 .noo {
   font-family: "DynaPuff", serif;
   font-optical-sizing: auto;

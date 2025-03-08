@@ -1,0 +1,12 @@
+{
+  "signin": {
+    "create_account": "Створити акаунт",
+    "error": "Введені дані неправильні",
+    "metaTitle": "Увійти – noo",
+    "password": "Пароль",
+    "submit": "Увійти",
+    "tenant_error": "Будь ласка, увійди через акаунт {domain}",
+    "title": "Увійди до свого акаунту <noo></noo>",
+    "username": "Ім’я користувача або email"
+  }
+}

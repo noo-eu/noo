@@ -1,0 +1,12 @@
+{
+  "signin": {
+    "create_account": "Krijo një llogari",
+    "error": "Të dhënat që vendose janë të pasakta",
+    "metaTitle": "Hyrje – noo",
+    "password": "Fjalëkalimi",
+    "submit": "Hyr",
+    "tenant_error": "Të lutem hyr me një llogari {domain}",
+    "title": "Hyr në llogarinë tënde <noo></noo>",
+    "username": "Emri i përdoruesit ose emaili"
+  }
+}

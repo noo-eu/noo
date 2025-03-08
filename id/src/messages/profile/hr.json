@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Vrati se na vaše profilno korisničko ime",
+    "birthdate": {
+      "day": "Dan",
+      "description": "Vaš datum rođenja može se koristiti za sigurnost računa i ličnu prilagodljivost.",
+      "errors": {
+        "bad_year": "Unesi cijeli godinu rođenja",
+        "future": "Unesi datum iz prošlosti",
+        "invalid": "Neispravno datum rođenja"
+      },
+      "month": "Mjesec",
+      "title": "Postavi datum rođenja",
+      "updateSuccess": "Datum rođenja je spreman",
+      "year": "Godina"
+    },
+    "gender": {
+      "custom": "Prilagođeno",
+      "customLabel": "Rod",
+      "description": "Vaše rodne osobine koriste se za ličnu prilagodljivost i da vas tko drugi uvrijedo kao što ste zamišljeni.",
+      "example": "Alex je online, {gender, select, female {pošalji joj} male {pošalji mu} other {pošalji}} poruku.",
+      "female": "Žena",
+      "male": "Muž",
+      "other": "Drugo",
+      "pronounsLabel": "Adresa me kao",
+      "title": "Postavi rod",
+      "unspecified": "Ne želim reći",
+      "updateSuccess": "Spolne podatke su uspješno spremljeni"
+    },
+    "header": "<noo></noo> Korisnički račun",
+    "name": {
+      "description": "Vaše ime će biti vidljivo ostalim korisnicima s kojima ste u interakciji na <noo></noo>. Ako koristite <noo></noo> za prijavu u druge aplikacije, vaše ime također moguće da će biti dijeljeno s njima ako izaberete.",
+      "errors": {
+        "invalid": "Vaše ime sadrži nevažeće znake",
+        "required": "Unesite vase prvo ime",
+        "tooLong": "Vase ime je preduolg",
+        "tooShort": "Vase ime je premalo"
+      },
+      "firstName": "Prvo ime",
+      "lastName": "Prezime",
+      "title": "Promijeni svoje korisničko ime",
+      "updateNotice": "Ova ažuriranja vrijedi za sve <noo></noo> usluge. Moguće je i još uvijek biti potrebno zasebno ažurirati vaše ime za druge aplikacije.",
+      "updateSuccess": "Vaše korisničko ime promijenjeno"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Spremi",
+        "description": "Koristite kameru uređaja da snimite sliku.",
+        "title": "Snimi sliku"
+      },
+      "error": "Nešto je pošlo krivo. Molimo, pokušajte ponovno.\n",
+      "main": {
+        "description": "Slika vam pomaže i drugima da prepoznate vaš nalog. Možete je mijenjati ili ukloniti bilo kada.",
+        "title": "Profilna slika"
+      },
+      "remove_success": "Vaša profilna slika je uklonjena...\n",
+      "upload": {
+        "browse": "Odaberite iz računala",
+        "camera": "Upotrijebite kameru",
+        "change": "Promijeni sliku",
+        "drag": "Vucite sliku ovdje",
+        "error": {
+          "mime": "Slika nije podržana. Molimo odaberite JPG, PNG ili GIF datoteku.",
+          "size": "Slika je prevelika. Molimo odaberite sliku manju od 10MB."
+        },
+        "success": "Vaš profilni slika je ažurirana.",
+        "title": "Odaberi sliku"
+      }
+    },
+    "summary": {
+      "birthdate": "Datum rođenja",
+      "gender": "Tvoj rod",
+      "name": "Vaše ime",
+      "picture": "Vaša slika",
+      "unspecifiedGender": "Nije navedeno"
+    },
+    "title": "Vaš <noo></noo> profil"
+  }
+}

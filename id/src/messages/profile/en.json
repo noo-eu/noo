@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Back to your account",
+    "birthdate": {
+      "day": "Day",
+      "description": "Your date of birth may be used for account security and personalisation.",
+      "errors": {
+        "bad_year": "Please enter your full year of birth",
+        "future": "Please enter a date in the past",
+        "invalid": "The date of birth is invalid"
+      },
+      "month": "Month",
+      "title": "Set your date of birth",
+      "updateSuccess": "Your date of birth has been saved",
+      "year": "Year"
+    },
+    "gender": {
+      "custom": "Let me type",
+      "customLabel": "Gender",
+      "description": "Your gender is used for personalisation and to address you correctly.",
+      "example": "Alex sent an update. Check {gender, select, female {her} male {his} other {the}} message for details.",
+      "female": "Female",
+      "male": "Male",
+      "other": "Other",
+      "pronounsLabel": "Refer to me as",
+      "title": "Set your gender",
+      "unspecified": "I'd rather not say",
+      "updateSuccess": "Your gender details have been saved"
+    },
+    "header": "<noo></noo> Account",
+    "name": {
+      "description": "Your name will be visible to other users you interact with on <noo></noo>. If you use <noo></noo> to sign in to other apps, your name can also be shared with them, if you choose.",
+      "errors": {
+        "invalid": "The name contains some invalid characters",
+        "required": "Please enter your first name",
+        "tooLong": "The name you entered is too long",
+        "tooShort": "The name you entered is too short"
+      },
+      "firstName": "First name",
+      "lastName": "Surname",
+      "title": "Change your name",
+      "updateNotice": "This update applies to all <noo></noo> services. You may still need to update your name separately for other apps.",
+      "updateSuccess": "Your name has been changed"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Capture",
+        "description": "Use your device's camera to take a photo.",
+        "title": "Take a photo"
+      },
+      "error": "Something went wrong. Please try again.",
+      "main": {
+        "description": "A photo helps you and others recognize your account. You can change or remove it at any time.",
+        "title": "Profile photo"
+      },
+      "remove_success": "Your profile photo has been removed",
+      "upload": {
+        "browse": "Choose from your computer",
+        "camera": "Use your camera",
+        "change": "Change photo",
+        "drag": "Drag photo here",
+        "error": {
+          "mime": "The photo is not supported. Please choose a JPG, PNG, or GIF file.",
+          "size": "The photo is too large. Please choose a photo that is less than 10MB."
+        },
+        "success": "Your profile photo has been updated.",
+        "title": "Choose a photo"
+      }
+    },
+    "summary": {
+      "birthdate": "Your date of birth",
+      "gender": "Your gender",
+      "name": "Your name",
+      "picture": "Your photo",
+      "unspecifiedGender": "Not specified"
+    },
+    "title": "Your <noo></noo> profile"
+  }
+}

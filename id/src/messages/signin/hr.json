@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Registrujte se",
-    "error": "Vaše prijave su netočne",
-    "metaTitle": "Prijava - noo",
+    "create_account": "Kreiraj račun",
+    "error": "Uneseni podaci nisu točni",
+    "metaTitle": "Prijava – noo",
     "password": "Lozinka",
     "submit": "Prijavi se",
-    "tenant_error": "Prijavite se pomoću računa {domain}",
-    "title": "Prijavite se na vaš <noo></noo> račun",
-    "username": "Korisničko ime ili email"
+    "tenant_error": "Molimo prijavite se s {domain} računom",
+    "title": "Prijavi se na svoj <noo></noo> račun",
+    "username": "Korisničko ime ili e-mail"
   }
 }

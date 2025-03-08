@@ -1,9 +1,11 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
+  date,
   inet,
   integer,
   jsonb,
+  pgEnum,
   pgTable,
   primaryKey,
   text,
@@ -19,6 +21,14 @@ export const tenants = pgTable("tenants", {
   oidcRegistrationTokenDigest: text("oidc_registration_token_digest"),
 });
 
+export const genderEnum = pgEnum("genders", [
+  "male",
+  "female",
+  "custom",
+  "not_specified",
+]);
+export const pronounEnum = pgEnum("pronouns", ["male", "female", "other"]);
+
 export const users = pgTable(
   "users",
   {
@@ -33,6 +43,11 @@ export const users = pgTable(
     otpSecret: text("otp_secret"),
     firstName: text("first_name").notNull(),
     lastName: text("last_name"),
+    picture: text(),
+    birthdate: date({ mode: "date" }),
+    gender: genderEnum().notNull().default("not_specified"),
+    genderCustom: text(),
+    pronouns: pronounEnum().notNull().default("other"),
   },
   (table) => [
     unique("users_tenant_id_normalized_username")

@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Tillbaka till ditt konto",
+    "birthdate": {
+      "day": "Dag",
+      "description": "Din födelsedatum kan användas för konto säkerhet och personifiering.",
+      "errors": {
+        "bad_year": "Vänligen ange ditt fullständiga födelseår",
+        "future": "Vänligen ange ett datum i förflötiden",
+        "invalid": "Det angivna datumet är ogiltigt"
+      },
+      "month": "Månad",
+      "title": "Sätt din födelsedatum",
+      "updateSuccess": "Födelsedatumet har sparats",
+      "year": "År"
+    },
+    "gender": {
+      "custom": "Anpassad",
+      "customLabel": "Kön",
+      "description": "{brackets]Ditt kön används för personlig anpassning och att du ska adresseras korrekt.{brackets]",
+      "example": "Alex är online, skicka ett meddelande {gender, select, female {till henne} male {till honom} other {}}.",
+      "female": "Kvinna",
+      "male": "Man",
+      "other": "Övrigt",
+      "pronounsLabel": "Se upp mig som",
+      "title": "Sätt din kön",
+      "unspecified": "{brackets]Jag vill inte säga något{brackets]",
+      "updateSuccess": "Dina könshändelser har sparats"
+    },
+    "header": "<noo></noo> Konto",
+    "name": {
+      "description": "Ditt namn kommer att synas för andra användare som du interagerar med på <noo></noo>. Om du använder <noo></noo> för att logga in i andra appar, kan även ditt namn delas med dem om du väljer det.",
+      "errors": {
+        "invalid": "Namnet innehåller några ogiltiga tecken",
+        "required": "Fyll i ditt förnamn",
+        "tooLong": "Namnet du skrivit är för långt",
+        "tooShort": "Namnet du skrivit är för kort"
+      },
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "title": "Ändra namn",
+      "updateNotice": "Denna uppdatering gäller alla <noo></noo>-tjänster. Du kanske fortfarande behöver uppdatera ditt namn separat för andra appar.",
+      "updateSuccess": "Ditt namn har ändrats"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ta foto",
+        "description": "Använd din enhetss kamera för att ta ett foto.",
+        "title": "Ta ett foto"
+      },
+      "error": "Någonting gick fel. Försök igen.",
+      "main": {
+        "description": "En bild hjälper dig och andra att känna igen ditt konto. Du kan ändra eller ta bort den när som helst.",
+        "title": "Profilbild"
+      },
+      "remove_success": "Ditt profilbillede har tagits bort...",
+      "upload": {
+        "browse": "Välj från datorn",
+        "camera": "Använd kameran",
+        "change": "Ändra foto",
+        "drag": "Dra foto hit",
+        "error": {
+          "mime": "Bilden stöds inte. Välj ett bildfil i JPG, PNG eller GIF-format istället.",
+          "size": "Bilden är för stor. Välj en bild som är mindre än 10 MB."
+        },
+        "success": "Ditt profilbillede har uppdaterats.",
+        "title": "Välj en bild"
+      }
+    },
+    "summary": {
+      "birthdate": "Din födelsedatum",
+      "gender": "Ditt kön",
+      "name": "Ditt namn",
+      "picture": "Ditt bild",
+      "unspecifiedGender": "Okänt kön"
+    },
+    "title": "Din <noo></noo> profil"
+  }
+}

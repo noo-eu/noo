@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Opru kont tiegħek <noo></noo>",
     "errors": {
-      "first_name_required": "Tajjeb tibba' isim tkun ħadd",
       "invalid_data": "Ġejt farruża kollox. Tibba' tkun ħadd maħsub li qed tgħidlek",
-      "name_invalid": "Ism ma jiekolx kollox",
-      "name_too_long": "Ism kemm ġej il-ħafna",
-      "name_too_short": "Ism kemm jew wisq qalih",
       "password_classes": "Tibba' tiksol passwurd qawwi. Tiksol jekk tibda bl-isem, numru u simboli",
       "password_length": "Tibba' tkun ta' 10 karattri jew wisq zewġ",
       "password_required": "Tajjeb tibba' passwurd",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Opru kont tiegħek noo",
     "step1": {
-      "first_name": "Isim",
-      "last_name": "Surnamu",
       "title": "Idda' isim"
     },
     "step2": {

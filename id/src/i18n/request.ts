@@ -2,7 +2,11 @@ import acceptLanguage from "accept-language";
 import { getRequestConfig } from "next-intl/server";
 import { cookies, headers } from "next/headers";
 
-acceptLanguage.languages(SUPPORTED_LANGUAGES);
+// Bosnian, Croatian, Montenegrin and Serbian are secretly the same language 🤫
+// I didn't decide this, I'm just a developer.
+const BCMS = ["sr", "bs", "me"];
+
+acceptLanguage.languages(SUPPORTED_LANGUAGES.concat(BCMS));
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
@@ -24,6 +28,7 @@ export async function i18nConfig() {
     const lngHeader = reqHeaders.get("accept-language");
 
     locale = acceptLanguage.get(lngHeader) ?? "en";
+    locale = BCMS.includes(locale) ? "hr" : locale;
   }
 
   return {
@@ -31,6 +36,7 @@ export async function i18nConfig() {
     messages: {
       ...(await loadJSON5(`src/messages/common/${locale}.json`)),
       ...(await loadJSON5(`src/messages/oidc/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/profile/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },

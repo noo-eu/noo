@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Izveido savu <noo></noo> kontu",
     "errors": {
-      "first_name_required": "Ievadi tuvi vārdu",
       "invalid_data": "Kāda kļūda notika. Lūdzu, pārbaudiet ievadīto datu saknes.",
-      "name_invalid": "Ievadītais vārds satur neleistus simbolus",
-      "name_too_long": "Vārds, ko iestatāji, ir pārliels",
-      "name_too_short": "Jāievada vismaz viens būtīgs raksts",
       "password_classes": "Lūdzu, izvēlati stipru paroli ar burtiem, skaitļiem un simboliem.",
       "password_length": "Ievadi vismaz 10 rakstus garu parole.",
       "password_required": "Lūdzu, ievadi paroli",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Izveido savu noo kontu",
     "step1": {
-      "first_name": "Vārds",
-      "last_name": "Uzvārds",
       "title": "Ievadi tuvi vārdu"
     },
     "step2": {

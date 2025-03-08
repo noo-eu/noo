@@ -1,17 +1,22 @@
 {
   "common": {
+    "back": "Atpakaļ",
     "cancel": "Atcelt",
+    "change": "Mainīt",
+    "close": "Aizvērt",
     "continue": "Turpināt",
-    "madeWith": "Izveidots ar ❤️ un ☕️ Eiropas Savienībā",
-    "next": "Nākamais",
+    "madeWith": "Radīts ar ❤️ un ☕️ Eiropas Savienībā",
+    "next": "Tālāk",
     "no": "Nē",
-    "optional": "Neobligāts",
+    "optional": "Nav obligāti",
     "passwordField": {
-      "ariaLabelShow": "Rādīte parole kā vienkāršu tekstu. Piezīme: šis izvirsis jūsu paroli uz ekrāna.",
-      "hide": "Slēpt parole",
-      "show": "Rādīte parole"
+      "ariaLabelShow": "Parādīt paroli kā vienkāršu tekstu. Brīdinājums: parole būs redzama ekrānā.",
+      "hide": "Slēpt paroli",
+      "show": "Parādīt paroli"
     },
-    "privacy": "Privātība",
+    "privacy": "Privātums",
+    "remove": "Noņemt",
+    "save": "Saglabāt",
     "terms": "Noteikumi",
     "yes": "Jā"
   }

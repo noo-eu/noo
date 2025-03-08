@@ -3,9 +3,11 @@ import { ModalFooter } from "@/components/ModalFooter";
 export function PageModal({
   children,
   className = "",
+  footer = true,
 }: {
   children: React.ReactNode;
   className?: string;
+  footer?: boolean;
 }) {
   return (
     <div className="sm:flex flex-col justify-center mt-8 sm:mt-auto">
@@ -14,7 +16,7 @@ export function PageModal({
       >
         {children}
 
-        <ModalFooter />
+        {footer && <ModalFooter />}
       </div>
     </div>
   );

@@ -1,18 +1,23 @@
 {
   "common": {
+    "back": "Nazaj",
     "cancel": "Prekliči",
+    "change": "Spremeni",
+    "close": "Zapri",
     "continue": "Nadaljuj",
-    "madeWith": "Narejeno z ❤️ in ☕️ v Evropski uniji",
-    "next": "Naslednji",
+    "madeWith": "Ustvarjeno z ❤️ in ☕️ v Evropski uniji",
+    "next": "Naprej",
     "no": "Ne",
     "optional": "Neobvezno",
     "passwordField": {
-      "ariaLabelShow": "Pokaži geslo v čiste obliki. Opozorilo: tvoje geslo se bo prikazalo na zaslonu.",
+      "ariaLabelShow": "Prikaži geslo kot navaden tekst. Opozorilo: geslo bo vidno na zaslonu.",
       "hide": "Skrij geslo",
-      "show": "Pokaži geslo"
+      "show": "Prikaži geslo"
     },
-    "privacy": "Varstvo podatkov",
-    "terms": "Pogoji uporabe",
+    "privacy": "Zasebnost",
+    "remove": "Odstrani",
+    "save": "Shrani",
+    "terms": "Pogoji",
     "yes": "Da"
   }
 }

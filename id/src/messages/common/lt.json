@@ -1,18 +1,23 @@
 {
   "common": {
+    "back": "Atgal",
     "cancel": "Atšaukti",
-    "continue": "Tęstytis",
+    "change": "Keisti",
+    "close": "Uždaryti",
+    "continue": "Tęsti",
     "madeWith": "Sukurta su ❤️ ir ☕️ Europos Sąjungoje",
-    "next": "Toliau",
+    "next": "Kitas",
     "no": "Ne",
-    "optional": "Aptinkamai",
+    "optional": "Nebūtina",
     "passwordField": {
-      "ariaLabelShow": "Rodyti slaptažodį tiesiems. Pražiūrėkite: tuo metu Jūsų slaptažodis bus rodomas ekrane.",
-      "hide": "Slaptažodį paslėpti",
+      "ariaLabelShow": "Rodyti slaptažodį kaip paprastą tekstą. Įspėjimas: slaptažodis bus matomas ekrane.",
+      "hide": "Slėpti slaptažodį",
       "show": "Rodyti slaptažodį"
     },
     "privacy": "Privatumas",
-    "terms": "Nuostatos",
+    "remove": "Pašalinti",
+    "save": "Išsaugoti",
+    "terms": "Taisyklės",
     "yes": "Taip"
   }
 }

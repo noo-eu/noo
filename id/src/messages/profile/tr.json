@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Hesabına geri dön",
+    "birthdate": {
+      "day": "Gün",
+      "description": "Doğum gününüz, hesaptaki güvenlik ve kişisel kullanım için kullanılabilir.",
+      "errors": {
+        "bad_year": "Lütfen tam yılınızı girin",
+        "future": "Geçmişte bir tarih giriniz",
+        "invalid": "Doğum tarihi geçersiz"
+      },
+      "month": "Ay",
+      "title": "Doğum Tarihinizi Belirleyin",
+      "updateSuccess": "Doğum günü bilgisi başarıyla kaydedildi.",
+      "year": "Yıl"
+    },
+    "gender": {
+      "custom": "Özel",
+      "customLabel": "Cinsiyet",
+      "description": "Cinsiyet bilgisi size daha doğru hitap etmek ve kişisel kullanımı için kullanılır.",
+      "example": "-- Unused --",
+      "female": "Kadın",
+      "male": "Erkek",
+      "other": "Diğer",
+      "pronounsLabel": "Bana aşağıdaki gibi hitap edin",
+      "title": "Cinsiyetinizi Belirleyin",
+      "unspecified": "Açıklamayı etmeyi tercih ediyorum",
+      "updateSuccess": "Cinsiyet bilgilerinizi başarıyla kaydettiniz"
+    },
+    "header": "<noo></noo> Hesabım",
+    "name": {
+      "description": "İsiminiz diğer <noo></noo> kullanıcılara görüntülenmeyecek. Eğer <noo></noo>'i kullanarak başka uygulamalardan giriş yapacaksanız, isimlerinizi onlara da paylaşabilirsin.",
+      "errors": {
+        "invalid": "İsimde bazı geçersiz karakterler var",
+        "required": "Lütfen ilk adınızı giriniz",
+        "tooLong": "Girdiğiniz isim çok uzun",
+        "tooShort": "Girdiğiniz isim çok kısa"
+      },
+      "firstName": "İlk Ad",
+      "lastName": "Soyisim",
+      "title": "İsminizi Değiştir",
+      "updateNotice": "<noo></noo> hizmetlerinde bu güncelleme uygulanmıştır. Diğer uygulamalar için ise ayrı olarak isimlerinizi güncellemeye devam edebilirsiniz.",
+      "updateSuccess": "İsminiz başarıyla güncellenmiştir"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Kaydet",
+        "description": "Ayarlar çerçevesinden bir fotoğraf çekin.",
+        "title": "Resim Çek"
+      },
+      "error": "Bir hata oluştu. Lütfen tekrar deneyiniz.",
+      "main": {
+        "description": "Bir resim hesabınızı ve diğer kullanıcıları tanıymanızı kolaylaştırır. Her zaman istediğinizde bu resimi veya isimdeki resimi değiştirebilirsiniz.",
+        "title": "Profil Resmi"
+      },
+      "remove_success": "Profil resmi başarıyla kaldırıldı...",
+      "upload": {
+        "browse": "Bilgisayarınızdan seçin",
+        "camera": "Ayarlar çerçevesinden çek",
+        "change": "Resmi değiştir",
+        "drag": "Resmi buraya sürükleyin",
+        "error": {
+          "mime": "Resim desteklenmiyor. Lütfen bir JPG, PNG veya GIF dosyası seçiniz.",
+          "size": "Resminiz çok büyük. Lütfen 10 MB'dan küçük bir resim seçiniz."
+        },
+        "success": "Profil resmi başarıyla güncellenmiştir",
+        "title": "Bir profil resmi seçin"
+      }
+    },
+    "summary": {
+      "birthdate": "Doğum tarihiniz",
+      "gender": "Cinsiyetiniz",
+      "name": "Adınız",
+      "picture": "Görselınız",
+      "unspecifiedGender": "Belirtilmemiş"
+    },
+    "title": "Sizin <noo></noo> profili"
+  }
+}

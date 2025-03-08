@@ -1,0 +1,36 @@
+{
+  "signup": {
+    "create_your_account": "Búa til reikning þinn <noo></noo>",
+    "errors": {
+      "invalid_data": "Eitthvað gengur úr. Veldu upplýsingum á að ræða",
+      "password_classes": "Veldu streng að er betra. Blanda bókstafi, tölu og hljúpstafir í það",
+      "password_length": "Veldu 10 eða fleiri tegundir á bæði endum",
+      "password_required": "Skili þinn lykta",
+      "password_too_long": "Lyktun er lítil fegur",
+      "username_first_char": "Notarþu þinna skal byrja við bókstaf eða tölu",
+      "username_invalid": "Notarþú þinn skal innihalda aðeins letur, tölu og dótum (. )",
+      "username_last_char": "Notarþu þinna skal endast við bókstaf eða tölu",
+      "username_length": "Notarþú þinn skal vera milli 6 og 30 stafa",
+      "username_required": "Veldu nýja notarþú þinn",
+      "username_taken": "Þessi notarþu er takaður",
+      "username_two_dots": "Notarþú þinn skilir ekki að innihalda tvö dótum (.) í rað"
+    },
+    "metaTitle": "Búa til reikning þitt",
+    "step1": {
+      "title": "Skrifa nafn þitt"
+    },
+    "step2": {
+      "title": "Veldu tómstunga póstþang",
+      "username": "Póstþanga"
+    },
+    "step3": {
+      "password": "Lykta",
+      "title": "Búa til sterk lykta"
+    },
+    "step4": {
+      "accept": "Samþykki og fylli í",
+      "description": "        <p>Einn<noo></noo> reikning gerir þig kleift að ganga inn á fjölbreyt sérþjónusta, eins og tómstunga póst, safn af skrár og fleira.</p>        <p><terms><noo></noo> Kennslumálinn</terms> lýsir hvað þú má vonast um en þú notar sérþjónustu okkar, meðan <privacy><noo></noo> Friðsamvísunarkennsla</privacy> lýsir hvernig við ferum til að innihalda upplýsingar sem birtast eða samanst sig sem þú notar sérþjónustu okkar.</p>        <p>Til að búa til <noo></noo> reikning og nota sérþjónustu okkar má þú samþykkja kennslumálinn okkar og friðsamvísunarkennsla.</p>",
+      "title": "Eitt síðasta"
+    }
+  }
+}

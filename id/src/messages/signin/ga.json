@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Cruthaigh a chuntas",
-    "error": "Níl na cheadaithe agat a theastaigh ",
-    "metaTitle": "Logáil isteach - noo",
-    "password": "Páirtíochta",
-    "submit": "Tóga isteach",
-    "tenant_error": "Logáil isteach le cuntas {domain}",
-    "title": "Logáil isteach i do chuntas <noo></noo>",
-    "username": "Ciall nó rphost"
+    "create_account": "Cruthaigh cuntas",
+    "error": "Tá na dintiúir mícheart",
+    "metaTitle": "Sínigh isteach – noo",
+    "password": "Focal faire",
+    "submit": "Sínigh isteach",
+    "tenant_error": "Sínigh isteach le cuntas {domain}, le do thoil",
+    "title": "Sínigh isteach i do chuntas <noo></noo>",
+    "username": "Ainm úsáideora nó r-phost"
   }
 }

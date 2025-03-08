@@ -1,0 +1,41 @@
+{
+  "oidc": {
+    "change_account": "Змінити обліковий запис",
+    "consent": {
+      "claims": {
+        "address": "Ваша поштова адреса",
+        "birthdate": "Ваша дата народження",
+        "email": "Ваша електронна адреса",
+        "gender": "Стать, з якою ви себе ідентифікуєте",
+        "name": "Ваше повне ім’я",
+        "phone_number": "Ваш номер телефону",
+        "profile": "Ваше фото профілю",
+        "username": "Ваше ім’я користувача"
+      },
+      "description": "<strong>{name}</strong> запитує доступ до наступної інформації",
+      "title": "Ви входите до <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "{name, select, undefined {Ви вийшли з додатку стороннього розробника.} other {Ви вийшли з <strong>{name}</strong>.}}",
+      "query": "Бажаєте також вийти з <noo></noo>?",
+      "title": "Вийти"
+    },
+    "fatal": {
+      "description": "Ви спробували увійти до стороннього додатку, але щось пішло не так. Спробуйте пізніше або зверніться до розробника з цією інформацією:",
+      "error": "Помилка OpenID Connect: {error}",
+      "title": "Щось пішло не так"
+    },
+    "home": "Перейти на головну сторінку <noo></noo>",
+    "switch": {
+      "description": "щоб продовжити до <details>{name}</details>",
+      "legalComplete": "Перш ніж увійти, переглянь <privacy>політику конфіденційності</privacy> та <terms>умови користування</terms> {client}.",
+      "legalNone": "Перш ніж увійти, переглянь юридичну інформацію {client}.",
+      "legalPrivacy": "Перш ніж увійти, переглянь <privacy>політику конфіденційності</privacy> {client}.",
+      "legalTerms": "Перш ніж увійти, переглянь <terms>умови користування</terms> {client}.",
+      "metaTitle": "Вхід — noo id",
+      "pageTitle": "Увійти через <noo></noo>",
+      "signin": "Увійти з іншого облікового запису",
+      "title": "Оберіть обліковий запис"
+    }
+  }
+}

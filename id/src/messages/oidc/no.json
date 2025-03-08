@@ -1,0 +1,41 @@
+{
+  "oidc": {
+    "change_account": "Endre konto",
+    "consent": {
+      "claims": {
+        "address": "Din postadresse",
+        "birthdate": "Din fødselsdato",
+        "email": "Din epostadresse",
+        "gender": "Kjønn du identifierer deg med",
+        "name": "Ditt fulle navn",
+        "phone_number": "Din telefonnummer",
+        "profile": "Ditt profilerbilde",
+        "username": "Din brukernavn"
+      },
+      "description": "<strong>{name}</strong> foreslår å få tilgang til følgende informasjon:",
+      "title": "Du signerer inn i <details>{name}</details>"
+    },
+    "end_session": {
+      "description": "{name, select, undefined {Du signerte ut fra et tredjepartsprogram.} other {Du signerte ut fra <strong>{name}</strong>}}",
+      "query": "Vil du også signere ut fra <noo></noo>?",
+      "title": "Signer ut"
+    },
+    "fatal": {
+      "description": "Du forsøkte å logge inn i et tredjepartsprogram, men programmet fungerer ikke riktig. Prøv igjen senere eller kontakt programinnehaver med følgende informasjon:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Noe gikk galt"
+    },
+    "home": "Gå til din <noo></noo> hjemme",
+    "switch": {
+      "description": "for å fortsatte til <details>{name}</details>",
+      "legalComplete": "Før du signer inn, bør du se over {client}'s <privacy>personvernpolicy</privacy> og <terms>brukerbetingelser</terms>",
+      "legalNone": "Før du signer inn, bør du se over {client}'s lovgivning.",
+      "legalPrivacy": "Før du signer inn, bør du se over {client}'s <privacy>personvernpolicy</privacy>",
+      "legalTerms": "Før du signer inn, bør du se over {client}'s <terms>brukerbetingelser</terms>",
+      "metaTitle": "Logg inn - noo id",
+      "pageTitle": "Logg inn med <noo></noo>",
+      "signin": "Bruk en annen konto",
+      "title": "Velg en konto"
+    }
+  }
+}

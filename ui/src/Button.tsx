@@ -7,7 +7,7 @@ const kindClasses = {
   primary:
     "bg-blue-600 hover:bg-blue-700 text-white focus-visible:outline-blue-700",
   secondary:
-    "bg-gray-300 hover:bg-gray-400 text-gray-800 focus-visible:outline-gray-700",
+    "bg-gray-300 hover:bg-gray-400 text-gray-800 focus-visible:outline-gray-400",
 };
 
 export function Button(props: Props) {
@@ -19,8 +19,9 @@ export function Button(props: Props) {
     ...rest
   } = props;
   const cls = `
-    ${className} cursor-pointer rounded-md px-6 py-2.5 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2
-    ${kindClasses[kind]}
+    cursor-pointer rounded-md px-6 py-2.5 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 flex justify-center items-center gap-2 \
+    transition-colors duration-150
+    ${className} ${kindClasses[kind]}
   `;
 
   rest.disabled = rest.disabled || pending;
@@ -29,7 +30,7 @@ export function Button(props: Props) {
     <button {...rest} className={cls}>
       {pending && (
         <svg
-          className="inline-block me-3 -ml-1 size-6 animate-spin text-white"
+          className="inline-block -ml-1 size-6 animate-spin text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

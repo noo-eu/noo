@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Wróć do swojego profilu",
+    "birthdate": {
+      "day": "Dzień",
+      "description": "Moja data urodzenia może być wykorzystana do bezpieczeństwa konta i personalizacji.",
+      "errors": {
+        "bad_year": "Proszę wpisać swój pełny rok urodzenia",
+        "future": "Prosze wprowadzić datę sprzed czasu",
+        "invalid": "Data urodzenia jest nieprawidłowa."
+      },
+      "month": "Miesiączek",
+      "title": "Określ swoją datę urodzenia",
+      "updateSuccess": "Twoja data urodzenia została zapisana",
+      "year": "Rok"
+    },
+    "gender": {
+      "custom": "Własny",
+      "customLabel": "Płeć",
+      "description": "Twoj płec jest wykorzystana do personalizacji i prawidłowego adresowania ciebie.",
+      "example": "Alex jest online, {gender, select, female {wyślij jej} male {wyślij mu} other {wyślij}} wiadomość.",
+      "female": "Kobieta",
+      "male": "Mężczyzna",
+      "other": "Inna",
+      "pronounsLabel": "Określ mnie jako",
+      "title": "Określ swoją płci",
+      "unspecified": "Nie chcę wyrazić się na ten temat",
+      "updateSuccess": "Twoje informacje o płci zostały zapisane"
+    },
+    "header": "<noo></noo> Konto",
+    "name": {
+      "description": "Twoja nazwa będzie widoczna dla innych użytkowników, z którymi będziesz interaktywnie komunikował się na <noo></noo>. Jeśli używasz <noo></noo> do logowania się w inne aplikacje, Twoja nazwa może być także udostępniona im, jeśli wybierzesz.",
+      "errors": {
+        "invalid": "Nazwa zawiera niepoprawne znaki",
+        "required": "Podaj swój imię",
+        "tooLong": "Nazwa jest zbyt długa",
+        "tooShort": "Nazwa jest za krótka"
+      },
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "title": "Zmień swoją nazwę",
+      "updateNotice": "Ta zmiana dotyczy wszystkich <noo></noo> usług. Może jednak wciąż będziesz musiał samodzielnie zaktualizować swoją nazwę dla innych aplikacji.",
+      "updateSuccess": "Zmieniono Twoja nazwę"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Zrób zdjęcie",
+        "description": "Użyj kamery urządzenia, aby zrobić zdjęcie.",
+        "title": "Zrób zdjęcie"
+      },
+      "error": "Coś poszło nie tak. Spróbuj ponownie.",
+      "main": {
+        "description": "Zdjęcie pomoże Tobie i innym rozpoznać Twoje konto. Możesz je zmienić lub usunąć w każdej chwili.",
+        "title": "Zdjęcie profilowe"
+      },
+      "remove_success": "Zostałeś zdjęciem profilowym usunięte...",
+      "upload": {
+        "browse": "Wybierz z komputera",
+        "camera": "Użyj kamery",
+        "change": "Zmień zdjęcie",
+        "drag": "Przeciągnij zdjęcie tutaj",
+        "error": {
+          "mime": "Zdjęcie nie jest obsługiwane. Proszę wybierz plik JPG, PNG lub GIF.",
+          "size": "Zdjęcie jest zbyt duże. Proszę wybierz zdjęcie mniejsze niż 10 MB."
+        },
+        "success": "Zaktualizowano Twoje zdjęcie profilowe.",
+        "title": "Wybierz zdjęcie"
+      }
+    },
+    "summary": {
+      "birthdate": "Data twojego urodzenia",
+      "gender": "Twój płeć",
+      "name": "Twoja imię",
+      "picture": "Twój zdjęcie",
+      "unspecifiedGender": "Nie określone"
+    },
+    "title": "Twoje <noo></noo> konto profilowe"
+  }
+}

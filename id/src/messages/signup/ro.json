@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Creați-vă contul <noo></noo>",
     "errors": {
-      "first_name_required": "Vă rugăm să introduceți primul nume",
       "invalid_data": "Ceva nu a mers bine. Vă rog să verificați datele introduse",
-      "name_invalid": "Numele conține caractere nevalabile",
-      "name_too_long": "Numele introdus este prea lung",
-      "name_too_short": "Numele introdus este prea scurt",
       "password_classes": "Vă rugăm să utilizați o parolă mai puternică. Folosiți o amestec de litere, numere și simboluri",
       "password_length": "Vă rugăm să utilizați 10 sau mai multe caractere",
       "password_required": "Vă rugăm să introduceți parola",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Creează contul tău noo",
     "step1": {
-      "first_name": "Prenume",
-      "last_name": "Nume de familie",
       "title": "Introduceți numele vostru"
     },
     "step2": {

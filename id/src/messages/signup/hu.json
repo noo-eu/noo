@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Hozzon létre saját <noo></noo> fiókot",
     "errors": {
-      "first_name_required": "Kérem adjonk meg a nevét",
       "invalid_data": "Valami probléma történt. Ellenőrizze a megadott adatot",
-      "name_invalid": "A beállított név nem megfelelő",
-      "name_too_long": "A megadott név túl hosszú",
-      "name_too_short": "A megadott név túl rövid",
       "password_classes": "Kérek erősebb jelszót. Vegyen bele betűkkel, számokkal és jelekkel.",
       "password_length": "Kérek több karaktert (legalább 10)",
       "password_required": "Kérem adjonk meg a jelszavát",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Létrehozd noo fiókodat",
     "step1": {
-      "first_name": "Név",
-      "last_name": "Családneve",
       "title": "Adjonk meg a nevét"
     },
     "step2": {

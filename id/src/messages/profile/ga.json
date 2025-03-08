@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Taisín abhaile go do chuntas",
+    "birthdate": {
+      "day": "Lá",
+      "description": "Is dát uasal a bhíonn tú tugtha don shuímhacht cuntais agus don leanaighnint personal.",
+      "errors": {
+        "bad_year": "Tóg dliost bhreitheoraigh iomlán, taobh istigh de do phróis.",
+        "future": "Tóg dát breith atá roimhe don am",
+        "invalid": "Níl dát breith chomhfhionnach mar sin."
+      },
+      "month": "Mheitheamh",
+      "title": "Tóg do dháta breithe",
+      "updateSuccess": "Tá dát breith duit curtha i láthair",
+      "year": "Bliain"
+    },
+    "gender": {
+      "custom": "Saincheaptha",
+      "customLabel": "Gná na féini",
+      "description": "Tugtar do ghnéas leanaighnint personal agus chun cabhrú leat a bheith faoi scéal go cuí.",
+      "example": "D'fhreagair Alex. {gender, select, female {A teachtaireacht atá} male {A theachtaireacht atá} other {Tá an teachtaireacht}} i do bhosca isteach.",
+      "female": "Baineacht",
+      "male": "Fear",
+      "other": "Éigin eile",
+      "pronounsLabel": "Cuir orm mar a dtagas tú féin dóigh",
+      "title": "Seo do ghná na féini",
+      "unspecified": "Níl mé ag rá leat féin.",
+      "updateSuccess": "Tá do ghneas déanta go maith"
+    },
+    "header": "Cuntas <noo></noo>",
+    "name": {
+      "description": "Déanfaidh tú a dteideal féachaint don mhuiniméad eile má bhíonn tú ag déanamh ghníomhaíocht ar <noo></noo>. Má úsáideann tú <noo></noo> chun sínigh le hábhar aige go do shuímh, féachfaidh tusa freisin, má roghnaíonn tú.",
+      "errors": {
+        "invalid": "Tá sárchríochtaí sna háinm atá thuigheamar",
+        "required": "Cuir ainm chéad in iúl leat",
+        "tooLong": "Tá an t-ainm atá thuigheamar tá fada",
+        "tooShort": "Tá an t-ainm atá thuigheamar ró-bhreac"
+      },
+      "firstName": "Ainm chéad duitse",
+      "lastName": "Saoi thuigheamar duitse",
+      "title": "Níl a dteideal á athrú",
+      "updateNotice": "Tá an t-athroman seo ceangailte le chionn cuntais <noo></noo> ar fad. Féachfaidh tú gur cheart duit a dteideal cuide nach bhfuil sult acu i gcuntas éigin eile.",
+      "updateSuccess": "Tá dteideal á athrú tar éis dó bheith déanta"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Sníomh",
+        "description": "Úsáid físeán do sheice uait pictiúr.",
+        "title": "Tóg Pictiúr"
+      },
+      "error": "Thug sé deigh. Déan iarracht arís.",
+      "main": {
+        "description": "Tugann pictiúr duit féin agus do chomráidigh aitheantas d'acconta. Féadfaidh tú é a athrú nó a dhíthinn go deo.",
+        "title": "Pictiúr Príomh-Chustaim"
+      },
+      "remove_success": "Tógadh an pictiúr do ghnothamh thuaithe...",
+      "upload": {
+        "browse": "Roghnaigh ó dtíochta do ríomhaire",
+        "camera": "Úsáid físeán do sheice",
+        "change": "Athrú iomhá",
+        "drag": "Treac iomhá anseo",
+        "error": {
+          "mime": "Ná híliúimid an pictiúr seo. Rognaigh JPG, PNG nó GIF.",
+          "size": "Tá an pictiúr seo fada. Rognaigh pictiúr a bhfuil sé ach 10MB."
+        },
+        "success": "Tá do ghraphic phroifile curtha i dtaobh don chéad uaire.",
+        "title": "Roghnaigh Pictiúr"
+      }
+    },
+    "summary": {
+      "birthdate": "Dát Breith agat",
+      "gender": "",
+      "name": "Do doo ainm agat",
+      "picture": "Do doo píosa dídite don phóta",
+      "unspecifiedGender": ""
+    },
+    "title": "Do doo chuid {{ profile }}"
+  }
+}

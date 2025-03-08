@@ -1,17 +1,22 @@
 {
   "common": {
+    "back": "Zpět",
     "cancel": "Zrušit",
+    "change": "Změnit",
+    "close": "Zavřít",
     "continue": "Pokračovat",
     "madeWith": "Vyrobeno s ❤️ a ☕️ v Evropské unii",
-    "next": "Pokračovat",
+    "next": "Další",
     "no": "Ne",
-    "optional": "Volitelné",
+    "optional": "Nepovinné",
     "passwordField": {
-      "ariaLabelShow": "Zobrazit heslo v čisté podobě. Varování: tím se zobrazí na obrazovce.",
-      "hide": "Skryt heslo",
+      "ariaLabelShow": "Zobrazit heslo jako čitelný text. Pozor: heslo bude viditelné na obrazovce.",
+      "hide": "Skrýt heslo",
       "show": "Zobrazit heslo"
     },
     "privacy": "Soukromí",
+    "remove": "Odebrat",
+    "save": "Uložit",
     "terms": "Podmínky",
     "yes": "Ano"
   }

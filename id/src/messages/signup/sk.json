@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Vytvorte si účet <noo></noo>",
     "errors": {
-      "first_name_required": "Prosím, zadejte vaše meno",
       "invalid_data": "Náš systém prekvapil. Prosím, zkontrolujte údaje, ktoré ste zadali",
-      "name_invalid": "Meno obsahuje neplatné znaky",
-      "name_too_long": "Meno, ktoré ste zadali je príliš dlhé",
-      "name_too_short": "Meno, ktoré ste zadali je príliš krátké",
       "password_classes": "Prosím, použite silnejšie heslo. Používejte mliešenie písmen, čísel a symbolov",
       "password_length": "Prosím, použite 10 alebo viac znakov",
       "password_required": "Prosím, zadejte vaše heslo",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Vytvoriť si účet",
     "step1": {
-      "first_name": "Meno",
-      "last_name": "Priezvisko",
       "title": "Zadajte vaše meno"
     },
     "step2": {

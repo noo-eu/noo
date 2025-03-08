@@ -16,8 +16,8 @@
       "title": "Usted está iniciando sesión en <details>{name}</details>"
     },
     "end_session": {
-      "description": "{name, select, undefined {Has cerrado sesión de una aplicación tercera.} other {Ha cerrado sesión de <strong>{name}</strong>.}}",
-      "query": "¿Desea terminar la sesión en {noo} también?",
+      "description": "{name, select, undefined {Has cerrado sesión de una aplicación de terceros.} other {Ha cerrado sesión de <strong>{name}</strong>.}}",
+      "query": "¿Desea terminar la sesión en <noo></noo> también?",
       "title": "Cerrar sesión"
     },
     "fatal": {
@@ -25,7 +25,7 @@
       "error": "OpenID Connect Error: {error}",
       "title": "Algo salió mal"
     },
-    "home": "Ve a tu página de inicio de <noo></noo>",
+    "home": "Ir a tu página de inicio de <noo></noo>",
     "switch": {
       "description": "para continuar en <details>{name}</details>",
       "legalComplete": "Antes de iniciar sesión, deberías revisar los <terms>terminos y condiciones</terms> y la <privacy>politica de privacidad</privacy> de {client}.",
@@ -34,7 +34,7 @@
       "legalTerms": "Antes de iniciar sesión, deberías revisar los <terms>terminos y condiciones</terms> de {client}.",
       "metaTitle": "Iniciar sesión - noo id",
       "pageTitle": "Inicia sesión con <noo></noo>",
-      "signin": "Usa otra cuenta",
+      "signin": "Usar otra cuenta",
       "title": "Elige una cuenta"
     }
   }

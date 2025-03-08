@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Eenaccount aanmaken",
-    "error": "De ingevoerde gegevens zijn niet correct",
+    "create_account": "Account aanmaken",
+    "error": "De ingevulde gegevens kloppen niet",
     "metaTitle": "Inloggen - noo",
     "password": "Wachtwoord",
     "submit": "Inloggen",
-    "tenant_error": "Meld je aan met een {domain}-account",
-    "title": "Aanmeld bij je <noo></noo>-account",
+    "tenant_error": "Log in met een {domain} account",
+    "title": "Log in op je <noo></noo> account",
     "username": "Gebruikersnaam of e-mailadres"
   }
 }

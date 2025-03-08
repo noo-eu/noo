@@ -25,7 +25,7 @@ for (const directory of directories) {
       const sorted = sort(parsed);
       Bun.write(
         `src/messages/${directory}/${language}.json`,
-        JSON.stringify(sorted, null, 2),
+        JSON.stringify(sorted, null, 2) + "\n",
       );
     }
   }
@@ -118,7 +118,7 @@ async function translate(
     da: "Danish",
     de: "German",
     el: "Greek",
-    es: "Spanish",
+    es: "Spanish (European)",
     et: "Estonian",
     fi: "Finnish",
     fr: "French",
@@ -126,28 +126,39 @@ async function translate(
     hr: "Croatian",
     hu: "Hungarian",
     it: "Italian",
+    is: "Icelandic",
     lt: "Lithuanian",
     lv: "Latvian",
     mt: "Maltese",
     nl: "Dutch",
+    no: "Norwegian (Bokmål)",
     pl: "Polish",
-    pt: "Portuguese",
+    pt: "Portuguese (European)",
     ro: "Romanian",
     sk: "Slovak",
     sl: "Slovenian",
+    sq: "Albanian",
     sv: "Swedish",
+    tr: "Turkish",
+    uk: "Ukrainian",
   };
 
   // Is this LLM abuse?
-  let prompt = `It is of vital importance that you correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. The translations may use the ICU Message Format. Do not translate literally and **do not translate the object keys**. Do not leave the value empty. Only output JSON, without any surronding text: `;
+  let prompt = `You must correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. \
+    The translations may use the ICU Message Format. \
+    Do not translate literally. **DO NOT TRANSLATE THE JSON KEYS.** \
+    If you see <tags> or {brackets} those must be left as is. \
+    Do not leave the value empty. Only output JSON, without any surronding text: `;
   prompt += JSON.stringify(requests, null, 2);
 
-  const response = await fetch("http://localhost:11434/api/generate", {
+  const response = await fetch("http://192.168.0.29:11434/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       prompt,
-      model: "gemma2",
+      system:
+        "You are a professional translator, working on JSON files for a software project.",
+      model: "llama3.1",
       format: "json",
       stream: false,
     }),
@@ -156,10 +167,41 @@ async function translate(
   const body = await response.json();
   const translations = JSON.parse(body.response);
 
-  // Remove translation keys that were not in the original source
   for (const key of Object.keys(translations)) {
+    // Remove keys that were not in the original source
     if (!requests[key]) {
+      console.warn(
+        `Translation for ${key} in ${targetLocale} was not requested. Skipping.`,
+      );
       delete translations[key];
+      continue;
+    }
+
+    // Reject empty translations
+    if (translations[key] === "") {
+      console.warn(
+        `Empty translation for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
+    }
+
+    // Verify that placeholders are all present and not translated
+    if (!matchesPlaceholders(requests[key], translations[key])) {
+      console.warn(
+        `Placeholders do not match for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
+    }
+
+    // If the result is over 2.5x the length of the source, it's probably garbage
+    if (translations[key].length > requests[key].length * 2.5) {
+      console.warn(
+        `Suspiciously long translation for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
     }
   }
 
@@ -201,4 +243,55 @@ function sort(obj: TranslationFile): TranslationFile {
   }
 
   return sorted;
+}
+
+function matchesPlaceholders(source: string, translation: string) {
+  const sourcePlaceholders = source.match(/{[^(}|\s)]+}/g) || [];
+  const translationPlaceholders = translation.match(/{[^(}|\s)]+}/g) || [];
+
+  if (sourcePlaceholders.length !== translationPlaceholders.length) {
+    return false;
+  }
+
+  // make sure the keys are all the same
+  const sourceSet = new Set(sourcePlaceholders.map((x) => x.slice(1, -1)));
+  const translationSet = new Set(
+    translationPlaceholders.map((x) => x.slice(1, -1)),
+  );
+
+  if (
+    sourceSet.size !== translationSet.size ||
+    [...sourceSet].some((x) => !translationSet.has(x))
+  ) {
+    return false;
+  }
+
+  // make sure they match in count
+  const sourceMap = sourcePlaceholders.reduce(
+    (acc, cur) => {
+      const key = cur.slice(1, -1);
+      acc[key] ||= 0;
+      acc[key]++;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  const translationMap = translationPlaceholders.reduce(
+    (acc, cur) => {
+      const key = cur.slice(1, -1);
+      acc[key] ||= 0;
+      acc[key]++;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  for (const key of Object.keys(sourceMap)) {
+    if (sourceMap[key] !== translationMap[key]) {
+      return false;
+    }
+  }
+
+  return true;
 }

@@ -1,0 +1,79 @@
+{
+  "profile": {
+    "back": "Atgriezties uz jūsu kontu",
+    "birthdate": {
+      "day": "Dienu",
+      "description": "Jūsu dzimšanas datuma var būt izmantots konta drošībai un personificācijai.",
+      "errors": {
+        "bad_year": "Lūdzu, ievadi jūsu pilnu dzimšanas gadu",
+        "future": "Lūdzu, ievadi datumu no kādreizējā laika",
+        "invalid": "Dzimšanas dati nav derīgi"
+      },
+      "month": "Mēneņu",
+      "title": "{Day of birth}",
+      "updateSuccess": "Jūsu dzimšanas datums ir izveidots",
+      "year": "Gadu"
+    },
+    "gender": {
+      "custom": "Pielāgots",
+      "customLabel": "Ģerontošāds",
+      "description": "Jūsu dzimums tiek izmantots personificācijai un lai Tevi pilnībā sauc.",
+      "example": "Alex ir tiešsaistē, {gender, select, female {nosūti viņai} male {nosūti viņam} other {nosūti}} ziņu.",
+      "female": "Sieviete",
+      "male": "Vīrietis",
+      "other": "Cits",
+      "pronounsLabel": "Sauc man kā",
+      "title": "{Personas vecums}",
+      "unspecified": "Noraidīsim raksturot",
+      "updateSuccess": "Jūsu dzimuma detaļas ir saglabātas"
+    },
+    "header": "<noo></noo> Konts",
+    "name": {
+      "description": "Jūsu vārds būs redzams citiem lietotājiem, ar kuriem jūs reaģētiet <noo></noo>. Ja jūs izmantojat <noo></noo>, lai pirmnieks ienākotu citos aplikācijas, tad jūsu vārds var arī tiekties uz dalīšanu ar tiem, ja jums šis rīsis ir izvēlēts.",
+      "errors": {
+        "invalid": "Ievadītais vārds satur neleistus simbolus",
+        "required": "Ievadi tuvi vārdu",
+        "tooLong": "Vārds, ko iestatāji, ir pārliels",
+        "tooShort": "Jāievada vismaz viens būtīgs raksts"
+      },
+      "firstName": "Vārds",
+      "lastName": "Uzvārds",
+      "title": "Mainīt savu vārdu",
+      "updateNotice": "Šī atjaunošana ietver visus <noo></noo> pakalpojumus. Vajadzība var būt, ka jums ir nepieciešams atjaunot savu vārdu tikai citiem aplikācijām.",
+      "updateSuccess": "Jūsu vārds ir mainīts"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Uzņemt",
+        "description": "Izmantojiet ierīces kameru, lai uzņemtu attēlu.",
+        "title": "Uzņemt attēlu"
+      },
+      "error": "Kāda kļūda notika. Mēdzīt uz vēlreiz.",
+      "main": {
+        "description": "Bilogs aizpauž iziet visus cilvēkus un tevi kā viņu. To varat mainīt vai izdzēst bezkārtībās.",
+        "title": "Profila attēls"
+      },
+      "remove_success": "Jūsu profila attēls ir nokārtots...",
+      "upload": {
+        "browse": "Atlasīt no datora",
+        "camera": "Izmantot kameru",
+        "change": "Mainīt fotogrāfiju",
+        "drag": "Velciet fotoattēlu šeit",
+        "error": {
+          "mime": "Foto nav atbalstīts. Lūdzu izvēlieties JPG, PNG vai GIF failu.",
+          "size": "Fotogrāfija ir par liela. Lūdzu izvēlieties fotogrāfiju, kas ir mazāka nekā 10MB."
+        },
+        "success": "Jūsu profila attēls ir atjaunots.",
+        "title": "Atlasīt attēlu"
+      }
+    },
+    "summary": {
+      "birthdate": "Tavs dzimšanas gads",
+      "gender": "Tava dzimuma",
+      "name": "Jūs, tavs vārds",
+      "picture": "Jūsu attēls",
+      "unspecifiedGender": "Nenoteiktība"
+    },
+    "title": "Jūsu <noo></noo> profils"
+  }
+}

@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Loo oma <noo></noo> konto",
     "errors": {
-      "first_name_required": "Palun sisesta oma esimene nimi",
       "invalid_data": "Midagi läks valesti. Palun kontrollida sisestatud andmeid",
-      "name_invalid": "Sisestatud nimes on salajne sisu",
-      "name_too_long": "Sisestatud nimi on liiga pikk",
-      "name_too_short": "Sisestatud nimi on liiga lühike",
       "password_classes": "Palun kasuta võimekamat parooli. Kasutage kirju, numbreid ja sümboli segamiseks.",
       "password_length": "Vältige kasutamast vähem kui 10 tähemärgi pikkusi.",
       "password_required": "Palun sisesta oma parool",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Loo oma noo konto",
     "step1": {
-      "first_name": "Eesnimi",
-      "last_name": "Perekonnanimi",
       "title": "Sisesta nimi"
     },
     "step2": {

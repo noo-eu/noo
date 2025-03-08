@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Vytvorte si účet",
-    "error": "Zadané údaje sú neplatné",
-    "metaTitle": "Prihlásenie - noo",
+    "create_account": "Vytvoriť účet",
+    "error": "Zadané údaje sú nesprávne",
+    "metaTitle": "Prihlásenie – noo",
     "password": "Heslo",
     "submit": "Prihlásiť sa",
-    "tenant_error": "Prihláste sa na účet {domain}",
-    "title": "Prihláste sa do vášho <noo></noo> účtu",
-    "username": "Užívateľské meno alebo e-mail"
+    "tenant_error": "Prihlás sa pomocou účtu {domain}",
+    "title": "Prihlás sa do svojho účtu <noo></noo>",
+    "username": "Používateľské meno alebo email"
   }
 }

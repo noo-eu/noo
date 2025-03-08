@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Opret din konto <noo></noo>",
     "errors": {
-      "first_name_required": "Skub venligst dit første navn ind",
       "invalid_data": "Der gik noget galt. Tjek venligst de data du har indtastet",
-      "name_invalid": "Navnet indeholder nogle ugyldige tegn",
-      "name_too_long": "Navnet du har skrevet er for længere",
-      "name_too_short": "Navnet du har skrevet er for kort",
       "password_classes": "Brug et stærkere adgangskode. Brug en blanding af bogstaver, tal og tegn",
       "password_length": "Venligst brug 10 eller flere tegn",
       "password_required": "Venligst indtast dit adgangskode",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Opret din noo konto",
     "step1": {
-      "first_name": "Fornavn",
-      "last_name": "Efternavn",
       "title": "Indtast dit navn"
     },
     "step2": {

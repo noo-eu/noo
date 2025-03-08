@@ -1,0 +1,23 @@
+{
+  "common": {
+    "back": "Geri",
+    "cancel": "İptal",
+    "change": "Değiştir",
+    "close": "Kapat",
+    "continue": "Devam et",
+    "madeWith": "Avrupa Birliği’nde ❤️ ve ☕️ ile hazırlandı",
+    "next": "İleri",
+    "no": "Hayır",
+    "optional": "Opsiyonel",
+    "passwordField": {
+      "ariaLabelShow": "Şifreyi düz metin olarak göster. Uyarı: şifreniz ekranda görünecek.",
+      "hide": "Şifreyi gizle",
+      "show": "Şifreyi göster"
+    },
+    "privacy": "Gizlilik",
+    "remove": "Kaldır",
+    "save": "Kaydet",
+    "terms": "Koşullar",
+    "yes": "Evet"
+  }
+}

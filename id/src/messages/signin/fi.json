@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Rekisteröidy",
-    "error": "Antamasi tiedot eivät ole oikein",
-    "metaTitle": "Kirjaudu sisään - noo",
+    "create_account": "Luo tili",
+    "error": "Tiedot ovat virheelliset",
+    "metaTitle": "Kirjaudu sisään – noo",
     "password": "Salasana",
-    "submit": "Kirjaudu sisään",
-    "tenant_error": "Kirjaudu sisään {domain}-tilillä",
-    "title": "Kirjaudu sisään <noo></noo>-tilillesi",
+    "submit": "Kirjaudu",
+    "tenant_error": "Kirjaudu sisään käyttämällä {domain} tiliä",
+    "title": "Kirjaudu <noo></noo>-tilillesi",
     "username": "Käyttäjätunnus tai sähköposti"
   }
 }

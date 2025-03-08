@@ -1,0 +1,23 @@
+{
+  "common": {
+    "back": "Prapa",
+    "cancel": "Anulo",
+    "change": "Ndrysho",
+    "close": "Mbyll",
+    "continue": "Vazhdo",
+    "madeWith": "Krijuar me ❤️ dhe ☕️ në Bashkimin Evropian",
+    "next": "Tjetër",
+    "no": "Jo",
+    "optional": "Opsionale",
+    "passwordField": {
+      "ariaLabelShow": "Shfaq fjalëkalimin si tekst të thjeshtë. Kujdes: fjalëkalimi do të jetë i dukshëm në ekran.",
+      "hide": "Fshih fjalëkalimin",
+      "show": "Shfaq fjalëkalimin"
+    },
+    "privacy": "Privatësia",
+    "remove": "Hiq",
+    "save": "Ruaj",
+    "terms": "Kushtet",
+    "yes": "Po"
+  }
+}

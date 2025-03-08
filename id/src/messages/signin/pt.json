@@ -1,12 +1,12 @@
 {
   "signin": {
     "create_account": "Criar conta",
-    "error": "As credenciais digitadas estão incorretas",
-    "metaTitle": "Entrar - noo",
-    "password": "Senha",
+    "error": "As credenciais que introduziste estão incorretas",
+    "metaTitle": "Iniciar sessão - noo",
+    "password": "Palavra-passe",
     "submit": "Entrar",
-    "tenant_error": "Por favor, entre com uma conta {domain}",
-    "title": "Entrar na sua conta <noo></noo>",
-    "username": "Nome de usuário ou e-mail"
+    "tenant_error": "Por favor, entra com uma conta {domain}",
+    "title": "Entra na tua conta <noo></noo>",
+    "username": "Nome de utilizador ou email"
   }
 }
