@@ -8,13 +8,18 @@ export type TextFieldProps = {
   error?: string;
 
   aroundLabel?: (children: ReactNode) => ReactNode;
+
+  wrapper?: {
+    className?: string;
+  };
+  append?: ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export function TextField(props: TextFieldProps) {
   const inputId = useId();
   const errorId = useId();
 
-  const { aroundLabel, error, suffix, ...rest } = props;
+  const { aroundLabel, error, suffix, append, ...rest } = props;
 
   const label = <Label htmlFor={inputId}>{props.label}</Label>;
   const wrappedLabel = aroundLabel ? aroundLabel(label) : label;
@@ -43,16 +48,15 @@ export function TextField(props: TextFieldProps) {
   );
 
   return (
-    <div>
-      <div className="space-y-1">
-        {wrappedLabel}
-        {field}
-        {error && (
-          <p id={errorId} className="text-red-500 text-sm/6">
-            {props.error}
-          </p>
-        )}
-      </div>
+    <div className={`${props.wrapper?.className || ""} space-y-1`}>
+      {wrappedLabel}
+      {field}
+      {error && (
+        <p id={errorId} className="text-red-500 text-sm/6">
+          {props.error}
+        </p>
+      )}
+      {append}
     </div>
   );
 }

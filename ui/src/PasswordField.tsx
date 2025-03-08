@@ -8,27 +8,21 @@ export function PasswordField(props: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
   const t = useTranslations("common.passwordField");
 
-  const aroundLabel =
-    props.aroundLabel ??
-    ((children: React.ReactNode) => (
-      <div className="flex justify-between">
-        {children}
+  return (
+    <TextField
+      {...props}
+      type={visible ? "text" : "password"}
+      wrapper={{ className: "relative" }}
+      append={
         <button
           type="button"
-          className="text-gray-500 cursor-pointer"
+          className="text-gray-500 cursor-pointer absolute right-0 top-0"
           onClick={() => setVisible((v) => !v)}
           aria-label={visible ? undefined : t("ariaLabelShow")}
         >
           {visible ? t("hide") : t("show")}
         </button>
-      </div>
-    ));
-
-  return (
-    <TextField
-      {...props}
-      aroundLabel={aroundLabel}
-      type={visible ? "text" : "password"}
+      }
     />
   );
 }

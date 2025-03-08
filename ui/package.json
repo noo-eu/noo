@@ -28,6 +28,9 @@
     "tailwindcss": "^4.0.8",
     "typescript": "^5"
   },
+  "peerDependencies": {
+    "next-intl": "*"
+  },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   }

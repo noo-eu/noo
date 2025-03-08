@@ -33,7 +33,11 @@ export function Form() {
           name="username"
           defaultValue={state.username}
         />
-        <PasswordField label={t("password")} name="password" />
+        <PasswordField
+          label={t("password")}
+          name="password"
+          autoComplete="current-password"
+        />
         {continueUrl && (
           <input type="hidden" name="continue" value={continueUrl} />
         )}
