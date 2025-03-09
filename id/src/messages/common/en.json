@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Back",
     "cancel": "Cancel",
+    "change": "Change",
+    "close": "Close",
     "continue": "Continue",
     "madeWith": "Made with ❤️ and ☕️ in the European Union",
     "next": "Next",
@@ -12,6 +15,8 @@
       "show": "Show password"
     },
     "privacy": "Privacy",
+    "remove": "Remove",
+    "save": "Save",
     "terms": "Terms",
     "yes": "Yes"
   }

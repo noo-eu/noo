@@ -31,6 +31,7 @@ export async function i18nConfig() {
     messages: {
       ...(await loadJSON5(`src/messages/common/${locale}.json`)),
       ...(await loadJSON5(`src/messages/oidc/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/profile/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },

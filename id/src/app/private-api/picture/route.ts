@@ -5,7 +5,7 @@ import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
 import { randomSalt } from "@/utils";
 
 async function getUser(request: Request) {
-  const sid = new HttpRequest(request).queryParam("sid");
+  const sid = new HttpRequest(request).header("X-Session-ID");
   if (!sid) {
     return null;
   }
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   }
 
   const form = await request.formData();
-  const image = form.get("file") as File;
+  const image = form.get("image") as File;
 
   const mime = image.type;
   if (!mime || !mime.startsWith("image/")) {
@@ -39,8 +39,12 @@ export async function POST(request: Request) {
     return { error: "file_type", ok: undefined };
   }
 
-  const key = randomSalt(64, "base64url");
+  if (user.picture) {
+    const store = getObjectStorage("noo-user");
+    await store.delete(user.picture);
+  }
 
+  const key = randomSalt(64, "base64url");
   const url = await getObjectStorage("noo-user").write(
     key + "." + ext,
     Buffer.from(await image.arrayBuffer()),
@@ -55,6 +59,11 @@ export async function DELETE(request: Request) {
   const user = await getUser(request);
   if (!user) {
     return Response.json({ error: "unauthorized" }, { status: 401 });
+  }
+
+  if (user.picture) {
+    const store = getObjectStorage("noo-user");
+    await store.delete(user.picture);
   }
 
   await Users.update(user.id, { picture: null });

@@ -35,7 +35,11 @@ class FileStorage implements ObjectStorage {
   }
 
   async delete(key: string) {
-    await fs.promises.unlink(this.#ROOT + key);
+    try {
+      await fs.promises.unlink("public" + key);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   url(key: string) {
