@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Captură",
+        "description": "Folosește camera dispozitivului tău pentru a face o fotografie.",
+        "title": "Fă o fotografie"
+      },
+      "main": {
+        "description": "O imagine vă ajută și altora să vă recunoască contul dvs. Puteți schimba sau șterge-o în orice moment.",
+        "title": "Imagine de profil"
+      },
+      "upload": {
+        "browse": "Selectează din computer",
+        "camera": "Folosește camera",
+        "change": "Schimbă fotografia",
+        "drag": "Trage fotografia aici",
+        "title": "Alege o fotografie"
+      }
+    }
+  }
+}

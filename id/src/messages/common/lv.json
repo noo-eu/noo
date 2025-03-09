@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Atpakaļ",
     "cancel": "Atcelt",
+    "change": "Mainīt",
+    "close": "Aizvērt",
     "continue": "Turpināt",
     "madeWith": "Izveidots ar ❤️ un ☕️ Eiropas Savienībā",
     "next": "Nākamais",
@@ -12,6 +15,8 @@
       "show": "Rādīte parole"
     },
     "privacy": "Privātība",
+    "remove": "Noņemt",
+    "save": "Saglabāt",
     "terms": "Noteikumi",
     "yes": "Jā"
   }

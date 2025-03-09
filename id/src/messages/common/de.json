@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Zurück",
     "cancel": "Abbrechen",
+    "change": "Ändern",
+    "close": "Schließen",
     "continue": "Fortfahren",
     "madeWith": "Hergestellt mit ❤️ und ☕️ in der Europäischen Union",
     "next": "Weiter",
@@ -12,6 +15,8 @@
       "show": "Passwort anzeigen"
     },
     "privacy": "Datenschutz",
+    "remove": "Entfernen",
+    "save": "Speichern",
     "terms": "Allgemeine Bedingungen",
     "yes": "Ja"
   }

@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Indietro",
     "cancel": "Annulla",
+    "change": "Modifica",
+    "close": "Chiudi",
     "continue": "Continua",
     "madeWith": "Fatto con ❤️ e ☕️ nell'Unione Europea",
     "next": "Avanti",
@@ -12,6 +15,8 @@
       "show": "Mostra password"
     },
     "privacy": "Privacy",
+    "remove": "Rimuovi",
+    "save": "Salva",
     "terms": "Termini",
     "yes": "Sì"
   }

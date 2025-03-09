@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Tillbaka",
     "cancel": "Avbryt",
+    "change": "Ändra",
+    "close": "Stäng",
     "continue": "Kontrollera",
     "madeWith": "Skapad med ❤️ och ☕️ i Europeiska unionen",
     "next": "Nästa",
@@ -12,6 +15,8 @@
       "show": "Visa lösenord"
     },
     "privacy": "Personuppgiftspolicy",
+    "remove": "Ta bort",
+    "save": "Spara",
     "terms": "Villkor",
     "yes": "Ja"
   }

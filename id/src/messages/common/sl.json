@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Nazaj",
     "cancel": "Prekliči",
+    "change": "Spremeni",
+    "close": "Zapri",
     "continue": "Nadaljuj",
     "madeWith": "Narejeno z ❤️ in ☕️ v Evropski uniji",
     "next": "Naslednji",
@@ -12,6 +15,8 @@
       "show": "Pokaži geslo"
     },
     "privacy": "Varstvo podatkov",
+    "remove": "Odstrani",
+    "save": "Shrani",
     "terms": "Pogoji uporabe",
     "yes": "Da"
   }

@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Tráthnóna",
     "cancel": "Dún anois",
+    "change": "Athrú",
+    "close": "Cúisigh",
     "continue": "Lean ar aghaidh",
     "madeWith": "Déanta le ❤️ agus ☕️ san Aontas Eorpach",
     "next": "Táimid ag dul chun tosaigh",
@@ -12,6 +15,8 @@
       "show": "Taispeáin ainm ghutha"
     },
     "privacy": "Priváitás",
+    "remove": "Bain",
+    "save": "Sábháil",
     "terms": "Coincheapanna",
     "yes": "Tá"
   }

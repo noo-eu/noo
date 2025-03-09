@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Sníomh",
+        "description": "Úsáid físeán do sheice uait pictiúr.",
+        "title": "Tóg Pictiúr"
+      },
+      "main": {
+        "description": "Tugann pictiúr duit féin agus do chomráidigh aitheantas d'acconta. Féadfaidh tú é a athrú nó a dhíthinn go deo.",
+        "title": "Pictiúr Príomh-Chustaim"
+      },
+      "upload": {
+        "browse": "Roghnaigh ó dtíochta do ríomhaire",
+        "camera": "Úsáid físeán do sheice",
+        "change": "Athrú iomhá",
+        "drag": "Treac iomhá anseo",
+        "title": "Roghnaigh Pictiúr"
+      }
+    }
+  }
+}

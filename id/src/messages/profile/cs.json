@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Přijmout",
+        "description": "Použijte kameru vašeho zařízení k pořízení fotografie.",
+        "title": "Vyfotit"
+      },
+      "main": {
+        "description": "Aktivní profilový obrázek vám a ostatním pomáhá rozpoznat váš účet. Můžete jej kdykoli změnit nebo odstranit.",
+        "title": "Profilová fotografie"
+      },
+      "upload": {
+        "browse": "Vybrat z počítače",
+        "camera": "Použít kameru",
+        "change": "Změnit fotografii",
+        "drag": "Přetáhněte fotku sem",
+        "title": "Vyberte obrázek"
+      }
+    }
+  }
+}

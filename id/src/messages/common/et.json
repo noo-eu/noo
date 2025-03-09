@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Tagasi",
     "cancel": "Tühista",
+    "change": "Muuda",
+    "close": "Sule",
     "continue": "Kontrolli välja",
     "madeWith": "Loodud ❤️ ja ☕️ Euroopa Liidus",
     "next": "Järgmine",
@@ -12,6 +15,8 @@
       "show": "Käivita parooli nägemine"
     },
     "privacy": "Õiguskaitse teatis",
+    "remove": "Eemalda",
+    "save": "Salvesta",
     "terms": "Märõded ja tingimused",
     "yes": "Jah"
   }

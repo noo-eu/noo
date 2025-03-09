@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ota kuva",
+        "description": "Käytä laitteesi kameraa ottaaksesi kuvan.",
+        "title": "Ota kuva"
+      },
+      "main": {
+        "description": "Kuva auttaa sinua ja muita tuntemään tilisi profiiliä. Voit muuttaa tai poistaa sen milloin tahansa.",
+        "title": "Profilikuva"
+      },
+      "upload": {
+        "browse": "Valitse tietokoneeltasi",
+        "camera": "Käytä kameraa",
+        "change": "Vaihda kuva",
+        "drag": "Vedä kuva tänne",
+        "title": "Valitse kuva"
+      }
+    }
+  }
+}

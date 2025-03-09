@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Scatta",
+        "description": "Usa la fotocamera del tuo dispositivo per scattare una foto.",
+        "title": "Scatta una foto"
+      },
+      "main": {
+        "description": "Una foto aiuta te e gli altri a riconoscere il tuo profilo. Puoi cambiarla o rimuoverla in qualsiasi momento.",
+        "title": "Foto profilo"
+      },
+      "upload": {
+        "browse": "Scegli dal computer",
+        "camera": "Usa la fotocamera",
+        "change": "Cambia foto",
+        "drag": "Trascina la foto qui",
+        "title": "Scegli una foto"
+      }
+    }
+  }
+}

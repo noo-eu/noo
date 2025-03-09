@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ta foto",
+        "description": "Använd din enhetss kamera för att ta ett foto.",
+        "title": "Ta ett foto"
+      },
+      "main": {
+        "description": "En bild hjälper dig och andra att känna igen ditt konto. Du kan ändra eller ta bort den när som helst.",
+        "title": "Profilbild"
+      },
+      "upload": {
+        "browse": "Välj från datorn",
+        "camera": "Använd kameran",
+        "change": "Ändra foto",
+        "drag": "Dra foto hit",
+        "title": "Välj en bild"
+      }
+    }
+  }
+}

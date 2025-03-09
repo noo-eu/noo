@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Foto teha",
+        "description": "Kasuta oma seadet kaamera pildi tegemiseks.",
+        "title": "Pilt teha"
+      },
+      "main": {
+        "description": "Pilt aitab teil ja teistel teadmata, et see on teie konto. Saate seda igavesti muuta või kustutada.",
+        "title": "Profiilifoto"
+      },
+      "upload": {
+        "browse": "Vali arvutist",
+        "camera": "Kasuta oma kaamerat",
+        "change": "Muuda fotot",
+        "drag": "Kühviga pildi siia tõsta",
+        "title": "Vali pilt"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Spremi",
+        "description": "Koristite kameru uređaja da snimite sliku.",
+        "title": "Snimi sliku"
+      },
+      "main": {
+        "description": "Slika vam pomaže i drugima da prepoznate vaš nalog. Možete je mijenjati ili ukloniti bilo kada.",
+        "title": "Profilna slika"
+      },
+      "upload": {
+        "browse": "Odaberite iz računala",
+        "camera": "Upotrijebite kameru",
+        "change": "Promijeni sliku",
+        "drag": "Vucite sliku ovdje",
+        "title": "Odaberi sliku"
+      }
+    }
+  }
+}

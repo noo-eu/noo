@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Vissza",
     "cancel": "Mégsem",
+    "change": "Módosít",
+    "close": "Bezár",
     "continue": "Folytatás",
     "madeWith": "Készült ❤️ és ☕️ az Európai Unióban",
     "next": "Tovább",
@@ -12,6 +15,8 @@
       "show": "Jelenítsd meg a jelszót!"
     },
     "privacy": "Adatvédelem",
+    "remove": "Töröl",
+    "save": "Mentés",
     "terms": "Szerződésfeltételek",
     "yes": "Igen"
   }

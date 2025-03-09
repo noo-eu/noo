@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Sugeneruoti",
+        "description": "Naudokite savo įrenginio kamerą, kad padarytumėte nuotrauką.",
+        "title": "Padaryti nuotrauką"
+      },
+      "main": {
+        "description": "Nuotrauka padeda jums ir kitu prisiminti savo paskyri. Jūs galite ją keisti ar ištrinti bet kada.",
+        "title": "Profilio paveikslėlis"
+      },
+      "upload": {
+        "browse": "Pasirinkti iš kompiuterio",
+        "camera": "Naudokite kamerą",
+        "change": "Keisti nuotrauką",
+        "drag": "Tempkite nuotrauką čia",
+        "title": "Pasirinkti nuotrauką"
+      }
+    }
+  }
+}

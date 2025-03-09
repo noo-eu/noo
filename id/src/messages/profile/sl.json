@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Posnemaj",
+        "description": "Za posnetek slike uporabite kamero vaše naprave.",
+        "title": "Posneti sliko"
+      },
+      "main": {
+        "description": "Slika pomaga drugim priznati vaš račun, lahko pa ga tudi sama spremenite ali izbrisete kdajkoli.",
+        "title": "Profilna slika"
+      },
+      "upload": {
+        "browse": "Izberite iz računalnika",
+        "camera": "Uporabite kamero",
+        "change": "Zamenjaj sliko",
+        "drag": "Slika potegnite sem",
+        "title": "Izberite sliko"
+      }
+    }
+  }
+}

@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Terug",
     "cancel": "Annuleren",
+    "change": "Wijzigen",
+    "close": "Sluiten",
     "continue": "Doorlopen",
     "madeWith": "Gemaakt met ❤️ en ☕️ in de Europese Unie",
     "next": "Volgende",
@@ -12,6 +15,8 @@
       "show": "Wachtwoord weergeven"
     },
     "privacy": "Gebruikersvoorwaarden",
+    "remove": "Verwijderen",
+    "save": "Opslaan",
     "terms": "Algemene voorwaarden",
     "yes": "Ja"
   }

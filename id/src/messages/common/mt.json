@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Il-quddiem",
     "cancel": "Tillem",
+    "change": "Tbiddil",
+    "close": "Iftot",
     "continue": "Ippetċerha",
     "madeWith": "Mhux ❤️ u ☕️ fl-Unjoni Ewropea",
     "next": "L-Aħħar",
@@ -12,6 +15,8 @@
       "show": "Ara ssoja"
     },
     "privacy": "Privatetà",
+    "remove": "Neħħi",
+    "save": "Iħżen",
     "terms": "Iktara l-Termini",
     "yes": "Jekk"
   }

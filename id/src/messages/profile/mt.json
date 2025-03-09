@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Niżżel",
+        "description": "Uża kamera tat-tpinġa tiegħek biex tixtri ritratt.",
+        "title": "Ixtaqleb ritratt"
+      },
+      "main": {
+        "description": "Bħalik kellek immedja ta' rikonoxximent bl-iktar ġużi, u oħrajn. Tista' tgħaddi jew tibdelha dejjem.",
+        "title": "Ritratt tal-profil"
+      },
+      "upload": {
+        "browse": "Agħżel minn kompjutur tiegħek",
+        "camera": "Uża l-kamera tiegħek",
+        "change": "Biddel il-foto",
+        "drag": "Jarra fl-istess post",
+        "title": "Agħżel ritratt"
+      }
+    }
+  }
+}

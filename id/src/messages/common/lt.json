@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Atgal",
     "cancel": "Atšaukti",
+    "change": "Keisti",
+    "close": "Uždaryti",
     "continue": "Tęstytis",
     "madeWith": "Sukurta su ❤️ ir ☕️ Europos Sąjungoje",
     "next": "Toliau",
@@ -12,6 +15,8 @@
       "show": "Rodyti slaptažodį"
     },
     "privacy": "Privatumas",
+    "remove": "Pašalinti",
+    "save": "Išsaugoti",
     "terms": "Nuostatos",
     "yes": "Taip"
   }

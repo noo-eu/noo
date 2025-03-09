@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Optag",
+        "description": "Brug enheden kamera til at tage et billede.",
+        "title": "Tag et billede"
+      },
+      "main": {
+        "description": "A picture helps you and others recognize your account. You can change or remove it at any time.",
+        "title": "Profilbillede"
+      },
+      "upload": {
+        "browse": "Vælg fra computeren",
+        "camera": "Brug kameraet",
+        "change": "Skift billede",
+        "drag": "Træk billede hertil",
+        "title": "Vælg et billede"
+      }
+    }
+  }
+}

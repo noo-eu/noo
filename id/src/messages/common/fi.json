@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Takaisin",
     "cancel": "Peru",
+    "change": "Muokkaa",
+    "close": "Sulje",
     "continue": "Jatka",
     "madeWith": "Tehnyt ❤️ ja ☕️ Euroopan unionissa",
     "next": "Seuraava",
@@ -12,6 +15,8 @@
       "show": "Näytä salasana"
     },
     "privacy": "Tietosuoja",
+    "remove": "Poista",
+    "save": "Tallenna",
     "terms": "Säännökset",
     "yes": "Kyllä"
   }

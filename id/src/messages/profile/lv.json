@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Uzņemt",
+        "description": "Izmantojiet ierīces kameru, lai uzņemtu attēlu.",
+        "title": "Uzņemt attēlu"
+      },
+      "main": {
+        "description": "Bilogs aizpauž iziet visus cilvēkus un tevi kā viņu. To varat mainīt vai izdzēst bezkārtībās.",
+        "title": "Profila attēls"
+      },
+      "upload": {
+        "browse": "Atlasīt no datora",
+        "camera": "Izmantot kameru",
+        "change": "Mainīt fotogrāfiju",
+        "drag": "Velciet fotoattēlu šeit",
+        "title": "Atlasīt attēlu"
+      }
+    }
+  }
+}

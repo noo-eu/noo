@@ -1,6 +1,9 @@
 {
   "common": {
+    "back": "Înapoi",
     "cancel": "Anulare",
+    "change": "Modifică",
+    "close": "Închide",
     "continue": "Continuă",
     "madeWith": "Făcut cu ❤️ și ☕️ în Uniunea Europeană",
     "next": "Înainte",
@@ -12,6 +15,8 @@
       "show": "Arată parola"
     },
     "privacy": "Confidențialitate",
+    "remove": "Șterge",
+    "save": "Salvează",
     "terms": "Termeni și condiții",
     "yes": "Da"
   }

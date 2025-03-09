@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ophalen",
+        "description": "Gebruik de camera van je apparaat om een foto te maken.",
+        "title": "Foto maken"
+      },
+      "main": {
+        "description": "Een foto helpt anderen en jou je account te herkennen. Je kunt deze altijd aanpassen of verwijderen.",
+        "title": "Profielfoto"
+      },
+      "upload": {
+        "browse": "Kies van je computer",
+        "camera": "Gebruik je camera",
+        "change": "Foto wijzigen",
+        "drag": "Sleep foto hier naartoe",
+        "title": "Kies een foto"
+      }
+    }
+  }
+}

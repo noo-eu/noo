@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Capturar",
+        "description": "Usa la cámara de tu dispositivo para tomar una foto.",
+        "title": "Tomar una foto"
+      },
+      "main": {
+        "description": "Una foto te ayuda a ti y a otros reconocer tu cuenta. Puedes cambiarla o eliminarla en cualquier momento.",
+        "title": "Foto de perfil"
+      },
+      "upload": {
+        "browse": "Seleccionar desde tu ordenador",
+        "camera": "Usar tu cámara",
+        "change": "Cambiar foto",
+        "drag": "Arrastra la foto aquí",
+        "title": "Elegir una foto"
+      }
+    }
+  }
+}

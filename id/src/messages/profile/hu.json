@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "picture_dialog": {
+      "camera": {
+        "capture": "Felvétel",
+        "description": "Használd eszközed kameráját, hogy fényképet készíts.",
+        "title": "Fénykép készítése"
+      },
+      "main": {
+        "description": "Az profilkép segít azonosítani a fiókját maguknak és másoknak. Bármikor módosíthatja vagy törölheti.",
+        "title": "Profilkép"
+      },
+      "upload": {
+        "browse": "Válassz a számítógépedről",
+        "camera": "Használd a kamerádat",
+        "change": "Fotó megváltoztatása",
+        "drag": "Húzd ide a fényképet",
+        "title": "Válassz egy képet"
+      }
+    }
+  }
+}
