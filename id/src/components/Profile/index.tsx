@@ -36,9 +36,7 @@ export function ProfilePage({ user }: ProfilePageProps) {
           user={user}
         />
       </div>
-      <h1 className="text-4xl font-medium mb-16">
-        Welcome, {user.firstName}!{JSON.stringify(user)}
-      </h1>
+      <h1 className="text-4xl font-medium mb-16">Welcome, {user.firstName}!</h1>
     </div>
   );
 }
