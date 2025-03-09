@@ -1,39 +1,43 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { ProfilePicture } from "../ProfilePicture";
-import { PictureDialog } from "./PictureDialog";
 
 type ProfilePageProps = {
-  session: {
+  user: {
     id: string;
-    user: {
-      firstName: string;
-      lastName: string | null;
-      picture: string | null;
-    };
+    firstName: string;
+    lastName: string | null;
+    picture: string | null;
   };
 };
 
-export function ProfilePage({ session }: ProfilePageProps) {
+const PictureDialog = dynamic(() => import("./PictureDialog"), {
+  ssr: false,
+});
+
+export function ProfilePage({ user }: ProfilePageProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center">
       <div className="mt-16 mb-8" onClick={() => setIsOpen(true)}>
-        <ProfilePicture
-          user={session.user}
-          className="w-32 h-32 text-5xl"
-          width={128}
-        />
+        <div className="flex items-center justify-center border border-2 rounded-full p-0.75">
+          <ProfilePicture
+            user={user}
+            className="w-32 h-32 text-5xl cursor-pointer hover:opacity-80"
+            width={128}
+          />
+        </div>
         <PictureDialog
           isOpen={isOpen}
           close={() => setIsOpen(false)}
-          session={session}
+          user={user}
         />
       </div>
       <h1 className="text-4xl font-medium mb-16">
-        Welcome, {session.user.firstName}!
+        Welcome, {user.firstName}!{JSON.stringify(user)}
       </h1>
     </div>
   );

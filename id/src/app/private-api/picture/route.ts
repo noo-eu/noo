@@ -2,17 +2,19 @@ import Users from "@/db/users";
 import { HttpRequest } from "@/lib/http/request";
 import { getObjectStorage } from "@/lib/objectStorage";
 import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { randomSalt } from "@/utils";
+import { humanIdToUuid, randomSalt } from "@/utils";
 
 async function getUser(request: Request) {
-  const sid = new HttpRequest(request).header("X-Session-ID");
+  const sid = new HttpRequest(request).header("X-User-ID");
   if (!sid) {
     return null;
   }
 
-  const session = await new SessionsService(
+  const sessions = await new SessionsService(
     await getSessionCookie(),
-  ).getSessionBySid(sid);
+  ).activeSessions();
+  const id = humanIdToUuid(sid, "usr");
+  const session = sessions.find((s) => s.userId === id);
   if (!session) {
     return null;
   }

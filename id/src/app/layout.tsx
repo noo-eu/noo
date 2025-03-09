@@ -2,6 +2,7 @@ import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default async function RootLayout({
         <body className="min-h-screen bg-indigo-50 dark:bg-zinc-800 text-gray-900 dark:text-gray-100 flex flex-col">
           {children}
           <Footer />
+          <Toaster position="bottom-center" />
         </body>
       </NextIntlClientProvider>
     </html>

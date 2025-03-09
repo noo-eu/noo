@@ -1,6 +1,8 @@
 {
   "profile": {
     "picture_dialog": {
+      "remove_success": "Your profile picture has been removed...",
+      "error": "Something went wrong. Please try again.",
       "camera": {
         "capture": "Capture",
         "description": "Use your device's camera to take a picture.",

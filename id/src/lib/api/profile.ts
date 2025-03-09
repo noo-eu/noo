@@ -1,20 +1,20 @@
-function removePicture(sessionId: string) {
-  return fetch(`/private-api/picture`, {
+async function removePicture(userId: string) {
+  return await fetch(`/private-api/picture`, {
     method: "DELETE",
     headers: {
-      "X-Session-ID": sessionId,
+      "X-User-ID": userId,
     },
   });
 }
 
-function uploadPicture(sessionId: string, image: File) {
+function uploadPicture(userId: string, image: File) {
   const formData = new FormData();
   formData.append("image", image);
 
   return fetch(`/private-api/picture`, {
     method: "POST",
     headers: {
-      "X-Session-ID": sessionId,
+      "X-User-ID": userId,
     },
     body: formData,
   });

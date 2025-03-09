@@ -1,3 +1,4 @@
+import { AuthContext } from "@/components/AuthContext";
 import { Profile } from "@/lib/api/profile";
 import { DialogTitle } from "@headlessui/react";
 import {
@@ -8,18 +9,16 @@ import {
 } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
-import { useRef, useState, useTransition } from "react";
+import { useContext, useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
-import { PictureDialogProps, View } from ".";
+import { View } from ".";
 
 export function UploadView({
   navigate,
-  session,
   initialImage,
 }: {
   navigate: (view: View) => void;
-  session: PictureDialogProps["session"];
   initialImage: File | null;
 }) {
   const t = useTranslations("profile.picture_dialog");
@@ -29,7 +28,8 @@ export function UploadView({
   const editorRef = useRef<AvatarEditor>(null);
 
   const [error, setError] = useState<string | undefined>();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setPending] = useState(false);
+  const user = useContext(AuthContext);
 
   const handleUpload = async () => {
     if (editorRef.current && image) {
@@ -38,24 +38,28 @@ export function UploadView({
 
       const mime = image.type || "image/jpeg";
 
-      startTransition(() => {
-        canvas.toBlob(async (blob) => {
-          if (!blob) return;
+      setPending(true);
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
 
-          const file = new File([blob], "image", {
-            type: mime,
-          });
+        const file = new File([blob], "image", {
+          type: mime,
+        });
 
-          const response = await Profile.Picture.upload(session.id, file);
+        try {
+          const response = await Profile.Picture.upload(user.id, file);
 
           if (response.ok) {
             window.location.reload();
           } else {
             const data = await response.json();
-            setError(data.error);
+            setPending(false);
           }
-        }, mime);
-      });
+        } catch (error) {
+          setError("An error occurred. Please try again.");
+          setPending(false);
+        }
+      }, mime);
     }
   };
 
@@ -67,7 +71,7 @@ export function UploadView({
 
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      <div className="my-12 mx-12 flex justify-center">
+      <div className="my-12 flex flex-col items-center justify-center">
         <Dropzone
           onDrop={(dropped) => setImage(dropped[0])}
           noClick
@@ -78,14 +82,16 @@ export function UploadView({
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()}>
               {image && (
-                <AvatarEditor
-                  ref={editorRef}
-                  image={image}
-                  width={256}
-                  height={256}
-                  border={0}
-                  className="rounded-3xl border border-white/20"
-                />
+                <>
+                  <AvatarEditor
+                    ref={editorRef}
+                    image={image}
+                    width={256}
+                    height={256}
+                    border={0}
+                    className="rounded-3xl border border-white/20 mb-4"
+                  />
+                </>
               )}
               {!image && (
                 <div className="w-3xs aspect-square border border-white/50 mx-auto rounded-3xl flex items-center justify-center relative">
