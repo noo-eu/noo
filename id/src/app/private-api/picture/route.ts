@@ -1,22 +1,24 @@
 import Users from "@/db/users";
 import { HttpRequest } from "@/lib/http/request";
 import { getObjectStorage } from "@/lib/objectStorage";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
-import { humanIdToUuid, randomSalt } from "@/utils";
+import { SessionsService } from "@/lib/SessionsService";
+import { randomSalt } from "@/utils";
+import sharp from "sharp";
+import { validateFileUpload } from "@/lib/http/fileValidations";
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/gif"];
+const PICTURE_SIZE = 512;
 
 async function getUser(request: Request) {
-  const sid = new HttpRequest(request).header("X-User-ID");
-  if (!sid) {
-    return null;
+  const uid = new HttpRequest(request).header("X-User-ID");
+  if (!uid) {
+    return undefined;
   }
 
-  const sessions = await new SessionsService(
-    await getSessionCookie(),
-  ).activeSessions();
-  const id = humanIdToUuid(sid, "usr");
-  const session = sessions.find((s) => s.userId === id);
+  const session = await SessionsService.sessionFor(uid);
   if (!session) {
-    return null;
+    return undefined;
   }
 
   return session.user;
@@ -29,27 +31,37 @@ export async function POST(request: Request) {
   }
 
   const form = await request.formData();
-  const image = form.get("image") as File;
+  const image = form.get("image") as File | null;
 
-  const mime = image.type;
-  if (!mime || !mime.startsWith("image/")) {
-    return { error: "file_type", ok: undefined };
+  const validation = await validateFileUpload(
+    image,
+    MAX_FILE_SIZE,
+    ALLOWED_MIME_TYPES,
+  );
+  if (validation.isErr()) {
+    return Response.json({ error: validation.error }, { status: 400 });
   }
 
-  const ext = mime.split("/")[1];
-  if (!["jpeg", "png", "gif"].includes(ext)) {
-    return { error: "file_type", ok: undefined };
-  }
+  // Process image with sharp: resize to 512x512
+  const resizedImageBuffer = await sharp(await image!.arrayBuffer())
+    .resize({
+      width: PICTURE_SIZE,
+      height: PICTURE_SIZE,
+      fit: "cover",
+      position: "center",
+    })
+    .toBuffer();
 
   if (user.picture) {
     const store = getObjectStorage("noo-user");
     await store.delete(user.picture);
   }
 
+  // We can safely assert the type since we already validated it's in ALLOWED_MIME_TYPES
   const key = randomSalt(64, "base64url");
   const url = await getObjectStorage("noo-user").write(
-    key + "." + ext,
-    Buffer.from(await image.arrayBuffer()),
+    key + "." + validation.value.ext,
+    resizedImageBuffer,
   );
 
   await Users.update(user.id, { picture: url });

@@ -1,4 +1,4 @@
-import { describe, expect, mock, test } from "bun:test";
+import { afterEach, describe, expect, mock, test } from "bun:test";
 import { getCookies } from "./cookies";
 
 describe("getCookies", () => {
@@ -6,6 +6,10 @@ describe("getCookies", () => {
     ({
       get: mock(() => ret),
     }) as unknown as Headers;
+
+  afterEach(() => {
+    mock.restore();
+  });
 
   test("returns empty object when Cookie header is not present", () => {
     const headers = mockHeaders(null);

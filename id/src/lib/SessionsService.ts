@@ -1,7 +1,7 @@
 import { schema } from "@/db";
 import Sessions, { Session } from "@/db/sessions";
 import { User } from "@/db/users";
-import { checkVerifier, createVerifier, sha256 } from "@/utils";
+import { checkVerifier, createVerifier, humanIdToUuid, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import crypto from "node:crypto";
@@ -74,6 +74,21 @@ export class SessionsService {
 
   constructor(cookie: string) {
     this.tokens = cookie.split(" ").filter((t) => t.length > 0);
+  }
+
+  static async new() {
+    return new SessionsService(await getSessionCookie());
+  }
+
+  static async sessionFor(userId: string) {
+    const manager = await SessionsService.new();
+    const sessions = await manager.activeSessions();
+    const uuid = humanIdToUuid(userId, "usr");
+    if (!uuid) {
+      return undefined;
+    }
+
+    return sessions.find((s) => s.userId === uuid);
   }
 
   buildCookie() {
