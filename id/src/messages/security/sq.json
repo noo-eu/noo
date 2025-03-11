@@ -22,8 +22,8 @@
         "weak": "i dobët"
       },
       "title": "Fjalëkalimi",
-      "updateNotice": "Përdor të paktën 10 karaktere. Shmang fjalët e zakonshme ose të dukshme si emrat e kafshëve, ekipet sportive, ose datat e lindjes.",
-      "updateSuccess": "Fjalëkalimi yt është ndryshuar."
+      "updateSuccess": "Fjalëkalimi yt është ndryshuar.",
+      "updateSuggestion": "Përdor të paktën 10 karaktere. Shmang fjalët e zakonshme ose të dukshme si emrat e kafshëve, ekipet sportive, ose datat e lindjes."
     },
     "summary": {
       "applications": "Aplikacione dhe qasje në të dhëna",

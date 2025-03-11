@@ -22,8 +22,8 @@
         "weak": "fraca"
       },
       "title": "Palavra-passe",
-      "updateNotice": "Use pelo menos 10 caracteres. Evite palavras comuns ou óbvias, como nomes de animais de estimação, equipas desportivas ou aniversários.",
-      "updateSuccess": "A sua palavra-passe foi alterada."
+      "updateSuccess": "A sua palavra-passe foi alterada.",
+      "updateSuggestion": "Use pelo menos 10 caracteres. Evite palavras comuns ou óbvias, como nomes de animais de estimação, equipas desportivas ou aniversários."
     },
     "summary": {
       "applications": "Aplicações e acesso a dados",

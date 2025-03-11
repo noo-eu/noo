@@ -35,7 +35,7 @@
       "securityDescription": "Menaxho cilësimet e privatësisë dhe sigurinë e llogarisë ",
       "settings": "Cilësimet",
       "settingsDescription": "Personalizo përvojën dhe preferencat e tua",
-      "title": "Mirë se erdhe <bold>{name}</bold>"
+      "title": "Mirë se erdhe {name}"
     },
     "name": {
       "description": "Emri ytë do të jetë i qasje ndryshme për përdoruesit e tjerë që ju kanë dialog me të në <noo></noo>. Nëse ju përdorni <noo></noo> për tu logruar në aplikacione tjera, emri ytë do të mund të shpërthehet edhe ndryshmë për tyre, nëse jeni zgjedhni për të.",

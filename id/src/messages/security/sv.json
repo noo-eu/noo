@@ -22,8 +22,8 @@
         "weak": "svagt"
       },
       "title": "Lösenord",
-      "updateNotice": "Använd minst 10 tecken. Undvik vanliga eller uppenbara ord som husdjursnamn, sportlag eller födelsedagar.",
-      "updateSuccess": "Ditt lösenord har ändrats."
+      "updateSuccess": "Ditt lösenord har ändrats.",
+      "updateSuggestion": "Använd minst 10 tecken. Undvik vanliga eller uppenbara ord som husdjursnamn, sportlag eller födelsedagar."
     },
     "summary": {
       "applications": "Appar och datåtkomst",

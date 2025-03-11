@@ -35,7 +35,7 @@
       "securityDescription": "Kezeld adatvédelmi beállításaidat és fiókod biztonságát",
       "settings": "Beállítások",
       "settingsDescription": "Testreszabhatod élményeidet és preferenciáidat",
-      "title": "Üdv, <bold>{name}</bold>"
+      "title": "Üdv, {name}"
     },
     "name": {
       "description": "A neved azokkal a felhasználókkal lesz látható, akikkel interakcióba lépsz <noo></noo>-on. A nevét továbbá a különböző alkalmazásokhoz való bejelentkezéskor az adott appokkal is megosztodhatod.",

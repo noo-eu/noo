@@ -22,8 +22,8 @@
         "weak": "svag"
       },
       "title": "Adgangskode",
-      "updateNotice": "Brug mindst 10 tegn. Undgå almindelige eller åbenlyse ord som kæledyrsnavne, sportshold eller fødselsdage.",
-      "updateSuccess": "Din adgangskode er blevet ændret."
+      "updateSuccess": "Din adgangskode er blevet ændret.",
+      "updateSuggestion": "Brug mindst 10 tegn. Undgå almindelige eller åbenlyse ord som kæledyrsnavne, sportshold eller fødselsdage."
     },
     "summary": {
       "applications": "Apps og datatilgængelighed",

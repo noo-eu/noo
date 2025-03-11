@@ -22,8 +22,8 @@
         "weak": "veikt"
       },
       "title": "Lykilorð",
-      "updateNotice": "Notaðu að minnsta kosti 10 tákn. Forðastu algeng orð eða augljós orð eins og gælunöfn, íþróttalið eða afmælisdagsetningar.",
-      "updateSuccess": "Lykilorðið þitt hefur verið breytt."
+      "updateSuccess": "Lykilorðið þitt hefur verið breytt.",
+      "updateSuggestion": "Notaðu að minnsta kosti 10 tákn. Forðastu algeng orð eða augljós orð eins og gælunöfn, íþróttalið eða afmælisdagsetningar."
     },
     "summary": {
       "applications": "Forrit og aðgangur að gögnum",

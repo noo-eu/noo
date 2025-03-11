@@ -22,8 +22,8 @@
         "weak": "laige"
       },
       "title": "Pasfhocal",
-      "updateNotice": "Úsáid ar a laghad 10 carachtar. Éist le focail coitianta nó soiléire cosúil le hainmneacha peata, foirne spóirt, nó laethanta breithe.",
-      "updateSuccess": "Tá do phasfhocal athraithe."
+      "updateSuccess": "Tá do phasfhocal athraithe.",
+      "updateSuggestion": "Úsáid ar a laghad 10 carachtar. Éist le focail coitianta nó soiléire cosúil le hainmneacha peata, foirne spóirt, nó laethanta breithe."
     },
     "summary": {
       "applications": "Aipeanna agus rochtain ar shonraí",

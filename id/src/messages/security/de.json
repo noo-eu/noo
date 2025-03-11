@@ -22,8 +22,8 @@
         "weak": "schwach"
       },
       "title": "Passwort",
-      "updateNotice": "Verwende mindestens 10 Zeichen. Vermeide gängige oder offensichtliche Wörter wie Tiernamen, Sportteams oder Geburtstage.",
-      "updateSuccess": "Dein Passwort wurde geändert."
+      "updateSuccess": "Dein Passwort wurde geändert.",
+      "updateSuggestion": "Verwende mindestens 10 Zeichen. Vermeide gängige oder offensichtliche Wörter wie Tiernamen, Sportteams oder Geburtstage."
     },
     "summary": {
       "applications": "Apps und Datenzugriff",

@@ -35,7 +35,7 @@
       "securityDescription": "Administra la configuración de privacidad y seguridad de tu cuenta",
       "settings": "Ajustes",
       "settingsDescription": "Personaliza tu experiencia y preferencias",
-      "title": "Bienvenido <bold>{name}</bold>"
+      "title": "Bienvenido {name}"
     },
     "name": {
       "description": "Tu nombre será visible para los usuarios con quienes interactúes en <noo></noo>. Si utilizas <noo></noo> para acceder a otras aplicaciones, tu nombre también podrá ser compartido con ellas, si lo seleccionas.",

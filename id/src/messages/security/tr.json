@@ -22,8 +22,8 @@
         "weak": "zayıf"
       },
       "title": "Şifre",
-      "updateNotice": "En az 10 karakter kullanın. Evcil hayvan isimleri, spor takımları veya doğum günleri gibi yaygın ya da açık kelimelerden kaçının.",
-      "updateSuccess": "Şifreniz değiştirildi."
+      "updateSuccess": "Şifreniz değiştirildi.",
+      "updateSuggestion": "En az 10 karakter kullanın. Evcil hayvan isimleri, spor takımları veya doğum günleri gibi yaygın ya da açık kelimelerden kaçının."
     },
     "summary": {
       "applications": "Uygulamalar ve veri erişimi",

@@ -18,6 +18,8 @@ import { PasswordRater } from "./PasswordRater";
 type Props = {
   user: {
     id: string;
+    firstName: string;
+    lastName: string | null;
     passwordChangedAt: Date | null;
     passwordBreaches: number | null;
     username: string;
@@ -41,6 +43,8 @@ export function Form({ user }: Props) {
           "noo",
           "noomail",
           "noo.eu",
+          ...user.firstName.split(" "),
+          ...(user.lastName?.split(" ") ?? []),
           user.normalizedUsername,
           user.username,
           user.tenantDomain ?? "",
@@ -142,7 +146,7 @@ export function Form({ user }: Props) {
                   <PasswordRater password={password} strength={strength} />
                 </div>
 
-                {t("password.updateNotice")}
+                {t("password.updateSuggestion")}
               </div>
 
               <PasswordField
@@ -156,6 +160,8 @@ export function Form({ user }: Props) {
                 }
                 autoComplete="new-password"
               />
+
+              <p className="text-sm mt-4">{t("password.updateNotice")}</p>
 
               <div className="mt-8 flex gap-4 justify-end items-center">
                 <Button type="submit" pending={isPending}>

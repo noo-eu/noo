@@ -22,8 +22,8 @@
         "weak": "debole"
       },
       "title": "Password",
-      "updateNotice": "Usa almeno 10 caratteri. Evita parole comuni o evidenti come nomi di animali domestici, squadre sportive o compleanni.",
-      "updateSuccess": "La tua password è stata cambiata."
+      "updateSuccess": "La tua password è stata cambiata.",
+      "updateSuggestion": "Usa almeno 10 caratteri. Evita parole comuni o evidenti come nomi di animali domestici, squadre sportive o compleanni."
     },
     "summary": {
       "applications": "App e accesso ai dati",

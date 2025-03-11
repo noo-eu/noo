@@ -35,7 +35,7 @@
       "securityDescription": "Zarządzaj ustawieniami prywatności i bezpieczeństwa konta",
       "settings": "Ustawienia",
       "settingsDescription": "Dostosuj swoje doświadczenia i preferencje",
-      "title": "Witaj <bold>{name}</bold>"
+      "title": "Witaj {name}"
     },
     "name": {
       "description": "Twoja nazwa będzie widoczna dla innych użytkowników, z którymi będziesz interaktywnie komunikował się na <noo></noo>. Jeśli używasz <noo></noo> do logowania się w inne aplikacje, Twoja nazwa może być także udostępniona im, jeśli wybierzesz.",

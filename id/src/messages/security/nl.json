@@ -22,8 +22,8 @@
         "weak": "zwak"
       },
       "title": "Wachtwoord",
-      "updateNotice": "Gebruik minimaal 10 tekens. Vermijd veelvoorkomende of voor de hand liggende woorden zoals huisdiernamen, sportteams of jarigen.",
-      "updateSuccess": "Je wachtwoord is gewijzigd."
+      "updateSuccess": "Je wachtwoord is gewijzigd.",
+      "updateSuggestion": "Gebruik minimaal 10 tekens. Vermijd veelvoorkomende of voor de hand liggende woorden zoals huisdiernamen, sportteams of jarigen."
     },
     "summary": {
       "applications": "Apps en gegevens toegang",

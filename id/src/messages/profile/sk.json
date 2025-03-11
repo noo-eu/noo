@@ -35,7 +35,7 @@
       "securityDescription": "Spravuj svoje nastavenia súkromia a zabezpečenia účtu",
       "settings": "Nastavenia",
       "settingsDescription": "Prispôsob si svoju skúsenosť a preferencie",
-      "title": "Vitáme ťa <bold>{name}</bold>"
+      "title": "Vitáme ťa {name}"
     },
     "name": {
       "description": "Vaše meno bude viditeľné ostatným používateľom s ktorými budete interagovať na <noo></noo>. Ak používate <noo></noo> pri pristupovaní do iných aplikácií, môže Vaše meno byť tiež zdieľané s nimi, ak si takto vyberiete.",

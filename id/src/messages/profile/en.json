@@ -35,7 +35,7 @@
       "securityDescription": "Manage your privacy settings and account security",
       "settings": "Settings",
       "settingsDescription": "Customize your experience and preferences",
-      "title": "Welcome <bold>{name}</bold>"
+      "title": "Welcome {name}"
     },
     "name": {
       "description": "Your name will be visible to other users you interact with on <noo></noo>. If you use <noo></noo> to sign in to other apps, your name can also be shared with them, if you choose.",

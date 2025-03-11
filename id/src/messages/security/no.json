@@ -22,8 +22,8 @@
         "weak": "svakt"
       },
       "title": "Passord",
-      "updateNotice": "Bruk minst 10 tegn. Unngå vanlige eller åpenbare ord som kjæledyrnavn, sportslag eller bursdager.",
-      "updateSuccess": "Passordet ditt er endret."
+      "updateSuccess": "Passordet ditt er endret.",
+      "updateSuggestion": "Bruk minst 10 tegn. Unngå vanlige eller åpenbare ord som kjæledyrnavn, sportslag eller bursdager."
     },
     "summary": {
       "applications": "Apper og datatilgang",

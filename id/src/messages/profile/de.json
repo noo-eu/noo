@@ -35,7 +35,7 @@
       "securityDescription": "Verwalte deine Datenschutzeinstellungen und Kontosicherheit",
       "settings": "Einstellungen",
       "settingsDescription": "Gestalte dein Erlebnis und deine Vorlieben",
-      "title": "Willkommen <bold>{name}</bold>"
+      "title": "Willkommen {name}"
     },
     "name": {
       "description": "Dein Name wird anderen Nutzern, mit denen du interagierst, auf <noo></noo> sichtbar. Wenn du dich auf <noo></noo> einloggst und in andere Apps zugreifst, kann dein Name auch dort gelten, wenn du es wählst.",

@@ -35,7 +35,7 @@
       "securityDescription": "Spravuj svá nastavení ochrany soukromí a bezpečnosti účtu",
       "settings": "Nastavení",
       "settingsDescription": "Přizpůsob si svou zkušenost a preference",
-      "title": "Vítej <bold>{name}</bold>"
+      "title": "Vítej {name}"
     },
     "name": {
       "description": "Vaše jméno bude viditelné ostatním uživatelům, se kterými budete interagovat na <noo></noo>. Pokud používáte <noo></noo> k přihlášení do jiných aplikací, může být vaše jméno také sdíleno s nimi, pokud si to vyberete.",

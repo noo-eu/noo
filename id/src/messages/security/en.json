@@ -22,8 +22,9 @@
         "weak": "weak"
       },
       "title": "Password",
-      "updateNotice": "Use at least 10 characters. Avoid common or obvious words like pet names, sports teams, or birthdays.",
-      "updateSuccess": "Your password has been changed."
+      "updateNotice": "For security reasons, changing your password signs you out everywhere else.",
+      "updateSuccess": "Your password has been changed.",
+      "updateSuggestion": "Use at least 10 characters. Avoid common or obvious words like pet names, sports teams, or birthdays."
     },
     "summary": {
       "applications": "Apps and data access",

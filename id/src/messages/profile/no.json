@@ -35,7 +35,7 @@
       "securityDescription": "Administrer personverninnstillingene og sikkerheten til kontoen din",
       "settings": "Innstillinger",
       "settingsDescription": "Tilpass opplevelsen din og preferansene dine",
-      "title": "Velkommen <bold>{name}</bold>"
+      "title": "Velkommen {name}"
     },
     "name": {
       "description": "Ditt navn vil være synlig for andre brukere du interagerer med på <noo></noo>. Hvis du bruger <noo></noo> til å logge inn i andre applikasjoner, kan også ditt navn dele med dem dersom du ønsker.",

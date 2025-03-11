@@ -35,7 +35,7 @@
       "securityDescription": "Stjórnaðu persónuverndarstillingum og öryggi reikningsins",
       "settings": "Stillingar",
       "settingsDescription": "Aðlagaðu upplifun þína og stillingar",
-      "title": "Velkomin <bold>{name}</bold>"
+      "title": "Velkomin {name}"
     },
     "name": {
       "description": "Nafn þitt verður símtu í aðrir notendahlutir þegar þú hörkst á sér. Ef þú vilt nota <noo></noo> til að skrá þig inn í aðrar forrit, getur nafn þitt líka verið deilt með þeim ef þú velur.",

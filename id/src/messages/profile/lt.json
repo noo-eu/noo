@@ -35,7 +35,7 @@
       "securityDescription": "Tvarkyk savo privatumo nustatymus ir paskyros saugumą",
       "settings": "Nustatymai",
       "settingsDescription": "Sukurk savo patirtį pagal savo norus",
-      "title": "Sveikas atvykęs, <bold>{name}</bold>"
+      "title": "Sveikas atvykęs, {name}"
     },
     "name": {
       "description": "Jūsų vardas bus matomas kitų naudotojų, su kuriomis galėsite ryškiai bendrauti <noo></noo>. Jeigu jums reikalinga įrašyti į <noo></noo> taip pat ir priekeitis kitas aplikacijas, vardas gali būti perduodamas ir kitiems, jeigu ji pasirinks.",

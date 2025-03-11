@@ -22,8 +22,8 @@
         "weak": "silpnas"
       },
       "title": "Slaptažodis",
-      "updateNotice": "Naudokite bent 10 simbolių. Venkite paprastų ar akivaizdžių žodžių, tokių kaip augintinių vardai, sporto komandos ar gimtadieniai.",
-      "updateSuccess": "Jūsų slaptažodis buvo pakeistas."
+      "updateSuccess": "Jūsų slaptažodis buvo pakeistas.",
+      "updateSuggestion": "Naudokite bent 10 simbolių. Venkite paprastų ar akivaizdžių žodžių, tokių kaip augintinių vardai, sporto komandos ar gimtadieniai."
     },
     "summary": {
       "applications": "Programėlės ir duomenų prieiga",

@@ -22,8 +22,8 @@
         "weak": "nõrk"
       },
       "title": "Parool",
-      "updateNotice": "Kasu vähemalt 10 tähemärki. Vältige tavalisi või ilmseid sõnu nagu lemmikloomade nimed, spordimeeskonnad või sünnipäevad.",
-      "updateSuccess": "Sinu parool on muutunud."
+      "updateSuccess": "Sinu parool on muutunud.",
+      "updateSuggestion": "Kasu vähemalt 10 tähemärki. Vältige tavalisi või ilmseid sõnu nagu lemmikloomade nimed, spordimeeskonnad või sünnipäevad."
     },
     "summary": {
       "applications": "Rakendused ja andmete ligipääs",

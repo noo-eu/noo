@@ -35,7 +35,7 @@
       "securityDescription": "Håndter dine privatlivsindstillinger og kontosikkerhed",
       "settings": "Indstillinger",
       "settingsDescription": "Tilpas din oplevelse og dine præferencer",
-      "title": "Velkommen <bold>{name}</bold>"
+      "title": "Velkommen {name}"
     },
     "name": {
       "description": "Din navn vil være synligt for andre brugere, du interagerer med på <noo></noo>. Hvis du signer i til andre apps ved hjælp af <noo></noo>, kan dit navn også deltages med dem, hvis du vælger det.",

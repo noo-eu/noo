@@ -22,8 +22,8 @@
         "weak": "vāja"
       },
       "title": "Parole",
-      "updateNotice": "Izmanto vismaz 10 rakstzīmes. Izvairies no izplatītām vai acīmredzamām vārdu kombinācijām, piemēram, dzīvnieku vārdiem, sporta komandām vai dzimšanas dienām.",
-      "updateSuccess": "Tava parole ir mainīta."
+      "updateSuccess": "Tava parole ir mainīta.",
+      "updateSuggestion": "Izmanto vismaz 10 rakstzīmes. Izvairies no izplatītām vai acīmredzamām vārdu kombinācijām, piemēram, dzīvnieku vārdiem, sporta komandām vai dzimšanas dienām."
     },
     "summary": {
       "applications": "Lietotnes un datu piekļuve",

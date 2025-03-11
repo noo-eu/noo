@@ -35,7 +35,7 @@
       "securityDescription": "Hallinnoi tietosuoja-asetuksiasi ja tilisi turvallisuutta",
       "settings": "Asetukset",
       "settingsDescription": "Muokkaa kokemustasi ja mieltymyksiäsi",
-      "title": "Tervetuloa <bold>{name}</bold>"
+      "title": "Tervetuloa {name}"
     },
     "name": {
       "description": "Nimesi näkyy muille käyttäjille, joiden kanssa olet vuorovaikutuksessa <noo></noo>:n kanssa. Jos et muutu nimeäsi <noo></noo>issa toimintoja varten, nimi voi myös tulla käsittelyyn neessa.",

@@ -1,9 +1,17 @@
+import { humanIdToUuid } from "@/utils";
 import { eq, SQL } from "drizzle-orm";
 import db, { schema } from ".";
 
 function find(sessionId: string) {
   return db.query.sessions.findFirst({
     where: eq(schema.sessions.id, sessionId),
+    with: { user: { with: { tenant: true } } },
+  });
+}
+
+function findManyBy(conditions: SQL) {
+  return db.query.sessions.findMany({
+    where: conditions,
     with: { user: { with: { tenant: true } } },
   });
 }
@@ -41,14 +49,24 @@ function refresh(
 }
 
 function destroy(sessionId: string) {
+  if (sessionId.startsWith("sess_")) {
+    sessionId = humanIdToUuid(sessionId, "sess")!;
+  }
+
   return db.delete(schema.sessions).where(eq(schema.sessions.id, sessionId));
+}
+
+function destroyBy(conditions: SQL) {
+  return db.delete(schema.sessions).where(conditions);
 }
 
 const Sessions = {
   find,
+  findManyBy,
   select,
   create,
   destroy,
+  destroyBy,
   refresh,
 };
 

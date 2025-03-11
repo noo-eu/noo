@@ -22,8 +22,8 @@
         "weak": "slaba"
       },
       "title": "Lozinka",
-      "updateNotice": "Koristite najmanje 10 znakova. Izbjegavajte uobičajene ili očite riječi poput imena ljubimaca, sportskih timova ili rođendana.",
-      "updateSuccess": "Vaša lozinka je promijenjena."
+      "updateSuccess": "Vaša lozinka je promijenjena.",
+      "updateSuggestion": "Koristite najmanje 10 znakova. Izbjegavajte uobičajene ili očite riječi poput imena ljubimaca, sportskih timova ili rođendana."
     },
     "summary": {
       "applications": "Aplikacije i pristup podacima",

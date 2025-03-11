@@ -22,8 +22,8 @@
         "weak": "débil"
       },
       "title": "Contraseña",
-      "updateNotice": "Utiliza al menos 10 caracteres. Evita palabras comunes u obvias como nombres de mascotas, equipos deportivos o cumpleaños.",
-      "updateSuccess": "Tu contraseña ha sido cambiada."
+      "updateSuccess": "Tu contraseña ha sido cambiada.",
+      "updateSuggestion": "Utiliza al menos 10 caracteres. Evita palabras comunes u obvias como nombres de mascotas, equipos deportivos o cumpleaños."
     },
     "summary": {
       "applications": "Aplicaciones y acceso a datos",

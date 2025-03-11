@@ -22,8 +22,8 @@
         "weak": "gyenge"
       },
       "title": "Jelszó",
-      "updateNotice": "Használj legalább 10 karaktert. Kerüld a közönséges vagy nyilvánvaló szavakat, mint például házi állatok neveit, sportcsapatokat vagy születésnapokat.",
-      "updateSuccess": "A jelszavad sikeresen megváltozott."
+      "updateSuccess": "A jelszavad sikeresen megváltozott.",
+      "updateSuggestion": "Használj legalább 10 karaktert. Kerüld a közönséges vagy nyilvánvaló szavakat, mint például házi állatok neveit, sportcsapatokat vagy születésnapokat."
     },
     "summary": {
       "applications": "Alkalmazások és adat hozzáférés",

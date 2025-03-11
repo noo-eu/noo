@@ -22,8 +22,8 @@
         "weak": "heikko"
       },
       "title": "Salasana",
-      "updateNotice": "Käytä vähintään 10 merkkiä. Vältä yleisiä tai ilmiselviä sanoja, kuten lemmikkien nimiä, urheilujoukkueita tai syntymäpäiviä.",
-      "updateSuccess": "Salasanasi on vaihdettu."
+      "updateSuccess": "Salasanasi on vaihdettu.",
+      "updateSuggestion": "Käytä vähintään 10 merkkiä. Vältä yleisiä tai ilmiselviä sanoja, kuten lemmikkien nimiä, urheilujoukkueita tai syntymäpäiviä."
     },
     "summary": {
       "applications": "Sovellukset ja tiedon pääsyoikeudet",

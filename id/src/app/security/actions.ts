@@ -1,9 +1,13 @@
 "use server";
 
+import { sessions } from "@/db/schema";
+import Sessions from "@/db/sessions";
 import Users from "@/db/users";
 import { checkPwnedPassword } from "@/lib/password";
 import { SessionsService } from "@/lib/SessionsService";
 import { hashPassword } from "@/lib/SignupService";
+import { humanIdToUuid } from "@/utils";
+import { and, eq, not } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -72,6 +76,9 @@ export async function updatePassword(
     passwordBreachesCheckedAt: undefined,
   });
 
+  const currentSession = await SessionsService.sessionFor(uid);
+  await terminateAllSessions(uid, currentSession!.id);
+
   return { data: { success: true }, input: data };
 }
 
@@ -83,4 +90,19 @@ export async function checkBreaches(password: string) {
   } else {
     return { breaches: result.value };
   }
+}
+
+async function terminateAllSessions(uid: string, except: string) {
+  const userId = humanIdToUuid(uid, "usr")!;
+
+  await Sessions.destroyBy(
+    and(not(eq(sessions.id, except)), eq(sessions.userId, userId))!,
+  );
+}
+
+export async function terminateSession(sid: string) {
+  await Sessions.destroy(sid);
+
+  // TODO (add uid)
+  return redirect("/security/sessions");
 }

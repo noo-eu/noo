@@ -15,6 +15,8 @@ export default async function ProfileNamePage({
 
   const user = {
     id: uuidToHumanId(dbUser.id, "usr"),
+    firstName: dbUser.firstName,
+    lastName: dbUser.lastName,
     passwordChangedAt: dbUser.passwordChangedAt!,
     passwordBreaches: dbUser.passwordBreaches,
     username: dbUser.username,

@@ -52,11 +52,8 @@ export function ProfilePage({ user }: ProfilePageProps) {
         />
       </div>
       <h1 className="text-5xl font-medium my-8">
-        {t.rich("title", {
+        {t("title", {
           name: user.firstName,
-          bold: (children) => (
-            <span style={{ fontFamily: "DynaPuff" }}>{children}</span>
-          ),
         })}
       </h1>
 

@@ -22,8 +22,8 @@
         "weak": "slabé"
       },
       "title": "Heslo",
-      "updateNotice": "Použijte alespoň 10 znaků. Vyhýbejte se obvyklým nebo očividným slovům jako jsou jména domácích mazlíčků, názvy sportovních týmů nebo narozeniny.",
-      "updateSuccess": "Vaše heslo bylo změněno."
+      "updateSuccess": "Vaše heslo bylo změněno.",
+      "updateSuggestion": "Použijte alespoň 10 znaků. Vyhýbejte se obvyklým nebo očividným slovům jako jsou jména domácích mazlíčků, názvy sportovních týmů nebo narozeniny."
     },
     "summary": {
       "applications": "Aplikace a přístup k datům",

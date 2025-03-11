@@ -22,8 +22,8 @@
         "weak": "šibko"
       },
       "title": "Geslo",
-      "updateNotice": "Uporabite vsaj 10 znakov. Izogibajte se pogostim ali očitnim besedam, kot so imena hišnih ljubljenčkov, športne ekipe ali datumi rojstva.",
-      "updateSuccess": "Vaše geslo je bilo spremenjeno."
+      "updateSuccess": "Vaše geslo je bilo spremenjeno.",
+      "updateSuggestion": "Uporabite vsaj 10 znakov. Izogibajte se pogostim ali očitnim besedam, kot so imena hišnih ljubljenčkov, športne ekipe ali datumi rojstva."
     },
     "summary": {
       "applications": "Aplikacije in dostop do podatkov",

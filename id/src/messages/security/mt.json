@@ -22,8 +22,8 @@
         "weak": "drekk"
       },
       "title": "Password",
-      "updateNotice": "Uża mill-inqas 10 karattri. Evita kliem komuni jew ovvji bħal isimijiet tal-pet, timijiet sportivi, jew anniversarji.",
-      "updateSuccess": "Il-password tiegħek inbidlet."
+      "updateSuccess": "Il-password tiegħek inbidlet.",
+      "updateSuggestion": "Uża mill-inqas 10 karattri. Evita kliem komuni jew ovvji bħal isimijiet tal-pet, timijiet sportivi, jew anniversarji."
     },
     "summary": {
       "applications": "Apps u aċċess għal data",

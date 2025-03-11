@@ -22,8 +22,8 @@
         "weak": "słabe"
       },
       "title": "Hasło",
-      "updateNotice": "Użyj przynajmniej 10 znaków. Unikaj popularnych lub oczywistych słów, takich jak imiona zwierząt, nazwy drużyn sportowych czy daty urodzin.",
-      "updateSuccess": "Twoje hasło zostało zmienione."
+      "updateSuccess": "Twoje hasło zostało zmienione.",
+      "updateSuggestion": "Użyj przynajmniej 10 znaków. Unikaj popularnych lub oczywistych słów, takich jak imiona zwierząt, nazwy drużyn sportowych czy daty urodzin."
     },
     "summary": {
       "applications": "Aplikacje i dostęp do danych",

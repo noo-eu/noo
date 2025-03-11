@@ -35,7 +35,7 @@
       "securityDescription": "Uredi nastavitve zasebnosti in varnost svojega računa",
       "settings": "Nastavitve",
       "settingsDescription": "Prilagodi svoje izkušnje in preference",
-      "title": "Dobrodošel/a <bold>{name}</bold>"
+      "title": "Dobrodošel/a {name}"
     },
     "name": {
       "description": "V vašem profilu je lahko vaše ime videti drugim uporabnikom s katerimi se med seboj delate v <noo></noo>. V primeru, da za logino uporabite <noo></noo> tudi pri drugih aplikacijah, lahko lahko tudi s temi aplikacijami združuje svoje ime, če si ga izbrali.",

@@ -22,8 +22,8 @@
         "weak": "slabă"
       },
       "title": "Parola",
-      "updateNotice": "Folosește cel puțin 10 caractere. Evită cuvinte comune sau evidente, cum ar fi nume de animale de companie, echipe sportive sau date de naștere.",
-      "updateSuccess": "Parola ta a fost schimbată."
+      "updateSuccess": "Parola ta a fost schimbată.",
+      "updateSuggestion": "Folosește cel puțin 10 caractere. Evită cuvinte comune sau evidente, cum ar fi nume de animale de companie, echipe sportive sau date de naștere."
     },
     "summary": {
       "applications": "Aplicații și acces la date",

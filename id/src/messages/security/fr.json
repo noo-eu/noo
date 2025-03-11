@@ -22,8 +22,8 @@
         "weak": "faible"
       },
       "title": "Mot de passe",
-      "updateNotice": "Utilisez au moins 10 caractères. Évitez les mots communs ou évidents comme les noms d'animaux de compagnie, les équipes sportives ou les anniversaires.",
-      "updateSuccess": "Votre mot de passe a été modifié."
+      "updateSuccess": "Votre mot de passe a été modifié.",
+      "updateSuggestion": "Utilisez au moins 10 caractères. Évitez les mots communs ou évidents comme les noms d'animaux de compagnie, les équipes sportives ou les anniversaires."
     },
     "summary": {
       "applications": "Applications et accès aux données",
