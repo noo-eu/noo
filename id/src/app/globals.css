@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @source "../../../ui";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --color-eu-blue: #003399;
   --color-eu-blue-hover: #0055cc;
-  --color-hc-link: #7799ff;
-  --color-hc-link-hover: #4c6ff0;
+  --color-hc-link: #4499ff;
+  --color-hc-link-hover: #3399cc;
 }
 
 /* https://rsms.me/inter/ */
@@ -35,6 +37,10 @@
 
 .link {
   @apply text-eu-blue hover:text-eu-blue-hover dark:text-hc-link dark:hover:text-hc-link-hover;
+}
+
+.link:hover {
+  @apply underline;
 }
 
 @utility shadow-with-highlights {

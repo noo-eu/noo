@@ -1,18 +1,18 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import Link from "next/link";
+import { Noo } from "@/components/Noo";
+import { ProfilePageProps } from "@/components/Profile";
+import { ProfilePicture } from "@/components/ProfilePicture";
 import {
   CakeIcon,
   ChatBubbleBottomCenterTextIcon,
   UserCircleIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { ProfilePicture } from "@/components/ProfilePicture";
-import { Noo } from "@/components/Noo";
-import { ProfilePageProps } from "@/components/Profile";
 import { useFormatter, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useState } from "react";
 
 const PictureDialog = dynamic(
   () => import("@/components/Profile/PictureDialog"),
@@ -37,7 +37,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
 
       <div className="space-y-4 w-full max-w-lg p-4">
         <button
-          className="cursor-pointer dark:bg-white/5 bg-black/10 hover:bg-black/20 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
+          className="cursor-pointer dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
           onClick={() => setIsOpen(true)}
         >
           <UserCircleIcon className="size-6" />
@@ -54,7 +54,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </button>
         <Link
-          className="dark:bg-white/5 bg-black/10 hover:bg-black/20 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
+          className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
           href={`/profile/name?uid=${user.id}`}
         >
           <ChatBubbleBottomCenterTextIcon className="size-6 self-start mt-0.5" />
@@ -67,7 +67,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </Link>
         <Link
-          className="dark:bg-white/5 bg-black/10 hover:bg-black/20 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
+          className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
           href={`/profile/birthdate?uid=${user.id}`}
         >
           <CakeIcon className="size-6 self-start mt-0.5" />
@@ -84,7 +84,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </Link>
         <Link
-          className="dark:bg-white/5 bg-black/10 hover:bg-black/20 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
+          className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
           href={`/profile/gender?uid=${user.id}`}
         >
           <UserIcon className="size-6 self-start mt-0.5" />

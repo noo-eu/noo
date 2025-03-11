@@ -28,6 +28,15 @@
       "updateSuccess": "Your gender details have been saved"
     },
     "header": "<noo></noo> Account",
+    "home": {
+      "title": "Welcome <bold>{name}</bold>",
+      "profile": "Your profile",
+      "profileDescription": "Check your profile and update your information",
+      "security": "Privacy & Security",
+      "securityDescription": "Manage your privacy settings and account security",
+      "settings": "Settings",
+      "settingsDescription": "Customize your experience and preferences"
+    },
     "name": {
       "description": "Your name will be visible to other users you interact with on <noo></noo>. If you use <noo></noo> to sign in to other apps, your name can also be shared with them, if you choose.",
       "errors": {
