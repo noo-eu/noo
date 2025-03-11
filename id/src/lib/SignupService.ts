@@ -82,6 +82,7 @@ export class SignupService {
           .toLowerCase()
           .replace(/\./g, ""),
         passwordDigest: await hashPassword(parsed.data.password),
+        passwordChangedAt: new Date(),
         firstName: parsed.data.first_name,
         lastName: parsed.data.last_name,
       }),
@@ -175,7 +176,7 @@ async function validateStep3(
   }
 }
 
-function hashPassword(password: string) {
+export function hashPassword(password: string) {
   return argon2.hash(password);
 }
 

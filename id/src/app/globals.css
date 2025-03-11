@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @source "../../../ui";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 
 @theme {
   --color-eu-blue: #003399;

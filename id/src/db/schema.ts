@@ -40,6 +40,11 @@ export const users = pgTable(
     username: text().notNull(),
     normalizedUsername: text("normalized_username").notNull(),
     passwordDigest: text("password_digest"),
+    passwordChangedAt: timestamp("last_password_changed_at", { mode: "date" }),
+    passwordBreaches: integer("password_breaches").notNull().default(0),
+    passwordBreachesCheckedAt: timestamp("password_breaches_checked_at", {
+      mode: "date",
+    }),
     otpSecret: text("otp_secret"),
     firstName: text("first_name").notNull(),
     lastName: text("last_name"),
