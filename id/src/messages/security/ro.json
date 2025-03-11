@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Înapoi",
+    "header": "Securitate & Confidențialitate",
+    "password": {
+      "breaches": "Parola ta a apărut în {count, plural, one {o breșă de date} other {{count} breșe de date}}. Deși sistemele noastre rămân sigure, îți recomandăm să-ți actualizezi parola imediat ca măsură de precauție.{otp, select, true {} other { Ar fi bine să activezi și autentificarea în doi pași pentru un plus de siguranță.}} <guide>Află mai multe</guide>.",
+      "confirmLabel": "Confirmați noua parolă",
+      "description1": "Parola ta este prima linie de apărare împotriva accesului neautorizat la contul tău.",
+      "description2": "Alege o parolă puternică, nu o împărtăși pentru alte servicii sau cu alte persoane. Citește ghidul nostru pentru a alege și gestiona o parolă sigură.",
+      "errors": {
+        "long": "Parola este prea lungă.",
+        "mismatch": "Parolele nu se potrivesc.",
+        "short": "Parola este prea scurtă."
+      },
+      "label": "Parola nouă",
+      "score": {
+        "acceptable": "acceptabilă",
+        "breached": "a fost compromis într-o scurgere de date. Încercați altul?",
+        "prefix": "Forța parolei:",
+        "short": "prea scurtă",
+        "strong": "puternică",
+        "weak": "slabă"
+      },
+      "title": "Parola",
+      "updateNotice": "Din motive de securitate, schimbarea parolei te deconectează de pe toate celelalte dispozitive.",
+      "updateSuccess": "Parola ta a fost schimbată.",
+      "updateSuggestion": "Folosește cel puțin 10 caractere. Evită cuvinte comune sau evidente, cum ar fi nume de animale de companie, echipe sportive sau date de naștere."
+    },
+    "sessions": {
+      "currentSession": "Sesiunea curentă",
+      "lastUsed": "Ultima utilizare {lastUsedAgo}",
+      "title": "Sesiuni active"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesiune activă} other {{count} sesiuni active}}",
+      "applications": "Aplicații și acces la date",
+      "breaches": "Parola ta a apărut în breșe de date.",
+      "comingSoon": "În curând",
+      "mfa": "Autentificare în doi pași",
+      "passkeys": "Chei de acces",
+      "password": "Parolă",
+      "passwordLastChanged": "Ultima schimbare pe {date, date, medium}.",
+      "sessions": "Sesiuni active"
+    },
+    "title": "Securitate & Confidențialitate"
+  }
+}

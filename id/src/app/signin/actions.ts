@@ -4,6 +4,7 @@ import Tenants from "@/db/tenants";
 import Users from "@/db/users";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
+import { checkPwnedPassword } from "@/lib/password";
 import {
   getSessionCookie,
   SessionsService,
@@ -17,6 +18,8 @@ const signinSchema = z.object({
   password: z.string(),
   continue: z.string().optional(),
 });
+
+const PASSWORD_BREACH_CHECK_INTERVAL = 1000 * 60 * 60 * 24 * 7; // 1 week
 
 export async function signin(_: unknown, formData: FormData) {
   const { username, password, ...params } = signinSchema.parse(
@@ -44,6 +47,25 @@ export async function signin(_: unknown, formData: FormData) {
   if (user.otpSecret) {
     // TODO: create a 5 minute token and redirect to /otp?token=...
     throw new Error("OTP step not implemented");
+  }
+
+  if (
+    !user.passwordBreachesCheckedAt ||
+    user.passwordBreachesCheckedAt <
+      new Date(Date.now() - PASSWORD_BREACH_CHECK_INTERVAL)
+  ) {
+    if (user.passwordBreaches > 0) {
+      // No need to check again, we know the password is breached
+      await Users.update(user.id, { passwordBreachesCheckedAt: new Date() });
+    } else {
+      const breaches = await checkPwnedPassword(password);
+      if (breaches.isOk() && breaches.value > 0) {
+        await Users.update(user.id, {
+          passwordBreaches: breaches.value,
+          passwordBreachesCheckedAt: new Date(),
+        });
+      }
+    }
   }
 
   const svc = new SessionsService(await getSessionCookie());

@@ -51,6 +51,7 @@
       "updateNotice": "Diese Änderung gilt für alle <noo></noo>-Dienste. Es könnte sein, dass du den Namen auch bei anderen Apps separat aktualisieren musst.",
       "updateSuccess": "Dein Name wurde geändert"
     },
+    "pageTitle": "Konto",
     "picture_dialog": {
       "camera": {
         "capture": "Foto aufnehmen",

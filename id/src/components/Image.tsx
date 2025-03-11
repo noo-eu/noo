@@ -6,11 +6,11 @@ export default function Image(props: Props) {
   const { props: newProps } = getImageProps(props);
 
   // Remove style="color: transparent" as it breaks CSP.
-  const { style: _omit, ...rest } = newProps;
+  const { style: _omit, alt, ...rest } = newProps;
 
   // But add tailwind "text-transparent" to make the alt text invisible.
   rest.className = `text-transparent ${rest.className}`;
 
   // eslint-disable-next-line @next/next/no-img-element
-  return <img {...rest} />;
+  return <img alt={alt} {...rest} />;
 }

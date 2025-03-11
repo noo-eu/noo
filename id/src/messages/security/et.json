@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Tagasi",
+    "header": "Turve ja Privaatsus",
+    "password": {
+      "breaches": "Sinu parool on olnud {count, plural, one {ühes andmelekkes} other {{count} andmelekkes}}. Kuigi meie süsteemid on endiselt turvalised, soovitame sul koheselt oma parool uuendada. {otp, select, true {} other { Samuti peaksid lubama kaheastmelise autentimise lisaturbeks.}} <guide>Uuri lähemalt</guide>.",
+      "confirmLabel": "Kinnita uus parool",
+      "description1": "Sinu parool on esimene kaitseliin volitamata juurdepääsu vastu sinu kontole.",
+      "description2": "Vali tugev parool, ära jaga seda teiste teenuste ega inimeste jaoks. Loe meie juhendit, kuidas valida ja hallata turvalist parooli.",
+      "errors": {
+        "long": "Parool on liiga pikk.",
+        "mismatch": "Paroolid ei ühti.",
+        "short": "Parool on liiga lühike."
+      },
+      "label": "Uus parool",
+      "score": {
+        "acceptable": "vastuvõetav",
+        "breached": "on andmelekke ohver. Proovi mõnda teist?",
+        "prefix": "Parooli tugevus:",
+        "short": "liiga lühike",
+        "strong": "tugev",
+        "weak": "nõrk"
+      },
+      "title": "Parool",
+      "updateNotice": "Turvalisuse huvides logitakse sind parooli vahetusel kõikjalt välja.",
+      "updateSuccess": "Sinu parool on muutunud.",
+      "updateSuggestion": "Kasu vähemalt 10 tähemärki. Vältige tavalisi või ilmseid sõnu nagu lemmikloomade nimed, spordimeeskonnad või sünnipäevad."
+    },
+    "sessions": {
+      "currentSession": "Praegune seanss",
+      "lastUsed": "Viimati kasutatud {lastUsedAgo} tagasi",
+      "title": "Aktiivsed seansid"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 aktiivne sessioon} other {{count} aktiivset sessiooni}}",
+      "applications": "Rakendused ja andmete ligipääs",
+      "breaches": "Sinu parool on ilmunud andmelekkedesse.",
+      "comingSoon": "Peagi tulekul",
+      "mfa": "Kaheastmeline autentimine",
+      "passkeys": "Paroolivõtmed",
+      "password": "Parool",
+      "passwordLastChanged": "Viimati muudeti {date, date, medium}.",
+      "sessions": "Aktiivsed sessioonid"
+    },
+    "title": "Turve ja Privaatsus"
+  }
+}

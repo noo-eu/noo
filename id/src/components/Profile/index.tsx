@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 import { ProfilePicture } from "../ProfilePicture";
+import ProfileLayout from "./ProfileLayout";
 
 export type ProfilePageProps = {
   user: {
@@ -34,7 +35,7 @@ export function ProfilePage({ user }: ProfilePageProps) {
   const t = useTranslations("profile.home");
 
   return (
-    <div className="flex flex-col items-center">
+    <ProfileLayout user={user}>
       <div className="mt-16 mb-8" onClick={() => setIsOpen(true)}>
         <div className="flex items-center justify-center border border-2 rounded-full p-0.75">
           <ProfilePicture
@@ -50,11 +51,8 @@ export function ProfilePage({ user }: ProfilePageProps) {
         />
       </div>
       <h1 className="text-5xl font-medium my-8">
-        {t.rich("title", {
+        {t("title", {
           name: user.firstName,
-          bold: (children) => (
-            <span style={{ fontFamily: "DynaPuff" }}>{children}</span>
-          ),
         })}
       </h1>
 
@@ -93,6 +91,6 @@ export function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </Link>
       </div>
-    </div>
+    </ProfileLayout>
   );
 }

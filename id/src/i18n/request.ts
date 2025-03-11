@@ -6,7 +6,7 @@ import { cookies, headers } from "next/headers";
 // I didn't decide this, I'm just a developer.
 const BCMS = ["sr", "bs", "me"];
 
-acceptLanguage.languages(SUPPORTED_LANGUAGES.concat(BCMS));
+acceptLanguage.languages(SUPPORTED_LANGUAGES.concat(BCMS).concat("nb"));
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
@@ -29,6 +29,7 @@ export async function i18nConfig() {
 
     locale = acceptLanguage.get(lngHeader) ?? "en";
     locale = BCMS.includes(locale) ? "hr" : locale;
+    locale = locale == "nb" ? "no" : locale;
   }
 
   return {
@@ -37,6 +38,7 @@ export async function i18nConfig() {
       ...(await loadJSON5(`src/messages/common/${locale}.json`)),
       ...(await loadJSON5(`src/messages/oidc/${locale}.json`)),
       ...(await loadJSON5(`src/messages/profile/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/security/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },

@@ -2,7 +2,7 @@ import { DialogTitle } from "@headlessui/react";
 import { ArrowLeftCircleIcon, CameraIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { View } from ".";
 
 export type CameraViewProps = {
@@ -14,9 +14,10 @@ export function CameraView({ navigate, onCapture }: CameraViewProps) {
   const t = useTranslations("profile.picture_dialog");
   const commonT = useTranslations("common");
 
+  const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [live, setLive] = useState(false);
 
   // Initialize camera
   const startCamera = async () => {
@@ -24,23 +25,26 @@ export function CameraView({ navigate, onCapture }: CameraViewProps) {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "user" },
       });
-      setStream(mediaStream);
+      streamRef.current = mediaStream;
 
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
       }
+
+      setLive(true);
     } catch (err) {
       console.error("Error accessing camera:", err);
     }
   };
 
   // Stop camera stream
-  const stopCamera = () => {
-    if (stream) {
-      stream.getTracks().forEach((track) => track.stop());
-      setStream(null);
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
     }
-  };
+    setLive(false);
+  }, []);
 
   // Take photo
   const takePhoto = () => {
@@ -76,7 +80,7 @@ export function CameraView({ navigate, onCapture }: CameraViewProps) {
   useEffect(() => {
     startCamera();
     return () => stopCamera();
-  });
+  }, [stopCamera]);
 
   return (
     <>
@@ -100,7 +104,7 @@ export function CameraView({ navigate, onCapture }: CameraViewProps) {
         <Button
           onClick={takePhoto}
           className="flex items-center gap-2"
-          disabled={!stream}
+          disabled={!live}
         >
           <CameraIcon className="size-5" />
           {t("camera.capture")}

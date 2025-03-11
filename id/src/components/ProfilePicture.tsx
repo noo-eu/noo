@@ -1,6 +1,6 @@
 import Image from "@/components/Image";
 
-type ProfilePictureProps = {
+export type ProfilePictureProps = {
   user: {
     picture: string | null;
     firstName: string;
@@ -19,7 +19,7 @@ export function ProfilePicture({
       <Image
         src={user.picture}
         alt=""
-        className={`rounded-full aspect-square ${className}`}
+        className={`rounded-full aspect-square select-none ${className}`}
         width={width}
         height={width}
       />

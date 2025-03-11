@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Tillbaka",
+    "header": "Säkerhet och Integritet",
+    "password": {
+      "breaches": "Ditt lösenord har förekommit i {count, plural, one {ett dataintrång} other {{count} dataintrång}}. Våra system är fortfarande säkra, men vi rekommenderar att du uppdaterar ditt lösenord omedelbart som en försiktighetsåtgärd.{otp, select, true {} other { Du bör också aktivera 2-faktorsautentisering för ökad säkerhet.}} <guide>Läs mer</guide>.",
+      "confirmLabel": "Bekräfta nytt lösenord",
+      "description1": "Ditt lösenord är den första försvarslinjen mot obehörig åtkomst till ditt konto.",
+      "description2": "Välj ett starkt lösenord, dela det inte med andra tjänster eller personer. Läs vår guide för att välja och hantera ett säkert lösenord.",
+      "errors": {
+        "long": "Lösenordet är för långt.",
+        "mismatch": "Lösenorden matchar inte.",
+        "short": "Lösenordet är för kort."
+      },
+      "label": "Nytt lösenord",
+      "score": {
+        "acceptable": "acceptabelt",
+        "breached": "finns med i en dataläcka. Försök med ett annat?",
+        "prefix": "Lösenordsstyrka:",
+        "short": "för kort",
+        "strong": "starkt",
+        "weak": "svagt"
+      },
+      "title": "Lösenord",
+      "updateNotice": "Av säkerhetsskäl loggas du ut överallt annars när du byter ditt lösenord.",
+      "updateSuccess": "Ditt lösenord har ändrats.",
+      "updateSuggestion": "Använd minst 10 tecken. Undvik vanliga eller uppenbara ord som husdjursnamn, sportlag eller födelsedagar."
+    },
+    "sessions": {
+      "currentSession": "Aktuell session",
+      "lastUsed": "Senast använd {lastUsedAgo}",
+      "title": "Aktiva sessioner"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 session} other {{count} sessioner}}",
+      "applications": "Appar och datåtkomst",
+      "breaches": "Ditt lösenord har förekommit i dataintrång.",
+      "comingSoon": "Kommer snart",
+      "mfa": "Tvåstegsverifiering",
+      "passkeys": "Passnycklar",
+      "password": "Lösenord",
+      "passwordLastChanged": "Senast ändrat {date, date, medium}.",
+      "sessions": "Aktiva sessioner"
+    },
+    "title": "Säkerhet och Integritet"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Atpakaļ",
+    "header": "Drošība un privātums",
+    "password": {
+      "breaches": "Tava parole ir parādījusies {count, plural, one {vienā datu noplūdē} other {{count} datu noplūdēs}}. Kamēr mūsu sistēmas paliek drošas, ieteicams nekavējoties atjaunināt savu paroli kā piesardzības pasākumu.{otp, select, true {} other { Jā, un tev vajadzētu arī iespējot divu faktoru autentifikāciju papildu drošībai.}} <guide>Uzzini vairāk</guide>.",
+      "confirmLabel": "Apstiprināt jauno paroli",
+      "description1": "Tava parole ir pirmais aizsardzības līnija pret neatļautu piekļuvi tavai kontam.",
+      "description2": "Izvēlies stipru paroli, nesaki to citiem pakalpojumiem vai cilvēkiem. Izlasi mūsu ceļvedi par drošu paroli izvēli un pārvaldīšanu.",
+      "errors": {
+        "long": "Parole ir pārāk gara.",
+        "mismatch": "Paroles nesakrīt.",
+        "short": "Parole ir pārāk īsa."
+      },
+      "label": "Jaunā parole",
+      "score": {
+        "acceptable": "pieņemama",
+        "breached": "ir iekļauta datu noplūdē. Varbūt mēģināt citu?",
+        "prefix": "Paroles stiprība:",
+        "short": "pārāk īsa",
+        "strong": "stipra",
+        "weak": "vāja"
+      },
+      "title": "Parole",
+      "updateNotice": "Drošības apsvērumu dēļ, mainot paroli, jūs tiekat izrakstīts no visām pārējām ierīcēm.",
+      "updateSuccess": "Tava parole ir mainīta.",
+      "updateSuggestion": "Izmanto vismaz 10 rakstzīmes. Izvairies no izplatītām vai acīmredzamām vārdu kombinācijām, piemēram, dzīvnieku vārdiem, sporta komandām vai dzimšanas dienām."
+    },
+    "sessions": {
+      "currentSession": "Pašreizējā sesija",
+      "lastUsed": "Pēdējo reizi izmantots {lastUsedAgo}",
+      "title": "Aktīvās sesijas"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesija} other {{count} sesijas}}",
+      "applications": "Lietotnes un datu piekļuve",
+      "breaches": "Tava parole ir parādījusies datu noplūdēs.",
+      "comingSoon": "Drīz būs pieejams",
+      "mfa": "Divfaktoru autentifikācija",
+      "passkeys": "Piekļuves atslēgas",
+      "password": "Parole",
+      "passwordLastChanged": "Pēdējo reizi mainīta {date, date, medium}.",
+      "sessions": "Aktīvās sesijas"
+    },
+    "title": "Drošība un privātums"
+  }
+}

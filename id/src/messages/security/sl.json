@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Nazaj",
+    "header": "Varnost in Zasebnost",
+    "password": {
+      "breaches": "Vaša geslo je bilo odkrito v {count, plural, one {kršitvi podatkov} other {{count} kršitvah podatkov}}. Čeprav so naši sistemi še vedno varni, priporočamo, da takoj posodobite svoje geslo kot previdnostno mero.{otp, select, true {} other { Prav tako bi morali omogočiti 2-faktorsko avtentifikacijo za dodatno varnost.}} <guide>Več informacij</guide>.",
+      "confirmLabel": "Potrdite novo geslo",
+      "description1": "Vaša geslo je prva linija obrambe pred nepooblaščenim dostopom do vašega računa.",
+      "description2": "Izberite močno geslo, ne delite ga z drugimi storitvami ali ljudmi. Preberite naš priročnik za izbiro in upravljanje varnega gesla.",
+      "errors": {
+        "long": "Geslo je predolgo.",
+        "mismatch": "Gesli se ne ujemata.",
+        "short": "Geslo je prekratko."
+      },
+      "label": "Novo geslo",
+      "score": {
+        "acceptable": "sprejemljivo",
+        "breached": "je bil del vdora v podatke. Bi poskusil z drugim?",
+        "prefix": "Moč gesla:",
+        "short": "prekratko",
+        "strong": "močno",
+        "weak": "šibko"
+      },
+      "title": "Geslo",
+      "updateNotice": "Zaradi varnostnih razlogov te odjava povsod drugje, če spremeniš geslo.",
+      "updateSuccess": "Vaše geslo je bilo spremenjeno.",
+      "updateSuggestion": "Uporabite vsaj 10 znakov. Izogibajte se pogostim ali očitnim besedam, kot so imena hišnih ljubljenčkov, športne ekipe ali datumi rojstva."
+    },
+    "sessions": {
+      "currentSession": "Trenutna seja",
+      "lastUsed": "Zadnjič uporabljen {lastUsedAgo}",
+      "title": "Aktivne seje"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 seja} other {{count} sej}}",
+      "applications": "Aplikacije in dostop do podatkov",
+      "breaches": "Vaša geslo je bilo odkrito v kršitvah podatkov.",
+      "comingSoon": "Kmalu na voljo",
+      "mfa": "Dvofaktorska avtentikacija",
+      "passkeys": "Ključi za dostop",
+      "password": "Geslo",
+      "passwordLastChanged": "Nazadnje spremenjeno {date, date, medium}.",
+      "sessions": "Aktivne seje"
+    },
+    "title": "Varnost in Zasebnost"
+  }
+}

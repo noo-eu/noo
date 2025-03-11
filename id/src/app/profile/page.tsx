@@ -1,7 +1,17 @@
-import ProfilePage from "./ProfileHomePage";
 import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import ProfilePage from "./ProfileHomePage";
+
+export async function generateMetadata() {
+  const t = await getTranslations("profile");
+
+  return {
+    title: t.rich("title", { noo: () => "noo" }),
+    description: "",
+  };
+}
 
 export default async function Home({
   searchParams,

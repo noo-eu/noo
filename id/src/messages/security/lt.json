@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Atgal",
+    "header": "Saugumas ir privatumas",
+    "password": {
+      "breaches": "Jūsų slaptažodis buvo rastas {count, plural, one {viename duomenų pažeidime} other {{count} duomenų pažeidimuose}}. Nors mūsų sistemos išlieka saugios, rekomenduojame nedelsiant atnaujinti slaptažodį kaip atsargumo priemonę.{otp, select, true {} other { Taip pat turėtumėte įjungti dviejų faktorių autentifikaciją papildomai apsaugai.}} <guide>Sužinokite daugiau</guide>.",
+      "confirmLabel": "Patvirtinkite naują slaptažodį",
+      "description1": "Jūsų slaptažodis yra pirmasis barjeras prieš nesankcionuotą prieigą prie jūsų paskyros.",
+      "description2": "Pasirinkite stiprų slaptažodį, nesidalinkite juo su kitomis paslaugomis ar žmonėmis. Perskaitykite mūsų gaires, kaip pasirinkti ir valdyti saugų slaptažodį.",
+      "errors": {
+        "long": "Slaptažodis per ilgas.",
+        "mismatch": "Slaptažodziai nesutampa.",
+        "short": "Slaptažodis per trumpas."
+      },
+      "label": "Naujas slaptažodis",
+      "score": {
+        "acceptable": "priimtinas",
+        "breached": "jau buvo paviešintas. Gal išbandysi kitą?",
+        "prefix": "Slaptažodžio stiprumas:",
+        "short": "per trumpas",
+        "strong": "stiprus",
+        "weak": "silpnas"
+      },
+      "title": "Slaptažodis",
+      "updateNotice": "Dėl saugumo priežasčių pakeitus slaptažodį, automatiškai būsite atjungti iš kitų įrenginių.",
+      "updateSuccess": "Jūsų slaptažodis buvo pakeistas.",
+      "updateSuggestion": "Naudokite bent 10 simbolių. Venkite paprastų ar akivaizdžių žodžių, tokių kaip augintinių vardai, sporto komandos ar gimtadieniai."
+    },
+    "sessions": {
+      "currentSession": "Dabartinė sesija",
+      "lastUsed": "Paskutinį kartą naudota {lastUsedAgo}",
+      "title": "Aktyvios sesijos"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 aktyvi sesija} other {{count} aktyvios sesijos}}",
+      "applications": "Programėlės ir duomenų prieiga",
+      "breaches": "Jūsų slaptažodis buvo rastas duomenų pažeidimuose.",
+      "comingSoon": "Greitai pasirodys",
+      "mfa": "Dviejų veiksnių autentifikavimas",
+      "passkeys": "Pateikimo raktai",
+      "password": "Slaptažodis",
+      "passwordLastChanged": "Paskutinį kartą pakeista {date, date, medium}.",
+      "sessions": "Aktyvios sesijos"
+    },
+    "title": "Saugumas ir privatumas"
+  }
+}

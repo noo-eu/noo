@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Späť",
+    "header": "Bezpečnosť a ochrana súkromia",
+    "password": {
+      "breaches": "Vaše heslo sa objavilo v {count, plural, one {jednom úniku dát} other {{count} únikoch dát}}. Hoci naše systémy ostávajú bezpečné, odporúčame ihneď aktualizovať vaše heslo ako opatrenie na ochranu.{otp, select, true {} other { Mali by ste tiež aktivovať dvojfaktorovú autentifikáciu pre vyššiu bezpečnosť.}} <guide>Zistite viac</guide>.",
+      "confirmLabel": "Potvrďte nové heslo",
+      "description1": "Vaše heslo je prvou obrannou líniou proti neoprávnenému prístupu k vášmu účtu.",
+      "description2": "Vyberte si silné heslo, nezdieľajte ho s inými službami ani s inými ľuďmi. Prečítajte si našu príručku na výber a správu bezpečného hesla.",
+      "errors": {
+        "long": "Heslo je príliš dlhé.",
+        "mismatch": "Heslá sa nezhodujú.",
+        "short": "Heslo je príliš krátke."
+      },
+      "label": "Nové heslo",
+      "score": {
+        "acceptable": "prijateľné",
+        "breached": "bolo zverejnené v úniku dát. Skúste iné?",
+        "prefix": "Sila hesla:",
+        "short": "príliš krátke",
+        "strong": "silné",
+        "weak": "slabé"
+      },
+      "title": "Heslo",
+      "updateNotice": "Z bezpečnostných dôvodov, keď si zmeníš heslo, odhlásime ťa zo všetkých ostatných zariadení.",
+      "updateSuccess": "Vaše heslo bolo zmenené.",
+      "updateSuggestion": "Použite aspoň 10 znakov. Vyhýbajte sa bežným alebo očividným slovám ako mená domácich miláčikov, športové tímy alebo narodeniny."
+    },
+    "sessions": {
+      "currentSession": "Aktuálna relácia",
+      "lastUsed": "Naposledy použitý {lastUsedAgo}",
+      "title": "Aktívne relácie"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 aktívna relácia} other {{count} aktívnych relácií}}",
+      "applications": "Aplikácie a prístup k dátam",
+      "breaches": "Vaše heslo sa objavilo v únikoch dát.",
+      "comingSoon": "Čoskoro prídeme",
+      "mfa": "Dvojfaktorová autentifikácia",
+      "passkeys": "Prístupové kľúče",
+      "password": "Heslo",
+      "passwordLastChanged": "Posledná zmena {date, date, medium}.",
+      "sessions": "Aktívne relácie"
+    },
+    "title": "Bezpečnosť a ochrana súkromia"
+  }
+}

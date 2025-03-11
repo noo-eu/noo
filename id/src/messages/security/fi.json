@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Takaisin",
+    "header": "Turvallisuus & Yksityisyys",
+    "password": {
+      "breaches": "Salasanasi on ilmennyt {count, plural, one {yhden tietovuodon} other {{count} tietovuodossa}}. Vaikka järjestelmämme ovat edelleen turvallisia, suosittelemme, että päivität salasanasi heti varotoimenpiteenä.{otp, select, true {} other { Suosittelemme myös 2-vaiheisen tunnistautumisen käyttöönottoa lisäturvallisuuden vuoksi.}} <guide>Lisätietoja</guide>.",
+      "confirmLabel": "Vahvista uusi salasana",
+      "description1": "Salasanasi on ensimmäinen puolustuslinja luvattomilta pääsyiltä tiliisi.",
+      "description2": "Valitse vahva salasana, älä jaa sitä muihin palveluihin tai muille ihmisille. Lue opas turvallisen salasanan valitsemiseen ja hallintaan.",
+      "errors": {
+        "long": "Salasana on liian pitkä.",
+        "mismatch": "Salasanat eivät täsmää.",
+        "short": "Salasana on liian lyhyt."
+      },
+      "label": "Uusi salasana",
+      "score": {
+        "acceptable": "hyväksyttävä",
+        "breached": "on löytynyt tietovuodosta. Haluatko kokeilla toista?",
+        "prefix": "Salasanan vahvuus:",
+        "short": "liian lyhyt",
+        "strong": "vahva",
+        "weak": "heikko"
+      },
+      "title": "Salasana",
+      "updateNotice": "Turvallisuussyistä salasanaa vaihtaessasi kirjaudut ulos kaikilta muilta laitteilta.",
+      "updateSuccess": "Salasanasi on vaihdettu.",
+      "updateSuggestion": "Käytä vähintään 10 merkkiä. Vältä yleisiä tai ilmiselviä sanoja, kuten lemmikkien nimiä, urheilujoukkueita tai syntymäpäiviä."
+    },
+    "sessions": {
+      "currentSession": "Nykyinen sessio",
+      "lastUsed": "Viimeksi käytetty {lastUsedAgo}",
+      "title": "Aktiiviset sessiot"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 istunto} other {{count} istuntoa}}",
+      "applications": "Sovellukset ja tiedon pääsyoikeudet",
+      "breaches": "Salasanasi on ilmennyt tietovuodoissa.",
+      "comingSoon": "Tulossa pian",
+      "mfa": "Kaksivaiheinen tunnistautuminen",
+      "passkeys": "Salasanatunnukset",
+      "password": "Salasana",
+      "passwordLastChanged": "Viimeksi vaihdettu {date, date, medium}.",
+      "sessions": "Aktiiviset istunnot"
+    },
+    "title": "Turvallisuus & Yksityisyys"
+  }
+}

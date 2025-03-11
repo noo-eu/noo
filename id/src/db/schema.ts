@@ -1,6 +1,8 @@
 import { relations } from "drizzle-orm";
 import {
+  bigint,
   boolean,
+  customType,
   date,
   inet,
   integer,
@@ -13,6 +15,15 @@ import {
   unique,
   uuid,
 } from "drizzle-orm/pg-core";
+
+const bytea = customType<{
+  data: Buffer;
+  default: false;
+}>({
+  dataType() {
+    return "bytea";
+  },
+});
 
 export const tenants = pgTable("tenants", {
   id: uuid().primaryKey().defaultRandom(),
@@ -40,7 +51,13 @@ export const users = pgTable(
     username: text().notNull(),
     normalizedUsername: text("normalized_username").notNull(),
     passwordDigest: text("password_digest"),
+    passwordChangedAt: timestamp("last_password_changed_at", { mode: "date" }),
+    passwordBreaches: integer("password_breaches").notNull().default(0),
+    passwordBreachesCheckedAt: timestamp("password_breaches_checked_at", {
+      mode: "date",
+    }),
     otpSecret: text("otp_secret"),
+    webauthnChallenge: text("webauthn_challenge"),
     firstName: text("first_name").notNull(),
     lastName: text("last_name"),
     picture: text(),
@@ -71,6 +88,27 @@ export const sessions = pgTable("sessions", {
     .notNull()
     .defaultNow(),
   lastUsedAt: timestamp("last_used_at").notNull().defaultNow(),
+});
+
+export const passkeys = pgTable("passkeys", {
+  id: uuid().primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
+  name: text().notNull(),
+  credentialId: text("credential_id").notNull(),
+  publicKey: bytea("public_key").notNull(),
+  counter: bigint({ mode: "number" }).notNull().default(0),
+  deviceType: text("device_type").notNull(),
+  backedUp: boolean("backed_up").notNull().default(false),
+  transports: text().array().notNull().default([]),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  lastUsedAt: timestamp("last_used_at", { mode: "date" })
+    .notNull()
+    .defaultNow(),
 });
 
 export const oidcClients = pgTable("oidc_clients", {

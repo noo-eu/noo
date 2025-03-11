@@ -51,6 +51,7 @@
       "updateNotice": "Cette mise à jour concerne tous les services de <noo></noo>. Vous devrez peut-être mettre à jour séparément votre nom pour d'autres applications.",
       "updateSuccess": "Votre nom a été modifié avec succès"
     },
+    "pageTitle": "Compte",
     "picture_dialog": {
       "camera": {
         "capture": "Capturer",

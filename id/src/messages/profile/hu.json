@@ -51,6 +51,7 @@
       "updateNotice": "Ez a frissítés vonatkozik minden <noo></noo> szolgáltatásra. Esetleg még mindig saját magadnak kell megváltoztatnod a nevét más alkalmazásokhoz.",
       "updateSuccess": "Sikeresen megváltoztattad a nevedet"
     },
+    "pageTitle": "Fiók",
     "picture_dialog": {
       "camera": {
         "capture": "Felvétel",

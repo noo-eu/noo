@@ -2,6 +2,7 @@
 
 import { Noo } from "@/components/Noo";
 import { ProfilePageProps } from "@/components/Profile";
+import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { ProfilePicture } from "@/components/ProfilePicture";
 import {
   CakeIcon,
@@ -28,8 +29,8 @@ export default function ProfilePage({ user }: ProfilePageProps) {
   const t = useTranslations("profile");
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-4xl font-medium mb-16">
+    <ProfileLayout user={user}>
+      <h1 className="text-4xl font-medium mt-12 mb-16">
         {t.rich("title", {
           noo: () => <Noo />,
         })}
@@ -102,6 +103,6 @@ export default function ProfilePage({ user }: ProfilePageProps) {
           </div>
         </Link>
       </div>
-    </div>
+    </ProfileLayout>
   );
 }

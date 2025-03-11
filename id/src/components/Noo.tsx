@@ -1,3 +1,3 @@
-export function Noo() {
-  return <span className="noo">noo</span>;
+export function Noo(props: { className?: string }) {
+  return <span className={`${props.className} noo`}>noo</span>;
 }

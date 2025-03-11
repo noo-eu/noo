@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Indietro",
+    "header": "Sicurezza & Privacy",
+    "password": {
+      "breaches": "La tua password è stata trovata in {count, plural, one {una violazione dei dati} other {{count} violazioni dei dati}}. Anche se i nostri sistemi sono sicuri, ti consigliamo di aggiornare subito la tua password per precauzione.{otp, select, true {} other { Potresti anche attivare l'autenticazione a due fattori per una maggiore sicurezza.}} <guide>Scopri di più</guide>.",
+      "confirmLabel": "Conferma la nuova password",
+      "description1": "La tua password è la prima linea di difesa contro l'accesso non autorizzato al tuo account.",
+      "description2": "Scegli una password forte, non condividerla con altri servizi o persone. Leggi la nostra guida su come scegliere e gestire una password sicura.",
+      "errors": {
+        "long": "La password è troppo lunga.",
+        "mismatch": "Le password non corrispondono.",
+        "short": "La password è troppo corta."
+      },
+      "label": "Nuova password",
+      "score": {
+        "acceptable": "accettabile",
+        "breached": "è stata trovata in un attacco informatico. Prova con un'altra?",
+        "prefix": "Sicurezza della password:",
+        "short": "troppo corta",
+        "strong": "forte",
+        "weak": "debole"
+      },
+      "title": "Password",
+      "updateNotice": "Per motivi di sicurezza, cambiare la password ti disconnette da tutti gli altri dispositivi.",
+      "updateSuccess": "La tua password è stata cambiata.",
+      "updateSuggestion": "Usa almeno 10 caratteri. Evita parole comuni o evidenti come nomi di animali domestici, squadre sportive o compleanni."
+    },
+    "sessions": {
+      "currentSession": "Sessione attuale",
+      "lastUsed": "Ultimo accesso {lastUsedAgo}",
+      "title": "Sessioni attive"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sessione} other {{count} sessioni}}",
+      "applications": "App e accesso ai dati",
+      "breaches": "La password che usi è comparsa in alcuni attacchi informatici.",
+      "comingSoon": "In arrivo",
+      "mfa": "Autenticazione a due fattori",
+      "passkeys": "Passkeys",
+      "password": "Password",
+      "passwordLastChanged": "Ultima modifica il {date, date, medium}.",
+      "sessions": "Sessioni attive"
+    },
+    "title": "Sicurezza & Privacy"
+  }
+}

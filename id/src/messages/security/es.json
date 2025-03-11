@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Volver",
+    "header": "Seguridad y Privacidad",
+    "password": {
+      "breaches": "Tu contraseña ha aparecido en {count, plural, one {una filtración de datos} other {{count} filtraciones de datos}}. Aunque nuestros sistemas son seguros, te recomendamos que actualices tu contraseña de inmediato como medida de precaución.{otp, select, true {} other { Además, deberías activar la autenticación en 2 pasos para mayor seguridad.}} <guide>Aprende más</guide>.",
+      "confirmLabel": "Confirma la nueva contraseña",
+      "description1": "Tu contraseña es la primera línea de defensa contra el acceso no autorizado a tu cuenta.",
+      "description2": "Elige una contraseña fuerte, no la compartas para otros servicios ni con otras personas. Lee nuestra guía para elegir y gestionar una contraseña segura.",
+      "errors": {
+        "long": "La contraseña es demasiado larga.",
+        "mismatch": "Las contraseñas no coinciden.",
+        "short": "La contraseña es demasiado corta."
+      },
+      "label": "Nueva contraseña",
+      "score": {
+        "acceptable": "aceptable",
+        "breached": "está en una filtración de datos. ¿Por qué no pruebas con otra?",
+        "prefix": "Fuerza de la contraseña:",
+        "short": "demasiado corta",
+        "strong": "fuerte",
+        "weak": "débil"
+      },
+      "title": "Contraseña",
+      "updateNotice": "Por motivos de seguridad, cambiar tu contraseña te desconectará de todos los demás sitios.",
+      "updateSuccess": "Tu contraseña ha sido cambiada.",
+      "updateSuggestion": "Utiliza al menos 10 caracteres. Evita palabras comunes u obvias como nombres de mascotas, equipos deportivos o cumpleaños."
+    },
+    "sessions": {
+      "currentSession": "Sesión actual",
+      "lastUsed": "Última vez usado {lastUsedAgo}",
+      "title": "Sesiones activas"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesión} other {{count} sesiones}}",
+      "applications": "Aplicaciones y acceso a datos",
+      "breaches": "Tu contraseña ha aparecido en filtraciones de datos.",
+      "comingSoon": "Próximamente",
+      "mfa": "Autenticación en dos pasos",
+      "passkeys": "Claves de seguridad",
+      "password": "Contraseña",
+      "passwordLastChanged": "Último cambio el {date, date, medium}.",
+      "sessions": "Sesiones activas"
+    },
+    "title": "Seguridad y Privacidad"
+  }
+}

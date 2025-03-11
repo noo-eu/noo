@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Nazad",
+    "header": "Sigurnost i Privatnost",
+    "password": {
+      "breaches": "Vaša lozinka se pojavila u {count, plural, one {jednom curenju podataka} other {{count} curenja podataka}}. Iako su naši sustavi sigurni, preporučujemo da odmah promijenite lozinku kao previd.{otp, select, true {} other { Također, preporučujemo da uključite dvofaktorsku autentifikaciju za dodatnu sigurnost.}} <guide>Saznajte više</guide>.",
+      "confirmLabel": "Potvrdi novu lozinku",
+      "description1": "Vaša lozinka je prva linija obrane protiv neovlaštenog pristupa vašem računu.",
+      "description2": "Odaberite jaku lozinku, ne dijelite je s drugim uslugama ili s drugim osobama. Pročitajte naš vodič za odabir i upravljanje sigurnom lozinkom.",
+      "errors": {
+        "long": "Lozinka je preduga.",
+        "mismatch": "Lozinke se ne podudaraju.",
+        "short": "Lozinka je prekratka."
+      },
+      "label": "Nova lozinka",
+      "score": {
+        "acceptable": "prihvatljivo",
+        "breached": "je procurila u nekom hakiranju podataka. Možda da pokušaš s nekom drugom?",
+        "prefix": "Snaga lozinke:",
+        "short": "prekratko",
+        "strong": "jaka",
+        "weak": "slaba"
+      },
+      "title": "Lozinka",
+      "updateNotice": "Iz sigurnosnih razloga, promjenom lozinke bit ćete odjavljeni sa svih drugih uređaja.",
+      "updateSuccess": "Vaša lozinka je promijenjena.",
+      "updateSuggestion": "Koristite najmanje 10 znakova. Izbjegavajte uobičajene ili očite riječi poput imena ljubimaca, sportskih timova ili rođendana."
+    },
+    "sessions": {
+      "currentSession": "Trenutna sesija",
+      "lastUsed": "Zadnji put korišteno {lastUsedAgo}",
+      "title": "Aktivne sesije"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 aktivna sesija} other {{count} aktivnih sesija}}",
+      "applications": "Aplikacije i pristup podacima",
+      "breaches": "Vaša lozinka se pojavila u curenjima podataka.",
+      "comingSoon": "Uskoro dolazi",
+      "mfa": "Dvofaktorska autentifikacija",
+      "passkeys": "Ključevi za pristup",
+      "password": "Lozinka",
+      "passwordLastChanged": "Zadnja promjena {date, date, medium}.",
+      "sessions": "Aktivne sesije"
+    },
+    "title": "Sigurnost i Privatnost"
+  }
+}

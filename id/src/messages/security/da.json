@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Tilbage",
+    "header": "Sikkerhed & Privatliv",
+    "password": {
+      "breaches": "Din adgangskode er blevet set i {count, plural, one {en databrud} other {{count} databrud}}. Selvom vores systemer er sikre, anbefaler vi at du opdaterer din adgangskode straks som en sikkerhedsforanstaltning.{otp, select, true {} other { Du bør også aktivere 2-faktor autentifikation for ekstra sikkerhed.}} <guide>Læs mere</guide>.",
+      "confirmLabel": "Bekræft ny adgangskode",
+      "description1": "Din adgangskode er den første forsvarslinje mod uautoriseret adgang til din konto.",
+      "description2": "Vælg en stærk adgangskode, del den ikke med andre tjenester eller personer. Læs vores guide til at vælge og håndtere en sikker adgangskode.",
+      "errors": {
+        "long": "Adgangskoden er for lang.",
+        "mismatch": "Adgangskoderne stemmer ikke overens.",
+        "short": "Adgangskoden er for kort."
+      },
+      "label": "Ny adgangskode",
+      "score": {
+        "acceptable": "acceptabel",
+        "breached": "er blevet kompromitteret. Skal vi prøve en anden?",
+        "prefix": "Adgangskodes styrke:",
+        "short": "for kort",
+        "strong": "stærk",
+        "weak": "svag"
+      },
+      "title": "Adgangskode",
+      "updateNotice": "Af sikkerhedsmæssige årsager bliver du logget ud alle andre steder, når du ændrer din adgangskode.",
+      "updateSuccess": "Din adgangskode er blevet ændret.",
+      "updateSuggestion": "Brug mindst 10 tegn. Undgå almindelige eller åbenlyse ord som kæledyrsnavne, sportshold eller fødselsdage."
+    },
+    "sessions": {
+      "currentSession": "Nuværende session",
+      "lastUsed": "Sidst brugt for {lastUsedAgo}",
+      "title": "Aktive sessioner"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 session} other {{count} sessioner}}",
+      "applications": "Apps og datatilgængelighed",
+      "breaches": "Din adgangskode er blevet set i databrud.",
+      "comingSoon": "På vej",
+      "mfa": "To-faktor-godkendelse",
+      "passkeys": "Adgangsnøgler",
+      "password": "Adgangskode",
+      "passwordLastChanged": "Sidst ændret den {date, date, medium}.",
+      "sessions": "Aktive sessioner"
+    },
+    "title": "Sikkerhed & Privatliv"
+  }
+}
