@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Terug",
+    "header": "Beveiliging & Privacy",
+    "password": {
+      "breaches": "Je wachtwoord is in {count, plural, one {een datalek} other {{count} datalekken}} voorgekomen. Terwijl onze systemen veilig blijven, raden we aan om je wachtwoord onmiddellijk te wijzigen als voorzorgsmaatregel.{otp, select, true {} other { Vergeet ook niet om 2-factor-authenticatie in te schakelen voor extra beveiliging.}} <guide>Leer meer</guide>.",
+      "confirmLabel": "Bevestig nieuw wachtwoord",
+      "description1": "Je wachtwoord is de eerste verdedigingslinie tegen ongeautoriseerde toegang tot je account.",
+      "description2": "Kies een sterk wachtwoord en deel het niet voor andere diensten of met anderen. Lees onze gids voor het kiezen en beheren van een veilig wachtwoord.",
+      "errors": {
+        "long": "Het wachtwoord is te lang.",
+        "mismatch": "De wachtwoorden komen niet overeen.",
+        "short": "Het wachtwoord is te kort."
+      },
+      "label": "Nieuw wachtwoord",
+      "score": {
+        "acceptable": "acceptabel",
+        "breached": "staat in een datalek. Probeer een andere?",
+        "prefix": "Wachtwoordsterkte:",
+        "short": "te kort",
+        "strong": "sterk",
+        "weak": "zwak"
+      },
+      "title": "Wachtwoord",
+      "updateNotice": "Om veiligheidsredenen word je uitgelogd op andere apparaten wanneer je je wachtwoord wijzigt.",
+      "updateSuccess": "Je wachtwoord is gewijzigd.",
+      "updateSuggestion": "Gebruik minimaal 10 tekens. Vermijd veelvoorkomende of voor de hand liggende woorden zoals huisdiernamen, sportteams of jarigen."
+    },
+    "sessions": {
+      "currentSession": "Huidige sessie",
+      "lastUsed": "Laatst gebruikt {lastUsedAgo}",
+      "title": "Actieve sessies"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sessie} other {{count} sessies}}",
+      "applications": "Apps en gegevens toegang",
+      "breaches": "Je wachtwoord is voorgekomen in datalekken.",
+      "comingSoon": "Binnenkort beschikbaar",
+      "mfa": "Twee-staps-verificatie",
+      "passkeys": "Toegangssleutels",
+      "password": "Wachtwoord",
+      "passwordLastChanged": "Laatst gewijzigd op {date, date, medium}.",
+      "sessions": "Actieve sessies"
+    },
+    "title": "Beveiliging & Privacy"
+  }
+}

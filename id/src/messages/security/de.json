@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Zurück",
+    "header": "Sicherheit & Datenschutz",
+    "password": {
+      "breaches": "Dein Passwort war in {count, plural, one {einem Datenleck} other {{count} Datenlecks}} betroffen. Obwohl unsere Systeme sicher bleiben, empfehlen wir dir, dein Passwort sofort zur Vorsicht zu aktualisieren.{otp, select, true {} other { Du solltest auch die Zwei-Faktor-Authentifizierung aktivieren, um zusätzliche Sicherheit zu gewährleisten.}} <guide>Mehr erfahren</guide>.",
+      "confirmLabel": "Neues Passwort bestätigen",
+      "description1": "Dein Passwort ist die erste Verteidigungslinie gegen unbefugten Zugriff auf dein Konto.",
+      "description2": "Wähle ein starkes Passwort und teile es nicht mit anderen Diensten oder Personen. Lies unseren Leitfaden zur Auswahl und Verwaltung eines sicheren Passworts.",
+      "errors": {
+        "long": "Das Passwort ist zu lang.",
+        "mismatch": "Die Passwörter stimmen nicht überein.",
+        "short": "Das Passwort ist zu kurz."
+      },
+      "label": "Neues Passwort",
+      "score": {
+        "acceptable": "akzeptabel",
+        "breached": "wurde bei einer Datenpanne gefunden. Versuch's mit einem anderen?",
+        "prefix": "Passwortstärke:",
+        "short": "zu kurz",
+        "strong": "stark",
+        "weak": "schwach"
+      },
+      "title": "Passwort",
+      "updateNotice": "Aus Sicherheitsgründen wirst du überall abgemeldet, wenn du dein Passwort änderst.",
+      "updateSuccess": "Dein Passwort wurde geändert.",
+      "updateSuggestion": "Verwende mindestens 10 Zeichen. Vermeide gängige oder offensichtliche Wörter wie Tiernamen, Sportteams oder Geburtstage."
+    },
+    "sessions": {
+      "currentSession": "Aktuelle Sitzung",
+      "lastUsed": "Zuletzt verwendet {lastUsedAgo}",
+      "title": "Aktive Sitzungen"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 Sitzung} other {{count} Sitzungen}}",
+      "applications": "Apps und Datenzugriff",
+      "breaches": "Dein Passwort war in Datenlecks betroffen.",
+      "comingSoon": "Bald verfügbar",
+      "mfa": "Zwei-Faktor-Authentifizierung",
+      "passkeys": "Passkeys",
+      "password": "Passwort",
+      "passwordLastChanged": "Zuletzt geändert am {date, date, medium}.",
+      "sessions": "Aktive Sitzungen"
+    },
+    "title": "Sicherheit & Datenschutz"
+  }
+}

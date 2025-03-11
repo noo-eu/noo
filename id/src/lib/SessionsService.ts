@@ -113,6 +113,17 @@ export class SessionsService {
     return await SessionsService.userFor(userId);
   }
 
+  static async sessionFor(userId: string) {
+    const manager = await SessionsService.new();
+    const sessions = await manager.activeSessions();
+    const uuid = humanIdToUuid(userId, "usr");
+    if (!uuid) {
+      return undefined;
+    }
+
+    return sessions.find((s) => s.userId === uuid);
+  }
+
   async startSession(userId: string, ip: string, userAgent: string) {
     const sid = crypto.randomUUID();
 

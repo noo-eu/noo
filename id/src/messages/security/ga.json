@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Ar ais",
+    "header": "Slándáil & Príobháideacht",
+    "password": {
+      "breaches": "Tá do phasfhocal le feiceáil i {count, plural, one {breach sonraí} other {{count} breaches sonraí}}. Cé go maireann ár gcórais slán, molaimid duit do phasfhocal a nuashonrú láithreach mar chosc.{otp, select, true {} other { Ba chóir duit freisin bailíochtú 2-fhoinse a chumasú le haghaidh slándála breise.}} <guide>Foghlaim tuilleadh</guide>.",
+      "confirmLabel": "Deimhnigh an pasfhocal nua",
+      "description1": "Is é do phasfhocal an chéad líne cosanta i gcoinne rochtain neamhúdaraithe ar do chuntas.",
+      "description2": "Roghnaigh pasfhocal láidir, ná roinn é le seirbhísí eile nó le daoine eile. Léigh ár dtreoir maidir le roghnú agus bainistiú pasfhocal slán.",
+      "errors": {
+        "long": "Tá an pasfhocal ró-fhada.",
+        "mismatch": "Ní comhoiriúnach na pasfhocail.",
+        "short": "Tá an pasfhocal ró-ghearr."
+      },
+      "label": "Pasfhocal nua",
+      "score": {
+        "acceptable": "inghlactha",
+        "breached": "tá sé i sárú sonraí. Bain triail as ceann eile?",
+        "prefix": "Neart pasfhocail:",
+        "short": "ró ghearr",
+        "strong": "láidir",
+        "weak": "laige"
+      },
+      "title": "Pasfhocal",
+      "updateNotice": "Ar chúiseanna slándála, má athraíonn tú do phasfhocal, logálfar amach thú ó gach áit eile.",
+      "updateSuccess": "Tá do phasfhocal athraithe.",
+      "updateSuggestion": "Úsáid ar a laghad 10 carachtar. Éist le focail coitianta nó soiléire cosúil le hainmneacha peata, foirne spóirt, nó laethanta breithe."
+    },
+    "sessions": {
+      "currentSession": "An sionnaigh reatha",
+      "lastUsed": "Úsáidtear é le déanaí {lastUsedAgo}",
+      "title": "Sionnaigh gníomhacha"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 seisiún gníomhach} other {{count} seisiúin ghníomhacha}}",
+      "applications": "Aipeanna agus rochtain ar shonraí",
+      "breaches": "Tá do phasfhocal le feiceáil i breaches sonraí.",
+      "comingSoon": "Ag teacht go luath",
+      "mfa": "Fíordheimhniú dhá-fhachtóir",
+      "passkeys": "Eochracha pas",
+      "password": "Pasfhocal",
+      "passwordLastChanged": "Athraíodh é ar {date, date, medium}.",
+      "sessions": "Seisiúin gníomhacha"
+    },
+    "title": "Slándáil & Príobháideacht"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Geri",
+    "header": "Güvenlik & Gizlilik",
+    "password": {
+      "breaches": "Şifreniz {count, plural, one {bir veri ihlalinde} other {{count} veri ihlalinde}} ortaya çıkmış. Sistemlerimiz güvende olsa da, bir önlem olarak şifrenizi hemen güncellemenizi öneririz.{otp, select, true {} other { Ek güvenlik için 2 faktörlü kimlik doğrulamayı da etkinleştirmelisiniz.}} <guide>Daha fazla bilgi edin</guide>.",
+      "confirmLabel": "Yeni şifreyi onayla",
+      "description1": "Şifreniz, hesabınıza yetkisiz erişime karşı birinci savunma hattınızdır.",
+      "description2": "Güçlü bir şifre seçin, bunu diğer hizmetler veya başkalarıyla paylaşmayın. Güvenli bir şifre seçme ve yönetme hakkında kılavuzumuzu okuyun.",
+      "errors": {
+        "long": "Şifre çok uzun.",
+        "mismatch": "Şifreler eşleşmiyor.",
+        "short": "Şifre çok kısa."
+      },
+      "label": "Yeni şifre",
+      "score": {
+        "acceptable": "kabul edilir",
+        "breached": "bir veri ihlalinde yer alıyor. Başka bir tane dene mi?",
+        "prefix": "Şifre gücü:",
+        "short": "çok kısa",
+        "strong": "güçlü",
+        "weak": "zayıf"
+      },
+      "title": "Şifre",
+      "updateNotice": "Güvenlik nedeniyle, şifrenizi değiştirdiğinizde diğer tüm yerlerde oturumunuz kapatılır.",
+      "updateSuccess": "Şifreniz değiştirildi.",
+      "updateSuggestion": "En az 10 karakter kullanın. Evcil hayvan isimleri, spor takımları veya doğum günleri gibi yaygın ya da açık kelimelerden kaçının."
+    },
+    "sessions": {
+      "currentSession": "Mevcut oturum",
+      "lastUsed": "{lastUsedAgo} kullanıldı",
+      "title": "Açık oturumlar"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 oturum} other {{count} oturum}}",
+      "applications": "Uygulamalar ve veri erişimi",
+      "breaches": "Şifreniz veri ihlallerinde ortaya çıktı.",
+      "comingSoon": "Yakında burada",
+      "mfa": "İki aşamalı doğrulama",
+      "passkeys": "Geçiş Anahtarları",
+      "password": "Şifre",
+      "passwordLastChanged": "Son değişiklik tarihi: {date, date, medium}.",
+      "sessions": "Aktif oturumlar"
+    },
+    "title": "Güvenlik & Gizlilik"
+  }
+}

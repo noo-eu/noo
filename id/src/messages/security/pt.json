@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Voltar",
+    "header": "Segurança & Privacidade",
+    "password": {
+      "breaches": "A sua palavra-passe apareceu em {count, plural, one {uma violação de dados} other {{count} violações de dados}}. Embora os nossos sistemas se mantenham seguros, recomendamos que atualize a sua palavra-passe de imediato como precaução.{otp, select, true {} other { Também deve ativar a autenticação em 2 etapas para uma segurança adicional.}} <guide>Saiba mais</guide>.",
+      "confirmLabel": "Confirmar nova palavra-passe",
+      "description1": "A sua palavra-passe é a primeira linha de defesa contra acessos não autorizados à sua conta.",
+      "description2": "Escolha uma palavra-passe forte, não a partilhe para outros serviços ou com outras pessoas. Leia o nosso guia sobre como escolher e gerir uma palavra-passe segura.",
+      "errors": {
+        "long": "A palavra-passe é demasiado longa.",
+        "mismatch": "As palavras-passe não coincidem.",
+        "short": "A palavra-passe é demasiado curta."
+      },
+      "label": "Nova palavra-passe",
+      "score": {
+        "acceptable": "aceitável",
+        "breached": "está comprometida num vazamento de dados. Que tal tentar outra?",
+        "prefix": "Força da palavra-passe:",
+        "short": "muito curta",
+        "strong": "forte",
+        "weak": "fraca"
+      },
+      "title": "Palavra-passe",
+      "updateNotice": "Por razões de segurança, mudar a tua palavra-passe termina a sessão em todos os outros dispositivos.",
+      "updateSuccess": "A sua palavra-passe foi alterada.",
+      "updateSuggestion": "Use pelo menos 10 caracteres. Evite palavras comuns ou óbvias, como nomes de animais de estimação, equipas desportivas ou aniversários."
+    },
+    "sessions": {
+      "currentSession": "Sessão atual",
+      "lastUsed": "Usado pela última vez {lastUsedAgo}",
+      "title": "Sessões ativas"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sessão} other {{count} sessões}}",
+      "applications": "Aplicações e acesso a dados",
+      "breaches": "A sua palavra-passe tem estado em violação de dados.",
+      "comingSoon": "Em breve",
+      "mfa": "Autenticação de dois fatores",
+      "passkeys": "Chaves de segurança",
+      "password": "Palavra-passe",
+      "passwordLastChanged": "Última alteração em {date, date, medium}.",
+      "sessions": "Sessões ativas"
+    },
+    "title": "Segurança & Privacidade"
+  }
+}

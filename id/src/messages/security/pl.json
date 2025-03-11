@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Wstecz",
+    "header": "Bezpieczeństwo i Prywatność",
+    "password": {
+      "breaches": "Twoje hasło pojawiło się w {count, plural, one {naruszeniu danych} other {{count} naruszeniach danych}}. Choć nasze systemy są bezpieczne, zalecamy jak najszybszą zmianę hasła dla bezpieczeństwa.{otp, select, true {} other { Powinieneś także włączyć uwierzytelnianie dwuskładnikowe, aby zwiększyć swoje bezpieczeństwo.}} <guide>Dowiedz się więcej</guide>.",
+      "confirmLabel": "Potwierdź nowe hasło",
+      "description1": "Twoje hasło jest pierwszą linią obrony przed nieautoryzowanym dostępem do twojego konta.",
+      "description2": "Wybierz mocne hasło, nie udostępniaj go do innych usług ani innym osobom. Zapoznaj się z naszym przewodnikiem po wyborze i zarządzaniu bezpiecznym hasłem.",
+      "errors": {
+        "long": "Hasło jest za długie.",
+        "mismatch": "Hasła się nie zgadzają.",
+        "short": "Hasło jest za krótkie."
+      },
+      "label": "Nowe hasło",
+      "score": {
+        "acceptable": "do zaakceptowania",
+        "breached": "pojawiło się w wycieku danych. Może spróbujesz innego?",
+        "prefix": "Siła hasła:",
+        "short": "za krótkie",
+        "strong": "mocne",
+        "weak": "słabe"
+      },
+      "title": "Hasło",
+      "updateNotice": "Ze względów bezpieczeństwa zmiana hasła powoduje wylogowanie z innych miejsc.",
+      "updateSuccess": "Twoje hasło zostało zmienione.",
+      "updateSuggestion": "Użyj przynajmniej 10 znaków. Unikaj popularnych lub oczywistych słów, takich jak imiona zwierząt, nazwy drużyn sportowych czy daty urodzin."
+    },
+    "sessions": {
+      "currentSession": "Obecna sesja",
+      "lastUsed": "Ostatnio używane {lastUsedAgo}",
+      "title": "Aktywne sesje"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesja} other {{count} sesji}}",
+      "applications": "Aplikacje i dostęp do danych",
+      "breaches": "Twoje hasło występowało w naruszeniach danych.",
+      "comingSoon": "Już wkrótce",
+      "mfa": "Uwierzytelnianie dwuskładnikowe",
+      "passkeys": "Klucze dostępu",
+      "password": "Hasło",
+      "passwordLastChanged": "Ostatnio zmienione {date, date, medium}.",
+      "sessions": "Aktywne sesje"
+    },
+    "title": "Bezpieczeństwo i Prywatność"
+  }
+}

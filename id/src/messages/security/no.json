@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Tilbake",
+    "header": "Sikkerhet & Personvern",
+    "password": {
+      "breaches": "Passordet ditt har blitt funnet i {count, plural, one {en datalekkasje} other {{count} datalekkasjer}}. Selv om systemene våre er sikre, anbefaler vi at du oppdaterer passordet ditt umiddelbart som en forholdsregel.{otp, select, true {} other { Du bør også aktivere to-faktor autentisering for ekstra sikkerhet.}} <guide>Lær mer</guide>.",
+      "confirmLabel": "Bekreft nytt passord",
+      "description1": "Passordet ditt er den første forsvarslinjen mot uautorisert tilgang til kontoen din.",
+      "description2": "Velg et sterkt passord, ikke del det med andre tjenester eller personer. Les vår guide til valg og håndtering av et sikkert passord.",
+      "errors": {
+        "long": "Passordet er for langt.",
+        "mismatch": "Passordene stemmer ikke overens.",
+        "short": "Passordet er for kort."
+      },
+      "label": "Nytt passord",
+      "score": {
+        "acceptable": "akseptabelt",
+        "breached": "er del av et datainnbrudd. Prøv et annet?",
+        "prefix": "Passordstyrke:",
+        "short": "for kort",
+        "strong": "sterkt",
+        "weak": "svakt"
+      },
+      "title": "Passord",
+      "updateNotice": "Av sikkerhetsgrunner logges du ut fra alle andre steder når du endrer passordet ditt.",
+      "updateSuccess": "Passordet ditt er endret.",
+      "updateSuggestion": "Bruk minst 10 tegn. Unngå vanlige eller åpenbare ord som kjæledyrnavn, sportslag eller bursdager."
+    },
+    "sessions": {
+      "currentSession": " Nåværende økt",
+      "lastUsed": "Sist brukt for {lastUsedAgo}",
+      "title": "Aktive økter"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 økt} other {{count} økter}}",
+      "applications": "Apper og datatilgang",
+      "breaches": "Passordet ditt har blitt funnet i datalekkasjer.",
+      "comingSoon": "Kommer snart",
+      "mfa": "Tofaktorautentisering",
+      "passkeys": "Passnøkler",
+      "password": "Passord",
+      "passwordLastChanged": "Sist endret {date, date, medium}.",
+      "sessions": "Aktive økter"
+    },
+    "title": "Sikkerhet & Personvern"
+  }
+}

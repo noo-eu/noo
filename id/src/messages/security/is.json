@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Til baka",
+    "header": "Öryggi & Persónuvernd",
+    "password": {
+      "breaches": "Lykilorðið þitt hefur komið fram í {count, plural, one {öðru gagnaleki} other {{count} gagnalekum}}. Þó að kerfin okkar séu örugg, þá ráðleggjum við þér að uppfæra lykilorðið þitt strax sem varúðarráðstöfun.{otp, select, true {} other { Þú ættir líka að virkja tvíþátta auðkenningu fyrir aukna öryggi.}} <guide>Fræðast meira</guide>.",
+      "confirmLabel": "Staðfesta nýtt lykilorð",
+      "description1": "Lykilorðið þitt er fyrsta vörnin gegn óheimila aðgangi að reikningnum þínum.",
+      "description2": "Veldu sterkt lykilorð, deildu því ekki fyrir aðrar þjónustur eða við aðra. Lesaðu leiðbeiningarnar okkar um val á og stjórn á öruggu lykilorði.",
+      "errors": {
+        "long": "Lykilorðið er of langt.",
+        "mismatch": "Lykilorðin passa ekki.",
+        "short": "Lykilorðið er of stutt."
+      },
+      "label": "Nýtt lykilorð",
+      "score": {
+        "acceptable": "ásættanlegt",
+        "breached": "var lekið í gagnabroti. Prófaðu eitthvað annað?",
+        "prefix": "Styrkleiki lykilorðs:",
+        "short": "of stutt",
+        "strong": "sterkt",
+        "weak": "veikt"
+      },
+      "title": "Lykilorð",
+      "updateNotice": "Af öryggisástæðum verður þú skráður út alls staðar annarstaðar þegar þú breytir lykilorðinu þínu.",
+      "updateSuccess": "Lykilorðið þitt hefur verið breytt.",
+      "updateSuggestion": "Notaðu að minnsta kosti 10 tákn. Forðastu algeng orð eða augljós orð eins og gælunöfn, íþróttalið eða afmælisdagsetningar."
+    },
+    "sessions": {
+      "currentSession": "Núverandi aðgerð",
+      "lastUsed": "Síðast notað {lastUsedAgo} síðan",
+      "title": "Virkar aðgerðir"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 virk lota} other {{count} virkar lotur}}",
+      "applications": "Forrit og aðgangur að gögnum",
+      "breaches": "Lykilorðið þitt hefur komið fram í gagnalekum.",
+      "comingSoon": "Komir fljótlega",
+      "mfa": "Tveggja þrepa auðkenning",
+      "passkeys": "Aðgangsnúmer",
+      "password": "Lykilorð",
+      "passwordLastChanged": "Síðast breytt {date, date, medium}.",
+      "sessions": "Aktívar sesjónir"
+    },
+    "title": "Öryggi & Persónuvernd"
+  }
+}

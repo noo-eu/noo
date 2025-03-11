@@ -1,0 +1,47 @@
+{
+  "security": {
+    "back": "Irrid lura",
+    "header": "Sigurtà & Privatità",
+    "password": {
+      "breaches": "Il-password tiegħek dehret f'{count, plural, one {data breach} other {{count} data breaches}}. Filwaqt li s-sistemi tagħna jibqgħu siguri, nirrakkomandaw li taġġorna l-password tiegħek issa bħala prekawzjoni.{otp, select, true {} other { Għandek ukoll attiva l-autentikazzjoni bil-2 fatturi għall-addiżjoni ta' sigurtà.}} <guide>Ikteb iktar</guide>.",
+      "confirmLabel": "Ikkonferma l-password il-ġdida",
+      "description1": "Il-password tiegħek hija l-ewwel linja ta’ difiża kontra aċċess mhux awtorizzat għall-kont tiegħek.",
+      "description2": "Agħżel password b'saħħitha, u ma għandekx taqsamha għal servizzi oħra jew ma' persuni oħra. Aqra l-ġwida tagħna dwar kif tagħżel u timmaniġġja password sikura.",
+      "errors": {
+        "long": "Il-password hija twila wisq.",
+        "mismatch": "Il-passwords mhux qed jagħmlu qbil.",
+        "short": "Il-password hija qasira wisq."
+      },
+      "label": "Password il-ġdida",
+      "score": {
+        "acceptable": "aċċettabbli",
+        "breached": "huwa parti minn ksur ta' data. Ippruvaw xi ħaġa oħra?",
+        "prefix": "Saħħa tal-password:",
+        "short": "qasira wisq",
+        "strong": "saħħitha",
+        "weak": "drekk"
+      },
+      "title": "Password",
+      "updateNotice": "Għal raġunijiet ta' sigurtà, jekk tibdel il-password tkeċċi minn kullimkien oħra.",
+      "updateSuccess": "Il-password tiegħek inbidlet.",
+      "updateSuggestion": "Uża mill-inqas 10 karattri. Evita kliem komuni jew ovvji bħal isimijiet tal-pet, timijiet sportivi, jew anniversarji."
+    },
+    "sessions": {
+      "currentSession": "Is-sessjoni kurrenti",
+      "lastUsed": "Uża l-aħħar {lastUsedAgo} ",
+      "title": "Sessjonijiet Attivi"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sessjoni} other {{count} sessjonijiet}}",
+      "applications": "Apps u aċċess għal data",
+      "breaches": "Il-password tiegħek dehret f'breaches ta' data.",
+      "comingSoon": "Se jkun hawn dalwaqt",
+      "mfa": "Autentikazzjoni b'żewġ fatturi",
+      "passkeys": "Passkeys",
+      "password": "Password",
+      "passwordLastChanged": "L-aħħar bidla saret fl-{date, date, medium}.",
+      "sessions": "Sessjonijiet attivi"
+    },
+    "title": "Sigurtà & Privatità"
+  }
+}
