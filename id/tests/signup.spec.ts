@@ -140,7 +140,7 @@ test.describe("Individual signup", () => {
     await page.click("text=Next");
     await expect(
       page.getByText(
-        "Please use a stronger password. Use a mix of letters, numbers and symbols",
+        "Please choose a stronger password, using a mix of letters, numbers and symbols",
       ),
     ).toBeVisible();
   });

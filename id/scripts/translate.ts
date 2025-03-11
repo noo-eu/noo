@@ -1,35 +1,6 @@
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import json5 from "json5";
-import { readdir } from "node:fs/promises";
-
-const files = await readdir("src/messages", { recursive: true });
-
-// Find all directories that contain an "en.json" file
-const directories = files
-  .filter((file) => file.endsWith("en.json"))
-  .map((file) => file.replace(/\/[^/]+$/, ""));
-
-// Ensure that all directories contain all supported languages
-for (const directory of directories) {
-  for (const language of SUPPORTED_LANGUAGES) {
-    if (!files.includes(`${directory}/${language}.json`)) {
-      await Bun.write(`src/messages/${directory}/${language}.json`, "{}");
-    }
-
-    // Check if --force-sort is passed
-    if (process.argv.includes("--force-sort")) {
-      const content = await Bun.file(
-        `src/messages/${directory}/${language}.json`,
-      ).text();
-      const parsed = json5.parse(content);
-      const sorted = sort(parsed);
-      Bun.write(
-        `src/messages/${directory}/${language}.json`,
-        JSON.stringify(sorted, null, 2) + "\n",
-      );
-    }
-  }
-}
+import { directories, sort, TranslationFile } from "./messages";
 
 // Check that translation files have no missing keys
 for (const directory of directories) {
@@ -60,10 +31,6 @@ for (const directory of directories) {
     }
   }
 }
-
-type TranslationFile = {
-  [key: string]: string | TranslationFile;
-};
 
 function recursiveKeyCheck(
   reference: TranslationFile,
@@ -146,9 +113,11 @@ async function translate(
   // Is this LLM abuse?
   let prompt = `You must correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. \
     The translations may use the ICU Message Format. \
-    Do not translate literally. **DO NOT TRANSLATE THE JSON KEYS.** \
-    If you see <tags> or {brackets} those must be left as is. \
+    Do not translate literally, prefer local idioms and customs (some sentences may make sense in English, but need some imagination in other languages). \
+    Prefer an informal style, if the language allows. **DO NOT TRANSLATE THE JSON KEYS.** \
+    If you see angled tags (<tags>) or placeholders in {brackets} those must be left as is. \
     Do not leave the value empty. Only output JSON, without any surronding text: `;
+
   prompt += JSON.stringify(requests, null, 2);
 
   const response = await fetch("http://192.168.0.29:11434/api/generate", {
@@ -222,27 +191,6 @@ function merge(base: TranslationFile, translation: Record<string, string>) {
   }
 
   return base;
-}
-
-function sort(obj: TranslationFile): TranslationFile {
-  if (typeof obj !== "object" || obj === null) {
-    return obj;
-  }
-
-  const keys = Object.keys(obj).sort();
-  const sorted: TranslationFile = {};
-
-  // Add each key-value pair to the new object in sorted order
-  // Sort nested objects recursively
-  for (const key of keys) {
-    if (typeof obj[key] === "object") {
-      sorted[key] = sort(obj[key]);
-    } else {
-      sorted[key] = obj[key];
-    }
-  }
-
-  return sorted;
 }
 
 function matchesPlaceholders(source: string, translation: string) {

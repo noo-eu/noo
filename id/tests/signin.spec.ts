@@ -19,7 +19,7 @@ test.describe("Signin", () => {
     await page.getByTestId("signinSubmit").click();
 
     await expect(
-      page.getByText("The credentials you entered are incorrect"),
+      page.getByText("The details you entered are incorrect"),
     ).toBeVisible();
   });
 

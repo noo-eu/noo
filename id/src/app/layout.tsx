@@ -34,7 +34,7 @@ export default async function RootLayout({
             href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap"
           />
         </head>
-        <body className="min-h-screen bg-indigo-50 dark:bg-zinc-800 text-gray-900 dark:text-gray-100 flex flex-col">
+        <body className="min-h-screen bg-indigo-50 text-gray-900 dark:bg-black dark:text-white flex flex-col">
           {children}
           <Footer />
           <Toaster position="bottom-center" />

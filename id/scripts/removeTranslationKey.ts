@@ -1,7 +1,7 @@
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import json5 from "json5";
 
-import { deleteKey, setKey, sort } from "./messages";
+import { deleteKey, sort } from "./messages";
 
 if (process.argv.length < 3) {
   console.error("Usage: removeTranslationKey.ts key directory");

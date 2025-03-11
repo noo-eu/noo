@@ -31,7 +31,7 @@ PageModal.Modal = function Modal({
 }) {
   return (
     <section
-      className={`${className} px-8 sm:p-12 w-full sm:rounded-lg sm:shadow-lg sm:backdrop-blur-xs sm:bg-white/40 dark:sm:bg-black/40 lg:grid lg:grid-cols-2 gap-8 dark:sm:shadow-with-highlights`}
+      className={`${className} border border-white/25 px-8 sm:p-12 w-full sm:rounded-lg sm:shadow-lg sm:backdrop-blur-xs sm:bg-white/40 dark:sm:bg-black/40 lg:grid lg:grid-cols-2 gap-8 dark:sm:shadow-with-highlights`}
     >
       {children}
     </section>
