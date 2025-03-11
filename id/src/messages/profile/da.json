@@ -28,6 +28,15 @@
       "updateSuccess": "Dine kønsoplysninger er blevet gemt med succes"
     },
     "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Din profil",
+      "profileDescription": "Tjek din profil og opdater dine oplysninger",
+      "security": "Privatliv & Sikkerhed",
+      "securityDescription": "Håndter dine privatlivsindstillinger og kontosikkerhed",
+      "settings": "Indstillinger",
+      "settingsDescription": "Tilpas din oplevelse og dine præferencer",
+      "title": "Velkommen <bold>{name}</bold>"
+    },
     "name": {
       "description": "Din navn vil være synligt for andre brugere, du interagerer med på <noo></noo>. Hvis du signer i til andre apps ved hjælp af <noo></noo>, kan dit navn også deltages med dem, hvis du vælger det.",
       "errors": {

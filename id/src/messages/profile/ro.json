@@ -28,6 +28,15 @@
       "updateSuccess": "Detaliiul de gen au fost salvate cu succes"
     },
     "header": "Contul <noo></noo>",
+    "home": {
+      "profile": "Profilul tău",
+      "profileDescription": "Verifică-ți profilul și actualizează informațiile",
+      "security": "Confidențialitate și Securitate",
+      "securityDescription": "Gestionează setările de confidențialitate și securitatea contului tău",
+      "settings": "Setări",
+      "settingsDescription": "Personalizează-ți experiența și preferințele",
+      "title": "Bine ai venit <bold>{name}</bold>"
+    },
     "name": {
       "description": "Numele tau este vizibil celorlora cu care interacționați pe <noo></noo>. Dacă folosiți <noo></noo> pentru a vă autentifica în alte aplicații, numele dumneavoastră poate fi și împărtășit acestor aplicații dacă alegeți.",
       "errors": {

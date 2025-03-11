@@ -1,6 +1,38 @@
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import json5 from "json5";
 import { directories, sort, TranslationFile } from "./messages";
+import { getClient } from "./models";
+
+const LOCALE_NAMES: Record<string, string> = {
+  bg: "Bulgarian",
+  cs: "Czech",
+  da: "Danish",
+  de: "German",
+  el: "Greek",
+  es: "Spanish (European)",
+  et: "Estonian",
+  fi: "Finnish",
+  fr: "French",
+  ga: "Irish",
+  hr: "Croatian",
+  hu: "Hungarian",
+  it: "Italian",
+  is: "Icelandic",
+  lt: "Lithuanian",
+  lv: "Latvian",
+  mt: "Maltese",
+  nl: "Dutch",
+  no: "Norwegian (Bokmål)",
+  pl: "Polish",
+  pt: "Portuguese (European)",
+  ro: "Romanian",
+  sk: "Slovak",
+  sl: "Slovenian",
+  sq: "Albanian",
+  sv: "Swedish",
+  tr: "Turkish",
+  uk: "Ukrainian",
+};
 
 // Check that translation files have no missing keys
 for (const directory of directories) {
@@ -79,62 +111,15 @@ async function translate(
   requests: Record<string, string>,
   targetLocale: string,
 ) {
-  const localeNames: Record<string, string> = {
-    bg: "Bulgarian",
-    cs: "Czech",
-    da: "Danish",
-    de: "German",
-    el: "Greek",
-    es: "Spanish (European)",
-    et: "Estonian",
-    fi: "Finnish",
-    fr: "French",
-    ga: "Irish",
-    hr: "Croatian",
-    hu: "Hungarian",
-    it: "Italian",
-    is: "Icelandic",
-    lt: "Lithuanian",
-    lv: "Latvian",
-    mt: "Maltese",
-    nl: "Dutch",
-    no: "Norwegian (Bokmål)",
-    pl: "Polish",
-    pt: "Portuguese (European)",
-    ro: "Romanian",
-    sk: "Slovak",
-    sl: "Slovenian",
-    sq: "Albanian",
-    sv: "Swedish",
-    tr: "Turkish",
-    uk: "Ukrainian",
-  };
-
-  // Is this LLM abuse?
-  let prompt = `You must correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. \
+  const system = `You must correctly translate this document to ${LOCALE_NAMES[targetLocale]}, making sure to use local spelling and idioms. \
     The translations may use the ICU Message Format. \
     Do not translate literally, prefer local idioms and customs (some sentences may make sense in English, but need some imagination in other languages). \
     Prefer an informal style, if the language allows. **DO NOT TRANSLATE THE JSON KEYS.** \
     If you see angled tags (<tags>) or placeholders in {brackets} those must be left as is. \
-    Do not leave the value empty. Only output JSON, without any surronding text: `;
+    Do not leave the value empty. Only output JSON, without any surronding text.`;
 
-  prompt += JSON.stringify(requests, null, 2);
-
-  const response = await fetch("http://192.168.0.29:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      prompt,
-      system:
-        "You are a professional translator, working on JSON files for a software project.",
-      model: "llama3.1",
-      format: "json",
-      stream: false,
-    }),
-  });
-
-  const body = await response.json();
-  const translations = JSON.parse(body.response);
+  const prompt = JSON.stringify(requests, null, 2);
+  const translations = await getClient().request(system, prompt);
 
   for (const key of Object.keys(translations)) {
     // Remove keys that were not in the original source

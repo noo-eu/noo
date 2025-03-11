@@ -28,6 +28,15 @@
       "updateSuccess": "Tá do ghneas déanta go maith"
     },
     "header": "Cuntas <noo></noo>",
+    "home": {
+      "profile": "Do Phroifíl",
+      "profileDescription": "Seiceáil do phróifíl agus uasdaigh do chuid eolais",
+      "security": "Príobháideacht & Slándáil",
+      "securityDescription": "Bainistigh do shocruithe príobháideachta agus slándála cuntais",
+      "settings": "Socruithe",
+      "settingsDescription": "Saincheap do thaithí agus roghanna",
+      "title": "Fáilte <bold>{name}</bold>"
+    },
     "name": {
       "description": "Déanfaidh tú a dteideal féachaint don mhuiniméad eile má bhíonn tú ag déanamh ghníomhaíocht ar <noo></noo>. Má úsáideann tú <noo></noo> chun sínigh le hábhar aige go do shuímh, féachfaidh tusa freisin, má roghnaíonn tú.",
       "errors": {
@@ -69,10 +78,10 @@
     },
     "summary": {
       "birthdate": "Dát Breith agat",
-      "gender": "",
+      "gender": "Do inscne",
       "name": "Do doo ainm agat",
       "picture": "Do doo píosa dídite don phóta",
-      "unspecifiedGender": ""
+      "unspecifiedGender": "Gan lua"
     },
     "title": "Do doo chuid {{ profile }}"
   }

@@ -28,6 +28,15 @@
       "updateSuccess": "Uw geslachtsgegevens zijn opgeslagen"
     },
     "header": "<noo></noo> Account",
+    "home": {
+      "profile": "Jouw profiel",
+      "profileDescription": "Bekijk je profiel en werk je gegevens bij",
+      "security": "Privacy & Beveiliging",
+      "securityDescription": "Beheer je privacy-instellingen en accountbeveiliging",
+      "settings": "Instellingen",
+      "settingsDescription": "Pas je ervaring en voorkeuren aan",
+      "title": "Welkom <bold>{name}</bold>"
+    },
     "name": {
       "description": "Uw naam is zichtbaar voor andere gebruikers met wie u interactie hebt op <noo></noo>. Als u <noo></noo> gebruikt om in andere apps in te loggen, kan uw naam ook worden gedeeld met hen, als u dat wilt.",
       "errors": {

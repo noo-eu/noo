@@ -28,6 +28,15 @@
       "updateSuccess": "Seus detalhes de gênero foram salvos com sucesso"
     },
     "header": "<noo></noo> Conta",
+    "home": {
+      "profile": "O teu perfil",
+      "profileDescription": "Dá uma olhada no teu perfil e atualiza as tuas informações",
+      "security": "Privacidade & Segurança",
+      "securityDescription": "Gerir as tuas definições de privacidade e segurança da conta",
+      "settings": "Definições",
+      "settingsDescription": "Personaliza a tua experiência e preferências",
+      "title": "Bem-vindo <bold>{name}</bold>"
+    },
     "name": {
       "description": "Seu nome será visível para outros usuários com quem interagir no <noo></noo>. Se você usar o <noo></noo> para entrar em outras aplicações, seu nome também pode ser compartilhado com elas, se escolher.",
       "errors": {

@@ -28,6 +28,15 @@
       "updateSuccess": "Sukupuolisiasi tiedot on tallennettu onnistuneesti"
     },
     "header": "<noo></noo>-tili",
+    "home": {
+      "profile": "Profiilisi",
+      "profileDescription": "Tarkista profiilisi ja päivitä tietojasi",
+      "security": "Tietosuoja ja turvallisuus",
+      "securityDescription": "Hallinnoi tietosuoja-asetuksiasi ja tilisi turvallisuutta",
+      "settings": "Asetukset",
+      "settingsDescription": "Muokkaa kokemustasi ja mieltymyksiäsi",
+      "title": "Tervetuloa <bold>{name}</bold>"
+    },
     "name": {
       "description": "Nimesi näkyy muille käyttäjille, joiden kanssa olet vuorovaikutuksessa <noo></noo>:n kanssa. Jos et muutu nimeäsi <noo></noo>issa toimintoja varten, nimi voi myös tulla käsittelyyn neessa.",
       "errors": {

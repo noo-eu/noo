@@ -28,6 +28,15 @@
       "updateSuccess": "Vaša sprememba spolnega izpolnitev je bila shranjena"
     },
     "header": "Račun <noo></noo>",
+    "home": {
+      "profile": "Tvoj profil",
+      "profileDescription": "Poglej svoj profil in posodobi svoje podatke",
+      "security": "Zasebnost in varnost",
+      "securityDescription": "Uredi nastavitve zasebnosti in varnost svojega računa",
+      "settings": "Nastavitve",
+      "settingsDescription": "Prilagodi svoje izkušnje in preference",
+      "title": "Dobrodošel/a <bold>{name}</bold>"
+    },
     "name": {
       "description": "V vašem profilu je lahko vaše ime videti drugim uporabnikom s katerimi se med seboj delate v <noo></noo>. V primeru, da za logino uporabite <noo></noo> tudi pri drugih aplikacijah, lahko lahko tudi s temi aplikacijami združuje svoje ime, če si ga izbrali.",
       "errors": {
@@ -74,6 +83,6 @@
       "picture": "Tvoje sliko",
       "unspecifiedGender": "Nepredpovedano"
     },
-    "title": ""
+    "title": "Tvoj <noo></noo> profil"
   }
 }

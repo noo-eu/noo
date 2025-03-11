@@ -28,6 +28,15 @@
       "updateSuccess": "Twoje informacje o płci zostały zapisane"
     },
     "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Twój profil",
+      "profileDescription": "Sprawdź swój profil i zaktualizuj swoje dane",
+      "security": "Prywatność i bezpieczeństwo",
+      "securityDescription": "Zarządzaj ustawieniami prywatności i bezpieczeństwa konta",
+      "settings": "Ustawienia",
+      "settingsDescription": "Dostosuj swoje doświadczenia i preferencje",
+      "title": "Witaj <bold>{name}</bold>"
+    },
     "name": {
       "description": "Twoja nazwa będzie widoczna dla innych użytkowników, z którymi będziesz interaktywnie komunikował się na <noo></noo>. Jeśli używasz <noo></noo> do logowania się w inne aplikacje, Twoja nazwa może być także udostępniona im, jeśli wybierzesz.",
       "errors": {

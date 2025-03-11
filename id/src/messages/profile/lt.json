@@ -28,6 +28,15 @@
       "updateSuccess": "Jūsų lyties detalės buvo išsaugintos"
     },
     "header": "<noo></noo> Paskyra",
+    "home": {
+      "profile": "Tavo profilis",
+      "profileDescription": "Patikrink savo profilį ir atnaujink informaciją",
+      "security": "Privatumas ir saugumas",
+      "securityDescription": "Tvarkyk savo privatumo nustatymus ir paskyros saugumą",
+      "settings": "Nustatymai",
+      "settingsDescription": "Sukurk savo patirtį pagal savo norus",
+      "title": "Sveikas atvykęs, <bold>{name}</bold>"
+    },
     "name": {
       "description": "Jūsų vardas bus matomas kitų naudotojų, su kuriomis galėsite ryškiai bendrauti <noo></noo>. Jeigu jums reikalinga įrašyti į <noo></noo> taip pat ir priekeitis kitas aplikacijas, vardas gali būti perduodamas ir kitiems, jeigu ji pasirinks.",
       "errors": {

@@ -28,6 +28,15 @@
       "updateSuccess": "Deine Geschlechtsdaten wurden gespeichert"
     },
     "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Dein Profil",
+      "profileDescription": "Überprüfe dein Profil und aktualisiere deine Informationen",
+      "security": "Datenschutz & Sicherheit",
+      "securityDescription": "Verwalte deine Datenschutzeinstellungen und Kontosicherheit",
+      "settings": "Einstellungen",
+      "settingsDescription": "Gestalte dein Erlebnis und deine Vorlieben",
+      "title": "Willkommen <bold>{name}</bold>"
+    },
     "name": {
       "description": "Dein Name wird anderen Nutzern, mit denen du interagierst, auf <noo></noo> sichtbar. Wenn du dich auf <noo></noo> einloggst und in andere Apps zugreifst, kann dein Name auch dort gelten, wenn du es wählst.",
       "errors": {

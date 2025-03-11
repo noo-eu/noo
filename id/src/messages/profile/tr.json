@@ -28,6 +28,15 @@
       "updateSuccess": "Cinsiyet bilgilerinizi başarıyla kaydettiniz"
     },
     "header": "<noo></noo> Hesabım",
+    "home": {
+      "profile": "Profilin",
+      "profileDescription": "Profilini kontrol et ve bilgilerini güncelle",
+      "security": "Gizlilik ve Güvenlik",
+      "securityDescription": "Gizlilik ayarlarını ve hesap güvenliğini yönet",
+      "settings": "Ayarlar",
+      "settingsDescription": "Deneyimini ve tercihlerini kişiselleştir",
+      "title": "Hoş geldin <bold>{name}</bold>"
+    },
     "name": {
       "description": "İsiminiz diğer <noo></noo> kullanıcılara görüntülenmeyecek. Eğer <noo></noo>'i kullanarak başka uygulamalardan giriş yapacaksanız, isimlerinizi onlara da paylaşabilirsin.",
       "errors": {

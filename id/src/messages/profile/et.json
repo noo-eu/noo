@@ -28,6 +28,15 @@
       "updateSuccess": "Sõbra sooandmed on salvestatud"
     },
     "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Sinu profiil",
+      "profileDescription": "Vaata oma profiili ja uuenda oma andmeid",
+      "security": "Privaatsus ja turvalisus",
+      "securityDescription": "Halda oma privaatsusseadeid ja konto turvalisust",
+      "settings": "Seaded",
+      "settingsDescription": "Kohanda oma kogemust ja eelistusi",
+      "title": "Tere tulemast, <bold>{name}</bold>"
+    },
     "name": {
       "description": "Sinu nimi näeb teispool kasutajad, kuidaga sa oled võrdsid. Kui sa <noo></noo> abil sisse logi ja üldse võrdsete aplikatsiooni, võib see ka nende saatmine süüa üksinda võtta.",
       "errors": {

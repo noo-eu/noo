@@ -28,6 +28,15 @@
       "updateSuccess": "Spolne podatke su uspješno spremljeni"
     },
     "header": "<noo></noo> Korisnički račun",
+    "home": {
+      "profile": "Tvoj profil",
+      "profileDescription": "Pregledaj i ažuriraj svoje podatke",
+      "security": "Privatnost i sigurnost",
+      "securityDescription": "Upravljaj postavkama privatnosti i sigurnošću računa",
+      "settings": "Postavke",
+      "settingsDescription": "Prilagodi svoje iskustvo i preferencije",
+      "title": "Dobrodošao/la <bold>{name}</bold>"
+    },
     "name": {
       "description": "Vaše ime će biti vidljivo ostalim korisnicima s kojima ste u interakciji na <noo></noo>. Ako koristite <noo></noo> za prijavu u druge aplikacije, vaše ime također moguće da će biti dijeljeno s njima ako izaberete.",
       "errors": {

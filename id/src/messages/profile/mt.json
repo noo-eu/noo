@@ -28,6 +28,15 @@
       "updateSuccess": "Il-ħwajsa ta' danikija tiegħek ġender ġie salvata"
     },
     "header": "Akkont <noo></noo>",
+    "home": {
+      "profile": "Il-profil tiegħek",
+      "profileDescription": "Iċċekkja l-profil tiegħek u aġġorna l-informazzjoni tiegħek",
+      "security": "Privatezza u Sigurtà",
+      "securityDescription": "Immaniġġja s-settings tal-privatezza u s-sigurtà tal-kont tiegħek",
+      "settings": "Settings",
+      "settingsDescription": "Ippersonalizza l-esperjenza u l-preferenzi tiegħek",
+      "title": "Merħba <bold>{name}</bold>"
+    },
     "name": {
       "description": "Isem inti se jiżżewweġ lill-utenti oħra li tibgħad mal-hmawwinhom fuq <noo></noo>. Jekk tibgħat fiż-żejned mill <noo></noo> sabiex tiżżewwag għall-applikazzjonijiet oħra, isem inti se jiżżewweġhom wkoll jekk jogħġbok",
       "errors": {

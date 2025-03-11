@@ -28,6 +28,15 @@
       "updateSuccess": "Dina könshändelser har sparats"
     },
     "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Din profil",
+      "profileDescription": "Kolla igenom din profil och uppdatera dina uppgifter",
+      "security": "Integritet & Säkerhet",
+      "securityDescription": "Hantera dina integritetsinställningar och kontots säkerhet",
+      "settings": "Inställningar",
+      "settingsDescription": "Anpassa din upplevelse och preferenser",
+      "title": "Välkommen <bold>{name}</bold>"
+    },
     "name": {
       "description": "Ditt namn kommer att synas för andra användare som du interagerar med på <noo></noo>. Om du använder <noo></noo> för att logga in i andra appar, kan även ditt namn delas med dem om du väljer det.",
       "errors": {
