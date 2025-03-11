@@ -1,0 +1,23 @@
+{
+  "common": {
+    "back": "Til baka",
+    "cancel": "Hætta við",
+    "change": "Breyta",
+    "close": "Loka",
+    "continue": "Halda áfram",
+    "madeWith": "Gert með ❤️ og ☕️ í Evrópusambandinu",
+    "next": "Áfram",
+    "no": "Nei",
+    "optional": "Valfrjálst",
+    "passwordField": {
+      "ariaLabelShow": "Sýna lykilorð sem læsilegan texta. Aðvörun: lykilorðið mun birtast á skjánum.",
+      "hide": "Fela lykilorð",
+      "show": "Sýna lykilorð"
+    },
+    "privacy": "Persónuvernd",
+    "remove": "Fjarlægja",
+    "save": "Vista",
+    "terms": "Skilmálar",
+    "yes": "Já"
+  }
+}

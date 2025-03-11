@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Cruthaigh do chuntas <noo></noo>",
     "errors": {
-      "first_name_required": "Cuir ainm chéad in iúl leat",
       "invalid_data": "Níl aon dhuine ag déanamh caidé do scéim agus cuir cuntas á chur síos",
-      "name_invalid": "Tá sárchríochtaí sna háinm atá thuigheamar",
-      "name_too_long": "Tá an t-ainm atá thuigheamar tá fada",
-      "name_too_short": "Tá an t-ainm atá thuigheamar ró-bhreac",
       "password_classes": "Cuir pàs níos láidir in iúl leat. Cuir síos ar litreacha, nuar nó síneadh i dtaobh agus fead síos ar háinm úr atá thuigheamar.",
       "password_length": "Caibidil a chur síos fad é is a shár go dtí 10 caibidil.",
       "password_required": "Cuir pàs in iúl leat",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Criannaigh an áireamh tú",
     "step1": {
-      "first_name": "Ainm chéad duitse",
-      "last_name": "Saoi thuigheamar duitse",
       "title": "Tóg ainm dóitse leat "
     },
     "step2": {

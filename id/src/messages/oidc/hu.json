@@ -1,41 +1,41 @@
 {
   "oidc": {
-    "change_account": "Fiók módosítása",
+    "change_account": "Fiók váltása",
     "consent": {
       "claims": {
-        "address": "Postacíme",
-        "birthdate": "Születési dátuma",
-        "email": "A noo e-mail címe",
-        "gender": "A nem, amellyel azonosul",
-        "name": "Teljes neve",
-        "phone_number": "Telefonszáma",
-        "profile": "Profilképe",
-        "username": "Felhasználóneve"
+        "address": "A lakcímed",
+        "birthdate": "A születési dátumod",
+        "email": "A noo e-mail címed",
+        "gender": "A nem, amivel azonosulsz",
+        "name": "A teljes neved",
+        "phone_number": "A telefonszámod",
+        "profile": "A profilképed",
+        "username": "A felhasználóneved"
       },
-      "description": "<strong>{name}</strong> az alábbi információkhoz kér hozzáférést:",
-      "title": "Az Ön beleegyezéséhez csatlakozik a <details>{name}</details>."
+      "description": "<strong>{name}</strong> hozzáférést kér a következő adataidhoz:",
+      "title": "Bejelentkezel ide: <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Harmadik szerepű alkalmazásból kijelentkezett.} other {<strong>{name}</strong> nevű fiókból kijelentkezett.}}",
-      "query": "Tartsa a megfelelő fiókot is?",
+      "description": "{name, select, undefined {Kijelentkeztél egy külső alkalmazásból.} other {Kijelentkeztél a <strong>{name}</strong> alkalmazásból.}}",
+      "query": "Szeretnél a <noo></noo> fiókból is kijelentkezni?",
       "title": "Kijelentkezés"
     },
     "fatal": {
-      "description": "Megpróbált bejelentkezni egy harmadik féltől származó alkalmazásba, de az alkalmazás nem működik megfelelően. Kérjük, próbálja meg később, vagy lépjen kapcsolatba az alkalmazás tulajdonosával az alábbi információkkal:",
-      "error": "OpenID Connect Error: {error}",
-      "title": "Hiba történt"
+      "description": "Egy külső alkalmazásba próbáltál bejelentkezni, de valami nem működött rendesen. Próbáld meg később újra, vagy vedd fel a kapcsolatot az alkalmazás fejlesztőjével. Itt vannak a részletek:",
+      "error": "OpenID Connect hiba: {error}",
+      "title": "Valami hiba történt"
     },
-    "home": "Lépjen be a saját <noo></noo> kezdőlapjára",
+    "home": "Ugorj a saját <noo></noo> kezdőlapodra",
     "switch": {
-      "description": "a <details>{name}</details> alkalmazásba való belépéshez",
-      "legalComplete": "Bejelentkezés előtt ellenőriznie kell a <privacy>adatvédelmi irányelveket</privacy> és a <terms>használati feltételeket</terms> {client}.",
-      "legalNone": "Bejelentkezés előtt ellenőriznie kell a {client} jogi dokumentumait.",
-      "legalPrivacy": "Bejelentkezés előtt ellenőriznie kell a <privacy>adatvédelmi irányelveket</privacy> {client}.",
-      "legalTerms": "Bejelentkezés előtt ellenőriznie kell a <terms>használati feltételeket</terms> {client}.",
-      "metaTitle": "Belépés - noo id",
-      "pageTitle": "Bejelentkezés <noo></noo>-fiókkal",
+      "description": "a(z) <details>{name}</details> folytatásához",
+      "legalComplete": "Mielőtt bejelentkezel, olvasd el a(z) {client} <privacy>adatvédelmi irányelveit</privacy> és a <terms>felhasználási feltételeit</terms>.",
+      "legalNone": "Mielőtt bejelentkezel, érdemes átnézned a(z) {client} jogi dokumentumait.",
+      "legalPrivacy": "Mielőtt bejelentkezel, olvasd el a(z) {client} <privacy>adatvédelmi irányelveit</privacy>.",
+      "legalTerms": "Mielőtt bejelentkezel, olvasd el a(z) {client} <terms>felhasználási feltételeit</terms>.",
+      "metaTitle": "Bejelentkezés - noo id",
+      "pageTitle": "Bejelentkezés a(z) <noo></noo> fiókkal",
       "signin": "Másik fiók használata",
-      "title": "Válasszon fiókot"
+      "title": "Válassz egy fiókot"
     }
   }
 }

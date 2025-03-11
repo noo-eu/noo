@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Maak uw <noo></noo> account aan",
     "errors": {
-      "first_name_required": "Vul alstublieft uw voornaam in",
       "invalid_data": "Er ging iets mis. Controleer de gegevens die u ingevuld heeft",
-      "name_invalid": "De naam bevat ongeldige tekens",
-      "name_too_long": "Uw naam is te lang",
-      "name_too_short": "Uw naam is te kort",
       "password_classes": "Gebruik een sterker wachtwoord. Meng letters, cijfers en symboolen",
       "password_length": "Gebruik alstublieft 10 of meer tekens",
       "password_required": "Vul alstublieft uw wachtwoord in",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Maak je noo-account aan",
     "step1": {
-      "first_name": "Voornaam",
-      "last_name": "Achternaam",
       "title": "Vul uw naam in"
     },
     "step2": {

@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Sukurkite savo <noo></noo> paskyrą",
     "errors": {
-      "first_name_required": "Įveskite savo pavardę",
       "invalid_data": "Kitaip nei teisingai. Rodykite įvestus duomenis",
-      "name_invalid": "Įveste pavardė yra netinkuota",
-      "name_too_long": "Įvestas vardas yra per ilgas",
-      "name_too_short": "Įvestas vardas yra per trumpas",
       "password_classes": "Panaudokite stipresnę slapyvardą. Naudojokite raidžių, skaičių ir simbolių mišinį",
       "password_length": "Panaudokite 10 arba daugiau simbolių",
       "password_required": "Įveskite savo slaptažodį",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Sukurkite savo noo paskyrą",
     "step1": {
-      "first_name": "Pavardė",
-      "last_name": "Šeima",
       "title": "Įveskite savo vardą"
     },
     "step2": {

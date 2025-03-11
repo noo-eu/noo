@@ -1,0 +1,36 @@
+{
+  "signup": {
+    "create_your_account": "Hesabınızı oluşturun <noo></noo>",
+    "errors": {
+      "invalid_data": "Bir hata oluştu. Lütfen girdilerinizi kontrol edin",
+      "password_classes": "Lütfen daha güçlü bir parola kullanın. Karakterler, rakamlar ve sembollerin kombinasyonunu kullanın",
+      "password_length": "10 karakterden fazlasını kullanın",
+      "password_required": "<noo></noo> hesabınızı oluşturmak için lütfen parolanızı girin",
+      "password_too_long": "Girdiğiniz parola çok uzun",
+      "username_first_char": "Kullanıcı adınız ilk karakter olarak harf veya rakam içermelidir",
+      "username_invalid": "Kullanıcı adınızda yalnızca harfler, rakamlar ve noktalar (.) bulunabilir",
+      "username_last_char": "Kullanıcı adınız son karakter olarak harf veya rakam içermelidir",
+      "username_length": "6 ile 30 karakter arasında bir kullanıcı adı girin",
+      "username_required": "<noo></noo> hesabınızı oluşturmak için lütfen yeni kullanıcı adınızı girin",
+      "username_taken": "Bu kullanıcı adı zaten alınmıştır",
+      "username_two_dots": "Kullanıcı adınızda iki nokta (.) yan yana bulunamaz"
+    },
+    "metaTitle": "Hesabınızı oluşturun",
+    "step1": {
+      "title": "Adınızı girin"
+    },
+    "step2": {
+      "title": "E-posta adresinizi seçin",
+      "username": "E-posta adresi"
+    },
+    "step3": {
+      "password": "Parola",
+      "title": "Bir güçlü parola oluşturun"
+    },
+    "step4": {
+      "accept": "Onayla ve devam et",
+      "description": "<p><noo></noo> hesabınız, e-posta, dosya depolama ve daha pek çok hizmete erişim sağlar.</p>\n<p><terms><noo></noo>'in Şartları</terms>, <terms>kullanım sırasında neler bekliyorsunuz?</terms> hakkında açıklamalar içerirken <privacy><noo></noo>'un Gizlilik Politikası</privacy>, kullanırken hangi bilgi türlerinin toplanıp işlendiğini anlatır.</p>\n<p>Hesap oluşturup hizmetlere erişmek için, <terms><noo></noo>'in Şartlarını</terms> ve <privacy><noo></noo>'un Gizlilik Politikası'nı onaylamanız gereklidir.</p>",
+      "title": "Son bir şey..."
+    }
+  }
+}

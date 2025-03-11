@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Tilbage til din konto",
+    "birthdate": {
+      "day": "Dag",
+      "description": "Din fødselsdato kan bruges til at sikre din konto og personliggøre dine data.",
+      "errors": {
+        "bad_year": "Indtast dit fulde årstal af fødsel",
+        "future": "Indtast en dato i fortiden",
+        "invalid": "Fødselsdagen er ugyldig"
+      },
+      "month": "Måned",
+      "title": "Indtast din fødselsdato",
+      "updateSuccess": "Din fødselsdato er blevet gemt",
+      "year": "År"
+    },
+    "gender": {
+      "custom": "Brugerdefineret",
+      "customLabel": "Køn",
+      "description": "Dit køn bruges til personliggørelse og for at adressere dig korrekt.",
+      "example": "Alex er online, send {gender, select, female {hende} male {ham} other {}} en besked.",
+      "female": "Kvinde",
+      "male": "Mand",
+      "other": "Andre",
+      "pronounsLabel": "Tale om mig som",
+      "title": "Indtast din kønsspecifikation",
+      "unspecified": "Jeg præfererer ikke at sige det",
+      "updateSuccess": "Dine kønsoplysninger er blevet gemt med succes"
+    },
+    "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Din profil",
+      "profileDescription": "Tjek din profil og opdater dine oplysninger",
+      "security": "Privatliv & Sikkerhed",
+      "securityDescription": "Håndter dine privatlivsindstillinger og kontosikkerhed",
+      "settings": "Indstillinger",
+      "settingsDescription": "Tilpas din oplevelse og dine præferencer",
+      "title": "Velkommen <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Din navn vil være synligt for andre brugere, du interagerer med på <noo></noo>. Hvis du signer i til andre apps ved hjælp af <noo></noo>, kan dit navn også deltages med dem, hvis du vælger det.",
+      "errors": {
+        "invalid": "Navnet indeholder nogle ugyldige tegn",
+        "required": "Skub venligst dit første navn ind",
+        "tooLong": "Navnet du har skrevet er for længere",
+        "tooShort": "Navnet du har skrevet er for kort"
+      },
+      "firstName": "Fornavn",
+      "lastName": "Efternavn",
+      "title": "Ændre dit navn",
+      "updateNotice": "Dette opdatering gælder for alle <noo></noo>-tjenester. Du må stadigvæk selv skulle opdatere dit navn separat til andre apps.",
+      "updateSuccess": "Dit navn er blevet ændret"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Optag",
+        "description": "Brug enheden kamera til at tage et billede.",
+        "title": "Tag et billede"
+      },
+      "error": "Der gik noget galt. Prøv igen, venligst.",
+      "main": {
+        "description": "A picture helps you and others recognize your account. You can change or remove it at any time.",
+        "title": "Profilbillede"
+      },
+      "remove_success": "Din profilbillede er blevet fjernet...",
+      "upload": {
+        "browse": "Vælg fra computeren",
+        "camera": "Brug kameraet",
+        "change": "Skift billede",
+        "drag": "Træk billede hertil",
+        "error": {
+          "mime": "'Billedet er ikke understøttet. Vælg et JPG-, PNG- eller GIF-billede.'",
+          "size": "'Billedet er for stort. Vælg et billede på mindre end 10 MB.'"
+        },
+        "success": "Din profilsammenhængende billede er blevet opdateret.",
+        "title": "Vælg et billede"
+      }
+    },
+    "summary": {
+      "birthdate": "Din fødselsdag",
+      "gender": "Din køn",
+      "name": "Dit navn",
+      "picture": "Din bilde",
+      "unspecifiedGender": "Ikke angivet"
+    },
+    "title": "Dit <noo></noo> profiler"
+  }
+}

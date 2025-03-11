@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Për të kthehur në llogarinë tuaj",
+    "birthdate": {
+      "day": "Dita",
+      "description": "Data e lindjes tuaj mund të përdoret për siguri të kontit dhe personalizim.",
+      "errors": {
+        "bad_year": "Shtypni çdo njërën nga vjetët e lindjes tuaj",
+        "future": "Shtypni një datë në kohë të katermendshme",
+        "invalid": "Data e lindjes është të pamundur"
+      },
+      "month": "Muhurja",
+      "title": "Shtypni datën e lindjes",
+      "updateSuccess": "Data e lindjes tuaj është ruajtur me sukses",
+      "year": "Viti"
+    },
+    "gender": {
+      "custom": "Personalizuar",
+      "customLabel": "Gjinia",
+      "description": "Gjina juaj përdoret për personalizim dhe që të ju adresoheni saktërisht.",
+      "example": "Alex është në linjë, {gender, select, female {dërgojini asaj} male {dërgojini atij} other {dergo}} një mesazh.",
+      "female": "Femër",
+      "male": "Mashkull",
+      "other": "Tjetër gjini",
+      "pronounsLabel": "Refer to me si",
+      "title": "Shtypni gjinjen",
+      "unspecified": "Unspecifik",
+      "updateSuccess": "Të dhjetat e gjinit të tuaj janë ruajtur me sukses"
+    },
+    "header": "<noo></noo> Llogari",
+    "home": {
+      "profile": "Profili yt",
+      "profileDescription": "Shiko profili yt dhe përditëso informatat",
+      "security": "Privatësia & Siguria",
+      "securityDescription": "Menaxho cilësimet e privatësisë dhe sigurinë e llogarisë ",
+      "settings": "Cilësimet",
+      "settingsDescription": "Personalizo përvojën dhe preferencat e tua",
+      "title": "Mirë se erdhe <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Emri ytë do të jetë i qasje ndryshme për përdoruesit e tjerë që ju kanë dialog me të në <noo></noo>. Nëse ju përdorni <noo></noo> për tu logruar në aplikacione tjera, emri ytë do të mund të shpërthehet edhe ndryshmë për tyre, nëse jeni zgjedhni për të.",
+      "errors": {
+        "invalid": "Emri ka karaktere të pavlefshme",
+        "required": "Ju lutem fryte emrin tuaj",
+        "tooLong": "Emri ytë që jeni hyli është i gjatë në mënyrë të kërkuar",
+        "tooShort": "Emri ytë që jeni hyli është shumë i shkurtër"
+      },
+      "firstName": "Pronomi i parë",
+      "lastName": "Familje",
+      "title": "Ndryshoni emrin tuaj",
+      "updateNotice": "Kjo ndryshim është për të gjitha <noo></noo> shërbesit. Ju mund të sillini shtypni emrin tuaj sepse aplikacione tjera, nëse duhet.",
+      "updateSuccess": "Emri ytë u ndryshoi"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Sfotografoi",
+        "description": "Përdorni makinën për të shikuar një shtypni.",
+        "title": "Marroni një shtypni"
+      },
+      "error": "Diçka shkoi keq. Ju lutem provoni edhe përsëri.",
+      "main": {
+        "description": "Një shtypni ndihmon ju dhe të tjerit e njohur për kontinë tuaj. Ju mundi ndryshim a rrji at këtij çast.",
+        "title": "Shtypni i profili"
+      },
+      "remove_success": "Një shtypni i profilit është zhdukur...",
+      "upload": {
+        "browse": "Shfryti nga kompjuteri juaj",
+        "camera": "Përdorni kamerën tënde për të kapër",
+        "change": "Ndryshoni fotografi",
+        "drag": "Dragoni fotografinë këtu",
+        "error": {
+          "mime": "Fotografia nuk është e mbështetur. Ju lutem shfryti një JPG, PNG ose GIF file.",
+          "size": "Fotografia është të mëdhejtë në mënyrën e kërkuar. Ju lutem shfryti një fotografi që është më pak se 10MB."
+        },
+        "success": "Shtypni i profilit është aktualizuar",
+        "title": "Shfryti një shtypni"
+      }
+    },
+    "summary": {
+      "birthdate": "Datëlindja juaj",
+      "gender": "Gjinia jote",
+      "name": "Emri ytë",
+      "picture": "Shtypja e profilit tënd",
+      "unspecifiedGender": "Nuk specifikuar"
+    },
+    "title": "Profili i tuaj <noo></noo>"
+  }
+}

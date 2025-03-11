@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Tagasi oma konto",
+    "birthdate": {
+      "day": "Päev",
+      "description": "Sündimuutu on võimalik kasutada konto turvast ja isiku määratlust.",
+      "errors": {
+        "bad_year": "Palun sisestage teie sünni aasta täielikult",
+        "future": "Palun sisestage minevikusse kuuluv sünniaeg",
+        "invalid": "Sünniaeg ei ole õige"
+      },
+      "month": "Kuu",
+      "title": "Sisesta sünniaeg",
+      "updateSuccess": "Sünniaeg on edukalt salvestatud.",
+      "year": "Aasta"
+    },
+    "gender": {
+      "custom": "Kohandatud",
+      "customLabel": "Soolestik",
+      "description": "Sugu valib meie teadmised sulle suhtuma ning saavadte kõike õigesti kirjeldatult.",
+      "example": "-- Unused --",
+      "female": "Naine",
+      "male": "Mees",
+      "other": "Teised",
+      "pronounsLabel": "Tule vastastega tehes",
+      "title": "Sisesta sool",
+      "unspecified": "Ei soovida öelda",
+      "updateSuccess": "Sõbra sooandmed on salvestatud"
+    },
+    "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Sinu profiil",
+      "profileDescription": "Vaata oma profiili ja uuenda oma andmeid",
+      "security": "Privaatsus ja turvalisus",
+      "securityDescription": "Halda oma privaatsusseadeid ja konto turvalisust",
+      "settings": "Seaded",
+      "settingsDescription": "Kohanda oma kogemust ja eelistusi",
+      "title": "Tere tulemast, <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Sinu nimi näeb teispool kasutajad, kuidaga sa oled võrdsid. Kui sa <noo></noo> abil sisse logi ja üldse võrdsete aplikatsiooni, võib see ka nende saatmine süüa üksinda võtta.",
+      "errors": {
+        "invalid": "Sisestatud nimes on salajne sisu",
+        "required": "Palun sisesta oma esimene nimi",
+        "tooLong": "Sisestatud nimi on liiga pikk",
+        "tooShort": "Sisestatud nimi on liiga lühike"
+      },
+      "firstName": "Eesnimi",
+      "lastName": "Perekonnanimi",
+      "title": "Muuda oma nimi",
+      "updateNotice": "See uuendus on <noo></noo> kõigi teenuste jaoks. Sinu nime täiendamine võib tekkida veel vajaduse süüa üksinda veel üldse teiseid soome võrdsete.",
+      "updateSuccess": "Sinu nimi on muudetud"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Foto teha",
+        "description": "Kasuta oma seadet kaamera pildi tegemiseks.",
+        "title": "Pilt teha"
+      },
+      "error": "Midagi läks valesti. Proovi uuesti, kui vajad.",
+      "main": {
+        "description": "Pilt aitab teil ja teistel teadmata, et see on teie konto. Saate seda igavesti muuta või kustutada.",
+        "title": "Profiilifoto"
+      },
+      "remove_success": "Profiilipildi otsesõnum on eemaldatud.",
+      "upload": {
+        "browse": "Vali arvutist",
+        "camera": "Kasuta oma kaamerat",
+        "change": "Muuda fotot",
+        "drag": "Kühviga pildi siia tõsta",
+        "error": {
+          "mime": "Selle pildi formaat ei ole toetatud. Palun vali JPG, PNG või GIF fail.",
+          "size": "Pilt on liiga suur. Palun vali pilt, mis on väiksem kui 10 MB."
+        },
+        "success": "Sinu profiili pildi on uuendatud.",
+        "title": "Vali pilt"
+      }
+    },
+    "summary": {
+      "birthdate": "Sündimisaeg",
+      "gender": "Sugu",
+      "name": "Sünninimi",
+      "picture": "Vaadeldav pilt",
+      "unspecifiedGender": "Mitte teada"
+    },
+    "title": "Sinu <noo></noo> profiil"
+  }
+}

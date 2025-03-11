@@ -50,6 +50,16 @@ async function create(attributes: typeof schema.users.$inferInsert) {
   return (await db.insert(schema.users).values(attributes).returning()).pop()!;
 }
 
+async function update(
+  userId: string,
+  attributes: Partial<typeof schema.users.$inferInsert>,
+) {
+  return db
+    .update(schema.users)
+    .set(attributes)
+    .where(eq(schema.users.id, userId));
+}
+
 async function isUsernameAvailable(
   normalizedUsername: string,
   tenantId: string | null,
@@ -87,6 +97,7 @@ async function authenticate(username: string, password: string) {
 const Users = {
   find,
   create,
+  update,
   authenticate,
   isUsernameAvailable,
 };

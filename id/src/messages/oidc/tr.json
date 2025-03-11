@@ -1,0 +1,41 @@
+{
+  "oidc": {
+    "change_account": "Hesap değiştir",
+    "consent": {
+      "claims": {
+        "address": "Adresin",
+        "birthdate": "Doğum tarihi",
+        "email": "E-posta adresin",
+        "gender": "Belirttiğin cinsiyet",
+        "name": "Tam adın",
+        "phone_number": "Telefon numaran",
+        "profile": "Profil fotoğrafın",
+        "username": "Kullanıcı adın"
+      },
+      "description": "<strong>{name}</strong> aşağıdaki bilgilere erişim istiyor",
+      "title": "<details>{name}</details> ile giriş yapıyorsun."
+    },
+    "end_session": {
+      "description": "{name, select, undefined {Üçüncü parti bir uygulamadan çıkış yaptın.} other {<strong>{name}</strong> adlı uygulamadan çıkış yaptın.}}",
+      "query": "<noo></noo>'dan da çıkış yapmak ister misin?",
+      "title": "Çıkış yap"
+    },
+    "fatal": {
+      "description": "Bir üçüncü parti uygulamaya giriş yapmayı denedin ama uygulama düzgün çalışmıyor. Lütfen daha sonra tekrar dene ya da aşağıdaki bilgilerle uygulamanın geliştiricisine ulaş.",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Bir hata oluştu"
+    },
+    "home": "<noo></noo> ana sayfana git",
+    "switch": {
+      "description": "<details>{name}</details> ile devam etmek için",
+      "legalComplete": "Giriş yapmadan önce, {client}'in gizlilik politikasını ve hizmet koşullarını gözden geçir.",
+      "legalNone": "Giriş yapmadan önce, {client}'in hukuki belgelerini gözden geçir.",
+      "legalPrivacy": "Giriş yapmadan önce, {client}'in <privacy>gizlilik politikasını</privacy> incelemelisin.",
+      "legalTerms": "Giriş yapmadan önce, {client}'in <terms>kullanım koşullarını</terms> incelemelisin.",
+      "metaTitle": "Giriş yap - noo id",
+      "pageTitle": "<noo></noo> ile giriş yap",
+      "signin": "Diğer bir hesaba giriş yap",
+      "title": "Bir hesap seç"
+    }
+  }
+}

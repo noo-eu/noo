@@ -1,18 +1,23 @@
 {
   "common": {
+    "back": "Tagasi",
     "cancel": "Tühista",
-    "continue": "Kontrolli välja",
-    "madeWith": "Loodud ❤️ ja ☕️ Euroopa Liidus",
-    "next": "Järgmine",
+    "change": "Muuda",
+    "close": "Sulge",
+    "continue": "Jätka",
+    "madeWith": "Tehtud ❤️ ja ☕️ saatel Euroopa Liidus",
+    "next": "Edasi",
     "no": "Ei",
     "optional": "Valikuline",
     "passwordField": {
-      "ariaLabelShow": "Parool näidata tekstina ekraanile. Märkus: see näitab teie parooli ekraanil!",
+      "ariaLabelShow": "Näita salasõna tavalise tekstina. Ettevaatust: salasõna kuvatakse ekraanil.",
       "hide": "Peida parool",
-      "show": "Käivita parooli nägemine"
+      "show": "Näita salasõna"
     },
-    "privacy": "Õiguskaitse teatis",
-    "terms": "Märõded ja tingimused",
+    "privacy": "Privaatsus",
+    "remove": "Eemalda",
+    "save": "Salvesta",
+    "terms": "Tingimused",
     "yes": "Jah"
   }
 }

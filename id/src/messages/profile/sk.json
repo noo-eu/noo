@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Naspäť do Vašej účtovnej triedy",
+    "birthdate": {
+      "day": "Deň",
+      "description": "Vaša dátum narodenia môže byť použité na zvýšenie bezpečnosti účtu a personalizáciu.",
+      "errors": {
+        "bad_year": "Zadajte celý rok vašej narodenia",
+        "future": "Zadajte dátum v minulosti",
+        "invalid": "Dátum narodenia je neplatný"
+      },
+      "month": "Mesiac",
+      "title": "Zadajte svoj dátum narodenia",
+      "updateSuccess": "Vaše dátum narodenia bolo úspešne uložené",
+      "year": "Rok"
+    },
+    "gender": {
+      "custom": "Vlastné",
+      "customLabel": "Pohlavie",
+      "description": "Vaše pohlavie sa používa na personalizáciu a aby ste boli oslovení správne.",
+      "example": "Alex je online, {gender, select, female {pošli jej} male {pošli mu} other {pošli}} správu.",
+      "female": "Žiacka",
+      "male": "Chlapeček",
+      "other": "Iné",
+      "pronounsLabel": "Oslovujte ma takto",
+      "title": "Zadajte svoj pohlavie",
+      "unspecified": "Nezadám, aké pohlavie mám",
+      "updateSuccess": "Vaše údaje o pohlaví sa uložili úspešne"
+    },
+    "header": "<noo></noo> Účet",
+    "home": {
+      "profile": "Tvoj profil",
+      "profileDescription": "Skontroluj svoj profil a aktualizuj svoje informácie",
+      "security": "Ochrana súkromia & Bezpečnosť",
+      "securityDescription": "Spravuj svoje nastavenia súkromia a zabezpečenia účtu",
+      "settings": "Nastavenia",
+      "settingsDescription": "Prispôsob si svoju skúsenosť a preferencie",
+      "title": "Vitáme ťa <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Vaše meno bude viditeľné ostatným používateľom s ktorými budete interagovať na <noo></noo>. Ak používate <noo></noo> pri pristupovaní do iných aplikácií, môže Vaše meno byť tiež zdieľané s nimi, ak si takto vyberiete.",
+      "errors": {
+        "invalid": "Meno obsahuje neplatné znaky",
+        "required": "Prosím, zadejte vaše meno",
+        "tooLong": "Meno, ktoré ste zadali je príliš dlhé",
+        "tooShort": "Meno, ktoré ste zadali je príliš krátké"
+      },
+      "firstName": "Meno",
+      "lastName": "Priezvisko",
+      "title": "Zmena Vašeho mena",
+      "updateNotice": "Táto zmienka sa vztahuje na všetky <noo></noo> služby. Môžete stále potrebovať Váš názov samostatne upraviť pre iné aplikácie.",
+      "updateSuccess": "Vaše meno bolo zmenené"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Nafotiť",
+        "description": "Použite kameru vášho zariadenia na vyhotovenie fotografie.",
+        "title": "Vyhotoviť fotografiu"
+      },
+      "error": "Čo niečo nepošlo dobre. Skús to znova.",
+      "main": {
+        "description": "Obrázok Vám a iným pomáha rozpoznávať Vašiu účet. Môžete ho meniť alebo odstrániť v každom čase.",
+        "title": "Profilová fotografia"
+      },
+      "remove_success": "Vaša profilová fotka bola odstránená...",
+      "upload": {
+        "browse": "Vybrať z počítača",
+        "camera": "Použiť kameru",
+        "change": "Zmeniť fotografiu",
+        "drag": "Potiahnuť fotografiu sem",
+        "error": {
+          "mime": "Fotka nie je podporovaná. Vyberte prosím súbor v formáte JPG, PNG alebo GIF.",
+          "size": "Nahradte túto fotografiu novou fotografiou menší ako 10MB."
+        },
+        "success": "Vaša profilová fotka bola aktualizovaná.",
+        "title": "Vybrať fotografiu"
+      }
+    },
+    "summary": {
+      "birthdate": "Tvoj dátum narodenia",
+      "gender": "Tvé pohlavie",
+      "name": "Tvoje meno",
+      "picture": "Tvoja obrázok",
+      "unspecifiedGender": "Nezdané"
+    },
+    "title": "Tvoj <noo></noo> profil"
+  }
+}

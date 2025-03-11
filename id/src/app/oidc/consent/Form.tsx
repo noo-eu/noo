@@ -17,7 +17,13 @@ export default function Form() {
       <form action={formAction}>
         <input type="hidden" name="sessionId" value={sessionId} />
         <div className="flex gap-4 justify-end">
-          <Button type="submit" name="consent" disabled={pending} value={"yes"}>
+          <Button
+            type="submit"
+            name="consent"
+            disabled={pending}
+            value={"yes"}
+            data-testid="consentSubmit"
+          >
             {t("continue")}
           </Button>
         </div>

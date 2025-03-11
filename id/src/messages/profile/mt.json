@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Lura għall-akkaunt tiegħek",
+    "birthdate": {
+      "day": "Jum",
+      "description": "L-età ta' twemmin tiegħek tissejay il-kont u l-personalizazzjoni.",
+      "errors": {
+        "bad_year": "Tiniedi tara l-sena sħiħa tal-biċċiera tiegħek",
+        "future": "Tara għax-xhur u d-deżert",
+        "invalid": "L-età ta' twemmin hi invalida"
+      },
+      "month": "Majja",
+      "title": "Tżomm il-data ta' twelidkom",
+      "updateSuccess": "L-età ta' twemmin tiegħek ġiet salvata",
+      "year": "Sena"
+    },
+    "gender": {
+      "custom": "Personalizzat",
+      "customLabel": "Ġeneru",
+      "description": "L-ġeneru tiegħek jintuża għall-personalizazzjoni u biex tkun ad-dressata saħansitra.",
+      "example": "Alex online, {gender, select, female {ibgħatilha} male {ibgħatlu} other {ibgħat}} messaġġ.",
+      "female": "Marċen",
+      "male": "Irġiel",
+      "other": "Oħrajn",
+      "pronounsLabel": "Referi għalimi bħala",
+      "title": "Setja l-genru",
+      "unspecified": "Inniex nirid xejn",
+      "updateSuccess": "Il-ħwajsa ta' danikija tiegħek ġender ġie salvata"
+    },
+    "header": "Akkont <noo></noo>",
+    "home": {
+      "profile": "Il-profil tiegħek",
+      "profileDescription": "Iċċekkja l-profil tiegħek u aġġorna l-informazzjoni tiegħek",
+      "security": "Privatezza u Sigurtà",
+      "securityDescription": "Immaniġġja s-settings tal-privatezza u s-sigurtà tal-kont tiegħek",
+      "settings": "Settings",
+      "settingsDescription": "Ippersonalizza l-esperjenza u l-preferenzi tiegħek",
+      "title": "Merħba <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Isem inti se jiżżewweġ lill-utenti oħra li tibgħad mal-hmawwinhom fuq <noo></noo>. Jekk tibgħat fiż-żejned mill <noo></noo> sabiex tiżżewwag għall-applikazzjonijiet oħra, isem inti se jiżżewweġhom wkoll jekk jogħġbok",
+      "errors": {
+        "invalid": "Ism ma jiekolx kollox",
+        "required": "Tajjeb tibba' isim tkun ħadd",
+        "tooLong": "Ism kemm ġej il-ħafna",
+        "tooShort": "Ism kemm jew wisq qalih"
+      },
+      "firstName": "Isim",
+      "lastName": "Surnamu",
+      "title": "Tgħallem l-isem tiegħek",
+      "updateNotice": "Dan il-modifika ta' kull servizz <noo></noo> li jagħmel. Bosta drabi, biss, tibghadx fiż-żejned għall-applikazzjonijiet oħra.",
+      "updateSuccess": "L-isem tiegħek ġie tgħallem"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Niżżel",
+        "description": "Uża kamera tat-tpinġa tiegħek biex tixtri ritratt.",
+        "title": "Ixtaqleb ritratt"
+      },
+      "error": "Inhales fuq xi xorta. Tixtieq tiflahomx.",
+      "main": {
+        "description": "Bħalik kellek immedja ta' rikonoxximent bl-iktar ġużi, u oħrajn. Tista' tgħaddi jew tibdelha dejjem.",
+        "title": "Ritratt tal-profil"
+      },
+      "remove_success": "Iħabbar li l-istampa ta' profil tiegħek ġiet eliminata...",
+      "upload": {
+        "browse": "Agħżel minn kompjutur tiegħek",
+        "camera": "Uża l-kamera tiegħek",
+        "change": "Biddel il-foto",
+        "drag": "Jarra fl-istess post",
+        "error": {
+          "mime": "'Ilgħalba qed tkun mistoħja. Iktarha ġrafu fl-ormi JPG, PNG jew GIF.",
+          "size": "'Il-ġrafu ta' għaliex huwa aktar minn 10MB. Iktarha bħala l-istess."
+        },
+        "success": "Il-pittruzz tal-profil tiegħek ġie mmodifikat.",
+        "title": "Agħżel ritratt"
+      }
+    },
+    "summary": {
+      "birthdate": "Datu ta' twelid ta' għaqad tiegħek",
+      "gender": "Inhawiża tiegħek",
+      "name": "Isem tiegħek",
+      "picture": "L-immaġni tiegħek",
+      "unspecifiedGender": "Inhawiża mhux espicit"
+    },
+    "title": "Il-profilu tiegħek <noo></noo>"
+  }
+}

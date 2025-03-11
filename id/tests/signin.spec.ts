@@ -8,7 +8,7 @@ test.describe("Signin", () => {
     await page.fill('input[name="password"]', "super-s3cret");
     await page.getByTestId("signinSubmit").click();
 
-    await expect(page.getByText("Welcome back, John")).toBeVisible();
+    await expect(page.getByText("Manage your privacy settings")).toBeVisible();
   });
 
   test("Bad credentials", async ({ page }) => {
@@ -19,7 +19,7 @@ test.describe("Signin", () => {
     await page.getByTestId("signinSubmit").click();
 
     await expect(
-      page.getByText("The credentials you entered are incorrect"),
+      page.getByText("The details you entered are incorrect"),
     ).toBeVisible();
   });
 

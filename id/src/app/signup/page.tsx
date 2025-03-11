@@ -31,6 +31,7 @@ export default function SignupPage() {
   );
 
   const t = useTranslations("signup");
+  const profileT = useTranslations("profile");
   const commonT = useTranslations("common");
 
   return (
@@ -41,15 +42,15 @@ export default function SignupPage() {
 
       <form action={formAction} className="space-y-8">
         <TextField
-          label={t("step1.first_name")}
+          label={profileT("name.firstName")}
           name="first_name"
           defaultValue={state.values.first_name}
-          error={state.errors.first_name}
+          error={state.errors.firstName}
           autoCapitalize="words"
         />
 
         <TextField
-          label={t("step1.last_name")}
+          label={profileT("name.lastName")}
           aroundLabel={(label) => (
             <div className="flex justify-between mb-1">
               {label}
@@ -58,7 +59,7 @@ export default function SignupPage() {
           )}
           name="last_name"
           defaultValue={state.values.last_name}
-          error={state.errors.last_name}
+          error={state.errors.lastName}
           autoCapitalize="words"
         />
 

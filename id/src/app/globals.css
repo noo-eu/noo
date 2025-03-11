@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @source "../../../ui";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --color-eu-blue: #003399;
   --color-eu-blue-hover: #0055cc;
-  --color-hc-link: #7799ff;
-  --color-hc-link-hover: #4c6ff0;
+  --color-hc-link: #4499ff;
+  --color-hc-link-hover: #3399cc;
 }
 
 /* https://rsms.me/inter/ */
@@ -19,10 +21,6 @@
   :root {
     font-family: InterVariable, sans-serif;
   }
-}
-
-body {
-  @apply bg-indigo-50 dark:bg-zinc-800 text-gray-900 dark:text-gray-100;
 }
 
 .noo {
@@ -41,9 +39,13 @@ body {
   @apply text-eu-blue hover:text-eu-blue-hover dark:text-hc-link dark:hover:text-hc-link-hover;
 }
 
+.link:hover {
+  @apply underline;
+}
+
 @utility shadow-with-highlights {
   box-shadow:
-    0 5px 40px 10px rgba(60, 60, 60, 0.5),
+    0 5px 40px 10px rgba(60, 60, 60, 0.6),
     rgba(0, 0, 0, 0.5) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.5) 0px 4px 6px -4px;
 }

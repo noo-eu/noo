@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Takaisin tilillesi",
+    "birthdate": {
+      "day": "Päivä",
+      "description": "Syntymäaikasi voidaan käyttää tilisi turvallisuuteen ja henkilökohtaistamiseen.",
+      "errors": {
+        "bad_year": "Anna syntymävuotesi kokonaan",
+        "future": "Anna menneisyyteen kuuluva syntymäaika",
+        "invalid": "Syntymäaikaiset tiedot ovat virheellisiä"
+      },
+      "month": "Kuukausi",
+      "title": "Anna syntymäaikasi",
+      "updateSuccess": "Syntymäaikasi on tallennettu",
+      "year": "Vuosi"
+    },
+    "gender": {
+      "custom": "Mukautettu",
+      "customLabel": "Sukupuoli",
+      "description": "Sukupuolesi käytetään henkilökohtaistamiseen ja sinua oikein osoittamiseen.",
+      "example": "-- Unused --",
+      "female": "Nainen",
+      "male": "Mies",
+      "other": "Muu",
+      "pronounsLabel": "Kutsu minut nimellä",
+      "title": "Valitse sukupuoli",
+      "unspecified": "En halua sanoa",
+      "updateSuccess": "Sukupuolisiasi tiedot on tallennettu onnistuneesti"
+    },
+    "header": "<noo></noo>-tili",
+    "home": {
+      "profile": "Profiilisi",
+      "profileDescription": "Tarkista profiilisi ja päivitä tietojasi",
+      "security": "Tietosuoja ja turvallisuus",
+      "securityDescription": "Hallinnoi tietosuoja-asetuksiasi ja tilisi turvallisuutta",
+      "settings": "Asetukset",
+      "settingsDescription": "Muokkaa kokemustasi ja mieltymyksiäsi",
+      "title": "Tervetuloa <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Nimesi näkyy muille käyttäjille, joiden kanssa olet vuorovaikutuksessa <noo></noo>:n kanssa. Jos et muutu nimeäsi <noo></noo>issa toimintoja varten, nimi voi myös tulla käsittelyyn neessa.",
+      "errors": {
+        "invalid": "Nimessä on virheellisiä merkkiä",
+        "required": "Anna ensimmäinen nimi",
+        "tooLong": "Nimi on liian pitkä",
+        "tooShort": "Nimi on liian lyhyt"
+      },
+      "firstName": "Etunimi",
+      "lastName": "Sukunimi",
+      "title": "Muuta nimi",
+      "updateNotice": "Tämä päivitys koskee kaikkia <noo></noo>:n palveluita. Voit olla edelleen velvoitettu vaihtama nimesi erikseen muihin sovelluksiin.",
+      "updateSuccess": "Nimesi on muutettu"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ota kuva",
+        "description": "Käytä laitteesi kameraa ottaaksesi kuvan.",
+        "title": "Ota kuva"
+      },
+      "error": "Jotain meni pieleen. Yritä sitten uudelleen.",
+      "main": {
+        "description": "Kuva auttaa sinua ja muita tuntemään tilisi profiiliä. Voit muuttaa tai poistaa sen milloin tahansa.",
+        "title": "Profilikuva"
+      },
+      "remove_success": "Profiilikuvasi on poistettu...",
+      "upload": {
+        "browse": "Valitse tietokoneeltasi",
+        "camera": "Käytä kameraa",
+        "change": "Vaihda kuva",
+        "drag": "Vedä kuva tänne",
+        "error": {
+          "mime": "Kuvaa ei ole tuettu. Valitse JPG-, PNG- tai GIF-tiedosto.",
+          "size": "Valitun kuvan on oltava pienempi kuin 10MB."
+        },
+        "success": "Profiilikuvasi on päivitetty.",
+        "title": "Valitse kuva"
+      }
+    },
+    "summary": {
+      "birthdate": "Syntymäpäiväsi",
+      "gender": "Sukupuolesi",
+      "name": "Nimiäsi",
+      "picture": "Kuvausi",
+      "unspecifiedGender": "Ei ilmoitettu"
+    },
+    "title": "Sinun <noo></noo> profiilisi"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Zurück zu deinem Konto",
+    "birthdate": {
+      "day": "Tag",
+      "description": "Dein Geburtsdatum kann für die Konto-Sicherheit und Personalisierung verwendet werden.",
+      "errors": {
+        "bad_year": "Bitte gib dein vollständiges Geburtsjahr an",
+        "future": "Bitte gib ein Datum in der Vergangenheit ein",
+        "invalid": "Das Geburtsdatum ist ungültig."
+      },
+      "month": "Monat",
+      "title": "Geburtsdatum setzen",
+      "updateSuccess": "Dein Geburtsdatum wurde gespeichert.",
+      "year": "Jahr"
+    },
+    "gender": {
+      "custom": "Benutzerdefiniert",
+      "customLabel": "Geschlecht",
+      "description": "Dein Geschlecht wird für die Personalisierung und zum richtigen Ansprechen verwendet.",
+      "example": "Alex hat ein Update gesendet. Sieh dir {gender, select, female {ihre} male {seine} other {die}} Nachricht für Details an.",
+      "female": "Weiblich",
+      "male": "Männlich",
+      "other": "Sonstiges",
+      "pronounsLabel": "Anredeform",
+      "title": "Dein Geschlecht setzen",
+      "unspecified": "Möchte ich nicht angeben",
+      "updateSuccess": "Deine Geschlechtsdaten wurden gespeichert"
+    },
+    "header": "<noo></noo> Konto",
+    "home": {
+      "profile": "Dein Profil",
+      "profileDescription": "Überprüfe dein Profil und aktualisiere deine Informationen",
+      "security": "Datenschutz & Sicherheit",
+      "securityDescription": "Verwalte deine Datenschutzeinstellungen und Kontosicherheit",
+      "settings": "Einstellungen",
+      "settingsDescription": "Gestalte dein Erlebnis und deine Vorlieben",
+      "title": "Willkommen <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Dein Name wird anderen Nutzern, mit denen du interagierst, auf <noo></noo> sichtbar. Wenn du dich auf <noo></noo> einloggst und in andere Apps zugreifst, kann dein Name auch dort gelten, wenn du es wählst.",
+      "errors": {
+        "invalid": "Der Name enthält einige ungültige Zeichen",
+        "required": "Bitte gib deinen Namen ein",
+        "tooLong": "Der eingegebene Name ist zu lang",
+        "tooShort": "Der eingegebene Name ist zu kurz"
+      },
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "title": "Deinen Namen ändern",
+      "updateNotice": "Diese Änderung gilt für alle <noo></noo>-Dienste. Es könnte sein, dass du den Namen auch bei anderen Apps separat aktualisieren musst.",
+      "updateSuccess": "Dein Name wurde geändert"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Foto aufnehmen",
+        "description": "Nutze die Kamera deines Geräts, um ein Foto aufzunehmen.",
+        "title": "Foto machen"
+      },
+      "error": "Leider ist etwas schiefgegangen. Bitte noch einmal versuchen.",
+      "main": {
+        "description": "Ein Bild hilft dir und anderen, dein Konto zu erkennen. Du kannst es jederzeit ändern oder entfernen.",
+        "title": "Profilbild"
+      },
+      "remove_success": "Ihr Profilbild wurde erfolgreich entfernt...",
+      "upload": {
+        "browse": "Aus deinem Computer wählen",
+        "camera": "Kamera verwenden",
+        "change": "Foto ändern",
+        "drag": "Foto hier ziehen",
+        "error": {
+          "mime": "Die Datei ist nicht unterstützt. Bitte wählen Sie eine JPG-, PNG- oder GIF-Datei.",
+          "size": "Das Bild ist zu groß. Bitte wählen Sie ein Foto, das kleiner als 10 MB ist."
+        },
+        "success": "Dein Profilbild wurde aktualisiert.",
+        "title": "Wähle ein Bild"
+      }
+    },
+    "summary": {
+      "birthdate": "Dein Geburtsdatum",
+      "gender": "Dein Geschlecht",
+      "name": "Dein Name",
+      "picture": "Dein Bild",
+      "unspecifiedGender": "Nicht angegeben"
+    },
+    "title": "Dein <noo></noo> Profil"
+  }
+}

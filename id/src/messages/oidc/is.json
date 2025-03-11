@@ -1,0 +1,41 @@
+{
+  "oidc": {
+    "change_account": "Breyta aðgangssölu",
+    "consent": {
+      "claims": {
+        "address": "Þín pósthúsleiðsla",
+        "birthdate": "Dags dato fæddingarinnar þína",
+        "email": "Notendaupplýsingarnar þínar (e.-póst)",
+        "gender": "Kynþátta þínu",
+        "name": "Nafn þínu",
+        "phone_number": "Samsólstillingartal þína",
+        "profile": "Mynd af síðu þinni (profill)",
+        "username": "Notaþaupplýsingarnar þínar"
+      },
+      "description": "<strong>{name}</strong> vilt fá aðgang að eftirfarandi upplýsingum:",
+      "title": "Þú vilt skrá þér inn á <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "{name, select, undefined {Víst hefur þú skrátt út úr þjóðrétt samsérvíkurforriti.} other {Víst hefur þú skrátt út frá <strong>{name}</strong>.}}",
+      "query": "Vilt þér skrá út frá <noo></noo> ásamt?",
+      "title": "Upphafið"
+    },
+    "fatal": {
+      "description": "Þú vilt skrá þér inn í þjóðrétt samsérvíkurforriti, en forritið er ekki starfandi rétt. Vinsamlegast reyndu aftur seinna eða snerta til hliðsjónarforritseiganda við eftirfarandi upplýsingum:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Eitthvað galdi"
+    },
+    "home": "Far í <noo></noo> hollu þína",
+    "switch": {
+      "description": "áfram til <details>{name}</details>",
+      "legalComplete": "Fyrir að skrá þér inn, er eftirstaða að kynna sér á {client}'s <privacy>meðhöndlun upplýsinganna</privacy> og <terms>samvísu um framkvæmd</terms>.",
+      "legalNone": "Fyrir að skrá þét inn, er eftirstaða að kynna sér á {client}'s meðhöndlunarreglugerðum",
+      "legalPrivacy": "Fyrir að skrá þét inn, er eftirstaða að kynna sér á {client}'s <privacy>meðhöndlun upplýsinganna</privacy>",
+      "legalTerms": "Fyrir að skrá þét inn, er eftirstaða að kynna sér á {client}'s <terms>samvísu um framkvæmd</terms>",
+      "metaTitle": "Skrá þét inn - noo id",
+      "pageTitle": "Skrá þét inn með <noo></noo>",
+      "signin": "Nota annað aðgangsmynd",
+      "title": "Velja aðgangsmynd"
+    }
+  }
+}

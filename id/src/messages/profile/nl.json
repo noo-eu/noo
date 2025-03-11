@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Terug naar je account",
+    "birthdate": {
+      "day": "Dag",
+      "description": "Uw geboortedatum kan worden gebruikt voor veiligheids- en personalisatie-doelen.",
+      "errors": {
+        "bad_year": "Vul alsjeblieft uw volledige geboortejaar in",
+        "future": "Geef een datum in het verleden op",
+        "invalid": "De ingevoerde geboortedatum is ongeldig"
+      },
+      "month": "Maand",
+      "title": "Zet uw geboortedatum in",
+      "updateSuccess": "Uw geboortedatum is opgeslagen",
+      "year": "Jaar"
+    },
+    "gender": {
+      "custom": "Aangepast",
+      "customLabel": "Geslacht",
+      "description": "Uw geslacht wordt gebruikt voor personalisatie en om u correct aan te spreken.",
+      "example": "Alex heeft een update gestuurd. Bekijk {gender, select, female {haar} male {zijn} other {het}} bericht voor details.",
+      "female": "Vrouwelijk",
+      "male": "Man",
+      "other": "Anders",
+      "pronounsLabel": "Noem me als",
+      "title": "Stel uw geslacht vast",
+      "unspecified": "Ik wil liever niet zeggen",
+      "updateSuccess": "Uw geslachtsgegevens zijn opgeslagen"
+    },
+    "header": "<noo></noo> Account",
+    "home": {
+      "profile": "Jouw profiel",
+      "profileDescription": "Bekijk je profiel en werk je gegevens bij",
+      "security": "Privacy & Beveiliging",
+      "securityDescription": "Beheer je privacy-instellingen en accountbeveiliging",
+      "settings": "Instellingen",
+      "settingsDescription": "Pas je ervaring en voorkeuren aan",
+      "title": "Welkom <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Uw naam is zichtbaar voor andere gebruikers met wie u interactie hebt op <noo></noo>. Als u <noo></noo> gebruikt om in andere apps in te loggen, kan uw naam ook worden gedeeld met hen, als u dat wilt.",
+      "errors": {
+        "invalid": "De naam bevat ongeldige tekens",
+        "required": "Vul alstublieft uw voornaam in",
+        "tooLong": "Uw naam is te lang",
+        "tooShort": "Uw naam is te kort"
+      },
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "title": "Wijzig je naam",
+      "updateNotice": "Dit update geldt voor alle <noo></noo>-diensten. U moet uw naam nog steeds apart bijwerken voor andere apps.",
+      "updateSuccess": "Je naam is gewijzigd"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Ophalen",
+        "description": "Gebruik de camera van je apparaat om een foto te maken.",
+        "title": "Foto maken"
+      },
+      "error": "Er ging iets mis. Probeer het opnieuw.",
+      "main": {
+        "description": "Een foto helpt anderen en jou je account te herkennen. Je kunt deze altijd aanpassen of verwijderen.",
+        "title": "Profielfoto"
+      },
+      "remove_success": "Je profielfoto is succesvol verwijderd...",
+      "upload": {
+        "browse": "Kies van je computer",
+        "camera": "Gebruik je camera",
+        "change": "Foto wijzigen",
+        "drag": "Sleep foto hier naartoe",
+        "error": {
+          "mime": "De foto wordt niet ondersteund. Kies alstublieft een JPG, PNG- of GIF-bestand.",
+          "size": "De foto is te groot. Kies alstublieft een foto die kleiner is dan 10 MB."
+        },
+        "success": "Je profielfoto is bijgewerkt.",
+        "title": "Kies een foto"
+      }
+    },
+    "summary": {
+      "birthdate": "Jouw geboortedatum",
+      "gender": "Je geslacht",
+      "name": "Je naam",
+      "picture": "Jouw foto",
+      "unspecifiedGender": "Onbekend"
+    },
+    "title": "Je <noo></noo> profiel"
+  }
+}

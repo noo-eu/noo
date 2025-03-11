@@ -1,18 +1,23 @@
 {
   "common": {
-    "cancel": "Peru",
+    "back": "Takaisin",
+    "cancel": "Peruuta",
+    "change": "Muokkaa",
+    "close": "Sulje",
     "continue": "Jatka",
-    "madeWith": "Tehnyt ❤️ ja ☕️ Euroopan unionissa",
+    "madeWith": "Tehnyt ❤️:lla ja ☕:lla Euroopan unionissa",
     "next": "Seuraava",
     "no": "Ei",
     "optional": "Valinnainen",
     "passwordField": {
-      "ariaLabelShow": "Näytä salasana tekstimuodossa. Huomioi, että tämä näyttää salasanasi ruudulle.",
+      "ariaLabelShow": "Näytä salasana selkokielisenä. Varoitus: salasana näkyy ruudulla.",
       "hide": "Piilota salasana",
       "show": "Näytä salasana"
     },
     "privacy": "Tietosuoja",
-    "terms": "Säännökset",
+    "remove": "Poista",
+    "save": "Tallenna",
+    "terms": "Käyttöehdot",
     "yes": "Kyllä"
   }
 }

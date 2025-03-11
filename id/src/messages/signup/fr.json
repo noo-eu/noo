@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Créez votre compte <noo></noo>",
     "errors": {
-      "first_name_required": "Veuillez entrer votre prénom",
       "invalid_data": "Une erreur est survenue. Veuillez vérifier les données saisies",
-      "name_invalid": "Votre nom comporte des caractères invalides",
-      "name_too_long": "Votre nom est trop long",
-      "name_too_short": "Votre nom est trop court",
       "password_classes": "Veuillez utiliser un mot de passe plus sécurisé. Mélangez lettres, nombres et symboles",
       "password_length": "Utilisez au moins 10 caractères",
       "password_required": "Veuillez saisir votre mot de passe",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Créez votre compte noo !",
     "step1": {
-      "first_name": "Prénom",
-      "last_name": "Nom de famille",
       "title": "Entrez votre nom"
     },
     "step2": {

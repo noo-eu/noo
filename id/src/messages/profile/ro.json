@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Înapoi la contul tău",
+    "birthdate": {
+      "day": "Ziua",
+      "description": "Data de naștere poate fi folosită pentru securitatea contului și personalizarea utilizatorului.",
+      "errors": {
+        "bad_year": "{brackets>Vă rugăm, introduceți anul complet de naștere</tags>",
+        "future": "{brackets>Vă rugăm să introduceți o dată din trecut</tags>",
+        "invalid": "{brackets>Data nașterii este invalidă</tags>"
+      },
+      "month": "Luna",
+      "title": "Alegeți data nașterii",
+      "updateSuccess": "Datele tale de naștere au fost salvate",
+      "year": "Anul"
+    },
+    "gender": {
+      "custom": "Personalizat",
+      "customLabel": "Gen",
+      "description": "{brackets>Genul este folosit pentru personalizarea experienței și pentru a vă adresa corespunzător</tags}",
+      "example": "Alex a trimis o actualizare. Verifică mesajul {gender, select, female {ei} male {lui} other {}} pentru detalii.",
+      "female": "Femeie",
+      "male": "Bărbat",
+      "other": "Altul",
+      "pronounsLabel": "Referiți-vă la mine ca",
+      "title": "Alegeți genul",
+      "unspecified": "Nu vreau să spun",
+      "updateSuccess": "Detaliiul de gen au fost salvate cu succes"
+    },
+    "header": "Contul <noo></noo>",
+    "home": {
+      "profile": "Profilul tău",
+      "profileDescription": "Verifică-ți profilul și actualizează informațiile",
+      "security": "Confidențialitate și Securitate",
+      "securityDescription": "Gestionează setările de confidențialitate și securitatea contului tău",
+      "settings": "Setări",
+      "settingsDescription": "Personalizează-ți experiența și preferințele",
+      "title": "Bine ai venit <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Numele tau este vizibil celorlora cu care interacționați pe <noo></noo>. Dacă folosiți <noo></noo> pentru a vă autentifica în alte aplicații, numele dumneavoastră poate fi și împărtășit acestor aplicații dacă alegeți.",
+      "errors": {
+        "invalid": "Numele conține caractere nevalabile",
+        "required": "Vă rugăm să introduceți primul nume",
+        "tooLong": "Numele introdus este prea lung",
+        "tooShort": "Numele introdus este prea scurt"
+      },
+      "firstName": "Prenume",
+      "lastName": "Nume de familie",
+      "title": "Schimbă-ți numele",
+      "updateNotice": "Această actualizare se referă la toate serviciile <noo></noo>. Poate că mai trebuie să schimbi și independent numele dumneavoastră pentru alte aplicații.",
+      "updateSuccess": "Numele dumneavoastră a fost schimbat"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Captură",
+        "description": "Folosește camera dispozitivului tău pentru a face o fotografie.",
+        "title": "Fă o fotografie"
+      },
+      "error": "Ceva nu a mers bine. Încercați din nou, te rog.",
+      "main": {
+        "description": "O imagine vă ajută și altora să vă recunoască contul dvs. Puteți schimba sau șterge-o în orice moment.",
+        "title": "Imagine de profil"
+      },
+      "remove_success": "Imaginile tale de profil au fost îndepărtate cu succes...",
+      "upload": {
+        "browse": "Selectează din computer",
+        "camera": "Folosește camera",
+        "change": "Schimbă fotografia",
+        "drag": "Trage fotografia aici",
+        "error": {
+          "mime": "Imaginea nu este suportată. Alegeți o imagine în format JPG, PNG sau GIF.",
+          "size": "Imaginea este prea mare. Alegeți o imagine cu dimensiune mai mică de 10 MB."
+        },
+        "success": "Poza ta de profil a fost actualizată cu succes.",
+        "title": "Alege o fotografie"
+      }
+    },
+    "summary": {
+      "birthdate": "Data de naștere",
+      "gender": "Genul tău",
+      "name": "Numele tău",
+      "picture": "Imaginea ta",
+      "unspecifiedGender": "Nu specificat"
+    },
+    "title": "Profilul <noo></noo> tău"
+  }
+}

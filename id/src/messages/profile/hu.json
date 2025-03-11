@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Vissza a fiókodhoz",
+    "birthdate": {
+      "day": "Nap",
+      "description": "A születési dátumodat biztonsági és személyre szabott célból használhatjuk.",
+      "errors": {
+        "bad_year": "Kérjük, adj meg teljes évszámot.",
+        "future": "Vissza kell térni egy múltbeli időpontra.",
+        "invalid": "Azonosították a téves születési adatot."
+      },
+      "month": "Hónap",
+      "title": "Születési dátum megadása",
+      "updateSuccess": "A születési dátumodat sikeresen mentettük.",
+      "year": "Év"
+    },
+    "gender": {
+      "custom": "Egyedi",
+      "customLabel": "Nem",
+      "description": "A nemedet személyre szabott és a helyes szólításhoz használjuk.",
+      "example": "-- Unused --",
+      "female": "Nő",
+      "male": "Fiú",
+      "other": "Más",
+      "pronounsLabel": "Hívjon",
+      "title": "Nézd meg és válaszd ki a nemed",
+      "unspecified": "Köszönöm, de nem mondhatnám el.",
+      "updateSuccess": "A nemiségi adatait sikeresen mentettük."
+    },
+    "header": "<noo></noo> fiók",
+    "home": {
+      "profile": "Profilod",
+      "profileDescription": "Nézd át a profilodat és frissítsd az adataidat",
+      "security": "Adatvédelem és Biztonság",
+      "securityDescription": "Kezeld adatvédelmi beállításaidat és fiókod biztonságát",
+      "settings": "Beállítások",
+      "settingsDescription": "Testreszabhatod élményeidet és preferenciáidat",
+      "title": "Üdv, <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "A neved azokkal a felhasználókkal lesz látható, akikkel interakcióba lépsz <noo></noo>-on. A nevét továbbá a különböző alkalmazásokhoz való bejelentkezéskor az adott appokkal is megosztodhatod.",
+      "errors": {
+        "invalid": "A beállított név nem megfelelő",
+        "required": "Kérem adjonk meg a nevét",
+        "tooLong": "A megadott név túl hosszú",
+        "tooShort": "A megadott név túl rövid"
+      },
+      "firstName": "Név",
+      "lastName": "Családneve",
+      "title": "Váltsd fel a néved",
+      "updateNotice": "Ez a frissítés vonatkozik minden <noo></noo> szolgáltatásra. Esetleg még mindig saját magadnak kell megváltoztatnod a nevét más alkalmazásokhoz.",
+      "updateSuccess": "Sikeresen megváltoztattad a nevedet"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Felvétel",
+        "description": "Használd eszközed kameráját, hogy fényképet készíts.",
+        "title": "Fénykép készítése"
+      },
+      "error": "Valami probléma történt. Kérjük, próbálja újra.",
+      "main": {
+        "description": "Az profilkép segít azonosítani a fiókját maguknak és másoknak. Bármikor módosíthatja vagy törölheti.",
+        "title": "Profilkép"
+      },
+      "remove_success": "Sikeresen eltávolítottuk a profil képed...",
+      "upload": {
+        "browse": "Válassz a számítógépedről",
+        "camera": "Használd a kamerádat",
+        "change": "Fotó megváltoztatása",
+        "drag": "Húzd ide a fényképet",
+        "error": {
+          "mime": "A fotó nem támogatott. Kérjük, válassza a JPG, PNG vagy GIF fájlokat!",
+          "size": "A kép túl nagy. Kérem, válassza a legfeljebb 10MB-os fotót."
+        },
+        "success": "A profilképét sikeresen frissítette.",
+        "title": "Válassz egy képet"
+      }
+    },
+    "summary": {
+      "birthdate": "A születési dátumod",
+      "gender": "A nemed",
+      "name": "Az neved",
+      "picture": "A képed",
+      "unspecifiedGender": "Nem megadva"
+    },
+    "title": "A <noo></noo> profilod"
+  }
+}

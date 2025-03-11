@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Skapa ditt konto på <noo></noo>",
     "errors": {
-      "first_name_required": "Fyll i ditt förnamn",
       "invalid_data": "Något gick fel. Kolla igenom det data du skrivit in",
-      "name_invalid": "Namnet innehåller några ogiltiga tecken",
-      "name_too_long": "Namnet du skrivit är för långt",
-      "name_too_short": "Namnet du skrivit är för kort",
       "password_classes": "Använd ett starkare lösenord. Använd en blandning av bokstäver, siffror och tecken",
       "password_length": "Använd åtminstone 10 tecken",
       "password_required": "Fyll i ditt lösenord",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Skapa ditt noo-konto",
     "step1": {
-      "first_name": "Förnamn",
-      "last_name": "Efternamn",
       "title": "Fyll i ditt namn"
     },
     "step2": {

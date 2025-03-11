@@ -1,0 +1,41 @@
+{
+  "oidc": {
+    "change_account": "Ndrysho llogari",
+    "consent": {
+      "claims": {
+        "address": "Adresa postare e tuajë",
+        "birthdate": "Data e lindjes tënde",
+        "email": "Adresa email e tuajë",
+        "gender": "Gjinia në të cilën identifikohesh",
+        "name": "Emri i plote i tuajë",
+        "phone_number": "Nr. telefonit tënde",
+        "profile": "Imazhi i profilit të tuajë",
+        "username": "Emri i përdoruesit tënd"
+      },
+      "description": "<strong>{name}</strong> kërkon akses në informacione të mëposhtme:",
+      "title": "Ti po kyçesh te <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "{name, select, undefined {U shpallën nga një aplikacion tretëruese.} other {Ti u shpallën nga <strong>{name}</strong>.}}",
+      "query": "A do ti shpallnesh edhe te <noo></noo>?",
+      "title": "Shpalli"
+    },
+    "fatal": {
+      "description": "Ti prrove që të kyçesh në një aplikacion tretëruese, por aplikacioni nuk funksionon korrektisht. Përmbushni përsëri më vonë ose kontaktoni pronarin e aplikacionit me informacione të mëposhtme:",
+      "error": "OpenID Connect error: {error}",
+      "title": "Diçka shkoi keq"
+    },
+    "home": "Shko në shtepinë <noo></noo>",
+    "switch": {
+      "description": " për të vazhduar te <details>{name}</details>",
+      "legalComplete": "Para se ti kyçesh, duhet ta përmendni dokumentet ligjore të {client}-it dhe politikat e privatitetit dhe të shfrytëzimit.",
+      "legalNone": "Para se ti kyçesh, duhet ta përmendni dokumentet ligjore të {client}-it.",
+      "legalPrivacy": "Para se ti kyçesh, duhet ta përmendni politikat e privatitetit të {client}-it.",
+      "legalTerms": "Para se ti kyçesh, duhet ta përmendni kushtet e shfrytëzimit të {client}-it.",
+      "metaTitle": "Kyço - noo id",
+      "pageTitle": "Kyço me <noo></noo>",
+      "signin": "Përdor një llogari tjetër",
+      "title": "Zgjidhni një llogari"
+    }
+  }
+}

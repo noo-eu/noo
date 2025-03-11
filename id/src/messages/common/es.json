@@ -1,17 +1,22 @@
 {
   "common": {
+    "back": "Atrás",
     "cancel": "Cancelar",
+    "change": "Cambiar",
+    "close": "Cerrar",
     "continue": "Continuar",
     "madeWith": "Hecho con ❤️ y ☕️ en la Unión Europea",
     "next": "Siguiente",
     "no": "No",
     "optional": "Opcional",
     "passwordField": {
-      "ariaLabelShow": "Mostrar contraseña como texto plano. Advertencia: esto mostrará tu contraseña en la pantalla.",
+      "ariaLabelShow": "Mostrar la contraseña en texto plano. Ojo: se verá en la pantalla.",
       "hide": "Ocultar contraseña",
       "show": "Mostrar contraseña"
     },
     "privacy": "Privacidad",
+    "remove": "Eliminar",
+    "save": "Guardar",
     "terms": "Términos",
     "yes": "Sí"
   }

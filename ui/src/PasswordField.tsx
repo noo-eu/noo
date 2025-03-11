@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useTranslations } from "use-intl";
 import { TextField, TextFieldProps } from "./TextField";

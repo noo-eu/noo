@@ -13,10 +13,10 @@
         "username": "Votre nom d'utilisateur"
       },
       "description": "<strong>{name}</strong> demande l'accès aux informations suivantes :",
-      "title": "Vous vous connectez à <details>{name}</details>. "
+      "title": "Vous êtes en train de vous connecter à <details>{name}</details>. "
     },
     "end_session": {
-      "description": "{name, select, undefined {Vous avez déconnecté d'une application tierce.} other {Vous vous êtes déconnecté(e) de <strong>{name}</strong> .}}",
+      "description": "Vous vous êtes déconnecté(e) {name, select, undefined {d'une application tierce.} other {de <strong>{name}</strong> .}}",
       "query": "Souhaitez-vous également terminer la session sur <noo></noo> ?",
       "title": "Déconnexion"
     },
@@ -28,10 +28,10 @@
     "home": "Accédez à votre page d'accueil <noo></noo>",
     "switch": {
       "description": "pour continuer à <details>{name}</details>",
-      "legalComplete": "Avant de vous connecter, il faut passer en revue la politique de confidentialité et les modalités d'utilisation du {client} :<privacy>Politique de confidentialité</privacy> et <terms>Conditions d'utilisation</terms>",
-      "legalNone": "Avant de vous connecter, il faut passer en revue les documents juridiques du {client}",
-      "legalPrivacy": "Avant de vous connecter, il faut passer en revue la <privacy>politique de confidentialité</privacy> du {client}",
-      "legalTerms": "Avant de vous connecter, il faut passer en revue les <terms>modalités d'utilisation</terms> du {client}",
+      "legalComplete": "Avant de vous connecter, veuillez consulter la <privacy>politique de confidentialité</privacy> et les <terms>conditions d'utilisation</terms> de {client}.",
+      "legalNone": "Avant de vous connecter, veuillez consulter les documents juridiques de {client}.",
+      "legalPrivacy": "Avant de vous connecter, veuillez consulter la <privacy>politique de confidentialité</privacy> de {client}.",
+      "legalTerms": "Avant de vous connecter, veuillez consulter les <terms>conditions d'utilisation</terms> de {client}.",
       "metaTitle": "Connexion - noo id",
       "pageTitle": "Se connecter avec <noo></noo>",
       "signin": "Utiliser un autre compte",

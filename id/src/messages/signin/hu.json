@@ -1,12 +1,12 @@
 {
   "signin": {
-    "create_account": "Regisztráció",
-    "error": "A megadott adatok nem stimmelnek",
-    "metaTitle": "Belépés - noo",
+    "create_account": "Fiók létrehozása",
+    "error": "A megadott adatok hibásak",
+    "metaTitle": "Bejelentkezés – noo",
     "password": "Jelszó",
     "submit": "Bejelentkezés",
-    "tenant_error": "Jelentkezzen be a(z) {domain} fiókkal",
-    "title": "Belépd a <noo></noo> fiókodba",
-    "username": "Felhasználónév vagy e-mail"
+    "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
+    "title": "Jelentkezz be a <noo></noo> fiókodba",
+    "username": "Felhasználónév vagy email"
   }
 }

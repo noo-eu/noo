@@ -1,18 +1,23 @@
 {
   "common": {
+    "back": "Zurück",
     "cancel": "Abbrechen",
-    "continue": "Fortfahren",
-    "madeWith": "Hergestellt mit ❤️ und ☕️ in der Europäischen Union",
+    "change": "Ändern",
+    "close": "Schließen",
+    "continue": "Weiter",
+    "madeWith": "Mit ❤️ und ☕️ in der Europäischen Union erstellt",
     "next": "Weiter",
     "no": "Nein",
     "optional": "Optional",
     "passwordField": {
-      "ariaLabelShow": "Das Passwort als einfaches Textfeld anzeigen. Achtung: dabei wird Ihr Passwort auf dem Bildschirm sichtbar!",
-      "hide": "Passwort verstecken",
+      "ariaLabelShow": "Passwort als Klartext anzeigen. Achtung: Das Passwort wird auf dem Bildschirm sichtbar.",
+      "hide": "Passwort verbergen",
       "show": "Passwort anzeigen"
     },
     "privacy": "Datenschutz",
-    "terms": "Allgemeine Bedingungen",
+    "remove": "Entfernen",
+    "save": "Speichern",
+    "terms": "AGB",
     "yes": "Ja"
   }
 }

@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Vytvořte si své <noo></noo> účet",
     "errors": {
-      "first_name_required": "Zadejte prosím vaše jméno",
       "invalid_data": "Co se stalo špatně. Prosím zkontrolujte zadaná data",
-      "name_invalid": "Váš název obsahuje neplatné znaky",
-      "name_too_long": "Vaše jméno je příliš dlouhé",
-      "name_too_short": "Vaše jméno je příliš krátké",
       "password_classes": "Prosíme použijte silnější heslo. Používejte mix písmen, čísel a symbolů",
       "password_length": "Prosíme použijte více než 10 znaků",
       "password_required": "Zadejte prosím heslo",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Vytvořte si účet na noo",
     "step1": {
-      "first_name": "Křestní jméno",
-      "last_name": "Příjmení",
       "title": "Zadejte jméno"
     },
     "step2": {

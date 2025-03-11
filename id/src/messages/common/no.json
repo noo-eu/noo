@@ -1,0 +1,23 @@
+{
+  "common": {
+    "back": "Tilbake",
+    "cancel": "Avbryt",
+    "change": "Endre",
+    "close": "Lukk",
+    "continue": "Fortsett",
+    "madeWith": "Laget med ❤️ og ☕️ i Den europeiske unionen",
+    "next": "Neste",
+    "no": "Nei",
+    "optional": "Valgfritt",
+    "passwordField": {
+      "ariaLabelShow": "Vis passord som lesbar tekst. Advarsel: passordet vil vises på skjermen.",
+      "hide": "Skjul passord",
+      "show": "Vis passord"
+    },
+    "privacy": "Personvern",
+    "remove": "Fjern",
+    "save": "Lagre",
+    "terms": "Vilkår",
+    "yes": "Ja"
+  }
+}

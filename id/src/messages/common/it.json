@@ -1,17 +1,22 @@
 {
   "common": {
+    "back": "Indietro",
     "cancel": "Annulla",
+    "change": "Modifica",
+    "close": "Chiudi",
     "continue": "Continua",
     "madeWith": "Fatto con ❤️ e ☕️ nell'Unione Europea",
     "next": "Avanti",
     "no": "No",
-    "optional": "Opzionale",
+    "optional": "Facoltativo",
     "passwordField": {
-      "ariaLabelShow": "Mostra password come testo normale. Attenzione: questo renderà visibile la tua password sullo schermo.",
+      "ariaLabelShow": "Mostra la password in chiaro. Attenzione: la password sarà visibile sullo schermo.",
       "hide": "Nascondi password",
       "show": "Mostra password"
     },
     "privacy": "Privacy",
+    "remove": "Rimuovi",
+    "save": "Salva",
     "terms": "Termini",
     "yes": "Sì"
   }

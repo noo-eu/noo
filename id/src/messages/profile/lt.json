@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Grįžti į savo paskyrą",
+    "birthdate": {
+      "day": "Diena",
+      "description": "Jūsų gimimo datos galimybės taikyti patalpą saugumo ir asmeninių nuorodų tikslui.",
+      "errors": {
+        "bad_year": "Ivesti pilną gimimo metų numerį",
+        "future": "Nustatyti senesnę datą",
+        "invalid": "Neteisinga gimimo data"
+      },
+      "month": "Mėnuo",
+      "title": "Nustatyti gimimo datą",
+      "updateSuccess": "Saugoma jūsų gimimo datos informacija",
+      "year": "Metai"
+    },
+    "gender": {
+      "custom": "Savas",
+      "customLabel": "Lytis",
+      "description": "Suaugusiųjų profilis: Jūsų lytis naudojama personalizacijai ir adresuoti jumis teisingai.",
+      "example": "Alexas prisijungęs, {gender, select, female {išsiųsk jai} male {išsiųsk jam} other {išsiųsk}} žinutę.",
+      "female": "Moters",
+      "male": "Vyro",
+      "other": "Kita",
+      "pronounsLabel": "Prasyti kaip",
+      "title": "Nustatyti lytį",
+      "unspecified": "Nesakyti",
+      "updateSuccess": "Jūsų lyties detalės buvo išsaugintos"
+    },
+    "header": "<noo></noo> Paskyra",
+    "home": {
+      "profile": "Tavo profilis",
+      "profileDescription": "Patikrink savo profilį ir atnaujink informaciją",
+      "security": "Privatumas ir saugumas",
+      "securityDescription": "Tvarkyk savo privatumo nustatymus ir paskyros saugumą",
+      "settings": "Nustatymai",
+      "settingsDescription": "Sukurk savo patirtį pagal savo norus",
+      "title": "Sveikas atvykęs, <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Jūsų vardas bus matomas kitų naudotojų, su kuriomis galėsite ryškiai bendrauti <noo></noo>. Jeigu jums reikalinga įrašyti į <noo></noo> taip pat ir priekeitis kitas aplikacijas, vardas gali būti perduodamas ir kitiems, jeigu ji pasirinks.",
+      "errors": {
+        "invalid": "Įveste pavardė yra netinkuota",
+        "required": "Įveskite savo pavardę",
+        "tooLong": "Įvestas vardas yra per ilgas",
+        "tooShort": "Įvestas vardas yra per trumpas"
+      },
+      "firstName": "Pavardė",
+      "lastName": "Šeima",
+      "title": "Keisti savo pavadinimą",
+      "updateNotice": "Šis naujasis sąrašas taikomas visoms <noo></noo> paslaugų. Jūs galite dar ir reikėti atnaujinti savo pavadinimą atskirai už kitų programas.",
+      "updateSuccess": "Jūsų pavadinimas buvo pakeistas"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Sugeneruoti",
+        "description": "Naudokite savo įrenginio kamerą, kad padarytumėte nuotrauką.",
+        "title": "Padaryti nuotrauką"
+      },
+      "error": "Ką nors nutiko, prašome dar kartą bandyti.",
+      "main": {
+        "description": "Nuotrauka padeda jums ir kitu prisiminti savo paskyri. Jūs galite ją keisti ar ištrinti bet kada.",
+        "title": "Profilio paveikslėlis"
+      },
+      "remove_success": "Jūsų profilo nuotraukos buvo ištrinta...",
+      "upload": {
+        "browse": "Pasirinkti iš kompiuterio",
+        "camera": "Naudokite kamerą",
+        "change": "Keisti nuotrauką",
+        "drag": "Tempkite nuotrauką čia",
+        "error": {
+          "mime": "Ši nuotrauka neatlieka reikšmus. Pažymėk JPG, PNG arba GIF failą.",
+          "size": "Ši nuotrauka yra per didelė. Pasirinkite nuotrauką kurios dydis yra mažesnė nei 10MB."
+        },
+        "success": "Jūsų profiliaus nuotraukos priedėtoje yra papildytas.",
+        "title": "Pasirinkti nuotrauką"
+      }
+    },
+    "summary": {
+      "birthdate": "Gimimo datos",
+      "gender": "Tavo lygis",
+      "name": "Tavo pavardė",
+      "picture": "Tavo vaizdas",
+      "unspecifiedGender": "Nesuprata"
+    },
+    "title": "<noo></noo> Profilis"
+  }
+}

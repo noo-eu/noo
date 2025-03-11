@@ -1,7 +1,7 @@
 import { schema } from "@/db";
 import Sessions, { Session } from "@/db/sessions";
 import { User } from "@/db/users";
-import { checkVerifier, createVerifier, sha256 } from "@/utils";
+import { checkVerifier, createVerifier, humanIdToUuid, sha256 } from "@/utils";
 import { inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import crypto from "node:crypto";
@@ -29,20 +29,28 @@ export async function getSessionCookie() {
 
 export async function setSessionCookie(value: string) {
   const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE_NAME, value, {
+
+  // Secure cookies are only sent over HTTPS, with the exception of localhost.
+  // If you are using Safari, this exception does not apply... use another browser for development.
+
+  await cookieStore.set(SESSION_COOKIE_NAME, value, {
     maxAge: 60 * 60 * 24 * 400,
     httpOnly: true,
     secure: true,
     // TODO: determine if "none" is really required, or if "lax" is sufficient
-    sameSite: "none",
+    sameSite: "lax",
   });
 
-  cookieStore.set(
+  await cookieStore.set(
     SESSION_CHECK_COOKIE_NAME,
     sha256(value).digest("base64url"),
     {
       maxAge: 60 * 60 * 24 * 400,
+      httpOnly: false,
       secure: true,
+      // Note: "none" only works if secure is true. If you are disabling
+      // `secure` for development purposes, know that this will break the
+      // cookie.
       sameSite: "none",
     },
   );
@@ -64,6 +72,11 @@ export async function getSessions() {
   return manager.activeSessions();
 }
 
+export async function getFirstSession() {
+  const manager = new SessionsService(await getSessionCookie());
+  return (await manager.activeSessions())[0];
+}
+
 export class SessionsService {
   private tokens: string[];
 
@@ -71,8 +84,33 @@ export class SessionsService {
     this.tokens = cookie.split(" ").filter((t) => t.length > 0);
   }
 
+  static async new() {
+    return new SessionsService(await getSessionCookie());
+  }
+
   buildCookie() {
     return this.tokens.join(" ");
+  }
+
+  static async userFor(userId: string) {
+    const manager = await SessionsService.new();
+    const sessions = await manager.activeSessions();
+    const uuid = humanIdToUuid(userId, "usr");
+    if (!uuid) {
+      return undefined;
+    }
+
+    return sessions.find((s) => s.userId === uuid)?.user;
+  }
+
+  static async user(userId?: string) {
+    if (!userId) {
+      const manager = await SessionsService.new();
+      const sessions = await manager.activeSessions();
+      return sessions[0]?.user;
+    }
+
+    return await SessionsService.userFor(userId);
   }
 
   async startSession(userId: string, ip: string, userAgent: string) {

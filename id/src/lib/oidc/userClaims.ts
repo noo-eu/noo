@@ -35,7 +35,11 @@ export function requestedUserClaims(
     claims.email_verified = true;
   }
 
-  // TODO: picture, profile, phone_number, address, locale, zoneinfo, updated_at
+  if (requests.includes("picture") && user.picture) {
+    claims.picture = user.picture;
+  }
+
+  // TODO: profile, phone_number, address, locale, zoneinfo, updated_at
 
   return claims;
 }

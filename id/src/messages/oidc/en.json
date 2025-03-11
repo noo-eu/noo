@@ -17,7 +17,7 @@
     },
     "end_session": {
       "description": "{name, select, undefined {You signed out from a third party application.} other {You signed out from <strong>{name}</strong>.}}",
-      "query": "Do you want to sign out from <noo></noo> as well?",
+      "query": "Would you like to sign out from <noo></noo> as well?",
       "title": "Sign out"
     },
     "fatal": {

@@ -1,0 +1,36 @@
+{
+  "signup": {
+    "create_your_account": "Krijo nje <noo></noo> llogari",
+    "errors": {
+      "invalid_data": "E ndodhi ndryshe. Perqëndro të dhuratët që i keni shenuar",
+      "password_classes": "Përdorni një fjalëkalim më të fortë. Përdorëni mixim të shkronjave, numrash dhe simboleve",
+      "password_length": "Përdorni 10 apo më shumë karaktere",
+      "password_required": "Shtoni fjalëkalimin tuaj",
+      "password_too_long": "Fjalëkalimi që i keni shenuar është më i gjatë se duhet",
+      "username_first_char": "Emri i përdoruesit të duhet të fillojë me një letrë ose numër",
+      "username_invalid": "Emri i përdoruesit mund t'i përmbajë vetëm shkronja, numra dhe pikë (.)",
+      "username_last_char": "Emri i përdoruesit të duhet të mbarojë me një letrë ose numër",
+      "username_length": "Emri i përdoruesit të duhet të jetë midis 6 dhe 30 karaktere",
+      "username_required": "Shtoni emrin e ri të përdoruesit",
+      "username_taken": "Ky emër është marrë",
+      "username_two_dots": "Emri i përdoruesit nuk mund t'i përmbajë dy pikë (.) me vete"
+    },
+    "metaTitle": "Krijo nje noo llogari",
+    "step1": {
+      "title": "Shtoni emrin tuaj"
+    },
+    "step2": {
+      "title": "Zgjidhni adresën e email-it tuaj",
+      "username": "Adresa e email-it"
+    },
+    "step3": {
+      "password": "Fjalëkalimi",
+      "title": "Krijo një fjalëkalim të fortë"
+    },
+    "step4": {
+      "accept": "Pranoni dhe vazhdoni",
+      "description": "<p> <noo></noo> llogari juallë mund t'ju lehtësojë pristenshjen në një rrjet shumë të shërueshëm i shërueshëm, siç është email-i dhe mbajtja e fileve dhe më tepër. </p> <p>Termat dhe Politikat e Privatisëm për <noo></noo> shpjegojnë çfarë të pritshinë për tu shqiptuar ndërsa qëndroni në rrjet, dhe si ne pritet të trajtojmë informacionet që u jepni ndërsa vepron në rrjet. </p> <p> Ngaqë ta keni mundur t'i krijoni një llogari <noo></noo> dhe të përdorni shërueshmija, duhet t'pranoni edhe Termat dhe Politikat e Privatisëm për <noo></noo>. </p>",
+      "title": "Dielli është mbrapsur"
+    }
+  }
+}

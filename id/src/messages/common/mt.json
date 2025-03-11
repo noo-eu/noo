@@ -1,18 +1,23 @@
 {
   "common": {
-    "cancel": "Tillem",
-    "continue": "Ippetċerha",
-    "madeWith": "Mhux ❤️ u ☕️ fl-Unjoni Ewropea",
-    "next": "L-Aħħar",
-    "no": "Mhux",
-    "optional": "Fakultattiv",
+    "back": "Lura",
+    "cancel": "Ikkanċella",
+    "change": "Ibdel",
+    "close": "Agħlaq",
+    "continue": "Kompli",
+    "madeWith": "Magħmul b’❤️ u ☕️ fl-Unjoni Ewropea",
+    "next": "Li jmiss",
+    "no": "Le",
+    "optional": "Mhux obbligatorju",
     "passwordField": {
-      "ariaLabelShow": "Tara s-soja bħala test plain. Attenzjoni: hekk il-ġoġobba tiegħek se titqegħed fuq is-screen.",
-      "hide": "Tillem issa",
-      "show": "Ara ssoja"
+      "ariaLabelShow": "Uri l-password b’mod ċar. Twissija: il-password se tidher fuq l-iskrin.",
+      "hide": "Aħbi l-password",
+      "show": "Uri l-password"
     },
-    "privacy": "Privatetà",
-    "terms": "Iktara l-Termini",
-    "yes": "Jekk"
+    "privacy": "Privatezza",
+    "remove": "Neħħi",
+    "save": "Issejvja",
+    "terms": "Termini",
+    "yes": "Iva"
   }
 }

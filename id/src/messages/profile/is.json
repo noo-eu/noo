@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Fara til aðgangapósti þínum",
+    "birthdate": {
+      "day": "Dagur",
+      "description": "Tíðareikning þinn má vera notuð fyrir aðgangsreynslu og persónuvirkni.",
+      "errors": {
+        "bad_year": "Fylla í fullt ár fæddibærra dagsins",
+        "future": "Skrá út framtíð",
+        "invalid": "Tíðareikningurinn er ógilt"
+      },
+      "month": "Mánuður",
+      "title": "Bætti tíðareikning þitt",
+      "updateSuccess": "Tíðareikning þinn hefur verið safnað",
+      "year": "Ár"
+    },
+    "gender": {
+      "custom": "Sérsniðið",
+      "customLabel": "Kyn",
+      "description": "Kyn þitt er notuð fyrir persónuvirkni og til að tala um þig rétt.",
+      "example": "Alex sendi uppfærslu. Skoðaðu skilaboðin {gender, select, female {hennar} male {hans} other {}} til að fá nánari upplýsingar.",
+      "female": "Konur",
+      "male": "Karlar",
+      "other": "Aðrir",
+      "pronounsLabel": "Tala um mig sem",
+      "title": "Bætti kyn þitt",
+      "unspecified": "Ég vill ekki segja",
+      "updateSuccess": "Gullun eru nú þín kyns upplýsingar"
+    },
+    "header": "<noo></noo> Póstir",
+    "home": {
+      "profile": "Prófíllinn þinn",
+      "profileDescription": "Skoðaðu prófílinn þinn og uppfærðu upplýsingarnar",
+      "security": "Persónuvernd & Öryggi",
+      "securityDescription": "Stjórnaðu persónuverndarstillingum og öryggi reikningsins",
+      "settings": "Stillingar",
+      "settingsDescription": "Aðlagaðu upplifun þína og stillingar",
+      "title": "Velkomin <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Nafn þitt verður símtu í aðrir notendahlutir þegar þú hörkst á sér. Ef þú vilt nota <noo></noo> til að skrá þig inn í aðrar forrit, getur nafn þitt líka verið deilt með þeim ef þú velur.",
+      "errors": {
+        "invalid": "Nafnið inneheldir einhver orð eða raunlausan bókstafi",
+        "required": "Vinsamlegast fylli inn nöfn þitt",
+        "tooLong": "Nafn þitt er líka langt og sér",
+        "tooShort": "Nafnið þitt er líka lítið og sér"
+      },
+      "firstName": "Fjónsnafn",
+      "lastName": "Símanafi",
+      "title": "Breyta nafni þínu",
+      "updateNotice": "Þessi breyting gildir allri <noo></noo> tenningu. Þú má ennþága að uppfæra nöfn þitt sérstaklega til aðrar forrit.",
+      "updateSuccess": "Nafni þitt hefur verið breytt"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Fótagrafa",
+        "description": "Veldu taki á borgar símanáfnið",
+        "title": "Taka mynd"
+      },
+      "error": "Mjög víst að eitthvað fór úr. Proppa prófa aftur.",
+      "main": {
+        "description": "Myndin hjálpar þér og öðrum at ákvarða hversu þú er yfir",
+        "title": "Mynd í aðfangapósti"
+      },
+      "remove_success": "Hafið hefur verið falið úr... ",
+      "upload": {
+        "browse": "Veldu í staðanum af PC sínum",
+        "camera": "Notkun taka símanáfnið",
+        "change": "Breyta mynd",
+        "drag": "Sleppa mynd hér inn",
+        "error": {
+          "mime": "Myndin er ekki stýtt. Veldu JPG, PNG eða GIF skjal.",
+          "size": "Myndin er líka lang og símtu"
+        },
+        "success": "Mynd í aðfangapósti hefur verið uppfært ",
+        "title": "Veldu mynd"
+      }
+    },
+    "summary": {
+      "birthdate": "Dagssetning þína",
+      "gender": "Kyn þitt",
+      "name": "Nafn þitt",
+      "picture": "Þinn mynd",
+      "unspecifiedGender": "Upphaf"
+    },
+    "title": "Þín <noo></noo> myndlist"
+  }
+}

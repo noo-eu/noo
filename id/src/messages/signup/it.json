@@ -2,11 +2,7 @@
   "signup": {
     "create_your_account": "Crea il tuo account <noo></noo>",
     "errors": {
-      "first_name_required": "Per favore, inserisci il tuo nome",
       "invalid_data": "Qualcosa è andato storto. Per favore, controlla i dati inseriti",
-      "name_invalid": "Il nome contiene caratteri non validi",
-      "name_too_long": "Il nome inserito è troppo lungo",
-      "name_too_short": "Il nome inserito è troppo breve",
       "password_classes": "Per favore, usa una password più sicura. Usa una combinazione di lettere, numeri e simboli",
       "password_length": "Per favore, usa 10 o più caratteri",
       "password_required": "Per favore, inserisci una password",
@@ -21,8 +17,6 @@
     },
     "metaTitle": "Crea il tuo account noo",
     "step1": {
-      "first_name": "Nome",
-      "last_name": "Cognome",
       "title": "Inserisci il tuo nome"
     },
     "step2": {

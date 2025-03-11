@@ -1,24 +1,28 @@
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { ProfilePage } from "@/components/Profile";
+import { SessionsService } from "@/lib/SessionsService";
+import { uuidToHumanId } from "@/utils";
 import { redirect } from "next/navigation";
 
-export async function getCurrentUser() {
-  const sessionManager = new SessionsService(await getSessionCookie());
-  return sessionManager.getUser();
-}
-
-export default async function Home() {
-  const user = await getCurrentUser();
-  if (!user) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ uid?: string }>;
+}) {
+  const dbUser = await SessionsService.user((await searchParams).uid);
+  if (!dbUser) {
     redirect("/signin");
   }
 
-  return (
-    <div className="flex flex-col items-center h-screen">
-      <h1 className="text-4xl font-medium my-16">
-        Welcome back, {user.firstName}!
-      </h1>
+  const user = {
+    id: uuidToHumanId(dbUser.id, "usr"),
+    firstName: dbUser.firstName,
+    lastName: dbUser.lastName,
+    picture: dbUser.picture,
+    birthdate: dbUser.birthdate,
+    gender: dbUser.gender,
+    genderCustom: dbUser.genderCustom,
+    pronouns: dbUser.pronouns,
+  };
 
-      <p>This is a placeholder page.</p>
-    </div>
-  );
+  return <ProfilePage user={user} />;
 }

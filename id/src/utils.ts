@@ -5,7 +5,7 @@ export function sha256(input: Buffer | string) {
 }
 
 export function randomSalt(length: number, encoding?: BufferEncoding) {
-  return crypto.randomBytes(16).toString(encoding);
+  return crypto.randomBytes(length).toString(encoding);
 }
 
 // This function generates a random opaque string that can be given to the

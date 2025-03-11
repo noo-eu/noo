@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "back": "Voltar para sua conta",
+    "birthdate": {
+      "day": "Dia",
+      "description": "Sua data de nascimento pode ser usada para segurança do conta e personalização.",
+      "errors": {
+        "bad_year": "Por favor, insira o ano completo do seu nascimento",
+        "future": "Por favor, insira uma data no passado",
+        "invalid": "A data de nascimento é inválida"
+      },
+      "month": "Mês",
+      "title": "Defina sua data de nascimento",
+      "updateSuccess": "Sua data de nascimento foi salva com sucesso",
+      "year": "Ano"
+    },
+    "gender": {
+      "custom": "Personalizado",
+      "customLabel": "Gênero",
+      "description": "Seu gênero é usado para personalização e para endereçá-lo corretamente.",
+      "example": "Alex enviou uma atualização. Veja a mensagem {gender, select, female {dela} male {dele} other {}} para mais detalhes.",
+      "female": "Feminino",
+      "male": "Masculino",
+      "other": "Outro",
+      "pronounsLabel": "Faça-me referência como",
+      "title": "Defina seu gênero",
+      "unspecified": "Não quero dizer",
+      "updateSuccess": "Seus detalhes de gênero foram salvos com sucesso"
+    },
+    "header": "<noo></noo> Conta",
+    "home": {
+      "profile": "O teu perfil",
+      "profileDescription": "Dá uma olhada no teu perfil e atualiza as tuas informações",
+      "security": "Privacidade & Segurança",
+      "securityDescription": "Gerir as tuas definições de privacidade e segurança da conta",
+      "settings": "Definições",
+      "settingsDescription": "Personaliza a tua experiência e preferências",
+      "title": "Bem-vindo <bold>{name}</bold>"
+    },
+    "name": {
+      "description": "Seu nome será visível para outros usuários com quem interagir no <noo></noo>. Se você usar o <noo></noo> para entrar em outras aplicações, seu nome também pode ser compartilhado com elas, se escolher.",
+      "errors": {
+        "invalid": "O nome contém alguns caracteres inválidos",
+        "required": "Por favor, insira seu primeiro nome",
+        "tooLong": "O nome que você digitou é muito longo",
+        "tooShort": "O nome que você digitou é muito curto"
+      },
+      "firstName": "Primeiro nome",
+      "lastName": "Sobrenome",
+      "title": "Alterar seu nome",
+      "updateNotice": "Essa atualização se aplica a todos os serviços do <noo></noo>. Você ainda pode precisar atualizar o seu nome separadamente para outras aplicações.",
+      "updateSuccess": "Seu nome foi alterado com sucesso"
+    },
+    "picture_dialog": {
+      "camera": {
+        "capture": "Capturar",
+        "description": "Use a câmera do seu dispositivo para tirar uma foto.",
+        "title": "Tirar uma foto"
+      },
+      "error": "Algo deu errado. Tente novamente por favor.",
+      "main": {
+        "description": "Uma foto ajuda você e os outros a reconhecerem sua conta. Você pode mudá-la ou removê-la a qualquer momento.",
+        "title": "Foto de perfil"
+      },
+      "remove_success": "Sua foto de perfil foi removida...",
+      "upload": {
+        "browse": "Escolher do seu computador",
+        "camera": "Usar sua câmera",
+        "change": "Mudar foto",
+        "drag": "Arraste a foto aqui",
+        "error": {
+          "mime": "A imagem não é suportada. Por favor escolha um arquivo em JPG, PNG ou GIF.",
+          "size": "A foto está muito grande. Por favor escolha uma foto que não ultrapassem os 10MB."
+        },
+        "success": "Sua foto de perfil foi atualizada com sucesso.",
+        "title": "Escolha uma foto"
+      }
+    },
+    "summary": {
+      "birthdate": "Sua data de nascimento",
+      "gender": "Seu gênero",
+      "name": "Seu nome",
+      "picture": "Sua foto",
+      "unspecifiedGender": "Não especificado"
+    },
+    "title": "Seu <noo></noo> perfil"
+  }
+}

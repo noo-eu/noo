@@ -1,35 +1,38 @@
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import json5 from "json5";
-import { readdir } from "node:fs/promises";
+import { directories, sort, TranslationFile } from "./messages";
+import { getClient } from "./models";
 
-const files = await readdir("src/messages", { recursive: true });
-
-// Find all directories that contain an "en.json" file
-const directories = files
-  .filter((file) => file.endsWith("en.json"))
-  .map((file) => file.replace(/\/[^/]+$/, ""));
-
-// Ensure that all directories contain all supported languages
-for (const directory of directories) {
-  for (const language of SUPPORTED_LANGUAGES) {
-    if (!files.includes(`${directory}/${language}.json`)) {
-      await Bun.write(`src/messages/${directory}/${language}.json`, "{}");
-    }
-
-    // Check if --force-sort is passed
-    if (process.argv.includes("--force-sort")) {
-      const content = await Bun.file(
-        `src/messages/${directory}/${language}.json`,
-      ).text();
-      const parsed = json5.parse(content);
-      const sorted = sort(parsed);
-      Bun.write(
-        `src/messages/${directory}/${language}.json`,
-        JSON.stringify(sorted, null, 2),
-      );
-    }
-  }
-}
+const LOCALE_NAMES: Record<string, string> = {
+  bg: "Bulgarian",
+  cs: "Czech",
+  da: "Danish",
+  de: "German",
+  el: "Greek",
+  es: "Spanish (European)",
+  et: "Estonian",
+  fi: "Finnish",
+  fr: "French",
+  ga: "Irish",
+  hr: "Croatian",
+  hu: "Hungarian",
+  it: "Italian",
+  is: "Icelandic",
+  lt: "Lithuanian",
+  lv: "Latvian",
+  mt: "Maltese",
+  nl: "Dutch",
+  no: "Norwegian (Bokmål)",
+  pl: "Polish",
+  pt: "Portuguese (European)",
+  ro: "Romanian",
+  sk: "Slovak",
+  sl: "Slovenian",
+  sq: "Albanian",
+  sv: "Swedish",
+  tr: "Turkish",
+  uk: "Ukrainian",
+};
 
 // Check that translation files have no missing keys
 for (const directory of directories) {
@@ -60,10 +63,6 @@ for (const directory of directories) {
     }
   }
 }
-
-type TranslationFile = {
-  [key: string]: string | TranslationFile;
-};
 
 function recursiveKeyCheck(
   reference: TranslationFile,
@@ -112,54 +111,51 @@ async function translate(
   requests: Record<string, string>,
   targetLocale: string,
 ) {
-  const localeNames: Record<string, string> = {
-    bg: "Bulgarian",
-    cs: "Czech",
-    da: "Danish",
-    de: "German",
-    el: "Greek",
-    es: "Spanish",
-    et: "Estonian",
-    fi: "Finnish",
-    fr: "French",
-    ga: "Irish",
-    hr: "Croatian",
-    hu: "Hungarian",
-    it: "Italian",
-    lt: "Lithuanian",
-    lv: "Latvian",
-    mt: "Maltese",
-    nl: "Dutch",
-    pl: "Polish",
-    pt: "Portuguese",
-    ro: "Romanian",
-    sk: "Slovak",
-    sl: "Slovenian",
-    sv: "Swedish",
-  };
+  const system = `You must correctly translate this document to ${LOCALE_NAMES[targetLocale]}, making sure to use local spelling and idioms. \
+    The translations may use the ICU Message Format. \
+    Do not translate literally, prefer local idioms and customs (some sentences may make sense in English, but need some imagination in other languages). \
+    Prefer an informal style, if the language allows. **DO NOT TRANSLATE THE JSON KEYS.** \
+    If you see angled tags (<tags>) or placeholders in {brackets} those must be left as is. \
+    Do not leave the value empty. Only output JSON, without any surronding text.`;
 
-  // Is this LLM abuse?
-  let prompt = `It is of vital importance that you correctly translate this document to ${localeNames[targetLocale]}, making sure to use local spelling and idioms. The translations may use the ICU Message Format. Do not translate literally and **do not translate the object keys**. Do not leave the value empty. Only output JSON, without any surronding text: `;
-  prompt += JSON.stringify(requests, null, 2);
+  const prompt = JSON.stringify(requests, null, 2);
+  const translations = await getClient().request(system, prompt);
 
-  const response = await fetch("http://localhost:11434/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      prompt,
-      model: "gemma2",
-      format: "json",
-      stream: false,
-    }),
-  });
-
-  const body = await response.json();
-  const translations = JSON.parse(body.response);
-
-  // Remove translation keys that were not in the original source
   for (const key of Object.keys(translations)) {
+    // Remove keys that were not in the original source
     if (!requests[key]) {
+      console.warn(
+        `Translation for ${key} in ${targetLocale} was not requested. Skipping.`,
+      );
       delete translations[key];
+      continue;
+    }
+
+    // Reject empty translations
+    if (translations[key] === "") {
+      console.warn(
+        `Empty translation for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
+    }
+
+    // Verify that placeholders are all present and not translated
+    if (!matchesPlaceholders(requests[key], translations[key])) {
+      console.warn(
+        `Placeholders do not match for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
+    }
+
+    // If the result is over 2.5x the length of the source, it's probably garbage
+    if (translations[key].length > requests[key].length * 2.5) {
+      console.warn(
+        `Suspiciously long translation for ${key} in ${targetLocale}. Skipping.`,
+      );
+      delete translations[key];
+      continue;
     }
   }
 
@@ -182,23 +178,53 @@ function merge(base: TranslationFile, translation: Record<string, string>) {
   return base;
 }
 
-function sort(obj: TranslationFile): TranslationFile {
-  if (typeof obj !== "object" || obj === null) {
-    return obj;
+function matchesPlaceholders(source: string, translation: string) {
+  const sourcePlaceholders = source.match(/{[^(}|\s)]+}/g) || [];
+  const translationPlaceholders = translation.match(/{[^(}|\s)]+}/g) || [];
+
+  if (sourcePlaceholders.length !== translationPlaceholders.length) {
+    return false;
   }
 
-  const keys = Object.keys(obj).sort();
-  const sorted: TranslationFile = {};
+  // make sure the keys are all the same
+  const sourceSet = new Set(sourcePlaceholders.map((x) => x.slice(1, -1)));
+  const translationSet = new Set(
+    translationPlaceholders.map((x) => x.slice(1, -1)),
+  );
 
-  // Add each key-value pair to the new object in sorted order
-  // Sort nested objects recursively
-  for (const key of keys) {
-    if (typeof obj[key] === "object") {
-      sorted[key] = sort(obj[key]);
-    } else {
-      sorted[key] = obj[key];
+  if (
+    sourceSet.size !== translationSet.size ||
+    [...sourceSet].some((x) => !translationSet.has(x))
+  ) {
+    return false;
+  }
+
+  // make sure they match in count
+  const sourceMap = sourcePlaceholders.reduce(
+    (acc, cur) => {
+      const key = cur.slice(1, -1);
+      acc[key] ||= 0;
+      acc[key]++;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  const translationMap = translationPlaceholders.reduce(
+    (acc, cur) => {
+      const key = cur.slice(1, -1);
+      acc[key] ||= 0;
+      acc[key]++;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  for (const key of Object.keys(sourceMap)) {
+    if (sourceMap[key] !== translationMap[key]) {
+      return false;
     }
   }
 
-  return sorted;
+  return true;
 }

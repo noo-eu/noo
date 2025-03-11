@@ -5,8 +5,8 @@ import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import {
   getSessionCookie,
-  SESSION_COOKIE_NAME,
   SessionsService,
+  setSessionCookie,
 } from "@/lib/SessionsService";
 import { SignupService } from "@/lib/SignupService";
 import { getTranslations } from "next-intl/server";
@@ -59,7 +59,7 @@ export async function signupStep1(prevState: unknown, formData: FormData) {
   const errors = await svc.runStep1();
 
   if (errors) {
-    const t = await getTranslations("signup.errors");
+    const t = await getTranslations("profile.name.errors");
     return {
       errors: translateErrors(t, errors),
       values: svc.params,
@@ -106,7 +106,6 @@ export async function signupStep3(prevState: unknown, formData: FormData) {
 }
 
 async function startSession(user: typeof schema.users.$inferSelect) {
-  const cookieStore = await cookies();
   const sessionManager = new SessionsService(await getSessionCookie());
 
   const session = await sessionManager.startSession(
@@ -115,15 +114,7 @@ async function startSession(user: typeof schema.users.$inferSelect) {
     await getUserAgent(),
   );
 
-  // Delete old, expired, tampered sessions
-  await sessionManager.cleanup();
-
-  cookieStore.set(SESSION_COOKIE_NAME, sessionManager.buildCookie(), {
-    maxAge: 60 * 60 * 24 * 400,
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-  });
+  await setSessionCookie(sessionManager.buildCookie());
 
   return session;
 }

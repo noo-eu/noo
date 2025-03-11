@@ -1,18 +1,23 @@
 {
   "common": {
+    "back": "Voltar",
     "cancel": "Cancelar",
+    "change": "Alterar",
+    "close": "Fechar",
     "continue": "Continuar",
     "madeWith": "Feito com ❤️ e ☕️ na União Europeia",
-    "next": "Próximo",
+    "next": "Seguinte",
     "no": "Não",
     "optional": "Opcional",
     "passwordField": {
-      "ariaLabelShow": "Mostrar a senha como texto plano. Atenção: isso irá exibir sua senha na tela.",
-      "hide": "Esconder senha",
-      "show": "Mostrar senha"
+      "ariaLabelShow": "Mostrar a palavra-passe em texto simples. Atenção: a palavra-passe será visível no ecrã.",
+      "hide": "Esconder palavra-passe",
+      "show": "Mostrar palavra-passe"
     },
     "privacy": "Privacidade",
-    "terms": "Termos de Uso",
+    "remove": "Remover",
+    "save": "Guardar",
+    "terms": "Termos",
     "yes": "Sim"
   }
 }
