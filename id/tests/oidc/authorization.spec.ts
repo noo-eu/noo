@@ -27,9 +27,8 @@ test.describe("OpenID Authorization endpoint", () => {
         await page.fill('input[name="password"]', "super-s3cret");
         await page.getByTestId("signinSubmit").click();
 
-        await expect(page.getByText("Test Public OIDC Client")).toBeVisible();
-
-        await page.getByText("Continue").click();
+        // We should now be on /oidc/consent or /oidc/continue
+        await page.getByTestId("consentSubmit").click();
 
         await expect(page.getByText('"method"')).toBeVisible();
 

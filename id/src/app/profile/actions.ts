@@ -158,7 +158,6 @@ export async function updateGender(
   }
 
   const data = updateGenderSchema.parse(Object.fromEntries(form));
-  console.log(data);
   if (data.gender == "male" || data.gender == "female") {
     await Users.update(user.id, {
       gender: data.gender,

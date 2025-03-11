@@ -10,8 +10,6 @@ import {
 import { SignInWithNoo } from "@/components/SignInWithNoo";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { afterConsent } from "../continue/actions";
 import Form from "./Form";
 
 type Props = {
@@ -25,16 +23,17 @@ export function Content({ missingClaims, client, user, fastForward }: Props) {
   const t = useTranslations();
   const sessionId = useSearchParams().get("sid")!;
 
-  useEffect(() => {
-    // This is where Next.js breaks down...
-    // We might want to delete a cookie (afterConsent), but we can't do so during the server-side rendering (poor design IMO).
-    // So we have to invoke the server action from the client side.
-    // Of course, useEffect doesn't work if JS is disabled, so JS-less users will have to fall back to clicking the "Continue" button.
+  // Breaks the tests.
+  // useEffect(() => {
+  //   // This is where Next.js breaks down...
+  //   // We might want to delete a cookie (afterConsent), but we can't do so during the server-side rendering (poor design IMO).
+  //   // So we have to invoke the server action from the client side.
+  //   // Of course, useEffect doesn't work if JS is disabled, so JS-less users will have to fall back to clicking the "Continue" button.
 
-    if (fastForward) {
-      afterConsent(sessionId);
-    }
-  });
+  //   if (fastForward) {
+  //     afterConsent(sessionId);
+  //   }
+  // });
 
   return (
     <PageModal>

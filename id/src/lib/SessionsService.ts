@@ -29,20 +29,28 @@ export async function getSessionCookie() {
 
 export async function setSessionCookie(value: string) {
   const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE_NAME, value, {
+
+  // Secure cookies are only sent over HTTPS, with the exception of localhost.
+  // If you are using Safari, this exception does not apply... use another browser for development.
+
+  await cookieStore.set(SESSION_COOKIE_NAME, value, {
     maxAge: 60 * 60 * 24 * 400,
     httpOnly: true,
-    secure: false,
+    secure: true,
     // TODO: determine if "none" is really required, or if "lax" is sufficient
-    sameSite: "none",
+    sameSite: "lax",
   });
 
-  cookieStore.set(
+  await cookieStore.set(
     SESSION_CHECK_COOKIE_NAME,
     sha256(value).digest("base64url"),
     {
       maxAge: 60 * 60 * 24 * 400,
-      secure: false,
+      httpOnly: false,
+      secure: true,
+      // Note: "none" only works if secure is true. If you are disabling
+      // `secure` for development purposes, know that this will break the
+      // cookie.
       sameSite: "none",
     },
   );

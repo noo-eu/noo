@@ -45,7 +45,7 @@ export default function SignupPage() {
           label={profileT("name.firstName")}
           name="first_name"
           defaultValue={state.values.first_name}
-          error={state.errors.first_name}
+          error={state.errors.firstName}
           autoCapitalize="words"
         />
 
@@ -59,7 +59,7 @@ export default function SignupPage() {
           )}
           name="last_name"
           defaultValue={state.values.last_name}
-          error={state.errors.last_name}
+          error={state.errors.lastName}
           autoCapitalize="words"
         />
 
