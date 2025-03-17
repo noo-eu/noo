@@ -12,6 +12,7 @@
       "username_last_char": "Kullanıcı adınız son karakter olarak harf veya rakam içermelidir",
       "username_length": "6 ile 30 karakter arasında bir kullanıcı adı girin",
       "username_required": "<noo></noo> hesabınızı oluşturmak için lütfen yeni kullanıcı adınızı girin",
+      "username_reserved": "Üzgünüm, bu kullanıcı adı kullanılamaz",
       "username_taken": "Bu kullanıcı adı zaten alınmıştır",
       "username_two_dots": "Kullanıcı adınızda iki nokta (.) yan yana bulunamaz"
     },

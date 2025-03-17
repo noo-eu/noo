@@ -12,6 +12,7 @@
       "username_last_char": "Lietotāja vārds jābeidz ar burtu vai skaitli",
       "username_length": "Lietotāja vārds ir jābūt 6 nozīmēm garšam un ne mazāk kā 30",
       "username_required": "Lūdzu, ievadi jaunu lietotāju vārdu",
+      "username_reserved": "Piedod, šis lietotājvārds nav pieejams",
       "username_taken": "Šis lietotāja vārds ir izmantots",
       "username_two_dots": "Lietotāja vārds nav var izmantot vienīgi divus punktus (.) pēc kārtas."
     },

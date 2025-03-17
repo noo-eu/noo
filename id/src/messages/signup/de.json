@@ -12,6 +12,7 @@
       "username_last_char": "Ihr Benutzername muss mit einem Buchstaben- oder Ziffernzeichen enden",
       "username_length": "Ihr Benutzername muss zwischen 6 und 30 Zeichen lang sein",
       "username_required": "Bitte geben Sie Ihren neuen Benutzernamen ein",
+      "username_reserved": "Entschuldigung, dieser Benutzername ist nicht verfügbar",
       "username_taken": "Dieser Benutzername ist bereits vergeben",
       "username_two_dots": "Ihr Benutzername darf keine zwei aufeinanderfolgenden Punkte (.) enthalten"
     },

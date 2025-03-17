@@ -12,6 +12,7 @@
       "username_last_char": "Käyttäjänimen tulee päättyä kirjaimella tai numerolla",
       "username_length": "Käyttäjänimi on oltava vähintään 6 ja enintään 30 merkkiä pitkä",
       "username_required": "Anna uusi käyttäjänimi",
+      "username_reserved": "Anteeksi, tämä käyttäjänimi ei ole sallittu.",
       "username_taken": "Tämä käyttäjänimi on jo varattu",
       "username_two_dots": "Käyttäjänimessä ei voi olla kaksi peräkkäistä pistettä (.)"
     },

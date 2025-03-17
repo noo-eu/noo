@@ -12,6 +12,7 @@
       "username_last_char": "Din bruger navn skal slutte med et bogstav eller et tal",
       "username_length": "Din brugernavn skal være mellem 6 og 30 tegn langt",
       "username_required": "Venligst indtast dit nye brugernavn",
+      "username_reserved": "Beklager, dette brugernavn er ikke tilladt",
       "username_taken": "Brugernavnet er allerede taget",
       "username_two_dots": "Din bruger navn må ikke have to punktum i træk"
     },

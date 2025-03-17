@@ -12,6 +12,7 @@
       "username_last_char": "A felhasználónevnél az utolsó karakternek betűnek vagy számnak kell lennie",
       "username_length": "A felhasználónévnek legfeljebb 30 karakterben kell állnia",
       "username_required": "Kérem adja meg a új felhasználónevet",
+      "username_reserved": "Sajnálom, ez a felhasználónév már foglalt",
       "username_taken": "Ez a felhasználónév már foglalt",
       "username_two_dots": "A felhasználónév nem lehet két ponttal ellátva"
     },

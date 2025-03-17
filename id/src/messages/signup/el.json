@@ -12,6 +12,7 @@
       "username_last_char": "Ο username σας πρέπει να τελειώνει με γράμμα ή αριθμό",
       "username_length": "Ο username σας πρέπει να είναι μεταξύ 6 και 30 χαρακτήρων",
       "username_required": "Παρακαλώ δώστε το νέο σας username",
+      "username_reserved": "Συγγνώμη, αυτό το username δεν επιτρέπεται",
       "username_taken": "Αυτός ο username είναι παίχτης",
       "username_two_dots": "Ο username σας δεν μπορεί να περιέχει δύο ποντάκια (.) στο σειρά"
     },

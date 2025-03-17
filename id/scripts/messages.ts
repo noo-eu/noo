@@ -3,7 +3,7 @@ import { readdir } from "fs/promises";
 import json5 from "json5";
 
 export type TranslationFile = {
-  [key: string]: string | TranslationFile;
+  [key: string]: string | string[] | TranslationFile;
 };
 
 const files = await readdir("src/messages", { recursive: true });
@@ -44,7 +44,11 @@ export function sort(obj: TranslationFile): TranslationFile {
   // Sort nested objects recursively
   for (const key of keys) {
     if (typeof obj[key] === "object") {
-      sorted[key] = sort(obj[key]);
+      if (Array.isArray(obj[key])) {
+        sorted[key] = obj[key];
+      } else {
+        sorted[key] = sort(obj[key]);
+      }
     } else {
       sorted[key] = obj[key];
     }

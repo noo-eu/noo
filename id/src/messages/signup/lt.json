@@ -12,6 +12,7 @@
       "username_last_char": "Vartotojo vardo pabaiga turi būti raidė ar skaičius",
       "username_length": "Vartotojo vardas turi būti nuo 6 iki 30 simbolių ilgio",
       "username_required": "Įveskite savo naują vartotojo vardą",
+      "username_reserved": "Atsiprašome, šis vartotojo vardas jau užimtas",
       "username_taken": "Šis vartotojo vardas yra užimtas",
       "username_two_dots": "Vartotojo vardo negalima turėti dviejų iš eilį taško (.)"
     },

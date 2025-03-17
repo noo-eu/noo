@@ -12,6 +12,7 @@
       "username_last_char": "Emri i përdoruesit të duhet të mbarojë me një letrë ose numër",
       "username_length": "Emri i përdoruesit të duhet të jetë midis 6 dhe 30 karaktere",
       "username_required": "Shtoni emrin e ri të përdoruesit",
+      "username_reserved": "Na vjen keq, ky emër përdoruesi është i rezervuar",
       "username_taken": "Ky emër është marrë",
       "username_two_dots": "Emri i përdoruesit nuk mund t'i përmbajë dy pikë (.) me vete"
     },

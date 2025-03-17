@@ -12,6 +12,7 @@
       "username_last_char": "Seu apelido deve terminar com uma letra ou número",
       "username_length": "Seu apelido deve ter entre 6 e 30 caracteres",
       "username_required": "Por favor, insira seu novo apelido",
+      "username_reserved": "Desculpa, este nome de utilizador não está disponível",
       "username_taken": "Este apelido está ocupado",
       "username_two_dots": "Seu apelido não pode conter dois pontos (.) em sequência"
     },

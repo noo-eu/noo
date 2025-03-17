@@ -12,6 +12,7 @@
       "username_last_char": "Ditt användarnamn måste sluta med en bokstav eller siffra",
       "username_length": "Ditt användarnamn måste vara mellan 6 och 30 tecken",
       "username_required": "Fyll i ditt nya användarnamn",
+      "username_reserved": "Tyvärr, det användarnamnet är upptaget",
       "username_taken": "Det här användarnamnet är redan taget",
       "username_two_dots": "Ditt användarnamn får inte innehålla två punkter i rad"
     },

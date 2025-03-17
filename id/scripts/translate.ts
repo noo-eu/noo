@@ -73,9 +73,23 @@ function recursiveKeyCheck(
   for (const key of Object.keys(reference)) {
     if (typeof reference[key] === "object") {
       if (typeof other[key] === "string" || !other[key]) {
-        other[key] = {};
+        other[key] = Array.isArray(reference[key]) ? [] : {};
       }
-      recursiveKeyCheck(reference[key], other[key], misses, `${prefix}${key}.`);
+
+      if (Array.isArray(reference[key])) {
+        if (!Array.isArray(other[key])) {
+          delete other[key];
+          other[key] = [];
+        }
+      } else {
+        recursiveKeyCheck(
+          reference[key],
+          // @ts-expect-error we know it's an object
+          other[key],
+          misses,
+          `${prefix}${key}.`,
+        );
+      }
     } else {
       if (typeof other[key] === "object") {
         delete other[key];
@@ -140,13 +154,15 @@ async function translate(
       continue;
     }
 
-    // Verify that placeholders are all present and not translated
-    if (!matchesPlaceholders(requests[key], translations[key])) {
-      console.warn(
-        `Placeholders do not match for ${key} in ${targetLocale}. Skipping.`,
-      );
-      delete translations[key];
-      continue;
+    if (!Array.isArray(translations[key])) {
+      // Verify that placeholders are all present and not translated
+      if (!matchesPlaceholders(requests[key], translations[key])) {
+        console.warn(
+          `Placeholders do not match for ${key} in ${targetLocale}. Skipping.`,
+        );
+        delete translations[key];
+        continue;
+      }
     }
 
     // If the result is over 2.5x the length of the source, it's probably garbage
@@ -162,7 +178,10 @@ async function translate(
   return translations;
 }
 
-function merge(base: TranslationFile, translation: Record<string, string>) {
+function merge(
+  base: TranslationFile,
+  translation: Record<string, string | string[]>,
+) {
   for (const key of Object.keys(translation)) {
     const parts = key.split(".");
     let current = base;

@@ -12,6 +12,7 @@
       "username_last_char": "Uw gebruikersnaam moet met een letter of cijfer eindigen",
       "username_length": "Uw gebruikersnaam moet tussen de 6 en 30 tekens zijn",
       "username_required": "Vul alstublieft uw nieuwe gebruikersnaam in",
+      "username_reserved": "Sorry, deze gebruikersnaam is niet beschikbaar",
       "username_taken": "Deze gebruikersnaam is al in gebruik",
       "username_two_dots": "Uw gebruikersnaam mag niet twee punten achter elkaar bevatten"
     },

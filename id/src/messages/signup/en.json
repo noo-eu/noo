@@ -12,6 +12,7 @@
       "username_last_char": "Your username must end with a letter or number",
       "username_length": "Your username must be between 6 and 30 characters",
       "username_required": "Please enter your new username",
+      "username_reserved": "Sorry, this username is not allowed",
       "username_taken": "This username is taken",
       "username_two_dots": "Your username cannot contain two dots (.) in a row"
     },

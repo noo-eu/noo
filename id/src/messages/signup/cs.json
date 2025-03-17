@@ -12,6 +12,7 @@
       "username_last_char": "Jméno účtu musí končit písmenem nebo číslem",
       "username_length": "Jméno účtu musí mít délku mezi 6 a 30 znaky",
       "username_required": "Zadejte prosím nové jméno účtu",
+      "username_reserved": "Je nám líto, toto uživatelské jméno není povoleno",
       "username_taken": "Toto jméno účtu je již zabrané",
       "username_two_dots": "Vaše jméno účtu nemůže obsahovat dva body (.) vedle sebe"
     },

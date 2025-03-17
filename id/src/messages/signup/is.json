@@ -12,6 +12,7 @@
       "username_last_char": "Notarþu þinna skal endast við bókstaf eða tölu",
       "username_length": "Notarþú þinn skal vera milli 6 og 30 stafa",
       "username_required": "Veldu nýja notarþú þinn",
+      "username_reserved": "Því miður, þetta notandanafn er ekki leyfilegt",
       "username_taken": "Þessi notarþu er takaður",
       "username_two_dots": "Notarþú þinn skilir ekki að innihalda tvö dótum (.) í rað"
     },

@@ -12,6 +12,7 @@
       "username_last_char": "Vaše korisničko ime mora završiti slovom ili brojem",
       "username_length": "Vaše korisničko ime mora biti između 6 i 30 znakova",
       "username_required": "Unesite vase novo korisničko ime",
+      "username_reserved": "Žao nam je, ovo korisničko ime nije dostupno",
       "username_taken": "Korisničko ime je zauzeto",
       "username_two_dots": "Vaše korisničko ime ne smije sadržavati dvije točke (.) uz redom"
     },

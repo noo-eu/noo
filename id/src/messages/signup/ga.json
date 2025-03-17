@@ -12,6 +12,7 @@
       "username_last_char": "Ba chóra duit a hainm úr a chur de thréimhse le litir nó nuar",
       "username_length": "Tá a hainm úr agus mé téir a chaighdean idir 6 is 30 caibidil.",
       "username_required": "Cuir ainm úr iúl leat",
+      "username_reserved": "Gabh mo leithscéal, níl an t-ainm úsáideora seo ceadaithe",
       "username_taken": "Tá an t-ainm úr atá thuigheamar taréis.",
       "username_two_dots": "Níl dhá pointi (.). Tá fáilte ag abairtí a chur saor ó na pointí ."
     },

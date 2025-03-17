@@ -2,6 +2,7 @@ import Users, { User } from "@/db/users";
 import argon2 from "argon2";
 import { z } from "zod";
 import { validateNameForm } from "./validations/name";
+import { isUsernameAllowed } from "./validations/username";
 
 const step1Schema = z.object({
   first_name: z.string(),
@@ -133,6 +134,12 @@ async function validateStep2(
   const available = await Users.isUsernameAvailable(normalizedUsername, null);
   if (!available) {
     return { username: "username_taken" };
+  }
+
+  // 7. The username must not be in the list of reserved usernames
+  const allowed = isUsernameAllowed(data.username, normalizedUsername);
+  if (!allowed) {
+    return { username: "username_reserved" };
   }
 }
 

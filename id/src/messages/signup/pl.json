@@ -12,6 +12,7 @@
       "username_last_char": "Nazwa użytkownika musi kończyć się literą lub liczbą",
       "username_length": "Nazwa użytkownika powinna mieścić się między 6 a 30 znaków",
       "username_required": "Podaj nowe nazwę użytkownika",
+      "username_reserved": "Przykro nam, ta nazwa użytkownika jest już zajęta",
       "username_taken": "Ta nazwa jest zajęta",
       "username_two_dots": "Nazwa użytkownika nie może zawierać dwóch kropek z rzędu"
     },

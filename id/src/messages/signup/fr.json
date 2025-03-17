@@ -12,6 +12,7 @@
       "username_last_char": "Votre pseudonyme doit se terminer par une lettre ou un chiffre",
       "username_length": "Votre pseudonyme doit faire entre 6 et 30 caractères",
       "username_required": "Veuillez saisir votre nouveau pseudonyme",
+      "username_reserved": "Désolé, ce nom d'utilisateur n'est pas autorisé",
       "username_taken": "Ce pseudonyme est déjà pris",
       "username_two_dots": "Votre pseudonyme ne peut pas contenir deux points (.) consécutifs"
     },

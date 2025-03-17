@@ -12,6 +12,7 @@
       "username_last_char": "El último carácter de tu nombre de usuario debe ser una letra o un número",
       "username_length": "Tu nombre de usuario debe tener entre 6 y 30 caracteres",
       "username_required": "Por favor, introduce tu nuevo nombre de usuario",
+      "username_reserved": "Lo siento, este nombre de usuario no está disponible",
       "username_taken": "Ese nombre de usuario ya está en uso",
       "username_two_dots": "Tu nombre de usuario no puede contener puntos (.) consecutivos"
     },

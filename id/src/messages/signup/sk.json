@@ -12,6 +12,7 @@
       "username_last_char": "Prihlasovacie meno musí skončiť písmenom alebo číslom",
       "username_length": "Prihlasovacie meno musí mať dĺžku medzi 6 a 30 znakov",
       "username_required": "Prosím, zadejte vaše nové prihlasovacie meno",
+      "username_reserved": "Prepáč, toto používateľské meno nie je povolené",
       "username_taken": "Toto prihlasovacie meno je już použité",
       "username_two_dots": "Prihlasovacie meno nemôže obsahovať dve body (.) v rade"
     },

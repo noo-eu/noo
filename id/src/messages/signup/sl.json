@@ -12,6 +12,7 @@
       "username_last_char": "Uporabniško ime mora končati z črko ali število",
       "username_length": "Uporabniško ime mora vsebovati med 6 in 30 znaki",
       "username_required": "Vpišite novo ime uporabnika",
+      "username_reserved": "Oprosti, to uporabniško ime ni dovoljeno",
       "username_taken": "Ta uporabniško ime je že zasedeno",
       "username_two_dots": "Uporabniško ime ne more vsebovati dveh zaporednih točkamo (.)"
     },

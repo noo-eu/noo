@@ -12,6 +12,7 @@
       "username_last_char": "Kasutajanimetus peab lõpuks koosneda kirja või numbritest",
       "username_length": "Kasutajanimetus peab olla vahemikus 6-30 tähemärgist",
       "username_required": "Palun sisesta oma uus kasutajanimi",
+      "username_reserved": "Kahjuks, see kasutajanimi on juba broneeritud",
       "username_taken": "See kasutajanimetus on juba võetud",
       "username_two_dots": "Kasutajanimetus ei tohi sisaldada kahe punkti perioodit () üksteist."
     },

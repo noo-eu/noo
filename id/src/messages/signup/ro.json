@@ -12,6 +12,7 @@
       "username_last_char": "Numărul de utilizator trebuie să se încheie cu literă sau cifră",
       "username_length": "Numărul de utilizator trebuie să fie între 6 și 30 caractere",
       "username_required": "Vă rugăm să introduceți nouul nume de utilizator",
+      "username_reserved": "Ne pare rău, acest nume de utilizator este deja folosit",
       "username_taken": "Acest număr de utilizator este luat",
       "username_two_dots": "Numărul de utilizator nu poate conține două puncte (.) consecutive"
     },
