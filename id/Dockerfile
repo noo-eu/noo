@@ -48,6 +48,8 @@ COPY --from=build --chown=app:app /app/id/src/db/schema.ts ./schema.ts
 COPY --from=build --chown=app:app /app/id/drizzle ./drizzle
 COPY --from=build --chown=app:app /app/id/docker-entrypoint.sh .
 
+COPY --from=build --chown=app:app /app/id/src/messages ./src/messages
+
 USER app
 
 EXPOSE 3000
