@@ -8,6 +8,7 @@ on:
     branches: [ main ]
     paths:
       - 'id/**'
+  workflow_dispatch:
 
 env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_id_test
