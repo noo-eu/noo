@@ -1,4 +1,4 @@
-name: "[id] Tests"
+name: "id"
 on:
   push:
     branches: [ main ]
@@ -98,7 +98,7 @@ jobs:
   build:
     runs-on: ubuntu-24.04-arm
     needs: [unit, test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     permissions:
       packages: write
       contents: read

@@ -43,9 +43,16 @@ COPY --from=build --chown=app:app /app/id/.next/standalone .
 COPY --from=build --chown=app:app /app/id/.next/static ./.next/static
 COPY --from=build --chown=app:app /app/id/public ./public
 
+COPY --from=build --chown=app:app /app/id/drizzle.config.prod.ts ./drizzle.config.ts
+COPY --from=build --chown=app:app /app/id/src/db/schema.ts ./schema.ts
+COPY --from=build --chown=app:app /app/id/drizzle ./drizzle
+COPY --from=build --chown=app:app /app/id/docker-entrypoint.sh .
+
 USER app
 
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
 CMD ["bun", "run", "./server.js"]
