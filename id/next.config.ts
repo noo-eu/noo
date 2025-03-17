@@ -5,6 +5,7 @@ import path from "path";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   outputFileTracingRoot:
     process.env.NODE_ENV === "development"
       ? path.join(__dirname, "../")

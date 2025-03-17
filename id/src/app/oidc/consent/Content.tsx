@@ -9,7 +9,6 @@ import {
 } from "@/components/PresentClient";
 import { SignInWithNoo } from "@/components/SignInWithNoo";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
 import Form from "./Form";
 
 type Props = {
@@ -19,9 +18,9 @@ type Props = {
   fastForward?: boolean;
 };
 
-export function Content({ missingClaims, client, user, fastForward }: Props) {
+export function Content({ missingClaims, client, user }: Props) {
   const t = useTranslations();
-  const sessionId = useSearchParams().get("sid")!;
+  // const sessionId = useSearchParams().get("sid")!;
 
   // Breaks the tests.
   // useEffect(() => {
