@@ -5,11 +5,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // TODO: bundle Inter and DynaPuff and avoid third-party requests
+
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
-    style-src 'self' 'nonce-${nonce}';
+    script-src 'nonce-${nonce}' 'strict-dynamic';
+    style-src 'nonce-${nonce}' 'https://rsms.me' 'https://fonts.googleapis.com';
     img-src 'self' blob: data:;
     font-src 'self';
     object-src 'none';

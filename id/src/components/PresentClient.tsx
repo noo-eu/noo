@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image";
 import React from "react";
 import { ClientDescription } from "./ClientDescription";
 
