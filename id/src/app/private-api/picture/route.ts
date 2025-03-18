@@ -53,15 +53,18 @@ export async function POST(request: Request) {
     .toBuffer();
 
   if (user.picture) {
-    const store = getObjectStorage("noo-user");
+    const store = getObjectStorage("noousr");
     await store.delete(user.picture);
   }
 
   // We can safely assert the type since we already validated it's in ALLOWED_MIME_TYPES
   const key = randomSalt(64, "base64url");
-  const url = await getObjectStorage("noo-user").write(
+  const url = await getObjectStorage("noousr").write(
     key + "." + validation.value.ext,
     resizedImageBuffer,
+    {
+      ContentType: validation.value.mime,
+    },
   );
 
   await Users.update(user.id, { picture: url });
@@ -76,7 +79,7 @@ export async function DELETE(request: Request) {
   }
 
   if (user.picture) {
-    const store = getObjectStorage("noo-user");
+    const store = getObjectStorage("noousr");
     await store.delete(user.picture);
   }
 

@@ -46,7 +46,7 @@ export const users = pgTable(
     picture: text(),
     birthdate: date({ mode: "date" }),
     gender: genderEnum().notNull().default("not_specified"),
-    genderCustom: text(),
+    genderCustom: text("gender_custom"),
     pronouns: pronounEnum().notNull().default("other"),
   },
   (table) => [

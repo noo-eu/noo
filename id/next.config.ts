@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
     process.env.NODE_ENV === "development"
       ? path.join(__dirname, "../")
       : undefined,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "noousr.noo.eu",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

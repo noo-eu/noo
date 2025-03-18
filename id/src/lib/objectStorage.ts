@@ -9,8 +9,12 @@ import fs from "fs";
 
 type ValueType = Buffer;
 
+type Options = {
+  ContentType?: string;
+};
+
 interface ObjectStorage {
-  write(key: string, value: ValueType): Promise<string>;
+  write(key: string, value: ValueType, options?: Options): Promise<string>;
 
   delete(key: string): Promise<void>;
 }
@@ -53,16 +57,23 @@ class S3Storage implements ObjectStorage {
   #scope: string;
 
   constructor(scope: string) {
-    this.#client = new S3Client({});
+    this.#client = new S3Client({
+      endpoint: process.env.S3_ENDPOINT!,
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+      },
+    });
 
     this.#scope = scope;
   }
 
-  async write(key: string, value: ValueType) {
+  async write(key: string, value: ValueType, options?: Options) {
     const command = new PutObjectCommand({
       Bucket: this.#scope,
       Key: key,
       Body: value,
+      ...options,
     });
 
     await this.#client.send(command);
@@ -71,6 +82,10 @@ class S3Storage implements ObjectStorage {
   }
 
   async delete(key: string) {
+    // Split the path from the host and remove the leading slash.
+    const url = new URL(key);
+    key = url.pathname.slice(1);
+
     const command = new DeleteObjectCommand({
       Bucket: this.#scope,
       Key: key,
@@ -80,7 +95,15 @@ class S3Storage implements ObjectStorage {
   }
 
   url(key: string) {
-    return `${process.env.S3_ENDPOINT}/${this.#scope}/${key}`;
+    if (process.env[`S3_PUBLIC_URL_${this.#scope}`]) {
+      return `${process.env[`S3_PUBLIC_URL_${this.#scope}`]}/${key}`;
+    }
+
+    const url = new URL(process.env.S3_ENDPOINT!);
+    url.hostname = `${this.#scope}.${url.hostname}`;
+
+    const endpoint = url.toString().replace(/\/$/, "");
+    return `${endpoint}/${key}`;
   }
 }
 
