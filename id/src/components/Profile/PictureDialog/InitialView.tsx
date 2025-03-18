@@ -6,7 +6,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { useContext, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify/unstyled";
 import { View } from ".";
 import { useMutation } from "@tanstack/react-query";
 

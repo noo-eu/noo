@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./fonts";
 @source "../../../ui";
+@import "react-toastify/dist/ReactToastify.css";
 
 @theme {
   --color-eu-blue: #003399;

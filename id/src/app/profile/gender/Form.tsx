@@ -4,7 +4,7 @@ import { Button, TextField, SelectField } from "@noo/ui";
 import { useActionState, useEffect, useState } from "react";
 import { updateGender } from "../actions";
 import { redirect } from "next/navigation";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify/unstyled";
 import { PageModal } from "@/components/PageModal";
 import Link from "next/link";
 import { Noo } from "@/components/Noo";
