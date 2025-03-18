@@ -58,11 +58,13 @@ class S3Storage implements ObjectStorage {
 
   constructor(scope: string) {
     this.#client = new S3Client({
-      endpoint: process.env.S3_ENDPOINT!,
+      endpoint: process.env.S3_ENDPOINT,
       credentials: {
         accessKeyId: process.env.S3_ACCESS_KEY_ID!,
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
       },
+      // The S3 client v3 requires a region, even if the endpoint doesn't use it.
+      region: process.env.S3_REGION || "us-east-1",
     });
 
     this.#scope = scope;
