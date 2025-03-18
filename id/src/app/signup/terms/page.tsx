@@ -19,7 +19,7 @@ export default function SignupPage() {
 
       <div className="text-sm">
         {t.rich("step4.description", {
-          noo: Noo,
+          noo: () => <Noo />,
           p: (children) => <p className="mb-2">{children}</p>,
           terms: (children) => (
             <a href="/terms" target="_blank" className="text-blue-500">

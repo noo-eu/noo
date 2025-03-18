@@ -1,6 +1,6 @@
+import Image from "@/components/Image";
 import { Noo } from "@/components/Noo";
 import { getTranslations } from "next-intl/server";
-import Image from "@/components/Image";
 
 export async function PresentNoo() {
   const t = await getTranslations("signin");
@@ -14,7 +14,9 @@ export async function PresentNoo() {
         width={64}
         height={64}
       />
-      <h1 className="text-2xl mb-8">{t.rich("title", { noo: Noo })}</h1>
+      <h1 className="text-2xl mb-8">
+        {t.rich("title", { noo: () => <Noo /> })}
+      </h1>
     </div>
   );
 }

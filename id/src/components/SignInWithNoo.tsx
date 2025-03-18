@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import Image from "@/components/Image";
+import { useTranslations } from "next-intl";
 import { Noo } from "./Noo";
 
 export function SignInWithNoo() {
@@ -14,7 +14,7 @@ export function SignInWithNoo() {
         width={32}
         height={32}
       />
-      <span>{t.rich("switch.pageTitle", { noo: Noo })}</span>
+      <span>{t.rich("switch.pageTitle", { noo: () => <Noo /> })}</span>
     </h1>
   );
 }

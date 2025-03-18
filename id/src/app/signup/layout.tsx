@@ -23,7 +23,7 @@ export default function SignupPage({
     <PageModal className="!max-w-lg">
       <PageModal.Modal className="max-w-lg mx-auto !block">
         <h1 className="text-4xl text-center mb-8">
-          {t.rich("signup.create_your_account", { noo: Noo })}
+          {t.rich("signup.create_your_account", { noo: () => <Noo /> })}
         </h1>
 
         {children}

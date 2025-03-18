@@ -15,14 +15,14 @@ const WebAuthnID =
 
 export async function registrationOptions(
   uid: string,
-): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string, {}>> {
+): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string, null>> {
   if (!uid) {
-    return { error: "Missing user ID", input: {} };
+    return { error: "Missing user ID", input: null };
   }
 
   const user = await SessionsService.user(uid);
   if (!user) {
-    return { error: "User not found", input: {} };
+    return { error: "User not found", input: null };
   }
 
   const userPasskeys = await Passkeys.listForUser(user.id);
@@ -53,7 +53,7 @@ export async function registrationOptions(
 
   await Users.update(user.id, { webauthnChallenge: options.challenge });
 
-  return { data: options, input: {} };
+  return { data: options, input: null };
 }
 
 export async function verifyRegistration(
