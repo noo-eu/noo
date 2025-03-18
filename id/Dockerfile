@@ -33,7 +33,11 @@ WORKDIR /app/id
 
 RUN npm run build -- --no-lint
 
-FROM base AS final
+FROM node:${NODE_BUILDER_VERSION} AS final
+
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system app
 RUN adduser --system app
@@ -57,4 +61,4 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
-CMD ["bun", "run", "./server.js"]
+CMD ["node", "./server.js"]
