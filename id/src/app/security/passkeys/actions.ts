@@ -47,7 +47,6 @@ export async function registrationOptions(
     authenticatorSelection: {
       residentKey: "preferred",
       userVerification: "preferred",
-      authenticatorAttachment: "cross-platform",
     },
   });
 
