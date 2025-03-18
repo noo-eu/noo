@@ -2,6 +2,12 @@
   "security": {
     "back": "Zpět",
     "header": "Bezpečnost a ochrana soukromí",
+    "passkeys": {
+      "description1": "S přístupovými klíči se do svého noo účtu přihlásíte jen pomocí otisku prstu, obličeje, zamykací obrazovky nebo bezpečnostního klíče. Žádná hesla k zapamatování a je těžší je někomu ukrást.",
+      "description2": "Vaše přístupové klíče zůstávají na vašem zařízení nebo bezpečnostním klíči, takže je můžete používat jen vy. Stačí udržovat své zařízení v bezpečí - zamykací obrazovka nebo biometrické údaje jsou klíčem.",
+      "register": "Vytvořit přístupový klíč",
+      "title": "Přístupové klíče"
+    },
     "password": {
       "breaches": "Vaše heslo se objevilo v {count, plural, one {úniku dat} other {{count} únicích dat}}. Ačkoli jsou naše systémy stále v bezpečí, doporučujeme, abyste své heslo ihned změnili jako opatrnost.{otp, select, true {} other {Také byste měli povolit dvoufaktorovou autentizaci pro zvýšenou bezpečnost.}} <guide>Zjistěte více</guide>.",
       "confirmLabel": "Potvrďte nové heslo",

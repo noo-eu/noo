@@ -2,6 +2,12 @@
   "security": {
     "back": "Irrid lura",
     "header": "Sigurtà & Privatità",
+    "passkeys": {
+      "description1": "Bis-sistema tal-passkeys, tista' tidħol fil-kont noo tiegħek billi tuża biss il-marki tas-swaba', il-wiċċ, il-lock tat-tastiera, jew ċavetta tas-sigurtà. M'hemmx passwords x'tiftakar, u ħafna iktar diffiċli għal ħaddieħor li jisraqhom.",
+      "description2": "Il-passkeys tiegħek jistaqsu fuq l-apparat jew ċavetta tas-sigurtà tiegħek, allura biss int tista' tużahom. Żomm biss l-apparat tiegħek sigur—il-lock tat-tastiera jew biometrics huma ċ-ċavetta.",
+      "register": "Oħloq passkey",
+      "title": "Passkeys"
+    },
     "password": {
       "breaches": "Il-password tiegħek dehret f'{count, plural, one {data breach} other {{count} data breaches}}. Filwaqt li s-sistemi tagħna jibqgħu siguri, nirrakkomandaw li taġġorna l-password tiegħek issa bħala prekawzjoni.{otp, select, true {} other { Għandek ukoll attiva l-autentikazzjoni bil-2 fatturi għall-addiżjoni ta' sigurtà.}} <guide>Ikteb iktar</guide>.",
       "confirmLabel": "Ikkonferma l-password il-ġdida",

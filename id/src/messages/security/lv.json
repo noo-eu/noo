@@ -2,6 +2,12 @@
   "security": {
     "back": "Atpakaļ",
     "header": "Drošība un privātums",
+    "passkeys": {
+      "description1": "Ar piekļuves atslēgām tu vari pieslēgties savam noo kontam, izmantojot tikai pirkstu nospiedumu, sejas atpazīšanu, ekrāna bloķēšanu vai drošības atslēgu. Nav jāatceras paroles, un tās ir daudz grūtāk nozagt.",
+      "description2": "Tavas piekļuves atslēgas paliek tavā ierīcē vai drošības atslēgā, tāpēc tikai tu tās vari izmantot. Tikai saglabā savu ierīci drošībā—ekrāna bloķēšana vai biometriskie dati ir galvenā atslēga.",
+      "register": "Izveidot piekļuves atslēgu",
+      "title": "Piekļuves atslēgas"
+    },
     "password": {
       "breaches": "Tava parole ir parādījusies {count, plural, one {vienā datu noplūdē} other {{count} datu noplūdēs}}. Kamēr mūsu sistēmas paliek drošas, ieteicams nekavējoties atjaunināt savu paroli kā piesardzības pasākumu.{otp, select, true {} other { Jā, un tev vajadzētu arī iespējot divu faktoru autentifikāciju papildu drošībai.}} <guide>Uzzini vairāk</guide>.",
       "confirmLabel": "Apstiprināt jauno paroli",

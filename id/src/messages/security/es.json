@@ -2,6 +2,12 @@
   "security": {
     "back": "Volver",
     "header": "Seguridad y Privacidad",
+    "passkeys": {
+      "description1": "Con las passkeys, puedes iniciar sesión en tu cuenta de noo usando solo tu huella digital, reconocimiento facial, bloqueo de pantalla o una llave de seguridad. No hay contraseñas que recordar, y es mucho más difícil que alguien las robe.",
+      "description2": "Tus passkeys se quedan en tu dispositivo o llave de seguridad, así que solo tú puedes usarlas. Solo tienes que mantener tu dispositivo seguro: tu bloqueo de pantalla o datos biométricos son la clave.",
+      "register": "Crear una passkey",
+      "title": "Passkeys"
+    },
     "password": {
       "breaches": "Tu contraseña ha aparecido en {count, plural, one {una filtración de datos} other {{count} filtraciones de datos}}. Aunque nuestros sistemas son seguros, te recomendamos que actualices tu contraseña de inmediato como medida de precaución.{otp, select, true {} other { Además, deberías activar la autenticación en 2 pasos para mayor seguridad.}} <guide>Aprende más</guide>.",
       "confirmLabel": "Confirma la nueva contraseña",
@@ -37,7 +43,7 @@
       "breaches": "Tu contraseña ha aparecido en filtraciones de datos.",
       "comingSoon": "Próximamente",
       "mfa": "Autenticación en dos pasos",
-      "passkeys": "Claves de seguridad",
+      "passkeys": "Passkeys",
       "password": "Contraseña",
       "passwordLastChanged": "Último cambio el {date, date, medium}.",
       "sessions": "Sesiones activas"

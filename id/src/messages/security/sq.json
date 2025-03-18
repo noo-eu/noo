@@ -2,6 +2,12 @@
   "security": {
     "back": "Kthehu",
     "header": "Siguria & Privatësia",
+    "passkeys": {
+      "description1": "Me çelësa akses, mund të regjistrohesh në llogarinë tënde noo duke përdorur vetëm shenjën e gishtit, fytyrën, bllokimin e ekranit, ose një çelës sigurie. Pa fjalëkalime për t'u mbajtur mend, dhe shumë më e vështirë për dikë që të t'i vjedhë.",
+      "description2": "Çelësat e aksesit qëndrojnë në pajisjen tënde ose në çelësin e sigurisë, kështu që vetëm ti mund t'i përdorësh. Mbaji pajisjet të sigurta—bllokimi i ekranit ose biometrika janë çelësi.",
+      "register": "Krijo një çelës akses",
+      "title": "Çelësa Aksesi"
+    },
     "password": {
       "breaches": "Fjalëkalimi yt është shfaqur në {count, plural, one {një shkelje të dhënash} other {{count} shkelje të dhënash}}. Ndërsa sistemet tona mbeten të sigurta, rekomandojmë të azhurnosh fjalëkalimin menjëherë si masë paraprake.{otp, select, true {} other { Duhet gjithashtu të aktivizosh autentifikimin me dy faktorë për siguri shtesë.}} <guide>Mëso më shumë</guide>.",
       "confirmLabel": "Konfirmo fjalëkalimin e ri",

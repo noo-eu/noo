@@ -2,6 +2,12 @@
   "security": {
     "back": "Tillbaka",
     "header": "Säkerhet och Integritet",
+    "passkeys": {
+      "description1": "Med passkeys kan du logga in på ditt noo-konto med bara ditt fingeravtryck, ansikte, skärmlås eller en säkerhetsnyckel. Inga lösenord att komma ihåg, och mycket svårare för någon att stjäla.",
+      "description2": "Dina passkeys stannar på din enhet eller säkerhetsnyckel, så bara du kan använda dem. Se bara till att din enhet är säker - ditt skärmlås eller biometriska data är nyckeln.",
+      "register": "Skapa en passkey",
+      "title": "Passkeys"
+    },
     "password": {
       "breaches": "Ditt lösenord har förekommit i {count, plural, one {ett dataintrång} other {{count} dataintrång}}. Våra system är fortfarande säkra, men vi rekommenderar att du uppdaterar ditt lösenord omedelbart som en försiktighetsåtgärd.{otp, select, true {} other { Du bör också aktivera 2-faktorsautentisering för ökad säkerhet.}} <guide>Läs mer</guide>.",
       "confirmLabel": "Bekräfta nytt lösenord",

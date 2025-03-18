@@ -3,10 +3,10 @@
     "back": "Back",
     "header": "Security & Privacy",
     "passkeys": {
-      "title": "Passkeys",
       "description1": "With passkeys, you can sign in to your noo account using just your fingerprint, face, screen lock, or a security key. No passwords to remember, and much harder for anyone to steal.",
       "description2": "Your passkeys stay on your device or security key, so only you can use them. Just keep your device secure—your screen lock or biometrics are the key.",
-      "register": "Create a passkey"
+      "register": "Create a passkey",
+      "title": "Passkeys"
     },
     "password": {
       "breaches": "Your password has appeared in {count, plural, one {a data breach} other {{count} data breaches}}. While our systems remain secure, we recommend updating your password immediately as a precaution.{otp, select, true {} other { You should also enable 2-factor authentication for added security.}} <guide>Learn more</guide>.",

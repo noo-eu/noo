@@ -2,6 +2,12 @@
   "security": {
     "back": "Wstecz",
     "header": "Bezpieczeństwo i Prywatność",
+    "passkeys": {
+      "description1": "Dzięki kluczom dostępu możesz zalogować się do swojego konta noo używając wyłącznie odcisku palca, twarzy, blokady ekranu lub klucza bezpieczeństwa. Nie musisz pamiętać haseł, a kradzież staje się dużo trudniejsza.",
+      "description2": "Twoje klucze dostępu pozostają na Twoim urządzeniu lub kluczu bezpieczeństwa, więc tylko Ty możesz z nich korzystać. Wystarczy, że zadbasz o bezpieczeństwo swojego urządzenia – blokada ekranu lub funkcje biometryczne są kluczem.",
+      "register": "Utwórz klucz dostępu",
+      "title": "Klucze dostępu"
+    },
     "password": {
       "breaches": "Twoje hasło pojawiło się w {count, plural, one {naruszeniu danych} other {{count} naruszeniach danych}}. Choć nasze systemy są bezpieczne, zalecamy jak najszybszą zmianę hasła dla bezpieczeństwa.{otp, select, true {} other { Powinieneś także włączyć uwierzytelnianie dwuskładnikowe, aby zwiększyć swoje bezpieczeństwo.}} <guide>Dowiedz się więcej</guide>.",
       "confirmLabel": "Potwierdź nowe hasło",

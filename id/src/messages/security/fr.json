@@ -2,6 +2,12 @@
   "security": {
     "back": "Retour",
     "header": "Sécurité & Confidentialité",
+    "passkeys": {
+      "description1": "Avec les clés d'accès, tu peux te connecter à ton compte noo simplement en utilisant ton empreinte digitale, ton visage, le verrouillage de ton écran ou une clé de sécurité. Pas de mots de passe à retenir, et bien plus difficile à pirater.",
+      "description2": "Tes clés d'accès restent sur ton appareil ou ta clé de sécurité, donc seulement toi peux les utiliser. Assure-toi simplement que ton appareil est sécurisé—ton verrouillage d'écran ou tes données biométriques sont la clé.",
+      "register": "Créer une clé d'accès",
+      "title": "Clés d'accès"
+    },
     "password": {
       "breaches": "Votre mot de passe a été trouvé dans {count, plural, one {une violation de données} other {{count} violations de données}}. Bien que nos systèmes soient sécurisés, nous vous recommandons de mettre à jour votre mot de passe immédiatement par précaution.{otp, select, true {} other { Vous devriez aussi activer l'authentification à 2 facteurs pour plus de sécurité.}} <guide>En savoir plus</guide>.",
       "confirmLabel": "Confirmer le nouveau mot de passe",

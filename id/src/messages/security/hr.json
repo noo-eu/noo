@@ -2,6 +2,12 @@
   "security": {
     "back": "Nazad",
     "header": "Sigurnost i Privatnost",
+    "passkeys": {
+      "description1": "Uz ključeve pristupa, možete se prijaviti u svoj noo račun koristeći samo otisak prsta, lice, zaključavanje zaslona ili sigurnosni ključ. Nema lozinki koje trebate pamtiti, i puno je teže da ih netko ukrade.",
+      "description2": "Vaši ključevi pristupa ostaju na vašem uređaju ili sigurnosnom ključu, tako da ih samo vi možete koristiti. Samo pazite da vam je uređaj siguran—zaključavanje zaslona ili biometrija su ključ.",
+      "register": "Stvori ključ pristupa",
+      "title": "Ključevi pristupa"
+    },
     "password": {
       "breaches": "Vaša lozinka se pojavila u {count, plural, one {jednom curenju podataka} other {{count} curenja podataka}}. Iako su naši sustavi sigurni, preporučujemo da odmah promijenite lozinku kao previd.{otp, select, true {} other { Također, preporučujemo da uključite dvofaktorsku autentifikaciju za dodatnu sigurnost.}} <guide>Saznajte više</guide>.",
       "confirmLabel": "Potvrdi novu lozinku",

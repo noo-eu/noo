@@ -2,6 +2,12 @@
   "security": {
     "back": "Indietro",
     "header": "Sicurezza & Privacy",
+    "passkeys": {
+      "description1": "Con le passkey, puoi accedere al tuo account noo usando solo l'impronta digitale, il riconoscimento facciale, il blocco schermo o una chiave di sicurezza. Niente più password da ricordare, ed è molto più difficile da rubare per chiunque.",
+      "description2": "Le tue passkey rimangono sul tuo dispositivo o sulla chiave di sicurezza, quindi solo tu puoi usarle. Basta mantenere il dispositivo al sicuro: il blocco schermo o il riconoscimento biometrico sono la chiave.",
+      "register": "Crea una passkey",
+      "title": "Passkey"
+    },
     "password": {
       "breaches": "La tua password è stata trovata in {count, plural, one {una violazione dei dati} other {{count} violazioni dei dati}}. Anche se i nostri sistemi sono sicuri, ti consigliamo di aggiornare subito la tua password per precauzione.{otp, select, true {} other { Potresti anche attivare l'autenticazione a due fattori per una maggiore sicurezza.}} <guide>Scopri di più</guide>.",
       "confirmLabel": "Conferma la nuova password",

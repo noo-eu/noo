@@ -2,6 +2,12 @@
   "security": {
     "back": "Nazaj",
     "header": "Varnost in Zasebnost",
+    "passkeys": {
+      "description1": "S ključki za dostop se lahko v svoji noo račun prijaviš samo s prstnim odtisom, obrazom, zaklepanjem zaslona ali varnostnim ključem. Nič več si ni treba zapomniti gesel, in veliko težje je, da ti kdo ukrade dostop.",
+      "description2": "Tvoji ključki za dostop ostanejo na tvoji napravi ali varnostnem ključu, tako da jih lahko uporabljaš samo ti. Samo poskrbi, da je tvoja naprava varna—zaklepanje zaslona ali biometrija sta ključ.",
+      "register": "Ustvari ključek za dostop",
+      "title": "Ključki za dostop"
+    },
     "password": {
       "breaches": "Vaša geslo je bilo odkrito v {count, plural, one {kršitvi podatkov} other {{count} kršitvah podatkov}}. Čeprav so naši sistemi še vedno varni, priporočamo, da takoj posodobite svoje geslo kot previdnostno mero.{otp, select, true {} other { Prav tako bi morali omogočiti 2-faktorsko avtentifikacijo za dodatno varnost.}} <guide>Več informacij</guide>.",
       "confirmLabel": "Potrdite novo geslo",
