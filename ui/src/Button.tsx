@@ -30,7 +30,7 @@ export function Button(props: Props) {
     <button {...rest} className={cls}>
       {pending && (
         <svg
-          className="inline-block -ml-1 size-6 animate-spin text-white"
+          className="inline-block -ms-1 size-6 animate-spin text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

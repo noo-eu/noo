@@ -44,7 +44,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
           <div>
             <h2 className="text-lg font-medium">{t("summary.picture")}</h2>
           </div>
-          <div className="ml-auto border border-black/50 border-2 rounded-full p-0.5">
+          <div className="ms-auto border border-black/50 border-2 rounded-full p-0.5">
             <ProfilePicture user={user} width={72} className="w-18 text-2xl" />
             <PictureDialog
               isOpen={isOpen}

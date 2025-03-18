@@ -22,7 +22,7 @@ export function SelectField(props: SelectFieldProps) {
         id={inputId}
         aria-describedby={props.error ? errorId : undefined}
         aria-invalid={!!props.error}
-        className={`${rest.className} w-full pr-12`}
+        className={`${rest.className} w-full pe-12`}
       />
       <ChevronDownIcon
         className="size-4 absolute top-1/2 right-3 -mt-2 pointer-events-none"
