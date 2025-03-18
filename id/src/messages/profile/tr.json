@@ -35,7 +35,7 @@
       "securityDescription": "Gizlilik ayarlarını ve hesap güvenliğini yönet",
       "settings": "Ayarlar",
       "settingsDescription": "Deneyimini ve tercihlerini kişiselleştir",
-      "title": "Hoş geldin <bold>{name}</bold>"
+      "title": "Hoş geldin {name}"
     },
     "name": {
       "description": "İsiminiz diğer <noo></noo> kullanıcılara görüntülenmeyecek. Eğer <noo></noo>'i kullanarak başka uygulamalardan giriş yapacaksanız, isimlerinizi onlara da paylaşabilirsin.",

@@ -35,7 +35,7 @@
       "securityDescription": "Gère tes paramètres de confidentialité et la sécurité de ton compte",
       "settings": "Paramètres",
       "settingsDescription": "Personnalise ton expérience et tes préférences",
-      "title": "Bienvenue <bold>{name}</bold>"
+      "title": "Bienvenue {name}"
     },
     "name": {
       "description": "Votre nom sera visible aux autres utilisateurs avec lesquels vous interagissez sur <noo></noo>. Si vous utilisez <noo></noo> pour vous connecter à d'autres applications, votre nom peut également être partagé avec elles si vous le souhaitez.",

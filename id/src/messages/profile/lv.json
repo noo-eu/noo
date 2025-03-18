@@ -35,7 +35,7 @@
       "securityDescription": "Pārvaldi savus privātuma iestatījumus un konta drošību",
       "settings": "Iestatījumi",
       "settingsDescription": "Pielāgo savu pieredzi un vēlmes",
-      "title": "Sveicināts <bold>{name}</bold>"
+      "title": "Sveicināts {name}"
     },
     "name": {
       "description": "Jūsu vārds būs redzams citiem lietotājiem, ar kuriem jūs reaģētiet <noo></noo>. Ja jūs izmantojat <noo></noo>, lai pirmnieks ienākotu citos aplikācijas, tad jūsu vārds var arī tiekties uz dalīšanu ar tiem, ja jums šis rīsis ir izvēlēts.",

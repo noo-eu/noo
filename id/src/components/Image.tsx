@@ -11,5 +11,6 @@ export default function Image(props: Props) {
   // But add tailwind "text-transparent" to make the alt text invisible.
   rest.className = `text-transparent ${rest.className}`;
 
+  // eslint-disable-next-line @next/next/no-img-element
   return <img {...rest} />;
 }

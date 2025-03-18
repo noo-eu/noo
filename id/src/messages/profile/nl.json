@@ -35,7 +35,7 @@
       "securityDescription": "Beheer je privacy-instellingen en accountbeveiliging",
       "settings": "Instellingen",
       "settingsDescription": "Pas je ervaring en voorkeuren aan",
-      "title": "Welkom <bold>{name}</bold>"
+      "title": "Welkom {name}"
     },
     "name": {
       "description": "Uw naam is zichtbaar voor andere gebruikers met wie u interactie hebt op <noo></noo>. Als u <noo></noo> gebruikt om in andere apps in te loggen, kan uw naam ook worden gedeeld met hen, als u dat wilt.",

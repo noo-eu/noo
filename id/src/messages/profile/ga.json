@@ -35,7 +35,7 @@
       "securityDescription": "Bainistigh do shocruithe príobháideachta agus slándála cuntais",
       "settings": "Socruithe",
       "settingsDescription": "Saincheap do thaithí agus roghanna",
-      "title": "Fáilte <bold>{name}</bold>"
+      "title": "Fáilte {name}"
     },
     "name": {
       "description": "Déanfaidh tú a dteideal féachaint don mhuiniméad eile má bhíonn tú ag déanamh ghníomhaíocht ar <noo></noo>. Má úsáideann tú <noo></noo> chun sínigh le hábhar aige go do shuímh, féachfaidh tusa freisin, má roghnaíonn tú.",
