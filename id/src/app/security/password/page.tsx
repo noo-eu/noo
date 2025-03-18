@@ -1,6 +1,16 @@
 import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
+import { getTranslations } from "next-intl/server";
 import { Form } from "./Form";
+
+export async function generateMetadata() {
+  const t = await getTranslations("security");
+
+  return {
+    title: t("password.title"),
+    description: "",
+  };
+}
 
 export default async function ProfileNamePage({
   searchParams,
@@ -24,6 +34,7 @@ export default async function ProfileNamePage({
     tenantDomain: dbUser.tenant?.domain,
     birthdate: dbUser.birthdate?.toISOString().split("T")[0],
     hasOtp: !!dbUser.otpSecret,
+    picture: dbUser.picture,
   };
 
   return <Form user={user} />;

@@ -23,8 +23,6 @@ export type ProfilePageProps = {
     gender: User["gender"];
     genderCustom: string | null;
     pronouns: User["pronouns"];
-    passwordBreaches: number;
-    passwordChangedAt: Date;
   };
 };
 

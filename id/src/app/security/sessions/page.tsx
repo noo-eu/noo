@@ -4,8 +4,18 @@ import Sessions from "@/db/sessions";
 import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
 import { eq } from "drizzle-orm";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { SessionsPage } from "./SessionsPage";
+
+export async function generateMetadata() {
+  const t = await getTranslations("security");
+
+  return {
+    title: t("sessions.title"),
+    description: "",
+  };
+}
 
 export default async function Home({
   searchParams,
@@ -33,7 +43,10 @@ export default async function Home({
     };
   });
 
-  const currentSessionId = (await SessionsService.sessionFor(userId))?.id!;
+  const currentSessionId = (await SessionsService.sessionFor(userId))?.id;
+  if (!currentSessionId) {
+    redirect("/signin");
+  }
 
   return (
     <ProfileLayout user={user}>

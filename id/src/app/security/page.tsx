@@ -1,10 +1,20 @@
+import { schema } from "@/db";
+import Sessions from "@/db/sessions";
 import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
+import { eq } from "drizzle-orm";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import SecurityHomePage from "./SecurityHomePage";
-import Sessions from "@/db/sessions";
-import { eq } from "drizzle-orm";
-import { schema } from "@/db";
+
+export async function generateMetadata() {
+  const t = await getTranslations("security");
+
+  return {
+    title: t.rich("title", { noo: () => "noo" }),
+    description: "",
+  };
+}
 
 export default async function Home({
   searchParams,

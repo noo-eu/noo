@@ -17,7 +17,7 @@ export function PasswordRater({ password, strength }: PasswordRaterProps) {
 
   useEffect(() => {
     setDebouncedPassword(password);
-  }, [password]);
+  }, [password, setDebouncedPassword]);
 
   useEffect(() => {
     if (debouncedPassword.length < 10) {
@@ -81,7 +81,7 @@ function useDebouncer<T>(initialValue: T, delay: number) {
     return () => {
       clearTimeout(handler);
     };
-  }, [value]);
+  }, [value, delay]);
 
   return { value: debouncedValue, setValue };
 }

@@ -28,6 +28,7 @@ type Props = {
     tenantDomain?: string;
     birthdate?: string;
     hasOtp: boolean;
+    picture: string | null;
   };
 };
 
@@ -61,6 +62,8 @@ export function Form({ user }: Props) {
     user.username,
     user.tenantDomain,
     user.birthdate,
+    user.firstName,
+    user.lastName,
   ]);
 
   const [state, action, isPending] = useActionState(
