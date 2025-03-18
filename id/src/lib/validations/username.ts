@@ -109,13 +109,16 @@ export function isUsernameAllowed(
     }
   }
 
-  if (username.startsWith("noo")) {
+  // Starting with "noo." is not allowed (but "noor" is fine)
+  // Note: to be here, we know the username is at least 6 characters long
+  if (username.toLocaleLowerCase().startsWith("noo")) {
     if (username[3] == ".") {
       return false;
     }
   }
 
-  if (username.endsWith("noo")) {
+  // Ending with "noo" is not allowed (jasonoo)
+  if (username.toLocaleLowerCase().endsWith("noo")) {
     return false;
   }
 
