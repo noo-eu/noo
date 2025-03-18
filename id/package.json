@@ -23,6 +23,7 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@noo/ui": "workspace:*",
+    "@sentry/nextjs": "^9",
     "@tanstack/react-query": "^5.67.2",
     "accept-language": "^3.0.20",
     "argon2": "^0.41.1",

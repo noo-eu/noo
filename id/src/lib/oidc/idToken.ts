@@ -88,6 +88,16 @@ export function buildSubClaim(client: OidcClient, userId: string) {
     const url = client.sectorIdentifierUri ?? client.redirectUris[0];
     const host = new URL(url).hostname;
 
+    let salt = process.env.PAIRWISE_SALT;
+    if (!salt) {
+      if (process.env.NODE_ENV === "production") {
+        throw new Error("PAIRWISE_SALT is not set");
+      } else {
+        console.warn("PAIRWISE_SALT is not set, using a random salt");
+        salt = crypto.randomBytes(32).toString("base64");
+      }
+    }
+
     // Hash the user id with the host name
     const hash = sha256(`${host}${userId}${process.env.PAIRWISE_SALT}`).digest(
       "hex",
