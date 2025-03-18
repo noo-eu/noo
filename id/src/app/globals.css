@@ -1,7 +1,6 @@
 @import "tailwindcss";
+@import "./fonts";
 @source "../../../ui";
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
   --color-eu-blue: #003399;
@@ -10,21 +9,15 @@
   --color-hc-link-hover: #3399cc;
 }
 
-/* https://rsms.me/inter/ */
 :root {
-  font-family: Inter, sans-serif;
+  font-family: InterVariable, sans-serif;
   font-feature-settings:
     "liga" 1,
     "calt" 1;
 }
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, sans-serif;
-  }
-}
 
 .noo {
-  font-family: "DynaPuff", serif;
+  font-family: DynaPuff, serif;
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: normal;

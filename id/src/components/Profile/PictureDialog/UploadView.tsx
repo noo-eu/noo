@@ -14,7 +14,7 @@ import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import { View } from ".";
 import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 
 export function UploadView({
   navigate,

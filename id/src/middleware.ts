@@ -6,12 +6,14 @@ export function middleware(request: NextRequest) {
   }
 
   // TODO: bundle Inter and DynaPuff and avoid third-party requests
+  // unsafe-inline and https: are ignored in the presence of 'strict-dynamic' by
+  // modern browsers, but help with compatibility with older browsers
 
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self';
-    script-src 'nonce-${nonce}' 'strict-dynamic';
-    style-src 'nonce-${nonce}' 'https://rsms.me' 'https://fonts.googleapis.com';
+    script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https:;
+    style-src 'nonce-${nonce}';
     img-src 'self' blob: data:;
     font-src 'self';
     object-src 'none';
@@ -19,6 +21,7 @@ export function middleware(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
+    require-trusted-types-for 'script';
 `;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
