@@ -8,10 +8,28 @@ import {
   RegistrationResponseJSON,
   verifyRegistrationResponse,
 } from "@simplewebauthn/server";
+import { headers } from "next/headers";
 import { ActionResult } from "../actions";
 
-const WebAuthnID =
-  process.env.NODE_ENV === "production" ? "id.noo.eu" : "localhost";
+async function getWebAuthnID() {
+  if (process.env.NODE_ENV === "production") {
+    return "id.noo.eu";
+  }
+
+  const hdrs = await headers();
+  return hdrs.get("host")?.replace(/:\d+$/, "") || "localhost";
+}
+
+async function getWebAuthnExpectedOrigin() {
+  if (process.env.NODE_ENV === "production") {
+    return "https://id.noo.eu";
+  }
+
+  const hdrs = await headers();
+  const scheme = hdrs.get("x-forwarded-proto") || "http";
+  const host = hdrs.get("host") || "localhost";
+  return `${scheme}://${host}`;
+}
 
 export async function registrationOptions(
   uid: string,
@@ -33,7 +51,7 @@ export async function registrationOptions(
 
   const options = await generateRegistrationOptions({
     rpName: "noo",
-    rpID: WebAuthnID,
+    rpID: await getWebAuthnID(),
     userName: username,
     userID: uint8UserId,
     userDisplayName: `${user.firstName} ${user.lastName}`.trim(),
@@ -78,8 +96,8 @@ export async function verifyRegistration(
     verification = await verifyRegistrationResponse({
       response: registrationResponse,
       expectedChallenge: challenge,
-      expectedOrigin: `https://${WebAuthnID}:13000`,
-      expectedRPID: WebAuthnID,
+      expectedOrigin: await getWebAuthnExpectedOrigin(),
+      expectedRPID: await getWebAuthnID(),
     });
   } catch (error) {
     console.error("Error verifying registration:", error);
