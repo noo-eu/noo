@@ -19,8 +19,8 @@ import crypto from "node:crypto";
 // is a hash of the verifier, stored in PHC string format. We currently use
 // SHA-256 for the verifier hash with a 16-byte salt.
 
-export const SESSION_COOKIE_NAME = "_noo_auth";
-export const SESSION_CHECK_COOKIE_NAME = "_noo_auth_check";
+const SESSION_COOKIE_NAME = "_noo_auth";
+const SESSION_CHECK_COOKIE_NAME = "_noo_auth_check";
 
 export async function getSessionCookie() {
   const cookieStore = await cookies();
@@ -70,11 +70,6 @@ export async function getUserForSession(sessionId: string) {
 export async function getSessions() {
   const manager = new SessionsService(await getSessionCookie());
   return manager.activeSessions();
-}
-
-export async function getFirstSession() {
-  const manager = new SessionsService(await getSessionCookie());
-  return (await manager.activeSessions())[0];
 }
 
 export class SessionsService {
@@ -175,24 +170,6 @@ export class SessionsService {
     return await Sessions.refresh(sid, ip, userAgent, new Date());
   }
 
-  async getUser(sessionIndex: number = 0) {
-    const sessionData = this.getSessionData(sessionIndex);
-    if (!sessionData) {
-      return undefined;
-    }
-
-    const session = await this.loadSession(sessionData.sid);
-    if (!session) {
-      return undefined;
-    }
-
-    if (!checkVerifier(sessionData.verifier, session.verifierDigest)) {
-      return undefined;
-    }
-
-    return session.user;
-  }
-
   async getSessionBySid(sessionId: string) {
     const allSessions = this.decodeAll();
     const session = allSessions.find((s) => s.sid === sessionId);
@@ -272,15 +249,6 @@ export class SessionsService {
     return Sessions.select(inArray(schema.sessions.id, sids));
   }
 
-  private getSessionData(index: number) {
-    const token = this.tokens[index];
-    if (!token) {
-      return null;
-    }
-
-    return this.decodeSessionToken(token);
-  }
-
   private decodeSessionToken(
     token: string,
   ): { sid: string; verifier: string } | null {
@@ -330,27 +298,5 @@ export class SessionsService {
       "-" +
       buffer.toString("hex", 10, 16)
     );
-  }
-
-  private verifySessionVerifier(
-    verifier: Buffer,
-    salt: Buffer,
-    digest: Buffer,
-  ): boolean {
-    if (verifier.length !== 32 || salt.length !== 16 || digest.length !== 32) {
-      return false;
-    }
-
-    // Hash the verifier with the salt
-    const hashedVerifier = this.hashSessionVerifier(verifier, salt);
-
-    // Compare the digest with the hashed verifier
-    return crypto.timingSafeEqual(digest, hashedVerifier);
-  }
-
-  private hashSessionVerifier(verifier: Buffer, salt: Buffer): Buffer {
-    const hash = crypto.createHash("sha256");
-    hash.update(Buffer.concat([salt, verifier]));
-    return hash.digest();
   }
 }
