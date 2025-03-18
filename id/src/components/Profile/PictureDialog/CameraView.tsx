@@ -2,7 +2,7 @@ import { DialogTitle } from "@headlessui/react";
 import { ArrowLeftCircleIcon, CameraIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { View } from ".";
 
 export type CameraViewProps = {
@@ -76,7 +76,7 @@ export function CameraView({ navigate, onCapture }: CameraViewProps) {
   useEffect(() => {
     startCamera();
     return () => stopCamera();
-  });
+  }, []);
 
   return (
     <>

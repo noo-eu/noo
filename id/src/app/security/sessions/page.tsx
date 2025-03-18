@@ -1,3 +1,4 @@
+import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
 import { SessionsService } from "@/lib/SessionsService";
@@ -17,6 +18,11 @@ export default async function Home({
     redirect("/signin");
   }
 
+  const user = {
+    firstName: dbUser.firstName,
+    picture: dbUser.picture,
+  };
+
   const allSessions = await Sessions.findManyBy(eq(sessions.userId, dbUser.id));
   const safeSessions = allSessions.map((session) => {
     return {
@@ -30,10 +36,12 @@ export default async function Home({
   const currentSessionId = (await SessionsService.sessionFor(userId))?.id!;
 
   return (
-    <SessionsPage
-      sessions={safeSessions}
-      currentSessionId={currentSessionId}
-      userId={userId}
-    />
+    <ProfileLayout user={user}>
+      <SessionsPage
+        sessions={safeSessions}
+        currentSessionId={currentSessionId}
+        userId={userId}
+      />
+    </ProfileLayout>
   );
 }

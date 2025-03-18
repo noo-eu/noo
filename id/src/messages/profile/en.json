@@ -51,6 +51,7 @@
       "updateNotice": "This update applies to all <noo></noo> services. You may still need to update your name separately for other apps.",
       "updateSuccess": "Your name has been changed"
     },
+    "pageTitle": "Account",
     "picture_dialog": {
       "camera": {
         "capture": "Capture",

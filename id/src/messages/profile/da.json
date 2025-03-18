@@ -51,6 +51,7 @@
       "updateNotice": "Dette opdatering gælder for alle <noo></noo>-tjenester. Du må stadigvæk selv skulle opdatere dit navn separat til andre apps.",
       "updateSuccess": "Dit navn er blevet ændret"
     },
+    "pageTitle": "Konto",
     "picture_dialog": {
       "camera": {
         "capture": "Optag",

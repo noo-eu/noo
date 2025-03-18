@@ -1,15 +1,16 @@
 "use client";
 
-import { Button, TextField, SelectField } from "@noo/ui";
-import { useActionState, useEffect } from "react";
-import { updateBirthdate, UpdateBirthdateState } from "../actions";
-import { redirect } from "next/navigation";
-import { toast } from "react-toastify/unstyled";
-import { PageModal } from "@/components/PageModal";
-import Link from "next/link";
 import { Noo } from "@/components/Noo";
-import { useLocale, useTranslations } from "next-intl";
+import { PageModal } from "@/components/PageModal";
+import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import { Button, SelectField, TextField } from "@noo/ui";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify/unstyled";
+import { updateBirthdate, UpdateBirthdateState } from "../actions";
 
 type Props = {
   user: {
@@ -17,6 +18,7 @@ type Props = {
     firstName: string;
     lastName: string | null;
     birthdate: Date | null;
+    picture: string | null;
   };
 };
 
@@ -48,87 +50,90 @@ export function Form({ user }: Props) {
     if (state.data?.success) {
       // Redirect to the profile page
       toast.success(t("birthdate.updateSuccess"));
-      redirect(`/?uid=${user.id}`);
+      redirect(`/profile?uid=${user.id}`);
     }
   }, [state.data, t, user.id]);
 
   return (
-    <div className="max-w-xl w-full p-4 mx-auto">
-      <PageModal footer={false}>
-        <div className="text-lg mx-4 mb-2 flex items-center">
-          <Link href={`/profile?uid=${user.id}`} aria-label={t("back")}>
-            <ArrowLeftIcon className="size-6 inline-block me-2" />
-          </Link>
-          <h1>
-            {t.rich("header", {
-              noo: () => <Noo />,
-            })}
-          </h1>
-        </div>
-        <section>
-          <PageModal.Modal className="!block">
-            <h1 className="text-2xl mb-4">{t("birthdate.title")}</h1>
-
-            <p className="mb-4 text-sm">
-              {t.rich("birthdate.description", {
+    <ProfileLayout user={user}>
+      <div className="max-w-xl w-full p-4 mx-auto">
+        <PageModal footer={false}>
+          <div className="text-lg mx-4 mb-2 flex items-center">
+            <Link href={`/profile?uid=${user.id}`} aria-label={t("back")}>
+              <ArrowLeftIcon className="size-6 inline-block me-2" />
+            </Link>
+            <h1>
+              {t.rich("header", {
                 noo: () => <Noo />,
               })}
-            </p>
+            </h1>
+          </div>
+          <section>
+            <PageModal.Modal className="!block">
+              <h1 className="text-2xl mb-4">{t("birthdate.title")}</h1>
 
-            <form action={action} className="space-y-8">
-              <div className="flex gap-3">
-                <TextField
-                  label={t("birthdate.day")}
-                  name="day"
-                  defaultValue={state.input.day}
-                  autoFocus
-                  size={3}
-                  maxLength={2}
-                  error={
-                    state.error?.day && t(`birthdate.errors.${state.error.day}`)
-                  }
-                />
-                <SelectField
-                  label={t("birthdate.month")}
-                  name="month"
-                  defaultValue={state.input.month}
-                  className="flex-3"
-                  error={
-                    state.error?.month &&
-                    t(`birthdate.errors.${state.error.month}`)
-                  }
-                >
-                  {months.map((month, index) => (
-                    <option key={index} value={index + 1}>
-                      {month}
-                    </option>
-                  ))}
-                </SelectField>
-                <TextField
-                  label={t("birthdate.year")}
-                  name="year"
-                  defaultValue={state.input.year}
-                  size={5}
-                  maxLength={4}
-                  error={
-                    state.error?.year &&
-                    t(`birthdate.errors.${state.error.year}`)
-                  }
-                />
-              </div>
+              <p className="mb-4 text-sm">
+                {t.rich("birthdate.description", {
+                  noo: () => <Noo />,
+                })}
+              </p>
 
-              <div className="flex gap-4 justify-end items-center">
-                <Link className="link p-2.5" href={`/?uid=${user.id}`}>
-                  {commonT("cancel")}
-                </Link>
-                <Button type="submit" pending={isPending}>
-                  {commonT("save")}
-                </Button>
-              </div>
-            </form>
-          </PageModal.Modal>
-        </section>
-      </PageModal>
-    </div>
+              <form action={action} className="space-y-8">
+                <div className="flex gap-3">
+                  <TextField
+                    label={t("birthdate.day")}
+                    name="day"
+                    defaultValue={state.input.day}
+                    autoFocus
+                    size={3}
+                    maxLength={2}
+                    error={
+                      state.error?.day &&
+                      t(`birthdate.errors.${state.error.day}`)
+                    }
+                  />
+                  <SelectField
+                    label={t("birthdate.month")}
+                    name="month"
+                    defaultValue={state.input.month}
+                    className="flex-3"
+                    error={
+                      state.error?.month &&
+                      t(`birthdate.errors.${state.error.month}`)
+                    }
+                  >
+                    {months.map((month, index) => (
+                      <option key={index} value={index + 1}>
+                        {month}
+                      </option>
+                    ))}
+                  </SelectField>
+                  <TextField
+                    label={t("birthdate.year")}
+                    name="year"
+                    defaultValue={state.input.year}
+                    size={5}
+                    maxLength={4}
+                    error={
+                      state.error?.year &&
+                      t(`birthdate.errors.${state.error.year}`)
+                    }
+                  />
+                </div>
+
+                <div className="flex gap-4 justify-end items-center">
+                  <Link className="link p-2.5" href={`/?uid=${user.id}`}>
+                    {commonT("cancel")}
+                  </Link>
+                  <Button type="submit" pending={isPending}>
+                    {commonT("save")}
+                  </Button>
+                </div>
+              </form>
+            </PageModal.Modal>
+          </section>
+        </PageModal>
+      </div>
+    </ProfileLayout>
   );
 }

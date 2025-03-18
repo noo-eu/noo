@@ -51,6 +51,7 @@
       "updateNotice": "Tämä päivitys koskee kaikkia <noo></noo>:n palveluita. Voit olla edelleen velvoitettu vaihtama nimesi erikseen muihin sovelluksiin.",
       "updateSuccess": "Nimesi on muutettu"
     },
+    "pageTitle": "Tili",
     "picture_dialog": {
       "camera": {
         "capture": "Ota kuva",

@@ -1,6 +1,6 @@
 import { SessionsService } from "@/lib/SessionsService";
-import { Form } from "./Form";
 import { uuidToHumanId } from "@/utils";
+import { Form } from "./Form";
 
 export default async function ProfileGenderPage({
   searchParams,
@@ -21,6 +21,7 @@ export default async function ProfileGenderPage({
     gender: dbUser.gender,
     genderCustom: dbUser.genderCustom,
     pronouns: dbUser.pronouns,
+    picture: dbUser.picture,
   };
 
   return <Form user={user} />;

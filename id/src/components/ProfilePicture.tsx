@@ -1,6 +1,6 @@
 import Image from "@/components/Image";
 
-type ProfilePictureProps = {
+export type ProfilePictureProps = {
   user: {
     picture: string | null;
     firstName: string;

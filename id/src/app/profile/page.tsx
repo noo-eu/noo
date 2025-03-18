@@ -1,7 +1,7 @@
-import ProfilePage from "./ProfileHomePage";
 import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
 import { redirect } from "next/navigation";
+import ProfilePage from "./ProfileHomePage";
 
 export default async function Home({
   searchParams,

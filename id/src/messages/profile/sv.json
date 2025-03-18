@@ -51,6 +51,7 @@
       "updateNotice": "Denna uppdatering gäller alla <noo></noo>-tjänster. Du kanske fortfarande behöver uppdatera ditt namn separat för andra appar.",
       "updateSuccess": "Ditt namn har ändrats"
     },
+    "pageTitle": "Konto",
     "picture_dialog": {
       "camera": {
         "capture": "Ta foto",

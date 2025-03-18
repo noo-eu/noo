@@ -2,6 +2,7 @@
 
 import { Noo } from "@/components/Noo";
 import { PageModal } from "@/components/PageModal";
+import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { Button, PasswordField } from "@noo/ui";
 import { zxcvbnAsync, zxcvbnOptions } from "@zxcvbn-ts/core";
@@ -78,7 +79,7 @@ export function Form({ user }: Props) {
     if (state.data?.success) {
       // Redirect to the profile page
       toast.success(t("password.updateSuccess"));
-      redirect(`/?uid=${user.id}`);
+      redirect(`/security?uid=${user.id}`);
     }
   }, [state.data, t, user.id]);
 
@@ -92,86 +93,88 @@ export function Form({ user }: Props) {
   }, [password]);
 
   return (
-    <div className="max-w-xl w-full p-4 mx-auto">
-      <PageModal footer={false}>
-        <div className="text-lg mx-4 mb-2 flex items-center">
-          <Link href={`/security?uid=${user.id}`} aria-label={t("back")}>
-            <ArrowLeftIcon className="size-6 inline-block me-2" />
-          </Link>
-          <h1>
-            {t.rich("header", {
-              noo: () => <Noo />,
-            })}
-          </h1>
-        </div>
-        <section>
-          <PageModal.Modal className="!block">
-            <h1 className="text-2xl mb-4">{t("password.title")}</h1>
+    <ProfileLayout user={user}>
+      <div className="max-w-xl w-full p-4 mx-auto">
+        <PageModal footer={false}>
+          <div className="text-lg mx-4 mb-2 flex items-center">
+            <Link href={`/security?uid=${user.id}`} aria-label={t("back")}>
+              <ArrowLeftIcon className="size-6 inline-block me-2" />
+            </Link>
+            <h1>
+              {t.rich("header", {
+                noo: () => <Noo />,
+              })}
+            </h1>
+          </div>
+          <section>
+            <PageModal.Modal className="!block">
+              <h1 className="text-2xl mb-4">{t("password.title")}</h1>
 
-            {user.passwordBreaches !== null && user.passwordBreaches > 0 && (
-              <p className="mb-4 text-sm text-amber-600 border border-amber-600 p-3 rounded-md">
-                {t.rich("password.breaches", {
-                  count: format.number(user.passwordBreaches),
-                  otp: user.hasOtp,
-                  guide: (children) => (
-                    <Link className="link" href={`https://help.noo.eu/`}>
-                      {children}
-                    </Link>
-                  ),
-                })}
-              </p>
-            )}
+              {user.passwordBreaches !== null && user.passwordBreaches > 0 && (
+                <p className="mb-4 text-sm text-amber-600 border border-amber-600 p-3 rounded-md">
+                  {t.rich("password.breaches", {
+                    count: format.number(user.passwordBreaches),
+                    otp: user.hasOtp,
+                    guide: (children) => (
+                      <Link className="link" href={`https://help.noo.eu/`}>
+                        {children}
+                      </Link>
+                    ),
+                  })}
+                </p>
+              )}
 
-            <p className="mb-4 text-sm">{t("password.description1")}</p>
+              <p className="mb-4 text-sm">{t("password.description1")}</p>
 
-            <p className="mb-4 text-sm">{t("password.description2")}</p>
+              <p className="mb-4 text-sm">{t("password.description2")}</p>
 
-            <form action={action}>
-              <PasswordField
-                label={t("password.label")}
-                name="new-password"
-                defaultValue={state.input["new-password"]}
-                error={
-                  state.error?.["new-password"] &&
-                  t(`password.errors.${state.error["new-password"]}`)
-                }
-                onChange={(e) => setPassword(e.target.value)}
-                autoFocus
-                autoComplete="new-password"
-                min={10}
-              />
+              <form action={action}>
+                <PasswordField
+                  label={t("password.label")}
+                  name="new-password"
+                  defaultValue={state.input["new-password"]}
+                  error={
+                    state.error?.["new-password"] &&
+                    t(`password.errors.${state.error["new-password"]}`)
+                  }
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoFocus
+                  autoComplete="new-password"
+                  min={10}
+                />
 
-              <div className="text-sm mb-8">
-                <div className="mb-4">
-                  <PasswordRater password={password} strength={strength} />
+                <div className="text-sm mb-8">
+                  <div className="mb-4">
+                    <PasswordRater password={password} strength={strength} />
+                  </div>
+
+                  {t("password.updateSuggestion")}
                 </div>
 
-                {t("password.updateSuggestion")}
-              </div>
+                <PasswordField
+                  label={t("password.confirmLabel")}
+                  name="new-password-confirmation"
+                  error={
+                    state.error?.["new-password-confirmation"] &&
+                    t(
+                      `password.errors.${state.error["new-password-confirmation"]}`,
+                    )
+                  }
+                  autoComplete="new-password"
+                />
 
-              <PasswordField
-                label={t("password.confirmLabel")}
-                name="new-password-confirmation"
-                error={
-                  state.error?.["new-password-confirmation"] &&
-                  t(
-                    `password.errors.${state.error["new-password-confirmation"]}`,
-                  )
-                }
-                autoComplete="new-password"
-              />
+                <p className="text-sm mt-4">{t("password.updateNotice")}</p>
 
-              <p className="text-sm mt-4">{t("password.updateNotice")}</p>
-
-              <div className="mt-8 flex gap-4 justify-end items-center">
-                <Button type="submit" pending={isPending}>
-                  {commonT("save")}
-                </Button>
-              </div>
-            </form>
-          </PageModal.Modal>
-        </section>
-      </PageModal>
-    </div>
+                <div className="mt-8 flex gap-4 justify-end items-center">
+                  <Button type="submit" pending={isPending}>
+                    {commonT("save")}
+                  </Button>
+                </div>
+              </form>
+            </PageModal.Modal>
+          </section>
+        </PageModal>
+      </div>
+    </ProfileLayout>
   );
 }

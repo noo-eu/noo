@@ -15,7 +15,7 @@
       "label": "Nuova password",
       "score": {
         "acceptable": "accettabile",
-        "breached": "è in un attacco informatico. Prova con un'altra?",
+        "breached": "è stata trovata in un attacco informatico. Prova con un'altra?",
         "prefix": "Sicurezza della password:",
         "short": "troppo corta",
         "strong": "forte",

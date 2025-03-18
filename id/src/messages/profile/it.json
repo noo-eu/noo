@@ -51,6 +51,7 @@
       "updateNotice": "Questa modifica si applica a tutti i <noo></noo> servizi. Potresti comunque dover aggiornare separatamente il tuo nome nelle altre app.",
       "updateSuccess": "Il tuo nome è stato modificato con successo"
     },
+    "pageTitle": "Account",
     "picture_dialog": {
       "camera": {
         "capture": "Scatta",

@@ -2,6 +2,7 @@
 
 import { Noo } from "@/components/Noo";
 import { ProfilePageProps } from "@/components/Profile";
+import ProfileLayout from "@/components/Profile/ProfileLayout";
 import {
   ArrowLeftEndOnRectangleIcon,
   CircleStackIcon,
@@ -26,8 +27,8 @@ export default function SecurityHomePage({
   const t = useTranslations("security");
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-4xl font-medium mb-16">
+    <ProfileLayout user={user}>
+      <h1 className="text-4xl font-medium mt-12 mb-16">
         {t.rich("title", {
           noo: () => <Noo />,
         })}
@@ -118,6 +119,6 @@ export default function SecurityHomePage({
           </div>
         </Link>
       </div>
-    </div>
+    </ProfileLayout>
   );
 }
