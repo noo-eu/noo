@@ -1,8 +1,8 @@
 "use client";
 
 import { Noo } from "@/components/Noo";
-import { ProfilePageProps } from "@/components/Profile";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
+import { useAuth } from "@/lib/authContext";
 import {
   ArrowLeftEndOnRectangleIcon,
   CircleStackIcon,
@@ -15,20 +15,16 @@ import { useFormatter, useTranslations } from "next-intl";
 import Link from "next/link";
 
 type SecurityHomePageProps = {
-  user: ProfilePageProps["user"] & {
-    passwordBreaches: number | null;
-    passwordChangedAt: Date;
-  };
   activeSessions: number;
 };
 
 export default function SecurityHomePage({
-  user,
   activeSessions,
 }: SecurityHomePageProps) {
   const format = useFormatter();
 
   const t = useTranslations("security");
+  const user = useAuth();
 
   return (
     <ProfileLayout user={user}>

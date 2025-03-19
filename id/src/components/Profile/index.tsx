@@ -1,6 +1,7 @@
 "use client";
 
 import { User } from "@/db/users";
+import { useAuth } from "@/lib/authContext";
 import {
   Cog6ToothIcon,
   LockClosedIcon,
@@ -30,9 +31,11 @@ const PictureDialog = dynamic(() => import("./PictureDialog"), {
   ssr: false,
 });
 
-export function ProfilePage({ user }: ProfilePageProps) {
+export function ProfilePage() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("profile.home");
+
+  const user = useAuth();
 
   return (
     <ProfileLayout user={user}>

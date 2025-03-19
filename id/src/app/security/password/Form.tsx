@@ -3,6 +3,7 @@
 import { Noo } from "@/components/Noo";
 import { PageModal } from "@/components/PageModal";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
+import { useAuth } from "@/lib/authContext";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { Button, PasswordField } from "@noo/ui";
 import { zxcvbnAsync, zxcvbnOptions } from "@zxcvbn-ts/core";
@@ -16,23 +17,9 @@ import { toast } from "react-toastify/unstyled";
 import { updatePassword } from "../actions";
 import { PasswordRater } from "./PasswordRater";
 
-type Props = {
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string | null;
-    passwordChangedAt: Date | null;
-    passwordBreaches: number | null;
-    username: string;
-    normalizedUsername: string;
-    tenantDomain?: string;
-    birthdate?: string;
-    hasOtp: boolean;
-    picture: string | null;
-  };
-};
+export function Form() {
+  const user = useAuth();
 
-export function Form({ user }: Props) {
   useEffect(() => {
     const options = {
       translations: zxcvbnEnPackage.translations,
@@ -50,7 +37,6 @@ export function Form({ user }: Props) {
           user.normalizedUsername,
           user.username,
           user.tenantDomain ?? "",
-          user.birthdate ?? "",
         ],
       },
       useLevenshteinDistance: true,
@@ -61,7 +47,6 @@ export function Form({ user }: Props) {
     user.normalizedUsername,
     user.username,
     user.tenantDomain,
-    user.birthdate,
     user.firstName,
     user.lastName,
   ]);

@@ -1,7 +1,9 @@
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
+import { User } from "@/db/users";
 import { SessionsService } from "@/lib/SessionsService";
+import { withAuth } from "@/lib/withAuth";
 import { uuidToHumanId } from "@/utils";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
@@ -17,23 +19,8 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ uid?: string }>;
-}) {
-  const userId = (await searchParams).uid!;
-  const dbUser = await SessionsService.user(userId);
-  if (!dbUser) {
-    redirect("/signin");
-  }
-
-  const user = {
-    firstName: dbUser.firstName,
-    picture: dbUser.picture,
-  };
-
-  const allSessions = await Sessions.findManyBy(eq(sessions.userId, dbUser.id));
+async function SecuritySessionsPage({ user }: { user: User }) {
+  const allSessions = await Sessions.findManyBy(eq(sessions.userId, user.id));
   const safeSessions = allSessions.map((session) => {
     return {
       id: uuidToHumanId(session.id, "sess"),
@@ -43,7 +30,7 @@ export default async function Home({
     };
   });
 
-  const currentSessionId = (await SessionsService.sessionFor(userId))?.id;
+  const currentSessionId = (await SessionsService.sessionFor(user.id))?.id;
   if (!currentSessionId) {
     redirect("/signin");
   }
@@ -53,8 +40,10 @@ export default async function Home({
       <SessionsPage
         sessions={safeSessions}
         currentSessionId={currentSessionId}
-        userId={userId}
+        userId={user.id}
       />
     </ProfileLayout>
   );
 }
+
+export default withAuth(SecuritySessionsPage);
