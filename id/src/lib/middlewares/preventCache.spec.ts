@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, mock, test } from "bun:test";
+import { beforeEach, describe, expect, vi, test } from "vitest";
 import { Middleware } from ".";
 import { HttpRequest } from "../http/request";
 import { preventCache } from "./preventCache";
@@ -22,7 +22,7 @@ describe("preventCache middleware", () => {
     });
 
     // Create mock next middleware function
-    const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
+    const mockNext: Middleware = vi.fn(() => Promise.resolve(mockResponse));
 
     // Call the middleware
     const result = await preventCache(mockRequest, mockNext);
@@ -65,7 +65,7 @@ describe("preventCache middleware", () => {
     });
 
     // Create mock next middleware function
-    const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
+    const mockNext: Middleware = vi.fn(() => Promise.resolve(mockResponse));
 
     // Call the middleware
     const result = await preventCache(mockRequest, mockNext);
@@ -90,7 +90,7 @@ describe("preventCache middleware", () => {
     });
 
     // Create mock next middleware function
-    const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
+    const mockNext: Middleware = vi.fn(() => Promise.resolve(mockResponse));
 
     // Call the middleware
     const result = await preventCache(mockRequest, mockNext);

@@ -1,6 +1,6 @@
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import { randomSalt, uuidToHumanId } from "@/utils";
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { HttpRequest } from "../http/request";
 import { tokenEndpoint } from "./token";
 

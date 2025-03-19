@@ -1,6 +1,6 @@
 import db from "@/db";
 import { sessions } from "@/db/schema";
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { and, eq } from "drizzle-orm";
 import { SessionsService } from "./SessionsService";
 

@@ -19,18 +19,19 @@ import {
   ResponseMode,
   ResponseType,
 } from "./types";
+import { err, ok, Result } from "neverthrow";
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   const issuer = `${request.baseUrl}/oidc${tenant ? "/" + tenant.domain : ""}`;
   const rawParams = await request.params;
 
   const preflightResult = await preflightCheck(issuer, rawParams, tenant);
-  if (preflightResult instanceof Response) {
-    return preflightResult as unknown as Response;
+  if (preflightResult.isErr()) {
+    return fatalError(request.baseUrl, preflightResult.error);
   }
 
-  const client = preflightResult.client;
-  const params = preflightResult.params;
+  const client = preflightResult.value.client;
+  const params = preflightResult.value.params;
   params.tenantId = tenant?.id;
 
   if (!params.scopes.includes("openid")) {
@@ -159,12 +160,12 @@ export async function returnToClient(
   } else if (request.response_mode === "form_post") {
     return await buildFormPostResponse(request.redirect_uri, data);
   } else {
-    return fatalError("bad_response_mode");
+    throw new Error("Unsupported response mode");
   }
 }
 
-function fatalError(error: string) {
-  return Response.redirect(`/oidc/fatal?error=${error}`, 303);
+function fatalError(baseUrl: string, error: string) {
+  return Response.redirect(`${baseUrl}/oidc/fatal?error=${error}`, 303);
 }
 
 type PreflightResult = {
@@ -180,24 +181,24 @@ async function preflightCheck(
   issuer: string,
   params: Record<string, string | undefined>,
   tenant?: typeof schema.tenants.$inferSelect,
-): Promise<PreflightResult | Response> {
+): Promise<Result<PreflightResult, string>> {
   // client_id and response_type must always be present
   if (!params.client_id) {
-    return fatalError("missing_client_id");
+    return err("missing_client_id");
   }
 
   if (!params.response_type) {
-    return fatalError("missing_response_type");
+    return err("missing_response_type");
   }
 
   if (
     !RESPONSE_TYPES_SUPPORTED.includes(params.response_type as ResponseType)
   ) {
-    return fatalError("unsupported_response_type");
+    return err("unsupported_response_type");
   }
 
   if (params.response_type.includes("id_token") && !params.nonce) {
-    return fatalError("implicit_missing_nonce");
+    return err("implicit_missing_nonce");
   }
 
   // We now need to load the client from the database, as the
@@ -205,24 +206,24 @@ async function preflightCheck(
 
   const clientId = humanIdToUuid(params.client_id, "oidc");
   if (!clientId) {
-    return fatalError("invalid_client_id");
+    return err("invalid_client_id");
   }
 
   const client = await OidcClients.findWithTenant(clientId, tenant?.id);
   if (!client) {
-    return fatalError("invalid_client_id");
+    return err("invalid_client_id");
   }
 
   // redirect_uri is allowed to be missing and resolved through request object or URI
 
   if (params.request && params.request_uri) {
     // Cannot have both request object and request_uri
-    return fatalError("request_and_request_uri");
+    return err("request_and_request_uri");
   }
 
   if (params.request_uri) {
     // TODO: fetch request_uri, place it in request.request
-    return fatalError("request_uri_not_supported");
+    return err("request_uri_not_supported");
   }
 
   if (params.request) {
@@ -231,16 +232,16 @@ async function preflightCheck(
     //   2. check that client_id and response_type match with the request
     //   3. merge request object parameters with the current request, object
     //      parameters take precedence
-    return fatalError("request_not_supported");
+    return err("request_not_supported");
   }
 
   // By this point all parameters have been loaded. redirect_uri is now required
   if (!params.redirect_uri) {
-    return fatalError("missing_redirect_uri");
+    return err("missing_redirect_uri");
   }
 
   if (!client.redirectUris.includes(params.redirect_uri)) {
-    return fatalError("invalid_redirect_uri");
+    return err("invalid_redirect_uri");
   }
 
   // By this point we may be able to send errors back to the client instead of
@@ -249,11 +250,11 @@ async function preflightCheck(
   // error.
   const response_mode = determineResponseMode(params);
   if (!response_mode) {
-    return fatalError("bad_response_mode");
+    return err("bad_response_mode");
   }
 
   params.response_mode = response_mode;
-  return {
+  return ok({
     client,
     params: {
       issuer,
@@ -273,7 +274,7 @@ async function preflightCheck(
       code_challenge: params.code_challenge,
       code_challenge_method: params.code_challenge_method,
     },
-  };
+  });
 }
 
 function determineResponseMode(request: Record<string, string | undefined>) {

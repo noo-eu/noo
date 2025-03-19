@@ -1,14 +1,12 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, mock, test } from "bun:test";
-import { CloseDialog } from "./CloseDialog";
+// @vitest-environment happy-dom
 
-afterEach(() => {
-  cleanup();
-});
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, vi, test } from "vitest";
+import { CloseDialog } from "./CloseDialog";
 
 describe("CloseDialog", () => {
   test("calls onClick when clicked", () => {
-    const onClick = mock();
+    const onClick = vi.fn();
     render(<CloseDialog onClick={onClick} />);
     fireEvent.click(screen.getByRole("button"));
     expect(onClick).toHaveBeenCalled();

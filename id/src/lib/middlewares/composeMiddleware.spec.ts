@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, mock, test } from "bun:test";
+import { beforeEach, describe, expect, vi, test } from "vitest";
 import { composeMiddleware, Middleware } from ".";
 import { HttpRequest } from "../http/request";
 
@@ -23,7 +23,7 @@ describe("composeMiddleware", () => {
 
   test("calls a single middleware correctly", async () => {
     // Create mock middleware that returns a 200 response
-    const middleware: Middleware = mock(() => {
+    const middleware: Middleware = vi.fn(() => {
       return Promise.resolve(new Response("Success", { status: 200 }));
     });
 
@@ -47,17 +47,17 @@ describe("composeMiddleware", () => {
     const callOrder: number[] = [];
 
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async (req, next) => {
+    const middleware1: Middleware = vi.fn(async (req, next) => {
       callOrder.push(1);
       return next ? next(req) : new Response(null, { status: 404 });
     });
 
-    const middleware2: Middleware = mock(async (req, next) => {
+    const middleware2: Middleware = vi.fn(async (req, next) => {
       callOrder.push(2);
       return next ? next(req) : new Response(null, { status: 404 });
     });
 
-    const middleware3: Middleware = mock(async () => {
+    const middleware3: Middleware = vi.fn(async () => {
       callOrder.push(3);
       return new Response("Final handler", { status: 200 });
     });
@@ -84,11 +84,11 @@ describe("composeMiddleware", () => {
 
   test("middleware can short-circuit the chain", async () => {
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async () => {
+    const middleware1: Middleware = vi.fn(async () => {
       return new Response("Short circuit", { status: 403 });
     });
 
-    const middleware2: Middleware = mock(async () => {
+    const middleware2: Middleware = vi.fn(async () => {
       return new Response("Should not reach here", { status: 200 });
     });
 
@@ -115,11 +115,11 @@ describe("composeMiddleware", () => {
     const modifiedRequest = { modified: true } as unknown as HttpRequest;
 
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async (_, next) => {
+    const middleware1: Middleware = vi.fn(async (_, next) => {
       return next ? next(modifiedRequest) : new Response(null, { status: 404 });
     });
 
-    const middleware2: Middleware = mock(async (req) => {
+    const middleware2: Middleware = vi.fn(async (req) => {
       return new Response(
         JSON.stringify({ receivedModified: req === modifiedRequest }),
       );
@@ -145,7 +145,7 @@ describe("composeMiddleware", () => {
 
   test("middleware chain handles errors correctly", async () => {
     // Create mock middleware functions
-    const middleware1: Middleware = mock(async (req, next) => {
+    const middleware1: Middleware = vi.fn(async (req, next) => {
       try {
         return next ? await next(req) : new Response(null, { status: 404 });
       } catch (error) {
@@ -155,7 +155,7 @@ describe("composeMiddleware", () => {
       }
     });
 
-    const middleware2: Middleware = mock(async () => {
+    const middleware2: Middleware = vi.fn(async () => {
       throw new Error("Test error");
     });
 

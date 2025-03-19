@@ -1,11 +1,16 @@
-import { describe, expect, it, mock } from "bun:test";
+import { describe, expect, it, vi } from "vitest";
 import { validateFileUpload } from "./fileValidations";
+import { afterEach } from "node:test";
 
 describe("validateFileUpload", () => {
+  afterEach(() => {
+    vi.resetModules();
+  });
+
   // Mock File implementation since we're in Node environment
   function fileMock(content: Uint8Array): File {
     return {
-      arrayBuffer: mock(async () => content.buffer),
+      arrayBuffer: vi.fn(async () => content.buffer),
       size: content.length,
     } as unknown as File;
   }
@@ -25,7 +30,7 @@ describe("validateFileUpload", () => {
   };
 
   // Mock fileTypeFromBuffer to return correct types based on content
-  mock.module("file-type", () => ({
+  vi.mock("file-type", () => ({
     fileTypeFromBuffer: async (buffer: Buffer) => {
       const array = new Uint8Array(buffer);
 

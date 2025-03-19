@@ -1,7 +1,7 @@
 import OidcClients from "@/db/oidc_clients";
 import { HttpRequest } from "@/lib/http/request";
 import { uuidToHumanId } from "@/utils";
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import * as jose from "jose";
 import {
   authenticateClientSecretBasic,

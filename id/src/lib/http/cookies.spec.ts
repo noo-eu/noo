@@ -1,15 +1,11 @@
-import { afterEach, describe, expect, mock, test } from "bun:test";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { getCookies } from "./cookies";
 
 describe("getCookies", () => {
   const mockHeaders = (ret: string | null) =>
     ({
-      get: mock(() => ret),
+      get: vi.fn(() => ret),
     }) as unknown as Headers;
-
-  afterEach(() => {
-    mock.restore();
-  });
 
   test("returns empty object when Cookie header is not present", () => {
     const headers = mockHeaders(null);

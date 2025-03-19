@@ -1,6 +1,6 @@
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import { uuidToHumanId } from "@/utils";
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { HttpRequest } from "../http/request";
 import { userinfoEndpoint } from "./userinfo";
 

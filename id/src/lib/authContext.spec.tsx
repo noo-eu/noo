@@ -1,6 +1,8 @@
+// @vitest-environment happy-dom
+
 import { renderHook } from "@testing-library/react";
 import { useAuth, AuthProvider } from "@/lib/authContext";
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { ClientUser } from "./types/ClientUser";
 
 describe("useAuth", () => {

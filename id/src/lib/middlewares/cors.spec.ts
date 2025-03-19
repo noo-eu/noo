@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, mock, test } from "bun:test";
+import { beforeEach, describe, expect, vi, test } from "vitest";
 import { Middleware } from ".";
 import { HttpRequest } from "../http/request";
 import { cors } from "./cors";
@@ -46,7 +46,7 @@ describe("cors middleware", () => {
 
   test("adds CORS headers to response from next middleware for allowed method", async () => {
     // Create mock next middleware
-    const mockNext: Middleware = mock(() =>
+    const mockNext: Middleware = vi.fn(() =>
       Promise.resolve(new Response("Test response")),
     );
 
@@ -118,7 +118,7 @@ describe("cors middleware", () => {
     mockRequest.method = "DELETE";
 
     // Create mock next middleware
-    const mockNext: Middleware = mock(() =>
+    const mockNext: Middleware = vi.fn(() =>
       Promise.resolve(new Response("Test response")),
     );
 
@@ -145,7 +145,7 @@ describe("cors middleware", () => {
     const mockResponse = new Response("Test response", { headers });
 
     // Create mock next middleware
-    const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
+    const mockNext: Middleware = vi.fn(() => Promise.resolve(mockResponse));
 
     // Set method and origin
     // @ts-expect-error method is readonly :)
@@ -213,7 +213,7 @@ describe("cors middleware", () => {
     mockRequest.method = "DELETE";
 
     // Create mock next middleware
-    const mockNext: Middleware = mock(() =>
+    const mockNext: Middleware = vi.fn(() =>
       Promise.resolve(new Response("Test response")),
     );
 
@@ -240,7 +240,7 @@ describe("cors middleware", () => {
     const mockResponse = new Response("Test response", { headers });
 
     // Create mock next middleware
-    const mockNext: Middleware = mock(() => Promise.resolve(mockResponse));
+    const mockNext: Middleware = vi.fn(() => Promise.resolve(mockResponse));
 
     // Set method and origin
     // @ts-expect-error method is readonly :)

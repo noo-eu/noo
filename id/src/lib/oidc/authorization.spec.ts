@@ -1,25 +1,19 @@
-import { beforeEach, describe, expect, mock, test } from "bun:test";
+import { beforeEach, describe, expect, vi, test } from "vitest";
 import { HttpRequest } from "../http/request";
 import { oidcAuthorization } from "./authorization";
+import { afterEach } from "node:test";
 
-mock.module("next/headers", () => ({
-  cookies: () =>
-    Promise.resolve({
-      get: () => "session",
-    }),
-}));
+let mockSessions: {
+  age: number;
+  id: string;
+  userId: string;
+  tenantId?: string;
+}[] = [];
 
-function createMockSessionService(
-  activeSessions: {
-    age: number;
-    id: string;
-    userId: string;
-    tenantId?: string;
-  }[],
-) {
+function createMockSessionService() {
   return class MockSessionService {
     activeSessions(maxAge?: number) {
-      return activeSessions.filter((session) => {
+      return mockSessions.filter((session) => {
         return maxAge === undefined || session.age < maxAge;
       });
     }
@@ -50,19 +44,22 @@ const makeRequest = (data: Record<string, string> = {}) => {
   } as unknown as Request);
 };
 
-describe("Authorization endpoint", () => {
-  beforeEach(() => {
-    mock.module("@/lib/SessionsService", () => ({
-      SessionsService: createMockSessionService([
-        {
-          id: "session1",
-          userId: "00000000-0000-0000-0000-000000000001",
-          age: 10,
-        },
-      ]),
-    }));
-  });
+beforeEach(() => {
+  mockSessions = [
+    {
+      id: "session1",
+      userId: "00000000-0000-0000-0000-000000000001",
+      age: 10,
+    },
+  ];
+});
 
+vi.mock("@/lib/SessionsService", () => ({
+  SessionsService: createMockSessionService(),
+  getSessionCookie: () => Promise.resolve("session"),
+}));
+
+describe("Authorization endpoint", () => {
   describe("when there is only one signed-in user", () => {
     describe("when the user has not yet consented to the client", () => {
       test("should return the consent page", async () => {
@@ -70,7 +67,7 @@ describe("Authorization endpoint", () => {
         const result = await oidcAuthorization(request);
 
         expect(result.status).toBe(303);
-        expect(result.headers.get("Location")).toInclude("/oidc/consent");
+        expect(result.headers.get("Location")).toContain("/oidc/consent");
       });
     });
 
@@ -80,7 +77,7 @@ describe("Authorization endpoint", () => {
         const result = await oidcAuthorization(request);
 
         expect(result.status).toBe(303);
-        expect(result.headers.get("Location")).toInclude("/oidc/continue");
+        expect(result.headers.get("Location")).toContain("/oidc/continue");
       });
     });
 
@@ -90,27 +87,25 @@ describe("Authorization endpoint", () => {
         const result = await oidcAuthorization(request);
 
         expect(result.status).toBe(303);
-        expect(result.headers.get("Location")).toInclude("/signin");
+        expect(result.headers.get("Location")).toContain("/signin");
       });
     });
   });
 
   describe("when there is more than one active session", () => {
     beforeEach(() => {
-      mock.module("@/lib/SessionsService", () => ({
-        SessionsService: createMockSessionService([
-          {
-            id: "session1",
-            userId: "00000000-0000-0000-0000-000000000001",
-            age: 10,
-          },
-          {
-            id: "session2",
-            userId: "00000000-0000-0000-0000-000000000002",
-            age: 15,
-          },
-        ]),
-      }));
+      mockSessions = [
+        {
+          id: "session1",
+          userId: "00000000-0000-0000-0000-000000000001",
+          age: 10,
+        },
+        {
+          id: "session2",
+          userId: "00000000-0000-0000-0000-000000000002",
+          age: 15,
+        },
+      ];
     });
 
     test("it should return the session selection page", async () => {
@@ -118,7 +113,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude("/switch");
+      expect(result.headers.get("Location")).toContain("/switch");
     });
   });
 
@@ -128,7 +123,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "error=interaction_required",
       );
     });
@@ -140,7 +135,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude("/oidc/consent");
+      expect(result.headers.get("Location")).toContain("/oidc/consent");
     });
 
     test("OAuth2 requests have some restrictions", async () => {
@@ -152,7 +147,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude("error=invalid_request");
+      expect(result.headers.get("Location")).toContain("error=invalid_request");
     });
 
     test("requires client_id", async () => {
@@ -160,7 +155,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=missing_client_id",
       );
     });
@@ -170,7 +165,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=invalid_client_id",
       );
     });
@@ -180,7 +175,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=invalid_client_id",
       );
     });
@@ -190,7 +185,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=missing_response_type",
       );
     });
@@ -200,7 +195,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=unsupported_response_type",
       );
     });
@@ -210,7 +205,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=implicit_missing_nonce",
       );
     });
@@ -220,7 +215,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=request_and_request_uri",
       );
     });
@@ -230,7 +225,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=missing_redirect_uri",
       );
     });
@@ -242,7 +237,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=invalid_redirect_uri",
       );
     });
@@ -252,7 +247,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude(
+      expect(result.headers.get("Location")).toContain(
         "/fatal?error=bad_response_mode",
       );
     });
@@ -262,7 +257,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude("error=invalid_request");
+      expect(result.headers.get("Location")).toContain("error=invalid_request");
     });
 
     test("verifies that max_age is a 0+ integer", async () => {
@@ -270,7 +265,7 @@ describe("Authorization endpoint", () => {
       const result = await oidcAuthorization(request);
 
       expect(result.status).toBe(303);
-      expect(result.headers.get("Location")).toInclude("error=invalid_request");
+      expect(result.headers.get("Location")).toContain("error=invalid_request");
     });
   });
 });

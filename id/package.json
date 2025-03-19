@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "TEST=1 bun test src",
+    "test:unit": "TEST=1 bun vitest run src",
+    "test:unit:watch": "TEST=1 bun vitest src",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "db:migrate": "drizzle-kit migrate",
@@ -63,6 +64,7 @@
     "@types/react": "19.0.10",
     "@types/react-avatar-editor": "^13.0.4",
     "@types/react-dom": "19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
     "drizzle-kit": "^0.30.4",
     "drizzle-seed": "^0.3.1",
     "eslint": "^9",
@@ -71,7 +73,9 @@
     "postcss": "^8",
     "prettier": "^3.5.2",
     "tailwindcss": "^4.0.8",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

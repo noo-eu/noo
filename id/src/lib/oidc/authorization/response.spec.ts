@@ -1,18 +1,18 @@
 import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
-import { beforeEach, describe, expect, mock, test } from "bun:test";
+import { beforeEach, describe, expect, vi, test } from "vitest";
 import { AuthorizationRequest } from "../types";
 import { buildAuthorizationResponse } from "./response";
 
-mock.module("@/db/oidc_authorization_codes", () => ({
+vi.mock("@/db/oidc_authorization_codes", () => ({
   default: {
     create: () => Promise.resolve({ id: "test_code_123" }),
   },
 }));
 
-mock.module("@/db/oidc_access_tokens", () => ({
+vi.mock("@/db/oidc_access_tokens", () => ({
   default: {
-    create: mock(() =>
+    create: vi.fn(() =>
       Promise.resolve({
         id: "test-uuid-access-token",
         expiresAt: new Date(),
@@ -21,35 +21,35 @@ mock.module("@/db/oidc_access_tokens", () => ({
   },
 }));
 
-mock.module("@/lib/SessionsService", () => ({
-  getSessionCheckCookie: mock(() =>
+vi.mock("@/lib/SessionsService", () => ({
+  getSessionCheckCookie: vi.fn(() =>
     Promise.resolve("test-session-check-cookie"),
   ),
 }));
 
-mock.module("@/utils", () => ({
-  humanIdToUuid: mock((id) =>
+vi.mock("@/utils", () => ({
+  humanIdToUuid: vi.fn((id) =>
     id === "test-client-id" ? "00000000-0000-0000-0000-000000000000" : id,
   ),
-  uuidToHumanId: mock((id, prefix) => {
+  uuidToHumanId: vi.fn((id, prefix) => {
     if (id === "test-uuid-access-token" && prefix === "oidc_at")
       return "test-access-token";
     if (id === "test-client-uuid" && prefix === "oidc") return "test-client-id";
     return "mock-human-id";
   }),
-  randomSalt: mock(() => "random-salt"),
-  sha256: mock(() => ({ digest: () => "hashed-session-state" })),
+  randomSalt: vi.fn(() => "random-salt"),
+  sha256: vi.fn(() => ({ digest: () => "hashed-session-state" })),
 }));
 
-mock.module("../idToken", () => ({
-  createIdToken: mock(() => Promise.resolve("test-id-token")),
-  idTokenHash: mock((client, token) =>
+vi.mock("../idToken", () => ({
+  createIdToken: vi.fn(() => Promise.resolve("test-id-token")),
+  idTokenHash: vi.fn((client, token) =>
     token === "test_code_123" ? "test-c-hash" : "test-at-hash",
   ),
 }));
 
-mock.module("../userClaims", () => ({
-  requestedUserClaims: mock(() => ({ email: "test@example.com" })),
+vi.mock("../userClaims", () => ({
+  requestedUserClaims: vi.fn(() => ({ email: "test@example.com" })),
 }));
 
 describe("buildAuthorizationResponse", () => {
@@ -69,8 +69,7 @@ describe("buildAuthorizationResponse", () => {
   } as unknown as Session;
 
   beforeEach(() => {
-    // Reset all mocks before each test
-    mock.restore();
+    vi.restoreAllMocks();
   });
 
   test("throws error for unsupported response type", async () => {
@@ -83,7 +82,7 @@ describe("buildAuthorizationResponse", () => {
       nonce: "test-nonce",
     } as unknown as AuthorizationRequest;
 
-    expect(
+    await expect(
       buildAuthorizationResponse(mockClient, params, mockSession),
     ).rejects.toThrow("Unsupported or invalid response type");
   });

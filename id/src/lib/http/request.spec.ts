@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { HttpRequest } from "./request";
 
 describe("HttpRequest", () => {
@@ -30,7 +30,7 @@ describe("HttpRequest", () => {
   });
 
   afterEach(() => {
-    mock.restore();
+    vi.restoreAllMocks();
   });
 
   describe("basic properties", () => {
@@ -267,7 +267,7 @@ describe("HttpRequest", () => {
 
   describe("request body", () => {
     test("formData rejects for non-form requests", async () => {
-      expect(httpRequest.formData).rejects.toThrow(
+      await expect(httpRequest.formData).rejects.toThrow(
         "Request is not a form data",
       );
 
@@ -283,27 +283,29 @@ describe("HttpRequest", () => {
             return request.headers.get(name);
           },
         },
-        formData: mock(() => Promise.resolve(new FormData())),
+        formData: vi.fn(() => Promise.resolve(new FormData())),
       } as unknown as Request);
 
-      expect(formRequest.formData).resolves.toBeInstanceOf(FormData);
+      await expect(formRequest.formData).resolves.toBeInstanceOf(FormData);
     });
 
     test("json rejects for non-JSON requests", async () => {
       const getJsonRequest = new HttpRequest({
         ...request,
-        json: mock(() => Promise.resolve({ data: "test" })),
+        json: vi.fn(() => Promise.resolve({ data: "test" })),
       } as unknown as Request);
-      expect(getJsonRequest.json).rejects.toThrow("Request is not a JSON");
+      await expect(getJsonRequest.json).rejects.toThrow(
+        "Request is not a JSON",
+      );
 
       // Setup valid JSON POST request
       const postJsonRequest = new HttpRequest({
         ...request,
         method: "POST",
-        json: mock(() => Promise.resolve({ data: "test" })),
+        json: vi.fn(() => Promise.resolve({ data: "test" })),
       } as unknown as Request);
 
-      expect(postJsonRequest.json).resolves.toEqual({ data: "test" });
+      await expect(postJsonRequest.json).resolves.toEqual({ data: "test" });
     });
 
     test("formParams converts FormData to object", async () => {
@@ -322,11 +324,11 @@ describe("HttpRequest", () => {
             return request.headers.get(name);
           },
         },
-        formData: mock(() => Promise.resolve(mockFormData)),
+        formData: vi.fn(() => Promise.resolve(mockFormData)),
       } as unknown as Request);
 
       // Need to mock FormData.entries() in a way Jest can understand
-      const entriesMock = mock(() =>
+      const entriesMock = vi.fn(() =>
         [
           ["name", "test"],
           ["value", "123"],
@@ -337,7 +339,7 @@ describe("HttpRequest", () => {
         value: entriesMock,
       });
 
-      expect(formRequest.formParams).resolves.toEqual({
+      await expect(formRequest.formParams).resolves.toEqual({
         name: "test",
         value: "123",
       });
@@ -359,24 +361,24 @@ describe("HttpRequest", () => {
             return request.headers.get(name);
           },
         },
-        formData: mock(() => Promise.resolve(mockFormData)),
+        formData: vi.fn(() => Promise.resolve(mockFormData)),
       } as unknown as Request);
 
       // Mock FormData.entries()
-      const entriesMock = mock(() => [["name", "test"]][Symbol.iterator]());
+      const entriesMock = vi.fn(() => [["name", "test"]][Symbol.iterator]());
 
       Object.defineProperty(mockFormData, "entries", {
         value: entriesMock,
       });
 
-      expect(formRequest.params).resolves.toEqual({
+      await expect(formRequest.params).resolves.toEqual({
         query: "value",
         name: "test",
       });
     });
 
     test("params returns only query params for non-form requests", async () => {
-      expect(httpRequest.params).resolves.toEqual({
+      await expect(httpRequest.params).resolves.toEqual({
         query: "value",
       });
     });

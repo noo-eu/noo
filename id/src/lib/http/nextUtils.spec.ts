@@ -1,17 +1,20 @@
-import { describe, expect, mock, test } from "bun:test";
+// @vitest-environment happy-dom
+
+import { describe, expect, vi, test } from "vitest";
 import { getIpAddress, getUserAgent } from "./nextUtils";
+import { afterEach } from "node:test";
+
+let mockedHeaders: Record<string, string> = {};
+vi.mock("next/headers", () => ({
+  headers: () =>
+    Promise.resolve({
+      get: vi.fn((name: string) => mockedHeaders[name.toLowerCase()] ?? null),
+    }),
+}));
 
 describe("NextJS Utility Functions", () => {
   function mockHeaders(headers: Record<string, string>) {
-    const headersMock = {
-      headers: () =>
-        Promise.resolve({
-          get: mock((name: string) => headers[name.toLowerCase()] ?? null),
-        }),
-    };
-
-    // Mock the next/headers module
-    mock.module("next/headers", () => headersMock);
+    mockedHeaders = headers;
   }
 
   describe("getIpAddress", () => {
