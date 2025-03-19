@@ -50,7 +50,7 @@ export function ProfilePage({ user }: ProfilePageProps) {
           user={user}
         />
       </div>
-      <h1 className="text-5xl font-medium my-8">
+      <h1 className="text-5xl font-medium my-8 px-4 text-center">
         {t("title", {
           name: user.firstName,
         })}

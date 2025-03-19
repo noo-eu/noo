@@ -30,7 +30,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
 
   return (
     <ProfileLayout user={user}>
-      <h1 className="text-4xl font-medium mt-12 mb-16">
+      <h1 className="text-4xl font-medium mt-12 mb-16 px-4 text-center">
         {t.rich("title", {
           noo: () => <Noo />,
         })}
@@ -43,7 +43,9 @@ export default function ProfilePage({ user }: ProfilePageProps) {
         >
           <UserCircleIcon className="size-6" />
           <div>
-            <h2 className="text-lg font-medium">{t("summary.picture")}</h2>
+            <h2 className="text-lg font-medium text-left">
+              {t("summary.picture")}
+            </h2>
           </div>
           <div className="ms-auto border border-black/50 border-2 rounded-full p-0.5">
             <ProfilePicture user={user} width={72} className="w-18 text-2xl" />

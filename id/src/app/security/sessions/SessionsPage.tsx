@@ -103,7 +103,7 @@ function Session({
   const t = useTranslations("security");
 
   return (
-    <div className="pb-6 px-4 last:pb-0 flex flex-row">
+    <div className="pb-6 last:pb-0 flex flex-row">
       <div>
         {ua.browser && (
           <p>
