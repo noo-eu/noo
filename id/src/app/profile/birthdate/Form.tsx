@@ -11,23 +11,16 @@ import { redirect } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify/unstyled";
 import { updateBirthdate, UpdateBirthdateState } from "../actions";
-
-type Props = {
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string | null;
-    birthdate: Date | null;
-    picture: string | null;
-  };
-};
+import { useAuth } from "@/lib/authContext";
 
 function monthsForLocale(locale: string) {
   const format = new Intl.DateTimeFormat(locale, { month: "long" }).format;
   return [...Array(12).keys()].map((m) => format(new Date(Date.UTC(2021, m))));
 }
 
-export function Form({ user }: Props) {
+export function Form() {
+  const user = useAuth();
+
   const day = user.birthdate?.getDate();
   const month = (user.birthdate?.getMonth() || 0) + 1;
   const year = user.birthdate?.getFullYear();

@@ -23,9 +23,9 @@ import {
   removePasskey,
   verifyRegistration,
 } from "./actions";
+import { useAuth } from "@/lib/authContext";
 
 export type PasskeysPageFormProps = {
-  uid: string;
   existingPasskeys: {
     id: string;
     name: string;
@@ -34,16 +34,14 @@ export type PasskeysPageFormProps = {
   }[];
 };
 
-export function PasskeysPageForm({
-  uid,
-  existingPasskeys,
-}: PasskeysPageFormProps) {
+export function PasskeysPageForm({ existingPasskeys }: PasskeysPageFormProps) {
   const t = useTranslations("security.passkeys");
+  const { id: userId } = useAuth();
 
   const registerPasskey = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const options = await registrationOptions(uid);
+    const options = await registrationOptions(userId);
     if (options.error) {
       console.error("Error registering passkey:", options.error);
       return;
@@ -53,7 +51,7 @@ export function PasskeysPageForm({
       const registrationResponse = await startRegistration({
         optionsJSON: options.data as PublicKeyCredentialCreationOptionsJSON,
       });
-      await verifyRegistration(uid, registrationResponse);
+      await verifyRegistration(userId, registrationResponse);
     } catch (error) {
       console.error("Error registering passkey:", error);
     }
@@ -83,7 +81,7 @@ export function PasskeysPageForm({
           <ConfirmationProvider>
             <ul className="divide-y divide-black/15 dark:divide-white/25">
               {existingPasskeys.map((passkey) => (
-                <Passkey uid={uid} passkey={passkey} key={passkey.id} />
+                <Passkey passkey={passkey} key={passkey.id} />
               ))}
             </ul>
           </ConfirmationProvider>
@@ -94,10 +92,8 @@ export function PasskeysPageForm({
 }
 
 function Passkey({
-  uid,
   passkey,
 }: {
-  uid: string;
   passkey: PasskeysPageFormProps["existingPasskeys"][0];
 }) {
   const t = useTranslations("security.passkeys");
@@ -107,8 +103,10 @@ function Passkey({
   const withConfirmation = useWithConfirmation();
   const router = useRouter();
 
+  const { id: userId } = useAuth();
+
   const destroy = async () => {
-    if ((await removePasskey(uid, passkey.id)).error) {
+    if ((await removePasskey(userId, passkey.id)).error) {
       toast.error(t("removeError"));
       return;
     } else {
@@ -123,7 +121,7 @@ function Passkey({
       className="flex justify-between items-center px-2 py-4"
     >
       <div>
-        <PasskeyName uid={uid} passkey={passkey} />
+        <PasskeyName passkey={passkey} />
         <div className="text-sm text-gray-500">
           <div>
             {t("created", {
@@ -157,10 +155,8 @@ function Passkey({
 }
 
 function PasskeyName({
-  uid,
   passkey,
 }: {
-  uid: string;
   passkey: PasskeysPageFormProps["existingPasskeys"][0];
 }) {
   const [editing, setEditing] = useState(false);
@@ -170,8 +166,10 @@ function PasskeyName({
   const commonT = useTranslations("common");
   const router = useRouter();
 
+  const { id: userId } = useAuth();
+
   const [, action, isPending] = useActionState(
-    withCallbacks(changePasskeyName.bind(null, uid, passkey.id), {
+    withCallbacks(changePasskeyName.bind(null, userId, passkey.id), {
       onSuccess: (data) => {
         router.refresh();
         setEditing(false);

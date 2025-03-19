@@ -1,9 +1,9 @@
 "use client";
 
 import { Noo } from "@/components/Noo";
-import { ProfilePageProps } from "@/components/Profile";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { ProfilePicture } from "@/components/ProfilePicture";
+import { useAuth } from "@/lib/authContext";
 import {
   CakeIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -22,11 +22,12 @@ const PictureDialog = dynamic(
   },
 );
 
-export default function ProfilePage({ user }: ProfilePageProps) {
+export default function ProfilePage() {
   const [isOpen, setIsOpen] = useState(false);
   const format = useFormatter();
 
   const t = useTranslations("profile");
+  const user = useAuth();
 
   return (
     <ProfileLayout user={user}>

@@ -12,17 +12,11 @@ import { redirect } from "next/navigation";
 import { startTransition, useActionState, useEffect, useState } from "react";
 import { toast } from "react-toastify/unstyled";
 import { updateName } from "../actions";
+import { useAuth } from "@/lib/authContext";
 
-type Props = {
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string | null;
-    picture: string | null;
-  };
-};
+export function Form() {
+  const user = useAuth();
 
-export function Form({ user }: Props) {
   const [state, action, isPending] = useActionState(
     updateName.bind(null, user.id),
     {

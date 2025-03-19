@@ -1,4 +1,4 @@
-import { UserWithTenant } from "@/db/users";
+import { User, UserWithTenant } from "@/db/users";
 import { uuidToHumanId } from "@/utils";
 
 export type ClientUser = {
@@ -10,9 +10,9 @@ export type ClientUser = {
   lastName: string | null;
   picture: string | null;
   birthdate: Date | null;
-  gender: string;
+  gender: User["gender"];
   genderCustom: string | null;
-  pronouns: string;
+  pronouns: User["pronouns"];
   passwordBreaches: number | null;
   passwordChangedAt: Date | null;
   hasOtp: boolean;

@@ -62,7 +62,7 @@ export function ProfilePage() {
       <div className="space-y-4 w-full max-w-lg p-4">
         <Link
           className="transition-all transition-100 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
-          href="/profile"
+          href={`/profile?uid=${user.id}`}
         >
           <UserCircleIcon className="size-6 self-start mt-0.5" />
           <div>
@@ -73,7 +73,7 @@ export function ProfilePage() {
         </Link>
         <Link
           className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
-          href="/security"
+          href={`/security?uid=${user.id}`}
         >
           <LockClosedIcon className="size-6 self-start mt-0.5" />
           <div>
@@ -84,7 +84,7 @@ export function ProfilePage() {
         </Link>
         <Link
           className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2"
-          href="/settings"
+          href={`/settings?uid=${user.id}`}
         >
           <Cog6ToothIcon className="size-6 self-start mt-0.5" />
           <div>

@@ -1,7 +1,6 @@
-import { SessionsService } from "@/lib/SessionsService";
-import { uuidToHumanId } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { Form } from "./Form";
+import { withAuth } from "@/lib/withAuth";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -12,23 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-export default async function ProfileNamePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ uid?: string }>;
-}) {
-  const uid = (await searchParams).uid;
-  const dbUser = await SessionsService.user(uid);
-  if (!dbUser) {
-    return undefined;
-  }
-
-  const user = {
-    id: uuidToHumanId(dbUser.id, "usr"),
-    firstName: dbUser.firstName,
-    lastName: dbUser.lastName,
-    picture: dbUser.picture,
-  };
-
-  return <Form user={user} />;
+function ProfileNamePage() {
+  return <Form />;
 }
+
+export default withAuth(ProfileNamePage);

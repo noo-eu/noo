@@ -1,25 +1,11 @@
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import Passkeys from "@/db/passkeys";
-import { SessionsService } from "@/lib/SessionsService";
 import { uuidToHumanId } from "@/utils";
-import { redirect } from "next/navigation";
 import { PasskeysPageForm } from "./Form";
+import { withAuth } from "@/lib/withAuth";
+import { User } from "@/db/users";
 
-export default async function PasskeysPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ uid?: string }>;
-}) {
-  const uid = (await searchParams).uid!;
-  if (!uid) {
-    redirect("/");
-  }
-
-  const user = await SessionsService.user(uid);
-  if (!user) {
-    redirect("/signin");
-  }
-
+async function PasskeysPage({ user }: { user: User }) {
   const existingPasskeys = (await Passkeys.listForUser(user.id)).map(
     (passkey) => {
       return {
@@ -33,7 +19,9 @@ export default async function PasskeysPage({
 
   return (
     <ProfileLayout user={user}>
-      <PasskeysPageForm uid={uid} existingPasskeys={existingPasskeys} />
+      <PasskeysPageForm existingPasskeys={existingPasskeys} />
     </ProfileLayout>
   );
 }
+
+export default withAuth(PasskeysPage);

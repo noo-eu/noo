@@ -18,5 +18,10 @@ export function AuthProvider({
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const user = useContext(AuthContext);
+  if (!user || !user.id) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
+  return user;
 }

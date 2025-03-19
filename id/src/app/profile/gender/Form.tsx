@@ -3,7 +3,6 @@
 import { Noo } from "@/components/Noo";
 import { PageModal } from "@/components/PageModal";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
-import { User } from "@/db/users";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { Button, SelectField, TextField } from "@noo/ui";
 import { useLocale, useTranslations } from "next-intl";
@@ -12,21 +11,11 @@ import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "react-toastify/unstyled";
 import { updateGender } from "../actions";
+import { useAuth } from "@/lib/authContext";
 
-type Props = {
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string | null;
-    birthdate: Date | null;
-    gender: User["gender"];
-    genderCustom: string | null;
-    pronouns: User["pronouns"];
-    picture: string | null;
-  };
-};
+export function Form() {
+  const user = useAuth();
 
-export function Form({ user }: Props) {
   const [state, action, isPending] = useActionState(
     updateGender.bind(null, user.id),
     {
