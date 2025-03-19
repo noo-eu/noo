@@ -3,10 +3,17 @@
     "back": "Înapoi",
     "header": "Securitate & Confidențialitate",
     "passkeys": {
-      "description1": "Cu pasuri de securitate, poți să te autentifici în contul tău noo folosind doar amprenta, fața, blocarea ecranului sau o cheie de securitate. Fără parole de ținut minte și mult mai greu de furat.",
+      "confirmRemove": "Ești sigur că vrei să ștergi această cheie de acces?",
+      "created": "Creată pe {date, date, medium}",
+      "description1": "Cu pasuri de securitate, poți să te autentifici în contul tău <noo></noo> folosind doar amprenta, fața, blocarea ecranului sau o cheie de securitate. Fără parole de ținut minte și mult mai greu de furat.",
       "description2": "Pasurile tale de securitate rămân pe dispozitivul tău sau pe cheia de securitate, așa că doar tu le poți folosi. Asigură-te doar că dispozitivul tău este securizat—blocarea ecranului sau datele biometrice sunt cheia.",
+      "lastUsed": "Ultima utilizare {ago}",
       "register": "Creează un pas de securitate",
-      "title": "Pasuri de securitate"
+      "removeError": "Ceva n-a mers bine la ștergerea cheii de acces.",
+      "removeSuccess": "Cheia de acces a fost ștearsă.",
+      "title": "Pasuri de securitate",
+      "unnamed": "Cheie fără nume",
+      "yourPasskeys": "Cheile tale de securitate"
     },
     "password": {
       "breaches": "Parola ta a apărut în {count, plural, one {o breșă de date} other {{count} breșe de date}}. Deși sistemele noastre rămân sigure, îți recomandăm să-ți actualizezi parola imediat ca măsură de precauție.{otp, select, true {} other { Ar fi bine să activezi și autentificarea în doi pași pentru un plus de siguranță.}} <guide>Află mai multe</guide>.",

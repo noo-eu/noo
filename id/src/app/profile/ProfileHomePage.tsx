@@ -76,11 +76,12 @@ export default function ProfilePage({ user }: ProfilePageProps) {
             <h2 className="text-lg font-medium">{t("summary.birthdate")}</h2>
 
             <p>
-              {format.dateTime(user.birthdate!, {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+              {user.birthdate &&
+                format.dateTime(user.birthdate, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
             </p>
           </div>
         </Link>

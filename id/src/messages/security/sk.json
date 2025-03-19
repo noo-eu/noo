@@ -3,10 +3,17 @@
     "back": "Späť",
     "header": "Bezpečnosť a ochrana súkromia",
     "passkeys": {
-      "description1": "S pomocou prístupových kľúčov sa môžeš prihlásiť do svojho noo účtu len pomocou odtlačku prsta, tváre, zamknutej obrazovky alebo bezpečnostného kľúča. Žiadne heslá na zapamätanie a omnoho ťažšie, aby ti ich niekto ukradol.",
+      "confirmRemove": "Naozaj chcete odstrániť tento prístupový kľúč?",
+      "created": "Vytvorené {date, date, medium}",
+      "description1": "S pomocou prístupových kľúčov sa môžeš prihlásiť do svojho <noo></noo> účtu len pomocou odtlačku prsta, tváre, zamknutej obrazovky alebo bezpečnostného kľúča. Žiadne heslá na zapamätanie a omnoho ťažšie, aby ti ich niekto ukradol.",
       "description2": "Tvoje prístupové kľúče ostávajú na tvojom zariadení alebo bezpečnostnom kľúči, takže ich môžeš použiť iba ty. Len maj zariadenie zabezpečené – tvoje zamknutie obrazovky alebo biometria sú kľúčom.",
+      "lastUsed": "Posledné použitie pred {ago}",
       "register": "Vytvoriť prístupový kľúč",
-      "title": "Prístupové kľúče"
+      "removeError": "Pri odstraňovaní prístupového kľúča sa niečo pokazilo.",
+      "removeSuccess": "Prístupový kľúč bol odstránený.",
+      "title": "Prístupové kľúče",
+      "unnamed": "Nepomenovaný kľúč",
+      "yourPasskeys": "Vaše bezpečnostné kľúče"
     },
     "password": {
       "breaches": "Vaše heslo sa objavilo v {count, plural, one {jednom úniku dát} other {{count} únikoch dát}}. Hoci naše systémy ostávajú bezpečné, odporúčame ihneď aktualizovať vaše heslo ako opatrenie na ochranu.{otp, select, true {} other { Mali by ste tiež aktivovať dvojfaktorovú autentifikáciu pre vyššiu bezpečnosť.}} <guide>Zistite viac</guide>.",

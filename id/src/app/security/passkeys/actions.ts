@@ -3,6 +3,7 @@
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
 import { SessionsService } from "@/lib/SessionsService";
+import { humanIdToUuid } from "@/utils";
 import {
   generateRegistrationOptions,
   RegistrationResponseJSON,
@@ -10,6 +11,7 @@ import {
 } from "@simplewebauthn/server";
 import { headers } from "next/headers";
 import { ActionResult } from "../actions";
+import knownAuthenticators from "./knownAuthenticators";
 
 async function getWebAuthnID() {
   if (process.env.NODE_ENV === "production") {
@@ -106,12 +108,12 @@ export async function verifyRegistration(
 
   if (verification.verified) {
     const info = verification.registrationInfo!;
-    console.log(info);
     const credential = info.credential;
+    const authenticatorName = knownAuthenticators[info.aaguid] || "";
 
     await Passkeys.create({
       userId: user.id,
-      name: "",
+      name: authenticatorName,
       credentialId: credential.id,
       publicKey: Buffer.from(credential.publicKey),
       counter: credential.counter,
@@ -125,4 +127,48 @@ export async function verifyRegistration(
   }
 
   return verification;
+}
+
+export async function removePasskey(
+  uid: string,
+  humanPasskeyId: string,
+): Promise<ActionResult<null, string, null>> {
+  if (!uid) {
+    return { error: "Missing user ID", input: null };
+  }
+
+  const user = await SessionsService.user(uid);
+  if (!user) {
+    return { error: "User not found", input: null };
+  }
+
+  const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;
+  await Passkeys.destroy(user.id, passkeyId);
+
+  return { data: null, input: null };
+}
+
+export async function changePasskeyName(
+  uid: string,
+  humanPasskeyId: string,
+  _: unknown,
+  form: FormData,
+): Promise<ActionResult<null, string, { name: string }>> {
+  const name = form.get("name") as string;
+
+  if (!uid) {
+    console.error("Missing user ID");
+    return { error: "Missing user ID", input: { name } };
+  }
+
+  const user = await SessionsService.user(uid);
+  if (!user) {
+    console.error("User not found");
+    return { error: "User not found", input: { name } };
+  }
+
+  const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;
+  await Passkeys.update(passkeyId, { name });
+
+  return { data: null, input: { name } };
 }

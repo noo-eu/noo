@@ -3,10 +3,17 @@
     "back": "Zurück",
     "header": "Sicherheit & Datenschutz",
     "passkeys": {
-      "description1": "Mit Passkeys kannst du dich bei deinem noo-Konto nur mit deinem Fingerabdruck, Gesicht, Bildschirmsperre oder einem Sicherheitsschlüssel anmelden. Keine Passwörter, die man sich merken muss, und es ist viel schwerer für andere sie zu stehlen.",
+      "confirmRemove": "Bist du sicher, dass du diesen Sicherheitsschlüssel entfernen möchtest?",
+      "created": "Erstellt am {date, date, medium}",
+      "description1": "Mit Passkeys kannst du dich bei deinem <noo></noo>-Konto nur mit deinem Fingerabdruck, Gesicht, Bildschirmsperre oder einem Sicherheitsschlüssel anmelden. Keine Passwörter, die man sich merken muss, und es ist viel schwerer für andere sie zu stehlen.",
       "description2": "Deine Passkeys bleiben auf deinem Gerät oder Sicherheitsschlüssel, also kannst nur du sie verwenden. Halte einfach dein Gerät sicher — dein Bildschirm-Lock oder die biometrischen Daten sind der Schlüssel.",
+      "lastUsed": "Zuletzt verwendet {ago}",
       "register": "Einen Passkey erstellen",
-      "title": "Passkeys"
+      "removeError": "Beim Entfernen des Sicherheitsschlüssels ist etwas schiefgelaufen.",
+      "removeSuccess": "Der Sicherheitsschlüssel wurde entfernt.",
+      "title": "Passkeys",
+      "unnamed": "Unbenannter Schlüssel",
+      "yourPasskeys": "Deine Sicherheitsschlüssel"
     },
     "password": {
       "breaches": "Dein Passwort war in {count, plural, one {einem Datenleck} other {{count} Datenlecks}} betroffen. Obwohl unsere Systeme sicher bleiben, empfehlen wir dir, dein Passwort sofort zur Vorsicht zu aktualisieren.{otp, select, true {} other { Du solltest auch die Zwei-Faktor-Authentifizierung aktivieren, um zusätzliche Sicherheit zu gewährleisten.}} <guide>Mehr erfahren</guide>.",

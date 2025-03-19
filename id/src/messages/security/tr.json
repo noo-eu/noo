@@ -3,10 +3,17 @@
     "back": "Geri",
     "header": "Güvenlik & Gizlilik",
     "passkeys": {
-      "description1": "Geçiş anahtarları ile noo hesabınıza sadece parmak izi, yüz tanıma, ekran kilidi veya güvenlik anahtarı kullanarak giriş yapabilirsiniz. Hatırlamanız gereken şifre yok ve başkalarının çalması çok daha zor.",
+      "confirmRemove": "Bu erişim anahtarını silmek istediğinden emin misin?",
+      "created": "{date, date, medium} tarihinde oluşturuldu",
+      "description1": "Geçiş anahtarları ile <noo></noo> hesabınıza sadece parmak izi, yüz tanıma, ekran kilidi veya güvenlik anahtarı kullanarak giriş yapabilirsiniz. Hatırlamanız gereken şifre yok ve başkalarının çalması çok daha zor.",
       "description2": "Geçiş anahtarlarınız cihazınızda veya güvenlik anahtarınızda kalır, bu yüzden sadece siz kullanabilirsiniz. Cihazınızı güvende tutun—ekran kilidi veya biyometri sizin anahtarınız.",
+      "lastUsed": "{ago} kullanıldı",
       "register": "Geçiş anahtarı oluştur",
-      "title": "Geçiş Anahtarları"
+      "removeError": "Erişim anahtarını silerken bir sorun oluştu.",
+      "removeSuccess": "Erişim anahtarı silindi.",
+      "title": "Geçiş Anahtarları",
+      "unnamed": "Adlandırılmamış anahtar",
+      "yourPasskeys": "Güvenlik anahtarların"
     },
     "password": {
       "breaches": "Şifreniz {count, plural, one {bir veri ihlalinde} other {{count} veri ihlalinde}} ortaya çıkmış. Sistemlerimiz güvende olsa da, bir önlem olarak şifrenizi hemen güncellemenizi öneririz.{otp, select, true {} other { Ek güvenlik için 2 faktörlü kimlik doğrulamayı da etkinleştirmelisiniz.}} <guide>Daha fazla bilgi edin</guide>.",

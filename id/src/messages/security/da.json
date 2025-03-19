@@ -3,10 +3,17 @@
     "back": "Tilbage",
     "header": "Sikkerhed & Privatliv",
     "passkeys": {
-      "description1": "Med adgangsnøgler kan du logge ind på din noo-konto ved at bruge bare dit fingeraftryk, ansigt, skærmlås eller en sikkerhedsnøgle. Ingen adgangskoder at huske, og det er meget sværere for nogen at stjæle.",
+      "confirmRemove": "Er du sikker på, at du vil fjerne denne nøgle?",
+      "created": "Oprettet den {date, date, medium}",
+      "description1": "Med adgangsnøgler kan du logge ind på din <noo></noo>-konto ved at bruge bare dit fingeraftryk, ansigt, skærmlås eller en sikkerhedsnøgle. Ingen adgangskoder at huske, og det er meget sværere for nogen at stjæle.",
       "description2": "Dine adgangsnøgler forbliver på din enhed eller sikkerhedsnøgle, så det er kun dig, der kan bruge dem. Bare sørg for, at din enhed er sikker—din skærmlås eller biometriske data er nøglen.",
+      "lastUsed": "Sidst brugt {ago}",
       "register": "Opret en adgangsnøgle",
-      "title": "Adgangsnøgler"
+      "removeError": "Noget gik galt under fjernelsen af nøglen.",
+      "removeSuccess": "Nøglen er blevet fjernet.",
+      "title": "Adgangsnøgler",
+      "unnamed": "Unavngiven nøgle",
+      "yourPasskeys": "Dine sikkerhedsnøgler"
     },
     "password": {
       "breaches": "Din adgangskode er blevet set i {count, plural, one {en databrud} other {{count} databrud}}. Selvom vores systemer er sikre, anbefaler vi at du opdaterer din adgangskode straks som en sikkerhedsforanstaltning.{otp, select, true {} other { Du bør også aktivere 2-faktor autentifikation for ekstra sikkerhed.}} <guide>Læs mere</guide>.",

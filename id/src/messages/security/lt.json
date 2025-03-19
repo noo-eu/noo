@@ -3,10 +3,17 @@
     "back": "Atgal",
     "header": "Saugumas ir privatumas",
     "passkeys": {
-      "description1": "Su naudojimo slaptažodžiais galite prisijungti prie savo noo paskyros naudodami tiesiog savo pirštų atspaudą, veidą, ekrano užraktą arba saugumo raktą. Jokių slaptažodžių, kuriuos reikėtų prisiminti, ir sunkiau bet kam juos pavogti.",
+      "confirmRemove": "Ar tikrai norite pašalinti šį raktą?",
+      "created": "Sukurta {date, date, medium}",
+      "description1": "Su naudojimo slaptažodžiais galite prisijungti prie savo <noo></noo> paskyros naudodami tiesiog savo pirštų atspaudą, veidą, ekrano užraktą arba saugumo raktą. Jokių slaptažodžių, kuriuos reikėtų prisiminti, ir sunkiau bet kam juos pavogti.",
       "description2": "Jūsų naudojimo slaptažodžiai lieka jūsų įrenginyje arba saugumo rakte, todėl tik jūs galite juos naudoti. Tiesiog apsaugokite savo įrenginį - jūsų ekrano užraktas arba biometriniai duomenys yra raktas.",
+      "lastUsed": "Paskutinį kartą naudota prieš {ago}",
       "register": "Sukurti naudojimo slaptažodį",
-      "title": ""
+      "removeError": "Įvyko klaida šalinant raktą.",
+      "removeSuccess": "Raktas buvo pašalintas.",
+      "title": "Patvirtinimo raktai",
+      "unnamed": "Nebepriskirtas raktas",
+      "yourPasskeys": "Jūsų saugos raktai"
     },
     "password": {
       "breaches": "Jūsų slaptažodis buvo rastas {count, plural, one {viename duomenų pažeidime} other {{count} duomenų pažeidimuose}}. Nors mūsų sistemos išlieka saugios, rekomenduojame nedelsiant atnaujinti slaptažodį kaip atsargumo priemonę.{otp, select, true {} other { Taip pat turėtumėte įjungti dviejų faktorių autentifikaciją papildomai apsaugai.}} <guide>Sužinokite daugiau</guide>.",

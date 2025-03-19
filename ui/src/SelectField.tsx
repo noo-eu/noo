@@ -1,7 +1,6 @@
 import { ReactNode, useId } from "react";
 import { Label } from "./Label";
 import { SelectInput } from "./SelectInput";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 export type SelectFieldProps = {
   label: ReactNode;
@@ -16,19 +15,12 @@ export function SelectField(props: SelectFieldProps) {
 
   const label = <Label htmlFor={inputId}>{props.label}</Label>;
   const input = (
-    <div className="relative">
-      <SelectInput
-        {...rest}
-        id={inputId}
-        aria-describedby={props.error ? errorId : undefined}
-        aria-invalid={!!props.error}
-        className={`${rest.className} w-full pe-12`}
-      />
-      <ChevronDownIcon
-        className="size-4 absolute top-1/2 right-3 -mt-2 pointer-events-none"
-        aria-hidden="true"
-      />
-    </div>
+    <SelectInput
+      {...rest}
+      id={inputId}
+      aria-describedby={props.error ? errorId : undefined}
+      aria-invalid={!!props.error}
+    />
   );
 
   return (

@@ -3,10 +3,17 @@
     "back": "Voltar",
     "header": "Segurança & Privacidade",
     "passkeys": {
-      "description1": "Com as chaves de acesso, podes iniciar sessão na tua conta noo usando apenas a tua impressão digital, rosto, bloqueio de ecrã ou uma chave de segurança. Não há palavras-passe para lembrar, e é muito mais difícil de serem roubadas.",
+      "confirmRemove": "Tem a certeza de que quer remover esta chave de segurança?",
+      "created": "Criado em {date, date, medium}",
+      "description1": "Com as chaves de acesso, podes iniciar sessão na tua conta <noo></noo> usando apenas a tua impressão digital, rosto, bloqueio de ecrã ou uma chave de segurança. Não há palavras-passe para lembrar, e é muito mais difícil de serem roubadas.",
       "description2": "As tuas chaves de acesso permanecem no teu dispositivo ou chave de segurança, por isso só tu as podes usar. Apenas mantém o teu dispositivo seguro - o bloqueio de ecrã ou as biometria são a chave.",
+      "lastUsed": "Usada há {ago}",
       "register": "Criar uma chave de acesso",
-      "title": "Chaves de Acesso"
+      "removeError": "Algo correu mal ao remover a chave de segurança.",
+      "removeSuccess": "A chave de segurança foi removida.",
+      "title": "Chaves de Acesso",
+      "unnamed": "Chave sem nome",
+      "yourPasskeys": "As suas chaves de segurança"
     },
     "password": {
       "breaches": "A sua palavra-passe apareceu em {count, plural, one {uma violação de dados} other {{count} violações de dados}}. Embora os nossos sistemas se mantenham seguros, recomendamos que atualize a sua palavra-passe de imediato como precaução.{otp, select, true {} other { Também deve ativar a autenticação em 2 etapas para uma segurança adicional.}} <guide>Saiba mais</guide>.",

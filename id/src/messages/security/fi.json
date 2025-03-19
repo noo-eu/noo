@@ -3,10 +3,17 @@
     "back": "Takaisin",
     "header": "Turvallisuus & Yksityisyys",
     "passkeys": {
-      "description1": "Avainkoodien avulla voit kirjautua noo-tilillesi pelkällä sormenjäljellä, kasvotunnistuksella, näytön lukituksella tai turvallisuusavaimella. Ei muistettavia salasanoja, eikä niitä ole helppo varastaa.",
+      "confirmRemove": "Oletko varma, että haluat poistaa tämän avaimen?",
+      "created": "Luotu {date, date, medium}",
+      "description1": "Avainkoodien avulla voit kirjautua <noo></noo>-tilillesi pelkällä sormenjäljellä, kasvotunnistuksella, näytön lukituksella tai turvallisuusavaimella. Ei muistettavia salasanoja, eikä niitä ole helppo varastaa.",
       "description2": "Avainkoodisi pysyvät laitteellasi tai turva-avaimellasi, joten vain sinä voit käyttää niitä. Pidä laitteesi turvassa—näytön lukitus tai biometrinen tunnistus on avain.",
+      "lastUsed": "Käytetty viimeksi {ago}",
       "register": "Luo avainkoodi",
-      "title": "Avainkoodit"
+      "removeError": "Jotain meni pieleen avainta poistettaessa.",
+      "removeSuccess": "Avain on poistettu.",
+      "title": "Avainkoodit",
+      "unnamed": "Nimetön avain",
+      "yourPasskeys": "Omat turva-avaimesi"
     },
     "password": {
       "breaches": "Salasanasi on ilmennyt {count, plural, one {yhden tietovuodon} other {{count} tietovuodossa}}. Vaikka järjestelmämme ovat edelleen turvallisia, suosittelemme, että päivität salasanasi heti varotoimenpiteenä.{otp, select, true {} other { Suosittelemme myös 2-vaiheisen tunnistautumisen käyttöönottoa lisäturvallisuuden vuoksi.}} <guide>Lisätietoja</guide>.",

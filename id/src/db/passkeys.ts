@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import db, { schema } from ".";
 
 async function find(passkeyId: string) {
@@ -29,8 +29,15 @@ async function update(
     .where(eq(schema.passkeys.id, passkeyId));
 }
 
-async function destroy(passkeyId: string) {
-  return db.delete(schema.passkeys).where(eq(schema.passkeys.id, passkeyId));
+async function destroy(userId: string, passkeyId: string) {
+  return db
+    .delete(schema.passkeys)
+    .where(
+      and(
+        eq(schema.passkeys.userId, userId),
+        eq(schema.passkeys.id, passkeyId),
+      ),
+    );
 }
 
 const Passkeys = {

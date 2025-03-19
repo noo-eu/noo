@@ -3,10 +3,17 @@
     "back": "Tilbake",
     "header": "Sikkerhet & Personvern",
     "passkeys": {
-      "description1": "Med passnøkler kan du logge inn på noo-kontoen din ved å bruke bare fingeravtrykk, ansikt, skjermlås eller en sikkerhetsnøkkel. Ingen passord å huske, og mye vanskeligere for noen å stjele.",
+      "confirmRemove": "Er du sikker på at du vil fjerne denne sikkerhetsnøkkelen?",
+      "created": "Opprettet {date, date, medium}",
+      "description1": "Med passnøkler kan du logge inn på <noo></noo>-kontoen din ved å bruke bare fingeravtrykk, ansikt, skjermlås eller en sikkerhetsnøkkel. Ingen passord å huske, og mye vanskeligere for noen å stjele.",
       "description2": "Passnøklene dine blir værende på enheten din eller sikkerhetsnøkkelen, så det er bare du som kan bruke dem. Bare hold enheten din trygg—skjermlåsen eller biometri er nøkkelen.",
+      "lastUsed": "Sist brukt {ago}",
       "register": "Lag en passnøkkel",
-      "title": "Passnøkler"
+      "removeError": "Noe gikk galt under fjerning av sikkerhetsnøkkelen.",
+      "removeSuccess": "Sikkerhetsnøkkelen er fjernet.",
+      "title": "Passnøkler",
+      "unnamed": "Navnløs nøkkel",
+      "yourPasskeys": "Dine sikkerhetsnøkler"
     },
     "password": {
       "breaches": "Passordet ditt har blitt funnet i {count, plural, one {en datalekkasje} other {{count} datalekkasjer}}. Selv om systemene våre er sikre, anbefaler vi at du oppdaterer passordet ditt umiddelbart som en forholdsregel.{otp, select, true {} other { Du bør også aktivere to-faktor autentisering for ekstra sikkerhet.}} <guide>Lær mer</guide>.",

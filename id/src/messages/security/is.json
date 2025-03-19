@@ -3,10 +3,17 @@
     "back": "Til baka",
     "header": "Öryggi & Persónuvernd",
     "passkeys": {
-      "description1": "Með lykilorðum geturðu skráð þig inn á noo reikninginn þinn með því að nota aðeins fingrafar, andlitsgreiningu, skjálás eða öryggislykil. Engin lykilorð til að muna og mun erfiðara fyrir aðra að stela.",
+      "confirmRemove": "Ertu viss um að þú viljir fjarlægja þennan lykil?",
+      "created": "Búinn til {date, date, medium}",
+      "description1": "Með lykilorðum geturðu skráð þig inn á <noo></noo> reikninginn þinn með því að nota aðeins fingrafar, andlitsgreiningu, skjálás eða öryggislykil. Engin lykilorð til að muna og mun erfiðara fyrir aðra að stela.",
       "description2": "Lykilorðin þín eru geymd á tækinu þínu eða öryggislykli, þannig að aðeins þú getur notað þau. Passaðu bara að hafa tækið öruggt—skjálásinn þinn eða lífkennigreiningin eru lykillinn.",
+      "lastUsed": "Síðast notaður fyrir {ago}",
       "register": "Búa til lykilorð",
-      "title": "Lykilorð"
+      "removeError": "Eitthvað fór úrskeiðis við að fjarlægja lykilinn.",
+      "removeSuccess": "Lykillinn hefur verið fjarlægður.",
+      "title": "Lykilorð",
+      "unnamed": "Ónefndur lykill",
+      "yourPasskeys": "Öryggislyklar þínir"
     },
     "password": {
       "breaches": "Lykilorðið þitt hefur komið fram í {count, plural, one {öðru gagnaleki} other {{count} gagnalekum}}. Þó að kerfin okkar séu örugg, þá ráðleggjum við þér að uppfæra lykilorðið þitt strax sem varúðarráðstöfun.{otp, select, true {} other { Þú ættir líka að virkja tvíþátta auðkenningu fyrir aukna öryggi.}} <guide>Fræðast meira</guide>.",

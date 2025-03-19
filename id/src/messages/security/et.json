@@ -3,10 +3,17 @@
     "back": "Tagasi",
     "header": "Turve ja Privaatsus",
     "passkeys": {
-      "description1": "Passkey'de abil saad oma noo kontole sisse logida ainult sõrmejälje, näotuvastuse, ekraaniluku või turvavõtmega. Paroolid pole vaja meelde jätta ja neid on palju raskem varastada.",
+      "confirmRemove": "Kas oled kindel, et soovid selle turvavõtme eemaldada?",
+      "created": "Loodud {date, date, medium}",
+      "description1": "Passkey'de abil saad oma <noo></noo> kontole sisse logida ainult sõrmejälje, näotuvastuse, ekraaniluku või turvavõtmega. Paroolid pole vaja meelde jätta ja neid on palju raskem varastada.",
       "description2": "Sinu passkey'd jäävad sinu seadmesse või turvavõtmesse, seega saad neid kasutada ainult sina. Hoia oma seade turvalisena—sinu ekraanilukk või biomeetrilised andmed on võti.",
+      "lastUsed": "Viimati kasutatud {ago}",
       "register": "Loo passkey",
-      "title": "Passkey'd"
+      "removeError": "Midagi läks valesti turvavõtme eemaldamisel.",
+      "removeSuccess": "Turvavõti on eemaldatud.",
+      "title": "Passkey'd",
+      "unnamed": "Nimetu võti",
+      "yourPasskeys": "Sinu turvavõtmed"
     },
     "password": {
       "breaches": "Sinu parool on olnud {count, plural, one {ühes andmelekkes} other {{count} andmelekkes}}. Kuigi meie süsteemid on endiselt turvalised, soovitame sul koheselt oma parool uuendada. {otp, select, true {} other { Samuti peaksid lubama kaheastmelise autentimise lisaturbeks.}} <guide>Uuri lähemalt</guide>.",

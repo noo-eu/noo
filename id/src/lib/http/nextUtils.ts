@@ -2,6 +2,9 @@ import { headers } from "next/headers";
 
 export async function getIpAddress() {
   const headerStore = await headers();
+
+  console.log("ALL HEADERS", headerStore.entries());
+
   const ipHeader =
     headerStore.get("x-real-ip") ??
     headerStore.get("x-forwarded-for") ??

@@ -12,7 +12,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify/unstyled";
 import { updatePassword } from "../actions";
 import { PasswordRater } from "./PasswordRater";
 

@@ -10,6 +10,10 @@ export function LanguagePicker({ className }: { className?: string }) {
 
   const locale = useLocale();
 
+  // TODO: this currently collapses all BCMS languages into Croatian, it could
+  // be more friendly by acknowledging the specific language, but we have to
+  // re-perform the checks from src/i18n/request.ts to do so.
+
   return (
     <LanguagePickerSelect locale={locale} className={className}>
       {languages.map(([code, name]) => (

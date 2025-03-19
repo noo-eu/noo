@@ -11,16 +11,16 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
   const t = useTranslations("profile");
 
   return (
-    <div className="max-w-3xl flex items-center justify-between border-b border-white/25 w-full px-6 py-3 bg-gray-100 dark:bg-black">
+    <div className="max-w-3xl flex items-center justify-between border-b border-black/15 dark:border-white/25 w-full px-6 py-3 dark:bg-black">
       <div className="flex items-center gap-4">
         <h1 className="text-2xl font-medium">
           <Link href="/" className="hover:underline">
             <Noo className="text-eu-blue dark:text-white" />{" "}
-            <span className="tracking-wider">{t("pageTitle")}</span>
+            <span className="tracking-wide">{t("pageTitle")}</span>
           </Link>
         </h1>
       </div>
-      <div className="flex items-center gap-4 flex items-center justify-center border rounded-full p-0.75">
+      <div className="flex items-center gap-4 flex items-center justify-center border rounded-full p-0.5">
         <a href="/profile">
           <ProfilePicture user={user} width={32} />
         </a>

@@ -3,10 +3,17 @@
     "back": "Terug",
     "header": "Beveiliging & Privacy",
     "passkeys": {
-      "description1": "Met paskeys kun je inloggen op je noo-account met alleen je vingerafdruk, gezicht, schermvergrendeling, of een beveiligingssleutel. Geen wachtwoorden om te onthouden, en veel moeilijker voor anderen om te stelen.",
+      "confirmRemove": "Weet je zeker dat je deze toegangssleutel wilt verwijderen?",
+      "created": "Aangemaakt op {date, date, medium}",
+      "description1": "Met paskeys kun je inloggen op je <noo></noo>-account met alleen je vingerafdruk, gezicht, schermvergrendeling, of een beveiligingssleutel. Geen wachtwoorden om te onthouden, en veel moeilijker voor anderen om te stelen.",
       "description2": "Je paskeys blijven op je apparaat of beveiligingssleutel, dus alleen jij kunt ze gebruiken. Zorg er gewoon voor dat je apparaat veilig is—je schermvergrendeling of biometrie zijn de sleutel.",
+      "lastUsed": "Laatst gebruikt {ago}",
       "register": "Maak een passkey aan",
-      "title": "Paskeys"
+      "removeError": "Er ging iets mis bij het verwijderen van de toegangssleutel.",
+      "removeSuccess": "De toegangssleutel is verwijderd.",
+      "title": "Paskeys",
+      "unnamed": "Naamloze sleutel",
+      "yourPasskeys": "Jouw beveiligingssleutels"
     },
     "password": {
       "breaches": "Je wachtwoord is in {count, plural, one {een datalek} other {{count} datalekken}} voorgekomen. Terwijl onze systemen veilig blijven, raden we aan om je wachtwoord onmiddellijk te wijzigen als voorzorgsmaatregel.{otp, select, true {} other { Vergeet ook niet om 2-factor-authenticatie in te schakelen voor extra beveiliging.}} <guide>Leer meer</guide>.",

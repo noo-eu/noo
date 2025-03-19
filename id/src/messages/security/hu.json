@@ -3,10 +3,17 @@
     "back": "Vissza",
     "header": "Biztonság és Adatvédelem",
     "passkeys": {
-      "description1": "A jelszókulcsokkal úgy jelentkezhetsz be a noo fiókodba, hogy csak az ujjlenyomatodra, az arcodra, a képernyőzárra vagy egy biztonsági kulcsra van szükséged. Nincs mit megjegyezni, és sokkal nehezebb ellopni is.",
+      "confirmRemove": "Biztosan el szeretnéd távolítani ezt a jelszót?",
+      "created": "Létrehozva: {date, date, medium}",
+      "description1": "A jelszókulcsokkal úgy jelentkezhetsz be a <noo></noo> fiókodba, hogy csak az ujjlenyomatodra, az arcodra, a képernyőzárra vagy egy biztonsági kulcsra van szükséged. Nincs mit megjegyezni, és sokkal nehezebb ellopni is.",
       "description2": "A jelszókulcsaid a készülékeden vagy a biztonsági kulcsodon maradnak, így csak te tudod azokat használni. Csak tartsd biztonságban az eszközödet - a képernyőzár vagy a biometrikus adatok a kulcs.",
+      "lastUsed": "Utoljára használtad: {ago}",
       "register": "Hozz létre egy jelszókulcsot",
-      "title": "Jelszókulcsok"
+      "removeError": "Hiba történt a jelszó eltávolítása közben.",
+      "removeSuccess": "A jelszó eltávolítva.",
+      "title": "Jelszókulcsok",
+      "unnamed": "Névtelen kulcs",
+      "yourPasskeys": "Biztonsági kulcsaid"
     },
     "password": {
       "breaches": "A jelszavad megjelent {count, plural, one {egy adatlopásban} other {{count} adatlopásban}}. Míg a rendszereink biztonságban vannak, javasoljuk, hogy azonnal frissítsd a jelszavad, mint óvintézkedést.{otp, select, true {} other { Emellett érdemes bekapcsolni a kétlépcsős azonosítást is a fokozott biztonság érdekében.}} <guide>Tudd meg többet</guide>.",

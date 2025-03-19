@@ -3,10 +3,17 @@
     "back": "Ar ais",
     "header": "Slándáil & Príobháideacht",
     "passkeys": {
-      "description1": "Le heochracha pas, is féidir leat síniú isteach i do chuntas noo ag úsáid ach do mhéar, d'aghaidh, glas scáileáin, nó eochair slándála. Ní gá aon fhocail faire a chur i gcuimhne, agus tá sé níos deacra iad a ghoid.",
+      "confirmRemove": "An bhfuil tú cinnte gur mhaith leat an eochair shlándála seo a bhaint?",
+      "created": "Cruthaithe ar {date, date, medium}",
+      "description1": "Le heochracha pas, is féidir leat síniú isteach i do chuntas <noo></noo> ag úsáid ach do mhéar, d'aghaidh, glas scáileáin, nó eochair slándála. Ní gá aon fhocail faire a chur i gcuimhne, agus tá sé níos deacra iad a ghoid.",
       "description2": "Fanann d'eochracha pas ar do ghléas nó eochair slándála, mar sin is tusa amháin a fhéadfaidh iad a úsáid. Coinnigh do ghléas slán—do ghlas scáileáin nó bithmhéadracht is ea an príomh.",
+      "lastUsed": "Úsáideadh deireanach {ago}",
       "register": "Cruthaigh eochair pas",
-      "title": "Eochracha Pas"
+      "removeError": "Tharla fadhb agus an eochair á bhaint.",
+      "removeSuccess": "Tá an eochair shlándála bainte.",
+      "title": "Eochracha Pas",
+      "unnamed": "Eochair gan ainm",
+      "yourPasskeys": "Do eochracha slándála"
     },
     "password": {
       "breaches": "Tá do phasfhocal le feiceáil i {count, plural, one {breach sonraí} other {{count} breaches sonraí}}. Cé go maireann ár gcórais slán, molaimid duit do phasfhocal a nuashonrú láithreach mar chosc.{otp, select, true {} other { Ba chóir duit freisin bailíochtú 2-fhoinse a chumasú le haghaidh slándála breise.}} <guide>Foghlaim tuilleadh</guide>.",

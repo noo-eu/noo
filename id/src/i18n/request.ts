@@ -6,7 +6,13 @@ import { cookies, headers } from "next/headers";
 // I didn't decide this, I'm just a developer.
 const BCMS = ["sr", "bs", "me"];
 
-acceptLanguage.languages(SUPPORTED_LANGUAGES.concat(BCMS).concat("nb"));
+// SUPPORTED_LANGUAGES are expected to have translations in the messages directory.
+// This secondary array helps us map commonly used language codes to the supported ones.
+// nb is the most common type of Norwegian, but we use no as the supported language code.
+const expandedSupportedLanguages =
+  SUPPORTED_LANGUAGES.concat(BCMS).concat("nb");
+
+acceptLanguage.languages(expandedSupportedLanguages);
 
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
@@ -21,16 +27,19 @@ export async function i18nConfig() {
   const cookieStore = await cookies();
   const lngCookie = cookieStore.get("_noo_locale")?.value;
   let locale: string | undefined;
-  if (lngCookie && SUPPORTED_LANGUAGES.includes(lngCookie)) {
+
+  if (lngCookie && expandedSupportedLanguages.includes(lngCookie)) {
     locale = lngCookie;
   } else {
     const reqHeaders = await headers();
     const lngHeader = reqHeaders.get("accept-language");
 
     locale = acceptLanguage.get(lngHeader) ?? "en";
-    locale = BCMS.includes(locale) ? "hr" : locale;
-    locale = locale == "nb" ? "no" : locale;
   }
+
+  // We need to normalize the locale to the supported language codes.
+  locale = BCMS.includes(locale) ? "hr" : locale;
+  locale = locale == "nb" ? "no" : locale;
 
   return {
     locale,

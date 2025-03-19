@@ -1,5 +1,7 @@
 "use client";
 
+import { SelectInput } from "@noo/ui";
+
 export function LanguagePickerSelect({
   children,
   locale,
@@ -15,13 +17,13 @@ export function LanguagePickerSelect({
   };
 
   return (
-    <select
-      className={`${className} text-xs p-2.5 hover:bg-blue-200 dark:hover:bg-white/20 rounded-md field-sizing-content`}
+    <SelectInput
+      className={`${className || ""} dark:outline-0 text-xs py-2.5 ps-2.5 hover:bg-blue-200 dark:hover:bg-white/20 rounded-md field-sizing-content`}
       aria-label="Language"
       onChange={handleChange}
       defaultValue={locale}
     >
       {children}
-    </select>
+    </SelectInput>
   );
 }

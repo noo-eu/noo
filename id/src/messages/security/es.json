@@ -3,10 +3,17 @@
     "back": "Volver",
     "header": "Seguridad y Privacidad",
     "passkeys": {
-      "description1": "Con las passkeys, puedes iniciar sesión en tu cuenta de noo usando solo tu huella digital, reconocimiento facial, bloqueo de pantalla o una llave de seguridad. No hay contraseñas que recordar, y es mucho más difícil que alguien las robe.",
+      "confirmRemove": "¿Estás seguro de que quieres eliminar esta clave de acceso?",
+      "created": "Creada el {date, date, medium}",
+      "description1": "Con las passkeys, puedes iniciar sesión en tu cuenta de <noo></noo> usando solo tu huella digital, reconocimiento facial, bloqueo de pantalla o una llave de seguridad. No hay contraseñas que recordar, y es mucho más difícil que alguien las robe.",
       "description2": "Tus passkeys se quedan en tu dispositivo o llave de seguridad, así que solo tú puedes usarlas. Solo tienes que mantener tu dispositivo seguro: tu bloqueo de pantalla o datos biométricos son la clave.",
+      "lastUsed": "Última vez usada {ago}",
       "register": "Crear una passkey",
-      "title": "Passkeys"
+      "removeError": "Ha habido un error al eliminar la clave de acceso.",
+      "removeSuccess": "La clave de acceso ha sido eliminada.",
+      "title": "Passkeys",
+      "unnamed": "Clave sin nombre",
+      "yourPasskeys": "Tus claves de seguridad"
     },
     "password": {
       "breaches": "Tu contraseña ha aparecido en {count, plural, one {una filtración de datos} other {{count} filtraciones de datos}}. Aunque nuestros sistemas son seguros, te recomendamos que actualices tu contraseña de inmediato como medida de precaución.{otp, select, true {} other { Además, deberías activar la autenticación en 2 pasos para mayor seguridad.}} <guide>Aprende más</guide>.",
