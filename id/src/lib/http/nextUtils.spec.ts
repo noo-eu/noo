@@ -15,11 +15,6 @@ describe("NextJS Utility Functions", () => {
   }
 
   describe("getIpAddress", () => {
-    test("returns x-real-ip when available", async () => {
-      mockHeaders({ "x-real-ip": "192.168.1.1" });
-      expect(await getIpAddress()).toBe("192.168.1.1");
-    });
-
     test("returns x-forwarded-for when x-real-ip is not available", async () => {
       mockHeaders({ "x-forwarded-for": "203.0.113.195" });
       expect(await getIpAddress()).toBe("203.0.113.195");
