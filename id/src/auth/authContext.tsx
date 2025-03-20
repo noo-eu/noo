@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { ClientUser } from "./types/ClientUser";
+import { ClientUser } from "@/lib/types/ClientUser";
 
 const AuthContext = createContext<ClientUser>({} as ClientUser);
 

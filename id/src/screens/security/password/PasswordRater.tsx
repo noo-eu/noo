@@ -1,6 +1,8 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { checkBreaches } from "../actions";
+import { checkBreaches } from "@/app/security/password/actions";
 
 export type PasswordRaterProps = {
   password: string;

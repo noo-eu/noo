@@ -1,9 +1,9 @@
 // @vitest-environment happy-dom
 
 import { renderHook } from "@testing-library/react";
-import { useAuth, AuthProvider } from "@/lib/authContext";
+import { useAuth, AuthProvider } from "@/auth/authContext";
 import { describe, expect, it } from "vitest";
-import { ClientUser } from "./types/ClientUser";
+import { ClientUser } from "@/lib/types/ClientUser";
 
 describe("useAuth", () => {
   it("throws error if used outside AuthProvider", () => {

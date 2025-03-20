@@ -1,7 +1,7 @@
 "use client";
 
 import { User } from "@/db/users";
-import { useAuth } from "@/lib/authContext";
+import { useAuth } from "@/auth/authContext";
 import {
   Cog6ToothIcon,
   LockClosedIcon,
@@ -38,20 +38,15 @@ export function ProfilePage() {
   const user = useAuth();
 
   return (
-    <ProfileLayout user={user}>
+    <ProfileLayout>
       <div className="mt-16 mb-8" onClick={() => setIsOpen(true)}>
         <div className="flex items-center justify-center border border-2 rounded-full p-0.75">
           <ProfilePicture
-            user={user}
             className="w-32 h-32 text-5xl cursor-pointer hover:opacity-80"
             width={128}
           />
         </div>
-        <PictureDialog
-          isOpen={isOpen}
-          close={() => setIsOpen(false)}
-          user={user}
-        />
+        <PictureDialog isOpen={isOpen} close={() => setIsOpen(false)} />
       </div>
       <h1 className="text-5xl font-medium my-8 px-4 text-center">
         {t("title", {

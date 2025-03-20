@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { Form } from "./Form";
-import { withAuth } from "@/lib/withAuth";
+import { GenderForm } from "@/screens/profile/gender/GenderForm";
+import { withAuth } from "@/auth/withAuth";
+import { User } from "@/db/users";
+import { makeUpdateGenderAction } from "./actions";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -11,8 +13,8 @@ export async function generateMetadata() {
   };
 }
 
-function ProfileGenderPage() {
-  return <Form />;
+async function Page({ user }: { user: User }) {
+  return <GenderForm action={makeUpdateGenderAction(user.id)} />;
 }
 
-export default withAuth(ProfileGenderPage);
+export default withAuth(Page);

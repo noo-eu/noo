@@ -1,4 +1,4 @@
-import { ActionResult } from "@/app/profile/actions";
+import { ActionResult } from "@/lib/types/ActionResult";
 
 export type Callbacks<T, H = unknown> = {
   onStart?: () => H;
@@ -9,7 +9,7 @@ export type Callbacks<T, H = unknown> = {
 
 export const withCallbacks = <
   Args extends unknown[],
-  T extends ActionResult<unknown, unknown, unknown>,
+  T extends unknown,
   H = unknown,
 >(
   fn: (...args: Args) => Promise<T>,
@@ -21,7 +21,7 @@ export const withCallbacks = <
 
     const result = await call;
 
-    if (result?.error) {
+    if (result && typeof result === "object" && "error" in result) {
       callbacks.onError?.(result, handle!);
     } else {
       callbacks.onSuccess?.(result, handle!);

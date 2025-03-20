@@ -1,10 +1,10 @@
 import { schema } from "@/db";
 import Sessions from "@/db/sessions";
 import { User } from "@/db/users";
-import { withAuth } from "@/lib/withAuth";
+import { withAuth } from "@/auth/withAuth";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
-import SecurityHomePage from "./SecurityHomePage";
+import SecurityHub from "@/screens/security/Hub";
 
 export async function generateMetadata() {
   const t = await getTranslations("security");
@@ -20,7 +20,7 @@ async function SecurityHome({ user }: { user: User }) {
     eq(schema.sessions.userId, user.id),
   );
 
-  return <SecurityHomePage activeSessions={activeSessions} />;
+  return <SecurityHub activeSessions={activeSessions} />;
 }
 
 export default withAuth(SecurityHome);

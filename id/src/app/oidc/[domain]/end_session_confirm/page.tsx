@@ -5,7 +5,7 @@ import {
   getSessionCookie,
   SessionsService,
   setSessionCookie,
-} from "@/lib/SessionsService";
+} from "@/auth/SessionsService";
 import { getClientName } from "@/lib/oidc/clientUtils";
 import { buildSubClaim } from "@/lib/oidc/idToken";
 import { getTranslations } from "next-intl/server";

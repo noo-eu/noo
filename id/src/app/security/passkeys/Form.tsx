@@ -23,7 +23,7 @@ import {
   removePasskey,
   verifyRegistration,
 } from "./actions";
-import { useAuth } from "@/lib/authContext";
+import { useAuth } from "@/auth/authContext";
 
 export type PasskeysPageFormProps = {
   existingPasskeys: {

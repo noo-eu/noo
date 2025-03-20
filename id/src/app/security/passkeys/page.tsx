@@ -2,7 +2,7 @@ import ProfileLayout from "@/components/Profile/ProfileLayout";
 import Passkeys from "@/db/passkeys";
 import { uuidToHumanId } from "@/utils";
 import { PasskeysPageForm } from "./Form";
-import { withAuth } from "@/lib/withAuth";
+import { withAuth } from "@/auth/withAuth";
 import { User } from "@/db/users";
 
 async function PasskeysPage({ user }: { user: User }) {
@@ -18,7 +18,7 @@ async function PasskeysPage({ user }: { user: User }) {
   );
 
   return (
-    <ProfileLayout user={user}>
+    <ProfileLayout>
       <PasskeysPageForm existingPasskeys={existingPasskeys} />
     </ProfileLayout>
   );

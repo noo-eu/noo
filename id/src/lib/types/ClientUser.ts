@@ -8,6 +8,7 @@ export type ClientUser = {
   tenantDomain?: string;
   firstName: string;
   lastName: string | null;
+  fullName: string;
   picture: string | null;
   birthdate: Date | null;
   gender: User["gender"];
@@ -26,6 +27,7 @@ export function makeClientUser(user: UserWithTenant): ClientUser {
     tenantDomain: user.tenant?.domain,
     firstName: user.firstName,
     lastName: user.lastName,
+    fullName: `${user.firstName} ${user.lastName ?? ""}`.trim(),
     picture: user.picture,
     birthdate: user.birthdate,
     gender: user.gender,

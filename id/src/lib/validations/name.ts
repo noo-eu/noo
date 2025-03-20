@@ -1,5 +1,3 @@
-import { isValidName } from "../name";
-
 export function validateNameForm(
   firstName: string,
   lastName: string,
@@ -26,4 +24,9 @@ export function validateNameForm(
   if (!isValidName(last)) {
     return { lastName: "invalid" };
   }
+}
+
+function isValidName(name: string) {
+  const namePattern = /^[\p{L}\p{M}\p{Zs}.'-]*$/u;
+  return namePattern.test(name);
 }

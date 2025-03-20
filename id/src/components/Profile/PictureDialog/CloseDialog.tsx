@@ -2,9 +2,10 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export type CloseDialogProps = {
   onClick: () => void;
+  title?: string;
 };
 
-export function CloseDialog({ onClick }: CloseDialogProps) {
+export function CloseDialog({ onClick, title }: CloseDialogProps) {
   const shadow =
     " \
     hover:bg-yellow-600 shadow-amber-600/90 hover:shadow-[0_0_15px_2px_var(--tw-shadow-color)] hover:text-white focus:text-white \
@@ -15,6 +16,7 @@ export function CloseDialog({ onClick }: CloseDialogProps) {
     <button
       onClick={onClick}
       tabIndex={0}
+      title={title}
       className={`absolute px-4 top-0 left-0 sm:rounded-tl-md border-b border-r border-black/40 focus:border-black/10 hover:border-black/10 dark:border-white/30 p-2 cursor-pointer rounded-br-sm ${shadow} transition-all duration-150`}
     >
       <XMarkIcon className="size-6" />

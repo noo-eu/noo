@@ -19,7 +19,7 @@ export default function Form({ sessionId }: { sessionId: string }) {
             name="consent"
             disabled={pending}
             value={"yes"}
-            data-test-id="consentSubmit"
+            data-testid="consentSubmit"
           >
             {t("continue")}
           </Button>

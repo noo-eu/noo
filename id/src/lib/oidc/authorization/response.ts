@@ -3,7 +3,7 @@ import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
-import { getSessionCheckCookie } from "@/lib/SessionsService";
+import { getSessionCheckCookie } from "@/auth/SessionsService";
 import { humanIdToUuid, randomSalt, sha256, uuidToHumanId } from "@/utils";
 import { createIdToken, idTokenHash } from "../idToken";
 import { AuthorizationRequest } from "../types";

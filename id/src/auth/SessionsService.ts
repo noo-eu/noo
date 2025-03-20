@@ -67,6 +67,10 @@ export async function getUserForSession(sessionId: string) {
   return service.getUserBySid(sessionId);
 }
 
+export async function getSessionUserById(userId: string) {
+  return await SessionsService.userFor(userId);
+}
+
 export async function getSessions() {
   const manager = new SessionsService(await getSessionCookie());
   return manager.activeSessions();
@@ -90,12 +94,14 @@ export class SessionsService {
   static async userFor(userId: string) {
     const manager = await SessionsService.new();
     const sessions = await manager.activeSessions();
-    const uuid = humanIdToUuid(userId, "usr");
-    if (!uuid) {
-      return undefined;
+    if (userId.startsWith("usr_")) {
+      userId = humanIdToUuid(userId, "usr")!;
+      if (!userId) {
+        return undefined;
+      }
     }
 
-    return sessions.find((s) => s.userId === uuid)?.user;
+    return sessions.find((s) => s.userId === userId)?.user;
   }
 
   static async user(userId?: string) {

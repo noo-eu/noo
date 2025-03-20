@@ -35,6 +35,7 @@ describe("makeClientUser", () => {
       tenantDomain: undefined,
       firstName: "Test",
       lastName: "User",
+      fullName: "Test User",
       picture: null,
       birthdate: new Date("2000-01-01"),
       gender: "male",

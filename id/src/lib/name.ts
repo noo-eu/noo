@@ -96,11 +96,6 @@ export function capitalizeName(name: string) {
   return name;
 }
 
-export function isValidName(name: string) {
-  const namePattern = /^[\p{L}\p{M}\p{Zs}.'-]*$/u;
-  return namePattern.test(name);
-}
-
 const handleName = (word: string) => {
   return handleApostropheName(word);
 };

@@ -1,4 +1,3 @@
-import { AuthContext } from "@/components/AuthContext";
 import { Profile } from "@/lib/api/profile";
 import { DialogTitle } from "@headlessui/react";
 import {
@@ -9,12 +8,13 @@ import {
 } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import { View } from ".";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify/unstyled";
+import { useAuth } from "@/auth/authContext";
 
 export function UploadView({
   navigate,
@@ -30,7 +30,7 @@ export function UploadView({
   const editorRef = useRef<AvatarEditor>(null);
 
   const [isPending, setPending] = useState(false);
-  const user = useContext(AuthContext);
+  const user = useAuth();
 
   const { mutate } = useMutation({
     mutationFn: () => {

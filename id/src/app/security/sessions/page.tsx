@@ -2,8 +2,8 @@ import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
 import { User } from "@/db/users";
-import { SessionsService } from "@/lib/SessionsService";
-import { withAuth } from "@/lib/withAuth";
+import { SessionsService } from "@/auth/SessionsService";
+import { withAuth } from "@/auth/withAuth";
 import { uuidToHumanId } from "@/utils";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
@@ -36,7 +36,7 @@ async function SecuritySessionsPage({ user }: { user: User }) {
   }
 
   return (
-    <ProfileLayout user={user}>
+    <ProfileLayout>
       <SessionsPage
         sessions={safeSessions}
         currentSessionId={currentSessionId}

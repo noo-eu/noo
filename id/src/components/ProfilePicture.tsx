@@ -1,19 +1,16 @@
+"use client";
+
+import { useAuth } from "@/auth/authContext";
 import Image from "@/components/Image";
 
 export type ProfilePictureProps = {
-  user: {
-    picture: string | null;
-    firstName: string;
-  };
   className?: string;
   width: number;
 };
 
-export function ProfilePicture({
-  user,
-  className,
-  width,
-}: ProfilePictureProps) {
+export function ProfilePicture({ className, width }: ProfilePictureProps) {
+  const user = useAuth();
+
   if (user.picture) {
     return (
       <Image

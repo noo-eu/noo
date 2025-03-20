@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import ProfilePage from "./ProfileHomePage";
-import { withAuth } from "@/lib/withAuth";
+import { withAuth } from "@/auth/withAuth";
+import ProfileHub from "@/screens/profile/Hub";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -11,8 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-function ProfileHome() {
-  return <ProfilePage />;
+function Page() {
+  return <ProfileHub />;
 }
 
-export default withAuth(ProfileHome);
+export default withAuth(Page);

@@ -2,7 +2,7 @@
 
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
-import { SessionsService } from "@/lib/SessionsService";
+import { SessionsService } from "@/auth/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import {
   generateRegistrationOptions,

@@ -5,7 +5,7 @@ import OidcClients from "@/db/oidc_clients";
 import { User } from "@/db/users";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import { getSessions } from "@/lib/SessionsService";
+import { getSessions } from "@/auth/SessionsService";
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Legal } from "../../components/Legal";

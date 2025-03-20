@@ -15,5 +15,6 @@ export default defineConfig({
       PAIRWISE_SALT: "helloworld",
     },
     exclude: ["tests/**/*"],
+    setupFiles: ["./tests/vitest-setup.ts"],
   },
 });

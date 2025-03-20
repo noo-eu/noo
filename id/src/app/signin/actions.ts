@@ -9,7 +9,7 @@ import {
   getSessionCookie,
   SessionsService,
   setSessionCookie,
-} from "@/lib/SessionsService";
+} from "@/auth/SessionsService";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 

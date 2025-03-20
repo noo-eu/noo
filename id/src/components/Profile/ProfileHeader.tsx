@@ -1,13 +1,9 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Noo } from "../Noo";
-import { ProfilePicture, ProfilePictureProps } from "../ProfilePicture";
+import { ProfilePicture } from "../ProfilePicture";
 
-export type ProfileHeaderProps = {
-  user: ProfilePictureProps["user"];
-};
-
-export function ProfileHeader({ user }: ProfileHeaderProps) {
+export function ProfileHeader() {
   const t = useTranslations("profile");
 
   return (
@@ -22,7 +18,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
       </div>
       <div className="flex items-center gap-4 flex items-center justify-center border rounded-full p-0.5">
         <a href="/profile">
-          <ProfilePicture user={user} width={32} />
+          <ProfilePicture className="size-[32px]" width={32} />
         </a>
       </div>
     </div>

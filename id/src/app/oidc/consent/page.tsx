@@ -2,7 +2,7 @@ import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import { getUserForSession } from "@/lib/SessionsService";
+import { getUserForSession } from "@/auth/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";

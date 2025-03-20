@@ -2,7 +2,7 @@ import { User } from "@/db/users";
 import { redirect } from "next/navigation";
 import { SessionsService } from "./SessionsService";
 import { AuthProvider } from "./authContext";
-import { makeClientUser } from "./types/ClientUser";
+import { makeClientUser } from "@/lib/types/ClientUser";
 
 // Higher-order component to wrap app router pages with auth
 export function withAuth<P extends { searchParams: Promise<{ uid?: string }> }>(

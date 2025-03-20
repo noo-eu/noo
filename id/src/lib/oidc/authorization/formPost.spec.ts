@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import { buildFormPostResponse } from "./formPost";
-import { afterEach, beforeEach } from "node:test";
+import { afterEach, beforeEach } from "vitest";
 
 describe("buildFormPostResponse", () => {
   beforeEach(() => {

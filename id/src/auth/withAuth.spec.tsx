@@ -1,10 +1,11 @@
 // @vitest-environment happy-dom
 
 import { render, screen } from "@testing-library/react";
-import { withAuth } from "@/lib/withAuth";
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { withAuth } from "@/auth/withAuth";
+import { describe, expect, it, vi } from "vitest";
+import { User } from "@/db/users";
 
-function TestPage({ user }: { user: any }) {
+function TestPage({ user }: { user: User; searchParams: unknown }) {
   return (
     <div data-testid="test-user">
       {user.firstName} {user.lastName}
@@ -14,8 +15,8 @@ function TestPage({ user }: { user: any }) {
 
 vi.mock("next/navigation", () => ({
   redirect: vi.fn((path: string) => {
-    // Next.js redirect function throws an error, and it's not commonly used
-    // with returns, so we need to mock it as a function that throws an error
+    // Next.js redirect function throws an error, and it's not commonly
+    // returned, so we need to mock it as a function that throws an error
     throw new Error(path);
   }),
 }));
@@ -24,7 +25,7 @@ const userMock = vi.hoisted(() => {
   return vi.fn();
 });
 
-vi.mock("@/lib/SessionsService", () => ({
+vi.mock("@/auth/SessionsService", () => ({
   SessionsService: {
     user: userMock,
   },

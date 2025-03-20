@@ -1,19 +1,19 @@
-import { AuthContext } from "@/components/AuthContext";
 import { ProfilePicture } from "@/components/ProfilePicture";
 import { Profile } from "@/lib/api/profile";
 import { DialogTitle } from "@headlessui/react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify/unstyled";
 import { View } from ".";
 import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "@/auth/authContext";
 
 export function InitialView({ setView }: { setView: (view: View) => void }) {
   const t = useTranslations("profile.picture_dialog");
   const commonT = useTranslations("common");
-  const user = useContext(AuthContext);
+  const user = useAuth();
 
   const [isPending, setPending] = useState(false);
   const { mutate } = useMutation({
@@ -44,7 +44,6 @@ export function InitialView({ setView }: { setView: (view: View) => void }) {
 
       <div className="my-12">
         <ProfilePicture
-          user={user}
           className="w-3xs mx-auto aspect-square text-7xl"
           width={256}
         />

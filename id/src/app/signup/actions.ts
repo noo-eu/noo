@@ -7,7 +7,7 @@ import {
   getSessionCookie,
   SessionsService,
   setSessionCookie,
-} from "@/lib/SessionsService";
+} from "@/auth/SessionsService";
 import { SignupService } from "@/lib/SignupService";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
