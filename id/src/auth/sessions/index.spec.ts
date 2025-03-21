@@ -13,7 +13,7 @@ import Sessions from "@/db/sessions";
 
 import { getSessionCookie, setSessionCookie } from "@/auth/sessions/store";
 import { encodeSessionToken } from "@/auth/sessions/token";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 
 vi.mock("@/db/sessions");
 vi.mock("@/auth/sessions/store");
@@ -34,13 +34,12 @@ const encodedToken = encodeSessionToken({
 
 beforeEach(() => {
   vi.clearAllMocks();
-  (getSessionCookie as any).mockResolvedValue(encodedToken);
-  (setSessionCookie as any).mockResolvedValue();
+  (getSessionCookie as Mock).mockResolvedValue(encodedToken);
 });
 
 describe("parseValidTokens", () => {
   it("parses valid tokens", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const { sessions, tokens } = await parseValidTokens(encodedToken);
     expect(sessions).toHaveLength(1);
     expect(tokens).toHaveLength(1);
@@ -55,9 +54,9 @@ describe("parseValidTokens", () => {
 
 describe("createSession", () => {
   it("creates a session", async () => {
-    (Sessions.create as any).mockResolvedValue(true);
-    (Sessions.find as any).mockResolvedValue(mockSession);
-    (Sessions.select as any).mockResolvedValue([]);
+    (Sessions.create as Mock).mockResolvedValue(true);
+    (Sessions.find as Mock).mockResolvedValue(mockSession);
+    (Sessions.select as Mock).mockResolvedValue([]);
 
     const session = await createSession(
       mockSession.userId,
@@ -71,8 +70,8 @@ describe("createSession", () => {
 
 describe("reauhenticateSession", () => {
   it("reauthenticates a session", async () => {
-    (Sessions.refresh as any).mockResolvedValue(true);
-    (Sessions.find as any).mockResolvedValue(mockSession);
+    (Sessions.refresh as Mock).mockResolvedValue(true);
+    (Sessions.find as Mock).mockResolvedValue(mockSession);
 
     const session = await reauthenticateSession(
       mockSession.id,
@@ -85,8 +84,8 @@ describe("reauhenticateSession", () => {
 
 describe("endSession", () => {
   it("ends a specific session", async () => {
-    (Sessions.destroy as any).mockResolvedValue(true);
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.destroy as Mock).mockResolvedValue(true);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
 
     await expect(endSession(mockSession.id)).resolves.toBeUndefined();
     expect(setSessionCookie).toHaveBeenCalled();
@@ -95,8 +94,8 @@ describe("endSession", () => {
 
 describe("endAllSessions", () => {
   it("ends all sessions", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
-    (Sessions.destroy as any).mockResolvedValue(true);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
+    (Sessions.destroy as Mock).mockResolvedValue(true);
 
     await expect(endAllSessions()).resolves.toBeUndefined();
     expect(setSessionCookie).toHaveBeenCalledWith("");
@@ -105,13 +104,13 @@ describe("endAllSessions", () => {
 
 describe("getActiveSessions", () => {
   it("gets active sessions", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const sessions = await getActiveSessions();
     expect(sessions[0].id).toBe(mockSession.id);
   });
 
   it("respects the maxAge option", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const sessions = await getActiveSessions(100);
     expect(sessions[0].id).toBe(mockSession.id);
   });
@@ -119,25 +118,25 @@ describe("getActiveSessions", () => {
 
 describe("getAuthenticatedUser", () => {
   it("gets authenticated user", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const user = await getAuthenticatedUser(mockSession.userId);
     expect(user?.id).toBe(mockSession.userId);
   });
 
   it("doesn't panic with an invalid user id", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const user = await getAuthenticatedUser("invalid-id");
     expect(user).toBeUndefined();
   });
 
   it("handles human IDs", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const user = await getAuthenticatedUser("usr_ylMnww2mkFyl9xLKbutXk");
     expect(user?.id).toBe(mockSession.userId);
   });
 
   it("handles undefined user ID", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const user = await getAuthenticatedUser(undefined);
     expect(user).toBeUndefined();
   });
@@ -145,7 +144,7 @@ describe("getAuthenticatedUser", () => {
 
 describe("getAuthenticatedSession", () => {
   it("gets authenticated session", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const session = await getAuthenticatedSession(mockSession.userId);
     expect(session?.userId).toBe(mockSession.userId);
   });
@@ -153,13 +152,13 @@ describe("getAuthenticatedSession", () => {
 
 describe("getFirstAuthenticatedUserId", () => {
   it("gets first authenticated user ID", async () => {
-    (Sessions.select as any).mockResolvedValue([mockSession]);
+    (Sessions.select as Mock).mockResolvedValue([mockSession]);
     const uid = await getFirstAuthenticatedUserId();
     expect(uid).toMatch(/^usr_/); // Assuming uuidToHumanId applies
   });
 
   it("returns undefined if no sessions", async () => {
-    (Sessions.select as any).mockResolvedValue([]);
+    (Sessions.select as Mock).mockResolvedValue([]);
     const uid = await getFirstAuthenticatedUserId();
     expect(uid).toBeUndefined();
   });

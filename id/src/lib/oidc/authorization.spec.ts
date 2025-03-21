@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { HttpRequest } from "../http/request";
 import { oidcAuthorization } from "./authorization";
 
@@ -7,17 +7,17 @@ let mockSessions: {
   id: string;
   userId: string;
   tenantId?: string;
-}[] = [];
+}[] = vi.hoisted(() => []);
 
-function createMockSessionService() {
-  return class MockSessionService {
-    activeSessions(maxAge?: number) {
-      return mockSessions.filter((session) => {
-        return maxAge === undefined || session.age < maxAge;
-      });
+vi.mock("@/auth/sessions", () => ({
+  getActiveSessions: (maxAge?: number) => {
+    if (maxAge === undefined) {
+      return mockSessions;
     }
-  };
-}
+
+    return mockSessions.filter((s) => s.age < maxAge);
+  },
+}));
 
 const makeRequestData = (data: Record<string, string>) => {
   return new URLSearchParams({
@@ -43,18 +43,18 @@ const makeRequest = (data: Record<string, string> = {}) => {
   } as unknown as Request);
 };
 
-beforeEach(() => {
-  mockSessions = [
-    {
-      id: "session1",
-      userId: "00000000-0000-0000-0000-000000000001",
-      age: 10,
-    },
-  ];
-});
-
 describe("Authorization endpoint", () => {
   describe("when there is only one signed-in user", () => {
+    beforeEach(() => {
+      mockSessions = [
+        {
+          id: "session1",
+          userId: "00000000-0000-0000-0000-000000000001",
+          age: 10,
+        },
+      ];
+    });
+
     describe("when the user has not yet consented to the client", () => {
       test("should return the consent page", async () => {
         const request = makeRequest();
@@ -124,6 +124,16 @@ describe("Authorization endpoint", () => {
   });
 
   describe("validations", () => {
+    beforeEach(() => {
+      mockSessions = [
+        {
+          id: "session1",
+          userId: "00000000-0000-0000-0000-000000000001",
+          age: 10,
+        },
+      ];
+    });
+
     test("allows non-OIDC (OAuth2) requests", async () => {
       const request = makeRequest({ response_type: "token", scope: "profile" });
       const result = await oidcAuthorization(request);
