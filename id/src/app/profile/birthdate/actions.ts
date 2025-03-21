@@ -1,3 +1,5 @@
+"use server";
+
 import { getSessionUserById } from "@/auth/SessionsService";
 import Users from "@/db/users";
 import { BasicFormAction } from "@/lib/types/ActionResult";
