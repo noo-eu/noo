@@ -1,14 +1,16 @@
 import { JohnDoe } from "@/../tests/fixtures/users";
 import { signin } from "@/app/signin/actions";
+import { reauthenticateSession } from "@/auth/sessions";
 import Tenants from "@/db/tenants";
 import Users from "@/db/users";
 import { uuidToHumanId } from "@/utils";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 
 const mockSessionService = vi.hoisted(() => ({
-  startSession: vi.fn(),
-  sessionFor: vi.fn(),
   getAuthenticatedUser: vi.fn(),
+  getAuthenticatedSession: vi.fn(),
+  createSession: vi.fn(),
+  reauthenticateSession: vi.fn(),
 }));
 
 vi.mock("@/db/users");
@@ -22,7 +24,6 @@ vi.mock("next/navigation", () => ({
 vi.mock("next/headers", () => ({
   cookies: () => ({
     set: () => {},
-    get: () => "",
   }),
   headers: () => ({
     get: () => {},
@@ -119,10 +120,14 @@ describe("signin", () => {
 
   it("updates the active session if the user is already authenticated", async () => {
     (Users.authenticate as Mock).mockResolvedValue(mockUser);
-    mockSessionService.sessionFor.mockResolvedValue({});
+    mockSessionService.getAuthenticatedSession.mockResolvedValue({
+      userId: mockUser.id,
+    });
 
     await expect(
       signin(null, createFormData({ username: "test", password: "123" })),
     ).rejects.toThrow("/");
+
+    expect(reauthenticateSession).toHaveBeenCalled();
   });
 });

@@ -8,7 +8,7 @@ import {
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("next/headers", () => {
-  let cookiesStore = {
+  const cookiesStore = {
     get: vi.fn(),
     set: vi.fn(),
   };

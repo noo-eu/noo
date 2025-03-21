@@ -229,9 +229,6 @@ export async function verifyWebauthn(
       if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
         const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
 
-        const fullUsername =
-          user.username + "@" + (tenant?.domain ?? "noomail.eu");
-
         return {
           error: "tenant",
           input: { domain: tenant!.domain },

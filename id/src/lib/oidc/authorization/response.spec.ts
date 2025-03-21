@@ -1,6 +1,6 @@
 import { OidcClient } from "@/db/oidc_clients";
-import { Session } from "@/db/sessions";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
+import { JohnDoe } from "../../../../tests/fixtures/users";
 import { AuthorizationRequest } from "../types";
 import { buildAuthorizationResponse } from "./response";
 
@@ -46,25 +46,26 @@ vi.mock("../userClaims", () => ({
   requestedUserClaims: vi.fn(() => ({ email: "test@example.com" })),
 }));
 
+vi.mock("@/auth/sessions", () => ({
+  getAuthenticatedSession: vi.fn(() =>
+    Promise.resolve({
+      userId: "00000000-0000-0000-0000-000000000000",
+      lastAuthenticatedAt: new Date(),
+      user: JohnDoe,
+    }),
+  ),
+}));
+
+vi.mock("@/auth/sessions/store", () => ({
+  getSessionCheckCookie: vi.fn(() => "test-session-check-cookie"),
+}));
+
 describe("buildAuthorizationResponse", () => {
   const mockClient = {
     id: "test-client-uuid",
     clientSecret: "test-secret",
     redirectUris: ["https://example.com/callback"],
   } as unknown as OidcClient;
-
-  const mockSession = {
-    userId: "00000000-0000-0000-0000-000000000000",
-    lastAuthenticatedAt: new Date(),
-    user: {
-      id: "00000000-0000-0000-0000-000000000000",
-      email: "test@example.com",
-    },
-  } as unknown as Session;
-
-  beforeEach(() => {
-    vi.restoreAllMocks();
-  });
 
   test("throws error for unsupported response type", async () => {
     const params = {
@@ -77,7 +78,7 @@ describe("buildAuthorizationResponse", () => {
     } as unknown as AuthorizationRequest;
 
     await expect(
-      buildAuthorizationResponse(mockClient, params, mockSession),
+      buildAuthorizationResponse(mockClient, params, JohnDoe),
     ).rejects.toThrow("Unsupported or invalid response type");
   });
 
@@ -96,7 +97,7 @@ describe("buildAuthorizationResponse", () => {
     const response = await buildAuthorizationResponse(
       mockClient,
       params,
-      mockSession,
+      JohnDoe,
     );
 
     expect(response.code).toBe("test_code_123");
@@ -116,7 +117,7 @@ describe("buildAuthorizationResponse", () => {
     const response = await buildAuthorizationResponse(
       mockClient,
       params,
-      mockSession,
+      JohnDoe,
     );
 
     expect(response.access_token).toBe("test-access-token");
@@ -139,7 +140,7 @@ describe("buildAuthorizationResponse", () => {
     const response = await buildAuthorizationResponse(
       mockClient,
       params,
-      mockSession,
+      JohnDoe,
     );
 
     expect(response.id_token).toBe("test-id-token");
@@ -162,7 +163,7 @@ describe("buildAuthorizationResponse", () => {
     const response = await buildAuthorizationResponse(
       mockClient,
       params,
-      mockSession,
+      JohnDoe,
     );
 
     expect(response.code).toBe("test_code_123");

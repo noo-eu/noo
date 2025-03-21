@@ -10,12 +10,6 @@ import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { generateWebauthnOptions, signin, verifyWebauthn } from "./actions";
 
-type State = {
-  username?: string;
-  error?: string;
-  domain?: string;
-};
-
 function useWebauthnAuthentication() {
   return async (autofill: boolean) => {
     try {
@@ -46,12 +40,10 @@ export function Form() {
   const authenticateWithWebauthn = useWebauthnAuthentication();
 
   useEffect(() => {
-    try {
-      authenticateWithWebauthn(true);
-    } catch (e) {
+    authenticateWithWebauthn(true).catch((e) => {
       console.warn(e);
-    }
-  }, []);
+    });
+  }, [authenticateWithWebauthn]);
 
   return (
     <>
