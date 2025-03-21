@@ -26,7 +26,7 @@ export function ConfirmationDialog({
   positiveKind = "primary",
   onConfirm,
   onCancel,
-}: ConfirmationDialogProps) {
+}: Readonly<ConfirmationDialogProps>) {
   const t = useTranslations("common");
 
   negativeButton = negativeButton || t("cancel");

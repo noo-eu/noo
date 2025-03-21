@@ -5,7 +5,7 @@ export type CloseDialogProps = {
   title?: string;
 };
 
-export function CloseDialog({ onClick, title }: CloseDialogProps) {
+export function CloseDialog({ onClick, title }: Readonly<CloseDialogProps>) {
   const shadow =
     " \
     hover:bg-yellow-600 shadow-amber-600/90 hover:shadow-[0_0_15px_2px_var(--tw-shadow-color)] hover:text-white focus:text-white \

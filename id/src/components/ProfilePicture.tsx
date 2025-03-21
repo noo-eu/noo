@@ -8,7 +8,10 @@ export type ProfilePictureProps = {
   width: number;
 };
 
-export function ProfilePicture({ className, width }: ProfilePictureProps) {
+export function ProfilePicture({
+  className,
+  width,
+}: Readonly<ProfilePictureProps>) {
   const user = useAuth();
 
   if (user.picture) {

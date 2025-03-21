@@ -1,9 +1,9 @@
+import { SessionsService } from "@/auth/SessionsService";
+import { withAuth } from "@/auth/withAuth";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
 import { User } from "@/db/users";
-import { SessionsService } from "@/auth/SessionsService";
-import { withAuth } from "@/auth/withAuth";
 import { uuidToHumanId } from "@/utils";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
@@ -19,7 +19,7 @@ export async function generateMetadata() {
   };
 }
 
-async function SecuritySessionsPage({ user }: { user: User }) {
+async function SecuritySessionsPage({ user }: Readonly<{ user: User }>) {
   const allSessions = await Sessions.findManyBy(eq(sessions.userId, user.id));
   const safeSessions = allSessions.map((session) => {
     return {

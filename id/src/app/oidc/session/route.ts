@@ -39,7 +39,7 @@ const PAGE = `
           document.cookie
             .split("; ")
             .find((row) => row.startsWith("_noo_auth_check"))
-            ?.split("=")[1] || "";
+            ?.split("=")[1] ?? "";
 
         const state = client_id + " " + e.origin + " " + opuas + " " + salt;
 

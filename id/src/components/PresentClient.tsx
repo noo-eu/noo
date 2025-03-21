@@ -23,7 +23,7 @@ export function PresentClient({
   append,
   descriptionKey,
   descriptionClassName,
-}: Props) {
+}: Readonly<Props>) {
   return (
     <div className="lg:me-8">
       {client.logo && (

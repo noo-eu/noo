@@ -28,7 +28,7 @@ export function requestedUserClaims(
   }
 
   if (requests.includes("email")) {
-    claims.email = user.username + "@" + (user.tenant?.domain || "noomail.eu");
+    claims.email = user.username + "@" + (user.tenant?.domain ?? "noomail.eu");
   }
 
   if (requests.includes("email_verified")) {

@@ -5,7 +5,7 @@ export type AccountBoxProps = {
   };
 };
 
-export function AccountBox({ user }: AccountBoxProps) {
+export function AccountBox({ user }: Readonly<AccountBoxProps>) {
   return (
     <div className="flex items-center">
       <div className="me-4">

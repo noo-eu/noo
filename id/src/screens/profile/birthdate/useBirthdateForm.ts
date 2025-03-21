@@ -12,9 +12,9 @@ export function useBirthdateForm(
   const t = useTranslations("profile");
   const user = useAuth();
 
-  const day = user.birthdate?.getDate().toString() || "";
-  const month = ((user.birthdate?.getMonth() || 0) + 1).toString();
-  const year = user.birthdate?.getFullYear().toString() || "";
+  const day = user.birthdate?.getDate().toString() ?? "";
+  const month = ((user.birthdate?.getMonth() ?? 0) + 1).toString();
+  const year = user.birthdate?.getFullYear().toString() ?? "";
 
   const [state, formAction, isPending] = useActionState(
     withCallbacks(action, {

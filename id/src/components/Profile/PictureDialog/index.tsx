@@ -1,11 +1,11 @@
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { CameraView } from "./CameraView";
 import { CloseDialog } from "./CloseDialog";
 import { InitialView } from "./InitialView";
 import { UploadView } from "./UploadView";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
 
 export type PictureDialogProps = {
   isOpen: boolean;
@@ -16,7 +16,10 @@ export type View = "initial" | "upload" | "crop" | "camera";
 
 const queryClient = new QueryClient();
 
-export default function PictureDialog({ isOpen, close }: PictureDialogProps) {
+export default function PictureDialog({
+  isOpen,
+  close,
+}: Readonly<PictureDialogProps>) {
   const [view, setView] = useState<View>("initial");
   const [capturedImage, setCapturedImage] = useState<File | null>(null);
 

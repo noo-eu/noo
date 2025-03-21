@@ -1,8 +1,9 @@
 "use server";
 
+import { SessionsService } from "@/auth/SessionsService";
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
-import { SessionsService } from "@/auth/SessionsService";
+import { ActionResult } from "@/lib/types/ActionResult";
 import { humanIdToUuid } from "@/utils";
 import {
   generateRegistrationOptions,
@@ -11,7 +12,6 @@ import {
 } from "@simplewebauthn/server";
 import { headers } from "next/headers";
 import knownAuthenticators from "./knownAuthenticators";
-import { ActionResult } from "@/lib/types/ActionResult";
 
 async function getWebAuthnID() {
   if (process.env.NODE_ENV === "production") {
@@ -19,7 +19,7 @@ async function getWebAuthnID() {
   }
 
   const hdrs = await headers();
-  return hdrs.get("host")?.replace(/:\d+$/, "") || "localhost";
+  return hdrs.get("host")?.replace(/:\d+$/, "") ?? "localhost";
 }
 
 async function getWebAuthnExpectedOrigin() {
@@ -28,8 +28,8 @@ async function getWebAuthnExpectedOrigin() {
   }
 
   const hdrs = await headers();
-  const scheme = hdrs.get("x-forwarded-proto") || "http";
-  const host = hdrs.get("host") || "localhost";
+  const scheme = hdrs.get("x-forwarded-proto") ?? "http";
+  const host = hdrs.get("host") ?? "localhost";
   return `${scheme}://${host}`;
 }
 
@@ -49,7 +49,7 @@ export async function registrationOptions(
 
   const encoder = new TextEncoder();
   const uint8UserId = encoder.encode(uid);
-  const username = `${user.username}@${user.tenant?.domain || "noomail.eu"}`;
+  const username = `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`;
 
   const options = await generateRegistrationOptions({
     rpName: "noo",
@@ -109,7 +109,7 @@ export async function verifyRegistration(
   if (verification.verified) {
     const info = verification.registrationInfo!;
     const credential = info.credential;
-    const authenticatorName = knownAuthenticators[info.aaguid] || "";
+    const authenticatorName = knownAuthenticators[info.aaguid] ?? "";
 
     await Passkeys.create({
       userId: user.id,

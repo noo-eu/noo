@@ -16,7 +16,11 @@ type Props = {
   userId: string;
 };
 
-export function SessionsPage({ sessions, currentSessionId, userId }: Props) {
+export function SessionsPage({
+  sessions,
+  currentSessionId,
+  userId,
+}: Readonly<Props>) {
   const sessionId = uuidToHumanId(currentSessionId, "sess");
   const t = useTranslations("security");
 
@@ -66,12 +70,12 @@ function SessionsGroup({
   sessions,
   currentSessionId,
   userId,
-}: {
+}: Readonly<{
   name: string;
   sessions: Props["sessions"];
   currentSessionId: string;
   userId: string;
-}) {
+}>) {
   return (
     <div className="w-full border border-black/25 dark:border-white/25 rounded-lg p-8 mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <h2 className="text-2xl font-medium">{name}</h2>
@@ -93,11 +97,11 @@ function Session({
   session,
   isActive,
   userId,
-}: {
+}: Readonly<{
   session: Props["sessions"][0];
   isActive: boolean;
   userId: string;
-}) {
+}>) {
   const formatter = useFormatter();
   const ua = userAgentToDevice(session.userAgent);
   const t = useTranslations("security");
@@ -222,7 +226,7 @@ function extractDeviceType(userAgent: string): string | undefined {
   const os = userAgent.slice(bracketStart + 1, bracketEnd);
 
   const parts = os.split(";");
-  if (parts[1] && parts[1].includes("Android ")) {
+  if (parts[1]?.includes("Android ")) {
     const device = parts[2]?.trim();
     if (device) {
       // Remove "Build/" from the device name

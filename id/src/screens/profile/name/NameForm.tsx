@@ -1,14 +1,14 @@
 "use client";
 
+import { updateName } from "@/app/profile/name/actions";
+import { useAuth } from "@/auth/authContext";
 import { Noo } from "@/components/Noo";
 import { capitalizeName } from "@/lib/name";
 import { Button, TextField } from "@noo/ui";
-import { useNameForm } from "./useNameForm";
 import { useTranslations } from "next-intl";
 import { CancelLink } from "../CancelLink";
 import { ProfileFormLayout } from "../ProfileFormLayout";
-import { updateName } from "@/app/profile/name/actions";
-import { useAuth } from "@/auth/authContext";
+import { useNameForm } from "./useNameForm";
 
 export function NameForm() {
   const {
@@ -36,7 +36,7 @@ export function NameForm() {
         action={formAction}
         onSubmit={onSubmit}
         className="space-y-8"
-        role="form"
+        data-testid="form"
       >
         <TextField
           label={t("firstName")}

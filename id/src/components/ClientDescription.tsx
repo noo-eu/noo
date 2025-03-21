@@ -7,7 +7,7 @@ type Props = {
   descriptionKey?: string;
 };
 
-export function ClientDescription({ name, descriptionKey }: Props) {
+export function ClientDescription({ name, descriptionKey }: Readonly<Props>) {
   const t = useTranslations("oidc");
 
   return (

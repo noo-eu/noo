@@ -1,19 +1,21 @@
 import { useAuth } from "@/auth/authContext";
 import Link from "next/link";
 
+type Props = {
+  href: string;
+  Icon: React.ComponentType<{ className: string }>;
+  title: string;
+  value?: React.ReactNode;
+  children?: React.ReactNode;
+};
+
 export function ProfileLink({
   href,
   Icon,
   title,
   value,
   children,
-}: {
-  href: string;
-  Icon: React.ComponentType<{ className: string }>;
-  title: string;
-  value?: React.ReactNode;
-  children?: React.ReactNode;
-}) {
+}: Readonly<Props>) {
   const { id: userId } = useAuth();
 
   return (

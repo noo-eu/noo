@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext } from "react";
 import { ClientUser } from "@/lib/types/ClientUser";
+import { createContext, useContext } from "react";
 
 const AuthContext = createContext<ClientUser>({} as ClientUser);
 
@@ -10,10 +10,10 @@ export { AuthContext };
 export function AuthProvider({
   children,
   user,
-}: {
+}: Readonly<{
   children: React.ReactNode;
   user: ClientUser;
-}) {
+}>) {
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }
 

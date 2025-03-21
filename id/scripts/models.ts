@@ -15,7 +15,7 @@ class Ollama implements LLM {
   }
 
   async request(system: string, prompt: string) {
-    const ollamaHost = process.env.OLLAMA_HOST || "http://localhost:11434";
+    const ollamaHost = process.env.OLLAMA_HOST ?? "http://localhost:11434";
 
     const response = await fetch(`${ollamaHost}/api/generate`, {
       method: "POST",

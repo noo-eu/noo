@@ -1,9 +1,9 @@
 "use client";
 
+import { useAuth } from "@/auth/authContext";
 import { Noo } from "@/components/Noo";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import { ProfilePicture } from "@/components/ProfilePicture";
-import { useAuth } from "@/auth/authContext";
 import {
   CakeIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -12,8 +12,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { useFormatter, useTranslations } from "next-intl";
 import { ProfileLink } from "./ProfileLink";
-import { renderBirthdate, renderGender } from "./utils";
 import { useProfilePictureDialog } from "./useProfilePictureDialog";
+import { renderBirthdate, renderGender } from "./utils";
 
 export default function ProfileHub() {
   const format = useFormatter();
@@ -39,7 +39,7 @@ export default function ProfileHub() {
         >
           <UserCircleIcon className="size-6" />
           <div>
-            <h2 className="text-lg font-medium text-left" role="presentation">
+            <h2 className="text-lg font-medium text-left">
               {t("summary.picture")}
             </h2>
           </div>

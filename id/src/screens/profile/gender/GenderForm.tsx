@@ -1,14 +1,14 @@
 "use client";
 
+import { updateGender } from "@/app/profile/gender/actions";
+import { useAuth } from "@/auth/authContext";
 import { Noo } from "@/components/Noo";
 import { Button, SelectField, TextField } from "@noo/ui";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { useAuth } from "@/auth/authContext";
+import { CancelLink } from "../CancelLink";
 import { ProfileFormLayout } from "../ProfileFormLayout";
 import { useGenderForm } from "./useGenderForm";
-import { CancelLink } from "../CancelLink";
-import { updateGender } from "@/app/profile/gender/actions";
 
 export function GenderForm() {
   const user = useAuth();
@@ -84,7 +84,7 @@ export function GenderForm() {
             <TextField
               name="genderCustom"
               label={t("gender.customLabel")}
-              defaultValue={user.genderCustom || ""}
+              defaultValue={user.genderCustom ?? ""}
               required
             />
             <SelectField

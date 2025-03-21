@@ -28,6 +28,7 @@ spec:
       labels:
         app: noo-id
     spec:
+      automountServiceAccountToken: false
       containers:
         - image: ghcr.io/noo-eu/id:latest
           name: noo-id
@@ -65,6 +66,13 @@ spec:
             httpGet:
               port: 3000
               path: /signin
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+              ephemeral-storage: "100Mi"
+            limits:
+              memory: "512Mi"
 ---
 apiVersion: v1
 kind: Service

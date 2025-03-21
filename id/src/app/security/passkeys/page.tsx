@@ -1,11 +1,11 @@
+import { withAuth } from "@/auth/withAuth";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
 import Passkeys from "@/db/passkeys";
+import { User } from "@/db/users";
 import { uuidToHumanId } from "@/utils";
 import { PasskeysPageForm } from "./Form";
-import { withAuth } from "@/auth/withAuth";
-import { User } from "@/db/users";
 
-async function PasskeysPage({ user }: { user: User }) {
+async function PasskeysPage({ user }: Readonly<{ user: User }>) {
   const existingPasskeys = (await Passkeys.listForUser(user.id)).map(
     (passkey) => {
       return {

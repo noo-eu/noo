@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/auth/authContext";
 import {
   ConfirmationProvider,
   useWithConfirmation,
@@ -23,7 +24,6 @@ import {
   removePasskey,
   verifyRegistration,
 } from "./actions";
-import { useAuth } from "@/auth/authContext";
 
 export type PasskeysPageFormProps = {
   existingPasskeys: {
@@ -34,7 +34,9 @@ export type PasskeysPageFormProps = {
   }[];
 };
 
-export function PasskeysPageForm({ existingPasskeys }: PasskeysPageFormProps) {
+export function PasskeysPageForm({
+  existingPasskeys,
+}: Readonly<PasskeysPageFormProps>) {
   const t = useTranslations("security.passkeys");
   const { id: userId } = useAuth();
 
@@ -93,9 +95,9 @@ export function PasskeysPageForm({ existingPasskeys }: PasskeysPageFormProps) {
 
 function Passkey({
   passkey,
-}: {
+}: Readonly<{
   passkey: PasskeysPageFormProps["existingPasskeys"][0];
-}) {
+}>) {
   const t = useTranslations("security.passkeys");
   const commonT = useTranslations("common");
   const format = useFormatter();
@@ -108,7 +110,6 @@ function Passkey({
   const destroy = async () => {
     if ((await removePasskey(userId, passkey.id)).error) {
       toast.error(t("removeError"));
-      return;
     } else {
       toast.success(t("removeSuccess"));
       router.refresh();
@@ -156,9 +157,9 @@ function Passkey({
 
 function PasskeyName({
   passkey,
-}: {
+}: Readonly<{
   passkey: PasskeysPageFormProps["existingPasskeys"][0];
-}) {
+}>) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(passkey.name);
 

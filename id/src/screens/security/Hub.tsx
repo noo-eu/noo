@@ -1,8 +1,8 @@
 "use client";
 
+import { useAuth } from "@/auth/authContext";
 import { Noo } from "@/components/Noo";
 import ProfileLayout from "@/components/Profile/ProfileLayout";
-import { useAuth } from "@/auth/authContext";
 import {
   ArrowLeftEndOnRectangleIcon,
   CircleStackIcon,
@@ -18,7 +18,9 @@ type SecurityHomePageProps = {
   activeSessions: number;
 };
 
-export default function SecurityHub({ activeSessions }: SecurityHomePageProps) {
+export default function SecurityHub({
+  activeSessions,
+}: Readonly<SecurityHomePageProps>) {
   const format = useFormatter();
 
   const t = useTranslations("security");

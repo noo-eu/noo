@@ -4,7 +4,7 @@ import { capitalizeName } from "@/lib/name";
 import { BasicFormAction } from "@/lib/types/ActionResult";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
-import { useActionState, useState, startTransition } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { toast } from "react-toastify/unstyled";
 
 export function useNameForm(
@@ -20,7 +20,7 @@ export function useNameForm(
         redirect(`/profile?uid=${user.id}`);
       },
     }),
-    { input: { firstName: user.firstName, lastName: user.lastName || "" } },
+    { input: { firstName: user.firstName, lastName: user.lastName ?? "" } },
   );
 
   const [firstName, setFirstName] = useState(state.input.firstName);
@@ -29,7 +29,7 @@ export function useNameForm(
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fn = capitalizeName(firstName);
-    const ln = capitalizeName(lastName || "");
+    const ln = capitalizeName(lastName ?? "");
     setFirstName(fn);
     setLastName(ln);
 

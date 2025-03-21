@@ -1,3 +1,4 @@
+import { getUserForSession } from "@/auth/SessionsService";
 import { AccountBox } from "@/components/AccountBox";
 import { Legal } from "@/components/Legal";
 import { PageModal } from "@/components/PageModal";
@@ -6,7 +7,6 @@ import { SignInWithNoo } from "@/components/SignInWithNoo";
 import OidcClients from "@/db/oidc_clients";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import { getUserForSession } from "@/auth/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
@@ -16,9 +16,9 @@ export const revalidate = 0;
 
 export default async function OidcContinuePage({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Promise<{ sid: string }>;
-}) {
+}>) {
   const t = await getTranslations();
 
   const oidcAuthRequest = await getOidcAuthorizationRequest();
@@ -63,7 +63,7 @@ export default async function OidcContinuePage({
 
   const userFields = {
     name: `${user.firstName} ${user.lastName}`.trim(),
-    email: `${user.username}@${user.tenant?.domain || "noomail.eu"}`,
+    email: `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`,
   };
 
   return (

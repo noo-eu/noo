@@ -1,10 +1,10 @@
 // @vitest-environment happy-dom
 
-import { render, screen, fireEvent } from "@testing-library/react";
-import { NameForm } from "./NameForm";
-import { vi, describe, it, expect } from "vitest";
-import { AuthProvider } from "@/auth/authContext";
 import { JohnDoeClient } from "@/../tests/fixtures/users";
+import { AuthProvider } from "@/auth/authContext";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { NameForm } from "./NameForm";
 
 function wrapRender(component: React.ReactNode) {
   return render(<AuthProvider user={JohnDoeClient}>{component}</AuthProvider>);
@@ -41,7 +41,7 @@ describe("NameForm", () => {
     });
 
     wrapRender(<NameForm />);
-    fireEvent.submit(screen.getByRole("form"));
+    fireEvent.submit(screen.getByTestId("form"));
 
     expect(await screen.findByText(/tooShort/i)).toBeInTheDocument();
   });

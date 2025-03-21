@@ -22,7 +22,7 @@ export function useGenderForm(
     {
       input: {
         gender: user.gender,
-        genderCustom: user.genderCustom || "",
+        genderCustom: user.genderCustom ?? "",
         pronouns: user.pronouns,
       },
     },

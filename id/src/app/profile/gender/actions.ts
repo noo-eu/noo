@@ -1,6 +1,6 @@
-import { BasicFormAction } from "@/lib/types/ActionResult";
 import { getSessionUserById } from "@/auth/SessionsService";
 import Users from "@/db/users";
+import { BasicFormAction } from "@/lib/types/ActionResult";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -31,7 +31,7 @@ export async function updateGender(
     await Users.update(user.id, {
       gender: "custom",
       genderCustom: data.genderCustom,
-      pronouns: data.pronouns || "other",
+      pronouns: data.pronouns ?? "other",
     });
   } else {
     await Users.update(user.id, {

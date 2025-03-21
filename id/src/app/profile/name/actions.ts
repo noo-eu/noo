@@ -1,6 +1,6 @@
-import { BasicFormAction } from "@/lib/types/ActionResult";
 import { getSessionUserById } from "@/auth/SessionsService";
 import Users from "@/db/users";
+import { BasicFormAction } from "@/lib/types/ActionResult";
 import { validateNameForm } from "@/lib/validations/name";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -11,7 +11,7 @@ const updateNameSchema = z.object({
 });
 
 function cleanupName(name: string | undefined): string {
-  return name?.trim().replaceAll(/\s+/g, " ") || "";
+  return name?.trim().replaceAll(/\s+/g, " ") ?? "";
 }
 
 export async function updateName(

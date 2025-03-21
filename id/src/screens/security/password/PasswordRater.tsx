@@ -1,15 +1,18 @@
 "use client";
 
+import { checkBreaches } from "@/app/security/password/actions";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { checkBreaches } from "@/app/security/password/actions";
 
 export type PasswordRaterProps = {
   password: string;
   strength: number;
 };
 
-export function PasswordRater({ password, strength }: PasswordRaterProps) {
+export function PasswordRater({
+  password,
+  strength,
+}: Readonly<PasswordRaterProps>) {
   const { value: debouncedPassword, setValue: setDebouncedPassword } =
     useDebouncer(password, 500);
 

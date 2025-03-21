@@ -171,7 +171,6 @@ async function translate(
         `Suspiciously long translation for ${key} in ${targetLocale}. Skipping.`,
       );
       delete translations[key];
-      continue;
     }
   }
 

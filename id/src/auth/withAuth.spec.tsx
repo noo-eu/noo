@@ -1,11 +1,11 @@
 // @vitest-environment happy-dom
 
-import { render, screen } from "@testing-library/react";
 import { withAuth } from "@/auth/withAuth";
-import { describe, expect, it, vi } from "vitest";
 import { User } from "@/db/users";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 
-function TestPage({ user }: { user: User; searchParams: unknown }) {
+function TestPage({ user }: Readonly<{ user: User }>) {
   return (
     <div data-testid="test-user">
       {user.firstName} {user.lastName}
