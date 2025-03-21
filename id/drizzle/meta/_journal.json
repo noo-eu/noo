@@ -43,6 +43,13 @@
       "when": 1742286257925,
       "tag": "0005_graceful_caretaker",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1742561163640,
+      "tag": "0006_lazy_shadowcat",
+      "breakpoints": true
     }
   ]
 }
