@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 
 import { AuthProvider } from "@/auth/authContext";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { JohnDoeClient } from "@/../tests/fixtures/users";
 import { ClientUser } from "@/lib/types/ClientUser";
@@ -25,9 +25,13 @@ function wrapRender(
   );
 }
 
+vi.mock("@/app/profile/birthdate/actions", () => ({
+  updateBirthdate: vi.fn(),
+}));
+
 describe("BirthdateForm", () => {
   it("pre-fills fields with state.input values", () => {
-    wrapRender(<BirthdateForm action={vi.fn()} />, {
+    wrapRender(<BirthdateForm />, {
       birthdate: new Date("2000-05-03"),
     });
 
@@ -37,7 +41,7 @@ describe("BirthdateForm", () => {
   });
 
   it("renders 12 month options localized", () => {
-    wrapRender(<BirthdateForm action={vi.fn()} />);
+    wrapRender(<BirthdateForm />);
 
     const monthSelect = screen.getByLabelText("birthdate.month");
     const options = monthSelect.querySelectorAll("option");

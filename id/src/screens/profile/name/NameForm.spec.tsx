@@ -10,11 +10,16 @@ function wrapRender(component: React.ReactNode) {
   return render(<AuthProvider user={JohnDoeClient}>{component}</AuthProvider>);
 }
 
+const updateNameMock = vi.hoisted(() => vi.fn());
+vi.mock("@/app/profile/name/actions", () => ({
+  updateName: updateNameMock,
+}));
+
 describe("NameForm", () => {
   it("autocapitalizes names on blur", async () => {
-    const actionMock = vi.fn().mockResolvedValue({ input: {} });
+    updateNameMock.mockResolvedValue({ input: {} });
 
-    wrapRender(<NameForm action={actionMock} />);
+    wrapRender(<NameForm />);
 
     const firstNameInput = screen.getByLabelText(/firstName/i);
     const lastNameInput = screen.getByLabelText(/lastName/i);
@@ -30,12 +35,12 @@ describe("NameForm", () => {
   });
 
   it("displays error messages if returned", async () => {
-    const actionMock = vi.fn().mockResolvedValue({
+    updateNameMock.mockResolvedValue({
       input: {},
       error: { firstName: "tooShort" },
     });
 
-    wrapRender(<NameForm action={actionMock} />);
+    wrapRender(<NameForm />);
     fireEvent.submit(screen.getByRole("form"));
 
     expect(await screen.findByText(/tooShort/i)).toBeInTheDocument();

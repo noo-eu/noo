@@ -26,21 +26,25 @@ function wrapRender(
   );
 }
 
+vi.mock("@/app/profile/gender/actions", () => ({
+  updateGender: vi.fn(),
+}));
+
 describe("GenderForm", () => {
   it("shows the correct gender selected on load", () => {
-    wrapRender(<GenderForm action={vi.fn()} />);
+    wrapRender(<GenderForm />);
     const radio = screen.getByDisplayValue("not_specified");
     expect(radio).toBeChecked();
   });
 
   it("shows the correct gender selected on load (set)", () => {
-    wrapRender(<GenderForm action={vi.fn()} />, { gender: "female" });
+    wrapRender(<GenderForm />, { gender: "female" });
     const radio = screen.getByDisplayValue("female");
     expect(radio).toBeChecked();
   });
 
   it("reveals custom fields when 'custom' is selected", () => {
-    wrapRender(<GenderForm action={vi.fn()} />);
+    wrapRender(<GenderForm />);
     const customRadio = screen.getByDisplayValue("custom");
     fireEvent.click(customRadio);
 
@@ -49,7 +53,7 @@ describe("GenderForm", () => {
   });
 
   it("shows the pronoun example when a gendered locale is used", () => {
-    wrapRender(<GenderForm action={vi.fn()} />);
+    wrapRender(<GenderForm />);
     fireEvent.click(screen.getByDisplayValue("custom"));
     const select = screen.getByLabelText("gender.pronounsLabel");
 
@@ -60,7 +64,7 @@ describe("GenderForm", () => {
 
   it("hides the pronoun example if locale is non-gendered", () => {
     (useLocale as Mock).mockReturnValue("tr"); // Turkish
-    wrapRender(<GenderForm action={vi.fn()} />);
+    wrapRender(<GenderForm />);
     fireEvent.click(screen.getByDisplayValue("custom"));
     const select = screen.getByLabelText("gender.pronounsLabel");
 

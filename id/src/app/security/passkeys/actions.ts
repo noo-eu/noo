@@ -10,8 +10,8 @@ import {
   verifyRegistrationResponse,
 } from "@simplewebauthn/server";
 import { headers } from "next/headers";
-import { ActionResult } from "../actions";
 import knownAuthenticators from "./knownAuthenticators";
+import { ActionResult } from "@/lib/types/ActionResult";
 
 async function getWebAuthnID() {
   if (process.env.NODE_ENV === "production") {
@@ -35,14 +35,14 @@ async function getWebAuthnExpectedOrigin() {
 
 export async function registrationOptions(
   uid: string,
-): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string, null>> {
+): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string>> {
   if (!uid) {
-    return { error: "Missing user ID", input: null };
+    return { error: "Missing user ID" };
   }
 
   const user = await SessionsService.user(uid);
   if (!user) {
-    return { error: "User not found", input: null };
+    return { error: "User not found" };
   }
 
   const userPasskeys = await Passkeys.listForUser(user.id);
@@ -72,7 +72,7 @@ export async function registrationOptions(
 
   await Users.update(user.id, { webauthnChallenge: options.challenge });
 
-  return { data: options, input: null };
+  return { data: options };
 }
 
 export async function verifyRegistration(
@@ -132,20 +132,20 @@ export async function verifyRegistration(
 export async function removePasskey(
   uid: string,
   humanPasskeyId: string,
-): Promise<ActionResult<null, string, null>> {
+): Promise<ActionResult<null, string>> {
   if (!uid) {
-    return { error: "Missing user ID", input: null };
+    return { error: "Missing user ID" };
   }
 
   const user = await SessionsService.user(uid);
   if (!user) {
-    return { error: "User not found", input: null };
+    return { error: "User not found" };
   }
 
   const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;
   await Passkeys.destroy(user.id, passkeyId);
 
-  return { data: null, input: null };
+  return { data: null };
 }
 
 export async function changePasskeyName(

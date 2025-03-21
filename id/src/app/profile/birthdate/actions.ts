@@ -12,6 +12,7 @@ const updateBirthdateSchema = z.object({
 
 export async function updateBirthdate(
   uid: string,
+  _: unknown,
   form: FormData,
 ): Promise<BasicFormAction> {
   const user = await getSessionUserById(uid);
@@ -82,11 +83,4 @@ function isValidDate(day: number, month: number, year: number) {
     date.getMonth() === month - 1 &&
     date.getDate() === day
   );
-}
-
-export function makeUpdateBirthdateAction(uid: string) {
-  return async (_: unknown, data: FormData) => {
-    "use server";
-    return updateBirthdate(uid, data);
-  };
 }

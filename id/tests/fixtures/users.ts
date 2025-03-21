@@ -8,7 +8,7 @@ const JohnDoe = {
   username: "john.Doe",
   normalizedUsername: "johndoe",
   picture: null,
-  birthdate: new Date(),
+  birthdate: new Date("1990-01-01"),
   gender: "male",
   genderCustom: null,
   pronouns: "male",

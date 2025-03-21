@@ -31,14 +31,14 @@ describe("updateName", () => {
     (getSessionUserById as Mock).mockResolvedValue(null);
 
     await expect(() =>
-      updateName("usr_xxx", form("John", "Doe")),
+      updateName("usr_xxx", null, form("John", "Doe")),
     ).rejects.toThrow("/");
   });
 
   it("returns error if validation fails", async () => {
     (getSessionUserById as Mock).mockResolvedValue({ id: "abc" });
 
-    const result = await updateName("usr_xxx", form("", ""));
+    const result = await updateName("usr_xxx", null, form("", ""));
     expect(result.error).toHaveProperty("firstName");
   });
 
@@ -46,7 +46,7 @@ describe("updateName", () => {
     (getSessionUserById as Mock).mockResolvedValue({ id: "abc" });
 
     const updateMock = vi.spyOn(Users, "update");
-    const result = await updateName("usr_xxx", form("John", "Doe"));
+    const result = await updateName("usr_xxx", null, form("John", "Doe"));
 
     expect(updateMock).toHaveBeenCalledWith("abc", {
       firstName: "John",

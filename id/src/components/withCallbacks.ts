@@ -1,5 +1,3 @@
-import { ActionResult } from "@/lib/types/ActionResult";
-
 export type Callbacks<T, H = unknown> = {
   onStart?: () => H;
   onEnd?: (handle: H) => void;
@@ -7,11 +5,7 @@ export type Callbacks<T, H = unknown> = {
   onError?: (result: T, handle: H) => void;
 };
 
-export const withCallbacks = <
-  Args extends unknown[],
-  T extends unknown,
-  H = unknown,
->(
+export const withCallbacks = <Args extends unknown[], T, H = unknown>(
   fn: (...args: Args) => Promise<T>,
   callbacks: Callbacks<T, H>,
 ): ((...args: Args) => Promise<T>) => {

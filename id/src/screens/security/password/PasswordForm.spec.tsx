@@ -48,9 +48,9 @@ describe("PasswordForm", () => {
     wrapRender(<PasswordForm />);
     const input = screen.getByLabelText("password.label");
     fireEvent.change(input, { target: { value: "helloworld" } });
-    expect(screen.getByText(/prefix/i)).toBeInTheDocument(),
-      // Should show one of: weak / acceptable / strong
-      expect(screen.getByText(/weak|acceptable|strong/i)).toBeInTheDocument();
+    expect(screen.getByText(/prefix/i)).toBeInTheDocument();
+    // Should show one of: weak / acceptable / strong
+    expect(screen.getByText(/weak|acceptable|strong/i)).toBeInTheDocument();
   });
 
   it("shows a breach warning if the current password has been breached", async () => {

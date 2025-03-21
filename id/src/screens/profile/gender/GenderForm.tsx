@@ -3,22 +3,19 @@
 import { Noo } from "@/components/Noo";
 import { Button, SelectField, TextField } from "@noo/ui";
 import { useLocale, useTranslations } from "next-intl";
-import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/auth/authContext";
 import { ProfileFormLayout } from "../ProfileFormLayout";
 import { useGenderForm } from "./useGenderForm";
-import { BasicFormAction } from "@/lib/types/ActionResult";
 import { CancelLink } from "../CancelLink";
+import { updateGender } from "@/app/profile/gender/actions";
 
-export function GenderForm({
-  action,
-}: {
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>;
-}) {
+export function GenderForm() {
   const user = useAuth();
 
-  const { formAction, isPending } = useGenderForm(action);
+  const { formAction, isPending } = useGenderForm(
+    updateGender.bind(null, user.id),
+  );
 
   const t = useTranslations("profile");
   const commonT = useTranslations("common");

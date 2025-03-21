@@ -3,24 +3,21 @@
 import { Noo } from "@/components/Noo";
 import { capitalizeName } from "@/lib/name";
 import { Button, TextField } from "@noo/ui";
-import { BasicFormAction } from "@/lib/types/ActionResult";
 import { useNameForm } from "./useNameForm";
 import { useTranslations } from "next-intl";
 import { CancelLink } from "../CancelLink";
 import { ProfileFormLayout } from "../ProfileFormLayout";
+import { updateName } from "@/app/profile/name/actions";
+import { useAuth } from "@/auth/authContext";
 
-export function NameForm({
-  action,
-}: {
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>;
-}) {
+export function NameForm() {
   const {
     errors,
     isPending,
     onSubmit,
     formAction,
     form: { firstName, setFirstName, lastName, setLastName },
-  } = useNameForm(action);
+  } = useNameForm(updateName.bind(null, useAuth().id));
 
   const t = useTranslations("profile.name");
   const commonT = useTranslations("common");

@@ -1,8 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { BirthdateForm } from "@/screens/profile/birthdate/BirthdateForm";
 import { withAuth } from "@/auth/withAuth";
-import { User } from "@/db/users";
-import { makeUpdateBirthdateAction } from "./actions";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -13,8 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-async function Page({ user }: { user: User }) {
-  return <BirthdateForm action={makeUpdateBirthdateAction(user.id)} />;
+async function Page() {
+  return <BirthdateForm />;
 }
 
 export default withAuth(Page);

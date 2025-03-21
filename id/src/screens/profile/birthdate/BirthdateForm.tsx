@@ -3,29 +3,26 @@
 import { Noo } from "@/components/Noo";
 import { Button, SelectField, TextField } from "@noo/ui";
 import { useLocale, useTranslations } from "next-intl";
-import Link from "next/link";
 import { useAuth } from "@/auth/authContext";
 import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
-import { BasicFormAction } from "@/lib/types/ActionResult";
 import { useBirthdateForm } from "./useBirthdateForm";
 import { CancelLink } from "../CancelLink";
+import { updateBirthdate } from "@/app/profile/birthdate/actions";
 
 function monthsForLocale(locale: string) {
   const format = new Intl.DateTimeFormat(locale, { month: "long" }).format;
   return [...Array(12).keys()].map((m) => format(new Date(Date.UTC(2021, m))));
 }
 
-export function BirthdateForm({
-  action,
-}: {
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>;
-}) {
+export function BirthdateForm() {
   const user = useAuth();
 
   const locale = useLocale();
   const months = monthsForLocale(locale);
 
-  const { state, errors, formAction, isPending } = useBirthdateForm(action);
+  const { state, errors, formAction, isPending } = useBirthdateForm(
+    updateBirthdate.bind(null, user.id),
+  );
 
   const t = useTranslations("profile");
   const commonT = useTranslations("common");

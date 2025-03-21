@@ -12,6 +12,7 @@ const updateGenderSchema = z.object({
 
 export async function updateGender(
   uid: string,
+  _: unknown,
   form: FormData,
 ): Promise<BasicFormAction> {
   const user = await getSessionUserById(uid);
@@ -41,11 +42,4 @@ export async function updateGender(
   }
 
   return { input: data };
-}
-
-export function makeUpdateGenderAction(uid: string) {
-  return async (_: unknown, data: FormData) => {
-    "use server";
-    return updateGender(uid, data);
-  };
 }

@@ -6,16 +6,20 @@ type ActionSuccess<T, Input> = [Input] extends [undefined]
   ? [T] extends [undefined]
     ? void
     : { data: T; error?: never }
-  : { input: Input; error?: never } & ([T] extends [undefined]
-      ? {}
-      : { data: T });
+  : [T] extends [undefined]
+    ? { input: Input; error?: never }
+    : { input: Input; data: T; error?: never };
 
 // When a server action fails, it returns an error object. This object is
 // specific to the action. The input object is also returned, just like in the
 // success case.
-type ActionFailure<Err, Input> = [Input] extends [undefined]
-  ? { error: Err }
-  : { input: Input; error: Err };
+type ActionFailure<T, Err, Input> = [Input] extends [undefined]
+  ? [T] extends [undefined]
+    ? { error: Err }
+    : { data?: never; error: Err }
+  : [T] extends [undefined]
+    ? { input: Input; error: Err }
+    : { input: Input; error: Err; data?: never };
 
 // The ActionResult type is a union of the success and failure types. It is used
 // to define the return type of server actions, usually called via
@@ -36,7 +40,7 @@ type ActionFailure<Err, Input> = [Input] extends [undefined]
 // ```
 export type ActionResult<T = undefined, Err = undefined, Input = undefined> =
   | ActionSuccess<T, Input>
-  | ([Err] extends [undefined] ? never : ActionFailure<Err, Input>);
+  | ([Err] extends [undefined] ? never : ActionFailure<T, Err, Input>);
 
 export type FormErrors = { [key: string]: string | undefined };
 export type FormInput = { [key: string]: string };

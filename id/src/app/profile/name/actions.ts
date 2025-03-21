@@ -16,6 +16,7 @@ function cleanupName(name: string | undefined): string {
 
 export async function updateName(
   uid: string,
+  _: unknown,
   form: FormData,
 ): Promise<BasicFormAction> {
   const user = await getSessionUserById(uid);
@@ -35,11 +36,4 @@ export async function updateName(
   await Users.update(user.id, { firstName, lastName });
 
   return { input: data };
-}
-
-export function makeUpdateNameAction(uid: string) {
-  return async (_: unknown, data: FormData) => {
-    "use server";
-    return updateName(uid, data);
-  };
 }
