@@ -1,10 +1,10 @@
 // When a server action is successful, it may return a data object. Often it
 // also has to return an input object, which is the same as the input object
 // passed to the function. This is needed for form rehydration. If both data and
-// input are not needed, the function can return void.
+// input are not needed, the function can return undefined.
 type ActionSuccess<T, Input> = [Input] extends [undefined]
   ? [T] extends [undefined]
-    ? void
+    ? undefined
     : { data: T; error?: never }
   : [T] extends [undefined]
     ? { input: Input; error?: never }

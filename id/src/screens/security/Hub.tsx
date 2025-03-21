@@ -65,12 +65,12 @@ export default function SecurityHub({
           </span>
         </ProfileLink>
         <ProfileLink
-          href={`/security/passkeys?uid=${user.id}`}
+          href={`/security/passkeys`}
           Icon={KeyIcon}
           title={t("summary.passkeys")}
         />
         <ProfileLink
-          href={`/security/sessions?uid=${user.id}`}
+          href={`/security/sessions`}
           Icon={UserCircleIcon}
           title={t("summary.sessions")}
         >
@@ -79,7 +79,7 @@ export default function SecurityHub({
           })}
         </ProfileLink>
         <ProfileLink
-          href={`/security/applications?uid=${user.id}`}
+          href={`/security/applications`}
           Icon={CircleStackIcon}
           title={t("summary.applications")}
         >

@@ -132,7 +132,7 @@ export async function verifyRegistration(
 export async function removePasskey(
   uid: string,
   humanPasskeyId: string,
-): Promise<ActionResult<null, string>> {
+): Promise<ActionResult<undefined, string>> {
   if (!uid) {
     return { error: "Missing user ID" };
   }
@@ -144,8 +144,6 @@ export async function removePasskey(
 
   const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;
   await Passkeys.destroy(user.id, passkeyId);
-
-  return { data: null };
 }
 
 export async function changePasskeyName(

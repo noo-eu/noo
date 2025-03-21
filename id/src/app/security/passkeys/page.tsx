@@ -1,27 +1,15 @@
 import { withAuth } from "@/auth/withAuth";
-import ProfileLayout from "@/components/Profile/ProfileLayout";
 import Passkeys from "@/db/passkeys";
 import { User } from "@/db/users";
-import { uuidToHumanId } from "@/utils";
-import { PasskeysPageForm } from "./Form";
+import { makeClientPasskey } from "@/lib/types/ClientPasskey";
+import { PasskeysPage } from "@/screens/security/passkeys/PasskeysPage";
 
-async function PasskeysPage({ user }: Readonly<{ user: User }>) {
+async function Page({ user }: Readonly<{ user: User }>) {
   const existingPasskeys = (await Passkeys.listForUser(user.id)).map(
-    (passkey) => {
-      return {
-        id: uuidToHumanId(passkey.id, "idpsk"),
-        name: passkey.name,
-        createdAt: passkey.createdAt,
-        lastUsedAt: passkey.lastUsedAt,
-      };
-    },
+    makeClientPasskey,
   );
 
-  return (
-    <ProfileLayout>
-      <PasskeysPageForm existingPasskeys={existingPasskeys} />
-    </ProfileLayout>
-  );
+  return <PasskeysPage existingPasskeys={existingPasskeys} />;
 }
 
-export default withAuth(PasskeysPage);
+export default withAuth(Page);

@@ -117,12 +117,15 @@ export class SessionsService {
   static async sessionFor(userId: string) {
     const manager = await SessionsService.new();
     const sessions = await manager.activeSessions();
-    const uuid = humanIdToUuid(userId, "usr");
-    if (!uuid) {
-      return undefined;
+
+    if (userId.startsWith("usr_")) {
+      userId = humanIdToUuid(userId, "usr")!;
+      if (!userId) {
+        return undefined;
+      }
     }
 
-    return sessions.find((s) => s.userId === uuid);
+    return sessions.find((s) => s.userId === userId);
   }
 
   async startSession(userId: string, ip: string, userAgent: string) {
