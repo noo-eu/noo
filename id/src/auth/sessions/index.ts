@@ -23,6 +23,9 @@ export async function parseValidTokens(cookie: string): Promise<{
   sessions: Session[];
 }> {
   const parsed = getCookieSessionTokens(cookie);
+  if (parsed.length === 0) {
+    return { tokens: [], sessions: [] };
+  }
 
   const sids = parsed.map((t) => t.sid);
   const db = await Sessions.select(inArray(schema.sessions.id, sids));
@@ -166,18 +169,13 @@ export async function getAuthenticatedSession(
   userId: string | undefined,
   cookie?: string,
 ): Promise<Session | undefined> {
+  cookie ??= await getSessionCookie();
+  userId = normalizeUserId(userId);
   if (!userId) {
     return;
   }
 
-  cookie ??= await getSessionCookie();
-
   const { sessions } = await parseValidTokens(cookie);
-
-  if (userId.startsWith("usr_")) {
-    userId = humanIdToUuid(userId, "usr")!;
-  }
-
   return sessions.find((s) => s.userId === userId);
 }
 
@@ -186,4 +184,12 @@ export async function getFirstAuthenticatedUserId() {
   const { sessions } = await parseValidTokens(cookie);
   const first = sessions[0];
   return first ? uuidToHumanId(first.userId, "usr") : undefined;
+}
+
+function normalizeUserId(userId?: string): string | undefined {
+  if (userId?.startsWith("usr_")) {
+    return humanIdToUuid(userId, "usr");
+  }
+
+  return userId;
 }

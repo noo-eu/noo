@@ -98,7 +98,7 @@ export function humanIdToUuid(humanId: string, expectedPrefix: string) {
   const prefix = parts.slice(0, -1).join("_");
 
   if (prefix !== expectedPrefix) {
-    return null;
+    return undefined;
   }
 
   return base62ToUuid(id);
