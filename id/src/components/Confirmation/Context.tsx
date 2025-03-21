@@ -24,9 +24,9 @@ export const useConfirmation = () => {
 
 export const ConfirmationProvider = ({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) => {
+}>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<ConfirmationOptions>({});
   const [resolvePromise, setResolvePromise] =

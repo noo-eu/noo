@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import { Form } from "./Form";
-import { withAuth } from "@/lib/withAuth";
+import { NameForm } from "@/screens/profile/name/NameForm";
+import { withAuth } from "@/auth/withAuth";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -11,8 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-function ProfileNamePage() {
-  return <Form />;
+async function Page() {
+  return <NameForm />;
 }
 
-export default withAuth(ProfileNamePage);
+export default withAuth(Page);

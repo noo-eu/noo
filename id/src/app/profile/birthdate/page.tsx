@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import { Form } from "./Form";
-import { withAuth } from "@/lib/withAuth";
+import { BirthdateForm } from "@/screens/profile/birthdate/BirthdateForm";
+import { withAuth } from "@/auth/withAuth";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -11,8 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-function ProfileBirthdatePage() {
-  return <Form />;
+async function Page() {
+  return <BirthdateForm />;
 }
 
-export default withAuth(ProfileBirthdatePage);
+export default withAuth(Page);

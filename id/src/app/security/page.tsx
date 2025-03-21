@@ -1,10 +1,10 @@
+import { withAuth } from "@/auth/withAuth";
 import { schema } from "@/db";
 import Sessions from "@/db/sessions";
 import { User } from "@/db/users";
-import { withAuth } from "@/lib/withAuth";
+import SecurityHub from "@/screens/security/Hub";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
-import SecurityHomePage from "./SecurityHomePage";
 
 export async function generateMetadata() {
   const t = await getTranslations("security");
@@ -15,12 +15,12 @@ export async function generateMetadata() {
   };
 }
 
-async function SecurityHome({ user }: { user: User }) {
+async function SecurityHome({ user }: Readonly<{ user: User }>) {
   const activeSessions = await Sessions.countBy(
     eq(schema.sessions.userId, user.id),
   );
 
-  return <SecurityHomePage activeSessions={activeSessions} />;
+  return <SecurityHub activeSessions={activeSessions} />;
 }
 
 export default withAuth(SecurityHome);

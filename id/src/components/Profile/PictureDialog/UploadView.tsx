@@ -1,4 +1,4 @@
-import { AuthContext } from "@/components/AuthContext";
+import { useAuth } from "@/auth/authContext";
 import { Profile } from "@/lib/api/profile";
 import { DialogTitle } from "@headlessui/react";
 import {
@@ -8,41 +8,41 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
-import { View } from ".";
-import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify/unstyled";
+import { View } from ".";
 
 export function UploadView({
   navigate,
   initialImage,
-}: {
+}: Readonly<{
   navigate: (view: View) => void;
   initialImage: File | null;
-}) {
+}>) {
   const t = useTranslations("profile.picture_dialog");
   const commonT = useTranslations("common");
 
   const [image, setImage] = useState(initialImage);
   const editorRef = useRef<AvatarEditor>(null);
 
-  const [isPending, setPending] = useState(false);
-  const user = useContext(AuthContext);
+  const [pending, setPending] = useState(false);
+  const user = useAuth();
 
   const { mutate } = useMutation({
     mutationFn: () => {
       if (editorRef.current && image) {
         const canvas = editorRef.current?.getImage();
-        if (!canvas) return Promise.reject();
+        if (!canvas) return Promise.reject(new Error("no image in canvas"));
 
-        const mime = image.type || "image/jpeg";
+        const mime = image.type ?? "image/jpeg";
 
         return new Promise((resolve, reject) => {
           canvas.toBlob(async (blob) => {
-            if (!blob) return reject();
+            if (!blob) return reject(new Error("no blob"));
 
             const file = new File([blob], "image", {
               type: mime,
@@ -52,18 +52,18 @@ export function UploadView({
               .then(async (response) => {
                 const data = await response.json();
                 if (data.error) {
-                  reject(data.error);
+                  reject(new Error(data.error));
                 }
                 resolve(data);
               })
               .catch((e) => {
-                reject(e);
+                reject(new Error(e));
               });
           }, mime);
         });
       }
 
-      return Promise.reject();
+      return Promise.reject(new Error("no image"));
     },
     onMutate: () => {
       setPending(true);
@@ -102,16 +102,14 @@ export function UploadView({
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()}>
               {image && (
-                <>
-                  <AvatarEditor
-                    ref={editorRef}
-                    image={image}
-                    width={256}
-                    height={256}
-                    border={0}
-                    className="rounded-3xl border border-white/20 mb-4"
-                  />
-                </>
+                <AvatarEditor
+                  ref={editorRef}
+                  image={image}
+                  width={256}
+                  height={256}
+                  border={0}
+                  className="rounded-3xl border border-white/20 mb-4"
+                />
               )}
               {!image && (
                 <div className="w-3xs aspect-square border border-black/30 dark:border-white/50 mx-auto rounded-3xl flex items-center justify-center relative">
@@ -173,14 +171,14 @@ export function UploadView({
 
       {image && (
         <div className="gap-4 flex flex-col">
-          <Button onClick={() => mutate()} pending={isPending}>
+          <Button onClick={() => mutate()} pending={pending}>
             <CheckBadgeIcon className="size-5" />
             {commonT("save")}
           </Button>
           <Button
             onClick={() => setImage(null)}
             kind="secondary"
-            disabled={isPending}
+            disabled={pending}
           >
             <ArrowLeftIcon className="size-5" />
             {t("upload.change")}

@@ -1,8 +1,9 @@
 "use server";
 
+import { SessionsService } from "@/auth/SessionsService";
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
-import { SessionsService } from "@/lib/SessionsService";
+import { ActionResult } from "@/lib/types/ActionResult";
 import { humanIdToUuid } from "@/utils";
 import {
   generateRegistrationOptions,
@@ -10,7 +11,6 @@ import {
   verifyRegistrationResponse,
 } from "@simplewebauthn/server";
 import { headers } from "next/headers";
-import { ActionResult } from "../actions";
 import knownAuthenticators from "./knownAuthenticators";
 
 async function getWebAuthnID() {
@@ -19,7 +19,7 @@ async function getWebAuthnID() {
   }
 
   const hdrs = await headers();
-  return hdrs.get("host")?.replace(/:\d+$/, "") || "localhost";
+  return hdrs.get("host")?.replace(/:\d+$/, "") ?? "localhost";
 }
 
 async function getWebAuthnExpectedOrigin() {
@@ -28,28 +28,28 @@ async function getWebAuthnExpectedOrigin() {
   }
 
   const hdrs = await headers();
-  const scheme = hdrs.get("x-forwarded-proto") || "http";
-  const host = hdrs.get("host") || "localhost";
+  const scheme = hdrs.get("x-forwarded-proto") ?? "http";
+  const host = hdrs.get("host") ?? "localhost";
   return `${scheme}://${host}`;
 }
 
 export async function registrationOptions(
   uid: string,
-): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string, null>> {
+): Promise<ActionResult<PublicKeyCredentialCreationOptionsJSON, string>> {
   if (!uid) {
-    return { error: "Missing user ID", input: null };
+    return { error: "Missing user ID" };
   }
 
   const user = await SessionsService.user(uid);
   if (!user) {
-    return { error: "User not found", input: null };
+    return { error: "User not found" };
   }
 
   const userPasskeys = await Passkeys.listForUser(user.id);
 
   const encoder = new TextEncoder();
   const uint8UserId = encoder.encode(uid);
-  const username = `${user.username}@${user.tenant?.domain || "noomail.eu"}`;
+  const username = `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`;
 
   const options = await generateRegistrationOptions({
     rpName: "noo",
@@ -72,7 +72,7 @@ export async function registrationOptions(
 
   await Users.update(user.id, { webauthnChallenge: options.challenge });
 
-  return { data: options, input: null };
+  return { data: options };
 }
 
 export async function verifyRegistration(
@@ -109,7 +109,7 @@ export async function verifyRegistration(
   if (verification.verified) {
     const info = verification.registrationInfo!;
     const credential = info.credential;
-    const authenticatorName = knownAuthenticators[info.aaguid] || "";
+    const authenticatorName = knownAuthenticators[info.aaguid] ?? "";
 
     await Passkeys.create({
       userId: user.id,
@@ -132,20 +132,18 @@ export async function verifyRegistration(
 export async function removePasskey(
   uid: string,
   humanPasskeyId: string,
-): Promise<ActionResult<null, string, null>> {
+): Promise<ActionResult<undefined, string>> {
   if (!uid) {
-    return { error: "Missing user ID", input: null };
+    return { error: "Missing user ID" };
   }
 
   const user = await SessionsService.user(uid);
   if (!user) {
-    return { error: "User not found", input: null };
+    return { error: "User not found" };
   }
 
   const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;
   await Passkeys.destroy(user.id, passkeyId);
-
-  return { data: null, input: null };
 }
 
 export async function changePasskeyName(

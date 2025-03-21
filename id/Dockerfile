@@ -39,20 +39,19 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system app
-RUN adduser --system app
+RUN addgroup --system app && adduser --system app
 
-COPY --from=deps --chown=app:app /app/node_modules /app/node_modules
-COPY --from=build --chown=app:app /app/id/.next/standalone .
-COPY --from=build --chown=app:app /app/id/.next/static ./.next/static
-COPY --from=build --chown=app:app /app/id/public ./public
+COPY --from=deps --chown=root:root --chmod=555 /app/node_modules /app/node_modules
+COPY --from=build --chown=root:root --chmod=555 /app/id/.next/standalone .
+COPY --from=build --chown=root:root --chmod=555 /app/id/.next/static ./.next/static
+COPY --from=build --chown=root:root --chmod=555 /app/id/public ./public
 
-COPY --from=build --chown=app:app /app/id/drizzle.config.prod.ts ./drizzle.config.ts
-COPY --from=build --chown=app:app /app/id/src/db/schema.ts ./schema.ts
-COPY --from=build --chown=app:app /app/id/drizzle ./drizzle
-COPY --from=build --chown=app:app /app/id/docker-entrypoint.sh .
+COPY --from=build --chown=root:root --chmod=555 /app/id/drizzle.config.prod.ts ./drizzle.config.ts
+COPY --from=build --chown=root:root --chmod=555 /app/id/src/db/schema.ts ./schema.ts
+COPY --from=build --chown=root:root --chmod=555 /app/id/drizzle ./drizzle
+COPY --from=build --chown=root:root --chmod=555 /app/id/docker-entrypoint.sh .
 
-COPY --from=build --chown=app:app /app/id/src/messages ./src/messages
+COPY --from=build --chown=root:root --chmod=555 /app/id/src/messages ./src/messages
 
 USER app
 

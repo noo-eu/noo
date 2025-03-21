@@ -21,7 +21,7 @@ vi.mock("@/db/oidc_access_tokens", () => ({
   },
 }));
 
-vi.mock("@/lib/SessionsService", () => ({
+vi.mock("@/auth/SessionsService", () => ({
   getSessionCheckCookie: vi.fn(() =>
     Promise.resolve("test-session-check-cookie"),
   ),

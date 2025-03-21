@@ -10,7 +10,7 @@ export type CameraViewProps = {
   onCapture: (file: File) => void;
 };
 
-export function CameraView({ navigate, onCapture }: CameraViewProps) {
+export function CameraView({ navigate, onCapture }: Readonly<CameraViewProps>) {
   const t = useTranslations("profile.picture_dialog");
   const commonT = useTranslations("common");
 

@@ -1,11 +1,11 @@
-import { Noo } from "@/components/Noo";
-import OidcClients, { OidcClient } from "@/db/oidc_clients";
-import { Session } from "@/db/sessions";
 import {
   getSessionCookie,
   SessionsService,
   setSessionCookie,
-} from "@/lib/SessionsService";
+} from "@/auth/SessionsService";
+import { Noo } from "@/components/Noo";
+import OidcClients, { OidcClient } from "@/db/oidc_clients";
+import { Session } from "@/db/sessions";
 import { getClientName } from "@/lib/oidc/clientUtils";
 import { buildSubClaim } from "@/lib/oidc/idToken";
 import { getTranslations } from "next-intl/server";
@@ -45,14 +45,14 @@ function finish(
 
 export default async function EndSession({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Promise<{
     clientId?: string;
     sub?: string;
     postLogoutRedirectUri?: string;
     state?: string;
   }>;
-}) {
+}>) {
   const query = await searchParams;
   const t = await getTranslations("oidc");
 

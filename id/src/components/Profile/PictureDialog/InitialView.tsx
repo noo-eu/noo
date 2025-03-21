@@ -1,21 +1,23 @@
-import { AuthContext } from "@/components/AuthContext";
+import { useAuth } from "@/auth/authContext";
 import { ProfilePicture } from "@/components/ProfilePicture";
 import { Profile } from "@/lib/api/profile";
 import { DialogTitle } from "@headlessui/react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify/unstyled";
 import { View } from ".";
-import { useMutation } from "@tanstack/react-query";
 
-export function InitialView({ setView }: { setView: (view: View) => void }) {
+export function InitialView({
+  setView,
+}: Readonly<{ setView: (view: View) => void }>) {
   const t = useTranslations("profile.picture_dialog");
   const commonT = useTranslations("common");
-  const user = useContext(AuthContext);
+  const user = useAuth();
 
-  const [isPending, setPending] = useState(false);
+  const [pending, setPending] = useState(false);
   const { mutate } = useMutation({
     mutationFn: () => Profile.Picture.remove(user.id),
     onMutate: () => {
@@ -44,19 +46,18 @@ export function InitialView({ setView }: { setView: (view: View) => void }) {
 
       <div className="my-12">
         <ProfilePicture
-          user={user}
           className="w-3xs mx-auto aspect-square text-7xl"
           width={256}
         />
       </div>
 
       <div className="flex justify-between">
-        <Button onClick={() => setView("upload")} disabled={isPending}>
+        <Button onClick={() => setView("upload")} disabled={pending}>
           <PencilIcon className="size-5" />
           {commonT("change")}
         </Button>
         {user.picture && (
-          <Button onClick={() => mutate()} kind="secondary" pending={isPending}>
+          <Button onClick={() => mutate()} kind="secondary" pending={pending}>
             <TrashIcon className="size-5" />
             {commonT("remove")}
           </Button>

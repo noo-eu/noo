@@ -1,6 +1,6 @@
-import { withAuth } from "@/lib/withAuth";
+import { withAuth } from "@/auth/withAuth";
 import { getTranslations } from "next-intl/server";
-import { Form } from "./Form";
+import { PasswordForm } from "@/screens/security/password/PasswordForm";
 
 export async function generateMetadata() {
   const t = await getTranslations("security");
@@ -11,8 +11,8 @@ export async function generateMetadata() {
   };
 }
 
-function SecurityPasswordPage() {
-  return <Form />;
+function Page() {
+  return <PasswordForm />;
 }
 
-export default withAuth(SecurityPasswordPage);
+export default withAuth(Page);

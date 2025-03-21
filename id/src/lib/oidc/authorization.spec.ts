@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, vi, test } from "vitest";
 import { HttpRequest } from "../http/request";
 import { oidcAuthorization } from "./authorization";
-import { afterEach } from "node:test";
 
 let mockSessions: {
   age: number;
@@ -54,7 +53,7 @@ beforeEach(() => {
   ];
 });
 
-vi.mock("@/lib/SessionsService", () => ({
+vi.mock("@/auth/SessionsService", () => ({
   SessionsService: createMockSessionService(),
   getSessionCookie: () => Promise.resolve("session"),
 }));

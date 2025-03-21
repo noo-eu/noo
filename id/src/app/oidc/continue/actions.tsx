@@ -9,7 +9,7 @@ import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
 } from "@/lib/oidc/utils";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { getSessionCookie, SessionsService } from "@/auth/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { notFound, redirect } from "next/navigation";
 

@@ -1,7 +1,7 @@
 import Users from "@/db/users";
 import { HttpRequest } from "@/lib/http/request";
 import { getObjectStorage } from "@/lib/objectStorage";
-import { SessionsService } from "@/lib/SessionsService";
+import { SessionsService } from "@/auth/SessionsService";
 import { randomSalt } from "@/utils";
 import sharp from "sharp";
 import { validateFileUpload } from "@/lib/http/fileValidations";

@@ -5,7 +5,7 @@ import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
-import { getSessionCookie, SessionsService } from "@/lib/SessionsService";
+import { getSessionCookie, SessionsService } from "@/auth/SessionsService";
 import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
 import { HttpRequest } from "../http/request";

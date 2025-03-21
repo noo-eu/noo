@@ -22,7 +22,7 @@ interface ObjectStorage {
 // For development, test and self-hosted environments.
 // Writes files to the local filesystem, at public/uploads.
 class FileStorage implements ObjectStorage {
-  #ROOT = "public/uploads/";
+  readonly #ROOT = "public/uploads/";
 
   constructor(scope: string) {
     this.#ROOT += scope + "/";
@@ -53,8 +53,8 @@ class FileStorage implements ObjectStorage {
 
 // For production environments, an S3-compatible object storage.
 class S3Storage implements ObjectStorage {
-  #client: S3Client;
-  #scope: string;
+  readonly #client: S3Client;
+  readonly #scope: string;
 
   constructor(scope: string) {
     this.#client = new S3Client({
@@ -64,7 +64,7 @@ class S3Storage implements ObjectStorage {
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
       },
       // The S3 client v3 requires a region, even if the endpoint doesn't use it.
-      region: process.env.S3_REGION || "us-east-1",
+      region: process.env.S3_REGION ?? "us-east-1",
     });
 
     this.#scope = scope;

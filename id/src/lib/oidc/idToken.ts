@@ -99,9 +99,7 @@ export function buildSubClaim(client: OidcClient, userId: string) {
     }
 
     // Hash the user id with the host name
-    const hash = sha256(`${host}${userId}${process.env.PAIRWISE_SALT}`).digest(
-      "hex",
-    );
+    const hash = sha256(`${host}${userId}${salt}`).digest("hex");
     return `usr_${hexToBase62(hash)}`;
   }
 }

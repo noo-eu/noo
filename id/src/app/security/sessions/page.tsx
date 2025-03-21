@@ -1,14 +1,14 @@
-import ProfileLayout from "@/components/Profile/ProfileLayout";
+import { SessionsService } from "@/auth/SessionsService";
+import { withAuth } from "@/auth/withAuth";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
 import { User } from "@/db/users";
-import { SessionsService } from "@/lib/SessionsService";
-import { withAuth } from "@/lib/withAuth";
+import { makeClientSession } from "@/lib/types/ClientSession";
+import { SessionsPage } from "@/screens/security/sessions/SessionsPage";
 import { uuidToHumanId } from "@/utils";
 import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { SessionsPage } from "./SessionsPage";
 
 export async function generateMetadata() {
   const t = await getTranslations("security");
@@ -19,16 +19,9 @@ export async function generateMetadata() {
   };
 }
 
-async function SecuritySessionsPage({ user }: { user: User }) {
+async function Page({ user }: Readonly<{ user: User }>) {
   const allSessions = await Sessions.findManyBy(eq(sessions.userId, user.id));
-  const safeSessions = allSessions.map((session) => {
-    return {
-      id: uuidToHumanId(session.id, "sess"),
-      ip: session.ip,
-      userAgent: session.userAgent,
-      lastUsedAt: session.lastUsedAt,
-    };
-  });
+  const clientSessions = allSessions.map(makeClientSession);
 
   const currentSessionId = (await SessionsService.sessionFor(user.id))?.id;
   if (!currentSessionId) {
@@ -36,14 +29,11 @@ async function SecuritySessionsPage({ user }: { user: User }) {
   }
 
   return (
-    <ProfileLayout user={user}>
-      <SessionsPage
-        sessions={safeSessions}
-        currentSessionId={currentSessionId}
-        userId={user.id}
-      />
-    </ProfileLayout>
+    <SessionsPage
+      sessions={clientSessions}
+      currentSessionId={uuidToHumanId(currentSessionId, "sess")}
+    />
   );
 }
 
-export default withAuth(SecuritySessionsPage);
+export default withAuth(Page);

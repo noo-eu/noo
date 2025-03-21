@@ -2,7 +2,9 @@ import { LANGUAGE_NAMES } from "@/i18n";
 import { useLocale } from "next-intl";
 import { LanguagePickerSelect } from "./LanguagePickerSelect";
 
-export function LanguagePicker({ className }: { className?: string }) {
+export function LanguagePicker({
+  className,
+}: Readonly<{ className?: string }>) {
   // Sort the LANGUAGE_NAMES by the value using the localeCompare method
   const languages = Object.entries(LANGUAGE_NAMES).sort((a, b) =>
     a[1].localeCompare(b[1]),

@@ -1,6 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { validateFileUpload } from "./fileValidations";
-import { afterEach } from "node:test";
 
 describe("validateFileUpload", () => {
   afterEach(() => {

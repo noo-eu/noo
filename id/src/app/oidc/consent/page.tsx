@@ -1,8 +1,8 @@
+import { getUserForSession } from "@/auth/SessionsService";
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import { getUserForSession } from "@/lib/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
@@ -12,9 +12,9 @@ export const revalidate = 0;
 
 export default async function OidcConsentPage({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Promise<{ sid: string }>;
-}) {
+}>) {
   const oidcAuthRequest = await getOidcAuthorizationRequest();
   if (!oidcAuthRequest) {
     console.warn("No OIDC auth request found");
@@ -86,7 +86,7 @@ export default async function OidcConsentPage({
   const fastForward = missingScopes.length === 0 && cleanClaims.length === 0;
   const userFields = {
     name: `${user.firstName} ${user.lastName}`.trim(),
-    email: `${user.username}@${user.tenant?.domain || "noomail.eu"}`,
+    email: `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`,
   };
 
   return (

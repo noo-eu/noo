@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { consentFormSubmit } from "./actions";
 
-export default function Form({ sessionId }: { sessionId: string }) {
+export default function Form({ sessionId }: Readonly<{ sessionId: string }>) {
   const [_, formAction, pending] = useActionState(consentFormSubmit, {});
   const t = useTranslations("common");
 
@@ -19,7 +19,7 @@ export default function Form({ sessionId }: { sessionId: string }) {
             name="consent"
             disabled={pending}
             value={"yes"}
-            data-test-id="consentSubmit"
+            data-testid="consentSubmit"
           >
             {t("continue")}
           </Button>

@@ -18,7 +18,7 @@ type Props = {
   fastForward?: boolean;
 };
 
-export function Content({ missingClaims, client, user }: Props) {
+export function Content({ missingClaims, client, user }: Readonly<Props>) {
   const t = useTranslations();
   // const sessionId = useSearchParams().get("sid")!;
 

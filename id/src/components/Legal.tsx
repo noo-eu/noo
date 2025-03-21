@@ -6,7 +6,7 @@ type Props = {
   className?: string;
 };
 
-export function Legal({ client, className }: Props) {
+export function Legal({ client, className }: Readonly<Props>) {
   const t = useTranslations("oidc");
 
   const externalLink = (url: string, text: React.ReactNode) => (

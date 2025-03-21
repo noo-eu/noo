@@ -2,7 +2,6 @@
 
 import { describe, expect, vi, test } from "vitest";
 import { getIpAddress, getUserAgent } from "./nextUtils";
-import { afterEach } from "node:test";
 
 let mockedHeaders: Record<string, string> = {};
 vi.mock("next/headers", () => ({

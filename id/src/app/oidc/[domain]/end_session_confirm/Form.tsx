@@ -5,9 +5,9 @@ import { useTranslations } from "next-intl";
 
 export function Form({
   submitAction,
-}: {
+}: Readonly<{
   submitAction: (data: FormData) => Promise<void>;
-}) {
+}>) {
   const t = useTranslations("common");
 
   return (
