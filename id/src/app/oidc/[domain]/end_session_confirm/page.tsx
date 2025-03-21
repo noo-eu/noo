@@ -1,8 +1,4 @@
-import {
-  getSessionCookie,
-  SessionsService,
-  setSessionCookie,
-} from "@/auth/SessionsService";
+import { endAllSessions, endSession, getActiveSessions } from "@/auth/sessions";
 import { Noo } from "@/components/Noo";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
@@ -74,8 +70,7 @@ export default async function EndSession({
       return finish(client, query.postLogoutRedirectUri, query.state);
     }
 
-    const svc = new SessionsService(await getSessionCookie());
-    const sessions = await svc.activeSessions();
+    const sessions = await getActiveSessions();
 
     let matchingSession: Session | undefined;
     if (query.sub && client) {
@@ -89,12 +84,10 @@ export default async function EndSession({
     }
 
     if (!matchingSession) {
-      await svc.endAllSessions();
+      await endAllSessions();
     } else {
-      await svc.endSession(matchingSession.id);
+      await endSession(matchingSession.id);
     }
-
-    await setSessionCookie(svc.buildCookie());
 
     return finish(client, query.postLogoutRedirectUri, query.state);
   };

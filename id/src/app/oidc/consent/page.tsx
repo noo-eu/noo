@@ -1,4 +1,4 @@
-import { getUserForSession } from "@/auth/SessionsService";
+import { getAuthenticatedUser } from "@/auth/sessions";
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
@@ -13,7 +13,7 @@ export const revalidate = 0;
 export default async function OidcConsentPage({
   searchParams,
 }: Readonly<{
-  searchParams: Promise<{ sid: string }>;
+  searchParams: Promise<{ uid: string }>;
 }>) {
   const oidcAuthRequest = await getOidcAuthorizationRequest();
   if (!oidcAuthRequest) {
@@ -21,13 +21,13 @@ export default async function OidcConsentPage({
     return redirect("/");
   }
 
-  const sessionId = (await searchParams).sid;
-  if (!sessionId) {
+  const userId = (await searchParams).uid;
+  if (!userId) {
     console.warn("No session ID found");
     return redirect("/switch");
   }
 
-  const user = await getUserForSession(sessionId);
+  const user = await getAuthenticatedUser(userId);
   if (!user) {
     console.warn("No user found for session");
     return redirect("/switch");
@@ -78,7 +78,7 @@ export default async function OidcConsentPage({
       scopes[0] === "openid" &&
       claimKeys.length === 0
     ) {
-      return redirect("/oidc/continue?sid=" + sessionId);
+      return redirect("/oidc/continue?uid=" + userId);
     }
   }
 

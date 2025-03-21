@@ -1,6 +1,6 @@
 "use server";
 
-import { SessionsService } from "@/auth/SessionsService";
+import { getAuthenticatedUser } from "@/auth/sessions";
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
 import { ActionResult } from "@/lib/types/ActionResult";
@@ -8,12 +8,13 @@ import { humanIdToUuid } from "@/utils";
 import {
   generateRegistrationOptions,
   RegistrationResponseJSON,
+  VerifiedRegistrationResponse,
   verifyRegistrationResponse,
 } from "@simplewebauthn/server";
 import { headers } from "next/headers";
 import knownAuthenticators from "./knownAuthenticators";
 
-async function getWebAuthnID() {
+export async function getWebAuthnID() {
   if (process.env.NODE_ENV === "production") {
     return "id.noo.eu";
   }
@@ -40,7 +41,7 @@ export async function registrationOptions(
     return { error: "Missing user ID" };
   }
 
-  const user = await SessionsService.user(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return { error: "User not found" };
   }
@@ -78,12 +79,12 @@ export async function registrationOptions(
 export async function verifyRegistration(
   uid: string,
   registrationResponse: RegistrationResponseJSON,
-) {
+): Promise<ActionResult<VerifiedRegistrationResponse, string>> {
   if (!uid) {
     return { error: "Missing user ID" };
   }
 
-  const user = await SessionsService.user(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return { error: "User not found" };
   }
@@ -126,7 +127,7 @@ export async function verifyRegistration(
     return { error: "Error verifying registration" };
   }
 
-  return verification;
+  return { data: verification };
 }
 
 export async function removePasskey(
@@ -137,7 +138,7 @@ export async function removePasskey(
     return { error: "Missing user ID" };
   }
 
-  const user = await SessionsService.user(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return { error: "User not found" };
   }
@@ -159,7 +160,7 @@ export async function changePasskeyName(
     return { error: "Missing user ID", input: { name } };
   }
 
-  const user = await SessionsService.user(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     console.error("User not found");
     return { error: "User not found", input: { name } };

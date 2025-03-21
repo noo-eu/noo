@@ -1,9 +1,10 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
+import { getAuthenticatedSession } from "@/auth/sessions";
+import { getSessionCheckCookie } from "@/auth/sessions/store";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
 import { OidcClient } from "@/db/oidc_clients";
-import { Session } from "@/db/sessions";
-import { getSessionCheckCookie } from "@/auth/SessionsService";
+import { UserWithTenant } from "@/db/users";
 import { humanIdToUuid, randomSalt, sha256, uuidToHumanId } from "@/utils";
 import { createIdToken, idTokenHash } from "../idToken";
 import { AuthorizationRequest } from "../types";
@@ -19,7 +20,7 @@ import { requestedUserClaims } from "../userClaims";
 export async function buildAuthorizationResponse(
   client: OidcClient,
   params: AuthorizationRequest,
-  session: Session,
+  user: UserWithTenant,
 ) {
   if (!RESPONSE_TYPES_SUPPORTED.includes(params.response_type)) {
     throw new Error("Unsupported or invalid response type");
@@ -30,15 +31,15 @@ export async function buildAuthorizationResponse(
   const parts = params.response_type.split(" ");
 
   if (parts.includes("code")) {
-    await handleCodeResponseType(params, session, response);
+    await handleCodeResponseType(params, user, response);
   }
 
   if (parts.includes("token")) {
-    await handleTokenResponseType(client, params, session, response);
+    await handleTokenResponseType(client, params, user, response);
   }
 
   if (parts.includes("id_token")) {
-    await handleIdTokenResponseType(client, params, session, response);
+    await handleIdTokenResponseType(client, params, user, response);
   }
 
   response.session_state = await buildSessionState(
@@ -51,9 +52,14 @@ export async function buildAuthorizationResponse(
 
 async function handleCodeResponseType(
   params: AuthorizationRequest,
-  session: Session,
+  user: UserWithTenant,
   response: Record<string, string>,
 ) {
+  const session = await getAuthenticatedSession(user.id);
+  if (!session) {
+    throw new Error("No session found for user");
+  }
+
   const code = await OidcAuthorizationCodes.create({
     id: "oidc_code_" + randomSalt(32, "base64url"),
     clientId: humanIdToUuid(params.client_id, "oidc")!,
@@ -73,12 +79,17 @@ async function handleCodeResponseType(
 async function handleTokenResponseType(
   client: OidcClient,
   params: AuthorizationRequest,
-  session: Session,
+  user: UserWithTenant,
   response: Record<string, string>,
 ) {
+  const session = await getAuthenticatedSession(user.id);
+  if (!session) {
+    throw new Error("No session found for user");
+  }
+
   const accessToken = await OidcAccessTokens.create({
     clientId: client.id,
-    userId: session.user.id,
+    userId: user.id,
     scopes: params.scopes,
     claims: params.claims,
     nonce: params.nonce,
@@ -93,12 +104,16 @@ async function handleTokenResponseType(
 async function handleIdTokenResponseType(
   client: OidcClient,
   params: AuthorizationRequest,
-  session: Session,
+  user: UserWithTenant,
   response: Record<string, string>,
 ) {
   const c_hash = idTokenHash(client, response.code);
   const at_hash = idTokenHash(client, response.access_token);
-  const user = session.user;
+
+  const session = await getAuthenticatedSession(user.id);
+  if (!session) {
+    throw new Error("No session found for user");
+  }
 
   response.id_token = await createIdToken(
     params.issuer,

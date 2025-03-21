@@ -1,5 +1,6 @@
 "use server";
 
+import { getAuthenticatedUser } from "@/auth/sessions";
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { returnToClientUrl } from "@/lib/oidc/authorization";
@@ -9,11 +10,10 @@ import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
 } from "@/lib/oidc/utils";
-import { getSessionCookie, SessionsService } from "@/auth/SessionsService";
 import { humanIdToUuid } from "@/utils";
 import { notFound, redirect } from "next/navigation";
 
-export async function afterConsent(sessionId: string) {
+export async function afterConsent(userId: string) {
   "use server";
 
   const oidcAuthRequest = await getOidcAuthorizationRequest();
@@ -21,9 +21,8 @@ export async function afterConsent(sessionId: string) {
     return {};
   }
 
-  const sessionManager = new SessionsService(await getSessionCookie());
-  const session = await sessionManager.getSessionBySid(sessionId);
-  if (!session) {
+  const user = await getAuthenticatedUser(userId);
+  if (!user) {
     return notFound();
   }
 
@@ -33,7 +32,6 @@ export async function afterConsent(sessionId: string) {
     return notFound();
   }
 
-  const user = session.user;
   if (client.tenantId && client.tenantId !== user.tenant?.id) {
     return notFound();
   }
@@ -50,7 +48,7 @@ export async function afterConsent(sessionId: string) {
   const responseParams = await buildAuthorizationResponse(
     client,
     oidcAuthRequest,
-    session,
+    user,
   );
 
   const url = returnToClientUrl(oidcAuthRequest, responseParams);
@@ -70,13 +68,13 @@ export async function afterConsent(sessionId: string) {
 }
 
 export async function consentFormSubmit(_: unknown, formData: FormData) {
-  const sessionId = formData.get("sessionId") as string;
+  const userId = formData.get("userId") as string;
   const consent = formData.get("consent") as string;
   if (consent !== "yes") {
     return notFound();
   }
 
-  return afterConsent(sessionId);
+  return afterConsent(userId);
 }
 
 async function storeConsent(

@@ -1,12 +1,12 @@
 // @vitest-environment happy-dom
 
-import { updateName } from "./actions";
-import { getSessionUserById } from "@/auth/SessionsService";
+import { getAuthenticatedUser } from "@/auth/sessions";
 import Users from "@/db/users";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { updateName } from "./actions";
 
-vi.mock("@/auth/SessionsService", () => ({
-  getSessionUserById: vi.fn(),
+vi.mock("@/auth/sessions", () => ({
+  getAuthenticatedUser: vi.fn(),
 }));
 vi.mock("@/db/users");
 vi.mock("next/navigation", () => ({
@@ -28,7 +28,7 @@ describe("updateName", () => {
   });
 
   it("redirects if session is missing", async () => {
-    (getSessionUserById as Mock).mockResolvedValue(null);
+    (getAuthenticatedUser as Mock).mockResolvedValue(null);
 
     await expect(() =>
       updateName("usr_xxx", null, form("John", "Doe")),
@@ -36,14 +36,14 @@ describe("updateName", () => {
   });
 
   it("returns error if validation fails", async () => {
-    (getSessionUserById as Mock).mockResolvedValue({ id: "abc" });
+    (getAuthenticatedUser as Mock).mockResolvedValue({ id: "abc" });
 
     const result = await updateName("usr_xxx", null, form("", ""));
     expect(result.error).toHaveProperty("firstName");
   });
 
   it("updates user if valid", async () => {
-    (getSessionUserById as Mock).mockResolvedValue({ id: "abc" });
+    (getAuthenticatedUser as Mock).mockResolvedValue({ id: "abc" });
 
     const updateMock = vi.spyOn(Users, "update");
     const result = await updateName("usr_xxx", null, form("John", "Doe"));

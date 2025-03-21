@@ -1,13 +1,9 @@
 "use server";
 
+import { createSession } from "@/auth/sessions";
 import { schema } from "@/db";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
-import {
-  getSessionCookie,
-  SessionsService,
-  setSessionCookie,
-} from "@/auth/SessionsService";
 import { SignupService } from "@/lib/SignupService";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
@@ -106,15 +102,11 @@ export async function signupStep3(prevState: unknown, formData: FormData) {
 }
 
 async function startSession(user: typeof schema.users.$inferSelect) {
-  const sessionManager = new SessionsService(await getSessionCookie());
-
-  const session = await sessionManager.startSession(
+  const session = await createSession(
     user.id,
     await getIpAddress(),
     await getUserAgent(),
   );
-
-  await setSessionCookie(sessionManager.buildCookie());
 
   return session;
 }

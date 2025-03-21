@@ -22,7 +22,17 @@ export function usePasskeyRegistration() {
       const registrationResponse = await startRegistration({
         optionsJSON: options.data as PublicKeyCredentialCreationOptionsJSON,
       });
-      return await verifyRegistration(userId, registrationResponse);
+      const verificationResponse = await verifyRegistration(
+        userId,
+        registrationResponse,
+      );
+      if (verificationResponse.error) {
+        console.error(
+          "Error verifying passkey registration:",
+          verificationResponse.error,
+        );
+        return;
+      }
     } catch (error) {
       console.error("Error registering passkey:", error);
     }

@@ -1,8 +1,8 @@
 import { User } from "@/db/users";
-import { redirect } from "next/navigation";
-import { SessionsService } from "./SessionsService";
-import { AuthProvider } from "./authContext";
 import { makeClientUser } from "@/lib/types/ClientUser";
+import { redirect } from "next/navigation";
+import { AuthProvider } from "./authContext";
+import { getAuthenticatedUser, getFirstAuthenticatedUserId } from "./sessions";
 
 // Higher-order component to wrap app router pages with auth
 export function withAuth<P extends { searchParams: Promise<{ uid?: string }> }>(
@@ -10,11 +10,18 @@ export function withAuth<P extends { searchParams: Promise<{ uid?: string }> }>(
 ) {
   return async function WithAuthComponent(props: P) {
     const params = await props.searchParams;
-    // if (!params.uid) {
-    //   redirect("/signin");
-    // }
+    if (!params.uid) {
+      const userId = await getFirstAuthenticatedUserId();
 
-    const user = await SessionsService.user(params.uid);
+      // Redirect to the same page with the first authenticated user
+      if (userId) {
+        redirect(`?uid=${userId}`);
+      } else {
+        redirect("/signin");
+      }
+    }
+
+    const user = await getAuthenticatedUser(params.uid);
     if (!user) {
       redirect("/signin");
     }

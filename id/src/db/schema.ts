@@ -233,6 +233,13 @@ export const oidcAccessTokens = pgTable("oidc_access_tokens", {
   expiresAt: timestamp("expires_at").notNull(),
 });
 
+export const passkeyRelations = relations(passkeys, ({ one }) => ({
+  user: one(users, {
+    fields: [passkeys.userId],
+    references: [users.id],
+  }),
+}));
+
 export const sessionRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
@@ -241,6 +248,7 @@ export const sessionRelations = relations(sessions, ({ one }) => ({
 }));
 
 export const userRelations = relations(users, ({ one, many }) => ({
+  passkeys: many(passkeys),
   sessions: many(sessions),
   tenant: one(tenants, {
     fields: [users.tenantId],

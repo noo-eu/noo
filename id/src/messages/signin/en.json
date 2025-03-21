@@ -4,9 +4,11 @@
     "error": "The details you entered are incorrect",
     "metaTitle": "Sign in - noo",
     "password": "Password",
+    "or": "or",
     "submit": "Sign in",
     "tenant_error": "Please sign in using a {domain} account",
     "title": "Sign in to your <noo></noo> account",
-    "username": "Username or email address"
+    "username": "Username or email address",
+    "usePasskey": "Sign in with a passkey"
   }
 }

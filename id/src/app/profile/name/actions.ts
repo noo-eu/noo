@@ -1,6 +1,6 @@
 "use server";
 
-import { getSessionUserById } from "@/auth/SessionsService";
+import { getAuthenticatedUser } from "@/auth/sessions";
 import Users from "@/db/users";
 import { BasicFormAction } from "@/lib/types/ActionResult";
 import { validateNameForm } from "@/lib/validations/name";
@@ -21,7 +21,7 @@ export async function updateName(
   _: unknown,
   form: FormData,
 ): Promise<BasicFormAction> {
-  const user = await getSessionUserById(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return redirect("/");
   }

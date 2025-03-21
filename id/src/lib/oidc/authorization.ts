@@ -1,13 +1,14 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
 import { getKeyByAlg } from "@/app/oidc/jwks";
+import { getActiveSessions } from "@/auth/sessions";
 import { schema } from "@/db";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
-import { getSessionCookie, SessionsService } from "@/auth/SessionsService";
 import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
 import { SignJWT } from "jose";
+import { err, ok, Result } from "neverthrow";
 import { HttpRequest } from "../http/request";
 import { buildFormPostResponse } from "./authorization/formPost";
 import { buildAuthorizationResponse } from "./authorization/response";
@@ -19,7 +20,6 @@ import {
   ResponseMode,
   ResponseType,
 } from "./types";
-import { err, ok, Result } from "neverthrow";
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   const issuer = `${request.baseUrl}/oidc${tenant ? "/" + tenant.domain : ""}`;
@@ -349,8 +349,7 @@ async function authorizationNone(
 ) {
   // The RP expects the user to be already authenticated and consented.
   // If this is not the case, the request is rejected.
-  const sessionsService = new SessionsService(await getSessionCookie());
-  const allSessions = await sessionsService.activeSessions();
+  const allSessions = await getActiveSessions();
 
   if (allSessions.length === 0) {
     return await returnToClient(params, {
@@ -428,7 +427,7 @@ async function authorizationNone(
       const responseParams = await buildAuthorizationResponse(
         client,
         params,
-        session,
+        session.user,
       );
 
       return await returnToClient(params, responseParams);
@@ -453,8 +452,7 @@ async function authorizationStandard(
   //   - if there are multiple active sessions: show the account picker.
   //   - if there are no active sessions, show the login screen.
 
-  const sessions = new SessionsService(await getSessionCookie());
-  const activeSessions = await sessions.activeSessions(
+  const activeSessions = await getActiveSessions(
     params.max_age !== undefined ? params.max_age * 1000 : undefined,
   );
 

@@ -1,9 +1,16 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, SQL } from "drizzle-orm";
 import db, { schema } from ".";
 
 async function find(passkeyId: string) {
   return db.query.passkeys.findFirst({
     where: eq(schema.passkeys.id, passkeyId),
+  });
+}
+
+async function findBy(conditions: SQL) {
+  return db.query.passkeys.findFirst({
+    where: conditions,
+    with: { user: { with: { tenant: true } } },
   });
 }
 
@@ -43,6 +50,7 @@ async function destroy(userId: string, passkeyId: string) {
 const Passkeys = {
   listForUser,
   find,
+  findBy,
   create,
   update,
   destroy,

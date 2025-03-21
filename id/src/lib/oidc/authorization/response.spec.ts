@@ -1,6 +1,6 @@
 import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
-import { beforeEach, describe, expect, vi, test } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { AuthorizationRequest } from "../types";
 import { buildAuthorizationResponse } from "./response";
 
@@ -19,12 +19,6 @@ vi.mock("@/db/oidc_access_tokens", () => ({
       }),
     ),
   },
-}));
-
-vi.mock("@/auth/SessionsService", () => ({
-  getSessionCheckCookie: vi.fn(() =>
-    Promise.resolve("test-session-check-cookie"),
-  ),
 }));
 
 vi.mock("@/utils", () => ({

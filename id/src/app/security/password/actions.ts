@@ -1,6 +1,6 @@
 "use server";
 
-import { SessionsService } from "@/auth/SessionsService";
+import { getAuthenticatedSession, getAuthenticatedUser } from "@/auth/sessions";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
 import Users from "@/db/users";
@@ -8,7 +8,7 @@ import { checkPwnedPassword } from "@/lib/password";
 import { hashPassword } from "@/lib/SignupService";
 import { BasicFormAction } from "@/lib/types/ActionResult";
 import { humanIdToUuid } from "@/utils";
-import { and, not, eq } from "drizzle-orm";
+import { and, eq, not } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -22,7 +22,7 @@ export async function updatePassword(
   _: unknown,
   form: FormData,
 ): Promise<BasicFormAction> {
-  const user = await SessionsService.userFor(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return redirect("/signin");
   }
@@ -58,7 +58,7 @@ export async function updatePassword(
     passwordBreachesCheckedAt: undefined,
   });
 
-  const currentSession = await SessionsService.sessionFor(uid);
+  const currentSession = await getAuthenticatedSession(uid);
   await terminateAllSessions(uid, currentSession!.id);
 
   return { input: data };

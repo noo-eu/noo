@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, vi, test } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 import { HttpRequest } from "../http/request";
 import { oidcAuthorization } from "./authorization";
 
@@ -52,11 +52,6 @@ beforeEach(() => {
     },
   ];
 });
-
-vi.mock("@/auth/SessionsService", () => ({
-  SessionsService: createMockSessionService(),
-  getSessionCookie: () => Promise.resolve("session"),
-}));
 
 describe("Authorization endpoint", () => {
   describe("when there is only one signed-in user", () => {

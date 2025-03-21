@@ -1,4 +1,4 @@
-import { getUserForSession } from "@/auth/SessionsService";
+import { getAuthenticatedUser } from "@/auth/sessions";
 import { AccountBox } from "@/components/AccountBox";
 import { Legal } from "@/components/Legal";
 import { PageModal } from "@/components/PageModal";
@@ -17,7 +17,7 @@ export const revalidate = 0;
 export default async function OidcContinuePage({
   searchParams,
 }: Readonly<{
-  searchParams: Promise<{ sid: string }>;
+  searchParams: Promise<{ uid: string }>;
 }>) {
   const t = await getTranslations();
 
@@ -27,12 +27,12 @@ export default async function OidcContinuePage({
     return redirect("/");
   }
 
-  const sessionId = (await searchParams).sid;
-  if (!sessionId) {
+  const userId = (await searchParams).uid;
+  if (!userId) {
     return redirect("/switch");
   }
 
-  const user = await getUserForSession(sessionId);
+  const user = await getAuthenticatedUser(userId);
   if (!user) {
     return redirect("/switch");
   }
@@ -86,7 +86,7 @@ export default async function OidcContinuePage({
             </a>
           </p>
 
-          <Form sessionId={sessionId} />
+          <Form userId={userId} />
 
           <Legal client={clientFields} className="mt-8 lg:hidden" />
         </div>

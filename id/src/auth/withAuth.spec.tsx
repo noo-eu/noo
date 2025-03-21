@@ -25,12 +25,6 @@ const userMock = vi.hoisted(() => {
   return vi.fn();
 });
 
-vi.mock("@/auth/SessionsService", () => ({
-  SessionsService: {
-    user: userMock,
-  },
-}));
-
 describe("withAuth HOC", () => {
   const WrappedTestPage = withAuth(TestPage);
 

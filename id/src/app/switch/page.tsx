@@ -1,4 +1,4 @@
-import { getSessions } from "@/auth/SessionsService";
+import { getActiveSessions } from "@/auth/sessions";
 import { PageModal } from "@/components/PageModal";
 import { PresentClient } from "@/components/PresentClient";
 import { SignInWithNoo } from "@/components/SignInWithNoo";
@@ -20,7 +20,7 @@ export async function generateMetadata() {
 }
 
 export default async function AccountSwitcherPage() {
-  const sessions = await getSessions();
+  const sessions = await getActiveSessions();
   const oidcAuthRequest = await getOidcAuthorizationRequest();
 
   if (!oidcAuthRequest) {

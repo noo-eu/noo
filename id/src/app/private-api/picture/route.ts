@@ -1,10 +1,10 @@
+import { getAuthenticatedUser } from "@/auth/sessions";
 import Users from "@/db/users";
+import { validateFileUpload } from "@/lib/http/fileValidations";
 import { HttpRequest } from "@/lib/http/request";
 import { getObjectStorage } from "@/lib/objectStorage";
-import { SessionsService } from "@/auth/SessionsService";
 import { randomSalt } from "@/utils";
 import sharp from "sharp";
-import { validateFileUpload } from "@/lib/http/fileValidations";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/gif"];
@@ -16,7 +16,7 @@ async function getUser(request: Request) {
     return undefined;
   }
 
-  const user = await SessionsService.userFor(uid);
+  const user = await getAuthenticatedUser(uid);
   if (!user) {
     return undefined;
   }

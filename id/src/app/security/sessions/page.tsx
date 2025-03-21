@@ -1,4 +1,4 @@
-import { SessionsService } from "@/auth/SessionsService";
+import { getAuthenticatedSession } from "@/auth/sessions";
 import { withAuth } from "@/auth/withAuth";
 import { sessions } from "@/db/schema";
 import Sessions from "@/db/sessions";
@@ -23,7 +23,7 @@ async function Page({ user }: Readonly<{ user: User }>) {
   const allSessions = await Sessions.findManyBy(eq(sessions.userId, user.id));
   const clientSessions = allSessions.map(makeClientSession);
 
-  const currentSessionId = (await SessionsService.sessionFor(user.id))?.id;
+  const currentSessionId = (await getAuthenticatedSession(user.id))?.id;
   if (!currentSessionId) {
     redirect("/signin");
   }
