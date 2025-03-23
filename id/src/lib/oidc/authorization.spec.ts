@@ -6,6 +6,9 @@ let mockSessions: {
   age: number;
   id: string;
   userId: string;
+  user: {
+    id: string;
+  };
   tenantId?: string;
 }[] = vi.hoisted(() => []);
 
@@ -51,6 +54,9 @@ describe("Authorization endpoint", () => {
           id: "session1",
           userId: "00000000-0000-0000-0000-000000000001",
           age: 10,
+          user: {
+            id: "00000000-0000-0000-0000-000000000001",
+          },
         },
       ];
     });
@@ -93,11 +99,17 @@ describe("Authorization endpoint", () => {
           id: "session1",
           userId: "00000000-0000-0000-0000-000000000001",
           age: 10,
+          user: {
+            id: "00000000-0000-0000-0000-000000000001",
+          },
         },
         {
           id: "session2",
           userId: "00000000-0000-0000-0000-000000000002",
           age: 15,
+          user: {
+            id: "00000000-0000-0000-0000-000000000002",
+          },
         },
       ];
     });
@@ -130,6 +142,9 @@ describe("Authorization endpoint", () => {
           id: "session1",
           userId: "00000000-0000-0000-0000-000000000001",
           age: 10,
+          user: {
+            id: "00000000-0000-0000-0000-000000000001",
+          },
         },
       ];
     });

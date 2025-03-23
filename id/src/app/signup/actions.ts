@@ -5,6 +5,7 @@ import { schema } from "@/db";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { SignupService } from "@/lib/SignupService";
+import { uuidToHumanId } from "@/utils";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -126,11 +127,12 @@ export async function signupStep4(_: unknown, __: FormData) {
 
   const result = await svc.runStep4(signupData);
   if (result.success) {
-    const session = await startSession(result.user);
+    await startSession(result.user);
+    const userId = uuidToHumanId(result.user.id, "usr");
 
     const oidcAuthorization = await getOidcAuthorizationRequest();
     if (oidcAuthorization) {
-      redirect("/oidc/consent?sid=" + session.id);
+      redirect("/oidc/consent?uid=" + userId);
     } else {
       redirect("/signup/success");
     }

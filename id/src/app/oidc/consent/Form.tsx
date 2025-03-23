@@ -9,13 +9,13 @@ import { consentFormSubmit } from "./actions";
 export default function Form() {
   const [_, formAction, pending] = useActionState(consentFormSubmit, {});
 
-  const sessionId = useSearchParams().get("sid")!;
+  const userId = useSearchParams().get("uid")!;
   const t = useTranslations("common");
 
   return (
     <div className="mt-8">
       <form action={formAction}>
-        <input type="hidden" name="sessionId" value={sessionId} />
+        <input type="hidden" name="userId" value={userId} />
         <div className="flex gap-4 justify-end">
           <Button
             type="submit"

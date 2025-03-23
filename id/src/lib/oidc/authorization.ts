@@ -6,7 +6,7 @@ import OidcClients, { OidcClient } from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
-import { asyncFilter, asyncFind, humanIdToUuid } from "@/utils";
+import { asyncFilter, asyncFind, humanIdToUuid, uuidToHumanId } from "@/utils";
 import { SignJWT } from "jose";
 import { err, ok, Result } from "neverthrow";
 import { HttpRequest } from "../http/request";
@@ -476,6 +476,7 @@ async function authorizationStandard(
   } else if (matchingSessions.length === 1) {
     // Only one active session, show consent screen if needed
     const session = matchingSessions[0];
+    const userId = uuidToHumanId(session.user.id, "usr");
 
     if (
       await verifyConsent(
@@ -489,7 +490,7 @@ async function authorizationStandard(
       return new Response(null, {
         status: 303,
         headers: {
-          Location: req.buildUrl("/oidc/continue", { sid: session.id }),
+          Location: req.buildUrl("/oidc/continue", { uid: userId }),
           "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });
@@ -498,7 +499,7 @@ async function authorizationStandard(
       return new Response(null, {
         status: 303,
         headers: {
-          Location: req.buildUrl("/oidc/consent", { sid: session.id }),
+          Location: req.buildUrl("/oidc/consent", { uid: userId }),
           "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
         },
       });

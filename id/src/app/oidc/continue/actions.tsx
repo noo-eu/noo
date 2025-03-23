@@ -77,7 +77,7 @@ export async function consentFormSubmit(_: unknown, formData: FormData) {
   return afterConsent(userId);
 }
 
-async function storeConsent(
+export async function storeConsent(
   userId: string,
   clientId: string,
   scopes: string[],

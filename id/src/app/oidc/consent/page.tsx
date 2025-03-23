@@ -71,8 +71,6 @@ export default async function OidcConsentPage({
 
   if (missingScopes.length > 0) {
     // We're sent to /consent if we're missing scopes or claims
-    // However, the /switch page also sends us here when an account is selected.
-    // In that case, we can fastForward and confirm the consent (if it was previously granted).
     if (
       scopes.length === 1 &&
       scopes[0] === "openid" &&
@@ -83,7 +81,6 @@ export default async function OidcConsentPage({
   }
 
   const cleanClaims = cleanupClaims(missingClaims);
-  const fastForward = missingScopes.length === 0 && cleanClaims.length === 0;
   const userFields = {
     name: `${user.firstName} ${user.lastName}`.trim(),
     email: `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`,
@@ -93,7 +90,6 @@ export default async function OidcConsentPage({
     <Content
       client={clientFields}
       missingClaims={cleanClaims}
-      fastForward={fastForward}
       user={userFields}
     />
   );

@@ -8,7 +8,11 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
-import { generateWebauthnOptions, signin, verifyWebauthn } from "./actions";
+import {
+  generateWebauthnOptions,
+  signin,
+  verifyWebauthn,
+} from "@/app/signin/actions";
 
 function useWebauthnAuthentication() {
   return async (autofill: boolean) => {
@@ -30,7 +34,7 @@ function useWebauthnAuthentication() {
   };
 }
 
-export function Form() {
+export function SignInForm() {
   const [state, formAction, pending] = useActionState(signin, {
     input: { username: "" },
   });
