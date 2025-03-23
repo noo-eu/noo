@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Account aanmaken",
-    "error": "De ingevulde gegevens kloppen niet",
-    "metaTitle": "Inloggen - noo",
     "password": "Wachtwoord",
-    "submit": "Inloggen",
+    "metaTitle": "Inloggen - noo",
     "tenant_error": "Log in met een {domain} account",
     "title": "Log in op je <noo></noo> account",
-    "username": "Gebruikersnaam of e-mailadres"
+    "create_account": "Account aanmaken",
+    "error": "De ingevulde gegevens kloppen niet",
+    "or": "of",
+    "username": "Gebruikersnaam of e-mailadres",
+    "usePasskey": "Aanmelden met een wachtwoordloos toegangssleutel",
+    "submit": "Inloggen"
   }
 }

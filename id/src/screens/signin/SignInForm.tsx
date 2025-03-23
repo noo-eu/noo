@@ -17,12 +17,12 @@ import {
 function useWebauthnAuthentication() {
   return async (autofill: boolean) => {
     try {
-      const options = await generateWebauthnOptions();
+      const { options, passkeyChallengeId } = await generateWebauthnOptions();
       const authResponse = await startAuthentication({
         optionsJSON: options as PublicKeyCredentialRequestOptionsJSON,
         useBrowserAutofill: autofill,
       });
-      const verifyResp = await verifyWebauthn(authResponse);
+      const verifyResp = await verifyWebauthn(passkeyChallengeId, authResponse);
       if (verifyResp?.error) {
         console.error(verifyResp.error);
       } else {

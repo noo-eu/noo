@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Rakstīt kontu",
-    "error": "Jūsu ievadīto informāciju nav pareiza",
-    "metaTitle": "Pieteikties - noo",
     "password": "Parole",
-    "submit": "Iestāties",
+    "metaTitle": "Pieteikties - noo",
     "tenant_error": "Lūdzu, iestājieties ar {domain} kontu",
     "title": "Iestāties savam <noo></noo> kontam",
-    "username": "Vārds vai e-pasta adrese"
+    "create_account": "Rakstīt kontu",
+    "error": "Jūsu ievadīto informāciju nav pareiza",
+    "or": "vai",
+    "username": "Vārds vai e-pasta adrese",
+    "usePasskey": "Pierakstīties, izmantojot paroli",
+    "submit": "Iestāties"
   }
 }

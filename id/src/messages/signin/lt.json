@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Sukurti paskyrą",
-    "error": "Neteisingi prisijungimo duomenys",
-    "metaTitle": "Prisijungimas - noo",
     "password": "Slaptažodis",
-    "submit": "Prisijungti",
+    "metaTitle": "Prisijungimas - noo",
     "tenant_error": "Prisijunkite naudodami {domain} paskyrą",
     "title": "Prisijunk prie savo <noo></noo> paskyros",
-    "username": "Vartotojo vardas arba el. paštas"
+    "create_account": "Sukurti paskyrą",
+    "error": "Neteisingi prisijungimo duomenys",
+    "or": "arba",
+    "username": "Vartotojo vardas arba el. paštas",
+    "usePasskey": "Prisijunkite naudodami slaptažodį",
+    "submit": "Prisijungti"
   }
 }

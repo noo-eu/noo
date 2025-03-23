@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Hesap oluştur",
-    "error": "Girdiğin bilgiler doğru değil",
-    "metaTitle": "Giriş yap – noo",
     "password": "Şifre",
-    "submit": "Giriş yap",
+    "metaTitle": "Giriş yap – noo",
     "tenant_error": "Lütfen {domain} hesabınla giriş yap",
     "title": "<noo></noo> hesabına giriş yap",
-    "username": "Kullanıcı adı veya e-posta"
+    "create_account": "Hesap oluştur",
+    "error": "Girdiğin bilgiler doğru değil",
+    "or": "veya",
+    "username": "Kullanıcı adı veya e-posta",
+    "usePasskey": "Anahtar ile giriş yap",
+    "submit": "Giriş yap"
   }
 }

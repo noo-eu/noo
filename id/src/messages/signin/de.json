@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Konto erstellen",
-    "error": "Die eingegebenen Anmeldedaten sind falsch",
-    "metaTitle": "Anmelden - noo",
     "password": "Passwort",
-    "submit": "Anmelden",
+    "metaTitle": "Anmelden - noo",
     "tenant_error": "Bitte melde dich mit einem {domain}-Konto an",
     "title": "Melde dich bei deinem <noo></noo> Konto an",
-    "username": "Benutzername oder E-Mail"
+    "create_account": "Konto erstellen",
+    "error": "Die eingegebenen Anmeldedaten sind falsch",
+    "or": "oder",
+    "username": "Benutzername oder E-Mail",
+    "usePasskey": "Mit einem Passkey anmelden",
+    "submit": "Anmelden"
   }
 }

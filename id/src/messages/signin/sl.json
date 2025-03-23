@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Ustvari račun",
-    "error": "Vneseni podatki niso pravilni",
-    "metaTitle": "Prijava – noo",
     "password": "Geslo",
-    "submit": "Prijavi se",
+    "metaTitle": "Prijava – noo",
     "tenant_error": "Prijavi se z računom {domain}",
     "title": "Prijavi se v svoj račun <noo></noo>",
-    "username": "Uporabniško ime ali e-pošta"
+    "create_account": "Ustvari račun",
+    "error": "Vneseni podatki niso pravilni",
+    "or": "ali",
+    "username": "Uporabniško ime ali e-pošta",
+    "usePasskey": "Prijavi se s ključno besedo",
+    "submit": "Prijavi se"
   }
 }

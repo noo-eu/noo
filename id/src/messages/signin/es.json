@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Crea una cuenta",
-    "error": "Las credenciales que has introducido no son correctas",
-    "metaTitle": "Iniciar sesión - noo",
     "password": "Contraseña",
-    "submit": "Entrar",
+    "metaTitle": "Iniciar sesión - noo",
     "tenant_error": "Por favor, accede con una cuenta de {domain}",
     "title": "Inicia sesión en tu cuenta de <noo></noo>",
-    "username": "Nombre de usuario o correo"
+    "create_account": "Crea una cuenta",
+    "error": "Las credenciales que has introducido no son correctas",
+    "or": "o",
+    "username": "Nombre de usuario o correo",
+    "usePasskey": "Accede con una clave de acceso",
+    "submit": "Entrar"
   }
 }

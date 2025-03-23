@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Creează un cont",
-    "error": "Datele introduse sunt greșite",
-    "metaTitle": "Autentificare - noo",
     "password": "Parolă",
-    "submit": "Autentifică-te",
+    "metaTitle": "Autentificare - noo",
     "tenant_error": "Te rog autentifică-te cu un cont {domain}",
     "title": "Autentifică-te în contul tău <noo></noo>",
-    "username": "Nume de utilizator sau email"
+    "create_account": "Creează un cont",
+    "error": "Datele introduse sunt greșite",
+    "or": "sau",
+    "username": "Nume de utilizator sau email",
+    "usePasskey": "Conectează-te cu o cheie de acces",
+    "submit": "Autentifică-te"
   }
 }

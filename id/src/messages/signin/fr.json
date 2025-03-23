@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Créer un compte",
-    "error": "Les identifiants sont incorrects",
-    "metaTitle": "Connexion – noo",
     "password": "Mot de passe",
-    "submit": "Se connecter",
+    "metaTitle": "Connexion – noo",
     "tenant_error": "Veuillez vous connecter avec un compte {domain}",
     "title": "Connecte-toi à ton compte <noo></noo>",
-    "username": "Nom d’utilisateur ou e-mail"
+    "create_account": "Créer un compte",
+    "error": "Les identifiants sont incorrects",
+    "or": "ou",
+    "username": "Nom d’utilisateur ou e-mail",
+    "usePasskey": "Se connecter avec une clé d'accès",
+    "submit": "Se connecter"
   }
 }

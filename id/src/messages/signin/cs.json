@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Zaregistrovat se",
-    "error": "Zadané údaje nejsou správné",
-    "metaTitle": "Přihlášení - noo",
     "password": "Heslo",
-    "submit": "Přihlásit se",
+    "metaTitle": "Přihlášení - noo",
     "tenant_error": "Přihlas se prosím pomocí účtu {domain}",
     "title": "Přihlas se ke svému účtu <noo></noo>",
-    "username": "Uživatelské jméno nebo e-mail"
+    "create_account": "Zaregistrovat se",
+    "error": "Zadané údaje nejsou správné",
+    "or": "nebo",
+    "username": "Uživatelské jméno nebo e-mail",
+    "usePasskey": "Přihlásit se pomocí klíče",
+    "submit": "Přihlásit se"
   }
 }

@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Oħloq kont",
-    "error": "Id-dettalji li daħħalt mhumiex korretti",
-    "metaTitle": "Idħol - noo",
     "password": "Password",
-    "submit": "Idħol",
+    "metaTitle": "Idħol - noo",
     "tenant_error": "Jekk jogħġbok idħol b’kont {domain}",
     "title": "Idħol fil-kont tiegħek ta’ <noo></noo>",
-    "username": "Username jew email"
+    "create_account": "Oħloq kont",
+    "error": "Id-dettalji li daħħalt mhumiex korretti",
+    "or": "jew",
+    "username": "Username jew email",
+    "usePasskey": "Idħol bil-passkey",
+    "submit": "Idħol"
   }
 }

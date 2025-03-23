@@ -27,6 +27,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getKeyByAlg } from "../oidc/jwks";
 import { getWebAuthnID } from "../security/passkeys/actions";
+import PasskeyChallenges from "@/db/passkeyChallenges";
 
 const signinSchema = z.object({
   username: z.string(),
@@ -57,18 +58,6 @@ export async function signin(
 
   await maybeCheckPwnedPassword(user, password);
 
-  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
-  if (oidcAuthorizationRequest?.tenantId) {
-    if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
-      const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
-
-      return {
-        error: "tenant",
-        input: { username, domain: tenant!.domain },
-      };
-    }
-  }
-
   if (user.otpSecret) {
     await startTotpSession(user);
     redirect("/signin/otp");
@@ -77,14 +66,9 @@ export async function signin(
     throw new Error("Redirected to OTP page");
   }
 
-  await startSession(user);
-  const uid = uuidToHumanId(user.id, "usr");
-
-  if (!oidcAuthorizationRequest) {
-    redirect("/");
-  } else {
-    redirect(`/oidc/consent?uid=${uid}`);
-  }
+  return await handleSuccessfulAuthentication<{ username: string }>(user, {
+    username,
+  });
 }
 
 async function startSession(user: User) {
@@ -122,7 +106,7 @@ async function startTotpSession(user: User, passedMethods: string[] = ["pwd"]) {
 
   const cookieStore = await cookies();
   await cookieStore.set(TOTP_COOKIE, token, {
-    maxAge: 60 * 60 * 24 * 400,
+    maxAge: 60 * 15,
     httpOnly: true,
     secure: true,
     sameSite: "strict",
@@ -160,13 +144,14 @@ export async function generateWebauthnOptions() {
     await generateAuthenticationOptions({
       rpID: await getWebAuthnID(),
       userVerification: "required",
-      challenge: "123",
     });
 
-  // (Pseudocode) Remember this challenge for this user
-  // setCurrentAuthenticationOptions(user, options);
+  const passkeyChallenge = await PasskeyChallenges.create({
+    challenge: options.challenge,
+    expiresAt: new Date(Date.now() + 1000 * 60 * 5),
+  });
 
-  return options;
+  return { options, passkeyChallengeId: passkeyChallenge.id };
 }
 
 async function getWebAuthnExpectedOrigin() {
@@ -181,6 +166,7 @@ async function getWebAuthnExpectedOrigin() {
 }
 
 export async function verifyWebauthn(
+  passkeyChallengeId: string,
   response: AuthenticationResponseJSON,
 ): Promise<ActionResult<undefined, string, { domain?: string }>> {
   const passkeyId = response.id;
@@ -188,16 +174,22 @@ export async function verifyWebauthn(
   const passkey = await Passkeys.findBy(
     eq(schema.passkeys.credentialId, passkeyId),
   );
-  console.log("passkey", passkey, "passkeyId", passkeyId);
   if (!passkey) {
     return { error: "Passkey not found", input: {} };
   }
+
+  const passkeyChallenge = await PasskeyChallenges.find(passkeyChallengeId);
+  if (!passkeyChallenge) {
+    return { error: "Passkey challenge not found", input: {} };
+  }
+
+  await PasskeyChallenges.destroy(passkeyChallengeId);
 
   let verification;
   try {
     verification = await verifyAuthenticationResponse({
       response,
-      expectedChallenge: "MTIz",
+      expectedChallenge: passkeyChallenge.challenge,
       expectedOrigin: await getWebAuthnExpectedOrigin(),
       expectedRPID: await getWebAuthnID(),
       credential: {
@@ -213,38 +205,43 @@ export async function verifyWebauthn(
   }
 
   const { verified } = verification;
-  if (verified) {
-    const { authenticationInfo } = verification;
-    const { newCounter } = authenticationInfo;
-
-    await Passkeys.update(passkey.id, {
-      counter: newCounter,
-      lastUsedAt: new Date(),
-    });
-
-    const user = passkey.user;
-
-    const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
-    if (oidcAuthorizationRequest?.tenantId) {
-      if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
-        const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
-
-        return {
-          error: "tenant",
-          input: { domain: tenant!.domain },
-        };
-      }
-    }
-
-    await startSession(passkey.user);
-
-    if (!oidcAuthorizationRequest) {
-      redirect("/");
-    } else {
-      const uid = uuidToHumanId(user.id, "usr");
-      redirect(`/oidc/consent?uid=${uid}`);
-    }
-  } else {
+  if (!verified) {
     return { error: "Passkey verification failed", input: {} };
+  }
+
+  const { authenticationInfo } = verification;
+  const { newCounter } = authenticationInfo;
+
+  await Passkeys.update(passkey.id, {
+    counter: newCounter,
+    lastUsedAt: new Date(),
+  });
+
+  return await handleSuccessfulAuthentication(passkey.user, {});
+}
+
+async function handleSuccessfulAuthentication<Input>(
+  user: User,
+  input: Input,
+): Promise<ActionResult<undefined, string, Input & { domain?: string }>> {
+  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
+  if (oidcAuthorizationRequest?.tenantId) {
+    if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
+      const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
+
+      return {
+        error: "tenant",
+        input: { ...input, domain: tenant!.domain },
+      };
+    }
+  }
+
+  await startSession(user);
+
+  if (!oidcAuthorizationRequest) {
+    redirect("/");
+  } else {
+    const uid = uuidToHumanId(user.id, "usr");
+    redirect(`/oidc/consent?uid=${uid}`);
   }
 }

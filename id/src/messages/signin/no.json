@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Opprett konto",
-    "error": "Brukernavn eller passord er feil",
-    "metaTitle": "Logg inn – noo",
     "password": "Passord",
-    "submit": "Logg inn",
+    "metaTitle": "Logg inn – noo",
     "tenant_error": "Logg inn med en {domain}-konto",
     "title": "Logg inn på <noo></noo>-kontoen din",
-    "username": "Brukernavn eller e-post"
+    "create_account": "Opprett konto",
+    "error": "Brukernavn eller passord er feil",
+    "or": "eller",
+    "username": "Brukernavn eller e-post",
+    "usePasskey": "Logg inn med en passkey",
+    "submit": "Logg inn"
   }
 }

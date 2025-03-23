@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Załóż konto",
-    "error": "Wprowadzone dane są nieprawidłowe",
-    "metaTitle": "Zaloguj się – noo",
     "password": "Hasło",
-    "submit": "Zaloguj się",
+    "metaTitle": "Zaloguj się – noo",
     "tenant_error": "Zaloguj się przy użyciu konta {domain}",
     "title": "Zaloguj się na swoje konto <noo></noo>",
-    "username": "Nazwa użytkownika lub e-mail"
+    "create_account": "Załóż konto",
+    "error": "Wprowadzone dane są nieprawidłowe",
+    "or": "lub",
+    "username": "Nazwa użytkownika lub e-mail",
+    "usePasskey": "Zaloguj się za pomocą klucza dostępu",
+    "submit": "Zaloguj się"
   }
 }

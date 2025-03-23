@@ -50,6 +50,13 @@
       "when": 1742561163640,
       "tag": "0006_lazy_shadowcat",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1742765516210,
+      "tag": "0007_careless_thunderbolts",
+      "breakpoints": true
     }
   ]
 }

@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Skapa konto",
-    "error": "Uppgifterna du angav är felaktiga",
-    "metaTitle": "Logga in – noo",
     "password": "Lösenord",
-    "submit": "Logga in",
+    "metaTitle": "Logga in – noo",
     "tenant_error": "Logga in med ett {domain}-konto",
     "title": "Logga in på ditt <noo></noo>-konto",
-    "username": "Användarnamn eller e-post"
+    "create_account": "Skapa konto",
+    "error": "Uppgifterna du angav är felaktiga",
+    "or": "eller",
+    "username": "Användarnamn eller e-post",
+    "usePasskey": "Logga in med en nyckelkod",
+    "submit": "Logga in"
   }
 }

@@ -1,12 +1,14 @@
 {
   "signin": {
-    "create_account": "Fiók létrehozása",
-    "error": "A megadott adatok hibásak",
-    "metaTitle": "Bejelentkezés – noo",
     "password": "Jelszó",
-    "submit": "Bejelentkezés",
+    "metaTitle": "Bejelentkezés – noo",
     "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
     "title": "Jelentkezz be a <noo></noo> fiókodba",
-    "username": "Felhasználónév vagy email"
+    "create_account": "Fiók létrehozása",
+    "error": "A megadott adatok hibásak",
+    "or": "vagy",
+    "username": "Felhasználónév vagy email",
+    "usePasskey": "Jelentkezz be egy jelszóhelyettesítővel",
+    "submit": "Bejelentkezés"
   }
 }

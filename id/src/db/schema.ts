@@ -111,6 +111,12 @@ export const passkeys = pgTable("passkeys", {
     .defaultNow(),
 });
 
+export const passkeyChallenges = pgTable("passkey_challenges", {
+  id: uuid().primaryKey().defaultRandom(),
+  challenge: text().notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+});
+
 export const oidcClients = pgTable("oidc_clients", {
   id: uuid().primaryKey().defaultRandom(),
   tenantId: uuid("tenant_id").references(() => tenants.id, {
