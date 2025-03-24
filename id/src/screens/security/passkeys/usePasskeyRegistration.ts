@@ -15,7 +15,7 @@ export function usePasskeyRegistration() {
     const options = await registrationOptions(userId);
     if (options.error) {
       console.error("Error registering passkey:", options.error);
-      return;
+      return false;
     }
 
     try {
@@ -31,10 +31,13 @@ export function usePasskeyRegistration() {
           "Error verifying passkey registration:",
           verificationResponse.error,
         );
-        return;
+        return false;
       }
     } catch (error) {
       console.error("Error registering passkey:", error);
+      return false;
     }
+
+    return true;
   };
 }

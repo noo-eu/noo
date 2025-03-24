@@ -1,5 +1,4 @@
 "use client";
-
 import { Button, PasswordField, TextField } from "@noo/ui";
 import {
   PublicKeyCredentialRequestOptionsJSON,
@@ -13,6 +12,7 @@ import {
   signin,
   verifyWebauthn,
 } from "@/app/signin/actions";
+import { redirect } from "next/navigation";
 
 function useWebauthnAuthentication() {
   return async (autofill: boolean) => {
@@ -23,10 +23,10 @@ function useWebauthnAuthentication() {
         useBrowserAutofill: autofill,
       });
       const verifyResp = await verifyWebauthn(passkeyChallengeId, authResponse);
-      if (verifyResp?.error) {
+      if ("error" in verifyResp) {
         console.error(verifyResp.error);
       } else {
-        console.log("Webauthn authentication successful");
+        redirect(verifyResp.data);
       }
     } catch (e) {
       console.warn(e);

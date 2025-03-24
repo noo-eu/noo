@@ -9,16 +9,21 @@ import { Button } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { PasskeyItem } from "./PasskeyItem";
 import { usePasskeyRegistration } from "./usePasskeyRegistration";
+import { useRouter } from "next/navigation";
 
 export function PasskeysPage({
   existingPasskeys,
 }: Readonly<{ existingPasskeys: ClientPasskey[] }>) {
   const t = useTranslations("security.passkeys");
+  const router = useRouter();
 
   const register = usePasskeyRegistration();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await register();
+    const success = await register();
+    if (success) {
+      router.refresh();
+    }
   };
 
   return (

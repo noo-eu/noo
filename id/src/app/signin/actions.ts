@@ -66,9 +66,18 @@ export async function signin(
     throw new Error("Redirected to OTP page");
   }
 
-  return await handleSuccessfulAuthentication<{ username: string }>(user, {
-    username,
-  });
+  const result = await handleSuccessfulAuthentication<{ username: string }>(
+    user,
+    {
+      username,
+    },
+  );
+
+  if (result.data) {
+    redirect(result.data);
+  }
+
+  return result;
 }
 
 async function startSession(user: User) {
@@ -168,7 +177,7 @@ async function getWebAuthnExpectedOrigin() {
 export async function verifyWebauthn(
   passkeyChallengeId: string,
   response: AuthenticationResponseJSON,
-): Promise<ActionResult<undefined, string, { domain?: string }>> {
+): Promise<ActionResult<string, string, { domain?: string }>> {
   const passkeyId = response.id;
 
   const passkey = await Passkeys.findBy(
@@ -223,7 +232,7 @@ export async function verifyWebauthn(
 async function handleSuccessfulAuthentication<Input>(
   user: User,
   input: Input,
-): Promise<ActionResult<undefined, string, Input & { domain?: string }>> {
+): Promise<ActionResult<string, string, Input & { domain?: string }>> {
   const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
   if (oidcAuthorizationRequest?.tenantId) {
     if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
@@ -239,9 +248,12 @@ async function handleSuccessfulAuthentication<Input>(
   await startSession(user);
 
   if (!oidcAuthorizationRequest) {
-    redirect("/");
+    return { data: "/", input: { ...input, domain: undefined } };
   } else {
     const uid = uuidToHumanId(user.id, "usr");
-    redirect(`/oidc/consent?uid=${uid}`);
+    return {
+      data: `/oidc/consent?uid=${uid}`,
+      input: { ...input, domain: undefined },
+    };
   }
 }
