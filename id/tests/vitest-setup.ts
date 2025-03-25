@@ -16,6 +16,7 @@ vi.mock("next-intl", async (importOriginal) => ({
   useFormatter: () => ({
     dateTime: (d: Date) => d.toISOString().split("T")[0],
     number: (n: number) => n.toString(),
+    relativeTime: (d: Date) => d.toISOString().split("T")[0],
   }),
   useLocale: vi.fn(() => "en"),
   createTranslator: vi.fn(() => mockT),

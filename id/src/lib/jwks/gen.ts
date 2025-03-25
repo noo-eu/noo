@@ -1,4 +1,16 @@
-import { computeJwkThumbprint } from "./thumbprint";
+import { calculateJwkThumbprint } from "jose";
+
+export async function generateSet() {
+  const rsa = await generateRSA();
+  const ec = await generateEC();
+  const ed = await generateEd25519();
+
+  return {
+    rsa: await exportPrivate(rsa),
+    ec: await exportPrivate(ec),
+    ed: await exportPrivate(ed),
+  };
+}
 
 function generateRSA(hash: "SHA-256" | "SHA-384" | "SHA-512" = "SHA-256") {
   return crypto.subtle.generateKey(
@@ -28,18 +40,6 @@ function generateEd25519() {
   return crypto.subtle.generateKey("Ed25519", true, ["sign"]);
 }
 
-export async function generateSet() {
-  const rsa = await generateRSA();
-  const ec = await generateEC();
-  const ed = await generateEd25519();
-
-  return {
-    rsa: await exportPrivate(rsa),
-    ec: await exportPrivate(ec),
-    ed: await exportPrivate(ed),
-  };
-}
-
 async function exportPrivate(key: CryptoKeyPair) {
   const pk = key.privateKey;
 
@@ -53,7 +53,7 @@ async function exportPrivate(key: CryptoKeyPair) {
   delete obj.key_ops;
 
   // Set the key id using the thumbprint of the key
-  obj.kid = computeJwkThumbprint(obj);
+  obj.kid = await calculateJwkThumbprint(obj);
 
   return obj;
 }

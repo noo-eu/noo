@@ -58,7 +58,7 @@ export function SessionItem({
         {!isActive && (
           <form action={action}>
             <button
-              title="End session"
+              title={t("sessions.terminate")}
               className="cursor-pointer p-2 rounded-full bg-red-700/15 hover:bg-red-700/35 text-red-700 hover:text-white"
             >
               <XMarkIcon className="w-6 h-6" />

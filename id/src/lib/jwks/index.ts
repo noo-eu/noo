@@ -45,6 +45,12 @@ async function selectKeyByAlg(
     if (kidMatch) {
       if (kidMatch.alg === alg) {
         return importKey(kidMatch, alg);
+      } else if (!kidMatch.alg) {
+        // Is the kty suitable for the alg?
+        const kty = ALG_TO_KTY[alg];
+        if (kty && kidMatch.kty === kty) {
+          return importKey(kidMatch, alg);
+        }
       }
     }
 
