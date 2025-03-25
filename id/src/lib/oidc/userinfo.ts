@@ -1,4 +1,3 @@
-import { getKeyByAlg } from "@/app/oidc/jwks";
 import OidcAccessTokens from "@/db/oidc_access_tokens";
 import OidcClients from "@/db/oidc_clients";
 import Tenants from "@/db/tenants";
@@ -9,6 +8,7 @@ import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
 import { buildSubClaim } from "./idToken";
 import { requestedUserClaims } from "./userClaims";
+import { getSigningKey } from "../jwks";
 
 export const userinfoEndpoint = composeMiddleware(
   preventCache,
@@ -78,7 +78,9 @@ async function handle(req: HttpRequest) {
   };
 
   if (client.userinfoSignedResponseAlg) {
-    const { kid, key } = (await getKeyByAlg(client.userinfoSignedResponseAlg))!;
+    const { kid, key } = (await getSigningKey(
+      client.userinfoSignedResponseAlg,
+    ))!;
     const signed = await new SignJWT(claims)
       .setProtectedHeader({ alg: client.userinfoSignedResponseAlg, kid })
       .sign(key);

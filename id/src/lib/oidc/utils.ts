@@ -1,10 +1,9 @@
-import { getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import * as jose from "jose";
 import { cookies } from "next/headers";
 import { AuthorizationRequest } from "./types";
+import { getSigningKey, getVerifyingKeyForJwt } from "../jwks";
 
 const OIDC_AUTH_COOKIE_NAME = "oidc_authorization_request";
-const OIDC_AUTH_COOKIE_ALG = "EdDSA";
 
 export async function getOidcAuthorizationRequest() {
   const cookieStore = await cookies();
@@ -24,15 +23,31 @@ export async function getOidcAuthorizationRequest() {
   return result?.payload as AuthorizationRequest | null;
 }
 
+export async function setOidcAuthorizationCookie(
+  request: AuthorizationRequest,
+) {
+  const signedParams = await signParams(request);
+
+  return `${OIDC_AUTH_COOKIE_NAME}=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`;
+}
+
 export async function deleteOidcAuthorizationCookie() {
   const cookieStore = await cookies();
   cookieStore.delete("oidc_authorization_request");
 }
 
+async function signParams(params: AuthorizationRequest) {
+  const { key, kid } = (await getSigningKey("EdDSA"))!;
+  return await new jose.SignJWT(params)
+    .setProtectedHeader({ alg: "EdDSA", kid })
+    .setIssuedAt()
+    .setExpirationTime("1h")
+    .sign(key);
+}
+
 async function decode(token: string) {
   try {
-    const { key } = (await getVerifyingKeyByAlg(OIDC_AUTH_COOKIE_ALG))!;
-    return await jose.jwtVerify(token, key);
+    return await jose.jwtVerify(token, getVerifyingKeyForJwt);
   } catch {
     return null;
   }
