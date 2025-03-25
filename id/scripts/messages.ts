@@ -37,7 +37,7 @@ export function sort(obj: TranslationFile): TranslationFile {
     return obj;
   }
 
-  const keys = Object.keys(obj).sort((a, b) => a[1].localeCompare(b[1]));
+  const keys = Object.keys(obj).sort((a, b) => a.localeCompare(b));
   const sorted: TranslationFile = {};
 
   // Add each key-value pair to the new object in sorted order

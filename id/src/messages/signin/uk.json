@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Пароль",
-    "metaTitle": "Увійти – noo",
-    "tenant_error": "Будь ласка, увійди через акаунт {domain}",
-    "title": "Увійди до свого акаунту <noo></noo>",
     "create_account": "Створити акаунт",
     "error": "Введені дані неправильні",
+    "metaTitle": "Увійти – noo",
     "or": "або",
-    "username": "Ім’я користувача або email",
+    "password": "Пароль",
+    "submit": "Увійти",
+    "tenant_error": "Будь ласка, увійди через акаунт {domain}",
+    "title": "Увійди до свого акаунту <noo></noo>",
     "usePasskey": "Увійдіть за допомогою ключа доступу",
-    "submit": "Увійти"
+    "username": "Ім’я користувача або email"
   }
 }

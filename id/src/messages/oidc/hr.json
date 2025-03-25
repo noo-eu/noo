@@ -16,7 +16,8 @@
       "title": "Potrebno je da se pristupa <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {U odjavio/la se iz treće strane aplikacije.} other {U odjavio/la se iz <strong>{name}</strong>.}}",
+      "description": "Odjavio si se s <strong>{name}</strong>.",
+      "description_no_app": "Odjavio si se iz aplikacije treće strane.",
       "query": "Želite li razriješiti i ovo sesiju na <noo></noo>?",
       "title": "Odjava"
     },

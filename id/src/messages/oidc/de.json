@@ -16,7 +16,8 @@
       "title": "Du meldest dich bei <details>{name}</details> an."
     },
     "end_session": {
-      "description": "{name, select, undefined {Sie haben sich von einem Drittanbieter-Tool abgemeldet.} other {Sie haben sich von <strong>{name}</strong> abgemeldet.}}",
+      "description": "Du hast dich von <strong>{name}</strong> abgemeldet.",
+      "description_no_app": "Du hast dich von einer Drittanbieteranwendung abgemeldet.",
       "query": "Möchten du dich auch bei <noo></noo> abmelden?",
       "title": "Abmelden"
     },

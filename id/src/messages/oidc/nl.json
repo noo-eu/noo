@@ -16,7 +16,8 @@
       "title": "Je toetst je in bij <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Uitgelogd van een derde partijtoepassing.} other {Uitgelogd van <strong>{name}</strong> .}}",
+      "description": "Je bent uitgelogd bij <strong>{name}</strong>.",
+      "description_no_app": "Je bent uitgelogd bij een externe applicatie.",
       "query": "Wil je ook je sessie op <noo> beëindigen?",
       "title": "Uitschrijven"
     },

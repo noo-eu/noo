@@ -16,7 +16,8 @@
       "title": "Kirjaudut sisään <details>{name}</details>.-palveluun."
     },
     "end_session": {
-      "description": "{name, select, undefined {Olet kirjautunut ulos kolmannen osapuolen sovelluksesta.} other {Olet kirjautunut ulos <strong>{name}</strong>-sovelluksesta.}}",
+      "description": "Uloskirjauduit <strong>{name}</strong>.",
+      "description_no_app": "Uloskirjauduit kolmannen osapuolen sovelluksesta.",
       "query": "Haluatko myös lopettaa käyttökokemuksesi tästä laitteesta <noo></noo>?",
       "title": "Kirjaudu ulos"
     },

@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Izvēlies valodu, kuru vēlies lietot visos noo pakalpojumos.",
+      "label": "Valoda",
+      "title": "Iestatīt savu vēlamo valodu",
+      "updateSuccess": "Tava vēlamā valoda ir saglabāta"
+    },
+    "summary": {
+      "language": "Maini savu vēlamo valodu",
+      "timeZone": "Maini savu laika zonu"
+    },
+    "timeZone": {
+      "cet": "Centrālā Eiropas laiks",
+      "description": "Izvēlies savu laika zonu, lai datumus un laikus rādītu vietējā laikā.",
+      "detected": "Saskaņā ar tavu ierīces iestatījumiem, tava pašreizējā laika zona ir {detected}. Mēs iesakām izmantot laika zonu, kas atbilst tavai atrašanās vietai.",
+      "eet": "Austrumu Eiropas laiks",
+      "gmt": "Griničas laiks / Rietumu Eiropas laiks",
+      "label": "Laika zona",
+      "title": "Iestatīt savu laika zonu",
+      "updateSuccess": "Tava laika zona ir saglabāta"
+    },
+    "title": "Aknu iestatījumi"
+  }
+}

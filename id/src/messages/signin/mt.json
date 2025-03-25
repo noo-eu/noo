@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Password",
-    "metaTitle": "Idħol - noo",
-    "tenant_error": "Jekk jogħġbok idħol b’kont {domain}",
-    "title": "Idħol fil-kont tiegħek ta’ <noo></noo>",
     "create_account": "Oħloq kont",
     "error": "Id-dettalji li daħħalt mhumiex korretti",
+    "metaTitle": "Idħol - noo",
     "or": "jew",
-    "username": "Username jew email",
+    "password": "Password",
+    "submit": "Idħol",
+    "tenant_error": "Jekk jogħġbok idħol b’kont {domain}",
+    "title": "Idħol fil-kont tiegħek ta’ <noo></noo>",
     "usePasskey": "Idħol bil-passkey",
-    "submit": "Idħol"
+    "username": "Username jew email"
   }
 }

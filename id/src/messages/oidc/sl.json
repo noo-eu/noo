@@ -16,7 +16,8 @@
       "title": "Želite povezati pri <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Se odjavili ste iz tretje stranske aplikacije.} other {Se odjavili ste iz <strong>{name}</strong>.}}",
+      "description": "Izpisali ste se iz <strong>{name}</strong>.",
+      "description_no_app": "Izpisali ste se iz aplikacije tretje osebe.",
       "query": "Ali bi radocel z odjavo tega na <noo></noo>?",
       "title": "Odjavi se"
     },

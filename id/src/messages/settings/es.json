@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Elige el idioma que prefieres utilizar en todos los servicios de noo.",
+      "label": "Idioma",
+      "title": "Establece tu idioma preferido",
+      "updateSuccess": "Tu idioma preferido ha sido guardado"
+    },
+    "summary": {
+      "language": "Cambia tu idioma preferido",
+      "timeZone": "Cambia tu zona horaria"
+    },
+    "timeZone": {
+      "cet": "Hora Central Europea",
+      "description": "Elige tu zona horaria para mostrar fechas y horas en tu hora local.",
+      "detected": "Según la configuración de tu dispositivo, tu zona horaria actual es {detected}. Te recomendamos utilizar la zona horaria que coincida con tu ubicación actual.",
+      "eet": "Hora de Europa Oriental",
+      "gmt": "Hora de Greenwich / Hora de Europa Occidental",
+      "label": "Zona horaria",
+      "title": "Establece tu zona horaria",
+      "updateSuccess": "Tu zona horaria ha sido guardada"
+    },
+    "title": "Configuración de la cuenta"
+  }
+}

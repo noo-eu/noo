@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Alege limba pe care preferi să o folosești în toate serviciile noo.",
+      "label": "Limba",
+      "title": "Alege limba preferată",
+      "updateSuccess": "Limba ta preferată a fost salvată"
+    },
+    "summary": {
+      "language": "Schimbă limba preferată",
+      "timeZone": "Schimbă fusul orar"
+    },
+    "timeZone": {
+      "cet": "Ora Europei Centrale",
+      "description": "Alege fusul orar pentru a afişa datele şi orele în ora locală.",
+      "detected": "Conform setărilor dispozitivului tău, fusul tău orar curent este {detected}. Îți recomandăm să folosești fusul orar care corespunde locației tale actuale.",
+      "eet": "Ora Europei de Est",
+      "gmt": "Ora Greenwich / Ora Europei de Vest",
+      "label": "Fus orar",
+      "title": "Alege fusul orar",
+      "updateSuccess": "Fusul tău orar a fost salvat"
+    },
+    "title": "Setările contului"
+  }
+}

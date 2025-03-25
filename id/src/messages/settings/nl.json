@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Kies de taal die je wilt gebruiken voor alle noo-diensten.",
+      "label": "Taal",
+      "title": "Stel je voorkeurstaal in",
+      "updateSuccess": "Je voorkeurstaal is opgeslagen"
+    },
+    "summary": {
+      "language": "Wijzig je voorkeurstaal",
+      "timeZone": "Wijzig je tijdzone"
+    },
+    "timeZone": {
+      "cet": "Centraal-Europese Tijd",
+      "description": "Kies je tijdzone om data en tijden in jouw lokale tijd weer te geven.",
+      "detected": "Volgens de instellingen van je apparaat is je huidige tijdzone {detected}. We raden aan om de tijdzone te gebruiken die overeenkomt met je huidige locatie.",
+      "eet": "Oost-Europese Tijd",
+      "gmt": "Groenwich Tijd / West-Europese Tijd",
+      "label": "Tijdzone",
+      "title": "Stel je tijdzone in",
+      "updateSuccess": "Je tijdzone is opgeslagen"
+    },
+    "title": "Accountinstellingen"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Válaszd ki a nyelvet, amelyet minden noo szolgáltatásban használni szeretnél.",
+      "label": "Nyelv",
+      "title": "Állítsd be a preferált nyelvedet",
+      "updateSuccess": "A preferált nyelved elmentve"
+    },
+    "summary": {
+      "language": "Változtasd meg a preferált nyelvedet",
+      "timeZone": "Változtasd meg az időzónádat"
+    },
+    "timeZone": {
+      "cet": "Közép-európai idő",
+      "description": "Válaszd ki az időzónádat, hogy a dátumok és időpontok a helyi idődben jelenjenek meg.",
+      "detected": "A készülékbeállításaid szerint a jelenlegi időzónád {detected}. Azt javasoljuk, hogy az aktuális helyzetednek megfelelő időzónát használd.",
+      "eet": "Kelet-európai idő",
+      "gmt": "Greenwichi idő / Nyugat-európai idő",
+      "label": "Időzóna",
+      "title": "Állítsd be az időzónádat",
+      "updateSuccess": "Az időzónád elmentve"
+    },
+    "title": "Fiókbeállítások"
+  }
+}

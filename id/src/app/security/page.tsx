@@ -15,7 +15,7 @@ export async function generateMetadata() {
   };
 }
 
-async function SecurityHome({ user }: Readonly<{ user: User }>) {
+async function Page({ user }: Readonly<{ user: User }>) {
   const activeSessions = await Sessions.countBy(
     eq(schema.sessions.userId, user.id),
   );
@@ -23,4 +23,4 @@ async function SecurityHome({ user }: Readonly<{ user: User }>) {
   return <SecurityHub activeSessions={activeSessions} />;
 }
 
-export default withAuth(SecurityHome);
+export default withAuth(Page);

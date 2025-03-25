@@ -57,6 +57,13 @@
       "when": 1742765516210,
       "tag": "0007_careless_thunderbolts",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1742813247357,
+      "tag": "0008_aromatic_stardust",
+      "breakpoints": true
     }
   ]
 }

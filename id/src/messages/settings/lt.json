@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Pasirinkite kalbą, kurią norite naudoti visuose noo paslaugose.",
+      "label": "Kalba",
+      "title": "Nustatykite pageidaujamą kalbą",
+      "updateSuccess": "Jūsų pageidaujama kalba buvo išsaugota"
+    },
+    "summary": {
+      "language": "Pakeiskite pageidaujamą kalbą",
+      "timeZone": "Pakeiskite laiko juostą"
+    },
+    "timeZone": {
+      "cet": "Centrinės Europos laikas",
+      "description": "Pasirinkite savo laiko juostą, kad datos ir laikai būtų rodomi jūsų vietos laiku.",
+      "detected": "Pagal jūsų įrenginio nustatymus, jūsų dabartinė laiko juosta yra {detected}. Rekomenduojame naudoti laiko juostą, kuri atitinka jūsų dabartinę vietą.",
+      "eet": "Rytų Europos laikas",
+      "gmt": "Grinvičo laikas / Vakarų Europos laikas",
+      "label": "Laiko juosta",
+      "title": "Nustatykite laiko juostą",
+      "updateSuccess": "Jūsų laiko juosta buvo išsaugota"
+    },
+    "title": "Paskyros nustatymai"
+  }
+}

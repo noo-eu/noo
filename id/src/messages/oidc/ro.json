@@ -16,7 +16,8 @@
       "title": "Te înscrii în <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Ai deconectat dintr-o aplicație terță.} other {Ai deconectat cu succes din <strong>{name}</strong>}}",
+      "description": "Te-ai deconectat de la <strong>{name}</strong>.",
+      "description_no_app": "Te-ai deconectat de la o aplicație de terță parte.",
       "query": "Dorești să te deconectezi și din <noo></noo>?",
       "title": "Deconectare"
     },

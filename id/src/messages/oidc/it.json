@@ -16,7 +16,8 @@
       "title": "Stai accedendo a <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Hai appena terminato la sessione con un'applicazione di terze parti.} other {Hai appena terminato la sessione con <strong>{name}</strong>.}}",
+      "description": "Hai effettuato il logout da <strong>{name}</strong>.",
+      "description_no_app": "Hai effettuato il logout da un'applicazione di terze parti.",
       "query": "Vuoi terminare anche la tua sessione <noo></noo>?",
       "title": "Termina sessione"
     },

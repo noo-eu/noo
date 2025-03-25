@@ -16,7 +16,8 @@
       "title": "Du skriver in på <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Du loggade ut från ett tredjepartsprogram.} other {Du loggade ut från <strong>{name}</strong>.}}",
+      "description": "Du har loggat ut från <strong>{name}</strong>.",
+      "description_no_app": "Du har loggat ut från en tredjepartsapp.",
       "query": "Vill du också avsluta ditt inloggningsläge på {noo}?",
       "title": "Logga ut"
     },

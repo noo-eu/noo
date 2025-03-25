@@ -16,7 +16,8 @@
       "title": "Σε είσαι υπογεγραμμένος στο <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Ξεκίνησα την αποσύνδεση από ένα τρίτο μέρος.} other {Ξεκίνησα την αποσύνδεση από το <strong>{name}</strong>.}}",
+      "description": "Αποσυνδεθήκατε από το <strong>{name}</strong>.",
+      "description_no_app": "Αποσυνδεθήκατε από μια εφαρμογή τρίτου μέρους.",
       "query": "Θέλεις να διακοινείσεις και στην <noo>?",
       "title": "Αποσύνδεση"
     },

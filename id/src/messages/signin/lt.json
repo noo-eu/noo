@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Slaptažodis",
-    "metaTitle": "Prisijungimas - noo",
-    "tenant_error": "Prisijunkite naudodami {domain} paskyrą",
-    "title": "Prisijunk prie savo <noo></noo> paskyros",
     "create_account": "Sukurti paskyrą",
     "error": "Neteisingi prisijungimo duomenys",
+    "metaTitle": "Prisijungimas - noo",
     "or": "arba",
-    "username": "Vartotojo vardas arba el. paštas",
+    "password": "Slaptažodis",
+    "submit": "Prisijungti",
+    "tenant_error": "Prisijunkite naudodami {domain} paskyrą",
+    "title": "Prisijunk prie savo <noo></noo> paskyros",
     "usePasskey": "Prisijunkite naudodami slaptažodį",
-    "submit": "Prisijungti"
+    "username": "Vartotojo vardas arba el. paštas"
   }
 }

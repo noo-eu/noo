@@ -14,7 +14,7 @@ export default function OidcFatalErrorPage() {
         <h1 className="text-xl font-medium mb-4">{t("title")}</h1>
         <p>{t("description")}</p>
         <pre className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded-md my-4">
-          {t("error", { error: query.get("error") })}
+          {t("error", { error: query.get("error")! })}
         </pre>
       </PageModal.Modal>
     </PageModal>

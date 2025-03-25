@@ -65,6 +65,10 @@ export const users = pgTable(
     gender: genderEnum().notNull().default("not_specified"),
     genderCustom: text("gender_custom"),
     pronouns: pronounEnum().notNull().default("other"),
+    timeZone: text("time_zone").notNull().default("CET"),
+    locale: text("locale").notNull().default("en"),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (table) => [
     unique("users_tenant_id_normalized_username")

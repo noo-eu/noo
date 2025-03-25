@@ -1,5 +1,5 @@
 import { sha256 } from "@/utils";
-import crypto from "node:crypto";
+import crypto from "crypto";
 
 export function validatePkce(
   verifier: string | undefined,

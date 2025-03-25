@@ -16,7 +16,8 @@
       "title": "Jūs prisijungeite į <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Atsijunge iš trečiosjų programės.}} other {{strong name}, Jūs atsijunge.}}}",
+      "description": "Išsiregistravote iš <strong>{name}</strong>.",
+      "description_no_app": "Išsiregistravote iš trečiosios šalies programėlės.",
       "query": "Ar norite panaikinti savo sesiją <noo> taip pat?",
       "title": "Atsijungimas"
     },

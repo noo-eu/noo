@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Parool",
-    "metaTitle": "Logi sisse – noo",
-    "tenant_error": "Palun logi sisse {domain} kontoga",
-    "title": "Logi sisse oma <noo></noo> kontole",
     "create_account": "Loo konto",
     "error": "Sisestatud andmed on valed",
+    "metaTitle": "Logi sisse – noo",
     "or": "või",
-    "username": "Kasutajanimi või e-post",
+    "password": "Parool",
+    "submit": "Logi sisse",
+    "tenant_error": "Palun logi sisse {domain} kontoga",
+    "title": "Logi sisse oma <noo></noo> kontole",
     "usePasskey": "Logi sisse passkey'ga",
-    "submit": "Logi sisse"
+    "username": "Kasutajanimi või e-post"
   }
 }

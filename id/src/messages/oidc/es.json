@@ -16,7 +16,8 @@
       "title": "Usted está iniciando sesión en <details>{name}</details>"
     },
     "end_session": {
-      "description": "{name, select, undefined {Has cerrado sesión de una aplicación de terceros.} other {Ha cerrado sesión de <strong>{name}</strong>.}}",
+      "description": "Te has desconectado de <strong>{name}</strong>.",
+      "description_no_app": "Te has desconectado de una aplicación de terceros.",
       "query": "¿Desea terminar la sesión en <noo></noo> también?",
       "title": "Cerrar sesión"
     },

@@ -16,7 +16,8 @@
       "title": "Imorħux inti l-isigna fil-<details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Inħobb qatt min app kawżina tal-terzi.} other {Inħobb qatt min <strong>{name}</strong>.}}",
+      "description": "Skont il-<strong>{name}</strong> ħriġt.",
+      "description_no_app": "Skont applikazzjoni ta' partijiet terzi ħriġt.",
       "query": "Għaddej int titjib ix-xewqa ta' tneħħ il-session fuq <noo></noo> użajtkema ukol?",
       "title": "Inħobb qatt"
     },

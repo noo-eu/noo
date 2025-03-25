@@ -16,7 +16,8 @@
       "title": "Jūs piesakāties iestādē '<details>{name}</details>'."
     },
     "end_session": {
-      "description": "{name, select, undefined {Jūs atsaucajāties no trešo pusēju aplikācijas.} other {Jūs atsaucajāties no <strong>{name}</strong>.}}",
+      "description": "Tu esi izrakstījies no <strong>{name}</strong>.",
+      "description_no_app": "Tu esi izrakstījies no trešās puses lietotnes.",
       "query": "Vai vēlaties turpmāk terminē sērijas arī uz <noo>?",
       "title": "Atsauksies sērijai"
     },

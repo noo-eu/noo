@@ -16,7 +16,8 @@
       "title": "Du signerer inn i <details>{name}</details>"
     },
     "end_session": {
-      "description": "{name, select, undefined {Du signerte ut fra et tredjepartsprogram.} other {Du signerte ut fra <strong>{name}</strong>}}",
+      "description": "Du har logget ut fra <strong>{name}</strong>.",
+      "description_no_app": "Du har logget ut fra en tredjepartsapplikasjon.",
       "query": "Vil du også signere ut fra <noo></noo>?",
       "title": "Signer ut"
     },

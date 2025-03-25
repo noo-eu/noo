@@ -16,7 +16,8 @@
       "title": "Zgadzasz się na dostęp do <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Zostałeś wylogowany z aplikacji trzeciego parta.</strong>}}",
+      "description": "Wyszedłeś z <strong>{name}</strong>.",
+      "description_no_app": "Wyszedłeś z aplikacji zewnętrznej.",
       "query": "Czy chcesz rozwiązać swoją sesję na <noo></noo> również?",
       "title": "Wyloguj się"
     },

@@ -16,7 +16,8 @@
       "title": "Vous êtes en train de vous connecter à <details>{name}</details>. "
     },
     "end_session": {
-      "description": "Vous vous êtes déconnecté(e) {name, select, undefined {d'une application tierce.} other {de <strong>{name}</strong> .}}",
+      "description": "Vous êtes déconnecté de <strong>{name}</strong>.",
+      "description_no_app": "Vous vous êtes déconnecté(e) d'une application tierce.",
       "query": "Souhaitez-vous également terminer la session sur <noo></noo> ?",
       "title": "Déconnexion"
     },

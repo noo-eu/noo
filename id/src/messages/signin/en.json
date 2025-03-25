@@ -3,12 +3,12 @@
     "create_account": "Create an account",
     "error": "The details you entered are incorrect",
     "metaTitle": "Sign in - noo",
-    "password": "Password",
     "or": "or",
+    "password": "Password",
     "submit": "Sign in",
     "tenant_error": "Please sign in using a {domain} account",
     "title": "Sign in to your <noo></noo> account",
-    "username": "Username or email address",
-    "usePasskey": "Sign in with a passkey"
+    "usePasskey": "Sign in with a passkey",
+    "username": "Username or email address"
   }
 }

@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  // This allows us to access the request URL and search params in layouts and
+  // i18n configuration.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-ssr-url", request.url);
+
   if (process.env.NODE_ENV !== "production") {
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
-  // TODO: bundle Inter and DynaPuff and avoid third-party requests
   // unsafe-inline and https: are ignored in the presence of 'strict-dynamic' by
   // modern browsers, but help with compatibility with older browsers
-
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self';
@@ -27,8 +34,6 @@ export function middleware(request: NextRequest) {
   const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, " ")
     .trim();
-
-  const requestHeaders = new Headers(request.headers);
 
   requestHeaders.set("x-nonce", nonce);
 

@@ -16,7 +16,8 @@
       "title": "Съществуващият Ви профил в <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Също така сте излезли от трета партия приложение.} other {Излязли също така от <strong>{name}</strong>.}}",
+      "description": "Излязохте от <strong>{name}</strong>.",
+      "description_no_app": "Излязохте от приложение на трета страна.",
       "query": "Хотели ли бихте да прерушите и тази сесия на {server_name}?",
       "title": "Повече от този сесия"
     },

@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Escolhe a língua que preferes utilizar em todos os serviços da noo.",
+      "label": "Língua",
+      "title": "Define a tua língua preferida",
+      "updateSuccess": "A tua língua preferida foi guardada"
+    },
+    "summary": {
+      "language": "Muda a tua língua preferida",
+      "timeZone": "Muda o teu fuso horário"
+    },
+    "timeZone": {
+      "cet": "Hora da Europa Central",
+      "description": "Escolhe o teu fuso horário para que as datas e horas sejam apresentadas na tua hora local.",
+      "detected": "De acordo com as definições do teu dispositivo, o teu fuso horário atual é {detected}. Recomendamos que uses o fuso horário que corresponde à tua localização atual.",
+      "eet": "Hora da Europa Oriental",
+      "gmt": "Hora de Greenwich / Hora da Europa Ocidental",
+      "label": "Fuso horário",
+      "title": "Define o teu fuso horário",
+      "updateSuccess": "O teu fuso horário foi guardado"
+    },
+    "title": "Configurações da conta"
+  }
+}

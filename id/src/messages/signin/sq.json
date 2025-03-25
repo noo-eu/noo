@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Fjalëkalimi",
-    "metaTitle": "Hyrje – noo",
-    "tenant_error": "Të lutem hyr me një llogari {domain}",
-    "title": "Hyr në llogarinë tënde <noo></noo>",
     "create_account": "Krijo një llogari",
     "error": "Të dhënat që vendose janë të pasakta",
+    "metaTitle": "Hyrje – noo",
     "or": "ose",
-    "username": "Emri i përdoruesit ose emaili",
+    "password": "Fjalëkalimi",
+    "submit": "Hyr",
+    "tenant_error": "Të lutem hyr me një llogari {domain}",
+    "title": "Hyr në llogarinë tënde <noo></noo>",
     "usePasskey": "Hyj me një çelës kalimi",
-    "submit": "Hyr"
+    "username": "Emri i përdoruesit ose emaili"
   }
 }

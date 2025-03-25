@@ -16,7 +16,8 @@
       "title": "Přihlašujete se do <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Odhlásili jste z aplikace třetí strany.} other {Odhlásili jste z <strong>{name}</strong>.}}",
+      "description": "Odhlásil/a jsi se z <strong>{name}</strong>.",
+      "description_no_app": "Odhlásil/a jsi se z aplikace třetí strany.",
       "query": "Chcete také ukončit svou session na <noo></noo>?",
       "title": "Odhlásit se"
     },

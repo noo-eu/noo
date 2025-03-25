@@ -56,7 +56,10 @@ async function update(
 ) {
   return db
     .update(schema.users)
-    .set(attributes)
+    .set({
+      updatedAt: new Date(),
+      ...attributes,
+    })
     .where(eq(schema.users.id, userId));
 }
 

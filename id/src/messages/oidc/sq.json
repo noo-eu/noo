@@ -16,7 +16,8 @@
       "title": "Ti po kyçesh te <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {U shpallën nga një aplikacion tretëruese.} other {Ti u shpallën nga <strong>{name}</strong>.}}",
+      "description": "Ke dalë nga <strong>{name}</strong>.",
+      "description_no_app": "Ke dalë nga një aplikacion i palëve të treta.",
       "query": "A do ti shpallnesh edhe te <noo></noo>?",
       "title": "Shpalli"
     },

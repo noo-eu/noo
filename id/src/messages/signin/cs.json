@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Heslo",
-    "metaTitle": "Přihlášení - noo",
-    "tenant_error": "Přihlas se prosím pomocí účtu {domain}",
-    "title": "Přihlas se ke svému účtu <noo></noo>",
     "create_account": "Zaregistrovat se",
     "error": "Zadané údaje nejsou správné",
+    "metaTitle": "Přihlášení - noo",
     "or": "nebo",
-    "username": "Uživatelské jméno nebo e-mail",
+    "password": "Heslo",
+    "submit": "Přihlásit se",
+    "tenant_error": "Přihlas se prosím pomocí účtu {domain}",
+    "title": "Přihlas se ke svému účtu <noo></noo>",
     "usePasskey": "Přihlásit se pomocí klíče",
-    "submit": "Přihlásit se"
+    "username": "Uživatelské jméno nebo e-mail"
   }
 }

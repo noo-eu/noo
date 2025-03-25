@@ -17,6 +17,8 @@ export type ClientUser = {
   passwordBreaches: number | null;
   passwordChangedAt: Date | null;
   hasOtp: boolean;
+  timeZone: string;
+  locale: string;
 };
 
 export function makeClientUser(user: UserWithTenant): ClientUser {
@@ -36,5 +38,7 @@ export function makeClientUser(user: UserWithTenant): ClientUser {
     passwordBreaches: user.passwordBreaches,
     passwordChangedAt: user.passwordChangedAt,
     hasOtp: user.otpSecret !== null,
+    timeZone: user.timeZone,
+    locale: user.locale,
   };
 }

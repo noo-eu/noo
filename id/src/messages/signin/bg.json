@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Парола",
-    "metaTitle": "Вход - noo",
-    "tenant_error": "Моля, влез с акаунт от {domain}",
-    "title": "Влез в профила си в <noo></noo>",
     "create_account": "Регистрирай се",
     "error": "Въведените данни са неправилни",
+    "metaTitle": "Вход - noo",
     "or": "или",
-    "username": "Потребителско име или имейл",
+    "password": "Парола",
+    "submit": "Вход",
+    "tenant_error": "Моля, влез с акаунт от {domain}",
+    "title": "Влез в профила си в <noo></noo>",
     "usePasskey": "Влез с ключ за достъп",
-    "submit": "Вход"
+    "username": "Потребителско име или имейл"
   }
 }

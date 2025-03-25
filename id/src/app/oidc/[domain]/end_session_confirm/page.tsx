@@ -96,10 +96,14 @@ export default async function EndSession({
     <div className="space-y-4">
       <h1 className="text-xl font-medium">{t("end_session.title")}</h1>
       <p>
-        {t.rich("end_session.description", {
-          name,
-          strong: (children) => <strong>{children}</strong>,
-        })}
+        {name
+          ? t.rich("end_session.description", {
+              name,
+              strong: (children) => <strong>{children}</strong>,
+            })
+          : t.rich("end_session.description_no_app", {
+              strong: (children) => <strong>{children}</strong>,
+            })}
       </p>
       <p>{t.rich("end_session.query", { noo: () => <Noo /> })}</p>
       <Form submitAction={submitAction} />

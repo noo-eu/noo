@@ -63,4 +63,4 @@ export const LANGUAGE_NAMES = {
   sv: "Svenska",
   tr: "Türkçe",
   uk: "Українська",
-};
+} as const as Record<string, string>;

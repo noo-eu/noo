@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Lozinka",
-    "metaTitle": "Prijava – noo",
-    "tenant_error": "Molimo prijavite se s {domain} računom",
-    "title": "Prijavi se na svoj <noo></noo> račun",
     "create_account": "Kreiraj račun",
     "error": "Uneseni podaci nisu točni",
+    "metaTitle": "Prijava – noo",
     "or": "ili",
-    "username": "Korisničko ime ili e-mail",
+    "password": "Lozinka",
+    "submit": "Prijavi se",
+    "tenant_error": "Molimo prijavite se s {domain} računom",
+    "title": "Prijavi se na svoj <noo></noo> račun",
     "usePasskey": "Prijavite se s ključem",
-    "submit": "Prijavi se"
+    "username": "Korisničko ime ili e-mail"
   }
 }

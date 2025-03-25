@@ -16,7 +16,8 @@
       "title": "Ви входите до <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Ви вийшли з додатку стороннього розробника.} other {Ви вийшли з <strong>{name}</strong>.}}",
+      "description": "Ви вийшли з <strong>{name}</strong>.",
+      "description_no_app": "Ви вийшли з стороннього додатку.",
       "query": "Бажаєте також вийти з <noo></noo>?",
       "title": "Вийти"
     },

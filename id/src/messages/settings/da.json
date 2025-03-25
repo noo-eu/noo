@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Vælg det sprog, du helst vil bruge i alle noo-tjenester.",
+      "label": "Sprog",
+      "title": "Indstil dit foretrukne sprog",
+      "updateSuccess": "Dit foretrukne sprog er blevet gemt"
+    },
+    "summary": {
+      "language": "Skift dit foretrukne sprog",
+      "timeZone": "Skift din tidszone"
+    },
+    "timeZone": {
+      "cet": "Central europæisk tid",
+      "description": "Vælg din tidszone, så datoer og tidspunkter vises i din lokale tid.",
+      "detected": "Ifølge dine enhedsindstillinger er din nuværende tidszone {detected}. Vi anbefaler at bruge den tidszone, der passer til din nuværende placering.",
+      "eet": "Østlig europæisk tid",
+      "gmt": "Greenwich tid / Vestlig europæisk tid",
+      "label": "Tidszone",
+      "title": "Indstil din tidszone",
+      "updateSuccess": "Din tidszone er blevet gemt"
+    },
+    "title": "Kontoinstillinger"
+  }
+}

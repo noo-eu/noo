@@ -16,7 +16,8 @@
       "title": "Bejelentkezel ide: <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Kijelentkeztél egy külső alkalmazásból.} other {Kijelentkeztél a <strong>{name}</strong> alkalmazásból.}}",
+      "description": "Kijelentkeztél a <strong>{name}</strong> fiókodból.",
+      "description_no_app": "Kijelentkeztél egy harmadik fél alkalmazásból.",
       "query": "Szeretnél a <noo></noo> fiókból is kijelentkezni?",
       "title": "Kijelentkezés"
     },

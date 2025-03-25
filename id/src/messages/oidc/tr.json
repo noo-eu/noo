@@ -16,7 +16,8 @@
       "title": "<details>{name}</details> ile giriş yapıyorsun."
     },
     "end_session": {
-      "description": "{name, select, undefined {Üçüncü parti bir uygulamadan çıkış yaptın.} other {<strong>{name}</strong> adlı uygulamadan çıkış yaptın.}}",
+      "description": "<strong>{name}</strong> hesabından çıkış yaptın.",
+      "description_no_app": "Bir üçüncü parti uygulamasından çıkış yaptın.",
       "query": "<noo></noo>'dan da çıkış yapmak ister misin?",
       "title": "Çıkış yap"
     },

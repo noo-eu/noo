@@ -11,7 +11,7 @@ export function PasswordBreachWarning() {
     <p className="mb-4 text-sm text-amber-600 border border-amber-600 p-3 rounded-md">
       {t.rich("password.breaches", {
         count: format.number(user.passwordBreaches!),
-        otp: user.hasOtp,
+        otp: user.hasOtp ? "true" : "false",
         guide: (children) => (
           <Link className="link" href={`https://help.noo.eu/`}>
             {children}

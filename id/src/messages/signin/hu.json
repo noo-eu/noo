@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Jelszó",
-    "metaTitle": "Bejelentkezés – noo",
-    "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
-    "title": "Jelentkezz be a <noo></noo> fiókodba",
     "create_account": "Fiók létrehozása",
     "error": "A megadott adatok hibásak",
+    "metaTitle": "Bejelentkezés – noo",
     "or": "vagy",
-    "username": "Felhasználónév vagy email",
+    "password": "Jelszó",
+    "submit": "Bejelentkezés",
+    "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
+    "title": "Jelentkezz be a <noo></noo> fiókodba",
     "usePasskey": "Jelentkezz be egy jelszóhelyettesítővel",
-    "submit": "Bejelentkezés"
+    "username": "Felhasználónév vagy email"
   }
 }

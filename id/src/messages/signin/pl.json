@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Hasło",
-    "metaTitle": "Zaloguj się – noo",
-    "tenant_error": "Zaloguj się przy użyciu konta {domain}",
-    "title": "Zaloguj się na swoje konto <noo></noo>",
     "create_account": "Załóż konto",
     "error": "Wprowadzone dane są nieprawidłowe",
+    "metaTitle": "Zaloguj się – noo",
     "or": "lub",
-    "username": "Nazwa użytkownika lub e-mail",
+    "password": "Hasło",
+    "submit": "Zaloguj się",
+    "tenant_error": "Zaloguj się przy użyciu konta {domain}",
+    "title": "Zaloguj się na swoje konto <noo></noo>",
     "usePasskey": "Zaloguj się za pomocą klucza dostępu",
-    "submit": "Zaloguj się"
+    "username": "Nazwa użytkownika lub e-mail"
   }
 }

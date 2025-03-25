@@ -3,7 +3,7 @@ import { useAuth } from "@/auth/authContext";
 import { withCallbacks } from "@/components/withCallbacks";
 import { ClientSession } from "@/lib/types/ClientSession";
 import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useNow, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { cleanIp } from "./ipUtils";
 import { userAgentToDevice } from "./userAgentUtils";
@@ -31,6 +31,8 @@ export function SessionItem({
     },
   );
 
+  const now = useNow();
+
   return (
     <div className="pb-6 last:pb-0 flex flex-row">
       <div>
@@ -42,7 +44,7 @@ export function SessionItem({
         <p>IP: {cleanIp(session.ip)}</p>
         <p>
           {t("sessions.lastUsed", {
-            lastUsedAgo: formatter.relativeTime(session.lastUsedAt),
+            lastUsedAgo: formatter.relativeTime(session.lastUsedAt, now),
           })}
         </p>
         {isActive && (

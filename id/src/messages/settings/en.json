@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Choose the language you prefer to use in all noo services.",
+      "label": "Language",
+      "title": "Set your preferred language",
+      "updateSuccess": "Your preferred language has been saved"
+    },
+    "summary": {
+      "language": "Change your preferred language",
+      "timeZone": "Change your time zone"
+    },
+    "timeZone": {
+      "cet": "Central European Time",
+      "description": "Choose your time zone to display dates and times in your local time.",
+      "detected": "According to your device settings, your current time zone is {detected}. We recommend using the time zone that matches your current location.",
+      "eet": "Eastern European Time",
+      "gmt": "Greenwich Time / Western European Time",
+      "label": "Time zone",
+      "title": "Set your time zone",
+      "updateSuccess": "Your time zone has been saved"
+    },
+    "title": "Account settings"
+  }
+}

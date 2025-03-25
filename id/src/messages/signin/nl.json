@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Wachtwoord",
-    "metaTitle": "Inloggen - noo",
-    "tenant_error": "Log in met een {domain} account",
-    "title": "Log in op je <noo></noo> account",
     "create_account": "Account aanmaken",
     "error": "De ingevulde gegevens kloppen niet",
+    "metaTitle": "Inloggen - noo",
     "or": "of",
-    "username": "Gebruikersnaam of e-mailadres",
+    "password": "Wachtwoord",
+    "submit": "Inloggen",
+    "tenant_error": "Log in met een {domain} account",
+    "title": "Log in op je <noo></noo> account",
     "usePasskey": "Aanmelden met een wachtwoordloos toegangssleutel",
-    "submit": "Inloggen"
+    "username": "Gebruikersnaam of e-mailadres"
   }
 }

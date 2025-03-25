@@ -16,7 +16,8 @@
       "title": "Du logger ind i <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Du logged ud af et tredjepartsprogram.}} andre {Du logged ud af <strong>{navn}</strong>.",
+      "description": "Du er logget ud fra <strong>{name}</strong>.",
+      "description_no_app": "Du er logget ud fra en tredjepartsapplikation.",
       "query": "Vil du også logge ud af <noo></noo>?",
       "title": "Afmeld"
     },

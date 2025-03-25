@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Odaberi jezik koji želiš koristiti u svim noo uslugama.",
+      "label": "Jezik",
+      "title": "Postavi svoj omiljeni jezik",
+      "updateSuccess": "Tvoj omiljeni jezik je spremljen"
+    },
+    "summary": {
+      "language": "Promijeni svoj omiljeni jezik",
+      "timeZone": "Promijeni svoju vremensku zonu"
+    },
+    "timeZone": {
+      "cet": "Srednjoeuropsko vrijeme",
+      "description": "Odaberi vremensku zonu za prikaz datuma i vremena u svom lokalnom vremenu.",
+      "detected": "Prema postavkama tvog uređaja, tvoja trenutna vremenska zona je {detected}. Preporučujemo korištenje vremenske zone koja odgovara tvojoj trenutnoj lokaciji.",
+      "eet": "Istočnoeuropsko vrijeme",
+      "gmt": "Grinička vremena / Zapadnoeuropsko vrijeme",
+      "label": "Vremenska zona",
+      "title": "Postavi svoju vremensku zonu",
+      "updateSuccess": "Tvoja vremenska zona je spremljena"
+    },
+    "title": "Postavke računa"
+  }
+}

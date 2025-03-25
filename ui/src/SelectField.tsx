@@ -4,6 +4,7 @@ import { SelectInput } from "./SelectInput";
 
 export type SelectFieldProps = {
   label: ReactNode;
+  labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
   error?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
@@ -11,9 +12,13 @@ export function SelectField(props: SelectFieldProps) {
   const inputId = useId();
   const errorId = useId();
 
-  const { error, ...rest } = props;
+  const { error, labelProps, ...rest } = props;
 
-  const label = <Label htmlFor={inputId}>{props.label}</Label>;
+  const label = (
+    <Label htmlFor={inputId} {...labelProps}>
+      {props.label}
+    </Label>
+  );
   const input = (
     <SelectInput
       {...rest}

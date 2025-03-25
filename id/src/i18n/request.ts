@@ -17,29 +17,49 @@ acceptLanguage.languages(expandedSupportedLanguages);
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
 import { SUPPORTED_LANGUAGES } from ".";
+import { humanIdToUuid } from "@/utils";
+import Users from "@/db/users";
 
 async function loadJSON5(filename: string) {
   const json5 = await readFile(filename, "utf8");
   return JSON5.parse(json5);
 }
 
-export async function i18nConfig() {
-  const cookieStore = await cookies();
-  const lngCookie = cookieStore.get("_noo_locale")?.value;
-  let locale: string | undefined;
+const normalizedLocales = {
+  bs: "hr",
+  sr: "hr",
+  me: "hr",
+  nb: "no",
+} as const as Record<string, string>;
 
-  if (lngCookie && expandedSupportedLanguages.includes(lngCookie)) {
-    locale = lngCookie;
-  } else {
+export async function i18nConfig() {
+  // First use the locale from the user's profile, if available.
+  let locale = await getLocaleFromUser();
+
+  // Fallback to the locale as saved in a cookie.
+  if (!locale) {
+    const cookieStore = await cookies();
+    const lngCookie = cookieStore.get("_noo_locale")?.value;
+
+    // The cookie locale must be validated, as it could be tampered with.
+    if (lngCookie && expandedSupportedLanguages.includes(lngCookie)) {
+      locale = lngCookie;
+    }
+  }
+
+  // Fallback to the locale from the request headers.
+  if (!locale) {
     const reqHeaders = await headers();
     const lngHeader = reqHeaders.get("accept-language");
 
-    locale = acceptLanguage.get(lngHeader) ?? "en";
+    locale = acceptLanguage.get(lngHeader) ?? undefined;
   }
 
-  // We need to normalize the locale to the supported language codes.
-  locale = BCMS.includes(locale) ? "hr" : locale;
-  locale = locale == "nb" ? "no" : locale;
+  // Fallback to English.
+  locale ??= "en";
+
+  // Some locale codes are aliases for others.
+  locale = normalizedLocales[locale] ?? locale;
 
   return {
     locale,
@@ -48,10 +68,40 @@ export async function i18nConfig() {
       ...(await loadJSON5(`src/messages/oidc/${locale}.json`)),
       ...(await loadJSON5(`src/messages/profile/${locale}.json`)),
       ...(await loadJSON5(`src/messages/security/${locale}.json`)),
+      ...(await loadJSON5(`src/messages/settings/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signin/${locale}.json`)),
       ...(await loadJSON5(`src/messages/signup/${locale}.json`)),
     },
   };
+}
+
+// This awkwardness is a gift of Next.js...
+async function getLocaleFromUser() {
+  // The current URL is set in the headers by @/middleware.ts
+  const headerStore = await headers();
+  const requestUrl = headerStore.get("x-ssr-url");
+  if (!requestUrl) {
+    return;
+  }
+
+  // Determine if there's an uid query parameter
+  const uid = new URL(requestUrl).searchParams.get("uid");
+  if (!uid) {
+    return;
+  }
+
+  // Get the user's locale from the database
+  const userId = humanIdToUuid(uid, "usr");
+  if (!userId) {
+    return;
+  }
+
+  const user = await Users.find(userId);
+  if (!user) {
+    return;
+  }
+
+  return user.locale;
 }
 
 export default getRequestConfig(i18nConfig);

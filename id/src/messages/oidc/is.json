@@ -16,7 +16,8 @@
       "title": "Þú vilt skrá þér inn á <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Víst hefur þú skrátt út úr þjóðrétt samsérvíkurforriti.} other {Víst hefur þú skrátt út frá <strong>{name}</strong>.}}",
+      "description": "Þú skráðir þig út af <strong>{name}</strong>.",
+      "description_no_app": "Þú skráðir þig út af þriðja aðila appi.",
       "query": "Vilt þér skrá út frá <noo></noo> ásamt?",
       "title": "Upphafið"
     },

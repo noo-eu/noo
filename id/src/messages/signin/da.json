@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Adgangskode",
-    "metaTitle": "Log ind - noo",
-    "tenant_error": "Log venligst ind med en {domain}-konto",
-    "title": "Log ind på din <noo></noo> konto",
     "create_account": "Opret konto",
     "error": "De indtastede oplysninger er forkerte",
+    "metaTitle": "Log ind - noo",
     "or": "eller",
-    "username": "Brugernavn eller e-mail",
+    "password": "Adgangskode",
+    "submit": "Log ind",
+    "tenant_error": "Log venligst ind med en {domain}-konto",
+    "title": "Log ind på din <noo></noo> konto",
     "usePasskey": "Log ind med en adgangsnøgle",
-    "submit": "Log ind"
+    "username": "Brugernavn eller e-mail"
   }
 }

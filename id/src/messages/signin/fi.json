@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Salasana",
-    "metaTitle": "Kirjaudu sisään – noo",
-    "tenant_error": "Kirjaudu sisään käyttämällä {domain} tiliä",
-    "title": "Kirjaudu <noo></noo>-tilillesi",
     "create_account": "Luo tili",
     "error": "Tiedot ovat virheelliset",
+    "metaTitle": "Kirjaudu sisään – noo",
     "or": "tai",
-    "username": "Käyttäjätunnus tai sähköposti",
+    "password": "Salasana",
+    "submit": "Kirjaudu",
+    "tenant_error": "Kirjaudu sisään käyttämällä {domain} tiliä",
+    "title": "Kirjaudu <noo></noo>-tilillesi",
     "usePasskey": "Kirjaudu sisään avainlinkillä",
-    "submit": "Kirjaudu"
+    "username": "Käyttäjätunnus tai sähköposti"
   }
 }

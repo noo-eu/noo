@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Agħżel il-lingwa li tixtieq tuża f'kulhjom is-servizzi tar-Robott.",
+      "label": "Lingwa",
+      "title": "Stabbilixxi l-lingwa tiegħek preferita",
+      "updateSuccess": "Il-lingwa tiegħek preferita ġiet salva"
+    },
+    "summary": {
+      "language": "Bidel il-lingwa tiegħek preferita",
+      "timeZone": "Bidel il-ħin lokali tiegħek"
+    },
+    "timeZone": {
+      "cet": "Ħin Ewropew Ċentrali",
+      "description": "Agħżel il-ħin tiegħek biex juri d-dati u l-ħinijiet fil-ħin lokali tiegħek.",
+      "detected": "Skont is-settings tal-apparat tiegħek, il-ħin lokali tiegħek huwa {detected}. Nippruvaw nużaw il-ħin li jaqbel mal-lokazzjoni tiegħek attwali.",
+      "eet": "Ħin Ewropew Tal-Lvant",
+      "gmt": "Ħin Greenwich / Ħin Ewropew Tal-Lbiċ",
+      "label": "Ħin Lokali",
+      "title": "Stabbilixxi l-ħin lokali tiegħek",
+      "updateSuccess": "Il-ħin lokali tiegħek ġie salva"
+    },
+    "title": "Impostazzjonijiet tal-Kont"
+  }
+}

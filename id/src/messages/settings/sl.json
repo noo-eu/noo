@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Izberi jezik, ki ga želiš uporabljati v vseh noo storitvah.",
+      "label": "Jezik",
+      "title": "Nastavi svoj najljubši jezik",
+      "updateSuccess": "Tvoj najljubši jezik je bil shranjen"
+    },
+    "summary": {
+      "language": "Spremeni svoj najljubši jezik",
+      "timeZone": "Spremeni svoj časovni pas"
+    },
+    "timeZone": {
+      "cet": "Srednjeevropski čas",
+      "description": "Izberi svoj časovni pas za prikaz datumov in časov v tvojem lokalnem času.",
+      "detected": "Po nastavitvah tvojega naprave je tvoj trenutni časovni pas {detected}. Priporočamo, da uporabiš časovni pas, ki se ujema s tvojo trenutno lokacijo.",
+      "eet": "Vzhodneevropski čas",
+      "gmt": "Greenviški čas / Zahodnoevropski čas",
+      "label": "Časovni pas",
+      "title": "Nastavi svoj časovni pas",
+      "updateSuccess": "Tvoj časovni pas je bil shranjen"
+    },
+    "title": "Nastavitve računa"
+  }
+}

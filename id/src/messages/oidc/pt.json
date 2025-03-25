@@ -16,7 +16,8 @@
       "title": "Você está acessando o <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {Você saiu de uma aplicação terceirizada.} other {Você saiu do <strong>{name}</strong>.}}",
+      "description": "Desligaste-te do <strong>{name}</strong>.",
+      "description_no_app": "Desligaste-te de uma aplicação de terceiros.",
       "query": "Você gostaria de encerrar a sessão também no {noo}?",
       "title": "Desconectar"
     },

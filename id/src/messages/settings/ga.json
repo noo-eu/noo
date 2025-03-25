@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Roghnaigh an teanga a bhfuil suim agat a úsáid i ngach seirbhís noo.",
+      "label": "Teanga",
+      "title": "Socraigh do theanga is fearr leat",
+      "updateSuccess": "Tá do theanga is fearr leat sábháilte now"
+    },
+    "summary": {
+      "language": "Athraigh do theanga is fearr leat",
+      "timeZone": "Athraigh do chrios ama"
+    },
+    "timeZone": {
+      "cet": "Am na hEorpa Lárnach",
+      "description": "Roghnaigh do chrios ama chun dáta agus am a thaispeáint i do am áitiúil.",
+      "detected": "De réir socruithe do ghléas, is é {detected} do chrios ama reatha. Molann muid domhan a ghabhann le do láthair reatha.",
+      "eet": "Am na hEorpa Thoir",
+      "gmt": "Am Greenwich / Am na hEorpa Thiar",
+      "label": "Crios ama",
+      "title": "Socraigh do chrios ama",
+      "updateSuccess": "Tá do chrios ama sábháilte"
+    },
+    "title": "Socruithe cuntais"
+  }
+}

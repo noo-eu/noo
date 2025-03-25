@@ -39,7 +39,33 @@ export function requestedUserClaims(
     claims.picture = user.picture;
   }
 
-  // TODO: profile, phone_number, address, locale, zoneinfo, updated_at
+  if (requests.includes("locale")) {
+    claims.locale = user.locale;
+  }
+
+  if (requests.includes("zoneinfo")) {
+    claims.zoneinfo = timeZoneToIana(user.timeZone);
+  }
+
+  if (requests.includes("updated_at")) {
+    claims.updated_at = user.updatedAt.toISOString();
+  }
+
+  // TODO: profile, phone_number, address
 
   return claims;
+}
+
+function timeZoneToIana(timeZone: string) {
+  switch (timeZone) {
+    case "GMT":
+    case "WET":
+      return "Europe/Lisbon";
+    case "CET":
+      return "Europe/Brussels";
+    case "EET":
+      return "Europe/Athens";
+    default:
+      return timeZone;
+  }
 }

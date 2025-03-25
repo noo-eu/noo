@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Focal faire",
-    "metaTitle": "Sínigh isteach – noo",
-    "tenant_error": "Sínigh isteach le cuntas {domain}, le do thoil",
-    "title": "Sínigh isteach i do chuntas <noo></noo>",
     "create_account": "Cruthaigh cuntas",
     "error": "Tá na dintiúir mícheart",
+    "metaTitle": "Sínigh isteach – noo",
     "or": "nó",
-    "username": "Ainm úsáideora nó r-phost",
+    "password": "Focal faire",
+    "submit": "Sínigh isteach",
+    "tenant_error": "Sínigh isteach le cuntas {domain}, le do thoil",
+    "title": "Sínigh isteach i do chuntas <noo></noo>",
     "usePasskey": "Logáil isteach le pasfhocal",
-    "submit": "Sínigh isteach"
+    "username": "Ainm úsáideora nó r-phost"
   }
 }

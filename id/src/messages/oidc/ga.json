@@ -16,7 +16,8 @@
       "title": "Táimid ag tabhairt isteach i <details>{name}</details>. "
     },
     "end_session": {
-      "description": "{name, select, undefined {Tá tú tar éis dul amuigh ón gcomhghuaillíocht tríú páirteach.} other {Tá tú tar éis dul amuigh as <strong>{name}</strong>.}}",
+      "description": "Tá tú sínte as <strong>{name}</strong>.",
+      "description_no_app": "Tá tú sínte as feidhmchlár tríú páirt.",
       "query": "An bhfuil de a shuíomh agus scrú íoc ar <noo></noo> freisin?",
       "title": "Schrú agus amuigh"
     },

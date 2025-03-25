@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Vali keel, mida soovid kasutada kõigis noo teenustes.",
+      "label": "Keel",
+      "title": "Aseta oma eelistatud keel",
+      "updateSuccess": "Sinu eelistatud keel on salvestatud"
+    },
+    "summary": {
+      "language": "Muuda oma eelistatud keelt",
+      "timeZone": "Muuda oma ajavööndit"
+    },
+    "timeZone": {
+      "cet": "Kesk-Euroopa aeg",
+      "description": "Vali oma ajavöönd, et kuupäevi ja aegu näidata oma kohaliku aja järgi.",
+      "detected": "Sinu seadme seadete järgi on sinu hetke ajavöönd {detected}. Soovitame kasutada ajavööndit, mis vastab su praegusele asukohale.",
+      "eet": "Ida-Euroopa aeg",
+      "gmt": "Greenwichi aeg / Lääne-Euroopa aeg",
+      "label": "Ajavöönd",
+      "title": "Aseta oma ajavöönd",
+      "updateSuccess": "Sinu ajavöönd on salvestatud"
+    },
+    "title": "Konto seaded"
+  }
+}

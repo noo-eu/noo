@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Sélectionne la langue que tu souhaites utiliser dans tous les services noo.",
+      "label": "Langue",
+      "title": "Choisis ta langue préférée",
+      "updateSuccess": "Ta langue préférée a bien été enregistrée"
+    },
+    "summary": {
+      "language": "Change ta langue préférée",
+      "timeZone": "Change ton fuseau horaire"
+    },
+    "timeZone": {
+      "cet": "Heure d'Europe centrale",
+      "description": "Sélectionne ton fuseau horaire pour afficher les dates et heures à l'heure locale.",
+      "detected": "D'après les réglages de ton appareil, ton fuseau horaire actuel est {detected}. On te recommande d'utiliser le fuseau horaire qui correspond à ta localisation actuelle.",
+      "eet": "Heure d'Europe de l'Est",
+      "gmt": "Heure de Greenwich / Heure de l'Europe de l'Ouest",
+      "label": "Fuseau horaire",
+      "title": "Choisis ton fuseau horaire",
+      "updateSuccess": "Ton fuseau horaire a été enregistré"
+    },
+    "title": "Paramètres du compte"
+  }
+}

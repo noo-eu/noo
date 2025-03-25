@@ -16,7 +16,8 @@
       "title": "You are signing into <details>{name}</details>."
     },
     "end_session": {
-      "description": "{name, select, undefined {You signed out from a third party application.} other {You signed out from <strong>{name}</strong>.}}",
+      "description": "You signed out from <strong>{name}</strong>.",
+      "description_no_app": "You signed out from a third party application.",
       "query": "Would you like to sign out from <noo></noo> as well?",
       "title": "Sign out"
     },

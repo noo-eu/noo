@@ -1,14 +1,14 @@
 {
   "signin": {
-    "password": "Heslo",
-    "metaTitle": "Prihlásenie – noo",
-    "tenant_error": "Prihlás sa pomocou účtu {domain}",
-    "title": "Prihlás sa do svojho účtu <noo></noo>",
     "create_account": "Vytvoriť účet",
     "error": "Zadané údaje sú nesprávne",
+    "metaTitle": "Prihlásenie – noo",
     "or": "alebo",
-    "username": "Používateľské meno alebo email",
+    "password": "Heslo",
+    "submit": "Prihlásiť sa",
+    "tenant_error": "Prihlás sa pomocou účtu {domain}",
+    "title": "Prihlás sa do svojho účtu <noo></noo>",
     "usePasskey": "Prihlásiť sa s použitím kľúča",
-    "submit": "Prihlásiť sa"
+    "username": "Používateľské meno alebo email"
   }
 }

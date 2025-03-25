@@ -16,7 +16,8 @@
       "title": "Sul on vajadus kirja andmisega <details>{name}</details> juurde sisselogeda."
     },
     "end_session": {
-      "description": "{name, select, undefined {Said ükskord välja teise tarkvara kasutaja.} other {Said välja <strong>{name}</strong>.}}",
+      "description": "Oled <strong>{name}</strong> sealt välja logitud.",
+      "description_no_app": "Oled välja logitud kolmanda osapoole rakendusest.",
       "query": "Kas soovid ka seejärel seansi selle <noo>kauga</noo> kesktelga lõpetada?",
       "title": "Logi välja"
     },
