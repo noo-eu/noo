@@ -2,7 +2,7 @@
 
 import { AuthProvider } from "@/auth/authContext";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, it, expect, vi, Mock } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { JohnDoeClient } from "@/../tests/fixtures/users";
 import { ClientUser } from "@/lib/types/ClientUser";
 import { SessionsPage } from "./SessionsPage";

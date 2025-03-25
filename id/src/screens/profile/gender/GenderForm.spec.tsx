@@ -50,6 +50,22 @@ describe("GenderForm", () => {
 
     expect(screen.getByLabelText("gender.customLabel")).toBeInTheDocument();
     expect(screen.getByLabelText("gender.pronounsLabel")).toBeInTheDocument();
+
+    // Hide the custom fields
+    fireEvent.click(screen.getByDisplayValue("male"));
+    expect(
+      screen.queryByLabelText("gender.customLabel"),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByDisplayValue("female"));
+    expect(
+      screen.queryByLabelText("gender.customLabel"),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByDisplayValue("not_specified"));
+    expect(
+      screen.queryByLabelText("gender.customLabel"),
+    ).not.toBeInTheDocument();
   });
 
   it("shows the pronoun example when a gendered locale is used", () => {

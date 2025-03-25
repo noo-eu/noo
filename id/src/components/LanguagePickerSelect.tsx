@@ -51,6 +51,7 @@ export function LanguagePickerSelect({
       onChange={handleChange}
       value={value}
       name="language"
+      data-testid="language-picker"
     >
       {children}
     </SelectInput>
