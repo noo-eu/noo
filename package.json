@@ -13,5 +13,9 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3"
   },
-  "packageManager": "bun@1.2.3"
+  "packageManager": "bun@1.2.3",
+  "overrides": {
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0"
+  }
 }

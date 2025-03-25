@@ -80,9 +80,5 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "overrides": {
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4"
   }
 }
