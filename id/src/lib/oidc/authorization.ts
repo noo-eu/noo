@@ -1,5 +1,4 @@
 import { RESPONSE_TYPES_SUPPORTED } from "@/app/oidc/configuration";
-import { getKeyByAlg } from "@/app/oidc/jwks";
 import { getActiveSessions } from "@/auth/sessions";
 import { schema } from "@/db";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
@@ -7,7 +6,6 @@ import OidcConsents from "@/db/oidc_consents";
 import { Session } from "@/db/sessions";
 import { Tenant } from "@/db/tenants";
 import { asyncFilter, asyncFind, humanIdToUuid, uuidToHumanId } from "@/utils";
-import { SignJWT } from "jose";
 import { err, ok, Result } from "neverthrow";
 import { HttpRequest } from "../http/request";
 import { buildFormPostResponse } from "./authorization/formPost";
@@ -20,6 +18,7 @@ import {
   ResponseMode,
   ResponseType,
 } from "./types";
+import { setOidcAuthorizationCookie } from "./utils";
 
 export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
   const issuer = `${request.baseUrl}/oidc${tenant ? "/" + tenant.domain : ""}`;
@@ -98,7 +97,7 @@ export async function oidcAuthorization(request: HttpRequest, tenant?: Tenant) {
         status: 303,
         headers: {
           Location: request.buildUrl("/switch"),
-          "Set-Cookie": `oidc_authorization_request=${await signParams(params)}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": await setOidcAuthorizationCookie(params),
         },
       });
     case "consent":
@@ -462,15 +461,13 @@ async function authorizationStandard(
       )
     : activeSessions;
 
-  const signedParams = await signParams(params);
-
   if (matchingSessions.length === 0) {
     // No active sessions, show redirect to login screen
     return new Response(null, {
       status: 303,
       headers: {
         Location: req.buildUrl("/signin"),
-        "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+        "Set-Cookie": await setOidcAuthorizationCookie(params),
       },
     });
   } else if (matchingSessions.length === 1) {
@@ -491,7 +488,7 @@ async function authorizationStandard(
         status: 303,
         headers: {
           Location: req.buildUrl("/oidc/continue", { uid: userId }),
-          "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": await setOidcAuthorizationCookie(params),
         },
       });
     } else {
@@ -500,7 +497,7 @@ async function authorizationStandard(
         status: 303,
         headers: {
           Location: req.buildUrl("/oidc/consent", { uid: userId }),
-          "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+          "Set-Cookie": await setOidcAuthorizationCookie(params),
         },
       });
     }
@@ -510,7 +507,7 @@ async function authorizationStandard(
       status: 303,
       headers: {
         Location: req.buildUrl("/switch"),
-        "Set-Cookie": `oidc_authorization_request=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`,
+        "Set-Cookie": await setOidcAuthorizationCookie(params),
       },
     });
   }
@@ -577,13 +574,4 @@ async function verifyConsent(
   }
 
   return true;
-}
-
-async function signParams(params: AuthorizationRequest) {
-  const { key, kid } = (await getKeyByAlg("EdDSA"))!;
-  return await new SignJWT(params)
-    .setProtectedHeader({ alg: "EdDSA", kid })
-    .setIssuedAt()
-    .setExpirationTime("1h")
-    .sign(key);
 }

@@ -1,12 +1,10 @@
-import { getPublicKeys } from "../jwks";
+import { allPublicKeys } from "@/lib/jwks/store";
 
 export async function GET() {
-  const keys = await getPublicKeys();
+  const keys = await allPublicKeys();
 
   return Response.json(
-    {
-      keys: [...keys.current, ...keys.legacy],
-    },
+    { keys },
     {
       headers: {
         "Cache-Control": "public, max-age=86400",

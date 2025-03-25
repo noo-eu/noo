@@ -1,8 +1,8 @@
-import { getKeyByAlg, getVerifyingKeyByAlg } from "@/app/oidc/jwks";
 import { OidcClient } from "@/db/oidc_clients";
 import { hexToBase62, sha256, uuidToBase62, uuidToHumanId } from "@/utils";
 import crypto from "crypto";
 import { jwtVerify, SignJWT, UnsecuredJWT } from "jose";
+import { getSigningKey, getVerifyingKeyForJwt } from "../jwks";
 
 export async function createIdToken(
   issuer: string,
@@ -32,7 +32,9 @@ export async function createIdToken(
       .setSubject(subClaim)
       .encode();
   } else {
-    const { kid, key } = (await getKeyByAlg(client.idTokenSignedResponseAlg))!;
+    const { kid, key } = (await getSigningKey(
+      client.idTokenSignedResponseAlg,
+    ))!;
 
     return new SignJWT({ ...claims })
       .setProtectedHeader({ alg: client.idTokenSignedResponseAlg, kid })
@@ -72,8 +74,7 @@ export async function decodeIdTokenWhole(idToken: string, alg: string) {
     if (alg == "none") {
       return UnsecuredJWT.decode(idToken).payload;
     } else {
-      const { key } = (await getVerifyingKeyByAlg(alg))!;
-      return await jwtVerify(idToken, key);
+      return await jwtVerify(idToken, getVerifyingKeyForJwt);
     }
   } catch (e) {
     console.error(e);

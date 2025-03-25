@@ -81,7 +81,7 @@ function extractDeviceType(userAgent: string): string | undefined {
     const device = parts[2]?.trim();
     if (device) {
       // Remove "Build/" from the device name
-      return device.replace(" Build/", "");
+      return device.replace(" Build/", " ");
     }
   }
 }
@@ -126,7 +126,7 @@ function extractBrowser(userAgent: string): string | undefined {
     return "DuckDuckGo";
   }
 
-  if (userAgent.includes("Safari/")) {
+  if (userAgent.includes("Safari/") && !userAgent.includes("Mobile Safari/")) {
     return "Safari";
   }
 

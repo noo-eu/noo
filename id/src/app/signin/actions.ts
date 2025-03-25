@@ -25,9 +25,9 @@ import { SignJWT } from "jose";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { getKeyByAlg } from "../oidc/jwks";
 import { getWebAuthnID } from "../security/passkeys/actions";
 import PasskeyChallenges from "@/db/passkeyChallenges";
+import { getSigningKey } from "@/lib/jwks";
 
 const signinSchema = z.object({
   username: z.string(),
@@ -104,7 +104,7 @@ async function startTotpSession(user: User, passedMethods: string[] = ["pwd"]) {
   // This works off a separate session cookie, so that the main session
   // is not affected by the TOTP flow.
 
-  const { key, kid } = (await getKeyByAlg("EdDSA"))!;
+  const { key, kid } = (await getSigningKey("EdDSA"))!;
   const token = await new SignJWT({ amr: passedMethods })
     .setProtectedHeader({ alg: "EdDSA", kid })
     .setSubject(user.id)

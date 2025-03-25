@@ -1,8 +1,9 @@
 import { Footer } from "@/components/Footer";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages, getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { ToastContainer } from "react-toastify/unstyled";
 import "./globals.css";
+import { getCurrentLocale } from "@/i18n/request";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -18,7 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
+  const locale = await getCurrentLocale();
   const messages = await getMessages();
 
   return (

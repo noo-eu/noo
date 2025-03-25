@@ -1,23 +1,25 @@
 import { SelectInput } from "@noo/ui";
+import { useEffect, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
-  locale: string;
   className?: string;
   kind?: "regular" | "flat";
+  autoSave?: boolean;
   handleLocaleChange?: (locale: string) => void;
 };
 
 export function LanguagePickerSelect({
   children,
-  locale,
   className,
   kind = "regular",
+  autoSave,
   handleLocaleChange,
 }: Readonly<Props>) {
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleLocaleChange?.(e.target.value);
-  };
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    setValue(document.documentElement.lang);
+  }, []);
 
   let classes = className;
   if (kind === "flat") {
@@ -25,13 +27,31 @@ export function LanguagePickerSelect({
       " dark:outline-0 text-xs py-2.5 ps-2.5 hover:bg-blue-200 dark:hover:bg-white/20 rounded-md field-sizing-content";
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const locale = e.target.value;
+    setValue(locale);
+
+    if (autoSave) {
+      // This is only used while the user is not authenticated (signin and
+      // signup), and if the user wants to override their Accept-Language
+      // header. So, we set a session cookie here and forget about it once the
+      // browser is closed.
+
+      document.cookie = `_noo_locale=${locale}; path=/`;
+      window.location.reload();
+    }
+
+    handleLocaleChange?.(locale);
+  };
+
   return (
     <SelectInput
       className={classes}
       aria-label="Language"
       onChange={handleChange}
-      defaultValue={locale}
+      value={value}
       name="language"
+      data-testid="language-picker"
     >
       {children}
     </SelectInput>

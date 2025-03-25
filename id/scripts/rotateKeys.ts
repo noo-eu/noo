@@ -1,4 +1,4 @@
-import { generateNewKeySet } from "@/app/oidc/jwks";
+import { generateSet } from "@/lib/jwks/gen";
 import {
   mkdirSync,
   readdirSync,
@@ -24,7 +24,7 @@ readdirSync("keys/current").forEach((file) => {
 });
 
 // Create new keys in keys/current
-const keys = await generateNewKeySet();
+const keys = await generateSet();
 for (const [key, value] of Object.entries(keys)) {
   const filePath = `keys/current/${key}.json`;
   const fileContent = JSON.stringify(value, null, 2);

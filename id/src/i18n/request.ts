@@ -32,7 +32,7 @@ const normalizedLocales = {
   nb: "no",
 } as const as Record<string, string>;
 
-export async function i18nConfig() {
+export async function getCurrentLocale() {
   // First use the locale from the user's profile, if available.
   let locale = await getLocaleFromUser();
 
@@ -56,10 +56,17 @@ export async function i18nConfig() {
   }
 
   // Fallback to English.
-  locale ??= "en";
+  return locale ?? "en";
+}
 
-  // Some locale codes are aliases for others.
-  locale = normalizedLocales[locale] ?? locale;
+// Some locale codes are aliases for others.
+export async function getCurrentNormalizedLocale() {
+  const locale = await getCurrentLocale();
+  return normalizedLocales[locale] ?? locale;
+}
+
+export async function i18nConfig() {
+  const locale = await getCurrentNormalizedLocale();
 
   return {
     locale,
