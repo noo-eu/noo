@@ -14,7 +14,6 @@ export function LanguagePickerSelect({
   className,
   kind = "regular",
   autoSave,
-  handleLocaleChange,
 }: Readonly<Props>) {
   const [value, setValue] = useState("");
   useEffect(() => {
@@ -40,8 +39,6 @@ export function LanguagePickerSelect({
       document.cookie = `_noo_locale=${locale}; path=/`;
       window.location.reload();
     }
-
-    handleLocaleChange?.(locale);
   };
 
   return (

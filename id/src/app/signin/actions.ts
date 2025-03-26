@@ -40,6 +40,11 @@ export async function signin(
 ): Promise<
   ActionResult<undefined, string, { username: string; domain?: string }>
 > {
+  if (formData.get("captcha")) {
+    // This is a bot, don't even bother
+    return { error: "validation", input: { username: "" } };
+  }
+
   const parseResult = signinSchema.safeParse(
     Object.fromEntries(formData.entries()),
   );

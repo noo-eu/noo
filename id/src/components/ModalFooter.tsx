@@ -19,7 +19,7 @@ export function ModalFooter() {
       >
         {t("privacy")}
       </Link>
-      <LanguagePicker className="text-end" />
+      <LanguagePicker className="text-end" kind="flat" />
     </div>
   );
 }

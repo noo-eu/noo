@@ -63,6 +63,11 @@ export default function SignupPage() {
           autoCapitalize="words"
         />
 
+        <div className="very-important-field">
+          <label>Favorite color</label>
+          <input type="text" name="favorite_color" />
+        </div>
+
         <div className="flex justify-end mt-12">
           <Button type="submit" pending={pending}>
             {commonT("next")}

@@ -70,6 +70,12 @@ export function SignInForm() {
           name="password"
           autoComplete="current-password"
         />
+
+        <div className="very-important-field">
+          <label>1 + 1 =</label>
+          <input type="text" name="captcha" />
+        </div>
+
         <div className="flex justify-end items-center mt-12">
           <Link href="/signup" className="py-2.5 px-2 link font-medium me-4">
             {t("create_account")}

@@ -52,6 +52,11 @@ async function getSignupData() {
 }
 
 export async function signupStep1(prevState: unknown, formData: FormData) {
+  if (formData.get("favorite_color") !== "") {
+    // This is a honeypot field. Only bots will fill it.
+    redirect("/signup/success");
+  }
+
   const svc = new SignupService(formData);
   const errors = await svc.runStep1();
 

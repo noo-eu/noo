@@ -1,7 +1,7 @@
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { afterAll, afterEach, beforeAll, beforeEach, expect, vi } from "vitest";
-import { configMocks, mockAnimationsApi } from "jsdom-testing-mocks";
+import { configMocks } from "jsdom-testing-mocks";
 
 expect.extend(matchers);
 afterEach(cleanup);
