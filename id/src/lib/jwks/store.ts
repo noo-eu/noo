@@ -1,5 +1,5 @@
 import { jwks, JwkSet } from "@/lib/oidc/types";
-import { readFile } from "fs/promises";
+import { readFile, access } from "fs/promises";
 import { Jwk } from ".";
 
 // Keep a 5m cache of the keys instead of reading them from disk every time
@@ -58,6 +58,12 @@ export async function loadKeysRaw() {
 }
 
 export async function loadJwkSet(path: string): Promise<JwkSet> {
+  try {
+    await access(path);
+  } catch {
+    return { keys: [] };
+  }
+
   const data = await readFile(path);
   return jwks.parse(JSON.parse(data.toString()));
 }

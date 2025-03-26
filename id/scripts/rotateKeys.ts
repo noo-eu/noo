@@ -1,7 +1,9 @@
 import { generateSet } from "@/lib/jwks/gen";
 import { existsSync, mkdirSync, renameSync, writeFileSync } from "fs";
 
-mkdirSync("keys");
+if (!existsSync("keys")) {
+  mkdirSync("keys");
+}
 
 if (existsSync("keys/current.jwk")) {
   renameSync("keys/current.jwk", "keys/old.jwk");
