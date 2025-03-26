@@ -9,6 +9,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS deps
 
+COPY i18n-utils/package.json i18n-utils/package.json
 COPY id/package.json id/package.json
 COPY mail/package.json mail/package.json
 COPY ui/package.json ui/package.json
