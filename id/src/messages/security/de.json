@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Aktuelle Sitzung",
       "lastUsed": "Zuletzt verwendet {lastUsedAgo}",
+      "terminate": "Diese Sitzung beenden",
       "title": "Aktive Sitzungen"
     },
     "summary": {

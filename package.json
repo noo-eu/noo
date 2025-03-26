@@ -5,6 +5,7 @@
     "prepare": "bun run --bun husky"
   },
   "workspaces": [
+    "i18n-utils",
     "id",
     "mail",
     "ui"

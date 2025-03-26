@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Trenutna seja",
       "lastUsed": "Zadnjič uporabljen {lastUsedAgo}",
+      "terminate": "Končaj to sejo",
       "title": "Aktivne seje"
     },
     "summary": {

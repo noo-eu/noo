@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Dabartinė sesija",
       "lastUsed": "Paskutinį kartą naudota {lastUsedAgo}",
+      "terminate": "Baigti šią sesiją",
       "title": "Aktyvios sesijos"
     },
     "summary": {

@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Jelenlegi munkamenet",
       "lastUsed": "Utolsó használat: {lastUsedAgo}.",
+      "terminate": "Zárd le ezt a munkamenetet",
       "title": "Aktív munkamenetek"
     },
     "summary": {

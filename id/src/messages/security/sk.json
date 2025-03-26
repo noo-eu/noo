@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Aktuálna relácia",
       "lastUsed": "Naposledy použitý {lastUsedAgo}",
+      "terminate": "Koniec tejto relácie",
       "title": "Aktívne relácie"
     },
     "summary": {

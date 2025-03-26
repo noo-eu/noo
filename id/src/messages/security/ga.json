@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "An sionnaigh reatha",
       "lastUsed": "Úsáidtear é le déanaí {lastUsedAgo}",
+      "terminate": "Críochnaigh an tsiopa seo",
       "title": "Sionnaigh gníomhacha"
     },
     "summary": {

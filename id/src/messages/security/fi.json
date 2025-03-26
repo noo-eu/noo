@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Nykyinen sessio",
       "lastUsed": "Viimeksi käytetty {lastUsedAgo}",
+      "terminate": "Lopeta tämä sessio",
       "title": "Aktiiviset sessiot"
     },
     "summary": {

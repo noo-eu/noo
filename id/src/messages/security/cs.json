@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Aktuální relace",
       "lastUsed": "Nap poslední {lastUsedAgo}",
+      "terminate": "Ukončit tuto relaci",
       "title": "Aktivní relace"
     },
     "summary": {

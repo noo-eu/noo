@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Seanca aktuale",
       "lastUsed": "E fundit përdorur {lastUsedAgo}",
+      "terminate": "Mbyll këtë sesion",
       "title": "Seancat aktive"
     },
     "summary": {

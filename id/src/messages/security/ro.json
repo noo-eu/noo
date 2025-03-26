@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Sesiunea curentă",
       "lastUsed": "Ultima utilizare {lastUsedAgo}",
+      "terminate": "Încheie această sesiune",
       "title": "Sesiuni active"
     },
     "summary": {

@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": " Nåværende økt",
       "lastUsed": "Sist brukt for {lastUsedAgo}",
+      "terminate": "Avslutt denne sesjonen",
       "title": "Aktive økter"
     },
     "summary": {

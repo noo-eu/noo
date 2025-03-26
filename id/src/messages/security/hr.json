@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Trenutna sesija",
       "lastUsed": "Zadnji put korišteno {lastUsedAgo}",
+      "terminate": "Prekini ovu sesiju",
       "title": "Aktivne sesije"
     },
     "summary": {

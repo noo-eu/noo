@@ -1,7 +1,5 @@
-import { SUPPORTED_LANGUAGES } from "@/i18n";
-import json5 from "json5";
-import { directories, sort, TranslationFile } from "./messages";
-import { getClient } from "./models";
+import { load, rootDirectories, save, TranslationFile } from "./common";
+import { LLM } from "./models";
 
 const LOCALE_NAMES: Record<string, string> = {
   bg: "Bulgarian",
@@ -34,32 +32,30 @@ const LOCALE_NAMES: Record<string, string> = {
   uk: "Ukrainian",
 };
 
-// Check that translation files have no missing keys
-for (const directory of directories) {
-  const en = json5.parse(
-    await Bun.file(`src/messages/${directory}/en.json`).text(),
-  );
+export async function translateMissing(languages: string[], llmClient: LLM) {
+  const directories = await rootDirectories();
 
-  for (const language of SUPPORTED_LANGUAGES) {
-    const other = json5.parse(
-      await Bun.file(`src/messages/${directory}/${language}.json`).text(),
-    );
-    let misses: string[] = [];
-    recursiveKeyCheck(en, other, misses);
+  // Check that translation files have no missing keys
+  for (const directory of directories) {
+    const en = await load(directory, "en");
 
-    if (misses.length > 0) {
-      const source = collect(en, misses);
+    for (const language of languages) {
+      const other = await load(directory, language);
 
-      console.log(
-        `Translating ${Object.keys(source).length} keys in ${directory}/${language}.json`,
-      );
-      const result = await translate(source, language);
+      let misses: string[] = [];
+      recursiveKeyCheck(en, other, misses);
 
-      const final = sort(merge(other, result));
-      Bun.write(
-        `src/messages/${directory}/${language}.json`,
-        JSON.stringify(final, null, 2),
-      );
+      if (misses.length > 0) {
+        const source = collect(en, misses);
+
+        console.log(
+          `Translating ${Object.keys(source).length} keys in ${directory}/${language}.json`,
+        );
+        const result = await translate(source, language, llmClient);
+
+        const final = merge(other, result);
+        await save(directory, language, final);
+      }
     }
   }
 }
@@ -124,6 +120,7 @@ function collect(reference: TranslationFile, keys: string[]) {
 async function translate(
   requests: Record<string, string>,
   targetLocale: string,
+  llmClient: LLM,
 ) {
   const system = `You must correctly translate this document to ${LOCALE_NAMES[targetLocale]}, making sure to use local spelling and idioms. \
     The translations may use the ICU Message Format. \
@@ -133,7 +130,7 @@ async function translate(
     Do not leave the value empty. Only output JSON, without any surronding text.`;
 
   const prompt = JSON.stringify(requests, null, 2);
-  const translations = await getClient().request(system, prompt);
+  const translations = await llmClient.request(system, prompt);
 
   for (const key of Object.keys(translations)) {
     // Remove keys that were not in the original source

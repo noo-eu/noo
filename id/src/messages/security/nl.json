@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Huidige sessie",
       "lastUsed": "Laatst gebruikt {lastUsedAgo}",
+      "terminate": "Eind deze sessie",
       "title": "Actieve sessies"
     },
     "summary": {

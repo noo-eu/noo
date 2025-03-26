@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Núverandi aðgerð",
       "lastUsed": "Síðast notað {lastUsedAgo} síðan",
+      "terminate": "Ljúka þessari sessjón",
       "title": "Virkar aðgerðir"
     },
     "summary": {

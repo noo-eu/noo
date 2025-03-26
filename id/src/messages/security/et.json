@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Praegune seanss",
       "lastUsed": "Viimati kasutatud {lastUsedAgo} tagasi",
+      "terminate": "Lõpeta see sessioon",
       "title": "Aktiivsed seansid"
     },
     "summary": {

@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Поточна сесія",
       "lastUsed": "Останній раз використано {lastUsedAgo}",
+      "terminate": "Закінчити цю сесію",
       "title": "Активні сесії"
     },
     "summary": {

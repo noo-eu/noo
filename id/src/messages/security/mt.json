@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Is-sessjoni kurrenti",
       "lastUsed": "Uża l-aħħar {lastUsedAgo} ",
+      "terminate": "Irrisetta din is-sessjoni",
       "title": "Sessjonijiet Attivi"
     },
     "summary": {

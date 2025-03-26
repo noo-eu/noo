@@ -1,0 +1,22 @@
+{
+  "name": "@noo/i18n-utils",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "i18n-utils": "./src/index.ts"
+  },
+  "scripts": {},
+  "dependencies": {
+    "commander": "^13.1.0",
+    "json5": "^2.2.3",
+    "openai": "^4.86.2"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^3.0.8"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}

@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Pašreizējā sesija",
       "lastUsed": "Pēdējo reizi izmantots {lastUsedAgo}",
+      "terminate": "Beidz šo sesiju",
       "title": "Aktīvās sesijas"
     },
     "summary": {

@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Mevcut oturum",
       "lastUsed": "{lastUsedAgo} kullanıldı",
+      "terminate": "Bu oturumu sonlandır",
       "title": "Açık oturumlar"
     },
     "summary": {

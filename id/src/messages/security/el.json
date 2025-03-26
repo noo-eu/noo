@@ -42,6 +42,7 @@
     "sessions": {
       "currentSession": "Τρέχουσα συνεδρία",
       "lastUsed": "Τελευταία χρήση {lastUsedAgo}",
+      "terminate": "Τερμάτισε αυτή τη συνεδρία",
       "title": "Ενεργές συνεδρίες"
     },
     "summary": {
