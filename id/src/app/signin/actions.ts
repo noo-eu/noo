@@ -12,8 +12,8 @@ import Users, { User } from "@/db/users";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { checkPwnedPassword } from "@/lib/password";
-import { ActionResult } from "@/lib/types/ActionResult";
-import { uuidToHumanId } from "@/utils";
+import { ActionResult, BasicFormAction } from "@/lib/types/ActionResult";
+import { humanIdToUuid, uuidToBase62, uuidToHumanId } from "@/utils";
 import {
   AuthenticationResponseJSON,
   AuthenticatorTransportFuture,
@@ -21,13 +21,13 @@ import {
   verifyAuthenticationResponse,
 } from "@simplewebauthn/server";
 import { eq } from "drizzle-orm";
-import { SignJWT } from "jose";
+import { jwtVerify, SignJWT } from "jose";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getWebAuthnID } from "../security/passkeys/actions";
 import PasskeyChallenges from "@/db/passkeyChallenges";
-import { getSigningKey } from "@/lib/jwks";
+import { getSigningKey, getVerifyingKeyForJwt } from "@/lib/jwks";
 
 const signinSchema = z.object({
   username: z.string(),
@@ -85,6 +85,41 @@ export async function signin(
   return result;
 }
 
+export async function totpSubmit(
+  _: unknown,
+  formData: FormData,
+): Promise<BasicFormAction> {
+  const totpUserId = await loadTotpSession();
+  if (!totpUserId) {
+    redirect("/signin");
+  }
+
+  const user = await Users.find(humanIdToUuid(totpUserId, "usr")!);
+  if (!user) {
+    redirect("/signin");
+  }
+
+  const totpCode = formData.get("totp") as string;
+  if (!totpCode) {
+    return { error: { totp: "credentials" }, input: {} };
+  }
+
+  if (!(await Users.verifyTotp(user, totpCode))) {
+    return { error: { totp: "credentials" }, input: {} };
+  }
+
+  // Clear the TOTP session
+  const cookieStore = await cookies();
+  await cookieStore.set(TOTP_COOKIE, "", { maxAge: 0 });
+
+  const result = await handleSuccessfulAuthentication(user, {});
+  if (result.data) {
+    redirect(result.data);
+  }
+
+  return { error: { tenant: result.error! }, input: {} };
+}
+
 async function startSession(user: User) {
   const ip = await getIpAddress();
   const ua = await getUserAgent();
@@ -98,33 +133,6 @@ async function startSession(user: User) {
   }
 
   return session;
-}
-
-const TOTP_COOKIE = "_noo_short_lived";
-
-async function startTotpSession(user: User, passedMethods: string[] = ["pwd"]) {
-  // A totp session is a short lived, partially authenticated session
-  // that can only be used to submit a TOTP code.
-
-  // This works off a separate session cookie, so that the main session
-  // is not affected by the TOTP flow.
-
-  const { key, kid } = (await getSigningKey("EdDSA"))!;
-  const token = await new SignJWT({ amr: passedMethods })
-    .setProtectedHeader({ alg: "EdDSA", kid })
-    .setSubject(user.id)
-    .setAudience("totp")
-    .setIssuedAt()
-    .setExpirationTime("15m")
-    .sign(key);
-
-  const cookieStore = await cookies();
-  await cookieStore.set(TOTP_COOKIE, token, {
-    maxAge: 60 * 15,
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-  });
 }
 
 const PASSWORD_BREACH_CHECK_INTERVAL = 1000 * 60 * 60 * 24 * 7; // 1 week
@@ -261,4 +269,47 @@ async function handleSuccessfulAuthentication<Input>(
       input: { ...input, domain: undefined },
     };
   }
+}
+
+const TOTP_COOKIE = "_noo_short_lived";
+
+async function startTotpSession(user: User, passedMethods: string[] = ["pwd"]) {
+  // A totp session is a short lived, partially authenticated session
+  // that can only be used to submit a TOTP code.
+
+  // This works off a separate session cookie, so that the main session
+  // is not affected by the TOTP flow.
+
+  const { key, kid } = (await getSigningKey("EdDSA"))!;
+  const token = await new SignJWT({ amr: passedMethods })
+    .setProtectedHeader({ alg: "EdDSA", kid })
+    .setSubject(uuidToHumanId(user.id, "usr"))
+    .setAudience("totp")
+    .setIssuedAt()
+    .setExpirationTime("15m")
+    .sign(key);
+
+  const cookieStore = await cookies();
+  await cookieStore.set(TOTP_COOKIE, token, {
+    maxAge: 60 * 15,
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+  });
+}
+
+async function loadTotpSession(): Promise<string | undefined> {
+  const cookieStore = await cookies();
+  const token = await cookieStore.get(TOTP_COOKIE);
+  if (!token) {
+    return;
+  }
+
+  try {
+    const jwt = await jwtVerify(token.value, getVerifyingKeyForJwt, {
+      audience: "totp",
+    });
+
+    return jwt.payload.sub;
+  } catch (error) {}
 }

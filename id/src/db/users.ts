@@ -2,6 +2,7 @@ import argon2 from "argon2";
 import { and, eq, isNull } from "drizzle-orm";
 import db, { schema } from ".";
 import Tenants, { Tenant } from "./tenants";
+import { verifyTotpWithTolerance } from "@/utils";
 
 async function find(userId: string) {
   return db.query.users.findFirst({
@@ -97,12 +98,21 @@ async function authenticate(username: string, password: string) {
   return null;
 }
 
+async function verifyTotp(user: User, totp: string) {
+  if (!user.otpSecret) {
+    return false;
+  }
+
+  return verifyTotpWithTolerance(user.otpSecret, totp);
+}
+
 const Users = {
   find,
   create,
   update,
   authenticate,
   isUsernameAvailable,
+  verifyTotp,
 };
 
 export default Users;

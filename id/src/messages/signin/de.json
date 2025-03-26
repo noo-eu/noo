@@ -8,6 +8,8 @@
     "submit": "Anmelden",
     "tenant_error": "Bitte melde dich mit einem {domain}-Konto an",
     "title": "Melde dich bei deinem <noo></noo> Konto an",
+    "totpCode": "Code",
+    "totpDescription": "Gib den Code aus deiner Authentifizierungs-App ein",
     "usePasskey": "Mit einem Passkey anmelden",
     "username": "Benutzername oder E-Mail"
   }

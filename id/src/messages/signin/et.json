@@ -8,6 +8,8 @@
     "submit": "Logi sisse",
     "tenant_error": "Palun logi sisse {domain} kontoga",
     "title": "Logi sisse oma <noo></noo> kontole",
+    "totpCode": "Kood",
+    "totpDescription": "Sisesta oma autentimise rakenduse kood",
     "usePasskey": "Logi sisse passkey'ga",
     "username": "Kasutajanimi või e-post"
   }

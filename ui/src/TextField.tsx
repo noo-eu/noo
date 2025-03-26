@@ -20,14 +20,15 @@ export function TextField(props: TextFieldProps) {
   const errorId = useId();
 
   const { aroundLabel, error, suffix, append, ...rest } = props;
+  const id = rest.id || inputId;
 
-  const label = <Label htmlFor={inputId}>{props.label}</Label>;
+  const label = <Label htmlFor={id}>{props.label}</Label>;
   const wrappedLabel = aroundLabel ? aroundLabel(label) : label;
 
   const input = (
     <TextInput
       {...rest}
-      id={inputId}
+      id={id}
       aria-describedby={props.error ? errorId : undefined}
       aria-invalid={!!props.error}
       className={`${rest.className} ${suffix ? "rounded-r-none -me-px" : ""}`}

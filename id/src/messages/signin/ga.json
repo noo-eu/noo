@@ -8,6 +8,8 @@
     "submit": "Sínigh isteach",
     "tenant_error": "Sínigh isteach le cuntas {domain}, le do thoil",
     "title": "Sínigh isteach i do chuntas <noo></noo>",
+    "totpCode": "Cód",
+    "totpDescription": "Cuir isteach an cód ó do chláir ghréasáin",
     "usePasskey": "Logáil isteach le pasfhocal",
     "username": "Ainm úsáideora nó r-phost"
   }

@@ -8,6 +8,8 @@
     "submit": "Zaloguj się",
     "tenant_error": "Zaloguj się przy użyciu konta {domain}",
     "title": "Zaloguj się na swoje konto <noo></noo>",
+    "totpCode": "Kod",
+    "totpDescription": "Wprowadź kod z aplikacji uwierzytelniającej",
     "usePasskey": "Zaloguj się za pomocą klucza dostępu",
     "username": "Nazwa użytkownika lub e-mail"
   }

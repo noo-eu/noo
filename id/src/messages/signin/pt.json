@@ -8,6 +8,8 @@
     "submit": "Entrar",
     "tenant_error": "Por favor, entra com uma conta {domain}",
     "title": "Entra na tua conta <noo></noo>",
+    "totpCode": "Código",
+    "totpDescription": "Insere o código da tua app de autenticação",
     "usePasskey": "Iniciar sessão com uma chave de acesso",
     "username": "Nome de utilizador ou email"
   }

@@ -8,6 +8,8 @@
     "submit": "Autentifică-te",
     "tenant_error": "Te rog autentifică-te cu un cont {domain}",
     "title": "Autentifică-te în contul tău <noo></noo>",
+    "totpCode": "Cod",
+    "totpDescription": "Introdu codul din aplicația ta de autentificare",
     "usePasskey": "Conectează-te cu o cheie de acces",
     "username": "Nume de utilizator sau email"
   }

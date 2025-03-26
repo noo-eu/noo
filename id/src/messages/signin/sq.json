@@ -8,6 +8,8 @@
     "submit": "Hyr",
     "tenant_error": "Të lutem hyr me një llogari {domain}",
     "title": "Hyr në llogarinë tënde <noo></noo>",
+    "totpCode": "Kodi",
+    "totpDescription": "Shkruaj kodin nga aplikacioni yt i autentikimit",
     "usePasskey": "Hyj me një çelës kalimi",
     "username": "Emri i përdoruesit ose emaili"
   }

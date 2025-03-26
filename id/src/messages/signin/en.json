@@ -8,6 +8,8 @@
     "submit": "Sign in",
     "tenant_error": "Please sign in using a {domain} account",
     "title": "Sign in to your <noo></noo> account",
+    "totpCode": "Code",
+    "totpDescription": "Enter the code from your authenticator app",
     "usePasskey": "Sign in with a passkey",
     "username": "Username or email address"
   }

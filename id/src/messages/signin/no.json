@@ -8,6 +8,8 @@
     "submit": "Logg inn",
     "tenant_error": "Logg inn med en {domain}-konto",
     "title": "Logg inn på <noo></noo>-kontoen din",
+    "totpCode": "Kode",
+    "totpDescription": "Skriv inn koden fra autentiseringsappen din",
     "usePasskey": "Logg inn med en passkey",
     "username": "Brukernavn eller e-post"
   }

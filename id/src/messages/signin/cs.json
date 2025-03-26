@@ -8,6 +8,8 @@
     "submit": "Přihlásit se",
     "tenant_error": "Přihlas se prosím pomocí účtu {domain}",
     "title": "Přihlas se ke svému účtu <noo></noo>",
+    "totpCode": "Kód",
+    "totpDescription": "Zadejte kód z vaší autentifikační aplikace",
     "usePasskey": "Přihlásit se pomocí klíče",
     "username": "Uživatelské jméno nebo e-mail"
   }

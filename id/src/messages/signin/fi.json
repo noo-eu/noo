@@ -8,6 +8,8 @@
     "submit": "Kirjaudu",
     "tenant_error": "Kirjaudu sisään käyttämällä {domain} tiliä",
     "title": "Kirjaudu <noo></noo>-tilillesi",
+    "totpCode": "Koodi",
+    "totpDescription": "Syötä koodi autentikaattorisovelluksesta",
     "usePasskey": "Kirjaudu sisään avainlinkillä",
     "username": "Käyttäjätunnus tai sähköposti"
   }

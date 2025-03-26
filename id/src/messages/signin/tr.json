@@ -8,6 +8,8 @@
     "submit": "Giriş yap",
     "tenant_error": "Lütfen {domain} hesabınla giriş yap",
     "title": "<noo></noo> hesabına giriş yap",
+    "totpCode": "Kod",
+    "totpDescription": "Kimlik doğrulayıcı uygulamanızdan kodu girin",
     "usePasskey": "Anahtar ile giriş yap",
     "username": "Kullanıcı adı veya e-posta"
   }

@@ -8,6 +8,8 @@
     "submit": "Prisijungti",
     "tenant_error": "Prisijunkite naudodami {domain} paskyrą",
     "title": "Prisijunk prie savo <noo></noo> paskyros",
+    "totpCode": "Kodas",
+    "totpDescription": "Įveskite kodą iš savo autentifikavimo programėlės",
     "usePasskey": "Prisijunkite naudodami slaptažodį",
     "username": "Vartotojo vardas arba el. paštas"
   }

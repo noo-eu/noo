@@ -8,6 +8,8 @@
     "submit": "Accedi",
     "tenant_error": "Per favore, accedi con un account {domain}",
     "title": "Accedi al tuo account <noo></noo>",
+    "totpCode": "Codice",
+    "totpDescription": "Inserisci il codice della tua app di autenticazione",
     "usePasskey": "Accedi con una passkey",
     "username": "Nome utente o email"
   }

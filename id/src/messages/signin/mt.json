@@ -8,6 +8,8 @@
     "submit": "Idħol",
     "tenant_error": "Jekk jogħġbok idħol b’kont {domain}",
     "title": "Idħol fil-kont tiegħek ta’ <noo></noo>",
+    "totpCode": "Kod",
+    "totpDescription": "Daħħal il-kod mill-app ta' awtentikazzjoni tiegħek",
     "usePasskey": "Idħol bil-passkey",
     "username": "Username jew email"
   }

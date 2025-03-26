@@ -8,6 +8,8 @@
     "submit": "Bejelentkezés",
     "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
     "title": "Jelentkezz be a <noo></noo> fiókodba",
+    "totpCode": "Kód",
+    "totpDescription": "Írd be a kódot az authentikáló alkalmazásodból",
     "usePasskey": "Jelentkezz be egy jelszóhelyettesítővel",
     "username": "Felhasználónév vagy email"
   }
