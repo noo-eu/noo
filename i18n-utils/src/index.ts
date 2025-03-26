@@ -6,7 +6,8 @@ import { getLLMClient } from "./models";
 import { move } from "./move";
 import { remove } from "./remove";
 import { show } from "./show";
-import { translateMissing } from "./translate";
+import { checkMissing } from "./checkMissing";
+import { translateMissing } from "./translateMissing";
 
 const { program } = require("commander");
 
@@ -76,6 +77,20 @@ program
     const client = getLLMClient(api, model);
 
     translateMissing(languages, client);
+  });
+
+program
+  .command("check-missing")
+  .description(
+    "Check for missing keys in all locales, failing if any are found",
+  )
+  .action(async () => {
+    const anyMissing = await checkMissing(languages);
+    if (anyMissing) {
+      process.exit(1);
+    } else {
+      console.log("All keys are present in all locales. Good job!");
+    }
   });
 
 program.parse();

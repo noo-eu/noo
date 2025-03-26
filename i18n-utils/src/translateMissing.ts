@@ -60,7 +60,7 @@ export async function translateMissing(languages: string[], llmClient: LLM) {
   }
 }
 
-function recursiveKeyCheck(
+export function recursiveKeyCheck(
   reference: TranslationFile,
   other: TranslationFile,
   misses: string[],

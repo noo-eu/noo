@@ -43,6 +43,9 @@ jobs:
         echo "Running Prettier check..."
         bun prettier --check . || FAIL=1
 
+        echo "Check if all translations keys are present..."
+        bun i18n-utils check-missing || FAIL=1
+
         exit $FAIL
 
   unit:
