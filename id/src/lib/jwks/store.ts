@@ -1,6 +1,5 @@
-import { jwkSchema } from "@/lib/oidc/types";
+import { jwks, JwkSet } from "@/lib/oidc/types";
 import { readFile } from "fs/promises";
-import { readdir } from "fs/promises";
 import { Jwk } from ".";
 
 // Keep a 5m cache of the keys instead of reading them from disk every time
@@ -49,31 +48,18 @@ export async function getKeys(): Promise<{
 }
 
 export async function loadKeysRaw() {
-  const legacyKeys = await loadKeysFromDir("keys/old");
-  const currentKeys = await loadKeysFromDir("keys/current");
+  const legacyKeys = await loadJwkSet("keys/old.jwk");
+  const currentKeys = await loadJwkSet("keys/current.jwk");
 
   return {
-    legacy: legacyKeys,
-    current: currentKeys,
+    legacy: legacyKeys.keys,
+    current: currentKeys.keys,
   };
 }
 
-export async function loadKeysFromDir(path: string): Promise<Jwk[]> {
-  const files = await readdir(path);
-
-  const keys = [];
-  for (const file of files) {
-    const content = await loadKeyRaw(`${path}/${file}`);
-    keys.push(content);
-  }
-
-  return keys;
-}
-
-async function loadKeyRaw(path: string): Promise<Jwk> {
+export async function loadJwkSet(path: string): Promise<JwkSet> {
   const data = await readFile(path);
-
-  return jwkSchema.parse(JSON.parse(data.toString()));
+  return jwks.parse(JSON.parse(data.toString()));
 }
 
 // Transform a private JWK into a public JWK by stripping out private fields

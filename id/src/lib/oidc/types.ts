@@ -86,6 +86,8 @@ const edKey = baseKey.extend({
 export const jwkSchema = z.union([rsaKey, ecKey, edKey]);
 export const jwks = z.object({ keys: z.array(jwkSchema) });
 
+export type JwkSet = z.infer<typeof jwks>;
+
 // OIDC Dynamic Client Registration
 export const registrationRequest = z.object({
   redirect_uris: z.array(z.string()).nonempty(),

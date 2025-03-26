@@ -6,9 +6,11 @@ export async function generateSet() {
   const ed = await generateEd25519();
 
   return {
-    rsa: await exportPrivate(rsa),
-    ec: await exportPrivate(ec),
-    ed: await exportPrivate(ed),
+    keys: [
+      await exportPrivate(rsa),
+      await exportPrivate(ec),
+      await exportPrivate(ed),
+    ],
   };
 }
 
