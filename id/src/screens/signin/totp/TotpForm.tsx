@@ -1,15 +1,15 @@
 "use client";
-import { Button, PasswordField, TextField } from "@noo/ui";
+
+import { Button, TextField } from "@noo/ui";
 import {
   PublicKeyCredentialRequestOptionsJSON,
   startAuthentication,
 } from "@simplewebauthn/browser";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import {
   generateWebauthnOptions,
-  signin,
   totpSubmit,
   verifyWebauthn,
 } from "@/app/signin/actions";
@@ -35,13 +35,15 @@ function useWebauthnAuthentication() {
   };
 }
 
-export function TotpForm() {
+export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
   const [state, formAction, pending] = useActionState(totpSubmit, {
     input: { username: "" },
   });
 
   const t = useTranslations("signin");
   const commonT = useTranslations("common");
+
+  const authenticateWithWebauthn = useWebauthnAuthentication();
 
   return (
     <>
@@ -75,21 +77,25 @@ export function TotpForm() {
         </div>
       </form>
 
-      {/* <div className="flex items-center justify-center my-8 relative">
-        <hr className="dark:border-white/20 w-full" />
-        <span className="mx-4 text-sm text-gray-500 dark:text-gray-400 absolute bg-white dark:bg-black px-2">
-          {t("or")}
-        </span>
-      </div>
+      {hasPasskeys && (
+        <>
+          <div className="flex items-center justify-center my-8 relative">
+            <hr className="dark:border-white/20 w-full" />
+            <span className="mx-4 text-sm text-gray-500 dark:text-gray-400 absolute bg-white dark:bg-black px-2">
+              {t("or")}
+            </span>
+          </div>
 
-      <Button
-        className="mx-auto"
-        size="sm"
-        form="outline"
-        onClick={() => authenticateWithWebauthn(false)}
-      >
-        {t("usePasskey")}
-      </Button> */}
+          <Button
+            className="mx-auto"
+            size="sm"
+            form="outline"
+            onClick={() => authenticateWithWebauthn(false)}
+          >
+            {t("usePasskey")}
+          </Button>
+        </>
+      )}
     </>
   );
 }

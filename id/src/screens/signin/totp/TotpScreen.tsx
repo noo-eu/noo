@@ -4,7 +4,7 @@ import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { TotpForm } from "./TotpForm";
 import { SignInWithNoo } from "@/components/SignInWithNoo";
 
-export async function TotpScreen() {
+export async function TotpScreen({ hasPasskeys }: { hasPasskeys: boolean }) {
   const oidcAuthorization = await getOidcAuthorizationRequest();
 
   return (
@@ -13,7 +13,7 @@ export async function TotpScreen() {
       <PageModal.Modal>
         <SignInSidePanel />
         <div>
-          <TotpForm />
+          <TotpForm hasPasskeys={hasPasskeys} />
         </div>
       </PageModal.Modal>
     </PageModal>

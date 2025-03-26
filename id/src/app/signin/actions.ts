@@ -13,7 +13,7 @@ import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { checkPwnedPassword } from "@/lib/password";
 import { ActionResult, BasicFormAction } from "@/lib/types/ActionResult";
-import { humanIdToUuid, uuidToBase62, uuidToHumanId } from "@/utils";
+import { humanIdToUuid, uuidToHumanId } from "@/utils";
 import {
   AuthenticationResponseJSON,
   AuthenticatorTransportFuture,
@@ -298,7 +298,7 @@ async function startTotpSession(user: User, passedMethods: string[] = ["pwd"]) {
   });
 }
 
-async function loadTotpSession(): Promise<string | undefined> {
+export async function loadTotpSession(): Promise<string | undefined> {
   const cookieStore = await cookies();
   const token = await cookieStore.get(TOTP_COOKIE);
   if (!token) {
@@ -311,5 +311,5 @@ async function loadTotpSession(): Promise<string | undefined> {
     });
 
     return jwt.payload.sub;
-  } catch (error) {}
+  } catch {}
 }
