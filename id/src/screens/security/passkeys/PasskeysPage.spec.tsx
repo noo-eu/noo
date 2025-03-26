@@ -12,6 +12,9 @@ import { ConfirmationProvider } from "@/components/Confirmation";
 import { PasskeyItem } from "./PasskeyItem";
 import { PasskeyNameEditor } from "./PasskeyNameEditor";
 import userEvent from "@testing-library/user-event";
+import { mockAnimationsApi } from "jsdom-testing-mocks";
+
+mockAnimationsApi();
 
 // Sample passkeys data with proper dates
 const samplePasskeys = vi.hoisted(() => [

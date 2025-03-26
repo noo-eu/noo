@@ -1,6 +1,7 @@
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { afterEach, expect, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, expect, vi } from "vitest";
+import { configMocks, mockAnimationsApi } from "jsdom-testing-mocks";
 
 expect.extend(matchers);
 afterEach(cleanup);
@@ -23,3 +24,10 @@ vi.mock("next-intl", async (importOriginal) => ({
 }));
 
 vi.resetModules();
+
+configMocks({
+  beforeAll: beforeAll,
+  beforeEach: beforeEach,
+  afterAll: afterAll,
+  afterEach: afterEach,
+});
