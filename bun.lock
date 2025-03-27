@@ -31,6 +31,7 @@
         "@aws-sdk/client-s3": "^3.758.0",
         "@headlessui/react": "^2.2.0",
         "@heroicons/react": "^2.2.0",
+        "@noo/oidc-server": "workspace:*",
         "@noo/ui": "workspace:*",
         "@sentry/nextjs": "^9",
         "@simplewebauthn/browser": "^13.1.0",
@@ -113,6 +114,26 @@
         "prettier": "^3.5.2",
         "tailwindcss": "^4.0.8",
         "typescript": "^5",
+      },
+    },
+    "oidc-server": {
+      "name": "@noo/oidc-server",
+      "version": "0.1.0",
+      "dependencies": {
+        "jose": "^6.0.10",
+        "neverthrow": "^8.2.0",
+        "zod": "^3.24.2",
+      },
+      "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@types/bun": "^1.2.4",
+        "@types/node": "^20",
+        "@vitest/coverage-istanbul": "3.0.9",
+        "eslint": "^9",
+        "prettier": "^3.5.2",
+        "typescript": "^5",
+        "vite-tsconfig-paths": "^5.1.4",
+        "vitest": "^3.0.9",
       },
     },
     "ui": {
@@ -523,6 +544,8 @@
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
 
     "@noo/i18n-utils": ["@noo/i18n-utils@workspace:i18n-utils"],
+
+    "@noo/oidc-server": ["@noo/oidc-server@workspace:oidc-server"],
 
     "@noo/ui": ["@noo/ui@workspace:ui"],
 

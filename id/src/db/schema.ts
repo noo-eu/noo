@@ -15,6 +15,7 @@ import {
   unique,
   uuid,
 } from "drizzle-orm/pg-core";
+import { JSONWebKeySet } from "jose";
 
 const bytea = customType<{
   data: Buffer;
@@ -145,7 +146,7 @@ export const oidcClients = pgTable("oidc_clients", {
   policyUri: jsonb("policy_uri"),
   tosUri: jsonb("tos_uri"),
   jwksUri: text("jwks_uri"),
-  jwks: jsonb("jwks"),
+  jwks: jsonb("jwks").$type<JSONWebKeySet>(),
   sectorIdentifierUri: text("sector_identifier_uri"),
   subjectType: text("subject_type").notNull().default("pairwise"),
   idTokenSignedResponseAlg: text("id_token_signed_response_alg")
@@ -181,13 +182,27 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
       onUpdate: "cascade",
     }),
   authTime: timestamp("auth_time").notNull(),
-  redirectUri: text("redirect_uri"),
+  redirectUri: text("redirect_uri").notNull(),
   scopes: text().array().notNull().default([]),
 
   // Claims here are a JSON object as defined by the OIDC spec
   claims: jsonb().notNull().default({}).$type<{
-    userinfo?: Record<string, unknown>;
-    id_token?: Record<string, unknown>;
+    userinfo?: Record<
+      string,
+      {
+        values?: string[] | undefined;
+        value?: string | undefined;
+        essential?: boolean | undefined;
+      } | null
+    >;
+    id_token?: Record<
+      string,
+      {
+        values?: string[] | undefined;
+        value?: string | undefined;
+        essential?: boolean | undefined;
+      } | null
+    >;
   }>(),
   nonce: text(),
   codeChallenge: text("code_challenge"),
@@ -236,8 +251,22 @@ export const oidcAccessTokens = pgTable("oidc_access_tokens", {
   scopes: text().array().notNull().default([]),
   // Claims here are a JSON object as defined by the OIDC spec
   claims: jsonb().notNull().default({}).$type<{
-    userinfo?: Record<string, unknown>;
-    id_token?: Record<string, unknown>;
+    userinfo?: Record<
+      string,
+      {
+        values?: string[] | undefined;
+        value?: string | undefined;
+        essential?: boolean | undefined;
+      } | null
+    >;
+    id_token?: Record<
+      string,
+      {
+        values?: string[] | undefined;
+        value?: string | undefined;
+        essential?: boolean | undefined;
+      } | null
+    >;
   }>(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   expiresAt: timestamp("expires_at").notNull(),

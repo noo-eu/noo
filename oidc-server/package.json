@@ -1,0 +1,34 @@
+{
+  "name": "@noo/oidc-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "import": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "test:unit": "TEST=1 bun vitest run",
+    "test:unit:watch": "TEST=1 bun vitest"
+  },
+  "dependencies": {
+    "jose": "^6.0.10",
+    "neverthrow": "^8.2.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/bun": "^1.2.4",
+    "@types/node": "^20",
+    "@vitest/coverage-istanbul": "3.0.9",
+    "eslint": "^9",
+    "prettier": "^3.5.2",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}

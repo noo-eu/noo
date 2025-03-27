@@ -16,7 +16,7 @@ test.describe("Private provider", () => {
         "00000000-0000-0000-0000-000000000002",
         "oidc",
       );
-      await page.goto("/oidc/acme.fr/end_session?client_id=" + clientId);
+      await page.goto("/oidc/org_1/end_session?client_id=" + clientId);
 
       await expect(
         page.getByText("You signed out from Acme Sarl's app"),

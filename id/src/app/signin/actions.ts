@@ -5,29 +5,19 @@ import {
   getAuthenticatedSession,
   reauthenticateSession,
 } from "@/auth/sessions";
-import { schema } from "@/db";
-import Passkeys from "@/db/passkeys";
 import Tenants from "@/db/tenants";
 import Users, { User } from "@/db/users";
 import { getIpAddress, getUserAgent } from "@/lib/http/nextUtils";
-import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
+import { getSigningKey, getVerifyingKeyForJwt } from "@/lib/jwks";
+import "@/lib/oidc/setup";
+import { getOidcAuthorizationClient } from "@/lib/oidc/utils";
 import { checkPwnedPassword } from "@/lib/password";
 import { ActionResult, BasicFormAction } from "@/lib/types/ActionResult";
 import { humanIdToUuid, uuidToHumanId } from "@/utils";
-import {
-  AuthenticationResponseJSON,
-  AuthenticatorTransportFuture,
-  generateAuthenticationOptions,
-  verifyAuthenticationResponse,
-} from "@simplewebauthn/server";
-import { eq } from "drizzle-orm";
 import { jwtVerify, SignJWT } from "jose";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { getWebAuthnID } from "../security/passkeys/actions";
-import PasskeyChallenges from "@/db/passkeyChallenges";
-import { getSigningKey, getVerifyingKeyForJwt } from "@/lib/jwks";
 
 const signinSchema = z.object({
   username: z.string(),
@@ -52,12 +42,16 @@ export async function signin(
     return { error: "validation", input: { username: "" } };
   }
 
+  const oidcAuthorizationClient = await getOidcAuthorizationClient();
+
   const { username, password } = parseResult.data;
 
-  const user = await Users.authenticate(username.trim(), password.trim());
+  const user = await Users.authenticate(
+    username.trim(),
+    password.trim(),
+    oidcAuthorizationClient,
+  );
   if (!user) {
-    // Artificially slow down the response to slow down brute force attacks.
-    await new Promise((resolve) => setTimeout(resolve, 250));
     return { error: "credentials", input: { username } };
   }
 
@@ -66,23 +60,18 @@ export async function signin(
   if (user.otpSecret) {
     await startTotpSession(user);
     redirect("/signin/otp");
+  } else {
+    const result = await handleSuccessfulAuthentication<{ username: string }>(
+      user,
+      { username },
+    );
 
-    // Safety net, should never happen
-    throw new Error("Redirected to OTP page");
+    if (result.data) {
+      redirect(result.data);
+    }
+
+    return result;
   }
-
-  const result = await handleSuccessfulAuthentication<{ username: string }>(
-    user,
-    {
-      username,
-    },
-  );
-
-  if (result.data) {
-    redirect(result.data);
-  }
-
-  return result;
 }
 
 export async function totpSubmit(
@@ -161,114 +150,38 @@ async function maybeCheckPwnedPassword(
   }
 }
 
-export async function generateWebauthnOptions() {
-  const options: PublicKeyCredentialRequestOptionsJSON =
-    await generateAuthenticationOptions({
-      rpID: await getWebAuthnID(),
-      userVerification: "required",
-    });
-
-  const passkeyChallenge = await PasskeyChallenges.create({
-    challenge: options.challenge,
-    expiresAt: new Date(Date.now() + 1000 * 60 * 5),
-  });
-
-  return { options, passkeyChallengeId: passkeyChallenge.id };
-}
-
-async function getWebAuthnExpectedOrigin() {
-  if (process.env.NODE_ENV === "production") {
-    return "https://id.noo.eu";
-  }
-
-  const hdrs = await headers();
-  const scheme = hdrs.get("x-forwarded-proto") ?? "http";
-  const host = hdrs.get("host") ?? "localhost";
-  return `${scheme}://${host}`;
-}
-
-export async function verifyWebauthn(
-  passkeyChallengeId: string,
-  response: AuthenticationResponseJSON,
-): Promise<ActionResult<string, string, { domain?: string }>> {
-  const passkeyId = response.id;
-
-  const passkey = await Passkeys.findBy(
-    eq(schema.passkeys.credentialId, passkeyId),
-  );
-  if (!passkey) {
-    return { error: "Passkey not found", input: {} };
-  }
-
-  const passkeyChallenge = await PasskeyChallenges.find(passkeyChallengeId);
-  if (!passkeyChallenge) {
-    return { error: "Passkey challenge not found", input: {} };
-  }
-
-  await PasskeyChallenges.destroy(passkeyChallengeId);
-
-  let verification;
-  try {
-    verification = await verifyAuthenticationResponse({
-      response,
-      expectedChallenge: passkeyChallenge.challenge,
-      expectedOrigin: await getWebAuthnExpectedOrigin(),
-      expectedRPID: await getWebAuthnID(),
-      credential: {
-        id: passkey.id,
-        publicKey: passkey.publicKey,
-        counter: passkey.counter,
-        transports: passkey.transports as AuthenticatorTransportFuture[],
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    return { error: `WebAuthn verification failed: ${error}`, input: {} };
-  }
-
-  const { verified } = verification;
-  if (!verified) {
-    return { error: "Passkey verification failed", input: {} };
-  }
-
-  const { authenticationInfo } = verification;
-  const { newCounter } = authenticationInfo;
-
-  await Passkeys.update(passkey.id, {
-    counter: newCounter,
-    lastUsedAt: new Date(),
-  });
-
-  return await handleSuccessfulAuthentication(passkey.user, {});
-}
-
-async function handleSuccessfulAuthentication<Input>(
+export async function handleSuccessfulAuthentication<Input>(
   user: User,
   input: Input,
 ): Promise<ActionResult<string, string, Input & { domain?: string }>> {
-  const oidcAuthorizationRequest = await getOidcAuthorizationRequest();
-  if (oidcAuthorizationRequest?.tenantId) {
-    if (user.tenantId !== oidcAuthorizationRequest.tenantId) {
-      const tenant = await Tenants.find(oidcAuthorizationRequest.tenantId);
-
-      return {
-        error: "tenant",
-        input: { ...input, domain: tenant!.domain },
-      };
+  const oidcAuthorizationClient = await getOidcAuthorizationClient();
+  if (oidcAuthorizationClient) {
+    if (oidcAuthorizationClient.tenantId) {
+      // The user must be in the same tenant as the client
+      if (user.tenantId !== oidcAuthorizationClient.tenantId) {
+        const tenant = await Tenants.find(oidcAuthorizationClient.tenantId);
+        return {
+          error: "tenant",
+          input: { ...input, domain: tenant!.domain },
+        };
+      }
+    } else {
+      // For the future: the client is public, if the user is in a tenant, we
+      // need to make sure that the tenant allows public clients.
     }
   }
 
   await startSession(user);
 
-  if (!oidcAuthorizationRequest) {
+  if (!oidcAuthorizationClient) {
     return { data: "/", input: { ...input, domain: undefined } };
-  } else {
-    const uid = uuidToHumanId(user.id, "usr");
-    return {
-      data: `/oidc/consent?uid=${uid}`,
-      input: { ...input, domain: undefined },
-    };
   }
+
+  const uid = uuidToHumanId(user.id, "usr");
+  return {
+    data: `/oidc/consent?uid=${uid}`,
+    input: { ...input, domain: undefined },
+  };
 }
 
 const TOTP_COOKIE = "_noo_short_lived";

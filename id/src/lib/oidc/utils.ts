@@ -1,6 +1,8 @@
+import OidcClients from "@/db/oidc_clients";
+import { humanIdToUuid } from "@/utils";
+import { AuthorizationRequest } from "@noo/oidc-server/types";
 import * as jose from "jose";
 import { cookies } from "next/headers";
-import { AuthorizationRequest } from "./types";
 import { getSigningKey, getVerifyingKeyForJwt } from "../jwks";
 
 const OIDC_AUTH_COOKIE_NAME = "oidc_authorization_request";
@@ -18,9 +20,26 @@ export async function getOidcAuthorizationRequest() {
   // Verify the signature
   const result = await decode(oidcAuthRequest);
 
-  // TODO: might want to double-check the issuer and audience here
-
   return result?.payload as AuthorizationRequest | null;
+}
+
+export async function isInOidcAuthorization() {
+  const request = getOidcAuthorizationRequest();
+  return !!request;
+}
+
+export async function getOidcAuthorizationClient() {
+  const oidcAuthRequest = await getOidcAuthorizationRequest();
+  if (!oidcAuthRequest) {
+    return undefined;
+  }
+
+  const clientId = oidcAuthRequest.client_id;
+  if (!clientId) {
+    return undefined;
+  }
+
+  return await OidcClients.find(humanIdToUuid(clientId, "oidc")!);
 }
 
 export async function setOidcAuthorizationCookie(
@@ -28,7 +47,12 @@ export async function setOidcAuthorizationCookie(
 ) {
   const signedParams = await signParams(request);
 
-  return `${OIDC_AUTH_COOKIE_NAME}=${signedParams}; HttpOnly; Secure; SameSite=Lax; Path=/`;
+  const cookieStore = await cookies();
+  await cookieStore.set(OIDC_AUTH_COOKIE_NAME, signedParams, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+  });
 }
 
 export async function deleteOidcAuthorizationCookie() {

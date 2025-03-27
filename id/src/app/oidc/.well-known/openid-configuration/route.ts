@@ -1,6 +1,6 @@
-import { buildConfiguration } from "@/app/oidc/configuration";
-import { NextRequest } from "next/server";
+import "@/lib/oidc/setup";
+import { discoveryMetadata } from "@noo/oidc-server/discovery";
 
-export function GET(request: NextRequest) {
-  return Response.json(buildConfiguration(request));
+export function GET(raw: Request) {
+  return Response.json(discoveryMetadata());
 }

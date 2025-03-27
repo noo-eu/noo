@@ -6,10 +6,12 @@ import { PresentClient } from "@/components/PresentClient";
 import { SignInWithNoo } from "@/components/SignInWithNoo";
 import OidcClients from "@/db/oidc_clients";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
+import "@/lib/oidc/setup";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { humanIdToUuid } from "@/utils";
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import { getUserEmail } from "../consent/page";
 import Form from "./Form";
 
 export const revalidate = 0;
@@ -27,6 +29,17 @@ export default async function OidcContinuePage({
     return redirect("/");
   }
 
+  const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc");
+  if (!clientId) {
+    return redirect("/");
+  }
+
+  const client = await OidcClients.find(clientId);
+  if (!client) {
+    console.warn("No OIDC client found");
+    return redirect("/");
+  }
+
   const userId = (await searchParams).uid;
   if (!userId) {
     return redirect("/switch");
@@ -37,20 +50,13 @@ export default async function OidcContinuePage({
     return redirect("/switch");
   }
 
-  if (oidcAuthRequest.tenantId && oidcAuthRequest.tenantId !== user.tenantId) {
+  if (client.tenantId && client.tenantId !== user.tenantId) {
     return redirect("/switch");
   }
 
   // At this point we have authenticated the user, we have to determine if the
   // user has already given consent. If the user has already given consent, we
   // can redirect to the client.
-
-  const client = await OidcClients.find(
-    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
-  );
-  if (!client) {
-    return redirect("/");
-  }
 
   const locale = await getLocale();
 
@@ -63,7 +69,8 @@ export default async function OidcContinuePage({
 
   const userFields = {
     name: `${user.firstName} ${user.lastName}`.trim(),
-    email: `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`,
+    email: getUserEmail(user),
+    tenant: user.tenant?.name,
   };
 
   return (
