@@ -6,8 +6,8 @@ import Users from "@/db/users";
 import { uuidToHumanId } from "@/utils";
 import { HttpRequest } from "../http/request";
 import { composeMiddleware, cors, preventCache } from "../middlewares";
-import { createIdToken } from "./idToken";
-import { validatePkce } from "./pkce";
+import { createIdToken } from "@noo/oidc-server/idToken";
+import { validatePkce } from "@noo/oidc-server/pkce";
 import { authenticateClient } from "./tokenAuthentication";
 import { requestedUserClaims } from "./userClaims";
 
@@ -66,13 +66,13 @@ async function authorizationCodeFlow(
 
   if (code.codeChallenge && code.codeChallengeMethod) {
     // We've been asked to verify the PKCE challenge
-    const earlyReturn = validatePkce(
+    const pkce = validatePkce(
       params.code_verifier,
       code.codeChallengeMethod,
       code.codeChallenge,
     );
-    if (earlyReturn) {
-      return Response.json({ error: earlyReturn }, { status: 400 });
+    if (pkce.isErr()) {
+      return Response.json({ error: pkce.error }, { status: 400 });
     }
   }
 

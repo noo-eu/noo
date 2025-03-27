@@ -7,9 +7,10 @@ import { notFound } from "next/navigation";
 
 export async function POST(
   raw: Request,
-  { params }: { params: Promise<{ domain: string }> },
+  { params }: { params: Promise<{ scope: string }> },
 ) {
-  const tenant = await getTenant(params);
+  const scope = (await params).scope;
+  const tenant = await getTenant(scope);
   if (!tenant) {
     notFound();
   }
@@ -31,9 +32,10 @@ export async function POST(
 
 export async function DELETE(
   raw: Request,
-  { params }: { params: Promise<{ domain: string }> },
+  { params }: { params: Promise<{ scope: string }> },
 ) {
-  const tenant = await getTenant(params);
+  const scope = (await params).scope;
+  const tenant = await getTenant(scope);
   if (!tenant) {
     notFound();
   }

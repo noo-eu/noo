@@ -1,25 +1,23 @@
 import { sha256 } from "@/utils";
 import crypto from "crypto";
+import { err, ok, Result } from "neverthrow";
 
 export function validatePkce(
   verifier: string | undefined,
   method: string,
   storedChallenge: string,
-): string | null {
+): Result<null, string> {
   if (!verifier) {
-    return "invalid_request";
+    return err("invalid_request");
   }
 
   let challenge;
   switch (method) {
-    case "plain":
-      challenge = verifier;
-      break;
     case "S256":
       challenge = sha256(verifier).digest("base64url");
       break;
     default:
-      return "invalid_request";
+      return err("invalid_request");
   }
 
   if (
@@ -28,8 +26,8 @@ export function validatePkce(
       Buffer.from(storedChallenge),
     )
   ) {
-    return "invalid_grant";
+    return err("invalid_grant");
   }
 
-  return null;
+  return ok(null);
 }

@@ -17,9 +17,10 @@ import { notFound } from "next/navigation";
 
 export async function GET(
   raw: Request,
-  { params }: { params: Promise<{ domain: string }> },
+  { params }: { params: Promise<{ scope: string }> },
 ) {
-  const tenant = await getTenant(params);
+  const scope = (await params).scope;
+  const tenant = await getTenant(scope);
   if (!tenant) {
     return notFound();
   }
@@ -38,7 +39,7 @@ export async function GET(
 
 export async function POST(
   raw: Request,
-  { params }: { params: Promise<{ domain: string }> },
+  { params }: { params: Promise<{ scope: string }> },
 ) {
   return GET(raw, { params });
 }
