@@ -103,7 +103,7 @@ export async function endAllSessions(cookie?: string) {
  *
  * Each session is validated against the verifier digest before being returned.
  *
- * @param maxAge - (Optional) The maximum age of the session in seconds. If
+ * @param maxAge - (Optional) The maximum age of the session in milliseconds. If
  * provided, only sessions that have been active within the last `maxAge`
  * seconds are returned.
  *

@@ -1,10 +1,13 @@
 import { configureIdP, Session } from "@/configuration";
+import { generateKeyPair } from "jose";
 import { vi } from "vitest";
 
 let ACTIVE_SESSIONS: Session[] = vi.hoisted(() => []);
 export const setActiveSessions = (sessions: Session[]) => {
   ACTIVE_SESSIONS = sessions;
 };
+
+const { publicKey, privateKey } = await generateKeyPair("RS256");
 
 configureIdP({
   baseUrl: "https://idp.example.com",
@@ -22,4 +25,7 @@ configureIdP({
     );
   }),
   getConsent: vi.fn(() => Promise.resolve({ scopes: [], claims: [] })),
+  getSigningJwk: vi.fn(() => Promise.resolve({ kid: "1", key: privateKey })),
+  getJwk: vi.fn(() => Promise.resolve(publicKey)),
+  encodeSubValue: vi.fn((sub) => sub),
 });

@@ -4,22 +4,23 @@ import { err, ok, Result } from "neverthrow";
 import crypto from "node:crypto";
 import { sha256 } from "./utils";
 
+/**
+ * Creates an ID Token for a user and client.
+ *
+ * @param client - The OIDC client for which the ID Token is being created.
+ * @param userId - The ID of the user for which the ID Token is being created.
+ * @param claims - Claims to include in the ID Token.
+ * @returns The ID Token.
+ */
 export async function createIdToken(
   client: Client,
   userId: string,
-  authTime: Date,
-  additionalClaims: Record<string, unknown> = {},
+  claims: Record<string, unknown>,
 ) {
   // Strip undefined values from the claims
-  Object.keys(additionalClaims).forEach(
-    (key) =>
-      additionalClaims[key] === undefined && delete additionalClaims[key],
+  Object.keys(claims).forEach(
+    (key) => claims[key] === undefined && delete claims[key],
   );
-
-  const claims = {
-    auth_time: Math.floor(authTime.getTime() / 1000),
-    ...additionalClaims,
-  };
 
   const subClaim = buildSubClaim(client, userId);
 
@@ -92,9 +93,10 @@ export async function decodeIdToken(
 /**
  * Creates the sub claim for a user. Depending on the subject_type of the
  * client, the sub claim can either be the user's ID or a more opaque value.
- * @param client
- * @param userId
- * @returns
+ *
+ * @param client - The OIDC client for which the sub claim is being created.
+ * @param userId - The ID of the user for which the sub claim is being created.
+ * @returns The sub claim.
  */
 export function buildSubClaim(client: Client, userId: string) {
   if (client.subjectType == "public") {
@@ -116,7 +118,7 @@ export function buildSubClaim(client: Client, userId: string) {
  * Hash a string, following the algorithm for hashes included in ID Tokens.
  * @param alg - The id_token signing algorithm, used to determine the hash algorithm.
  * @param value - The value to hash.
- * @returns
+ * @returns The hashed value.
  */
 export function idTokenHash(alg: string, value?: string) {
   if (!value) {
@@ -151,12 +153,10 @@ export function idTokenHash(alg: string, value?: string) {
     case "EdDSA":
       algorithm = "sha512";
       break;
+    case "none":
+      return undefined;
     default:
       throw new Error(`Unsupported algorithm: ${alg}`);
-  }
-
-  if (algorithm == "none") {
-    return undefined;
   }
 
   // Hash the value, get the binary representation and take the left-most half,

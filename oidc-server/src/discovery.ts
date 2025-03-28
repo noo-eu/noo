@@ -65,7 +65,7 @@ export function discoveryMetadata(
 ) {
   const shared = sharedMetadata();
 
-  const issuer = `${configuration.baseUrl}/oidc${scope ?? ""}`;
+  const issuer = `${configuration.baseUrl}${scope ?? ""}`;
 
   const metadata: ProviderMetadata = {
     issuer,
@@ -82,7 +82,7 @@ export function discoveryMetadata(
       // "tls_client_auth",
       "private_key_jwt",
     ];
-    metadata.pushed_authorization_request_endpoint = `${configuration.baseUrl}/oidc/par`;
+    metadata.pushed_authorization_request_endpoint = `${configuration.baseUrl}/par`;
     metadata.require_pushed_authorization_requests = true;
   }
 
@@ -91,11 +91,11 @@ export function discoveryMetadata(
 
 function sharedMetadata() {
   return {
-    authorization_endpoint: `${configuration.baseUrl}/oidc/authorize`,
-    token_endpoint: `${configuration.baseUrl}/oidc/token`,
-    userinfo_endpoint: `${configuration.baseUrl}/oidc/userinfo`,
-    jwks_uri: `${configuration.baseUrl}/oidc/jwks.json`,
-    check_session_iframe: `${configuration.baseUrl}/oidc/session`,
+    authorization_endpoint: `${configuration.baseUrl}/authorize`,
+    token_endpoint: `${configuration.baseUrl}/token`,
+    userinfo_endpoint: `${configuration.baseUrl}/userinfo`,
+    jwks_uri: `${configuration.baseUrl}/jwks.json`,
+    check_session_iframe: `${configuration.baseUrl}/session`,
     scopes_supported: ["openid", "profile", "email", "address", "phone"],
     grant_types_supported: [...GRANT_TYPES_SUPPORTED],
     response_modes_supported: [...RESPONSE_MODES_SUPPORTED],

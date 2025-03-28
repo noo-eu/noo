@@ -2,8 +2,8 @@ import { err, ok, Result } from "neverthrow";
 import { preflightCheck } from "./preflight";
 import { AuthorizationRequest, claimsSchema } from "@/types";
 import { decodeIdToken } from "@/idToken";
-import { authorizationNone } from "./none";
-import { authorizationRegular } from "./regular";
+import { authorizationNone } from "./promptNone";
+import { authorizationAny } from "./promptAny";
 import { returnToClient } from "./finish";
 
 export type AuthorizationResult = {
@@ -126,7 +126,7 @@ export async function performOidcAuthorization(
 
     // Fall through
     default:
-      return ok(await authorizationRegular(params, client));
+      return ok(await authorizationAny(params, client));
   }
 }
 
@@ -180,7 +180,7 @@ function parseMaxAge(
 ) {
   if (raw.max_age !== undefined) {
     params.max_age = parseInt(raw.max_age);
-    if (isNaN(params.max_age) || params.max_age <= 0) {
+    if (isNaN(params.max_age) || params.max_age < 0) {
       return false;
     }
   }

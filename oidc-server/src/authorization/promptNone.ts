@@ -6,49 +6,56 @@ import { AuthorizationResult } from "./request";
 import { returnToClient } from "./finish";
 import { verifyConsent } from "@/consent";
 
+/**
+ * Performs the authorization request with prompt=none, which means that the
+ * user should not be prompted for consent or authentication. This is only
+ * possible if the user has an active session and has already consented to the
+ * client.
+ *
+ * @param params - The authorization request parameters.
+ * @param client - The OIDC client for which the authorization is being
+ * performed.
+ * @returns - A result containing the next step in the authorization process.
+ *   For this step, the next step will always be to return the response to the
+ *   client, but the response may be an error.
+ */
 export async function authorizationNone(
   params: AuthorizationRequest,
   client: Client,
 ): Promise<AuthorizationResult> {
-  // The RP expects the user to be already authenticated and consented.
-  // If this is not the case, the request is rejected.
-  const sessions = await configuration.getActiveSessions();
+  const sessions = await configuration.getActiveSessions(params.max_age);
 
   if (sessions.length === 0) {
     return returnToClient(params, { error: "login_required" });
-  } else {
-    const session = await findCompatibleSession(sessions, params, client);
-
-    if (!session) {
-      // No, or multiple sessions match the criteria
-      return returnToClient(params, { error: "interaction_required" });
-    } else if (
-      params.max_age &&
-      Date.now() - session.lastAuthenticatedAt.getTime() > params.max_age * 1000
-    ) {
-      // We found a session, but it's too old
-      return returnToClient(params, { error: "login_required" });
-    } else if (
-      !(await verifyConsent(
-        client,
-        session.userId,
-        params.scopes,
-        params.claims,
-        true,
-      ))
-    ) {
-      // The user has not yet consented to the client
-      return returnToClient(params, { error: "consent_required" });
-    } else {
-      const responseParams = await buildAuthorizationResponse(
-        params,
-        client,
-        session,
-      );
-
-      return await returnToClient(params, responseParams);
-    }
   }
+
+  const session = await findCompatibleSession(sessions, params, client);
+
+  if (!session) {
+    // No, or multiple sessions match the criteria
+    return returnToClient(params, { error: "interaction_required" });
+  }
+
+  const consented = await verifyConsent(
+    client,
+    session.userId,
+    params.scopes,
+    params.claims,
+    true,
+  );
+
+  if (!consented) {
+    // The user has not yet consented to the client
+    return returnToClient(params, { error: "consent_required" });
+  }
+
+  const responseParams = await buildAuthorizationResponse(
+    params,
+    client,
+    session,
+  );
+
+  return await returnToClient(params, responseParams);
 }
 
 async function findCompatibleSession(

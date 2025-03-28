@@ -4,7 +4,7 @@ import { AuthorizationRequest } from "@/types";
 import { AuthorizationResult } from "./request";
 import { verifyConsent } from "@/consent";
 
-export async function authorizationRegular(
+export async function authorizationAny(
   params: AuthorizationRequest,
   client: Client,
 ): Promise<AuthorizationResult> {
@@ -21,9 +21,7 @@ export async function authorizationRegular(
   //   - if there are no active sessions, show the login screen.
 
   const sessions = (
-    await configuration.getActiveSessions(
-      params.max_age !== undefined ? params.max_age * 1000 : undefined,
-    )
+    await configuration.getActiveSessions(params.max_age)
   ).filter((session) => {
     if (params.id_token_hint) {
       return buildSubClaim(client, session.userId) === params.id_token_hint;

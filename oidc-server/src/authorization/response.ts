@@ -1,16 +1,15 @@
+import configuration, { Client, Session } from "@/configuration";
+import { createIdToken, idTokenHash } from "@/idToken";
+import { AuthorizationRequest } from "@/types";
+import { sha256 } from "@/utils";
+import { randomBytes } from "node:crypto";
+
 // Creates the response object for the authorization request. This happens after
 // the user has consented to the request. The response object may contain an
 // authorization code, an access token, an ID token, depending on the
 // response_type parameter of the authorization request.
 //
 // This data is then serialized in different ways depending on the response_mode
-
-import configuration, { Client, Session } from "@/configuration";
-import { createIdToken, idTokenHash } from "@/idToken";
-import { AuthorizationRequest } from "@/types";
-import { sha256 } from "@/utils";
-import crypto from "node:crypto";
-
 // parameter of the authorization request.
 export async function buildAuthorizationResponse(
   params: AuthorizationRequest,
@@ -99,17 +98,13 @@ async function handleIdTokenResponseType(
   // 1. fail the request if the sub claim doesn't match the user id
   // 2. remove the claim from the claims object if it doesn't match
 
-  response.id_token = await createIdToken(
-    client,
-    session.userId,
-    session.lastAuthenticatedAt,
-    {
-      ...claims,
-      nonce: params.nonce,
-      at_hash,
-      c_hash,
-    },
-  );
+  response.id_token = await createIdToken(client, session.userId, {
+    ...claims,
+    auth_time: Math.floor(session.lastAuthenticatedAt.getTime() / 1000),
+    at_hash,
+    c_hash,
+    nonce: params.nonce,
+  });
 }
 
 async function buildSessionState(client: Client, redirectUri: string) {
@@ -120,7 +115,7 @@ async function buildSessionState(client: Client, redirectUri: string) {
   }
 
   const origin = new URL(redirectUri).origin;
-  const salt = crypto.randomBytes(16).toString();
+  const salt = randomBytes(16).toString();
 
   const state = [client.clientId, origin, stateValue, salt].join(" ");
 

@@ -131,6 +131,7 @@ export async function preflightCheck(
       nonce: params.nonce,
       prompt: params.prompt,
       ui_locales: params.ui_locales,
+      id_token_hint: params.id_token_hint,
       login_hint: params.login_hint,
       acr_values: params.acr_values,
       code_challenge: params.code_challenge,
@@ -164,9 +165,5 @@ function determineResponseMode(
     case "code id_token token":
     case "token":
       return "fragment";
-    default:
-      throw new Error(
-        `Missing default response_mode for response_type ${response_type}`,
-      );
   }
 }

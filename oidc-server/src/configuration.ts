@@ -16,9 +16,26 @@ export type Session = {
 };
 
 export type IdPConfiguration = {
+  /**
+   * The base URL of the IdP. This is used as the issuer, and all URLs will be
+   * relative to this.
+   */
   baseUrl: string;
+
+  /**
+   * The language codes supported by the IdP. These will be returned in the
+   * `ui_locales_supported` field of the discovery document.
+   */
   supportedLocales: string[];
+
+  /**
+   * The salt used to hash the user ID when the client uses the "pairwise"
+   * subject type. This should be a random string that is unique to the IdP.
+   * **Warning:** changing this value will cause the sub claim to change for all
+   * clients.
+   */
   pairwiseSalt: string;
+
   getClient: (clientId: string) => Promise<Client | undefined>;
   getConsent: (
     client: Client,

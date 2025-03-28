@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 import { hexToBase62, humanIdToUuid, uuidToHumanId } from "@/utils";
 import OidcClients from "@/db/oidc_clients";
 import { uuid } from "drizzle-orm/pg-core";
+import { getActiveSessions } from "@/auth/sessions";
 
 let initialized = false;
 export function setup(rawRequest: Request) {
@@ -25,7 +26,7 @@ export function setup(rawRequest: Request) {
   }
 
   configureIdP({
-    baseUrl: request.url.origin,
+    baseUrl: request.url.origin + "/oidc",
     supportedLocales: SUPPORTED_LANGUAGES,
     pairwiseSalt: salt,
     getClient: async (clientId) => {
@@ -53,6 +54,14 @@ export function setup(rawRequest: Request) {
         redirectUris: client.redirectUris,
         idTokenSignedResponseAlg: client.idTokenSignedResponseAlg,
       };
+    },
+    getActiveSessions: async (maxAge?: number) => {
+      // We're given seconds, but we use milliseconds
+      if (maxAge !== undefined) {
+        maxAge *= 1000;
+      }
+
+      return await getActiveSessions(maxAge);
     },
     encodeSubValue: (sub: string) => {
       return `usr_${hexToBase62(sub)}`;

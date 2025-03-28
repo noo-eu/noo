@@ -7,12 +7,12 @@ describe("discoveryMetadata", () => {
       const metadata = discoveryMetadata();
 
       expect(metadata).toEqual({
-        issuer: "https://idp.example.com/oidc",
-        authorization_endpoint: "https://idp.example.com/oidc/authorize",
-        token_endpoint: "https://idp.example.com/oidc/token",
-        userinfo_endpoint: "https://idp.example.com/oidc/userinfo",
-        jwks_uri: "https://idp.example.com/oidc/jwks.json",
-        check_session_iframe: "https://idp.example.com/oidc/session",
+        issuer: "https://idp.example.com",
+        authorization_endpoint: "https://idp.example.com/authorize",
+        token_endpoint: "https://idp.example.com/token",
+        userinfo_endpoint: "https://idp.example.com/userinfo",
+        jwks_uri: "https://idp.example.com/jwks.json",
+        check_session_iframe: "https://idp.example.com/session",
         response_types_supported: expect.arrayContaining([
           "code",
           "id_token",
@@ -66,14 +66,14 @@ describe("discoveryMetadata", () => {
       const metadata = discoveryMetadata("tenant", "/org_123");
 
       expect(metadata).toMatchObject({
-        issuer: "https://idp.example.com/oidc/org_123",
-        authorization_endpoint: "https://idp.example.com/oidc/authorize",
-        token_endpoint: "https://idp.example.com/oidc/token",
-        userinfo_endpoint: "https://idp.example.com/oidc/userinfo",
-        jwks_uri: "https://idp.example.com/oidc/jwks.json",
-        check_session_iframe: "https://idp.example.com/oidc/session",
-        registration_endpoint: `https://idp.example.com/oidc/org_123/register`,
-        end_session_endpoint: `https://idp.example.com/oidc/org_123/end_session`,
+        issuer: "https://idp.example.com/org_123",
+        authorization_endpoint: "https://idp.example.com/authorize",
+        token_endpoint: "https://idp.example.com/token",
+        userinfo_endpoint: "https://idp.example.com/userinfo",
+        jwks_uri: "https://idp.example.com/jwks.json",
+        check_session_iframe: "https://idp.example.com/session",
+        registration_endpoint: `https://idp.example.com/org_123/register`,
+        end_session_endpoint: `https://idp.example.com/org_123/end_session`,
       });
     });
   });
@@ -83,12 +83,12 @@ describe("discoveryMetadata", () => {
       const metadata = discoveryMetadata("fapi2");
 
       expect(metadata).toMatchObject({
-        issuer: "https://idp.example.com/oidc",
-        authorization_endpoint: "https://idp.example.com/oidc/authorize",
-        token_endpoint: "https://idp.example.com/oidc/token",
-        userinfo_endpoint: "https://idp.example.com/oidc/userinfo",
-        jwks_uri: "https://idp.example.com/oidc/jwks.json",
-        check_session_iframe: "https://idp.example.com/oidc/session",
+        issuer: "https://idp.example.com",
+        authorization_endpoint: "https://idp.example.com/authorize",
+        token_endpoint: "https://idp.example.com/token",
+        userinfo_endpoint: "https://idp.example.com/userinfo",
+        jwks_uri: "https://idp.example.com/jwks.json",
+        check_session_iframe: "https://idp.example.com/session",
 
         // Much tighter restrictions
         response_types_supported: ["code"],
@@ -97,8 +97,7 @@ describe("discoveryMetadata", () => {
           // "tls_client_auth",
           "private_key_jwt",
         ],
-        pushed_authorization_request_endpoint:
-          "https://idp.example.com/oidc/par",
+        pushed_authorization_request_endpoint: "https://idp.example.com/par",
         require_pushed_authorization_requests: true,
       });
     });

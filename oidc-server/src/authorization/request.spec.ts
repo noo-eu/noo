@@ -1,20 +1,11 @@
 import { beforeEach, describe, expect, Mock, test, vi } from "vitest";
 import { performOidcAuthorization } from "./request";
 import configuration, { Client } from "@/configuration";
-import { ACTIVE_SESSIONS, setActiveSessions } from "../../vitest-setup";
+import { setActiveSessions } from "@/../vitest-setup";
+import { createIdToken } from "@/idToken";
 
-let mockSessions: {
-  age: number;
-  id: string;
-  userId: string;
-  user: {
-    id: string;
-  };
-  tenantId?: string;
-}[] = vi.hoisted(() => []);
-
-const makeRequestData = (data: Record<string, string>) => {
-  return Object.assign({
+const makeRequestData = (data: Record<string, string | undefined>) => {
+  return {
     response_type: "code",
     client_id: "oidc_1",
     scope: "openid profile",
@@ -22,7 +13,7 @@ const makeRequestData = (data: Record<string, string>) => {
     state: "state",
     nonce: "nonce",
     ...data,
-  });
+  };
 };
 
 (configuration.getClient as Mock).mockImplementation(
@@ -51,7 +42,7 @@ describe("Authorization endpoint", () => {
     });
 
     describe("when the user has not yet consented to the client", () => {
-      test("should return the consent page", async () => {
+      test("returns the consent page", async () => {
         const result = await performOidcAuthorization(makeRequestData({}));
         if (!result.isOk()) {
           throw new Error(`Expected a successful result, got: ${result.error}`);
@@ -61,8 +52,8 @@ describe("Authorization endpoint", () => {
       });
     });
 
-    describe("if the only scope is openid, it redirects to the confirm page, even if the user has not yet consented to the client", () => {
-      test("should return the consent page", async () => {
+    describe("if the only scope is openid", () => {
+      test("it redirects to the confirm page, even if the user has not yet consented to the client", async () => {
         const request = { scope: "openid" };
         const result = await performOidcAuthorization(makeRequestData(request));
         if (!result.isOk()) {
@@ -71,10 +62,21 @@ describe("Authorization endpoint", () => {
 
         expect(result.value.nextStep).toBe("CONFIRM");
       });
+
+      test("supports overriding the response_mode", async () => {
+        const request = { scope: "openid", response_mode: "form_post" };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        expect(result.value.nextStep).toBe("CONFIRM");
+        expect(result.value.params.response_mode).toBe("form_post");
+      });
     });
 
     describe("when prompt=login is set", () => {
-      test("should return the login page", async () => {
+      test("returns the login page", async () => {
         const request = { prompt: "login" };
         const result = await performOidcAuthorization(makeRequestData(request));
         if (!result.isOk()) {
@@ -100,13 +102,49 @@ describe("Authorization endpoint", () => {
       ]);
     });
 
-    test("it should return the session selection page", async () => {
+    test("returns the session selection page", async () => {
       const result = await performOidcAuthorization(makeRequestData({}));
       if (!result.isOk()) {
         throw new Error(`Expected a successful result, got: ${result.error}`);
       }
 
       expect(result.value.nextStep).toBe("SELECT_ACCOUNT");
+    });
+
+    describe("when an id_token_hint is provided", async () => {
+      test("restricts the candidate session to the one matching the id_token_hint", async () => {
+        const idToken = await createIdToken(
+          (await configuration.getClient("oidc_1"))!,
+          "usr_1",
+          {},
+        );
+
+        const result = await performOidcAuthorization(
+          makeRequestData({
+            id_token_hint: idToken,
+            scope: "openid",
+          }),
+        );
+
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        // In this case, the id_token_hint matches a session that has already
+        // consented to the client (openid is implicit), so we go to the confirm
+        // page.
+        expect(result.value.nextStep).toBe("CONFIRM");
+      });
+
+      test("ignores invalid id_token_hint values", async () => {
+        const request = { id_token_hint: "invalid" };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        expect(result.value.nextStep).toBe("SELECT_ACCOUNT");
+      });
     });
   });
 
@@ -123,6 +161,30 @@ describe("Authorization endpoint", () => {
     });
   });
 
+  describe("prompt=select_account", () => {
+    test("redirects to the session selection page", async () => {
+      const request = { prompt: "select_account" };
+      const result = await performOidcAuthorization(makeRequestData(request));
+      if (!result.isOk()) {
+        throw new Error("Expected an error result");
+      }
+
+      expect(result.value.nextStep).toBe("SELECT_ACCOUNT");
+    });
+  });
+
+  describe("prompt=consent", () => {
+    test("proceeds as a prompt=login; TODO: this is not really what's asked.", async () => {
+      const request = { prompt: "consent" };
+      const result = await performOidcAuthorization(makeRequestData(request));
+      if (!result.isOk()) {
+        throw new Error("Expected an error result");
+      }
+
+      expect(result.value.nextStep).toBe("SIGN_IN");
+    });
+  });
+
   describe("validations", () => {
     beforeEach(() => {
       setActiveSessions([
@@ -133,29 +195,70 @@ describe("Authorization endpoint", () => {
       ]);
     });
 
-    test("allows non-OIDC (OAuth2) requests", async () => {
-      const request = { response_type: "token", scope: "profile" };
-      const result = await performOidcAuthorization(makeRequestData(request));
-      if (!result.isOk()) {
-        throw new Error(`Expected a successful result, got: ${result.error}`);
-      }
+    describe("non-OIDC (OAuth2) requests", () => {
+      test("it works", async () => {
+        const request = { response_type: "token", scope: "profile" };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
 
-      expect(result.value.nextStep).toBe("CONSENT");
-    });
+        expect(result.value.nextStep).toBe("CONSENT");
+      });
 
-    test("OAuth2 requests have some restrictions", async () => {
-      const request = {
-        response_type: "token",
-        scope: "profile",
-        prompt: "login",
-      };
-      const result = await performOidcAuthorization(makeRequestData(request));
-      if (!result.isOk()) {
-        throw new Error(`Expected a successful result, got: ${result.error}`);
-      }
+      test("it works even if the scopes are empty", async () => {
+        const request = { response_type: "token", scope: undefined };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
 
-      expect(result.value.nextStep).toBe("REDIRECT");
-      expect(result.value.url).toContain("error=invalid_request");
+        expect(result.value.nextStep).toBe("CONFIRM"); // there's nothing to consent to
+      });
+
+      test("max_age is not allowed", async () => {
+        const request = {
+          response_type: "token",
+          scope: "profile",
+          max_age: "1",
+        };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        expect(result.value.nextStep).toBe("REDIRECT");
+        expect(result.value.url).toContain("error=invalid_request");
+      });
+
+      test("id_token cannot be requested", async () => {
+        const request = {
+          response_type: "code id_token",
+          scope: "profile",
+        };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        expect(result.value.nextStep).toBe("REDIRECT");
+        expect(result.value.url).toContain("error=invalid_request");
+      });
+
+      test("prompt=login is not allowed", async () => {
+        const request = {
+          response_type: "token",
+          scope: "profile",
+          prompt: "login",
+        };
+        const result = await performOidcAuthorization(makeRequestData(request));
+        if (!result.isOk()) {
+          throw new Error(`Expected a successful result, got: ${result.error}`);
+        }
+
+        expect(result.value.nextStep).toBe("REDIRECT");
+        expect(result.value.url).toContain("error=invalid_request");
+      });
     });
 
     test("requires client_id", async () => {
@@ -271,6 +374,40 @@ describe("Authorization endpoint", () => {
 
       expect(result.value.nextStep).toBe("REDIRECT");
       expect(result.value.url).toContain("error=invalid_request");
+    });
+
+    test("accepts a 0 max_age", async () => {
+      const request = { max_age: "0" };
+      const result = await performOidcAuthorization(makeRequestData(request));
+      if (!result.isOk()) {
+        throw new Error(`Expected a successful result, got: ${result.error}`);
+      }
+
+      expect(result.value.nextStep).toBe("SIGN_IN");
+    });
+  });
+
+  describe("when using request_uri", () => {
+    test("it fails (not implemented)", async () => {
+      const request = { request_uri: "https://example.com" };
+      const result = await performOidcAuthorization(makeRequestData(request));
+      if (!result.isErr()) {
+        throw new Error("Expected an error result");
+      }
+
+      expect(result.error).toEqual("request_uri_not_supported");
+    });
+  });
+
+  describe("when using request", () => {
+    test("it fails (not implemented)", async () => {
+      const request = { request: "request" };
+      const result = await performOidcAuthorization(makeRequestData(request));
+      if (!result.isErr()) {
+        throw new Error("Expected an error result");
+      }
+
+      expect(result.error).toEqual("request_not_supported");
     });
   });
 });
