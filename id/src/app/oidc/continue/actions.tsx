@@ -1,17 +1,17 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/auth/sessions";
+import { getAuthenticatedSession, getAuthenticatedUser } from "@/auth/sessions";
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
-import { returnToClientUrl } from "@/lib/oidc/authorization";
-import { buildAuthorizationResponse } from "@/lib/oidc/authorization/response";
-import { Claims } from "@/lib/oidc/types";
+import { returnToClient } from "@noo/oidc-server/authorization/finish";
+import { buildAuthorizationResponse } from "@noo/oidc-server/authorization/response";
 import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
 } from "@/lib/oidc/utils";
 import { humanIdToUuid } from "@/utils";
 import { notFound, redirect } from "next/navigation";
+import { Claims } from "@noo/oidc-server/types";
 
 export async function afterConsent(userId: string) {
   "use server";
@@ -21,10 +21,12 @@ export async function afterConsent(userId: string) {
     return {};
   }
 
-  const user = await getAuthenticatedUser(userId);
-  if (!user) {
+  const session = await getAuthenticatedSession(userId);
+  if (!session) {
     return notFound();
   }
+
+  const user = session.user;
 
   const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
   const client = await OidcClients.find(clientId);
@@ -46,16 +48,16 @@ export async function afterConsent(userId: string) {
   await deleteOidcAuthorizationCookie();
 
   const responseParams = await buildAuthorizationResponse(
-    client,
     oidcAuthRequest,
-    user,
+    client,
+    session,
   );
 
-  const url = returnToClientUrl(oidcAuthRequest, responseParams);
+  const result = await returnToClient(oidcAuthRequest, responseParams);
 
-  if (url) {
-    return redirect(url);
-  } else if (oidcAuthRequest.response_mode === "form_post") {
+  if (result.nextStep === "REDIRECT") {
+    return redirect(result.url!);
+  } else if (result.nextStep === "FORM_POST") {
     const escapedUrl = encodeURIComponent(oidcAuthRequest.redirect_uri);
     const escapedParams = encodeURIComponent(JSON.stringify(responseParams));
 
@@ -63,7 +65,7 @@ export async function afterConsent(userId: string) {
       `/oidc/form_post?redirect_uri=${escapedUrl}&params=${escapedParams}`,
     );
   } else {
-    throw new Error("unsupported response_mode");
+    throw new Error("unsupported nextStep");
   }
 }
 

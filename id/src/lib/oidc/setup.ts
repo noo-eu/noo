@@ -48,11 +48,13 @@ export function setup(rawRequest: Request) {
         issuer: `${request.url.origin}/oidc${issuerScope}`,
 
         clientId,
+        clientSecret: client.clientSecret,
         subjectType: client.subjectType,
         sectorIdentifierUri: client.sectorIdentifierUri ?? undefined,
         defaultMaxAge: client.defaultMaxAge ?? undefined,
         redirectUris: client.redirectUris,
         idTokenSignedResponseAlg: client.idTokenSignedResponseAlg,
+        tokenEndpointAuthMethod: client.tokenEndpointAuthMethod,
       };
     },
     getActiveSessions: async (maxAge?: number) => {

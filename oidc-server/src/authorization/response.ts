@@ -43,7 +43,7 @@ async function handleCodeResponseType(
   session: Session,
   response: Record<string, string>,
 ) {
-  const code = await configuration.createOidcAuthorizationCode({
+  const code = await configuration.createAuthorizationCode({
     clientId: client.clientId,
     userId: session.userId,
     redirectUri: params.redirect_uri,
@@ -64,7 +64,7 @@ async function handleTokenResponseType(
   session: Session,
   response: Record<string, string>,
 ) {
-  const accessToken = await configuration.createOidcAccessToken({
+  const accessToken = await configuration.createAccessToken({
     clientId: client.clientId,
     userId: session.userId,
     scopes: params.scopes,

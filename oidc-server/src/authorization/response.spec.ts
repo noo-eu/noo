@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-const mockCreateOidcAuthorizationCode = vi.hoisted(() => vi.fn());
-const mockCreateOidcAccessToken = vi.hoisted(() => vi.fn());
+const mockCreateAuthorizationCode = vi.hoisted(() => vi.fn());
+const mockCreateAccessToken = vi.hoisted(() => vi.fn());
 const mockGetClaims = vi.hoisted(() => vi.fn());
 const mockGetSessionStateValue = vi.hoisted(() => vi.fn());
 vi.mock("@/configuration", async (importOriginal) => {
@@ -9,8 +9,8 @@ vi.mock("@/configuration", async (importOriginal) => {
   return {
     ...original,
     default: {
-      createOidcAuthorizationCode: mockCreateOidcAuthorizationCode,
-      createOidcAccessToken: mockCreateOidcAccessToken,
+      createAuthorizationCode: mockCreateAuthorizationCode,
+      createAccessToken: mockCreateAccessToken,
       getClaims: mockGetClaims,
       getSessionStateValue: mockGetSessionStateValue,
       // Add other config properties if needed
@@ -94,8 +94,8 @@ describe("buildAuthorizationResponse", () => {
     testSession = createMockSession();
 
     // Setup default happy path mock implementations
-    mockCreateOidcAuthorizationCode.mockResolvedValue({ id: mockCodeId });
-    mockCreateOidcAccessToken.mockResolvedValue({ id: mockAccessTokenId });
+    mockCreateAuthorizationCode.mockResolvedValue({ id: mockCodeId });
+    mockCreateAccessToken.mockResolvedValue({ id: mockAccessTokenId });
     mockGetClaims.mockResolvedValue({
       sub: testSession.userId, // Ensure sub matches
       email: "test@example.com",
@@ -144,8 +144,8 @@ describe("buildAuthorizationResponse", () => {
     );
 
     // Check code handler call
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledWith({
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledTimes(1);
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledWith({
       clientId: testClient.clientId,
       userId: testSession.userId,
       redirectUri: testParams.redirect_uri,
@@ -158,7 +158,7 @@ describe("buildAuthorizationResponse", () => {
     });
 
     // Check other handlers NOT called
-    expect(mockCreateOidcAccessToken).not.toHaveBeenCalled();
+    expect(mockCreateAccessToken).not.toHaveBeenCalled();
     expect(mockGetClaims).not.toHaveBeenCalled();
     expect(mockCreateIdToken).not.toHaveBeenCalled();
 
@@ -186,8 +186,8 @@ describe("buildAuthorizationResponse", () => {
     );
 
     // Check token handler call
-    expect(mockCreateOidcAccessToken).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAccessToken).toHaveBeenCalledWith(
+    expect(mockCreateAccessToken).toHaveBeenCalledTimes(1);
+    expect(mockCreateAccessToken).toHaveBeenCalledWith(
       expect.objectContaining({
         // Use objectContaining for date check
         clientId: testClient.clientId,
@@ -199,7 +199,7 @@ describe("buildAuthorizationResponse", () => {
       }),
     );
     // Optional: Check expiresAt more closely if needed
-    const accessTokenCallArgs = mockCreateOidcAccessToken.mock.calls[0][0];
+    const accessTokenCallArgs = mockCreateAccessToken.mock.calls[0][0];
     expect(accessTokenCallArgs.expiresAt).toBeInstanceOf(Date);
     expect(accessTokenCallArgs.expiresAt.getTime()).toBeGreaterThan(Date.now());
     expect(accessTokenCallArgs.expiresAt.getTime()).toBeLessThan(
@@ -207,7 +207,7 @@ describe("buildAuthorizationResponse", () => {
     ); // Approx check
 
     // Check other handlers NOT called
-    expect(mockCreateOidcAuthorizationCode).not.toHaveBeenCalled();
+    expect(mockCreateAuthorizationCode).not.toHaveBeenCalled();
     expect(mockGetClaims).not.toHaveBeenCalled();
     expect(mockCreateIdToken).not.toHaveBeenCalled();
 
@@ -267,8 +267,8 @@ describe("buildAuthorizationResponse", () => {
     );
 
     // Check other handlers NOT called
-    expect(mockCreateOidcAuthorizationCode).not.toHaveBeenCalled();
-    expect(mockCreateOidcAccessToken).not.toHaveBeenCalled();
+    expect(mockCreateAuthorizationCode).not.toHaveBeenCalled();
+    expect(mockCreateAccessToken).not.toHaveBeenCalled();
 
     // Check response object properties
     expect(response).not.toHaveProperty("code");
@@ -294,8 +294,8 @@ describe("buildAuthorizationResponse", () => {
     );
 
     // Check all handlers called
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAccessToken).toHaveBeenCalledTimes(1);
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledTimes(1);
+    expect(mockCreateAccessToken).toHaveBeenCalledTimes(1);
 
     // Check id_token handler calls specifically
     expect(mockIdTokenHash).toHaveBeenCalledTimes(2); // Called for code and token
@@ -351,8 +351,8 @@ describe("buildAuthorizationResponse", () => {
       testSession,
     );
 
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAccessToken).toHaveBeenCalledTimes(1);
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledTimes(1);
+    expect(mockCreateAccessToken).toHaveBeenCalledTimes(1);
     expect(mockIdTokenHash).not.toHaveBeenCalled(); // id_token not requested
     expect(mockGetClaims).not.toHaveBeenCalled();
     expect(mockCreateIdToken).not.toHaveBeenCalled();
@@ -377,8 +377,8 @@ describe("buildAuthorizationResponse", () => {
       testSession,
     );
 
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAccessToken).not.toHaveBeenCalled();
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledTimes(1);
+    expect(mockCreateAccessToken).not.toHaveBeenCalled();
 
     // Check id_token handler
     expect(mockIdTokenHash).toHaveBeenCalledTimes(2); // Called for code and token (undefined)
@@ -424,8 +424,8 @@ describe("buildAuthorizationResponse", () => {
       testSession,
     );
 
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(mockCreateOidcAccessToken).not.toHaveBeenCalled();
+    expect(mockCreateAuthorizationCode).toHaveBeenCalledTimes(1);
+    expect(mockCreateAccessToken).not.toHaveBeenCalled();
 
     // Check id_token handler
     expect(mockIdTokenHash).toHaveBeenCalledTimes(2); // Called for code and token (undefined)
@@ -471,7 +471,7 @@ describe("buildAuthorizationResponse", () => {
 
     // Ensure other parts weren't called unnecessarily after the throw
     // Note: Depending on execution order, some might still be called before buildSessionState
-    expect(mockCreateOidcAuthorizationCode).toHaveBeenCalled(); // Assuming code is processed first
+    expect(mockCreateAuthorizationCode).toHaveBeenCalled(); // Assuming code is processed first
     expect(mockRandomBytes).not.toHaveBeenCalled(); // Should not be called if getSessionStateValue fails
   });
 });

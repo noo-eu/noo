@@ -1,7 +1,7 @@
 import * as jose from "jose";
 import { cookies } from "next/headers";
-import { AuthorizationRequest } from "./types";
 import { getSigningKey, getVerifyingKeyForJwt } from "../jwks";
+import { AuthorizationRequest } from "@noo/oidc-server/types";
 
 const OIDC_AUTH_COOKIE_NAME = "oidc_authorization_request";
 

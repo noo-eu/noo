@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-export type AuthorizationRequest = {
-  issuer: string;
-  tenantId?: string;
-};
-
 // JWKS
 const baseKey = z.object({
   kid: z.string().optional(),

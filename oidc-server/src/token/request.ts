@@ -1,55 +1,41 @@
-import OidcAccessTokens from "@/db/oidc_access_tokens";
-import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
-import OidcClients from "@/db/oidc_clients";
-import Tenants from "@/db/tenants";
-import Users from "@/db/users";
-import { uuidToHumanId } from "@/utils";
-import { HttpRequest } from "../http/request";
-import { composeMiddleware, cors, preventCache } from "../middlewares";
-import { createIdToken } from "@noo/oidc-server/idToken";
-import { validatePkce } from "@noo/oidc-server/pkce";
-import { authenticateClient } from "./tokenAuthentication";
-import { requestedUserClaims } from "./userClaims";
-
 // The FAPI 2.0 profile requires that the authorization code is only valid for
+
+import configuration from "@/configuration";
+import { requestParams } from "@/utils";
+import { authenticateClient } from "./tokenAuthentication";
+import { validatePkce } from "@/pkce";
+import { createIdToken } from "@/idToken";
+
 // one minute or less.
 const AUTHORIZATION_CODE_LIFETIME = 60 * 1000;
 
-export const tokenEndpoint = composeMiddleware(
-  preventCache,
-  cors(["POST"]),
-  handle,
-);
-
-async function handle(req: HttpRequest) {
-  const params = await req.formParams;
-
-  switch (params.grant_type) {
-    case "authorization_code":
-      return await authorizationCodeFlow(req, params);
-    default:
-      return Response.json(
-        { error: "unsupported_grant_type" },
-        { status: 400 },
-      );
+export async function handleTokenRequest(request: Request) {
+  const params = await requestParams(request);
+  if (!params.grant_type) {
+    return Response.json({ error: "invalid_request" }, { status: 400 });
   }
+
+  if (params.grant_type === "authorization_code") {
+    return await authorizationCodeFlow(request, params);
+  }
+
+  return Response.json({ error: "unsupported_grant_type" }, { status: 400 });
 }
 
 async function authorizationCodeFlow(
-  req: HttpRequest,
+  req: Request,
   params: Record<string, string | undefined>,
 ) {
   if (!params.code) {
     return Response.json({ error: "invalid_request" }, { status: 400 });
   }
 
-  const code = await OidcAuthorizationCodes.find(params.code);
-  if (!code) {
+  const lookup = await configuration.getCode(params.code);
+  if (!lookup) {
     return Response.json({ error: "invalid_grant" }, { status: 400 });
   }
 
-  // Foreign key constraints will make sure that the client exists
-  const client = (await OidcClients.find(code.clientId))!;
+  const { code, client } = lookup;
 
   // Authenticate the client following the agreed client authentication method
   if (!(await authenticateClient(req, client))) {
@@ -81,7 +67,7 @@ async function authorizationCodeFlow(
   // TODO: when a code is presented multiple times, the server should revoke
   // "all tokens previously issued based on that authorization code". We could
   // store a "code" field in the access tokens table.
-  await OidcAuthorizationCodes.destroy(params.code);
+  await configuration.revokeCode(params.code);
 
   // Reject the request if the code has expired
   if (code.createdAt.getTime() + AUTHORIZATION_CODE_LIFETIME < Date.now()) {
@@ -89,8 +75,8 @@ async function authorizationCodeFlow(
   }
 
   // Create and return the access token
-  const at = await OidcAccessTokens.create({
-    clientId: client.id,
+  const at = await configuration.createAccessToken({
+    clientId: client.clientId,
     userId: code.userId,
     scopes: code.scopes,
     claims: code.claims,
@@ -98,28 +84,20 @@ async function authorizationCodeFlow(
     expiresAt: new Date(Date.now() + 3600 * 1000),
   });
 
-  const user = (await Users.find(code.userId))!;
-
-  let issuer = `${req.baseUrl}/oidc`;
-  if (client.tenantId) {
-    const tenant = await Tenants.find(client.tenantId);
-    issuer += `/${tenant!.domain}`;
-  }
-
   if (code.scopes.includes("openid")) {
-    const idToken = await createIdToken(
-      issuer,
-      client,
+    const claims = await configuration.getClaims(
       code.userId,
-      code.authTime,
-      {
-        ...requestedUserClaims(code.claims.id_token, user),
-        nonce: code.nonce,
-      },
+      Object.keys(code.claims.id_token ?? []),
     );
 
+    const idToken = await createIdToken(client, code.userId, {
+      ...claims,
+      nonce: code.nonce,
+      auth_time: code.authTime.getTime() / 1000,
+    });
+
     return Response.json({
-      access_token: uuidToHumanId(at.id, "oidc_at"),
+      access_token: at.id,
       token_type: "Bearer",
       expires_in: 3600,
       id_token: idToken,
@@ -127,7 +105,7 @@ async function authorizationCodeFlow(
   } else {
     // Fallback to OAuth 2.0 behavior
     return Response.json({
-      access_token: uuidToHumanId(at.id, "oidc_at"),
+      access_token: at.id,
       token_type: "Bearer",
       expires_in: 3600,
     });
