@@ -1,5 +1,6 @@
 "use server";
 
+import { buildUsername } from "@/app/oidc/consent/page";
 import { getAuthenticatedUser } from "@/auth/sessions";
 import Passkeys from "@/db/passkeys";
 import Users from "@/db/users";
@@ -50,12 +51,11 @@ export async function registrationOptions(
 
   const encoder = new TextEncoder();
   const uint8UserId = encoder.encode(uid);
-  const username = `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`;
 
   const options = await generateRegistrationOptions({
     rpName: "noo",
     rpID: await getWebAuthnID(),
-    userName: username,
+    userName: buildUsername(user),
     userID: uint8UserId,
     userDisplayName: `${user.firstName} ${user.lastName}`.trim(),
     timeout: 1200000, // 2 minutes

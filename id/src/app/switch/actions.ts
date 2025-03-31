@@ -1,18 +1,20 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/auth/sessions";
+import { getAuthenticatedSession, getAuthenticatedUser } from "@/auth/sessions";
 import OidcClients, { OidcClient } from "@/db/oidc_clients";
+import { UserWithTenant } from "@/db/users";
 import { needsConsent } from "@/lib/oidc/consent";
+import { dbClientToClient, dbSessionToSession } from "@/lib/oidc/interface";
+import "@/lib/oidc/setup";
 import {
   deleteOidcAuthorizationCookie,
   getOidcAuthorizationRequest,
 } from "@/lib/oidc/utils";
+import { returnToClient } from "@noo/oidc-server/authorization/finish";
+import { buildAuthorizationResponse } from "@noo/oidc-server/authorization/response";
+import { AuthorizationRequest } from "@noo/oidc-server/types";
 import { redirect } from "next/navigation";
 import { storeConsent } from "../oidc/continue/actions";
-import { buildAuthorizationResponse } from "@/lib/oidc/authorization/response";
-import { UserWithTenant } from "@/db/users";
-import { AuthorizationRequest } from "@/lib/oidc/types";
-import { returnToClientUrl } from "@/lib/oidc/authorization";
 
 export async function switchSubmit(uid: string) {
   const oidcAuthRequest = await getOidcAuthorizationRequest();
@@ -32,7 +34,7 @@ export async function switchSubmit(uid: string) {
   }
 
   // Check that the user is allowed to use this OIDC client
-  if (oidcAuthRequest.tenantId && oidcAuthRequest.tenantId !== user.tenantId) {
+  if (client.tenantId && client.tenantId !== user.tenantId) {
     redirect("/switch");
   }
 
@@ -64,13 +66,17 @@ export async function finishOidcAuthorization(
     oidcAuthRequest.claims,
   );
 
+  const session = (await getAuthenticatedSession(user.id))!;
+
   const responseParams = await buildAuthorizationResponse(
-    client,
     oidcAuthRequest,
-    user,
+    dbClientToClient(client),
+    dbSessionToSession(session),
   );
 
-  if (oidcAuthRequest.response_mode === "form_post") {
+  const result = await returnToClient(oidcAuthRequest, responseParams);
+
+  if (result.nextStep === "FORM_POST") {
     const escapedUrl = encodeURIComponent(oidcAuthRequest.redirect_uri);
     const escapedParams = encodeURIComponent(JSON.stringify(responseParams));
 
@@ -78,11 +84,6 @@ export async function finishOidcAuthorization(
       `/oidc/form_post?redirect_uri=${escapedUrl}&params=${escapedParams}`,
     );
   } else {
-    const url = returnToClientUrl(oidcAuthRequest, responseParams);
-    if (!url) {
-      throw new Error("unsupported response_mode");
-    }
-
-    return redirect(url);
+    return redirect(result.url!);
   }
 }

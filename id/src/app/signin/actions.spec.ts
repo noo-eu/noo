@@ -31,7 +31,12 @@ vi.mock("next/headers", () => ({
 }));
 
 const getOidcAR = vi.hoisted(() => vi.fn());
-vi.mock("@/lib/oidc/utils", () => ({ getOidcAuthorizationRequest: getOidcAR }));
+vi.mock("@/lib/oidc/utils", async (importOriginal) => ({
+  getOidcAuthorizationClient: async () => {
+    return (await getOidcAR())?.client;
+  },
+  getOidcAuthorizationRequest: getOidcAR,
+}));
 
 const mockUser = JohnDoe;
 
@@ -82,11 +87,11 @@ describe("signin", () => {
     });
 
     getOidcAR.mockResolvedValue({
-      tenantId: "a-tenant",
+      client: { tenantId: "a-tenant" },
       domain: "example.eu",
     });
     (Tenants.find as Mock).mockResolvedValue({
-      tenantId: "a-tenant",
+      clientId: { tenantId: "a-tenant" },
       domain: "example.eu",
     });
 
@@ -111,7 +116,9 @@ describe("signin", () => {
 
   it("redirects to /oidc/consent if login succeeds with OIDC", async () => {
     (Users.authenticate as Mock).mockResolvedValue(mockUser);
-    getOidcAR.mockResolvedValue({});
+    getOidcAR.mockResolvedValue({
+      client: { name: "Test" },
+    });
 
     await expect(
       signin(null, createFormData({ username: "test", password: "123" })),

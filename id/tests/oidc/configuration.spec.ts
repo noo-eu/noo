@@ -75,7 +75,7 @@ test.describe("Private provider", () => {
       baseURL,
     }) => {
       const response = await request.get(
-        "/oidc/acme.fr/.well-known/openid-configuration",
+        "/oidc/org_1/.well-known/openid-configuration",
       );
 
       // A successful response MUST use the 200 OK HTTP status code
@@ -83,8 +83,8 @@ test.describe("Private provider", () => {
 
       const config = await response.json();
       expect(config).toMatchObject({
-        issuer: `${baseURL}/oidc/acme.fr`,
-        registration_endpoint: `${baseURL}/oidc/acme.fr/register`,
+        issuer: `${baseURL}/oidc/org_1`,
+        registration_endpoint: `${baseURL}/oidc/org_1/register`,
       });
 
       // It responds with 404 if the domain is not registered

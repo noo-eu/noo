@@ -1,5 +1,5 @@
+import { buildUsername } from "@/app/oidc/consent/page";
 import { switchSubmit } from "@/app/switch/actions";
-import { getActiveSessions } from "@/auth/sessions";
 import { Legal } from "@/components/Legal";
 import { PageModal } from "@/components/PageModal";
 import { PresentClient } from "@/components/PresentClient";
@@ -8,20 +8,17 @@ import { OidcClient } from "@/db/oidc_clients";
 import { Session } from "@/db/sessions";
 import { User } from "@/db/users";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
-import { AuthorizationRequest } from "@/lib/oidc/types";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function AccountSwitcher({
-  oidcAuthRequest,
   client,
+  sessions,
 }: {
-  oidcAuthRequest: AuthorizationRequest;
   client: OidcClient;
   sessions: Session[];
 }) {
   const locale = await getLocale();
-  const sessions = await getActiveSessions();
   const t = await getTranslations("oidc");
 
   const clientFields = {
@@ -42,7 +39,7 @@ export async function AccountSwitcher({
               <SessionItem
                 key={session.id}
                 session={session}
-                tenantId={oidcAuthRequest.tenantId}
+                tenantId={client.tenantId ?? undefined}
               />
             ))}
             <li>
@@ -103,10 +100,7 @@ function SessionItem({
             <div className="text-md font-semibold">
               {session.user.firstName} {session.user.lastName}
             </div>
-            <div className="text-gray-400">
-              {session.user.username}@
-              {session.user.tenant?.domain ?? "noomail.eu"}
-            </div>
+            <div className="text-gray-400">{buildUsername(session.user)}</div>
           </div>
         </button>
       </form>

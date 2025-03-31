@@ -20,6 +20,7 @@ async function main() {
   });
 
   const tenant = await Tenants.create({
+    id: "00000000-0000-0000-0000-000000000001",
     name: "Acme Sarl",
     domain: "acme.fr",
     // yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE

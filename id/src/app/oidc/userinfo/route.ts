@@ -1,5 +1,5 @@
 import { HttpRequest } from "@/lib/http/request";
-import { userinfoEndpoint } from "@/lib/oidc/userinfo";
+import { userinfoEndpoint } from "../utils";
 
 export async function GET(raw: Request) {
   const request = new HttpRequest(raw);

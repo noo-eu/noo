@@ -8,7 +8,7 @@ describe("OIDC Client Registration", async () => {
   const tenant = (await db.query.tenants.findFirst())!;
 
   const perform = async (request: Record<string, unknown>) => {
-    const raw = new Request("https://localhost:23000/oidc/acme.fr/register", {
+    const raw = new Request("https://localhost:23000/oidc/org_1/register", {
       method: "POST",
       headers: {
         Authorization: `Bearer not-tested`,

@@ -1,7 +1,9 @@
 import { getAuthenticatedUser } from "@/auth/sessions";
 import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
+import { UserWithTenant } from "@/db/users";
 import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
+import "@/lib/oidc/setup";
 import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { humanIdToUuid } from "@/utils";
 import { getLocale } from "next-intl/server";
@@ -9,6 +11,21 @@ import { redirect } from "next/navigation";
 import { Content } from "./Content";
 
 export const revalidate = 0;
+
+export function getUserEmail(user: UserWithTenant) {
+  if (user.tenant) {
+    if (user.tenant.domain) {
+      return `${user.username}@${user.tenant.domain}`;
+    }
+    return undefined;
+  }
+
+  return `${user.username}@noomail.eu`;
+}
+
+export function buildUsername(user: UserWithTenant) {
+  return getUserEmail(user) ?? `${user.username} @ ${user.tenant!.name}`;
+}
 
 export default async function OidcConsentPage({
   searchParams,
@@ -33,8 +50,13 @@ export default async function OidcConsentPage({
     return redirect("/switch");
   }
 
-  if (oidcAuthRequest.tenantId && oidcAuthRequest.tenantId !== user.tenantId) {
-    console.warn("Tenant mismatch");
+  const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
+  const client = await OidcClients.find(clientId);
+  if (!client) {
+    return redirect("/");
+  }
+
+  if (client.tenantId && client.tenantId !== user.tenant?.id) {
     return redirect("/switch");
   }
 
@@ -42,15 +64,7 @@ export default async function OidcConsentPage({
   // user has already given consent. If the user has already given consent, we
   // can redirect to the client.
 
-  const consent = await OidcConsents.findOrInitialize(
-    humanIdToUuid(oidcAuthRequest.client_id, "oidc")!,
-    user.id,
-  );
-  const client = await OidcClients.find(consent.clientId);
-  if (!client) {
-    console.warn("Client not found");
-    return redirect("/");
-  }
+  const consent = await OidcConsents.findOrInitialize(client.id, user.id);
 
   const locale = await getLocale();
   const clientFields = {
@@ -83,7 +97,8 @@ export default async function OidcConsentPage({
   const cleanClaims = cleanupClaims(missingClaims);
   const userFields = {
     name: `${user.firstName} ${user.lastName}`.trim(),
-    email: `${user.username}@${user.tenant?.domain ?? "noomail.eu"}`,
+    email: getUserEmail(user),
+    tenant: user.tenant?.name,
   };
 
   return (

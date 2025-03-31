@@ -8,8 +8,8 @@ test.describe("Private provider", () => {
         redirect_uris: ["https://example.com"],
       });
 
-      // The domain must have been registered first
-      let response = await request.post("/oidc/microsoft.com/register", {
+      // The tenant must have been registered first
+      let response = await request.post("/oidc/org_nonexisting/register", {
         data: requestObject,
         headers: {
           "Content-Type": "application/json",
@@ -18,7 +18,7 @@ test.describe("Private provider", () => {
       expect(response.status()).toBe(404);
 
       // Failure is expected without a Bearer token
-      response = await request.post("/oidc/acme.fr/register", {
+      response = await request.post("/oidc/org_1/register", {
         data: requestObject,
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ test.describe("Private provider", () => {
       expect(response.status()).toBe(401);
 
       // Register a new client
-      response = await request.post("/oidc/acme.fr/register", {
+      response = await request.post("/oidc/org_1/register", {
         data: requestObject,
         // See fixtures.ts for the token
         headers: {

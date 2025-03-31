@@ -1,5 +1,6 @@
 "use server";
 
+import "@/lib/oidc/setup";
 import { notFound } from "next/navigation";
 import { afterConsent } from "../continue/actions";
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { totpSubmit } from "@/app/signin/actions";
+import { generateWebauthnOptions, verifyWebauthn } from "@/app/signin/webauthn";
 import { Button, TextField } from "@noo/ui";
 import {
   PublicKeyCredentialRequestOptionsJSON,
@@ -7,13 +9,8 @@ import {
 } from "@simplewebauthn/browser";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useActionState } from "react";
-import {
-  generateWebauthnOptions,
-  totpSubmit,
-  verifyWebauthn,
-} from "@/app/signin/actions";
 import { redirect } from "next/navigation";
+import { useActionState } from "react";
 
 function useWebauthnAuthentication() {
   return async (autofill: boolean) => {

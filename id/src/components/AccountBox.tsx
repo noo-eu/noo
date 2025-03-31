@@ -1,7 +1,8 @@
 export type AccountBoxProps = {
   user: {
     name: string;
-    email: string;
+    email?: string;
+    tenant?: string;
   };
 };
 
@@ -15,7 +16,7 @@ export function AccountBox({ user }: Readonly<AccountBoxProps>) {
       </div>
       <div className="text-sm">
         <div className="font-semibold">{user.name}</div>
-        <div className="text-gray-400">{user.email}</div>
+        <div className="text-gray-400">{user.email ?? user.tenant}</div>
       </div>
     </div>
   );

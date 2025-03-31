@@ -5,15 +5,22 @@ import {
   RESPONSE_TYPES_SUPPORTED,
   SUBJECT_TYPES_SUPPORTED,
   TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED,
-} from "@/app/oidc/configuration";
+} from "@noo/oidc-server/discovery";
 import { schema } from "@/db";
 import OidcClients from "@/db/oidc_clients";
 import {
   RegistrationRequest,
   registrationRequest,
   RegistrationResponse,
-  ResponseType,
 } from "@/lib/oidc/types";
+import {
+  ResponseType,
+  SubjectType,
+  TokenEndpointAuthMethod,
+  SignatureAlg,
+  AcrValue,
+  GrantType,
+} from "@noo/oidc-server/types";
 import { createVerifier, uuidToHumanId } from "@/utils";
 import { HttpRequest } from "../http/request";
 
@@ -59,7 +66,7 @@ export async function oidcClientRegistration(
     return configValidationResult;
   }
 
-  const secretBytes = crypto.getRandomValues(new Uint8Array(32));
+  const secretBytes = crypto.getRandomValues(new Uint8Array(48));
   const clientSecret = "oidc_s_" + Buffer.from(secretBytes).toString("base64");
 
   const registrationAccessToken = createVerifier();
@@ -134,7 +141,7 @@ async function validateRegistration(config: RegistrationRequest) {
   config.grant_types ??= ["authorization_code"];
   const all_response_types = config.response_types.join(" ");
   config.grant_types = config.grant_types.filter((gt: string) =>
-    GRANT_TYPES_SUPPORTED.includes(gt),
+    GRANT_TYPES_SUPPORTED.includes(gt as GrantType),
   );
   if (!config.grant_types.includes("authorization_code")) {
     if (/\bcode\b/.exec(all_response_types)) {
@@ -184,7 +191,7 @@ async function validateRegistration(config: RegistrationRequest) {
     }
   }
 
-  if (!SUBJECT_TYPES_SUPPORTED.includes(config.subject_type as string)) {
+  if (!SUBJECT_TYPES_SUPPORTED.includes(config.subject_type as SubjectType)) {
     config.subject_type = "pairwise";
   }
 
@@ -213,7 +220,7 @@ async function validateRegistration(config: RegistrationRequest) {
   config.id_token_signed_response_alg ??= "RS256";
   if (
     !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
-      config.id_token_signed_response_alg,
+      config.id_token_signed_response_alg as SignatureAlg,
     )
   ) {
     return buildErrorResponse(
@@ -239,7 +246,7 @@ async function validateRegistration(config: RegistrationRequest) {
   if (
     config.userinfo_signed_response_alg &&
     !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
-      config.userinfo_signed_response_alg,
+      config.userinfo_signed_response_alg as SignatureAlg,
     )
   ) {
     return buildErrorResponse(
@@ -251,7 +258,7 @@ async function validateRegistration(config: RegistrationRequest) {
   if (
     config.request_object_signing_alg &&
     !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
-      config.request_object_signing_alg,
+      config.request_object_signing_alg as SignatureAlg,
     )
   ) {
     return buildErrorResponse(
@@ -263,7 +270,7 @@ async function validateRegistration(config: RegistrationRequest) {
   config.token_endpoint_auth_method ??= "client_secret_basic";
   if (
     !TOKEN_ENDPOINT_AUTH_METHODS_SUPPORTED.includes(
-      config.token_endpoint_auth_method,
+      config.token_endpoint_auth_method as TokenEndpointAuthMethod,
     )
   ) {
     return buildErrorResponse(
@@ -275,7 +282,7 @@ async function validateRegistration(config: RegistrationRequest) {
   if (
     (config.token_endpoint_auth_signing_alg &&
       !ID_TOKEN_SIGNING_ALG_VALUES_SUPPORTED.includes(
-        config.token_endpoint_auth_signing_alg,
+        config.token_endpoint_auth_signing_alg as SignatureAlg,
       )) ||
     config.token_endpoint_auth_signing_alg === "none"
   ) {
@@ -293,7 +300,7 @@ async function validateRegistration(config: RegistrationRequest) {
   }
 
   config.default_acr_values = config.default_acr_values?.filter((acr: string) =>
-    ACR_VALUES_SUPPORTED.includes(acr),
+    ACR_VALUES_SUPPORTED.includes(acr as AcrValue),
   );
 
   if (config.initiate_login_uri) {

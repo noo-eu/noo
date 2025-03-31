@@ -23,6 +23,7 @@
     "@aws-sdk/client-s3": "^3.758.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@noo/oidc-server": "workspace:*",
     "@noo/ui": "workspace:*",
     "@sentry/nextjs": "^9",
     "@simplewebauthn/browser": "^13.1.0",
