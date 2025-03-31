@@ -1,14 +1,6 @@
 import { UserWithTenant } from "@/db/users";
 
-export function requestedUserClaims(
-  requestedClaims: { [key: string]: unknown } | undefined,
-  user: UserWithTenant,
-) {
-  if (!requestedClaims) {
-    return {};
-  }
-
-  const requests = Object.keys(requestedClaims);
+export function requestedUserClaims(user: UserWithTenant, requests: string[]) {
   const claims: Record<string, string | boolean> = {};
 
   if (requests.includes("name")) {
@@ -27,12 +19,15 @@ export function requestedUserClaims(
     claims.preferred_username = user.username;
   }
 
-  if (requests.includes("email")) {
-    claims.email = user.username + "@" + (user.tenant?.domain ?? "noomail.eu");
-  }
+  if (!user.tenant || user.tenant.domain) {
+    if (requests.includes("email")) {
+      claims.email =
+        user.username + "@" + (user.tenant?.domain ?? "noomail.eu");
+    }
 
-  if (requests.includes("email_verified")) {
-    claims.email_verified = true;
+    if (requests.includes("email_verified")) {
+      claims.email_verified = true;
+    }
   }
 
   if (requests.includes("picture") && user.picture) {

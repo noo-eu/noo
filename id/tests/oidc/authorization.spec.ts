@@ -6,7 +6,7 @@ test.describe("OpenID Authorization endpoint", () => {
     client_id: uuidToHumanId("00000000-0000-0000-0000-000000000001", "oidc"),
     response_type: "code",
     redirect_uri: "https://localhost:22999/cb",
-    scope: "openid",
+    scope: "openid profile",
     state: "state",
     nonce: "nonce",
   };
@@ -87,6 +87,7 @@ test.describe("OpenID Authorization endpoint", () => {
         const userinfoBody = await userinfoResponse.json();
         expect(userinfoBody).toMatchObject({
           sub: expect.any(String),
+          name: expect.any(String),
         });
       });
     });

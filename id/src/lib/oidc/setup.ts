@@ -16,6 +16,8 @@ import {
   getClient,
   getCode,
 } from "./interface";
+import Users from "@/db/users";
+import { requestedUserClaims } from "./userClaims";
 
 console.log("Setup file loaded");
 
@@ -100,12 +102,25 @@ function setup() {
       return code;
     },
     getCode,
-    revokeCode: async (_: string) => {},
+    revokeCode: async (code: string) => {
+      await OidcAuthorizationCodes.destroy(code);
+    },
 
     createAccessToken,
     getAccessToken,
 
-    getClaims: async (_: string, _2: string[]) => ({}),
+    getClaims: async (userId: string, claimKeys: string[]) => {
+      const uid = humanIdToUuid(userId, "usr");
+      if (!uid) {
+        throw new Error("Invalid user ID");
+      }
+
+      const user = await Users.find(uid);
+      if (!user) {
+        throw new Error("User not found");
+      }
+      return requestedUserClaims(user, claimKeys);
+    },
     getSessionStateValue: getSessionCheckCookie,
   });
 

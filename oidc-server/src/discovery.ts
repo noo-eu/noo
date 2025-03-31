@@ -53,6 +53,11 @@ export const CLAIMS_SUPPORTED = [
   "name",
   "given_name",
   "family_name",
+  "preferred_username",
+  "picture",
+  "locale",
+  "zoneinfo",
+  "updated_at",
 ] as const;
 
 export const SUBJECT_TYPES_SUPPORTED = ["public", "pairwise"] as const;
