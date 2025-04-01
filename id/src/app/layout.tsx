@@ -1,9 +1,9 @@
 import { Footer } from "@/components/Footer";
+import { getCurrentLocale } from "@/i18n/request";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { ToastContainer } from "react-toastify/unstyled";
 import "./globals.css";
-import { getCurrentLocale } from "@/i18n/request";
 
 export async function generateMetadata() {
   const t = await getTranslations("profile");
@@ -11,6 +11,36 @@ export async function generateMetadata() {
   return {
     title: `noo ${t("pageTitle")}`,
     description: "",
+    icons: [
+      {
+        url: "https://static.noo.eu/favicon.ico",
+        type: "image/x-icon",
+        sizes: "any",
+        rel: "icon",
+      },
+      {
+        url: "https://static.noo.eu/favicon.svg",
+        type: "image/svg+xml",
+        sizes: "any",
+        rel: "icon",
+      },
+      {
+        url: "https://static.noo.eu/favicon-96x96.png",
+        type: "image/png",
+        sizes: "96x96",
+        rel: "icon",
+      },
+      {
+        url: "https://static.noo.eu/apple-touch-icon.png",
+        type: "image/png",
+        sizes: "180x180",
+        rel: "apple-touch-icon",
+      },
+    ],
+    openGraph: {
+      images: "https://static.noo.eu/noo-cover.png",
+    },
+    manifest: "https://static.noo.eu/site.webmanifest",
   };
 }
 

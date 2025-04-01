@@ -1,37 +1,37 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: noo-id
+  name: noo-mail
 spec:
-  name: noo_id
-  owner: noo_id
+  name: noo_mail
+  owner: noo_mail
   cluster:
     name: noo-main
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: noo-id
+  name: noo-mail
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: noo-id
-  namespace: noo-id
+  name: noo-mail
+  namespace: noo-mail
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: noo-id
+      app: noo-mail
   template:
     metadata:
       labels:
-        app: noo-id
+        app: noo-mail
     spec:
       automountServiceAccountToken: false
       containers:
-        - image: ghcr.io/noo-eu/id:latest
-          name: noo-id
+        - image: ghcr.io/noo-eu/mail:latest
+          name: noo-mail
           ports:
             - containerPort: 3000
           env:
@@ -40,32 +40,15 @@ spec:
                 secretKeyRef:
                   name: database-url
                   key: DATABASE_URL
-            - name: S3_ENDPOINT
+            - name: AUTH_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: noo-id-secrets
-                  key: S3_ENDPOINT
-            - name: S3_ACCESS_KEY_ID
-              valueFrom:
-                secretKeyRef:
-                  name: noo-id-secrets
-                  key: S3_ACCESS_KEY_ID
-            - name: S3_SECRET_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: noo-id-secrets
-                  key: S3_SECRET_ACCESS_KEY
-            - name: S3_PUBLIC_URL_noousr
-              value: "https://noousr.noo.eu"
-            - name: PAIRWISE_SALT
-              valueFrom:
-                secretKeyRef:
-                  name: noo-id-secrets
-                  key: PAIRWISE_SALT
-          readinessProbe:
-            httpGet:
-              port: 3000
-              path: /signin
+                  name: noo-mail-secrets
+                  key: AUTH_SECRET
+          # readinessProbe:
+          #   httpGet:
+          #     port: 3000
+          #     path: /
           resources:
             requests:
               memory: "128Mi"
@@ -77,11 +60,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: noo-id
-  namespace: noo-id
+  name: noo-mail
+  namespace: noo-mail
 spec:
   selector:
-    app: noo-id
+    app: noo-mail
   ports:
     - protocol: TCP
       port: 80
@@ -91,27 +74,24 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: noo-id
-  namespace: noo-id
+  name: noo-mail
+  namespace: noo-mail
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
   rules:
-    - host: id.noo.eu
+    - host: mail.noo.eu
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: noo-id
+                name: noo-mail
                 port:
                   number: 80
   tls:
     - hosts:
-        - id.noo.eu
-      secretName: noo-id-tls
-
----
-
+        - mail.noo.eu
+      secretName: noo-mail-tls
