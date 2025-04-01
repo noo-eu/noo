@@ -1,0 +1,157 @@
+name: "mail"
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'mail/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'mail/**'
+  merge_group:
+    types: [checks_requested]
+  workflow_dispatch:
+
+env:
+  DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_mail_test
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mail
+    steps:
+    - uses: actions/checkout@v4
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.2.3
+    - name: Install dependencies
+      run: bun install
+    - name: Run all checks
+      run: |
+        set +e
+        FAIL=0
+
+        echo "Running Typecheck..."
+        bun tsc || FAIL=1
+
+        echo "Running Next.js lint..."
+        bun next lint || FAIL=1
+
+        echo "Running Prettier check..."
+        bun prettier --check . || FAIL=1
+
+        echo "Check if all translations keys are present..."
+        bun i18n-utils check-missing || FAIL=1
+
+        exit $FAIL
+
+  unit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mail
+    
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: noo_mail_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.2.3
+    - name: Install dependencies
+      run: bun install
+    - name: Prepare the database
+      run: |
+        bun db:test:push
+        bun db:test:fixtures
+    - name: Generate key set for testing
+      run: bun run keys:rotate
+    - name: Run unit tests
+      run: bun run test:unit
+
+  # test:
+  #   timeout-minutes: 10
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: mail
+
+  #   services:
+  #     postgres:
+  #       image: postgres:17
+  #       env:
+  #         POSTGRES_PASSWORD: postgres
+  #         POSTGRES_DB: noo_mail_test
+  #       options: >-
+  #         --health-cmd pg_isready
+  #         --health-interval 10s
+  #         --health-timeout 5s
+  #         --health-retries 5
+  #       ports:
+  #         - 5432:5432
+
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - uses: oven-sh/setup-bun@v2
+  #     with:
+  #       bun-version: 1.2.3
+  #   - name: Install dependencies
+  #     run: bun install
+  #   - name: Install Playwright Browsers
+  #     run: bun run playwright install --with-deps
+  #   - name: Prepare the database
+  #     run: |
+  #       bun db:test:push
+  #   - name: Run Playwright tests
+  #     run: bun run test:e2e
+  #   - uses: actions/upload-artifact@v4
+  #     if: ${{ !cancelled() }}
+  #     with:
+  #       name: playwright-report
+  #       path: mail/playwright-report/
+  #       retention-days: 30
+
+  build:
+    runs-on: ubuntu-24.04-arm
+    needs: [lint, unit]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      packages: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        file: mail/Dockerfile
+        tags: ghcr.io/noo-eu/mail:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max

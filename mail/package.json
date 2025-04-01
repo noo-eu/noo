@@ -1,5 +1,5 @@
 {
-  "name": "mail",
+  "name": "@noo/mail",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@noo/lib": "workspace:*",
     "@noo/ui": "workspace:*",
     "@sentry/nextjs": "^9.10.1",
     "@tanstack/react-query": "^5.71.1",

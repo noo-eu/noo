@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { err, ok } from "neverthrow";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { checkPwnedPassword } from "./password";
-import { ok, err } from "neverthrow";
 
 const TEST_PASSWORD = "testpassword";
 const DIGEST = "8BB6118F8FD6935AD0876A3BE34A717D32708FFD".toLocaleUpperCase();
@@ -14,6 +14,7 @@ describe("checkPwnedPassword", () => {
 
     // Setup fetch mock
     fetchMock = vi.fn();
+    // @ts-expect-error Bun extends fetch with custom properties that we don't need and don't mock
     global.fetch = fetchMock;
 
     // Mock AbortSignal.timeout

@@ -40,11 +40,22 @@ spec:
                 secretKeyRef:
                   name: database-url
                   key: DATABASE_URL
-            - name: AUTH_SECRET
+            - name: NOO_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: noo-mail-secrets
-                  key: AUTH_SECRET
+                  key: NOO_CLIENT_ID
+            - name: NOO_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: noo-mail-secrets
+                  key: NOO_CLIENT_SECRET
+            - name: APP_URL
+              value: https://mail.noo.eu
+            - name: NOO_ID_URL
+              value: http://noo-id.noo-id
+            - name: NOO_ID_PUBLIC_URL
+              value: https://id.noo.eu
           # readinessProbe:
           #   httpGet:
           #     port: 3000

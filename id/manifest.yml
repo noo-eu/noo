@@ -95,6 +95,15 @@ metadata:
   namespace: noo-id
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      SecRuleEngine On
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      location /_noo {
+        deny all;
+        return 403;
+      }
 spec:
   ingressClassName: nginx
   rules:

@@ -162,7 +162,7 @@ export async function handleSuccessfulAuthentication<Input>(
         const tenant = await Tenants.find(oidcAuthorizationClient.tenantId);
         return {
           error: "tenant",
-          input: { ...input, domain: tenant!.domain },
+          input: { ...input, domain: tenant!.domain ?? tenant?.name },
         };
       }
     } else {

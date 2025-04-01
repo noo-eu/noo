@@ -86,8 +86,6 @@ export async function authenticateClientSecretJwt(
   }
 
   const params = Object.fromEntries((await req.formData()).entries());
-  console.log(params);
-
   const client_assertion_type = params.client_assertion_type?.toString();
   if (
     client_assertion_type !==
@@ -111,8 +109,6 @@ export async function authenticateClientSecretJwt(
         subject: client.clientId,
       },
     );
-
-    console.log("Claims", claims);
   } catch {
     return false;
   }

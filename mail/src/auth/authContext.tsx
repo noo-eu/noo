@@ -2,7 +2,11 @@
 
 import { createContext, useContext } from "react";
 
-const AuthContext = createContext<{ name: string }>({ name: "" });
+export type User = {
+  firstName: string;
+};
+
+const AuthContext = createContext<User>({ firstName: "" });
 
 export { AuthContext };
 
@@ -11,7 +15,7 @@ export function AuthProvider({
   user,
 }: Readonly<{
   children: React.ReactNode;
-  user: { name: string };
+  user: User;
 }>) {
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }

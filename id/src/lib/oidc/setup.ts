@@ -1,11 +1,14 @@
 import { getActiveSessions } from "@/auth/sessions";
 import { getSessionCheckCookie } from "@/auth/sessions/store";
 import OidcAuthorizationCodes from "@/db/oidc_authorization_codes";
+import OidcClients from "@/db/oidc_clients";
 import OidcConsents from "@/db/oidc_consents";
+import Users from "@/db/users";
 import { SUPPORTED_LANGUAGES } from "@/i18n";
 import { hexToBase62, humanIdToUuid, uuidToHumanId } from "@/utils";
 import {
   AuthorizationCode,
+  Client,
   configureIdP,
 } from "@noo/oidc-server/configuration";
 import crypto, { randomBytes } from "node:crypto";
@@ -16,7 +19,6 @@ import {
   getClient,
   getCode,
 } from "./interface";
-import Users from "@/db/users";
 import { requestedUserClaims } from "./userClaims";
 
 console.log("Setup file loaded");
@@ -77,12 +79,22 @@ function setup() {
       return `usr_${hexToBase62(sub)}`;
     },
     createAuthorizationCode: async (params: AuthorizationCode) => {
-      console.log("createAuthorizationCode", params);
-
       const rawUserId = humanIdToUuid(params.userId, "usr");
       const rawClientId = humanIdToUuid(params.clientId, "oidc");
       if (!rawUserId || !rawClientId) {
         throw new Error("Invalid user ID or client ID");
+      }
+
+      let context = {};
+      const client = (await OidcClients.find(rawClientId))!;
+      if (client.internalClient) {
+        const allSessions = await getActiveSessions();
+        context = {
+          sessions: allSessions.map((session) => ({
+            sessionId: uuidToHumanId(session.id, "sess"),
+            userId: uuidToHumanId(session.userId, "usr"),
+          })),
+        };
       }
 
       const code = await OidcAuthorizationCodes.create({
@@ -97,6 +109,7 @@ function setup() {
         nonce: params.nonce,
         codeChallenge: params.codeChallenge,
         codeChallengeMethod: params.codeChallengeMethod,
+        authContext: context,
       });
 
       return code;
@@ -122,6 +135,18 @@ function setup() {
       return requestedUserClaims(user, claimKeys);
     },
     getSessionStateValue: getSessionCheckCookie,
+    enrichTokenResponse: async (client: Client, code: AuthorizationCode) => {
+      const rawClientId = humanIdToUuid(client.clientId, "oidc")!;
+      const dbClient = (await OidcClients.find(rawClientId))!;
+
+      if (!dbClient.internalClient) {
+        return {};
+      }
+
+      return {
+        context: code.authorizationContext,
+      };
+    },
   });
 
   initialized = true;

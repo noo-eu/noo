@@ -64,6 +64,13 @@
       "when": 1742813247357,
       "tag": "0008_aromatic_stardust",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1743606112376,
+      "tag": "0009_slippery_kronos",
+      "breakpoints": true
     }
   ]
 }

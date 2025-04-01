@@ -52,8 +52,6 @@ async function handleCodeResponseType(
   session: Session,
   response: Record<string, string>,
 ) {
-  console.log("handleCodeResponseType", params, client, session);
-
   try {
     const code = await configuration.createAuthorizationCode({
       userId: session.userId,
