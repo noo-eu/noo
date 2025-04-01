@@ -12,6 +12,7 @@ FROM base AS deps
 COPY i18n-utils/package.json i18n-utils/package.json
 COPY id/package.json id/package.json
 COPY mail/package.json mail/package.json
+COPY oidc-server/package.json oidc-server/package.json
 COPY ui/package.json ui/package.json
 COPY package.json bun.lock ./
 
@@ -29,8 +30,12 @@ COPY --from=deps /app/node_modules /app/node_modules
 
 COPY ui /app/ui
 COPY id /app/id
+COPY oidc-server /app/oidc-server
 
 WORKDIR /app/id
+
+# dummy value for build
+ENV PAIRWISE_SALT=1
 
 RUN npm run build -- --no-lint
 
