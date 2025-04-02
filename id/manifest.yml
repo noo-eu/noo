@@ -62,6 +62,10 @@ spec:
                 secretKeyRef:
                   name: noo-id-secrets
                   key: PAIRWISE_SALT
+          volumeMounts:
+            - name: jwks-volume
+              mountPath: /app/keys
+              readOnly: true
           readinessProbe:
             httpGet:
               port: 3000
@@ -73,6 +77,10 @@ spec:
               ephemeral-storage: "100Mi"
             limits:
               memory: "512Mi"
+      volumes:
+        - name: jwks-volume
+          secret:
+            secretName: oidc-jwks
 ---
 apiVersion: v1
 kind: Service

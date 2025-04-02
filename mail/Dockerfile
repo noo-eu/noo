@@ -12,6 +12,7 @@ FROM base AS deps
 COPY i18n-utils/package.json i18n-utils/package.json
 COPY id/package.json id/package.json
 COPY mail/package.json mail/package.json
+COPY lib/package.json lib/package.json
 COPY oidc-server/package.json oidc-server/package.json
 COPY ui/package.json ui/package.json
 COPY package.json bun.lock ./
@@ -29,6 +30,7 @@ ENV DATABASE_URL=postgres:///build
 COPY --from=deps /app/node_modules /app/node_modules
 
 COPY ui /app/ui
+COPY lib /app/lib
 COPY mail /app/mail
 
 WORKDIR /app/mail
