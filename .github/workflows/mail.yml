@@ -79,8 +79,6 @@ jobs:
       run: |
         bun db:test:push
         bun db:test:fixtures
-    - name: Generate key set for testing
-      run: bun run keys:rotate
     - name: Run unit tests
       run: bun run test:unit
 
