@@ -7,6 +7,7 @@
   "workspaces": [
     "i18n-utils",
     "id",
+    "lib",
     "mail",
     "oidc-server",
     "ui"

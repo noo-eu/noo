@@ -163,14 +163,6 @@ describe("authenticateClient", () => {
     let expiredJwt: string;
 
     beforeAll(async () => {
-      console.log(
-        "Creating JWTs for tests",
-        testClientInfo.clientId,
-        testClientInfo.clientSecret,
-        expectedAudience,
-        BASE_URL,
-      );
-
       const secretBuffer = Buffer.from(testClientInfo.clientSecret);
       const createTestJwt = (
         payloadOverrides = {},

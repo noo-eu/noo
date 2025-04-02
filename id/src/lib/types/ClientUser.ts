@@ -26,7 +26,7 @@ export function makeClientUser(user: UserWithTenant): ClientUser {
     id: uuidToHumanId(user.id, "usr"),
     username: user.username,
     normalizedUsername: user.normalizedUsername,
-    tenantDomain: user.tenant?.domain,
+    tenantDomain: user.tenant?.domain ?? undefined,
     firstName: user.firstName,
     lastName: user.lastName,
     fullName: `${user.firstName} ${user.lastName ?? ""}`.trim(),

@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
 };
 
 export default withSentryConfig(withNextIntl(nextConfig), {
-  org: "noo-4x",
+  org: "noo-eu",
   project: "noo-id",
 
   // Only print logs for uploading source maps in CI

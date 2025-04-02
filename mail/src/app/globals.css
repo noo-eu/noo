@@ -1,1 +1,25 @@
 @import "tailwindcss";
+@import "./fonts";
+@source "../../../ui";
+
+:root {
+  font-family: InterVariable, sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+}
+
+.noo {
+  font-family: DynaPuff, serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+@layer base {
+  select option {
+    color: black;
+    text-align: left;
+  }
+}

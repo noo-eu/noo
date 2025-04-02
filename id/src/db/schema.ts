@@ -29,7 +29,7 @@ const bytea = customType<{
 export const tenants = pgTable("tenants", {
   id: uuid().primaryKey().defaultRandom(),
   name: text().notNull(),
-  domain: text().unique().notNull(),
+  domain: text().unique(),
   oidcRegistrationTokenDigest: text("oidc_registration_token_digest"),
 });
 
@@ -124,6 +124,7 @@ export const passkeyChallenges = pgTable("passkey_challenges", {
 
 export const oidcClients = pgTable("oidc_clients", {
   id: uuid().primaryKey().defaultRandom(),
+  internalClient: boolean("internal_client").notNull().default(false),
   tenantId: uuid("tenant_id").references(() => tenants.id, {
     onDelete: "cascade",
     onUpdate: "cascade",
@@ -207,6 +208,7 @@ export const oidcAuthorizationCodes = pgTable("oidc_authorization_codes", {
   nonce: text(),
   codeChallenge: text("code_challenge"),
   codeChallengeMethod: text("code_challenge_method"),
+  authContext: jsonb("auth_context"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 

@@ -65,6 +65,7 @@ export async function getCode(code: string): Promise<
       nonce: dbCode.nonce,
       codeChallenge: dbCode.codeChallenge,
       codeChallengeMethod: dbCode.codeChallengeMethod,
+      authorizationContext: dbCode.authContext,
     },
     client: dbClientToClient(client),
   };

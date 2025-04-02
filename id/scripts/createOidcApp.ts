@@ -12,11 +12,11 @@ if (process.argv.length !== 4) {
 
 const name = process.argv[2];
 const redirectUri = process.argv[3];
-const secret = randomBytes(48).toString("base64url");
+const secret = "oidc_s_" + randomBytes(48).toString("base64url");
 
 const client = await OidcClients.create({
   clientName: { "": name },
-  clientSecret: "oidc_s_" + secret,
+  clientSecret: secret,
   redirectUris: [redirectUri],
   subjectType: "pairwise",
   grantTypes: ["authorization_code"],

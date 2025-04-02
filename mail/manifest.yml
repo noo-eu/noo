@@ -1,0 +1,108 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: noo-mail
+spec:
+  name: noo_mail
+  owner: noo_mail
+  cluster:
+    name: noo-main
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: noo-mail
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noo-mail
+  namespace: noo-mail
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: noo-mail
+  template:
+    metadata:
+      labels:
+        app: noo-mail
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - image: ghcr.io/noo-eu/mail:latest
+          name: noo-mail
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-url
+                  key: DATABASE_URL
+            - name: NOO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: noo-mail-secrets
+                  key: NOO_CLIENT_ID
+            - name: NOO_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: noo-mail-secrets
+                  key: NOO_CLIENT_SECRET
+            - name: APP_URL
+              value: https://mail.noo.eu
+            - name: NOO_ID_URL
+              value: http://noo-id.noo-id
+            - name: NOO_ID_PUBLIC_URL
+              value: https://id.noo.eu
+          # readinessProbe:
+          #   httpGet:
+          #     port: 3000
+          #     path: /
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+              ephemeral-storage: "100Mi"
+            limits:
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noo-mail
+  namespace: noo-mail
+spec:
+  selector:
+    app: noo-mail
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: noo-mail
+  namespace: noo-mail
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: mail.noo.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: noo-mail
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - mail.noo.eu
+      secretName: noo-mail-tls

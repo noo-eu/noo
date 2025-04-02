@@ -86,9 +86,10 @@ export default async function OidcConsentPage({
   if (missingScopes.length > 0) {
     // We're sent to /consent if we're missing scopes or claims
     if (
-      scopes.length === 1 &&
-      scopes[0] === "openid" &&
-      claimKeys.length === 0
+      (scopes.length === 1 &&
+        scopes[0] === "openid" &&
+        claimKeys.length === 0) ||
+      client.internalClient
     ) {
       return redirect("/oidc/continue?uid=" + userId);
     }

@@ -101,6 +101,7 @@ async function authorizationCodeFlow(
       token_type: "Bearer",
       expires_in: 3600,
       id_token: idToken,
+      ...(await configuration.enrichTokenResponse(client, code)),
     });
   } else {
     // Fallback to OAuth 2.0 behavior
@@ -108,6 +109,7 @@ async function authorizationCodeFlow(
       access_token: at.id,
       token_type: "Bearer",
       expires_in: 3600,
+      ...(await configuration.enrichTokenResponse(client, code)),
     });
   }
 }

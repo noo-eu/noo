@@ -65,6 +65,21 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       expires 30d;
       add_header Cache-Control "public, max-age=2592000";
+
+      if ($http_origin ~* (https?://(.*\.noo\.eu|localhost(:\d+)?))) {
+        add_header 'Access-Control-Allow-Origin' "$http_origin" always;
+        add_header 'Access-Control-Allow-Methods' 'GET, HEAD, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Content-Type' always;
+      }
+
+      if ($request_method = OPTIONS) {
+        add_header 'Access-Control-Allow-Origin' "$http_origin" always;
+        add_header 'Access-Control-Allow-Methods' 'GET, HEAD, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Content-Type' always;
+        add_header 'Content-Length' 0 always;
+        add_header 'Content-Type' 'text/plain' always;
+        return 204;
+      }
 spec:
   tls:
     - hosts:

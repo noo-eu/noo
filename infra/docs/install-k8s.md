@@ -64,6 +64,8 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
   --set controller.ingressClass=nginx \
   --set controller.ingressClassResource.name=nginx \
   --set controller.ingressClassResource.default=true \
+  --set controller.allowSnippetAnnotations=true \
+  --set controller.config.annotations-risk-level=Critical \
   --set-string controller.nodeSelector.ingress-ready=true \
   --set controller.extraArgs.enable-ssl-passthrough=""
 ```

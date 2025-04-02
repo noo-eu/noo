@@ -41,6 +41,7 @@ export type AuthorizationCode = {
   redirectUri: string;
   scopes: string[];
   userId: string;
+  authorizationContext?: unknown;
 };
 
 export type AccessToken = {
@@ -163,6 +164,18 @@ export type IdPConfiguration = {
     claims: string[],
   ) => Promise<Record<string, unknown>>;
   getSessionStateValue: () => Promise<string>;
+
+  /**
+   * Allows the IdP to add custom fields to the token response. This can be used
+   * for non-standard functionality.
+   * @param client
+   * @param code
+   * @returns
+   */
+  enrichTokenResponse: (
+    client: Client,
+    code: AuthorizationCode,
+  ) => Promise<Record<string, unknown>>;
 };
 
 const configuration: IdPConfiguration = {
@@ -182,7 +195,10 @@ const configuration: IdPConfiguration = {
     "zoneinfo",
     "updated_at",
   ],
-} as IdPConfiguration;
+  enrichTokenResponse: async () => {
+    return {} as Record<string, unknown>;
+  },
+} as unknown as IdPConfiguration;
 
 export function configureIdP(config: Partial<IdPConfiguration>) {
   Object.assign(configuration, config);
