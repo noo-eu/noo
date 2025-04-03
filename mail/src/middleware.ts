@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
   // modern browsers, but help with compatibility with older browsers
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
-    default-src 'self';
+    default-src 'self' https://static.noo.eu;
     script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https:;
     style-src 'nonce-${nonce}';
     img-src 'self' blob: data:;
