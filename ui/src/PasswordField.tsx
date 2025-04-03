@@ -1,18 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "use-intl";
 import { TextField, TextFieldProps } from "./TextField";
 
-export type PasswordFieldProps = Omit<TextFieldProps, "type">;
+export type PasswordFieldProps = Omit<TextFieldProps, "type"> & {
+  t: (key: string) => string;
+};
 
 export function PasswordField(props: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
-  const t = useTranslations("common.passwordField");
+  const { t, ...rest } = props;
 
   return (
     <TextField
-      {...props}
+      {...rest}
       type={visible ? "text" : "password"}
       wrapper={{ className: "relative" }}
       append={

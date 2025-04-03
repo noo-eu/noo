@@ -1,7 +1,7 @@
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { afterAll, afterEach, beforeAll, beforeEach, expect, vi } from "vitest";
 import { configMocks } from "jsdom-testing-mocks";
+import { afterAll, afterEach, beforeAll, beforeEach, expect, vi } from "vitest";
 
 expect.extend(matchers);
 afterEach(cleanup);
@@ -21,6 +21,12 @@ vi.mock("next-intl", async (importOriginal) => ({
   }),
   useLocale: vi.fn(() => "en"),
   createTranslator: vi.fn(() => mockT),
+}));
+
+vi.mock("use-intl", async (importOriginal) => ({
+  ...(await importOriginal()),
+  useTranslations: vi.fn(() => mockT),
+  useLocale: vi.fn(() => "en"),
 }));
 
 vi.resetModules();

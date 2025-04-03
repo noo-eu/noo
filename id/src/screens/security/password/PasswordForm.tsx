@@ -1,14 +1,14 @@
 "use client";
 
 import { useAuth } from "@/auth/authContext";
+import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
 import { Button, PasswordField } from "@noo/ui";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { PasswordRater } from "./PasswordRater";
-import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
 import { PasswordBreachWarning } from "./PasswordBreachWarning";
-import { usePasswordStrength, useZxcvbnConfig } from "./usePasswordStrength";
+import { PasswordRater } from "./PasswordRater";
 import { usePasswordForm } from "./usePasswordForm";
+import { usePasswordStrength, useZxcvbnConfig } from "./usePasswordStrength";
 
 export function PasswordForm() {
   const user = useAuth();
@@ -19,6 +19,7 @@ export function PasswordForm() {
 
   const t = useTranslations("security");
   const commonT = useTranslations("common");
+  const passwordT = useTranslations("common.passwordField");
 
   const [password, setPassword] = useState<string>("");
   const strength = usePasswordStrength(password);
@@ -47,6 +48,7 @@ export function PasswordForm() {
           onChange={(e) => setPassword(e.target.value)}
           autoFocus
           autoComplete="new-password"
+          t={passwordT}
           min={10}
         />
 
@@ -65,6 +67,7 @@ export function PasswordForm() {
             errors?.["new-password-confirmation"] &&
             t(`password.errors.${errors["new-password-confirmation"]}`)
           }
+          t={passwordT}
           autoComplete="new-password"
         />
 

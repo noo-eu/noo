@@ -29,6 +29,7 @@ export default function SignupPage() {
 
   const t = useTranslations("signup");
   const commonT = useTranslations("common");
+  const passwordT = useTranslations("common.passwordField");
 
   return (
     <>
@@ -43,6 +44,7 @@ export default function SignupPage() {
           defaultValue={state.values.password}
           error={state.errors.password}
           autoComplete="new-password"
+          t={passwordT}
           autoFocus
         />
 

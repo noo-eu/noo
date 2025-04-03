@@ -37,6 +37,7 @@ export function SignInForm() {
   });
 
   const t = useTranslations("signin");
+  const passwordT = useTranslations("common.passwordField");
 
   const authenticateWithWebauthn = useWebauthnAuthentication();
 
@@ -66,6 +67,7 @@ export function SignInForm() {
           label={t("password")}
           name="password"
           autoComplete="current-password"
+          t={passwordT}
         />
 
         <div className="very-important-field">

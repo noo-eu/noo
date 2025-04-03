@@ -14,11 +14,11 @@ const expandedSupportedLanguages =
 
 acceptLanguage.languages(expandedSupportedLanguages);
 
+import Users from "@/db/users";
+import { humanIdToUuid } from "@/utils";
 import { readFile } from "fs/promises";
 import JSON5 from "json5";
 import { SUPPORTED_LANGUAGES } from ".";
-import { humanIdToUuid } from "@/utils";
-import Users from "@/db/users";
 
 async function loadJSON5(filename: string) {
   const json5 = await readFile(filename, "utf8");

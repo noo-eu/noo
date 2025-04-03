@@ -47,9 +47,6 @@
     "typescript": "^5",
     "vitest": "^3.0.8"
   },
-  "peerDependencies": {
-    "next-intl": "*"
-  },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
