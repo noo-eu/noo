@@ -42,7 +42,7 @@ async function getUserProfile(nooSession: {
   sessionId: string;
   userId: string;
 }) {
-  const response = await fetch(`${process.env.NOO_ID_INTERNAL_URL}/_noo/user`, {
+  const response = await fetch(`${process.env.NOO_ID_URL}/_noo/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
