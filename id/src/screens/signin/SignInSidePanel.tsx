@@ -27,7 +27,7 @@ export async function SignInSidePanel() {
   return (
     <div>
       <Image
-        src="/favicon.svg"
+        src="https://static.noo.eu/favicon.svg"
         alt="noo"
         className="w-16 h-16 mb-8"
         width={64}

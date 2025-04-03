@@ -35,10 +35,10 @@ jobs:
         FAIL=0
 
         echo "Running Typecheck..."
-        bun tsc || FAIL=1
+        bun typecheck || FAIL=1
 
         echo "Running Next.js lint..."
-        bun next lint || FAIL=1
+        bun eslint || FAIL=1
 
         echo "Running Prettier check..."
         bun prettier --check . || FAIL=1
@@ -151,5 +151,3 @@ jobs:
         push: true
         file: mail/Dockerfile
         tags: ghcr.io/noo-eu/mail:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max

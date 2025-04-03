@@ -39,6 +39,7 @@ export async function POST(request: Request) {
         pronouns: session.user.pronouns,
         tenant: session.user.tenant?.id,
         tenantDomain: session.user.tenant?.domain,
+        locale: session.user.locale,
       },
     }),
     {

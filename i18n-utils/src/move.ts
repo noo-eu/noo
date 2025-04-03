@@ -1,5 +1,4 @@
 import { deleteKey, load, save, setKey } from "./common";
-import { existsSync, mkdirSync } from "fs";
 
 export async function move(
   languages: string[],
@@ -9,13 +8,6 @@ export async function move(
   targetKey: string,
 ) {
   for (const language of languages) {
-    // const targetFile = `src/messages/${targetDirectory}/${language}.json`;
-
-    // const dir = targetFile.split("/").slice(0, -1).join("/");
-    // if (!existsSync(dir)) {
-    //   mkdirSync(dir, { recursive: true });
-    // }
-
     const source = await load(sourceDirectory, language);
     const target = await load(targetDirectory, language);
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if [ "${*}" == "node ./server.js" ]; then
-  npx drizzle-kit migrate
+if [ "${*}" == "bun ./server.js" ]; then
+  bun run drizzle-kit migrate
 fi
 
 exec "$@"
+

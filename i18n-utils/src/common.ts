@@ -1,15 +1,28 @@
-import { exists } from "fs/promises";
-import { writeFile } from "fs/promises";
-import { readFile } from "fs/promises";
+import fs from "fs";
+import { exists, readFile, writeFile } from "fs/promises";
 import json5 from "json5";
 import path from "path";
 
-import { sort } from "./sort";
 import { readdir } from "fs/promises";
+import { sort } from "./sort";
 
 export type TranslationFile = {
   [key: string]: string | string[] | TranslationFile;
 };
+
+function basePath() {
+  if (fs.existsSync("src/messages")) {
+    return "src/messages";
+  } else if (fs.existsSync("messages")) {
+    return "messages";
+  } else if (fs.existsSync("i18n/messages")) {
+    return "i18n/messages";
+  } else if (fs.existsSync("i18n")) {
+    return "i18n";
+  }
+
+  throw new Error("Could not find messages directory");
+}
 
 export async function projectRoot() {
   const cwd = process.cwd();
@@ -90,7 +103,7 @@ export async function load(
   language: string,
 ): Promise<TranslationFile> {
   const root = await projectRoot();
-  const file = path.join(root, `src/messages/${dir}/${language}.json`);
+  const file = path.join(root, `${basePath()}/${dir}/${language}.json`);
 
   try {
     const sourceContent = await readFile(file, "utf-8");
@@ -108,7 +121,7 @@ export async function save(
   content: TranslationFile,
 ) {
   const root = await projectRoot();
-  const file = path.join(root, `src/messages/${dir}/${language}.json`);
+  const file = path.join(root, `${basePath()}/${dir}/${language}.json`);
   const json = JSON.stringify(sort(content), null, 2) + "\n";
 
   await writeFile(file, json);
@@ -118,7 +131,7 @@ export async function rootDirectories() {
   const root = await projectRoot();
 
   // List all files in the src/messages directory.
-  const files = await readdir(path.join(root, "src/messages"), {
+  const files = await readdir(path.join(root, basePath()), {
     recursive: true,
   });
 
@@ -137,7 +150,7 @@ export async function fixDirectories(languages: string[]) {
       // Ensure that all directories have all languages.
       const fullPath = path.join(
         root,
-        "src/messages",
+        basePath(),
         directory,
         `${language}.json`,
       );
