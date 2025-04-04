@@ -3,19 +3,16 @@ ARG NODE_BUILDER_VERSION=22.14.0
 
 FROM oven/bun:${BUN_VERSION} AS base
 
-WORKDIR /app
+WORKDIR /noo
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS deps
 
-COPY i18n-utils/package.json i18n-utils/package.json
-COPY id/package.json id/package.json
-COPY mail/package.json mail/package.json
-COPY lib/package.json lib/package.json
-COPY oidc-server/package.json oidc-server/package.json
-COPY ui/package.json ui/package.json
-COPY package.json bun.lock ./
+RUN --mount=type=bind,target=/context \
+  cd /context; \
+  find . -name "package.json" -not -path "./node_modules/*" -maxdepth 4 -exec cp --parents "{}" /noo \;
+COPY bun.lock bun.lock
 
 RUN bun install --frozen-lockfile
 
@@ -27,14 +24,14 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV DATABASE_URL=postgres:///build
 
-COPY --from=deps /app/node_modules /app/node_modules
+COPY --from=deps /noo/node_modules /noo/node_modules
 
-COPY ui /app/ui
-COPY lib /app/lib
-COPY id /app/id
-COPY oidc-server /app/oidc-server
+COPY packages/ui /noo/packages/ui
+COPY packages/lib /noo/packages/lib
+COPY packages/oidc-server /noo/packages/oidc-server
+COPY apps/id /noo/apps/id
 
-WORKDIR /app/id
+WORKDIR /noo/apps/id
 
 # dummy value for build
 ENV PAIRWISE_SALT=1
@@ -49,17 +46,17 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system app && adduser --system app
 
-COPY --from=deps --chown=root:root --chmod=555 /app/node_modules /app/node_modules
-COPY --from=build --chown=root:root --chmod=555 /app/id/.next/standalone .
-COPY --from=build --chown=root:root --chmod=555 /app/id/.next/static ./.next/static
-COPY --from=build --chown=root:root --chmod=555 /app/id/public ./public
+COPY --from=deps --chown=root:root --chmod=555 /noo/node_modules /noo/node_modules
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/.next/standalone .
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/.next/static ./.next/static
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/public ./public
 
-COPY --from=build --chown=root:root --chmod=555 /app/id/drizzle.config.prod.ts ./drizzle.config.ts
-COPY --from=build --chown=root:root --chmod=555 /app/id/src/db/schema.ts ./schema.ts
-COPY --from=build --chown=root:root --chmod=555 /app/id/drizzle ./drizzle
-COPY --from=build --chown=root:root --chmod=555 /app/id/docker-entrypoint.sh .
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/drizzle.config.prod.ts ./drizzle.config.ts
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/src/db/schema.ts ./schema.ts
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/drizzle ./drizzle
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/docker-entrypoint.sh .
 
-COPY --from=build --chown=root:root --chmod=555 /app/id/src/messages ./src/messages
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/src/messages ./src/messages
 
 USER app
 

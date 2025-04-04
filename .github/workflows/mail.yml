@@ -149,5 +149,5 @@ jobs:
       with:
         context: .
         push: true
-        file: mail/Dockerfile
+        file: apps/mail/Dockerfile
         tags: ghcr.io/noo-eu/mail:latest

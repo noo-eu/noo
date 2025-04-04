@@ -17,11 +17,11 @@ RUN --mount=type=bind,target=/context \
 COPY bun.lock bun.lock
 RUN bun install --frozen-lockfile
 
-COPY ui ./ui
-COPY lib ./lib
-COPY mail ./mail
+COPY packages/ui ./packages/ui
+COPY packages/lib ./packages/lib
+COPY apps/mail ./apps/mail
 
-WORKDIR /noo/mail
+WORKDIR /noo/apps/mail
 
 RUN bun run build
 
@@ -30,7 +30,7 @@ FROM base AS production
 
 RUN addgroup --system app && adduser --system app
 
-COPY --from=build --chown=root:root --chmod=555 /noo/mail /noo
+COPY --from=build --chown=root:root --chmod=555 /noo/apps/mail /noo
 COPY --from=build --chown=root:root --chmod=555 /noo/node_modules /noo/node_modules
 
 ENTRYPOINT ["./docker-entrypoint.sh"]

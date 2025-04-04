@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot:
     process.env.NODE_ENV === "development"
-      ? path.join(__dirname, "../")
+      ? path.join(__dirname, "../../")
       : undefined,
   images: {
     remotePatterns: [
