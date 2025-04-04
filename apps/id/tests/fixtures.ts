@@ -1,9 +1,9 @@
-import db from "@/db";
-import OidcClients from "@/db/oidc_clients";
-import * as schema from "@/db/schema";
-import Tenants from "@/db/tenants";
-import Users from "@/db/users";
 import { reset } from "drizzle-seed";
+import db from "~/db.server";
+import OidcClients from "~/db.server/oidc_clients";
+import * as schema from "~/db.server/schema";
+import Tenants from "~/db.server/tenants";
+import Users from "~/db.server/users.server";
 
 async function main() {
   await reset(db, schema);

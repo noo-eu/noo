@@ -1,6 +1,7 @@
 import { err, ok, Result } from "neverthrow";
 import { decodeIdToken } from "../idToken";
-import { AuthorizationRequest, claimsSchema } from "../types";
+import { type AuthorizationRequest, claimsSchema } from "../types";
+import { requestParams } from "../utils";
 import { returnToClient } from "./finish";
 import { preflightCheck } from "./preflight";
 import { authorizationAny } from "./promptAny";
@@ -30,14 +31,15 @@ export type AuthorizationResult = {
  * Once the essential parameters are accepted, further errors are returned to
  * the client as a response. These are ok() values.
  *
- * @param originalParams - The request parameters from the query string or
- * request body.
+ * @param request - The request object containing the OIDC authorization request.
  * @returns a Result with the response to return to the client, or an error
  * string, only in case of a critical error.
  */
 export async function performOidcAuthorization(
-  originalParams: Record<string, string | undefined>,
+  request: Request,
 ): Promise<Result<AuthorizationResult, string>> {
+  const originalParams = await requestParams(request);
+
   const preflightResult = await preflightCheck(originalParams);
   if (preflightResult.isErr()) {
     return err(preflightResult.error);
@@ -107,7 +109,7 @@ export async function performOidcAuthorization(
 
   switch (params.prompt) {
     case "none":
-      return ok(await authorizationNone(params, client));
+      return ok(await authorizationNone(request, params, client));
     case "select_account":
       // We are requested to prompt the user to select an account. This could be
       // used to switch between multiple accounts.
@@ -126,7 +128,7 @@ export async function performOidcAuthorization(
 
     // Fall through
     default:
-      return ok(await authorizationAny(params, client));
+      return ok(await authorizationAny(request, params, client));
   }
 }
 

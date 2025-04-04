@@ -38,9 +38,10 @@ export default function handleRequest(
     const nonce = crypto.randomBytes(16).toString("hex");
     const { pipe, abort } = renderToPipeableStream(
       <NonceProvider value={nonce}>
-        <ServerRouter context={routerContext} url={request.url} />
+        <ServerRouter context={routerContext} url={request.url} nonce={nonce} />
       </NonceProvider>,
       {
+        nonce,
         [readyOption]() {
           shellRendered = true;
           const body = new PassThrough();

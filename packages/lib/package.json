@@ -12,12 +12,14 @@
     }
   },
   "scripts": {
-    "test:unit": "TEST=1 bun vitest run"
+    "test:unit": "TEST=1 pnpm vitest run"
   },
-  "dependencies": {},
+  "dependencies": {
+    "accept-language-parser": "1.5.0"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@types/bun": "^1.2.8",
+    "@types/accept-language-parser": "^1.5.7",
     "@types/node": "^22.13.16",
     "@vitest/coverage-istanbul": "^3.1.1",
     "eslint": "^9.23.0",
@@ -27,6 +29,6 @@
     "vitest": "^3.1.1"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "pnpm prettier --write --ignore-unknown"
   }
 }

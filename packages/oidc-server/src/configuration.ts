@@ -1,5 +1,5 @@
-import { JSONWebKeySet } from "jose";
-import { Claims } from "./types";
+import { type JSONWebKeySet } from "jose";
+import { type Claims } from "./types";
 
 export type Client = {
   // Each client will be linked to a specific issuer
@@ -125,9 +125,10 @@ export type IdPConfiguration = {
   }: {
     alg: string;
   }) => Promise<{ key: CryptoKey; kid: string }>;
-  getActiveSessions: (maxAge?: number) => Promise<Session[]>;
+  getActiveSessions: (request: Request, maxAge?: number) => Promise<Session[]>;
   encodeSubValue: (sub: string) => string;
   createAuthorizationCode: (
+    request: Request,
     params: AuthorizationCode,
   ) => Promise<AuthorizationCode>;
   /**
@@ -163,7 +164,7 @@ export type IdPConfiguration = {
     userId: string,
     claims: string[],
   ) => Promise<Record<string, unknown>>;
-  getSessionStateValue: () => Promise<string>;
+  getSessionStateValue: (request: Request) => Promise<string>;
 
   /**
    * Allows the IdP to add custom fields to the token response. This can be used
@@ -178,7 +179,7 @@ export type IdPConfiguration = {
   ) => Promise<Record<string, unknown>>;
 };
 
-const configuration: IdPConfiguration = {
+let configuration: IdPConfiguration = {
   grantedScopes: ["openid"],
   grantedClaims: [
     "acr",
@@ -201,7 +202,7 @@ const configuration: IdPConfiguration = {
 } as unknown as IdPConfiguration;
 
 export function configureIdP(config: Partial<IdPConfiguration>) {
-  Object.assign(configuration, config);
+  configuration = Object.assign(configuration, config);
 }
 
 export default configuration;

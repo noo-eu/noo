@@ -14,7 +14,6 @@ on:
 
 env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_mail_test
-  NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
   lint:

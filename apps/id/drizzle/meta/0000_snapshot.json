@@ -1,11 +1,11 @@
 {
-  "id": "788646af-8a99-41ec-8b93-2004a7547cc7",
+  "id": "95cee6d5-5914-4b23-95a6-75c1dcb35624",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.tenants": {
-      "name": "tenants",
+    "public.sessions": {
+      "name": "sessions",
       "schema": "",
       "columns": {
         "id": {
@@ -15,107 +15,30 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "name": {
-          "name": "name",
+        "verifier_digest": {
+          "name": "verifier_digest",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "domain": {
-          "name": "domain",
-          "type": "text",
+        "session_data": {
+          "name": "session_data",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": true
+        },
+        "last_used_at": {
+          "name": "last_used_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "tenants_domain_unique": {
-          "name": "tenants_domain_unique",
-          "nullsNotDistinct": false,
-          "columns": ["domain"]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "tenant_id": {
-          "name": "tenant_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "username": {
-          "name": "username",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "normalized_username": {
-          "name": "normalized_username",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "password_digest": {
-          "name": "password_digest",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "otp_secret": {
-          "name": "otp_secret",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "first_name": {
-          "name": "first_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "last_name": {
-          "name": "last_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "users_tenant_id_tenants_id_fk": {
-          "name": "users_tenant_id_tenants_id_fk",
-          "tableFrom": "users",
-          "tableTo": "tenants",
-          "columnsFrom": ["tenant_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_tenant_id_normalized_username": {
-          "name": "users_tenant_id_normalized_username",
-          "nullsNotDistinct": true,
-          "columns": ["tenant_id", "normalized_username"]
-        }
-      },
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

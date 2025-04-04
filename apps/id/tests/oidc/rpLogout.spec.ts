@@ -1,4 +1,4 @@
-import { uuidToHumanId } from "@/utils";
+import { uuidToHumanId } from "@noo/lib/humanIds";
 import { expect, test } from "@playwright/test";
 
 test.describe("Private provider", () => {
@@ -16,7 +16,7 @@ test.describe("Private provider", () => {
         "00000000-0000-0000-0000-000000000002",
         "oidc",
       );
-      await page.goto("/oidc/org_1/end_session?client_id=" + clientId);
+      await page.goto("/oidc/org_1/end-session?client_id=" + clientId);
 
       await expect(
         page.getByText("You signed out from Acme Sarl's app"),

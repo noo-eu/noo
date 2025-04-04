@@ -31,14 +31,14 @@ then
 fi
 
 echo "Installing asdf plugins..."
-asdf plugin add bun
+asdf plugin add pnpm
 asdf plugin add nodejs
 
 echo "Installing required runtime versions..."
 asdf install
 
 echo "Installing dependencies..."
-bun install
+pnpm install
 
 echo "Installing pre-commit hooks..."
-bun prepare
+pnpm prepare

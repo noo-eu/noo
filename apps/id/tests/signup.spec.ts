@@ -18,7 +18,7 @@ test.describe("Individual signup", () => {
 
     await page.click("text=Accept and continue");
 
-    await expect(page.getByText("Thank you!")).toBeVisible();
+    await expect(page.getByText("Welcome John")).toBeVisible();
   });
 
   test("Rushing through the end redirects to the start", async ({ page }) => {

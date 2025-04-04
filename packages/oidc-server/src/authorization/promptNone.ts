@@ -1,10 +1,10 @@
-import { Client, Session } from "../configuration";
+import type { Client, Session } from "../configuration";
 import { verifyConsent } from "../consent";
 import { buildSubClaim } from "../idToken";
-import { AuthorizationRequest, Claims } from "../types";
+import type { AuthorizationRequest, Claims } from "../types";
 import { getActiveSessions } from "../utils";
 import { returnToClient } from "./finish";
-import { AuthorizationResult } from "./request";
+import type { AuthorizationResult } from "./request";
 import { buildAuthorizationResponse } from "./response";
 
 /**
@@ -21,10 +21,11 @@ import { buildAuthorizationResponse } from "./response";
  *   client, but the response may be an error.
  */
 export async function authorizationNone(
+  request: Request,
   params: AuthorizationRequest,
   client: Client,
 ): Promise<AuthorizationResult> {
-  let sessions = await getActiveSessions(params.max_age);
+  let sessions = await getActiveSessions(request, params.max_age);
 
   /**
    * The spec leaves open a small undefined behaviour. Multiple sessions could
@@ -62,6 +63,7 @@ export async function authorizationNone(
       return returnToClient(params, { error: "consent_required" });
     }
     const responseParams = await buildAuthorizationResponse(
+      request,
       params,
       client,
       sessions[0],
@@ -77,6 +79,7 @@ export async function authorizationNone(
   }
 
   const responseParams = await buildAuthorizationResponse(
+    request,
     params,
     client,
     session,

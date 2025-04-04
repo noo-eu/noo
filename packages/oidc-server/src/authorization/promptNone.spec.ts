@@ -60,7 +60,11 @@ describe("authorizationNone", () => {
   });
 
   it("returns login_required error if no active sessions are found", async () => {
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
     expect(result).toEqual({
@@ -79,7 +83,11 @@ describe("authorizationNone", () => {
 
     vi.spyOn(configuration, "getActiveSessions").mockResolvedValue([session1]);
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
     expect(result).toEqual({
@@ -100,10 +108,17 @@ describe("authorizationNone", () => {
       .spyOn(configuration, "getActiveSessions")
       .mockImplementation(async () => []);
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(getActiveSessionsMock).toHaveBeenCalledTimes(1);
-    expect(getActiveSessionsMock).toHaveBeenCalledWith(maxAgeSeconds);
+    expect(getActiveSessionsMock).toHaveBeenCalledWith(
+      expect.any(Object),
+      maxAgeSeconds,
+    );
 
     expect(configuration.getConsent).not.toHaveBeenCalled();
     expect(configuration.createAuthorizationCode).not.toHaveBeenCalled();
@@ -131,7 +146,11 @@ describe("authorizationNone", () => {
       claims: [],
     });
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
 
@@ -164,7 +183,11 @@ describe("authorizationNone", () => {
       claims: [],
     });
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
     expect(configuration.getConsent).toHaveBeenCalledWith(
@@ -194,7 +217,11 @@ describe("authorizationNone", () => {
       id: expectedAuthCode,
     } as AuthorizationCode);
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
     expect(configuration.getConsent).toHaveBeenCalledWith(
@@ -203,6 +230,7 @@ describe("authorizationNone", () => {
     );
     expect(configuration.createAuthorizationCode).toHaveBeenCalledTimes(1);
     expect(configuration.createAuthorizationCode).toHaveBeenCalledWith(
+      expect.any(Object),
       expect.objectContaining({
         clientId: testClient.clientId,
         userId: session1.userId,
@@ -250,7 +278,11 @@ describe("authorizationNone", () => {
       id: expectedAuthCode,
     } as AuthorizationCode);
 
-    const result = await authorizationNone(testParams, testClient);
+    const result = await authorizationNone(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
 
@@ -266,6 +298,7 @@ describe("authorizationNone", () => {
     // Code should be created for the consenting session (session1)
     expect(configuration.createAuthorizationCode).toHaveBeenCalledTimes(1);
     expect(configuration.createAuthorizationCode).toHaveBeenCalledWith(
+      expect.any(Object),
       expect.objectContaining({
         clientId: testClient.clientId,
         userId: session1.userId, // <-- Correct user
@@ -290,7 +323,11 @@ describe("authorizationNone", () => {
       const error = new Error("Database unavailable");
       vi.spyOn(configuration, "getActiveSessions").mockRejectedValueOnce(error);
 
-      const result = await authorizationNone(testParams, testClient);
+      const result = await authorizationNone(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).not.toHaveBeenCalled();
@@ -310,7 +347,11 @@ describe("authorizationNone", () => {
       ]);
       vi.spyOn(configuration, "getConsent").mockRejectedValueOnce(error);
 
-      const result = await authorizationNone(testParams, testClient);
+      const result = await authorizationNone(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).toHaveBeenCalledWith(
@@ -339,7 +380,11 @@ describe("authorizationNone", () => {
         error,
       );
 
-      const result = await authorizationNone(testParams, testClient);
+      const result = await authorizationNone(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).toHaveBeenCalledWith(

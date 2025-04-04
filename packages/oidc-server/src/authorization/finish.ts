@@ -1,5 +1,5 @@
-import { AuthorizationRequest } from "../types";
-import { AuthorizationResult } from "./request";
+import type { AuthorizationRequest } from "../types";
+import type { AuthorizationResult } from "./request";
 
 function returnUrl(
   response_mode: "query" | "fragment",

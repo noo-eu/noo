@@ -1,68 +1,53 @@
-ARG BUN_VERSION=1.2.8
-ARG NODE_BUILDER_VERSION=22.14.0
+ARG NODE_VERSION=22.14.0
+ARG PNPM_VERSION=10.7.1
+ARG SENTRY_AUTH_TOKEN
 
-FROM oven/bun:${BUN_VERSION} AS base
+# Build stage
+FROM node:${NODE_VERSION}-slim AS base
 
 WORKDIR /noo
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 
-FROM base AS deps
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack prepare pnpm@${PNPM_VERSION} --activate
+RUN corepack enable
+RUN pnpm config set inject-workspace-packages=true
 
-RUN --mount=type=bind,target=/context \
-  cd /context; \
-  find . -name "package.json" -not -path "./node_modules/*" -maxdepth 4 -exec cp --parents "{}" /noo \;
-COPY bun.lock bun.lock
+FROM base AS build
 
-RUN bun install --frozen-lockfile
+# Copy the entire monorepo
+COPY . .
 
-# Note: there seem to be a bug between bun and nextjs.
-# Builds are happening on Node, for now.
-FROM node:${NODE_BUILDER_VERSION} AS build
+RUN pnpm deploy --filter id dist
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV DATABASE_URL=postgres:///build
+WORKDIR /noo/dist
+RUN pnpm build
 
-COPY --from=deps /noo/node_modules /noo/node_modules
+# Compile the main express server file
+RUN pnpm tsc --noEmit false --noCheck --module nodenext \
+  ./server.ts ./instrument.server.ts \
+  ./drizzle.config.prod.ts ./app/db.server/schema.ts
 
-COPY packages/ui /noo/packages/ui
-COPY packages/lib /noo/packages/lib
-COPY packages/oidc-server /noo/packages/oidc-server
-COPY apps/id /noo/apps/id
+# Clean up unnecessary dependencies
+RUN pnpm prune --prod
 
-WORKDIR /noo/apps/id
+# Final stage
+FROM base AS production
 
-# dummy value for build
-ENV PAIRWISE_SALT=1
-
-RUN npm run build -- --no-lint
-
-FROM node:${NODE_BUILDER_VERSION} AS final
-
-WORKDIR /app
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
+ENV PORT=3000
 RUN addgroup --system app && adduser --system app
 
-COPY --from=deps --chown=root:root --chmod=555 /noo/node_modules /noo/node_modules
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/.next/standalone .
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/.next/static ./.next/static
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/public ./public
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/build ./build
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/server.js /noo/dist/instrument.server.js ./
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/node_modules ./node_modules
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/messages ./messages
 
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/drizzle.config.prod.ts ./drizzle.config.ts
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/src/db/schema.ts ./schema.ts
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/drizzle ./drizzle
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/docker-entrypoint.sh .
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/drizzle.config.prod.js ./drizzle.config.js
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/app/db.server/schema.js ./app/db/schema.js
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/drizzle ./drizzle
 
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/id/src/messages ./src/messages
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/docker-entrypoint.sh .
 
-USER app
-
-EXPOSE 3000
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
-
-ENTRYPOINT [ "./docker-entrypoint.sh" ]
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["node", "./server.js"]

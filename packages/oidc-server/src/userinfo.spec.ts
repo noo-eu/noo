@@ -43,7 +43,11 @@ const makeUserinfoRequest = ({
   let requestBody: string | null = null;
   if (method === "POST" && body) {
     defaultHeaders["Content-Type"] = "application/x-www-form-urlencoded";
-    requestBody = new URLSearchParams(body).toString();
+    const qs = new URLSearchParams();
+    for (const [key, value] of Object.entries(body)) {
+      qs.append(key, value);
+    }
+    requestBody = qs.toString();
   }
 
   return new Request(`${configuration.baseUrl}/userinfo`, {

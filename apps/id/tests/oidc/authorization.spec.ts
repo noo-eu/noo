@@ -1,4 +1,4 @@
-import { uuidToHumanId } from "@/utils";
+import { uuidToHumanId } from "@noo/lib/humanIds";
 import { expect, test } from "@playwright/test";
 
 test.describe("OpenID Authorization endpoint", () => {
@@ -27,7 +27,7 @@ test.describe("OpenID Authorization endpoint", () => {
         await page.fill('input[name="password"]', "super-s3cret");
         await page.getByTestId("signinSubmit").click();
 
-        // We should now be on /oidc/consent or /oidc/continue
+        // We should now be on /oidc/consent
         await page.getByTestId("consentSubmit").click();
 
         await expect(page.getByText('"method"')).toBeVisible();

@@ -21,7 +21,7 @@ The noo project is building an European ecosystem of digital products. Read more
 
 ## Development
 
-This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/) to manage the versions of our runtimes. You can run our setup script to ensure your development environment is ready.
+This is a [React Router](https://reactrouter.com/) (Framework) app. We use [asdf](https://asdf-vm.com/) to manage the versions of our runtimes. You can run our setup script to ensure your development environment is ready.
 
 - **Clone the monorepo and navigate to the directory:**
 
@@ -38,17 +38,17 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
 
   This will:
 
-  - install asdf and its bun plugin
-  - install the required versions of Bun
+  - install asdf and its pnpm plugin
+  - install the required versions of pnpm
   - install the application dependencies
   - install a pre-commit hook for formatting
 
 - **Prepare the development database:**
 
   ```bash
-  cd id
+  cd apps/id
   createdb noo_id
-  bun db:migrate
+  pnpm db:migrate
   ```
 
 - **Generate your key set:**
@@ -56,30 +56,30 @@ This is a [Next.js](https://nextjs.org/) app. We use [asdf](https://asdf-vm.com/
   An OIDC IdP needs a set of keys to sign tokens.
 
   ```bash
-  bun run keys:rotate
+  pnpm run keys:rotate
   ```
 
 - **Start the development server:**
 
   ```bash
-  bun dev
+  pnpm dev
   ```
 
 - Visit [http://localhost:13000](http://localhost:13000) to access the application.
 
 ### Serving over HTTPS
 
-For strict OIDC compliance, the IdP must be served over HTTPS. To enable this in development, Next.js relies on [mkcert](https://github.com/FiloSottile/mkcert) to generate a local CA and certificates. You can start a development server with HTTPS by running:
+For strict OIDC compliance, the IdP must be served over HTTPS. To enable this in development, we rely on [mkcert](https://github.com/FiloSottile/mkcert) to generate a local CA and certificates. You can start a development server with HTTPS by running:
 
 ```bash
-bun dev:tls
+pnpm dev:tls
 ```
 
 The first time you run this command, mkcert will create a local CA and install it in your system's trust store. You may be prompted to enter your password to allow this. Subsequent runs will not require this step.
 
 ### Testing
 
-We use [Playwright](https://playwright.dev/) for end-to-end testing.
+We use Vitest for Unit tests and [Playwright](https://playwright.dev/) for end-to-end testing.
 
 Before running the tests, create the test database:
 
@@ -90,25 +90,31 @@ createdb noo_id_test
 Ensure the schema is up to date:
 
 ```bash
-bun db:test:push
+pnpm db:test:push
 ```
 
 Load the test fixtures:
 
 ```bash
-bun db:test:fixtures
+pnpm db:test:fixtures
 ```
 
-Finally, run the tests:
+Run the unit tests:
 
 ```bash
-bun run test
+pnpm test:unit # or test:unit:watch
+```
+
+Finally run the end-to-end tests:
+
+```bash
+pnpm test:e2e
 ```
 
 To assist in debugging, you can run the tests in headful mode:
 
 ```bash
-bun run test:ui
+pnpm test:e2e:ui
 ```
 
 ## License

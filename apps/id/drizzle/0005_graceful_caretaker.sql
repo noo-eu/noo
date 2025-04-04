@@ -1,1 +1,0 @@
-ALTER TABLE "users" RENAME COLUMN "genderCustom" TO "gender_custom";

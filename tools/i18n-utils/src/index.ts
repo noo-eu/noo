@@ -1,15 +1,15 @@
-#!/usr/bin/env bun
+#!/usr/bin/env tsx
 
+import { checkMissing } from "./checkMissing";
 import { fixDirectories } from "./common";
 import { loadLanguages } from "./loadLanguages";
 import { getLLMClient } from "./models";
 import { move } from "./move";
 import { remove } from "./remove";
 import { show } from "./show";
-import { checkMissing } from "./checkMissing";
 import { translateMissing } from "./translateMissing";
 
-const { program } = require("commander");
+import { program } from "commander";
 
 const languages = await loadLanguages();
 

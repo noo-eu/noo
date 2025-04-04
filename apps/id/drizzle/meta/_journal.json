@@ -5,71 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1740583172437,
-      "tag": "0000_gigantic_genesis",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1740605168895,
-      "tag": "0001_grey_puma",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1740743169474,
-      "tag": "0002_outstanding_glorian",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1741446321700,
-      "tag": "0003_abnormal_orphan",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1741552597437,
-      "tag": "0004_brown_purifiers",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1742286257925,
-      "tag": "0005_graceful_caretaker",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1742561163640,
-      "tag": "0006_lazy_shadowcat",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1742765516210,
-      "tag": "0007_careless_thunderbolts",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1742813247357,
-      "tag": "0008_aromatic_stardust",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1743606112376,
-      "tag": "0009_slippery_kronos",
+      "when": 1743698528282,
+      "tag": "0000_tiresome_lady_ursula",
       "breakpoints": true
     }
   ]

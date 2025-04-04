@@ -1,9 +1,7 @@
 import fs from "fs";
-import { exists, readFile, writeFile } from "fs/promises";
 import json5 from "json5";
 import path from "path";
 
-import { readdir } from "fs/promises";
 import { sort } from "./sort";
 
 export type TranslationFile = {
@@ -31,7 +29,7 @@ export async function projectRoot() {
   // traverse back until we find a package.json file.
 
   let currentPath = cwd;
-  while (!(await exists(path.join(currentPath, "package.json")))) {
+  while (!fs.existsSync(path.join(currentPath, "package.json"))) {
     currentPath = path.join(currentPath, "..");
     if (currentPath === "/") {
       throw new Error("Could not find package.json");
@@ -106,7 +104,7 @@ export async function load(
   const file = path.join(root, `${basePath()}/${dir}/${language}.json`);
 
   try {
-    const sourceContent = await readFile(file, "utf-8");
+    const sourceContent = fs.readFileSync(file, "utf-8");
     return json5.parse(sourceContent);
   } catch (error) {
     // @ts-expect-error Error is not typed.
@@ -124,14 +122,14 @@ export async function save(
   const file = path.join(root, `${basePath()}/${dir}/${language}.json`);
   const json = JSON.stringify(sort(content), null, 2) + "\n";
 
-  await writeFile(file, json);
+  fs.writeFileSync(file, json);
 }
 
 export async function rootDirectories() {
   const root = await projectRoot();
 
   // List all files in the src/messages directory.
-  const files = await readdir(path.join(root, basePath()), {
+  const files = fs.readdirSync(path.join(root, basePath()), {
     recursive: true,
   });
 
@@ -155,7 +153,7 @@ export async function fixDirectories(languages: string[]) {
         `${language}.json`,
       );
 
-      if (await exists(fullPath)) {
+      if (fs.existsSync(fullPath)) {
         continue;
       }
 

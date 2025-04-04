@@ -1,10 +1,14 @@
 import { err, ok, Result } from "neverthrow";
-import configuration, { Client } from "../configuration";
+import configuration, { type Client } from "../configuration";
 import {
   RESPONSE_MODES_SUPPORTED,
   RESPONSE_TYPES_SUPPORTED,
 } from "../discovery";
-import { AuthorizationRequest, ResponseMode, ResponseType } from "../types";
+import type {
+  AuthorizationRequest,
+  ResponseMode,
+  ResponseType,
+} from "../types";
 
 /**
  * Performs early checks on the incoming request to determine if it is valid.

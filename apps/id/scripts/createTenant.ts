@@ -1,12 +1,10 @@
-import OidcClients from "@/db/oidc_clients";
-import Tenants from "@/db/tenants";
-import { uuidToHumanId } from "@/utils";
-import { randomBytes } from "crypto";
+import { uuidToHumanId } from "@noo/lib/humanIds";
+import Tenants from "~/db.server/tenants";
 
 if (process.argv.length < 3 || process.argv.length > 4) {
-  console.log("Usage: bun run ./scripts/createTenant.ts <name> [<domain>]");
+  console.log("Usage: pnpm tsx ./scripts/createTenant.ts <name> [<domain>]");
   console.log(
-    "Example: bun run ./scripts/createTenant.ts 'Acme Sarl' 'acme.fr'",
+    "Example: pnpm tsx ./scripts/createTenant.ts 'Acme Sarl' 'acme.fr'",
   );
   process.exit(1);
 }

@@ -52,6 +52,11 @@ const makeTokenRequest = ({
     }
   }
 
+  const qs = new URLSearchParams();
+  for (const key in filteredBody) {
+    qs.append(key, filteredBody[key]);
+  }
+
   return new Request(`${configuration.baseUrl}/token`, {
     // Use configured base URL
     method: "POST",
@@ -62,7 +67,7 @@ const makeTokenRequest = ({
       "X-Forwarded-Proto": "https",
       ...headers,
     },
-    body: new URLSearchParams(filteredBody).toString(),
+    body: qs.toString(),
   });
 };
 

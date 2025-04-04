@@ -6,5 +6,5 @@ id/scripts/
 id/test-results/
 id/tests/
 
-*/Dockerfile
-*/.dockerignode
+**/Dockerfile
+**/.dockerignore

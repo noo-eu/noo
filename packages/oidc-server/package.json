@@ -9,8 +9,8 @@
     }
   },
   "scripts": {
-    "test:unit": "TEST=1 bun vitest run",
-    "test:unit:watch": "TEST=1 bun vitest"
+    "test:unit": "TEST=1 pnpm vitest run",
+    "test:unit:watch": "TEST=1 pnpm vitest"
   },
   "dependencies": {
     "jose": "^6.0.10",
@@ -19,16 +19,15 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/bun": "^1.2.4",
     "@types/node": "^20",
-    "@vitest/coverage-istanbul": "3.0.9",
+    "@vitest/coverage-istanbul": "3.1.1",
     "eslint": "^9",
     "prettier": "^3.5.2",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.9"
+    "vitest": "^3.1.1"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "pnpm prettier --write --ignore-unknown"
   }
 }

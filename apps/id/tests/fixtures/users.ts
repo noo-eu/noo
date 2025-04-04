@@ -1,5 +1,5 @@
-import { UserWithTenant } from "@/db/users";
-import { makeClientUser } from "@/lib/types/ClientUser";
+import { type UserWithTenant } from "~/db.server/users.server";
+import { makeClientUser } from "~/types/ClientUser";
 
 const JohnDoe = {
   id: "12345678-90ab-cdef-1234-567890abcdef",
@@ -29,4 +29,4 @@ const GenderlessUserClient = {
   pronouns: "other",
 };
 
-export { JohnDoe, JohnDoeClient, GenderlessUserClient };
+export { GenderlessUserClient, JohnDoe, JohnDoeClient };

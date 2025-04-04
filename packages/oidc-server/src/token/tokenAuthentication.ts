@@ -1,5 +1,5 @@
 import { jwtVerify } from "jose";
-import configuration, { Client } from "../configuration";
+import configuration, { type Client } from "../configuration";
 
 export async function authenticateClient(req: Request, client: Client) {
   switch (client.tokenEndpointAuthMethod) {

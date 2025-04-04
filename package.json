@@ -2,21 +2,11 @@
   "name": "noo",
   "private": true,
   "scripts": {
-    "prepare": "bun run --bun husky"
+    "prepare": "pnpm husky"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "tools/*"
-  ],
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3"
   },
-  "packageManager": "bun@1.2.3",
-  "overrides": {
-    "@types/react": "19.0.0",
-    "@types/react-dom": "19.0.0",
-    "vitest": "3.1.1"
-  }
+  "packageManager": "pnpm@10.7.1"
 }

@@ -29,27 +29,27 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
 
-    // video: {
-    //   mode: "on",
-    //   size: {
-    //     width: 1920,
-    //     height: 1080,
-    //   },
-    // },
+    video: {
+      mode: "on",
+      size: {
+        width: 1920,
+        height: 1080,
+      },
+    },
   },
 
   /* Run your local dev server before starting the tests */
   webServer: [
     {
       command:
-        "OIDC_ISSUER=https://localhost:23000/oidc TEST=1 PORT=23000 bun run dev",
+        "OIDC_ISSUER=https://localhost:23000/oidc TEST=1 PORT=23000 pnpm run dev",
       url: "https://localhost:23000",
       reuseExistingServer: !process.env.CI,
       ignoreHTTPSErrors: true,
       stdout: process.env.CI ? undefined : "pipe",
     },
     {
-      command: "bun ./tests/callbackServer.ts",
+      command: "pnpm tsx ./tests/callbackServer.ts",
       url: "https://localhost:22999/cb",
       reuseExistingServer: !process.env.CI,
       ignoreHTTPSErrors: true,

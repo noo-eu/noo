@@ -1,11 +1,13 @@
-import OidcClients from "@/db/oidc_clients";
-import { uuidToHumanId } from "@/utils";
+import { uuidToHumanId } from "@noo/lib/humanIds";
 import { randomBytes } from "crypto";
+import OidcClients from "~/db.server/oidc_clients";
 
 if (process.argv.length !== 4) {
-  console.log("Usage: bun run ./scripts/createOidcApp.ts <name> <redirectUri>");
   console.log(
-    "Example: bun run ./scripts/createOidcApp.ts 'My App' 'https://example.com/callback'",
+    "Usage: pnpm tsx ./scripts/createOidcApp.ts <name> <redirectUri>",
+  );
+  console.log(
+    "Example: pnpm tsx ./scripts/createOidcApp.ts 'My App' 'https://example.com/callback'",
   );
   process.exit(1);
 }

@@ -8,8 +8,7 @@ import { createIdToken } from "../idToken";
 import type { AuthorizationResult } from "./request"; // Import type
 import { performOidcAuthorization } from "./request"; // Adjust path
 
-// --- Factory Functions (reuse or define) ---
-const createMockInputParams = (
+const buildMockParams = (
   data: Record<string, string | undefined> = {},
 ): Record<string, string | undefined> => ({
   // Basic valid request params
@@ -22,6 +21,19 @@ const createMockInputParams = (
   ...data,
 });
 
+const createMockInputParams = function (
+  params: Record<string, string | undefined>,
+) {
+  const qs = new URLSearchParams();
+  for (const [key, value] of Object.entries(buildMockParams(params))) {
+    if (value !== undefined) {
+      qs.append(key, value);
+    }
+  }
+
+  return new Request("https://client.test/authorize?" + qs.toString());
+};
+
 const createMockClient = (overrides: Partial<Client> = {}): Client => ({
   issuer: "https://idp.example.com",
   clientId: "oidc_1",
@@ -32,6 +44,8 @@ const createMockClient = (overrides: Partial<Client> = {}): Client => ({
   tokenEndpointAuthMethod: "client_secret_basic",
   subjectType: "public",
   defaultMaxAge: undefined,
+  responseTypes: ["code"],
+  grantTypes: ["authorization_code"],
   // Add other necessary properties
   ...overrides,
 });
@@ -445,7 +459,7 @@ describe("performOidcAuthorization", () => {
         // authorizationAny with max_age=0 should eventually lead to SIGN_IN if getActiveSessions respects it
         // Let's adjust the mock to simulate getActiveSessions filtering by max_age=0
         vi.spyOn(configuration, "getActiveSessions").mockImplementation(
-          async (maxAge) => {
+          async (_, maxAge) => {
             expect(maxAge).toBe(0); // Verify max_age=0 was passed
             return []; // No sessions are recent enough
           },

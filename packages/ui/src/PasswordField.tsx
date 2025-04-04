@@ -1,7 +1,5 @@
-"use client";
-
 import { useState } from "react";
-import { TextField, TextFieldProps } from "./TextField";
+import { TextField, type TextFieldProps } from "./TextField";
 
 export type PasswordFieldProps = Omit<TextFieldProps, "type"> & {
   t: (key: string) => string;

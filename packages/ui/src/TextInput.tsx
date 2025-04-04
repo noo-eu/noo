@@ -1,4 +1,7 @@
-type Props = React.InputHTMLAttributes<HTMLInputElement>;
+type Props = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
 export function TextInput(props: Props) {
   const { type = "text", className = "", ...rest } = props;

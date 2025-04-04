@@ -1,7 +1,7 @@
-import { randomBytes } from "node:crypto";
-import configuration, { Client, Session } from "../configuration";
+import crypto from "node:crypto";
+import configuration, { type Client, type Session } from "../configuration";
 import { createIdToken, idTokenHash } from "../idToken";
-import { AuthorizationRequest } from "../types";
+import { type AuthorizationRequest } from "../types";
 import { sha256 } from "../utils";
 
 // Creates the response object for the authorization request. This happens after
@@ -12,6 +12,7 @@ import { sha256 } from "../utils";
 // This data is then serialized in different ways depending on the response_mode
 // parameter of the authorization request.
 export async function buildAuthorizationResponse(
+  request: Request,
   params: AuthorizationRequest,
   client: Client,
   session: Session,
@@ -21,7 +22,7 @@ export async function buildAuthorizationResponse(
   const parts = params.response_type.split(" ");
 
   if (parts.includes("code")) {
-    await handleCodeResponseType(params, client, session, response);
+    await handleCodeResponseType(request, params, client, session, response);
   }
 
   if (parts.includes("token")) {
@@ -32,7 +33,7 @@ export async function buildAuthorizationResponse(
     await handleIdTokenResponseType(params, client, session, response);
   }
 
-  await addSessionState(response, client, params);
+  await addSessionState(request, response, client, params);
 
   if (response.error) {
     // Remove all other response parameters if there is an error
@@ -47,13 +48,14 @@ export async function buildAuthorizationResponse(
 }
 
 async function handleCodeResponseType(
+  request: Request,
   params: AuthorizationRequest,
   client: Client,
   session: Session,
   response: Record<string, string>,
 ) {
   try {
-    const code = await configuration.createAuthorizationCode({
+    const code = await configuration.createAuthorizationCode(request, {
       userId: session.userId,
       clientId: client.clientId,
       redirectUri: params.redirect_uri,
@@ -124,12 +126,14 @@ async function handleIdTokenResponseType(
 }
 
 async function addSessionState(
+  request: Request,
   response: Record<string, string>,
   client: Client,
   params: AuthorizationRequest,
 ) {
   try {
     response.session_state = await buildSessionState(
+      request,
       client,
       params.redirect_uri,
     );
@@ -141,11 +145,15 @@ async function addSessionState(
   }
 }
 
-async function buildSessionState(client: Client, redirectUri: string) {
-  const stateValue = await configuration.getSessionStateValue();
+async function buildSessionState(
+  request: Request,
+  client: Client,
+  redirectUri: string,
+) {
+  const stateValue = await configuration.getSessionStateValue(request);
 
   const origin = new URL(redirectUri).origin;
-  const salt = randomBytes(16).toString("base64url");
+  const salt = crypto.randomBytes(16).toString("base64url");
 
   const state = [client.clientId, origin, stateValue, salt].join(" ");
 

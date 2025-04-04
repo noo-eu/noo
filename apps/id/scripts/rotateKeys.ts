@@ -1,5 +1,5 @@
-import { generateSet } from "@/lib/jwks/gen";
 import { existsSync, mkdirSync, renameSync, writeFileSync } from "fs";
+import { generateSet } from "~/lib.server/jwks/gen";
 
 if (!existsSync("keys")) {
   mkdirSync("keys");

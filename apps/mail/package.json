@@ -4,24 +4,25 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "bun ./server.ts",
+    "dev": "tsx ./server.ts",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "test:unit": "TEST=1 bun vitest run",
-    "test:unit:watch": "TEST=1 bun vitest",
+    "test:unit": "TEST=1 pnpm vitest run",
+    "test:unit:watch": "TEST=1 pnpm vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:test:push": "TEST=1 bun run --bun drizzle-kit push",
-    "db:test:fixtures": "TEST=1 bun run ./tests/fixtures.ts"
+    "db:test:push": "TEST=1 pnpm drizzle-kit push",
+    "db:test:fixtures": "TEST=1 tsx ./tests/fixtures.ts"
   },
   "dependencies": {
+    "@react-router/express": "^7.5.0",
     "@react-router/fs-routes": "^7.4.1",
     "@react-router/node": "^7.4.1",
     "@react-router/serve": "^7.4.1",
-    "@remix-run/express": "^2.16.4",
+    "@sentry/node": "^9.11.0",
     "@sentry/react-router": "^9.11.0",
     "accept-language-parser": "^1.5.0",
     "compression": "^1.8.0",
@@ -59,11 +60,10 @@
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.29.0",
-    "vite": "6.2.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.1"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "pnpm prettier --write --ignore-unknown"
   }
 }
