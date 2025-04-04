@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Wähle die Sprache, die du in allen noo-Diensten verwenden möchtest.",
+      "label": "Sprache",
+      "title": "Lege deine bevorzugte Sprache fest",
+      "updateSuccess": "Deine bevorzugte Sprache wurde gespeichert"
+    },
+    "summary": {
+      "language": "Ändere deine bevorzugte Sprache",
+      "timeZone": "Ändere deine Zeitzone"
+    },
+    "timeZone": {
+      "cet": "Mitteleuropäische Zeit",
+      "description": "Wähle deine Zeitzone, um Daten und Zeiten in deiner lokalen Zeit anzuzeigen.",
+      "detected": "Laut deinen Geräteeinstellungen ist deine aktuelle Zeitzone {detected}. Wir empfehlen, die Zeitzone zu verwenden, die deinem aktuellen Standort entspricht.",
+      "eet": "Osteuropäische Zeit",
+      "gmt": "Greenwich-Zeit / Westeuropäische Zeit",
+      "label": "Zeitzone",
+      "title": "Lege deine Zeitzone fest",
+      "updateSuccess": "Deine Zeitzone wurde gespeichert"
+    },
+    "title": "Kontoeinstellungen"
+  }
+}

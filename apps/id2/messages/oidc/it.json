@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Cambia account",
+    "consent": {
+      "claims": {
+        "address": "Il tuo indirizzo postale",
+        "birthdate": "La tua data di nascita",
+        "email": "Il tuo indirizzo email noo",
+        "gender": "Il genere con cui ti identifichi",
+        "name": "Il tuo nome completo",
+        "phone_number": "Il tuo numero di telefono",
+        "profile": "L'immagine del tuo profilo",
+        "username": "Il tuo nome utente"
+      },
+      "description": "<strong>{name}</strong> ha richiesto l'accesso a queste informazioni:",
+      "title": "Stai accedendo a <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Hai effettuato il logout da <strong>{name}</strong>.",
+      "description_no_app": "Hai effettuato il logout da un'applicazione di terze parti.",
+      "query": "Vuoi terminare anche la tua sessione <noo></noo>?",
+      "title": "Termina sessione"
+    },
+    "fatal": {
+      "description": "Hai provato ad accedere ad una applicazione di terze parti, ma non sta funzionando correttamente. Per favore, riprova più tardi, o contatta lo sviluppatore con queste informazioni:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Qualcosa è andato storto"
+    },
+    "home": "Vai alla tua home <noo></noo>",
+    "switch": {
+      "description": "per continuare su <details>{name}</details>",
+      "legalComplete": "Prima di accedere, dovresti rivedere le <privacy>condizioni sulla privacy</privacy> e le <terms>condizioni d'uso</terms> di {client}.",
+      "legalNone": "Prima di accedere, dovresti rivedere i documenti legali di {client}.",
+      "legalPrivacy": "Prima di accedere, dovresti rivedere le <privacy>condizioni sulla privacy</privacy> di {client}.",
+      "legalTerms": "Prima di accedere, dovresti rivedere le <terms>condizioni d'uso</terms> di {client}.",
+      "metaTitle": "Accedi - noo id",
+      "pageTitle": "Accedi con <noo></noo>",
+      "signin": "Utilizza un altro account",
+      "title": "Scegli un account"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Fiók létrehozása",
+    "error": "A megadott adatok hibásak",
+    "metaTitle": "Bejelentkezés – noo",
+    "or": "vagy",
+    "password": "Jelszó",
+    "submit": "Bejelentkezés",
+    "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
+    "title": "Jelentkezz be a <noo></noo> fiókodba",
+    "totpCode": "Kód",
+    "totpDescription": "Írd be a kódot az authentikáló alkalmazásodból",
+    "usePasskey": "Jelentkezz be egy jelszóhelyettesítővel",
+    "username": "Felhasználónév vagy email"
+  }
+}

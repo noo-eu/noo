@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Hozzon létre saját <noo></noo> fiókot",
+    "errors": {
+      "invalid_data": "Valami probléma történt. Ellenőrizze a megadott adatot",
+      "password_classes": "Kérek erősebb jelszót. Vegyen bele betűkkel, számokkal és jelekkel.",
+      "password_length": "Kérek több karaktert (legalább 10)",
+      "password_required": "Kérem adjonk meg a jelszavát",
+      "password_too_long": "A beállított jelszó túl hosszú",
+      "username_first_char": "A felhasználónevnél a kezdőbetűnek betűnek vagy számnak kell lennie",
+      "username_invalid": "A felhasználónév csak betűkkel, számokkal és ponttal (.) kivethető",
+      "username_last_char": "A felhasználónevnél az utolsó karakternek betűnek vagy számnak kell lennie",
+      "username_length": "A felhasználónévnek legfeljebb 30 karakterben kell állnia",
+      "username_required": "Kérem adja meg a új felhasználónevet",
+      "username_reserved": "Sajnálom, ez a felhasználónév már foglalt",
+      "username_taken": "Ez a felhasználónév már foglalt",
+      "username_two_dots": "A felhasználónév nem lehet két ponttal ellátva"
+    },
+    "metaTitle": "Létrehozd noo fiókodat",
+    "step1": {
+      "title": "Adjonk meg a nevét"
+    },
+    "step2": {
+      "title": "Válassza ki az e-mail címét",
+      "username": "E-mail cím"
+    },
+    "step3": {
+      "password": "Jelszó",
+      "title": "Hozzon létre egy erős jelszót"
+    },
+    "step4": {
+      "accept": "Elfogadom és folytassam",
+      "description": "        <p>Egy <noo></noo> fiók lehetővé teszi a számítógépes rendszerhez való hozzáférést, mint például e-mailek, fájl tárolás és sok más dolog.</p>        <p><terms><noo></noo>'s Szolgáltatási feltételei</terms> magyarázzák el a jövőbeni használathoz várhatókat. Míg <privacy><noo></noo>'-nak személyiségi politikája van.</p>        <p>Hogy létrehozhatna egy <noo></noo> fiókot, és a szolgáltatásokat használva, elfogadja <noo></noo>'s Szolgáltatási feltételeit és <noo></noo>'-nak személyiségi politikáját.</p>",
+      "title": "Azt még az utolsó..."
+    }
+  }
+}

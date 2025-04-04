@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Valitse kieli, jota haluat käyttää kaikissa noo-palveluissa.",
+      "label": "Kieli",
+      "title": "Aseta mieluisa kielesi",
+      "updateSuccess": "Mieluisa kielesi on tallennettu"
+    },
+    "summary": {
+      "language": "Vaihda mieluisa kielesi",
+      "timeZone": "Vaihda aikavyöhyke"
+    },
+    "timeZone": {
+      "cet": "Keski-Euroopan aika",
+      "description": "Valitse aikavyöhyke, jotta päivämäärät ja kellonajat näkyvät paikallisessa ajassa.",
+      "detected": "Laitteesi asetusten mukaan nykyinen aikavyöhykkeesi on {detected}. Suosittelemme käyttämään aikavyöhykettä, joka vastaa nykyistä sijaintiasi.",
+      "eet": "Itä-Euroopan aika",
+      "gmt": "Greenwichin aika / Länsi-Euroopan aika",
+      "label": "Aikavyöhyke",
+      "title": "Aseta aikavyöhyke",
+      "updateSuccess": "Aikavyöhyke on tallennettu"
+    },
+    "title": "Tiliasetukset"
+  }
+}

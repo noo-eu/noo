@@ -1,0 +1,61 @@
+{
+  "security": {
+    "back": "Kthehu",
+    "header": "Siguria & Privatësia",
+    "passkeys": {
+      "confirmRemove": "Je i sigurt që do ta heqësh këtë çelës sigurie?",
+      "created": "Krijuar më {date, date, medium}",
+      "description1": "Me çelësa akses, mund të regjistrohesh në llogarinë tënde <noo></noo> duke përdorur vetëm shenjën e gishtit, fytyrën, bllokimin e ekranit, ose një çelës sigurie. Pa fjalëkalime për t'u mbajtur mend, dhe shumë më e vështirë për dikë që të t'i vjedhë.",
+      "description2": "Çelësat e aksesit qëndrojnë në pajisjen tënde ose në çelësin e sigurisë, kështu që vetëm ti mund t'i përdorësh. Mbaji pajisjet të sigurta—bllokimi i ekranit ose biometrika janë çelësi.",
+      "lastUsed": "E përdorur së fundmi {ago}",
+      "register": "Krijo një çelës akses",
+      "removeError": "Diçka shkoi keq gjatë heqjes së çelësit të sigurisë.",
+      "removeSuccess": "Çelësi i sigurisë u hoq me sukses.",
+      "title": "Çelësa Aksesi",
+      "unnamed": "Çelës pa emër",
+      "yourPasskeys": "Çelësat e tu të sigurisë"
+    },
+    "password": {
+      "breaches": "Fjalëkalimi yt është shfaqur në {count, plural, one {një shkelje të dhënash} other {{count} shkelje të dhënash}}. Ndërsa sistemet tona mbeten të sigurta, rekomandojmë të azhurnosh fjalëkalimin menjëherë si masë paraprake.{otp, select, true {} other { Duhet gjithashtu të aktivizosh autentifikimin me dy faktorë për siguri shtesë.}} <guide>Mëso më shumë</guide>.",
+      "confirmLabel": "Konfirmo fjalëkalimin e ri",
+      "description1": "Fjalëkalimi yt është linja e parë e mbrojtjes kundër aksesit të paautorizuar në llogarinë tuaj.",
+      "description2": "Zgjidh një fjalëkalim të fortë, mos e ndaj atë për shërbime të tjera apo me njerëz të tjerë. Lexo udhëzuesin tonë për të zgjedhur dhe menaxhuar një fjalëkalim të sigurt.",
+      "errors": {
+        "long": "Fjalëkalimi është shumë i gjatë.",
+        "mismatch": "Fjalëkalimet nuk përputhen.",
+        "short": "Fjalëkalimi është shumë i shkurtër."
+      },
+      "label": "Fjalëkalimi i ri",
+      "score": {
+        "acceptable": "i pranueshëm",
+        "breached": "është përfshirë në një shkelje të të dhënave. Provo një tjetër?",
+        "prefix": "Forca e fjalëkalimit:",
+        "short": "shumë i shkurtër",
+        "strong": "i fortë",
+        "weak": "i dobët"
+      },
+      "title": "Fjalëkalimi",
+      "updateNotice": "Për arsye sigurie, ndryshimi i fjalëkalimit ju bën që të dilni nga çdo pajisje tjetër.",
+      "updateSuccess": "Fjalëkalimi yt është ndryshuar.",
+      "updateSuggestion": "Përdor të paktën 10 karaktere. Shmang fjalët e zakonshme ose të dukshme si emrat e kafshëve, ekipet sportive, ose datat e lindjes."
+    },
+    "sessions": {
+      "currentSession": "Seanca aktuale",
+      "lastUsed": "E fundit përdorur {lastUsedAgo}",
+      "terminate": "Mbyll këtë sesion",
+      "title": "Seancat aktive"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesion} other {{count} sesione}}",
+      "applications": "Aplikacione dhe qasje në të dhëna",
+      "breaches": "Fjalëkalimi yt është shfaqur në shkelje të dhënash.",
+      "comingSoon": "Do të vijë së shpejti",
+      "mfa": "Verifikim me dy faktorë",
+      "passkeys": "Çelësat kalim",
+      "password": "Fjalëkalimi",
+      "passwordLastChanged": "Ndryshuar për herë të fundit më {date, date, medium}.",
+      "sessions": "Seancat aktive"
+    },
+    "title": "Siguria & Privatësia"
+  }
+}

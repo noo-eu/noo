@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Zgjidh gjuhën që preferon të përdorësh në të gjitha shërbimet noo.",
+      "label": "Gjuha",
+      "title": "Cakto gjuhën tënde të preferuar",
+      "updateSuccess": "Gjuha jote e preferuar është ruajtur"
+    },
+    "summary": {
+      "language": "Ndrysho gjuhën tënde të preferuar",
+      "timeZone": "Ndrysho zonën tënde të kohës"
+    },
+    "timeZone": {
+      "cet": "Koha e Evropës Qendrore",
+      "description": "Zgjidh zonën tënde të kohës për të shfaqur datat dhe orët në kohën tënde lokale.",
+      "detected": "Sipas cilësimeve të pajisjes tënde, zona jote aktuale e kohës është {detected}. Të rekomandojmë të përdorësh zonën e kohës që përputhet me vendndodhjen tënde aktuale.",
+      "eet": "Koha e Evropës Lindore",
+      "gmt": "Koha Greenwich / Koha e Evropës Perëndimore",
+      "label": "Zona e kohës",
+      "title": "Cakto zonën tënde të kohës",
+      "updateSuccess": "Zona jote e kohës është ruajtur"
+    },
+    "title": "Cilësimet e llogarisë"
+  }
+}

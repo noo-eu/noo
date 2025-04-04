@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Înapoi",
+    "cancel": "Anulează",
+    "change": "Schimbă",
+    "close": "Închide",
+    "confirm": "Confirmă",
+    "continue": "Continuă",
+    "madeWith": "Creat cu ❤️ și ☕️ în Uniunea Europeană",
+    "next": "Următor",
+    "no": "Nu",
+    "optional": "Opțional",
+    "passwordField": {
+      "ariaLabelShow": "Afișează parola ca text simplu. Atenție: parola va fi vizibilă pe ecran.",
+      "hide": "Ascunde parola",
+      "show": "Afișează parola"
+    },
+    "privacy": "Confidențialitate",
+    "remove": "Șterge",
+    "save": "Salvează",
+    "terms": "Termeni",
+    "yes": "Da"
+  }
+}

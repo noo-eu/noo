@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Stvorite vas račun <noo></noo>",
+    "errors": {
+      "invalid_data": "Nešto nije u redu. Provjerite unesena podatka",
+      "password_classes": "Upotrijebite snažniju lozinku. Upotrijebite mješavinu slova, brojeva i znakova",
+      "password_length": "Upotrijebite 10 ili više znakova",
+      "password_required": "Unesite vase lozinku",
+      "password_too_long": "Vaša unesena lozinka je preduolg",
+      "username_first_char": "Vaše korisničko ime mora početi slovom ili brojem",
+      "username_invalid": "Vaše korisničko ime može sadržati samo slova, brojeve i točke (.)",
+      "username_last_char": "Vaše korisničko ime mora završiti slovom ili brojem",
+      "username_length": "Vaše korisničko ime mora biti između 6 i 30 znakova",
+      "username_required": "Unesite vase novo korisničko ime",
+      "username_reserved": "Žao nam je, ovo korisničko ime nije dostupno",
+      "username_taken": "Korisničko ime je zauzeto",
+      "username_two_dots": "Vaše korisničko ime ne smije sadržavati dvije točke (.) uz redom"
+    },
+    "metaTitle": "Kreiraj svoj noo račun",
+    "step1": {
+      "title": "Unesite vase ime"
+    },
+    "step2": {
+      "title": "Izaberite vase adresu e-pošte",
+      "username": "Adresa e-pošte"
+    },
+    "step3": {
+      "password": "Lozinka",
+      "title": "Stvorite snažnu lozinku"
+    },
+    "step4": {
+      "accept": "Prihvaćam i nastavljem",
+      "description": "        <p>A <noo></noo> račun omogućava pristup širokom rasponu usluga kao što su pošta, spremanje datoteka i mnogo toga drugačijeg.</p>        <p><terms><noo></noo>'i uvjeti uporabe</terms> objašnjavaju šta vam se može očekivati kada koristite usluge, dok je <privacy><noo></noo>'ova politika privatnosti</privacy> opisuje kako se rukuje informacijama koje se generiraju ili sakrivaju u procesu uporabe usluga.</p>        <p>Za stvaranje <noo></noo> računa i korištenje usluga morate prihvatiti <noo></noo>'i uvjete uporabe i politiku privatnosti</p>",
+      "title": "Žao, svi još nije gotovo..."
+    }
+  }
+}

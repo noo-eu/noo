@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Fiók váltása",
+    "consent": {
+      "claims": {
+        "address": "A lakcímed",
+        "birthdate": "A születési dátumod",
+        "email": "A noo e-mail címed",
+        "gender": "A nem, amivel azonosulsz",
+        "name": "A teljes neved",
+        "phone_number": "A telefonszámod",
+        "profile": "A profilképed",
+        "username": "A felhasználóneved"
+      },
+      "description": "<strong>{name}</strong> hozzáférést kér a következő adataidhoz:",
+      "title": "Bejelentkezel ide: <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Kijelentkeztél a <strong>{name}</strong> fiókodból.",
+      "description_no_app": "Kijelentkeztél egy harmadik fél alkalmazásból.",
+      "query": "Szeretnél a <noo></noo> fiókból is kijelentkezni?",
+      "title": "Kijelentkezés"
+    },
+    "fatal": {
+      "description": "Egy külső alkalmazásba próbáltál bejelentkezni, de valami nem működött rendesen. Próbáld meg később újra, vagy vedd fel a kapcsolatot az alkalmazás fejlesztőjével. Itt vannak a részletek:",
+      "error": "OpenID Connect hiba: {error}",
+      "title": "Valami hiba történt"
+    },
+    "home": "Ugorj a saját <noo></noo> kezdőlapodra",
+    "switch": {
+      "description": "a(z) <details>{name}</details> folytatásához",
+      "legalComplete": "Mielőtt bejelentkezel, olvasd el a(z) {client} <privacy>adatvédelmi irányelveit</privacy> és a <terms>felhasználási feltételeit</terms>.",
+      "legalNone": "Mielőtt bejelentkezel, érdemes átnézned a(z) {client} jogi dokumentumait.",
+      "legalPrivacy": "Mielőtt bejelentkezel, olvasd el a(z) {client} <privacy>adatvédelmi irányelveit</privacy>.",
+      "legalTerms": "Mielőtt bejelentkezel, olvasd el a(z) {client} <terms>felhasználási feltételeit</terms>.",
+      "metaTitle": "Bejelentkezés - noo id",
+      "pageTitle": "Bejelentkezés a(z) <noo></noo> fiókkal",
+      "signin": "Másik fiók használata",
+      "title": "Válassz egy fiókot"
+    }
+  }
+}

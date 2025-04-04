@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Pārbaudīt kontu",
+    "consent": {
+      "claims": {
+        "address": "Jūsu pasta adrese",
+        "birthdate": "Jūsu dzimšanas datums",
+        "email": "Jūsu noo e-pasta adrese",
+        "gender": "Dzimums, ar kuru jūs identificējaties",
+        "name": "Jūsu pilns vārds",
+        "phone_number": "Jūsu tālruņa numurs",
+        "profile": "Jūsu profila attēls",
+        "username": "Jūsu lietotājvārds"
+      },
+      "description": "<strong>{name}</strong> pieprasa piekļuvi šādai informācijai:",
+      "title": "Jūs piesakāties iestādē '<details>{name}</details>'."
+    },
+    "end_session": {
+      "description": "Tu esi izrakstījies no <strong>{name}</strong>.",
+      "description_no_app": "Tu esi izrakstījies no trešās puses lietotnes.",
+      "query": "Vai vēlaties turpmāk terminē sērijas arī uz <noo>?",
+      "title": "Atsauksies sērijai"
+    },
+    "fatal": {
+      "description": "Jūs mēģinājāt pieteikties trešās puses lietotnē, bet tā nedarbojas pareizi. Lūdzu, mēģiniet vēlreiz vēlāk vai sazinieties ar lietotnes īpašnieku, norādot šo informāciju:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Kaut kas nogāja greizi"
+    },
+    "home": "Dodieties uz savu <noo></noo> sākumlapu",
+    "switch": {
+      "description": "lai pārejtu uz lietotni <details>{name}</details>",
+      "legalComplete": "Pirms pieteikšanās jums jāpārbauda <privacy>privātuma politiku</privacy> un <terms>lietošanas noteikumus</terms> {client}.",
+      "legalNone": "Pirms pieteikšanās jums jāpārbauda {client} juridiskos dokumentus.",
+      "legalPrivacy": "Pirms pieteikšanās jums jāpārbauda <privacy>privātuma politiku</privacy> {client}.",
+      "legalTerms": "Pirms pieteikšanās jums jāpārbauda <terms>lietošanas noteikumus</terms> {client}.",
+      "metaTitle": "Pieteikties — noo id",
+      "pageTitle": "Piesakieties ar <noo></noo>",
+      "signin": "Izmantojiet citu kontu",
+      "title": "Izvēlieties kontu"
+    }
+  }
+}

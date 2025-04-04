@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Lura",
+    "cancel": "Ikkanċella",
+    "change": "Ibdel",
+    "close": "Agħlaq",
+    "confirm": "Ikkonferma",
+    "continue": "Kompli",
+    "madeWith": "Magħmul b’❤️ u ☕️ fl-Unjoni Ewropea",
+    "next": "Li jmiss",
+    "no": "Le",
+    "optional": "Mhux obbligatorju",
+    "passwordField": {
+      "ariaLabelShow": "Uri l-password b’mod ċar. Twissija: il-password se tidher fuq l-iskrin.",
+      "hide": "Aħbi l-password",
+      "show": "Uri l-password"
+    },
+    "privacy": "Privatezza",
+    "remove": "Neħħi",
+    "save": "Issejvja",
+    "terms": "Termini",
+    "yes": "Iva"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Vyberte jazyk, který chcete používat ve všech službách noo.",
+      "label": "Jazyk",
+      "title": "Nastavte svůj preferovaný jazyk",
+      "updateSuccess": "Váš preferovaný jazyk byl uložen."
+    },
+    "summary": {
+      "language": "Změňte preferovaný jazyk",
+      "timeZone": "Změňte časové pásmo"
+    },
+    "timeZone": {
+      "cet": "Středoevropský čas",
+      "description": "Vyberte své časové pásmo pro zobrazení dat a časů ve vašem místním čase.",
+      "detected": "Podle nastavení vašeho zařízení je vaše aktuální časové pásmo {detected}. Doporučujeme používat časové pásmo, které odpovídá vaší aktuální poloze.",
+      "eet": "Východoevropský čas",
+      "gmt": "Greenwichský čas / Západoevropský čas",
+      "label": "Časové pásmo",
+      "title": "Nastavte své časové pásmo",
+      "updateSuccess": "Vaše časové pásmo bylo uloženo."
+    },
+    "title": "Nastavení účtu"
+  }
+}

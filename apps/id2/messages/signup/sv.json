@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Skapa ditt konto på <noo></noo>",
+    "errors": {
+      "invalid_data": "Något gick fel. Kolla igenom det data du skrivit in",
+      "password_classes": "Använd ett starkare lösenord. Använd en blandning av bokstäver, siffror och tecken",
+      "password_length": "Använd åtminstone 10 tecken",
+      "password_required": "Fyll i ditt lösenord",
+      "password_too_long": "Lösenordet du skrivit är för långt",
+      "username_first_char": "Ditt användarnamn måste börja med en bokstav eller siffra",
+      "username_invalid": "Ditt användarnamn får bara innehålla bokstäver, siffror och punkter (.)",
+      "username_last_char": "Ditt användarnamn måste sluta med en bokstav eller siffra",
+      "username_length": "Ditt användarnamn måste vara mellan 6 och 30 tecken",
+      "username_required": "Fyll i ditt nya användarnamn",
+      "username_reserved": "Tyvärr, det användarnamnet är upptaget",
+      "username_taken": "Det här användarnamnet är redan taget",
+      "username_two_dots": "Ditt användarnamn får inte innehålla två punkter i rad"
+    },
+    "metaTitle": "Skapa ditt noo-konto",
+    "step1": {
+      "title": "Fyll i ditt namn"
+    },
+    "step2": {
+      "title": "Välj din e-postadress",
+      "username": "E-postadress"
+    },
+    "step3": {
+      "password": "Lösenord",
+      "title": "Skapa ett starkt lösenord"
+    },
+    "step4": {
+      "accept": "Acceptera och fortsätta",
+      "description": "        <p>Ett <noo></noo> tillåter dig att ha åtkomst till en mängd tjänster, som e-post, filminne och mera.</p>        <p><terms><noo></noo>'s Villkor</terms> förklarar vad du kan förvänta dig när du använder tjänsterna, medan <privacy><noo></noo>'s Sekretesspolicy</privacy> beskriver hur vi hanterar information som genereras eller samlas in när du använder tjänsterna.</p>        <p>För att skapa ett <noo></noo> och använda tjänsterna måste du acceptera att läsa <noo></noo>'s Villkor och Sekretesspolicy.</p>",
+      "title": "Det sista..."
+    }
+  }
+}

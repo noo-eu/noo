@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Wybierz język, którego chcesz używać we wszystkich usługach noo.",
+      "label": "Język",
+      "title": "Ustaw preferowany język",
+      "updateSuccess": "Twój preferowany język został zapisany"
+    },
+    "summary": {
+      "language": "Zmień preferowany język",
+      "timeZone": "Zmień strefę czasową"
+    },
+    "timeZone": {
+      "cet": "Czas Środkowoeuropejski",
+      "description": "Wybierz swoją strefę czasową, aby daty i godziny były wyświetlane w lokalnym czasie.",
+      "detected": "Zgodnie z ustawieniami Twojego urządzenia, aktualna strefa czasowa to {detected}. Zalecamy korzystanie ze strefy czasowej odpowiadającej Twojej lokalizacji.",
+      "eet": "Czas Wschodnioeuropejski",
+      "gmt": "Czas Greenwich / Czas Zachodnioeuropejski",
+      "label": "Strefa czasowa",
+      "title": "Ustaw strefę czasową",
+      "updateSuccess": "Twoja strefa czasowa została zapisana"
+    },
+    "title": "Ustawienia konta"
+  }
+}

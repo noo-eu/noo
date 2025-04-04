@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Spremeni račun",
+    "consent": {
+      "claims": {
+        "address": "Vaš poštni naslov",
+        "birthdate": "Vaš datum rojstva",
+        "email": "Vaš noo e-poštni naslov",
+        "gender": "Spol, s katerim se identificirate",
+        "name": "Vaše polno ime",
+        "phone_number": "Vaša telefonska številka",
+        "profile": "Vaša profilna slika",
+        "username": "Vaše uporabniško ime"
+      },
+      "description": "<strong>{name}</strong> zahteva dostop do naslednjih podatkov:",
+      "title": "Želite povezati pri <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Izpisali ste se iz <strong>{name}</strong>.",
+      "description_no_app": "Izpisali ste se iz aplikacije tretje osebe.",
+      "query": "Ali bi radocel z odjavo tega na <noo></noo>?",
+      "title": "Odjavi se"
+    },
+    "fatal": {
+      "description": "Poskusili ste se prijaviti v aplikacijo tretje osebe, vendar aplikacija ne deluje pravilno. Poskusite znova pozneje ali se obrnite na lastnika aplikacije s spodnjimi podatki:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Prišlo je do napake"
+    },
+    "home": "Pojdite na svojo domačo stran <noo></noo>",
+    "switch": {
+      "description": "za nadaljevanje na <details>{name}</details>",
+      "legalComplete": "Pred prijavo morate preveriti <privacy>pravilnik o zasebnosti</privacy> in <terms>pogoje uporabe</terms> {client}.",
+      "legalNone": "Pred prijavo morate preveriti pravne dokumente {client}.",
+      "legalPrivacy": "Pred prijavo morate preveriti <privacy>pravilnik o zasebnosti</privacy> {client}.",
+      "legalTerms": "Pred prijavo morate preveriti <terms>pogoje uporabe</terms> {client}.",
+      "metaTitle": "Prijava - noo id",
+      "pageTitle": "Prijavite se z <noo></noo>",
+      "signin": "Uporabite drug račun",
+      "title": "Izberite račun"
+    }
+  }
+}

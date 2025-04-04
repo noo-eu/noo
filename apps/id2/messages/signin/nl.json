@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Account aanmaken",
+    "error": "De ingevulde gegevens kloppen niet",
+    "metaTitle": "Inloggen - noo",
+    "or": "of",
+    "password": "Wachtwoord",
+    "submit": "Inloggen",
+    "tenant_error": "Log in met een {domain} account",
+    "title": "Log in op je <noo></noo> account",
+    "totpCode": "Code",
+    "totpDescription": "Voer de code in van je authenticator-app",
+    "usePasskey": "Aanmelden met een wachtwoordloos toegangssleutel",
+    "username": "Gebruikersnaam of e-mailadres"
+  }
+}

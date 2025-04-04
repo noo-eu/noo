@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Crie sua conta <noo></noo>",
+    "errors": {
+      "invalid_data": "Algo deu errado. Por favor, verifique os dados que você digitou",
+      "password_classes": "Por favor, use uma senha mais forte. Use uma mistura de letras, números e símbolos",
+      "password_length": "Por favor, use pelo menos 10 caracteres",
+      "password_required": "Por favor, insira sua senha",
+      "password_too_long": "A senha que você digitou é muito longa",
+      "username_first_char": "Seu apelido deve iniciar com uma letra ou número",
+      "username_invalid": "Seu apelido pode conter apenas letras, números e pontos (.)",
+      "username_last_char": "Seu apelido deve terminar com uma letra ou número",
+      "username_length": "Seu apelido deve ter entre 6 e 30 caracteres",
+      "username_required": "Por favor, insira seu novo apelido",
+      "username_reserved": "Desculpa, este nome de utilizador não está disponível",
+      "username_taken": "Este apelido está ocupado",
+      "username_two_dots": "Seu apelido não pode conter dois pontos (.) em sequência"
+    },
+    "metaTitle": "Crie sua conta noo",
+    "step1": {
+      "title": "Insira seu nome"
+    },
+    "step2": {
+      "title": "Escolha sua endereço de e-mail",
+      "username": "Endereço de e-mail"
+    },
+    "step3": {
+      "password": "Senha",
+      "title": "Crie uma senha forte"
+    },
+    "step4": {
+      "accept": "Aceite e continuar",
+      "description": "        <p>Uma conta <noo></noo> permite que você acesse um conjunto de serviços, como e-mail, armazenamento de arquivos e mais.</p>        <p><terms>Todos os Termos de Serviço da <noo></noo></terms> explicam o que você deve esperar ao usar os serviços, enquanto <privacy>A Política de Privacidade da <noo></noo></privacy> descreve como lidamos com as informações geradas ou coletadas quando você usa os serviços.</p>        <p>Pelo fato de criar uma conta <noo></noo> e usar os serviços, você precisa aceitar os <terms>Todos os Termos de Serviço</terms> da <noo></noo> e a <privacy>A Política de Privacidade</privacy> dela.</p>",
+      "title": "Uma última coisa..."
+    }
+  }
+}

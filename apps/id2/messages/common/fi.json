@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Takaisin",
+    "cancel": "Peruuta",
+    "change": "Muokkaa",
+    "close": "Sulje",
+    "confirm": "Vahvista",
+    "continue": "Jatka",
+    "madeWith": "Tehnyt ❤️:lla ja ☕:lla Euroopan unionissa",
+    "next": "Seuraava",
+    "no": "Ei",
+    "optional": "Valinnainen",
+    "passwordField": {
+      "ariaLabelShow": "Näytä salasana selkokielisenä. Varoitus: salasana näkyy ruudulla.",
+      "hide": "Piilota salasana",
+      "show": "Näytä salasana"
+    },
+    "privacy": "Tietosuoja",
+    "remove": "Poista",
+    "save": "Tallenna",
+    "terms": "Käyttöehdot",
+    "yes": "Kyllä"
+  }
+}

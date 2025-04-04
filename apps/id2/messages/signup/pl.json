@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Utwórz konto <noo></noo>",
+    "errors": {
+      "invalid_data": "Coś poszło nie tak. Sprawdź dane, które wpisałeś",
+      "password_classes": "Zrób bardziej silne hasło. Skorzystaj z mieszanki liter, cyfr i symboli",
+      "password_length": "Użyj co najmniej 10 znaków",
+      "password_required": "Podaj hasło",
+      "password_too_long": "Hasło, które podałeś jest zbyt długie",
+      "username_first_char": "Nazwa użytkownika musi zaczynać się literą lub liczbą",
+      "username_invalid": "Nazwa użytkownika może zawierać tylko litery, cyfry i kropki (.)",
+      "username_last_char": "Nazwa użytkownika musi kończyć się literą lub liczbą",
+      "username_length": "Nazwa użytkownika powinna mieścić się między 6 a 30 znaków",
+      "username_required": "Podaj nowe nazwę użytkownika",
+      "username_reserved": "Przykro nam, ta nazwa użytkownika jest już zajęta",
+      "username_taken": "Ta nazwa jest zajęta",
+      "username_two_dots": "Nazwa użytkownika nie może zawierać dwóch kropek z rzędu"
+    },
+    "metaTitle": "Stwórz swoje konto noo",
+    "step1": {
+      "title": "Wpisz swoje imię"
+    },
+    "step2": {
+      "title": "Wybierz adres e-mail",
+      "username": "Adres e-mail"
+    },
+    "step3": {
+      "password": "Hasło",
+      "title": "Utwórz silne hasło"
+    },
+    "step4": {
+      "accept": "Zaakceptuj i kontynuuj",
+      "description": "<p>Konto <noo></noo> umożliwia dostęp do szeregu usług, takich jak poczta e-mail, przechowywanie plików i wiele innych.</p><p><terms>Warunki korzystania z usługi <noo></noo></terms> wyjaśniają, czego można się spodziewać podczas korzystania z usług, podczas gdy <privacy>Polityka prywatności <noo></noo></privacy> opisuje sposób, w jaki przetwarzamy informacje generowane lub gromadzone podczas korzystania z usług.</p><p>Aby utworzyć konto <noo></noo> i korzystać z usług, musisz zaakceptować Warunki korzystania z usługi i Politykę prywatności <noo></noo>.</p>",
+      "title": "Ostatnie sprawy..."
+    }
+  }
+}

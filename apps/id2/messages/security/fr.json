@@ -1,0 +1,61 @@
+{
+  "security": {
+    "back": "Retour",
+    "header": "Sécurité & Confidentialité",
+    "passkeys": {
+      "confirmRemove": "Es-tu sûr de vouloir supprimer cette clé de sécurité ?",
+      "created": "Créé le {date, date, medium}",
+      "description1": "Avec les clés d'accès, tu peux te connecter à ton compte <noo></noo> simplement en utilisant ton empreinte digitale, ton visage, le verrouillage de ton écran ou une clé de sécurité. Pas de mots de passe à retenir, et bien plus difficile à pirater.",
+      "description2": "Tes clés d'accès restent sur ton appareil ou ta clé de sécurité, donc seulement toi peux les utiliser. Assure-toi simplement que ton appareil est sécurisé—ton verrouillage d'écran ou tes données biométriques sont la clé.",
+      "lastUsed": "Dernière utilisation {ago}",
+      "register": "Créer une clé d'accès",
+      "removeError": "Une erreur est survenue lors de la suppression de la clé de sécurité.",
+      "removeSuccess": "La clé de sécurité a été supprimée.",
+      "title": "Clés d'accès",
+      "unnamed": "Clé sans nom",
+      "yourPasskeys": "Vos clés de sécurité"
+    },
+    "password": {
+      "breaches": "Votre mot de passe a été trouvé dans {count, plural, one {une violation de données} other {{count} violations de données}}. Bien que nos systèmes soient sécurisés, nous vous recommandons de mettre à jour votre mot de passe immédiatement par précaution.{otp, select, true {} other { Vous devriez aussi activer l'authentification à 2 facteurs pour plus de sécurité.}} <guide>En savoir plus</guide>.",
+      "confirmLabel": "Confirmer le nouveau mot de passe",
+      "description1": "Votre mot de passe est la première barrière contre l'accès non autorisé à votre compte.",
+      "description2": "Choisissez un mot de passe solide, ne le partagez pas pour d'autres services ou avec d'autres personnes. Consultez notre guide pour choisir et gérer un mot de passe sécurisé.",
+      "errors": {
+        "long": "Le mot de passe est trop long.",
+        "mismatch": "Les mots de passe ne correspondent pas.",
+        "short": "Le mot de passe est trop court."
+      },
+      "label": "Nouveau mot de passe",
+      "score": {
+        "acceptable": "acceptable",
+        "breached": "a été compromis lors d'une fuite de données. Tu devrais en essayer un autre ?",
+        "prefix": "Force du mot de passe :",
+        "short": "trop court",
+        "strong": "fort",
+        "weak": "faible"
+      },
+      "title": "Mot de passe",
+      "updateNotice": "Pour des raisons de sécurité, changer votre mot de passe vous déconnecte partout ailleurs.",
+      "updateSuccess": "Votre mot de passe a été modifié.",
+      "updateSuggestion": "Utilisez au moins 10 caractères. Évitez les mots communs ou évidents comme les noms d'animaux de compagnie, les équipes sportives ou les anniversaires."
+    },
+    "sessions": {
+      "currentSession": "Session actuelle",
+      "lastUsed": "Dernière utilisation {lastUsedAgo}",
+      "terminate": "Terminer cette session",
+      "title": "Sessions actives"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 session} other {{count} sessions}}",
+      "applications": "Applications et accès aux données",
+      "breaches": "Votre mot de passe a été trouvé dans des violations de données.",
+      "comingSoon": "Bientôt disponible",
+      "mfa": "Authentification à deux facteurs",
+      "passkeys": "Clés d'accès",
+      "password": "Mot de passe",
+      "passwordLastChanged": "Dernière modification le {date, date, medium}.",
+      "sessions": "Sessions actives"
+    },
+    "title": "Sécurité & Confidentialité"
+  }
+}

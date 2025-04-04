@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Vissza",
+    "cancel": "Mégse",
+    "change": "Módosít",
+    "close": "Bezárás",
+    "confirm": "Megerősít",
+    "continue": "Folytatás",
+    "madeWith": "Készült ❤️-vel és ☕️-val az Európai Unióban",
+    "next": "Tovább",
+    "no": "Nem",
+    "optional": "Opcionális",
+    "passwordField": {
+      "ariaLabelShow": "Jelszó megjelenítése olvasható formában. Figyelem: a jelszó látható lesz a képernyőn.",
+      "hide": "Jelszó elrejtése",
+      "show": "Jelszó megjelenítése"
+    },
+    "privacy": "Adatvédelem",
+    "remove": "Eltávolítás",
+    "save": "Mentés",
+    "terms": "Feltételek",
+    "yes": "Igen"
+  }
+}

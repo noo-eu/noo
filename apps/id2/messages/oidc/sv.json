@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Byt konto",
+    "consent": {
+      "claims": {
+        "address": "Din postadress",
+        "birthdate": "Ditt födelsedatum",
+        "email": "Din noo e-postadress",
+        "gender": "Det kön du identifierar dig med",
+        "name": "Ditt fullständiga namn",
+        "phone_number": "Ditt telefonnummer",
+        "profile": "Din profilbild",
+        "username": "Ditt användarnamn"
+      },
+      "description": "<strong>{name}</strong> begär åtkomst till följande information:",
+      "title": "Du skriver in på <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Du har loggat ut från <strong>{name}</strong>.",
+      "description_no_app": "Du har loggat ut från en tredjepartsapp.",
+      "query": "Vill du också avsluta ditt inloggningsläge på {noo}?",
+      "title": "Logga ut"
+    },
+    "fatal": {
+      "description": "Du försökte logga in på en tredjepartsapplikation, men den fungerar inte korrekt. Försök igen senare eller kontakta applikationens ägare med följande information:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Något gick fel"
+    },
+    "home": "Gå till din <noo></noo> startsida",
+    "switch": {
+      "description": "för att fortsätta till <details>{name}</details>",
+      "legalComplete": "Innan du loggar in måste du kontrollera <privacy>sekretesspolicy</privacy> och <terms>användarvillkor</terms> för {client}.",
+      "legalNone": "Innan du loggar in måste du kontrollera {client}s juridiska dokument.",
+      "legalPrivacy": "Innan du loggar in måste du kontrollera <privacy>sekretesspolicy</privacy> för {client}.",
+      "legalTerms": "Innan du loggar in måste du kontrollera <terms>användarvillkor</terms> för {client}.",
+      "metaTitle": "Logga in - noo id",
+      "pageTitle": "Logga in med <noo></noo>",
+      "signin": "Använd ett annat konto",
+      "title": "Välj ett konto"
+    }
+  }
+}

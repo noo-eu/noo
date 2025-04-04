@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Rakstīt kontu",
+    "error": "Jūsu ievadīto informāciju nav pareiza",
+    "metaTitle": "Pieteikties - noo",
+    "or": "vai",
+    "password": "Parole",
+    "submit": "Iestāties",
+    "tenant_error": "Lūdzu, iestājieties ar {domain} kontu",
+    "title": "Iestāties savam <noo></noo> kontam",
+    "totpCode": "Kods",
+    "totpDescription": "Ievadi kodu no savas autentizācijas lietotnes",
+    "usePasskey": "Pierakstīties, izmantojot paroli",
+    "username": "Vārds vai e-pasta adrese"
+  }
+}

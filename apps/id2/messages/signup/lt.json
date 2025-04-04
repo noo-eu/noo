@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Sukurkite savo <noo></noo> paskyrą",
+    "errors": {
+      "invalid_data": "Kitaip nei teisingai. Rodykite įvestus duomenis",
+      "password_classes": "Panaudokite stipresnę slapyvardą. Naudojokite raidžių, skaičių ir simbolių mišinį",
+      "password_length": "Panaudokite 10 arba daugiau simbolių",
+      "password_required": "Įveskite savo slaptažodį",
+      "password_too_long": "Įvestas slaptažodis yra per ilgas",
+      "username_first_char": "Vartotojo vardo pradžia turi būti raidė ar skaičius",
+      "username_invalid": "Vartotojo vardo galime naudoti tik raidę, skaičių ir tašką (.)",
+      "username_last_char": "Vartotojo vardo pabaiga turi būti raidė ar skaičius",
+      "username_length": "Vartotojo vardas turi būti nuo 6 iki 30 simbolių ilgio",
+      "username_required": "Įveskite savo naują vartotojo vardą",
+      "username_reserved": "Atsiprašome, šis vartotojo vardas jau užimtas",
+      "username_taken": "Šis vartotojo vardas yra užimtas",
+      "username_two_dots": "Vartotojo vardo negalima turėti dviejų iš eilį taško (.)"
+    },
+    "metaTitle": "Sukurkite savo noo paskyrą",
+    "step1": {
+      "title": "Įveskite savo vardą"
+    },
+    "step2": {
+      "title": "Pasirinkite savo el. paštos adresą",
+      "username": "El.pašto adresas"
+    },
+    "step3": {
+      "password": "Slaptažodis",
+      "title": "Sukurkite stipresnį slaptažodį"
+    },
+    "step4": {
+      "accept": "Prisijunkite ir tęskite",
+      "description": "        <p>A <noo></noo> paskyra leidžia jus prisijungti iki serijos paslaugų, kaip taip pat el. pašto, failų saugyklos ir daugiau.</p>        <p><terms><noo></noo> Taisyklės apie paskyrai taisyklę</terms> aiškina, ką galite išlikti naudodami paslaugas, tuo tarpu <privacy><noo></noo>' Privatumo politika</privacy> aprašo, kaip mes valdomas informacijos ir jaukų generuota ar gaunama per naudojimo paslaugų.</p>        <p>Norėdami sukurti savęs paskyrai ir naudoti jos paslaugas, turite priimti visą <noo></noo> Taisyklę apie slapyvardus ir Privatumo politiką.</p>",
+      "title": "Įvykdyti vieną kartą..."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Criar conta",
+    "error": "As credenciais que introduziste estão incorretas",
+    "metaTitle": "Iniciar sessão - noo",
+    "or": "ou",
+    "password": "Palavra-passe",
+    "submit": "Entrar",
+    "tenant_error": "Por favor, entra com uma conta {domain}",
+    "title": "Entra na tua conta <noo></noo>",
+    "totpCode": "Código",
+    "totpDescription": "Insere o código da tua app de autenticação",
+    "usePasskey": "Iniciar sessão com uma chave de acesso",
+    "username": "Nome de utilizador ou email"
+  }
+}

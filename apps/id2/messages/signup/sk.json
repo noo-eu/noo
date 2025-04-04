@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Vytvorte si účet <noo></noo>",
+    "errors": {
+      "invalid_data": "Náš systém prekvapil. Prosím, zkontrolujte údaje, ktoré ste zadali",
+      "password_classes": "Prosím, použite silnejšie heslo. Používejte mliešenie písmen, čísel a symbolov",
+      "password_length": "Prosím, použite 10 alebo viac znakov",
+      "password_required": "Prosím, zadejte vaše heslo",
+      "password_too_long": "Zadane heslo je príliš dlhé",
+      "username_first_char": "Prihlasovacie meno musí začínať písmenom alebo číslom",
+      "username_invalid": "Prihlasovacie meno môže obsahovať iba písmená, čísla a bodky (.)",
+      "username_last_char": "Prihlasovacie meno musí skončiť písmenom alebo číslom",
+      "username_length": "Prihlasovacie meno musí mať dĺžku medzi 6 a 30 znakov",
+      "username_required": "Prosím, zadejte vaše nové prihlasovacie meno",
+      "username_reserved": "Prepáč, toto používateľské meno nie je povolené",
+      "username_taken": "Toto prihlasovacie meno je już použité",
+      "username_two_dots": "Prihlasovacie meno nemôže obsahovať dve body (.) v rade"
+    },
+    "metaTitle": "Vytvoriť si účet",
+    "step1": {
+      "title": "Zadajte vaše meno"
+    },
+    "step2": {
+      "title": "Vyberte svoju e-mailovú adresu",
+      "username": "E-mailová adresa"
+    },
+    "step3": {
+      "password": "Heslo",
+      "title": "Vytvorte silné heslo"
+    },
+    "step4": {
+      "accept": "Prijať a pokračovať",
+      "description": "        <p>A <noo></noo> umožní vám prístup k rôznym službám ako napríklad email, úložisko súborov a viac.</p>        <p><terms>Konkrétne <noo></noo> Terms of Service</terms> vysvetľujú, čo môžete očakávať pri používaní služieb, zatiaľčo <privacy><noo></noo> Privacy Policy</privacy> opisuje, ako sa s vašou osobnými údajmi bude nakladanie.</p>        <p>Aby ste mohli vytvoriť <noo></noo>, prihliadnete k jeho Terms of Service a Privacy Policu.</p>",
+      "title": "Ešte jedno..."
+    }
+  }
+}

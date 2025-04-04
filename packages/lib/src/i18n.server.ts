@@ -43,7 +43,7 @@ export function localeFromRequest(request: Request): string {
  */
 export async function loadMessages(
   locale: string,
-): Promise<Record<string, string>> {
+): Promise<Record<string, unknown>> {
   // Get the list of directories in the messages folder
   const directories = await readdir("./messages", {
     recursive: true,

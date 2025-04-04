@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Veldu tungumálið sem þú vilt nota í öllum þjónustum noo.",
+      "label": "Tungumál",
+      "title": "Stilltu valda tungumál",
+      "updateSuccess": "Valda tungumálið hefur verið vistað"
+    },
+    "summary": {
+      "language": "Breyttu valinni tungumáli",
+      "timeZone": "Breyttu tímasvæði"
+    },
+    "timeZone": {
+      "cet": "Mið-Evrópusvæðistími",
+      "description": "Veldu tímasvæði til að sýna dagsetningar og tíma á þínu staðartíma.",
+      "detected": "Samkvæmt stillingum tækisins þíns er núverandi tímasvæði þitt {detected}. Við mælum með því að nota tímasvæðið sem passar við þína núverandi staðsetningu.",
+      "eet": "Austur-Evrópusvæðistími",
+      "gmt": "Grænwich-tími / Vestrænn evrópskur tími",
+      "label": "Tímasvæði",
+      "title": "Stilltu tímasvæði",
+      "updateSuccess": "Tímasvæðið hefur verið vistað"
+    },
+    "title": "Aðgangsparametar"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Pakeiti paskyrą",
+    "consent": {
+      "claims": {
+        "address": "Jūsų pašto adresas",
+        "birthdate": "Jūsų gimimo data",
+        "email": "Jūsų noo el. pašto adresas",
+        "gender": "Jūsų lytis",
+        "name": "Jūsų vardas ir pavardė",
+        "phone_number": "Jūsų telefono numeris",
+        "profile": "Jūsų profilio nuotrauka",
+        "username": "Jūsų naudotojo vardas"
+      },
+      "description": "<strong>{name}</strong> prašo prieigos prie šios informacijos:",
+      "title": "Jūs prisijungeite į <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Išsiregistravote iš <strong>{name}</strong>.",
+      "description_no_app": "Išsiregistravote iš trečiosios šalies programėlės.",
+      "query": "Ar norite panaikinti savo sesiją <noo> taip pat?",
+      "title": "Atsijungimas"
+    },
+    "fatal": {
+      "description": "Bandėte prisijungti prie trečiosios šalies programos, tačiau programa neveikia tinkamai. Bandykite dar kartą vėliau arba susisiekite su programos savininku, pateikdami šią informaciją:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Įvyko klaida"
+    },
+    "home": "Eikite į savo <noo></noo> pagrindinį puslapį",
+    "switch": {
+      "description": "kad galėtumėte tęsti <details>{name}</details>",
+      "legalComplete": "Prieš prisijungdami, turite patikrinti <privacy>privatumo taisykles</privacy> ir <terms>naudojimo sąlygas</terms> {client}.",
+      "legalNone": "Prieš prisijungdami, turite patikrinti {client} teisinius dokumentus.",
+      "legalPrivacy": "Prieš prisijungdami, turite patikrinti <privacy>privatumo taisykles</privacy> {client}.",
+      "legalTerms": "Prieš prisijungdami, turite patikrinti <terms>naudojimo sąlygas</terms> {client}.",
+      "metaTitle": "Prisijungimas - noo id",
+      "pageTitle": "Prisijungimas naudojant <noo></noo>",
+      "signin": "Naudokite kitą paskyrą",
+      "title": "Pasirinkite paskyrą"
+    }
+  }
+}

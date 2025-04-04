@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Vytvořte si své <noo></noo> účet",
+    "errors": {
+      "invalid_data": "Co se stalo špatně. Prosím zkontrolujte zadaná data",
+      "password_classes": "Prosíme použijte silnější heslo. Používejte mix písmen, čísel a symbolů",
+      "password_length": "Prosíme použijte více než 10 znaků",
+      "password_required": "Zadejte prosím heslo",
+      "password_too_long": "Vaše heslo je příliš dlouhé",
+      "username_first_char": "Jméno účtu musí začínat písmenem nebo číslem",
+      "username_invalid": "Vaše jméno účtu může obsahovat pouze písmena, čísla a tečky (.)",
+      "username_last_char": "Jméno účtu musí končit písmenem nebo číslem",
+      "username_length": "Jméno účtu musí mít délku mezi 6 a 30 znaky",
+      "username_required": "Zadejte prosím nové jméno účtu",
+      "username_reserved": "Je nám líto, toto uživatelské jméno není povoleno",
+      "username_taken": "Toto jméno účtu je již zabrané",
+      "username_two_dots": "Vaše jméno účtu nemůže obsahovat dva body (.) vedle sebe"
+    },
+    "metaTitle": "Vytvořte si účet na noo",
+    "step1": {
+      "title": "Zadejte jméno"
+    },
+    "step2": {
+      "title": "Vyberte si emailovou adresu",
+      "username": "Emailová adresa"
+    },
+    "step3": {
+      "password": "Heslo",
+      "title": "Vytvořte silné heslo"
+    },
+    "step4": {
+      "accept": "Přijměte a pokračujte",
+      "description": "        <p>Account umožňuje přístup ke řadu služeb, jako jsou emailová adresa, ukládání souborů a další.</p>        <p><terms><noo></noo>'s Smlouva o službách</terms> vysvětluje, co očekávat při používání služeb, zatímco <privacy><noo></noo>' Politika soukromí</privacy> popisuje způsob zpracování informací založených nebo shromážděných během používání služeb.</p>        <p>Aby se vám mohlo vytvořit účet a používat služby, musíte přijmout smlouvu o službách a politiku soukromí <noo></noo>'</p>",
+      "title": "To poslední..."
+    }
+  }
+}

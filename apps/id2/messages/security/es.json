@@ -1,0 +1,61 @@
+{
+  "security": {
+    "back": "Volver",
+    "header": "Seguridad y Privacidad",
+    "passkeys": {
+      "confirmRemove": "¿Estás seguro de que quieres eliminar esta clave de acceso?",
+      "created": "Creada el {date, date, medium}",
+      "description1": "Con las passkeys, puedes iniciar sesión en tu cuenta de <noo></noo> usando solo tu huella digital, reconocimiento facial, bloqueo de pantalla o una llave de seguridad. No hay contraseñas que recordar, y es mucho más difícil que alguien las robe.",
+      "description2": "Tus passkeys se quedan en tu dispositivo o llave de seguridad, así que solo tú puedes usarlas. Solo tienes que mantener tu dispositivo seguro: tu bloqueo de pantalla o datos biométricos son la clave.",
+      "lastUsed": "Última vez usada {ago}",
+      "register": "Crear una passkey",
+      "removeError": "Ha habido un error al eliminar la clave de acceso.",
+      "removeSuccess": "La clave de acceso ha sido eliminada.",
+      "title": "Passkeys",
+      "unnamed": "Clave sin nombre",
+      "yourPasskeys": "Tus claves de seguridad"
+    },
+    "password": {
+      "breaches": "Tu contraseña ha aparecido en {count, plural, one {una filtración de datos} other {{count} filtraciones de datos}}. Aunque nuestros sistemas son seguros, te recomendamos que actualices tu contraseña de inmediato como medida de precaución.{otp, select, true {} other { Además, deberías activar la autenticación en 2 pasos para mayor seguridad.}} <guide>Aprende más</guide>.",
+      "confirmLabel": "Confirma la nueva contraseña",
+      "description1": "Tu contraseña es la primera línea de defensa contra el acceso no autorizado a tu cuenta.",
+      "description2": "Elige una contraseña fuerte, no la compartas para otros servicios ni con otras personas. Lee nuestra guía para elegir y gestionar una contraseña segura.",
+      "errors": {
+        "long": "La contraseña es demasiado larga.",
+        "mismatch": "Las contraseñas no coinciden.",
+        "short": "La contraseña es demasiado corta."
+      },
+      "label": "Nueva contraseña",
+      "score": {
+        "acceptable": "aceptable",
+        "breached": "está en una filtración de datos. ¿Por qué no pruebas con otra?",
+        "prefix": "Fuerza de la contraseña:",
+        "short": "demasiado corta",
+        "strong": "fuerte",
+        "weak": "débil"
+      },
+      "title": "Contraseña",
+      "updateNotice": "Por motivos de seguridad, cambiar tu contraseña te desconectará de todos los demás sitios.",
+      "updateSuccess": "Tu contraseña ha sido cambiada.",
+      "updateSuggestion": "Utiliza al menos 10 caracteres. Evita palabras comunes u obvias como nombres de mascotas, equipos deportivos o cumpleaños."
+    },
+    "sessions": {
+      "currentSession": "Sesión actual",
+      "lastUsed": "Última vez usado {lastUsedAgo}",
+      "terminate": "Terminar esta sesión",
+      "title": "Sesiones activas"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 sesión} other {{count} sesiones}}",
+      "applications": "Aplicaciones y acceso a datos",
+      "breaches": "Tu contraseña ha aparecido en filtraciones de datos.",
+      "comingSoon": "Próximamente",
+      "mfa": "Autenticación en dos pasos",
+      "passkeys": "Passkeys",
+      "password": "Contraseña",
+      "passwordLastChanged": "Último cambio el {date, date, medium}.",
+      "sessions": "Sesiones activas"
+    },
+    "title": "Seguridad y Privacidad"
+  }
+}

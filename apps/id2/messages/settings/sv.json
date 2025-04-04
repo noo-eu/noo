@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Välj det språk du föredrar att använda i alla noo-tjänster.",
+      "label": "Språk",
+      "title": "Ställ in ditt föredragna språk",
+      "updateSuccess": "Ditt föredragna språk har sparats"
+    },
+    "summary": {
+      "language": "Ändra ditt föredragna språk",
+      "timeZone": "Ändra din tidszon"
+    },
+    "timeZone": {
+      "cet": "Centraleuropeisk tid",
+      "description": "Välj din tidszon för att visa datum och tider i din lokala tid.",
+      "detected": "Enligt dina enhetsinställningar är din nuvarande tidszon {detected}. Vi rekommenderar att du använder den tidszon som matchar din nuvarande plats.",
+      "eet": "Östeuropeisk tid",
+      "gmt": "Greenwich Mean Time / Västeuropeisk tid",
+      "label": "Tidszon",
+      "title": "Ställ in din tidszon",
+      "updateSuccess": "Din tidszon har sparats"
+    },
+    "title": "Kontoinställningar"
+  }
+}

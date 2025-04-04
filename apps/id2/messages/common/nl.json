@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Terug",
+    "cancel": "Annuleren",
+    "change": "Wijzigen",
+    "close": "Sluiten",
+    "confirm": "Bevestigen",
+    "continue": "Doorgaan",
+    "madeWith": "Gemaakt met ❤️ en ☕️ in de Europese Unie",
+    "next": "Volgende",
+    "no": "Nee",
+    "optional": "Optioneel",
+    "passwordField": {
+      "ariaLabelShow": "Wachtwoord als leesbare tekst tonen. Waarschuwing: het wachtwoord wordt zichtbaar op het scherm.",
+      "hide": "Wachtwoord verbergen",
+      "show": "Wachtwoord tonen"
+    },
+    "privacy": "Privacy",
+    "remove": "Verwijderen",
+    "save": "Opslaan",
+    "terms": "Voorwaarden",
+    "yes": "Ja"
+  }
+}

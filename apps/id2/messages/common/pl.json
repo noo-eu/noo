@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Wstecz",
+    "cancel": "Anuluj",
+    "change": "Zmień",
+    "close": "Zamknij",
+    "confirm": "Potwierdź",
+    "continue": "Kontynuuj",
+    "madeWith": "Stworzone z ❤️ i ☕️ w Unii Europejskiej",
+    "next": "Dalej",
+    "no": "Nie",
+    "optional": "Opcjonalne",
+    "passwordField": {
+      "ariaLabelShow": "Pokaż hasło jako zwykły tekst. Uwaga: hasło będzie widoczne na ekranie.",
+      "hide": "Ukryj hasło",
+      "show": "Pokaż hasło"
+    },
+    "privacy": "Prywatność",
+    "remove": "Usuń",
+    "save": "Zapisz",
+    "terms": "Warunki",
+    "yes": "Tak"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Change account",
+    "consent": {
+      "claims": {
+        "address": "Your postal address",
+        "birthdate": "Your date of birth",
+        "email": "Your noo email address",
+        "gender": "The gender you identify with",
+        "name": "Your full name",
+        "phone_number": "Your phone number",
+        "profile": "Your profile picture",
+        "username": "Your username"
+      },
+      "description": "<strong>{name}</strong> is requesting access to the following information",
+      "title": "You are signing into <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "You signed out from <strong>{name}</strong>.",
+      "description_no_app": "You signed out from a third party application.",
+      "query": "Would you like to sign out from <noo></noo> as well?",
+      "title": "Sign out"
+    },
+    "fatal": {
+      "description": "You tried to sign in to a third-party application, but the application is not working correctly. Please try again later or contact the application owner with the following information:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Something went wrong"
+    },
+    "home": "Go to your <noo></noo> home",
+    "switch": {
+      "description": "to continue to <details>{name}</details>",
+      "legalComplete": "Before signing in, you should review {client}'s <privacy>privacy policy</privacy> and <terms>terms of service</terms>.",
+      "legalNone": "Before signing in, you should review {client}'s legal documents.",
+      "legalPrivacy": "Before signing in, you should review {client}'s <privacy>privacy policy</privacy>.",
+      "legalTerms": "Before signing in, you should review {client}'s <terms>terms of service</terms>.",
+      "metaTitle": "Sign in - noo id",
+      "pageTitle": "Sign in with <noo></noo>",
+      "signin": "Use another account",
+      "title": "Choose an account"
+    }
+  }
+}

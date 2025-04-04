@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Tilbage",
+    "cancel": "Annuller",
+    "change": "Skift",
+    "close": "Luk",
+    "confirm": "Bekræft",
+    "continue": "Fortsæt",
+    "madeWith": "Lavet med ❤️ og ☕️ i Den Europæiske Union",
+    "next": "Næste",
+    "no": "Nej",
+    "optional": "Valgfrit",
+    "passwordField": {
+      "ariaLabelShow": "Vis adgangskode som almindelig tekst. Advarsel: din adgangskode vil være synlig på skærmen.",
+      "hide": "Skjul adgangskode",
+      "show": "Vis adgangskode"
+    },
+    "privacy": "Privatliv",
+    "remove": "Fjern",
+    "save": "Gem",
+    "terms": "Vilkår",
+    "yes": "Ja"
+  }
+}

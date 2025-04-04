@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Luo tili <noo></noo>",
+    "errors": {
+      "invalid_data": "Jokin meni pieleen. Tarkistele syötetyt tiedot",
+      "password_classes": "Salaasanassa tulee olla erilaisia kirjaimia, numeroita ja merkkejä. Erityisen vahva salasana on parasta.",
+      "password_length": "Käytä vähintään 10 merkkiä",
+      "password_required": "Anna salasana",
+      "password_too_long": "Syötetty salasana oli liian pitkä",
+      "username_first_char": "Käyttäjänimen tulee aloittua kirjaimella tai numerolla",
+      "username_invalid": "Käyttäjänimessä voi olla vain kirjaimeet, numerot ja pisteet (.)",
+      "username_last_char": "Käyttäjänimen tulee päättyä kirjaimella tai numerolla",
+      "username_length": "Käyttäjänimi on oltava vähintään 6 ja enintään 30 merkkiä pitkä",
+      "username_required": "Anna uusi käyttäjänimi",
+      "username_reserved": "Anteeksi, tämä käyttäjänimi ei ole sallittu.",
+      "username_taken": "Tämä käyttäjänimi on jo varattu",
+      "username_two_dots": "Käyttäjänimessä ei voi olla kaksi peräkkäistä pistettä (.)"
+    },
+    "metaTitle": "Luo uusi noo-tilisi",
+    "step1": {
+      "title": "Anna henkilöllisyys"
+    },
+    "step2": {
+      "title": "Valitse sähköpostiosoite",
+      "username": "Sähköpostiosoite"
+    },
+    "step3": {
+      "password": "Salasana",
+      "title": "Luo vahva salasana"
+    },
+    "step4": {
+      "accept": "Hyväksy ehdot ja jatka",
+      "description": "        <p>A <noo></noo>tili antaa sinulle pääsyn laajaan palveluvalikoimaan, kuten sähköpostiin, tiedostojen tallentamiseen ja muuhun.</p>\n        <p><terms><noo></noo>n ehtoehdot</terms> selittävät mitä odottaa palvelujen käyttöä koskevassa käytännön tasolla, kun taas <privacy><noo></noo>n tietosuojakäytäntö</privacy> kertoo miten käsittelemme tiedon siitä millaista palveluita olet käyttänyt.</p>\n        <p>Jotta voit luoda <noo></noo>tili ja käyttää palveluita, sinun on hyväksytävä <noo></noo>n ehtoehdot sekä Tietosuojakäytäntö</p>",
+      "title": "Viimeinen hetki..."
+    }
+  }
+}

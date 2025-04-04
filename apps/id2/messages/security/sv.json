@@ -1,0 +1,61 @@
+{
+  "security": {
+    "back": "Tillbaka",
+    "header": "Säkerhet och Integritet",
+    "passkeys": {
+      "confirmRemove": "Är du säker på att du vill ta bort denna säkerhetsnyckel?",
+      "created": "Skapad den {date, date, medium}",
+      "description1": "Med passkeys kan du logga in på ditt <noo></noo>-konto med bara ditt fingeravtryck, ansikte, skärmlås eller en säkerhetsnyckel. Inga lösenord att komma ihåg, och mycket svårare för någon att stjäla.",
+      "description2": "Dina passkeys stannar på din enhet eller säkerhetsnyckel, så bara du kan använda dem. Se bara till att din enhet är säker - ditt skärmlås eller biometriska data är nyckeln.",
+      "lastUsed": "Senast använd {ago}",
+      "register": "Skapa en passkey",
+      "removeError": "Något gick fel vid borttagning av säkerhetsnyckeln.",
+      "removeSuccess": "Säkerhetsnyckeln har tagits bort.",
+      "title": "Passkeys",
+      "unnamed": "Namnlös nyckel",
+      "yourPasskeys": "Dina säkerhetsnycklar"
+    },
+    "password": {
+      "breaches": "Ditt lösenord har förekommit i {count, plural, one {ett dataintrång} other {{count} dataintrång}}. Våra system är fortfarande säkra, men vi rekommenderar att du uppdaterar ditt lösenord omedelbart som en försiktighetsåtgärd.{otp, select, true {} other { Du bör också aktivera 2-faktorsautentisering för ökad säkerhet.}} <guide>Läs mer</guide>.",
+      "confirmLabel": "Bekräfta nytt lösenord",
+      "description1": "Ditt lösenord är den första försvarslinjen mot obehörig åtkomst till ditt konto.",
+      "description2": "Välj ett starkt lösenord, dela det inte med andra tjänster eller personer. Läs vår guide för att välja och hantera ett säkert lösenord.",
+      "errors": {
+        "long": "Lösenordet är för långt.",
+        "mismatch": "Lösenorden matchar inte.",
+        "short": "Lösenordet är för kort."
+      },
+      "label": "Nytt lösenord",
+      "score": {
+        "acceptable": "acceptabelt",
+        "breached": "finns med i en dataläcka. Försök med ett annat?",
+        "prefix": "Lösenordsstyrka:",
+        "short": "för kort",
+        "strong": "starkt",
+        "weak": "svagt"
+      },
+      "title": "Lösenord",
+      "updateNotice": "Av säkerhetsskäl loggas du ut överallt annars när du byter ditt lösenord.",
+      "updateSuccess": "Ditt lösenord har ändrats.",
+      "updateSuggestion": "Använd minst 10 tecken. Undvik vanliga eller uppenbara ord som husdjursnamn, sportlag eller födelsedagar."
+    },
+    "sessions": {
+      "currentSession": "Aktuell session",
+      "lastUsed": "Senast använd {lastUsedAgo}",
+      "terminate": "Avsluta den här sessionen",
+      "title": "Aktiva sessioner"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 session} other {{count} sessioner}}",
+      "applications": "Appar och datåtkomst",
+      "breaches": "Ditt lösenord har förekommit i dataintrång.",
+      "comingSoon": "Kommer snart",
+      "mfa": "Tvåstegsverifiering",
+      "passkeys": "Passnycklar",
+      "password": "Lösenord",
+      "passwordLastChanged": "Senast ändrat {date, date, medium}.",
+      "sessions": "Aktiva sessioner"
+    },
+    "title": "Säkerhet och Integritet"
+  }
+}

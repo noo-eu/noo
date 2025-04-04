@@ -1,0 +1,9 @@
+.DS_Store
+/node_modules/
+/certificates/
+.env.local
+
+# React Router
+/.react-router/
+/build/
+/test-results

@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Tagasi",
+    "cancel": "Tühista",
+    "change": "Muuda",
+    "close": "Sulge",
+    "confirm": "Kinnita",
+    "continue": "Jätka",
+    "madeWith": "Tehtud ❤️ ja ☕️ saatel Euroopa Liidus",
+    "next": "Edasi",
+    "no": "Ei",
+    "optional": "Valikuline",
+    "passwordField": {
+      "ariaLabelShow": "Näita salasõna tavalise tekstina. Ettevaatust: salasõna kuvatakse ekraanil.",
+      "hide": "Peida parool",
+      "show": "Näita salasõna"
+    },
+    "privacy": "Privaatsus",
+    "remove": "Eemalda",
+    "save": "Salvesta",
+    "terms": "Tingimused",
+    "yes": "Jah"
+  }
+}

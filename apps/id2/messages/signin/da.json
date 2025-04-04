@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Opret konto",
+    "error": "De indtastede oplysninger er forkerte",
+    "metaTitle": "Log ind - noo",
+    "or": "eller",
+    "password": "Adgangskode",
+    "submit": "Log ind",
+    "tenant_error": "Log venligst ind med en {domain}-konto",
+    "title": "Log ind på din <noo></noo> konto",
+    "totpCode": "Kode",
+    "totpDescription": "Indtast koden fra din autentifikationsapp",
+    "usePasskey": "Log ind med en adgangsnøgle",
+    "username": "Brugernavn eller e-mail"
+  }
+}

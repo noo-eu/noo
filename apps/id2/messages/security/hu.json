@@ -1,0 +1,61 @@
+{
+  "security": {
+    "back": "Vissza",
+    "header": "Biztonság és Adatvédelem",
+    "passkeys": {
+      "confirmRemove": "Biztosan el szeretnéd távolítani ezt a jelszót?",
+      "created": "Létrehozva: {date, date, medium}",
+      "description1": "A jelszókulcsokkal úgy jelentkezhetsz be a <noo></noo> fiókodba, hogy csak az ujjlenyomatodra, az arcodra, a képernyőzárra vagy egy biztonsági kulcsra van szükséged. Nincs mit megjegyezni, és sokkal nehezebb ellopni is.",
+      "description2": "A jelszókulcsaid a készülékeden vagy a biztonsági kulcsodon maradnak, így csak te tudod azokat használni. Csak tartsd biztonságban az eszközödet - a képernyőzár vagy a biometrikus adatok a kulcs.",
+      "lastUsed": "Utoljára használtad: {ago}",
+      "register": "Hozz létre egy jelszókulcsot",
+      "removeError": "Hiba történt a jelszó eltávolítása közben.",
+      "removeSuccess": "A jelszó eltávolítva.",
+      "title": "Jelszókulcsok",
+      "unnamed": "Névtelen kulcs",
+      "yourPasskeys": "Biztonsági kulcsaid"
+    },
+    "password": {
+      "breaches": "A jelszavad megjelent {count, plural, one {egy adatlopásban} other {{count} adatlopásban}}. Míg a rendszereink biztonságban vannak, javasoljuk, hogy azonnal frissítsd a jelszavad, mint óvintézkedést.{otp, select, true {} other { Emellett érdemes bekapcsolni a kétlépcsős azonosítást is a fokozott biztonság érdekében.}} <guide>Tudd meg többet</guide>.",
+      "confirmLabel": "Új jelszó megerősítése",
+      "description1": "A jelszavad az első védelmi vonal a jogosulatlan hozzáférés ellen.",
+      "description2": "Válassz egy erős jelszót, és ne oszd meg más szolgáltatásokkal vagy más emberekkel. Olvasd el az útmutatónkat az erős jelszó kiválasztásához és kezeléséhez.",
+      "errors": {
+        "long": "A jelszó túl hosszú.",
+        "mismatch": "A jelszavak nem egyeznek.",
+        "short": "A jelszó túl rövid."
+      },
+      "label": "Új jelszó",
+      "score": {
+        "acceptable": "elfogadható",
+        "breached": "egy adatsértés során kompromittálódott. Próbálj ki egy másikat?",
+        "prefix": "Jelszó erőssége:",
+        "short": "túl rövid",
+        "strong": "erős",
+        "weak": "gyenge"
+      },
+      "title": "Jelszó",
+      "updateNotice": "Biztonsági okokból, ha megváltoztatod a jelszavad, mindenhol máshol kiléptet.",
+      "updateSuccess": "A jelszavad sikeresen megváltozott.",
+      "updateSuggestion": "Használj legalább 10 karaktert. Kerüld a közönséges vagy nyilvánvaló szavakat, mint például házi állatok neveit, sportcsapatokat vagy születésnapokat."
+    },
+    "sessions": {
+      "currentSession": "Jelenlegi munkamenet",
+      "lastUsed": "Utolsó használat: {lastUsedAgo}.",
+      "terminate": "Zárd le ezt a munkamenetet",
+      "title": "Aktív munkamenetek"
+    },
+    "summary": {
+      "activeSessions": "{count, plural, one {1 munkamenet} other {{count} munkamenet}}",
+      "applications": "Alkalmazások és adat hozzáférés",
+      "breaches": "A jelszavad megjelent adatlopásokban.",
+      "comingSoon": "Hamarosan érkezik",
+      "mfa": "Kétlépcsős hitelesítés",
+      "passkeys": "Jelszóhelyettesítők",
+      "password": "Jelszó",
+      "passwordLastChanged": "Legutóbb megváltoztatva: {date, date, medium}.",
+      "sessions": "Aktív ülések"
+    },
+    "title": "Biztonság és Adatvédelem"
+  }
+}

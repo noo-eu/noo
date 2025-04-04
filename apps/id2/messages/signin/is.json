@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Stofna aðgang",
+    "error": "Innskráningarupplýsingarnar eru rangar",
+    "metaTitle": "Innskráning - noo",
+    "or": "eða",
+    "password": "Lykilorð",
+    "submit": "Innskrá",
+    "tenant_error": "Vinsamlegast skráðu þig inn með {domain} aðgangi",
+    "title": "Skráðu þig inn á <noo></noo> aðganginn þinn",
+    "totpCode": "Kóði",
+    "totpDescription": "Sláðu inn kóðann úr auðkenningarforritinu þínu",
+    "usePasskey": "Skráðu þig inn með lykilnúmeri",
+    "username": "Notendanafn eða netfang"
+  }
+}

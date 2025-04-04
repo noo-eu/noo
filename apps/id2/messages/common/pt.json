@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "change": "Alterar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "continue": "Continuar",
+    "madeWith": "Feito com ❤️ e ☕️ na União Europeia",
+    "next": "Seguinte",
+    "no": "Não",
+    "optional": "Opcional",
+    "passwordField": {
+      "ariaLabelShow": "Mostrar a palavra-passe em texto simples. Atenção: a palavra-passe será visível no ecrã.",
+      "hide": "Esconder palavra-passe",
+      "show": "Mostrar palavra-passe"
+    },
+    "privacy": "Privacidade",
+    "remove": "Remover",
+    "save": "Guardar",
+    "terms": "Termos",
+    "yes": "Sim"
+  }
+}

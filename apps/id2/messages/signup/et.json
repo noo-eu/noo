@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Loo oma <noo></noo> konto",
+    "errors": {
+      "invalid_data": "Midagi läks valesti. Palun kontrollida sisestatud andmeid",
+      "password_classes": "Palun kasuta võimekamat parooli. Kasutage kirju, numbreid ja sümboli segamiseks.",
+      "password_length": "Vältige kasutamast vähem kui 10 tähemärgi pikkusi.",
+      "password_required": "Palun sisesta oma parool",
+      "password_too_long": "Sisestatud parool on liiga pikk",
+      "username_first_char": "Kasutajanimetus peab algusest alates koosneda kirja või numbritest",
+      "username_invalid": "Kasutajanimetus võib sisaldada ainult kirju, numbreid ja punkte (. ).",
+      "username_last_char": "Kasutajanimetus peab lõpuks koosneda kirja või numbritest",
+      "username_length": "Kasutajanimetus peab olla vahemikus 6-30 tähemärgist",
+      "username_required": "Palun sisesta oma uus kasutajanimi",
+      "username_reserved": "Kahjuks, see kasutajanimi on juba broneeritud",
+      "username_taken": "See kasutajanimetus on juba võetud",
+      "username_two_dots": "Kasutajanimetus ei tohi sisaldada kahe punkti perioodit () üksteist."
+    },
+    "metaTitle": "Loo oma noo konto",
+    "step1": {
+      "title": "Sisesta nimi"
+    },
+    "step2": {
+      "title": "Vali oma email",
+      "username": "Email"
+    },
+    "step3": {
+      "password": "Parool",
+      "title": "Loo tugev parool"
+    },
+    "step4": {
+      "accept": "Tahaksin vastu võtta ning edasi",
+      "description": "   <p> Üks <noo></noo>konto võimaldab teil ligipääsu mitme teenusele nagu sõnumid, failide püstitamine ning rohkem.</p>    <p><terms><noo></noo> nõuded kasutamiseks</terms> selgitavad, mis kindlust käseldav, samuti <privacy><noo></noo>kõnelub ehk <noo></noo>'i privatsuskaitsepoliitika' kirjeldab süsteemi info läbivormimist või selle pildamisest. </p>    <p>Kui soovite luua <noo></noo>konto ja kasutada teenuseid, peate vastama <noo></noo>'ile nõuetes kasutamiseks ja privatsuskaitsepoliitikale.</p>",
+      "title": "Jätku see viimne... "
+    }
+  }
+}

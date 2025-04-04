@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Schimba contul tău",
+    "consent": {
+      "claims": {
+        "address": "Adresa dvs. poștală",
+        "birthdate": "Data dvs. de naștere",
+        "email": "Adresa dvs. de e-mail noo",
+        "gender": "Genul cu care vă identificați",
+        "name": "Numele dvs. complet",
+        "phone_number": "Numărul dvs. de telefon",
+        "profile": "Fotografia dvs. de profil",
+        "username": "Numele dvs. de utilizator"
+      },
+      "description": "<strong>{name}</strong> solicită acces la următoarele informații:",
+      "title": "Te înscrii în <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Te-ai deconectat de la <strong>{name}</strong>.",
+      "description_no_app": "Te-ai deconectat de la o aplicație de terță parte.",
+      "query": "Dorești să te deconectezi și din <noo></noo>?",
+      "title": "Deconectare"
+    },
+    "fatal": {
+      "description": "Ați încercat să vă conectați la o aplicație terță, dar aceasta nu funcționează corect. Încercați din nou mai târziu sau contactați proprietarul aplicației cu următoarele informații:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "A apărut o problemă"
+    },
+    "home": "Accesați pagina dvs. de start <noo></noo>",
+    "switch": {
+      "description": "pentru a continua la <details>{name}</details>",
+      "legalComplete": "Înainte de a vă conecta, trebuie să verificați <privacy>politica de confidențialitate</privacy> și <terms>termenii de utilizare</terms> ai {client}.",
+      "legalNone": "Înainte de a vă conecta, trebuie să verificați documentele legale ale {client}.",
+      "legalPrivacy": "Înainte de a vă conecta, trebuie să verificați <privacy>politica de confidențialitate</privacy> a {client}.",
+      "legalTerms": "Înainte de a vă conecta, trebuie să verificați <terms>termenii de utilizare</terms> ai {client}.",
+      "metaTitle": "Conectare - noo id",
+      "pageTitle": "Conectați-vă cu <noo></noo>",
+      "signin": "Utilizați un alt cont",
+      "title": "Alegeți un cont"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "signin": {
+    "create_account": "Krijo një llogari",
+    "error": "Të dhënat që vendose janë të pasakta",
+    "metaTitle": "Hyrje – noo",
+    "or": "ose",
+    "password": "Fjalëkalimi",
+    "submit": "Hyr",
+    "tenant_error": "Të lutem hyr me një llogari {domain}",
+    "title": "Hyr në llogarinë tënde <noo></noo>",
+    "totpCode": "Kodi",
+    "totpDescription": "Shkruaj kodin nga aplikacioni yt i autentikimit",
+    "usePasskey": "Hyj me një çelës kalimi",
+    "username": "Emri i përdoruesit ose emaili"
+  }
+}

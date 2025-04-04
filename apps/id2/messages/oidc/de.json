@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Konto ändern",
+    "consent": {
+      "claims": {
+        "address": "Deine Postanschrift",
+        "birthdate": "Dein Geburtsdatum",
+        "email": "Deine noo-E-Mail-Adresse",
+        "gender": "Das Geschlecht, mit dem du dich identifizierst",
+        "name": "Dein vollständiger Name",
+        "phone_number": "Deine Telefonnummer",
+        "profile": "Dein Profilbild",
+        "username": "Dein Benutzername"
+      },
+      "description": "<strong>{name}</strong> beantragt Zugriff auf folgende Informationen:",
+      "title": "Du meldest dich bei <details>{name}</details> an."
+    },
+    "end_session": {
+      "description": "Du hast dich von <strong>{name}</strong> abgemeldet.",
+      "description_no_app": "Du hast dich von einer Drittanbieteranwendung abgemeldet.",
+      "query": "Möchten du dich auch bei <noo></noo> abmelden?",
+      "title": "Abmelden"
+    },
+    "fatal": {
+      "description": "Du hast versucht, dich bei einer Drittanbieter-Anwendung angemeldet, aber die Anwendung funktioniert nicht richtig. Bitte versuche es später noch einmal oder kontaktiere den Anwendungsinhaber mit den folgenden Informationen:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Etwas ist schiefgelaufen"
+    },
+    "home": "Gehe zu deiner <noo></noo> Startseite",
+    "switch": {
+      "description": "weiter zu <details>{name}</details>",
+      "legalComplete": "Bevor du sich anmelden, solltest du die <privacy>Datenschutzrichtlinien</privacy> und die <terms>Nutzungsbedingungen</terms> für {client} überprüfen.",
+      "legalNone": "Bevor du sich anmelden, solltest du die rechtlichen Dokumente für {client} überprüfen.",
+      "legalPrivacy": "Bevor du sich anmelden, solltest du die <privacy>Datenschutzrichtlinien</privacy> für {client} überprüfen.",
+      "legalTerms": "Bevor du sich anmelden, solltest du die <terms>Nutzungsbedingungen</terms> für {client} überprüfen.",
+      "metaTitle": "Anmelden - noo id",
+      "pageTitle": "Über <noo></noo> anmelden",
+      "signin": "Anderes Konto verwenden",
+      "title": "Konto auswählen"
+    }
+  }
+}

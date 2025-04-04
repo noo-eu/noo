@@ -1,0 +1,24 @@
+{
+  "common": {
+    "back": "Tillbaka",
+    "cancel": "Avbryt",
+    "change": "Ändra",
+    "close": "Stäng",
+    "confirm": "Bekräfta",
+    "continue": "Fortsätt",
+    "madeWith": "Skapad med ❤️ och ☕️ i Europeiska unionen",
+    "next": "Nästa",
+    "no": "Nej",
+    "optional": "Valfritt",
+    "passwordField": {
+      "ariaLabelShow": "Visa lösenord som vanlig text. Varning: lösenordet kommer att visas på skärmen.",
+      "hide": "Dölj lösenord",
+      "show": "Visa lösenord"
+    },
+    "privacy": "Integritet",
+    "remove": "Ta bort",
+    "save": "Spara",
+    "terms": "Villkor",
+    "yes": "Ja"
+  }
+}

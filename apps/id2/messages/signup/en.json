@@ -1,0 +1,37 @@
+{
+  "signup": {
+    "create_your_account": "Create your <noo></noo> account",
+    "errors": {
+      "invalid_data": "Something went wrong. Please check the data you entered",
+      "password_classes": "Please choose a stronger password, using a mix of letters, numbers and symbols",
+      "password_length": "Please use 10 or more characters",
+      "password_required": "Please enter your password",
+      "password_too_long": "The password you entered is too long",
+      "username_first_char": "Your username must start with a letter or number",
+      "username_invalid": "Your username can contain only letters, numbers and dots (.)",
+      "username_last_char": "Your username must end with a letter or number",
+      "username_length": "Your username must be between 6 and 30 characters",
+      "username_required": "Please enter your new username",
+      "username_reserved": "Sorry, this username is not allowed",
+      "username_taken": "This username is taken",
+      "username_two_dots": "Your username cannot contain two dots (.) in a row"
+    },
+    "metaTitle": "Create your noo account",
+    "step1": {
+      "title": "Enter your name"
+    },
+    "step2": {
+      "title": "Choose your email address",
+      "username": "Email address"
+    },
+    "step3": {
+      "password": "Password",
+      "title": "Create a strong password"
+    },
+    "step4": {
+      "accept": "Accept and continue",
+      "description": "        <p>A <noo></noo> account allows you to access a range of services, such as email, file storage, and more.</p>        <p><terms><noo></noo>'s Terms of Service</terms> explain what to expect as you use the services, while <privacy><noo></noo>'s Privacy Policy</privacy> describes how we handle information generated or gathered as you use the services.</p>        <p>In order to create a <noo></noo> account and use the services, you must agree to <noo></noo>'s Terms of Service and Privacy Policy.</p>",
+      "title": "One last thing..."
+    }
+  }
+}

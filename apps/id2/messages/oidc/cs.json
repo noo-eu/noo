@@ -1,0 +1,42 @@
+{
+  "oidc": {
+    "change_account": "Změnit účet",
+    "consent": {
+      "claims": {
+        "address": "Vaše poštovní adresa",
+        "birthdate": "Váš datum narození",
+        "email": "Vaše e-mailová adresa noo",
+        "gender": "Pohlaví, se kterým se identifikujete",
+        "name": "Vaše celé jméno",
+        "phone_number": "Vaše telefonní číslo",
+        "profile": "Vaše profilová fotografie",
+        "username": "Vaše uživatelské jméno"
+      },
+      "description": "<strong>{name}</strong> žádá o přístup k následujícím informacím:",
+      "title": "Přihlašujete se do <details>{name}</details>."
+    },
+    "end_session": {
+      "description": "Odhlásil/a jsi se z <strong>{name}</strong>.",
+      "description_no_app": "Odhlásil/a jsi se z aplikace třetí strany.",
+      "query": "Chcete také ukončit svou session na <noo></noo>?",
+      "title": "Odhlásit se"
+    },
+    "fatal": {
+      "description": "Pokusili jste se přihlásit do aplikace třetí strany, ale aplikace nefunguje správně. Zkuste to prosím později nebo kontaktujte vlastníka aplikace s následujícími informacemi:",
+      "error": "OpenID Connect Error: {error}",
+      "title": "Něco se pokazilo"
+    },
+    "home": "Přejděte na svou domovskou stránku <noo></noo>",
+    "switch": {
+      "description": "pro pokračování na <details>{name}</details>",
+      "legalComplete": "Před přihlášením musíte zkontrolovat <privacy>zásady ochrany osobních údajů</privacy> a <terms>podmínky použití</terms> pro {client}.",
+      "legalNone": "Před přihlášením musíte zkontrolovat právní dokumenty pro {client}.",
+      "legalPrivacy": "Před přihlášením musíte zkontrolovat <privacy>zásady ochrany osobních údajů</privacy> pro {client}.",
+      "legalTerms": "Před přihlášením musíte zkontrolovat <terms>podmínky použití</terms> pro {client}.",
+      "metaTitle": "Přihlásit se - noo id",
+      "pageTitle": "Přihlaste se pomocí <noo></noo>",
+      "signin": "Použít jiný účet",
+      "title": "Vyberte účet"
+    }
+  }
+}

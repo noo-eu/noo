@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "language": {
+      "description": "Tüm noo hizmetlerinde kullanmak istediğiniz dili seçin.",
+      "label": "Dil",
+      "title": "Tercih ettiğiniz dili ayarlayın",
+      "updateSuccess": "Tercih ettiğiniz dil kaydedildi"
+    },
+    "summary": {
+      "language": "Tercih ettiğiniz dili değiştirin",
+      "timeZone": "Zaman diliminizi değiştirin"
+    },
+    "timeZone": {
+      "cet": "Orta Avrupa Saati",
+      "description": "Tarihleri ve saatleri yerel saatinizde görüntülemek için zaman diliminizi seçin.",
+      "detected": "Cihaz ayarlarınıza göre mevcut zaman diliminiz {detected}. Mevcut konumunuza uygun olan zaman dilimini kullanmanızı öneririz.",
+      "eet": "Doğu Avrupa Saati",
+      "gmt": "Greenwich Saati / Batı Avrupa Saati",
+      "label": "Zaman dilimi",
+      "title": "Zaman diliminizi ayarlayın",
+      "updateSuccess": "Zaman diliminiz kaydedildi"
+    },
+    "title": "Hesap ayarları"
+  }
+}
