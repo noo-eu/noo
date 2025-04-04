@@ -5,12 +5,9 @@
     "prepare": "bun run --bun husky"
   },
   "workspaces": [
-    "i18n-utils",
-    "id",
-    "lib",
-    "mail",
-    "oidc-server",
-    "ui"
+    "apps/*",
+    "packages/*",
+    "tools/*"
   ],
   "devDependencies": {
     "husky": "^9.1.7",

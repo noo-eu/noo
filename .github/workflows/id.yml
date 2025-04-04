@@ -3,11 +3,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'id/**'
+      - 'apps/id/**'
   pull_request:
     branches: [ main ]
     paths:
-      - 'id/**'
+      - 'apps/id/**'
   merge_group:
     types: [checks_requested]
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: id
+        working-directory: apps/id
     steps:
     - uses: actions/checkout@v4
     - uses: oven-sh/setup-bun@v2
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: id
+        working-directory: apps/id
     
     services:
       postgres:
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: id
+        working-directory: apps/id
 
     services:
       postgres:
