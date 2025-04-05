@@ -1,12 +1,11 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
-import * as actions from "@/app/settings/time-zone/actions";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { IntlProvider } from "use-intl";
 import { describe, expect, it, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
 import { AuthProvider } from "~/auth/context";
-import { ClientUser } from "~/lib/types/ClientUser";
+import { type ClientUser } from "~/lib/types/ClientUser.client";
 import { TimeZoneForm } from "./TimeZoneForm";
 
 // Mock the timezone utility functions
@@ -22,7 +21,7 @@ vi.mock("~/lib/timeZones", async (importOriginal) => {
 });
 
 // Mock the server action
-vi.mock("@/app/settings/time-zone/actions", async (importOriginal) => ({
+vi.mock("~/app/settings/time-zone/actions", async (importOriginal) => ({
   ...(await importOriginal()),
   updateTimeZone: vi.fn(() => Promise.resolve({ input: {} })),
 }));

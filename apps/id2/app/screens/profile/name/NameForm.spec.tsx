@@ -1,8 +1,8 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
 import { AuthProvider } from "~/auth/context";
 import { NameForm } from "./NameForm";
 
@@ -11,7 +11,7 @@ function wrapRender(component: React.ReactNode) {
 }
 
 const updateNameMock = vi.hoisted(() => vi.fn());
-vi.mock("@/app/profile/name/actions", () => ({
+vi.mock("~/app/profile/name/actions", () => ({
   updateName: updateNameMock,
 }));
 

@@ -1,16 +1,16 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
-import * as actions from "@/app/security/sessions/actions";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { IntlProvider } from "use-intl";
 import { describe, expect, it, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
+import * as actions from "~/app/security/sessions/actions";
 import { AuthProvider } from "~/auth/context";
 import { ClientSession } from "~/lib/types/ClientSession";
 import { ClientUser } from "~/lib/types/ClientUser";
 import { SessionsPage } from "./SessionsPage";
 
-vi.mock("@/app/security/sessions/actions", async () => ({
+vi.mock("~/app/security/sessions/actions", async () => ({
   terminateSession: vi.fn().mockResolvedValue({ success: true }),
 }));
 

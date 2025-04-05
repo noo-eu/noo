@@ -8,18 +8,15 @@ import {
   getFirstAuthenticatedUserId,
   parseValidTokens,
   reauthenticateSession,
-} from "~/auth/sessions.server";
+} from "~/auth/sessions";
 import Sessions from "~/db/sessions";
 
 import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
-import {
-  getSessionCookie,
-  setSessionCookie,
-} from "~/auth/sessions.server/store";
-import { encodeSessionToken } from "~/auth/sessions.server/token";
+import { getSessionCookie, setSessionCookie } from "~/auth/sessions/store";
+import { encodeSessionToken } from "~/auth/sessions/token";
 
-vi.mock("@/db/sessions");
-vi.mock("@/auth/sessions/store");
+vi.mock("~/db/sessions");
+vi.mock("~/auth/sessions/store");
 
 const mockSession = {
   id: "00000000-0000-0000-0000-000000000001",

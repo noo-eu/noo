@@ -1,9 +1,9 @@
 // @vitest-environment happy-dom
 
-import { GenderlessUserClient } from "@/../tests/fixtures/users";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useLocale } from "use-intl";
 import { describe, expect, it, Mock, vi } from "vitest";
+import { GenderlessUserClient } from "~/../tests/fixtures/users";
 import { AuthProvider } from "~/auth/context";
 import { ClientUser } from "~/lib/types/ClientUser";
 import { GenderForm } from "./GenderForm";
@@ -26,7 +26,7 @@ function wrapRender(
   );
 }
 
-vi.mock("@/app/profile/gender/actions", () => ({
+vi.mock("~/app/profile/gender/actions", () => ({
   updateGender: vi.fn(),
 }));
 

@@ -1,9 +1,9 @@
+import { describe, expect, it } from "vitest";
 import {
   bufferToUUID,
   decodeSessionToken,
   encodeSessionToken,
-} from "@/auth/sessions/token";
-import { describe, expect, it } from "vitest";
+} from "~/auth/sessions/token";
 
 describe("Session token encoding/decoding", () => {
   it("round-trips encode/decode", () => {

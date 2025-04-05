@@ -6,7 +6,7 @@ import {
   createSession,
   getAuthenticatedSession,
   reauthenticateSession,
-} from "./sessions.server";
+} from "./sessions";
 
 export async function handleSuccessfulAuthentication<Input>(
   request: Request,

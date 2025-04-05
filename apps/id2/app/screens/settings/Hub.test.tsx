@@ -1,9 +1,9 @@
 // @vitest-environment happy-dom
 
-import { LANGUAGE_NAMES } from "@/i18n";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { useAuth } from "~/auth/context";
+import { LANGUAGE_NAMES } from "~/i18n";
 import { displayTz } from "~/lib/timeZones";
 import { SettingsHub } from "./Hub";
 

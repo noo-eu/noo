@@ -6,9 +6,9 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Button, ButtonProps } from "@noo/ui";
-import { useTranslations } from "next-intl";
+import { Button, type ButtonProps } from "@noo/ui";
 import { Fragment } from "react";
+import { useTranslations } from "use-intl";
 
 export type ConfirmationDialogProps = {
   message?: string;

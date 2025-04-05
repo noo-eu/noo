@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { UserWithTenant } from "~/db/users";
 import { makeClientUser } from "./ClientUser";
-import { UserWithTenant } from "@/db/users";
 
 describe("makeClientUser", () => {
   const userWithTenantMock = {

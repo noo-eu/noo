@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { useLoaderData, type LoaderFunctionArgs } from "react-router";
 import { withAuth } from "~/auth/authLoader";
 import { userContext } from "~/auth/serverContext";
-import { getAuthenticatedSession } from "~/auth/sessions.server";
+import { getAuthenticatedSession } from "~/auth/sessions";
 import { sessions } from "~/db/schema";
 import Sessions from "~/db/sessions";
 import { makeClientSession } from "~/lib/types/ClientSession";

@@ -17,7 +17,7 @@ export const sessionCheckCookie = createCookie("_noo_auth_check", {
 
 export async function getSessionCookie(request: Request): Promise<string> {
   const cookieHeader = request.headers.get("cookie");
-  return await sessionCookie.parse(cookieHeader);
+  return (await sessionCookie.parse(cookieHeader)) ?? "";
 }
 
 export async function getSessionCheckCookie(request: Request): Promise<string> {

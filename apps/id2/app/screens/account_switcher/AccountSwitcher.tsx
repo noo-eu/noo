@@ -1,37 +1,28 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { useTranslations } from "use-intl";
 import { buildUsername } from "~/app/oidc/consent/page";
 import { switchSubmit } from "~/app/switch/actions";
 import { Legal } from "~/components/Legal";
 import { PageModal } from "~/components/PageModal";
 import { PresentClient } from "~/components/PresentClient";
 import { SignInWithNoo } from "~/components/SignInWithNoo";
-import { type OidcClient } from "~/db/oidc_clients";
 import { type Session } from "~/db/sessions";
-import { type User } from "~/db/users";
-import { getLocalizedOidcField } from "~/lib/oidc/clientUtils";
+import { type User } from "~/db/users.server";
+import type { ClientOidcClient } from "~/lib/types/ClientOidcClient";
 
 export async function AccountSwitcher({
   client,
   sessions,
 }: {
-  client: OidcClient;
+  client: ClientOidcClient;
   sessions: Session[];
 }) {
-  const locale = await getLocale();
-  const t = await getTranslations("oidc");
-
-  const clientFields = {
-    name: getLocalizedOidcField(client, "clientName", locale)!,
-    logo: getLocalizedOidcField(client, "logoUri", locale),
-    privacyUrl: getLocalizedOidcField(client, "policyUri", locale),
-    tosUrl: getLocalizedOidcField(client, "tosUri", locale),
-  };
+  const t = useTranslations("oidc");
 
   return (
     <PageModal>
       <SignInWithNoo />
       <PageModal.Modal>
-        <PresentClient client={clientFields} title={t("switch.title")} />
+        <PresentClient client={client} title={t("switch.title")} />
         <div>
           <ul className="flex flex-col gap-1">
             {sessions.map((session) => (
@@ -57,7 +48,7 @@ export async function AccountSwitcher({
             </li>
           </ul>
 
-          <Legal client={clientFields} className={"mx-6 mt-8"} />
+          <Legal client={client} className={"mx-6 mt-8"} />
         </div>
       </PageModal.Modal>
     </PageModal>

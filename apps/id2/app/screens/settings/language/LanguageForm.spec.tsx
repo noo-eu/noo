@@ -1,16 +1,16 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
-import * as actions from "@/app/settings/language/actions";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { IntlProvider } from "use-intl";
 import { describe, expect, it, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
+import * as actions from "~/app/settings/language/actions";
 import { AuthProvider } from "~/auth/context";
 import { ClientUser } from "~/lib/types/ClientUser";
 import { LanguageForm } from "./LanguageForm";
 
 // Mock the server action
-vi.mock("@/app/settings/language/actions", async (importOriginal) => ({
+vi.mock("~/app/settings/language/actions", async (importOriginal) => ({
   ...(await importOriginal()),
   updateLanguage: vi.fn(() => Promise.resolve({})),
 }));

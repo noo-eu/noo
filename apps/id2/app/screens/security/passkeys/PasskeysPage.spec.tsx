@@ -1,12 +1,12 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
-import * as actions from "@/app/security/passkeys/actions";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockAnimationsApi } from "jsdom-testing-mocks";
 import { NextIntlClientProvider } from "use-intl";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
+import * as actions from "~/app/security/passkeys/actions";
 import { AuthProvider } from "~/auth/context";
 import { ConfirmationProvider } from "~/components/Confirmation";
 import { ClientUser } from "~/lib/types/ClientUser";
@@ -33,7 +33,7 @@ const samplePasskeys = vi.hoisted(() => [
 ]);
 
 // Mock the server actions
-vi.mock("@/app/security/passkeys/actions", async () => ({
+vi.mock("~/app/security/passkeys/actions", async () => ({
   getPasskeys: vi.fn().mockResolvedValue(samplePasskeys),
   registerPasskey: vi.fn().mockResolvedValue({ success: true }),
   removePasskey: vi.fn().mockResolvedValue({ success: true }),

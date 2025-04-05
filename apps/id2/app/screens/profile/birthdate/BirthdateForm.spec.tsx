@@ -1,8 +1,8 @@
 // @vitest-environment happy-dom
 
-import { JohnDoeClient } from "@/../tests/fixtures/users";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { JohnDoeClient } from "~/../tests/fixtures/users";
 import { AuthProvider } from "~/auth/context";
 import { ClientUser } from "~/lib/types/ClientUser";
 import { BirthdateForm } from "./BirthdateForm";
@@ -25,7 +25,7 @@ function wrapRender(
   );
 }
 
-vi.mock("@/app/profile/birthdate/actions", () => ({
+vi.mock("~/app/profile/birthdate/actions", () => ({
   updateBirthdate: vi.fn(),
 }));
 

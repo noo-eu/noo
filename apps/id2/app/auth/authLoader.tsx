@@ -1,6 +1,6 @@
 import { redirect, type LoaderFunctionArgs } from "react-router";
 import { userContext } from "./serverContext";
-import { getFirstAuthenticatedUserId } from "./sessions.server";
+import { getFirstAuthenticatedUserId } from "./sessions";
 
 export function withAuth<T>(
   loader: (args: LoaderFunctionArgs) => Promise<T>,

@@ -22,7 +22,7 @@ import { ToastContainer } from "react-toastify/unstyled";
 import { Footer } from "~/components/Footer";
 import { AuthProvider } from "./auth/context";
 import { userContext } from "./auth/serverContext";
-import { getAuthenticatedUser } from "./auth/sessions.server";
+import { getAuthenticatedUser } from "./auth/sessions";
 import type { User } from "./db/users.server";
 import { makeClientUser } from "./lib/types/ClientUser";
 
@@ -83,6 +83,8 @@ export const unstable_middleware = [loadUser, localeSetter];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const cspNonce = useNonce();
+  const loaderData = useLoaderData<typeof loader>();
+  console.log("loaderData", loaderData);
   const { rawLocale } = useLoaderData<typeof loader>();
 
   return (

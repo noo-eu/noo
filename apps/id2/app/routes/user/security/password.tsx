@@ -3,7 +3,7 @@ import { redirect, type ActionFunctionArgs } from "react-router";
 import { z } from "zod";
 import { emptyAuthLoader } from "~/auth/authLoader";
 import { userContext } from "~/auth/serverContext";
-import { getAuthenticatedSession } from "~/auth/sessions.server";
+import { getAuthenticatedSession } from "~/auth/sessions";
 import { schema } from "~/db";
 import Sessions from "~/db/sessions";
 import Users from "~/db/users.server";

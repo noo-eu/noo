@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach, Mock } from "vitest";
-import { getNormalizedTimeZone, getSelect, displayTz } from "./timeZones";
-import * as nextIntl from "next-intl";
+import * as useIntl from "use-intl";
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
+import { displayTz, getNormalizedTimeZone, getSelect } from "./timeZones";
 
 describe("getNormalizedTimeZone", () => {
   it("returns the normalized timezone for known timezones", () => {
@@ -101,7 +101,7 @@ describe("displayTz", () => {
     });
 
     // @ts-expect-error Mocking next-intl
-    vi.mocked(nextIntl.useTranslations).mockReturnValue(mockTranslate);
+    vi.mocked(useIntl.useTranslations).mockReturnValue(mockTranslate);
   });
 
   it("translates standard timezone abbreviations", () => {
