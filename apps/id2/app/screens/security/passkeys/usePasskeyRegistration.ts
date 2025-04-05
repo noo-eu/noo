@@ -1,12 +1,53 @@
 import {
-  registrationOptions,
-  verifyRegistration,
-} from "@/app/security/passkeys/actions";
-import { useAuth } from "@/auth/authContext";
-import {
-  PublicKeyCredentialCreationOptionsJSON,
+  type PublicKeyCredentialCreationOptionsJSON,
+  type RegistrationResponseJSON,
   startRegistration,
 } from "@simplewebauthn/browser";
+import { useAuth } from "~/auth/context";
+
+async function registrationOptions(userId: string) {
+  const response = await fetch(
+    "/private/webauthn/startRegistration?uid=" + userId,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+      }),
+    },
+  );
+  const data = await response.json();
+  if (!response.ok) {
+    return {
+      error: data.error,
+    };
+  }
+  return data as PublicKeyCredentialCreationOptionsJSON;
+}
+
+async function verifyRegistration(
+  userId: string,
+  registrationResponse: RegistrationResponseJSON,
+) {
+  const response = await fetch("/private/webauthn/register?uid=" + userId, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      registrationResponse,
+    }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    return {
+      error: data.error,
+    };
+  }
+  return data;
+}
 
 export function usePasskeyRegistration() {
   const { id: userId } = useAuth();
@@ -22,6 +63,7 @@ export function usePasskeyRegistration() {
       const registrationResponse = await startRegistration({
         optionsJSON: options.data as PublicKeyCredentialCreationOptionsJSON,
       });
+      console.log("Registration response:", registrationResponse);
       const verificationResponse = await verifyRegistration(
         userId,
         registrationResponse,

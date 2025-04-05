@@ -1,4 +1,4 @@
-import { ClientSession } from "@/lib/types/ClientSession";
+import type { ClientSession } from "~/lib/types/ClientSession.client";
 import { SessionItem } from "./SessionItem";
 
 type Props = {

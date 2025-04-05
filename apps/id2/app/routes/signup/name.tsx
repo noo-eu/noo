@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, TextField } from "@noo/ui";
 import {
   Form,

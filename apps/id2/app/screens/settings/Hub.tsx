@@ -1,12 +1,10 @@
-"use client";
-
-import { useAuth } from "@/auth/authContext";
-import { LANGUAGE_NAMES } from "@/i18n";
-import { displayTz } from "@/lib/timeZones";
 import { ClockIcon, LanguageIcon } from "@heroicons/react/24/outline";
+import { LANGUAGE_NAMES } from "@noo/lib/i18n";
+import { Noo } from "@noo/ui";
 import { useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
+import { useAuth } from "~/auth/context";
+import { displayTz } from "~/lib/timeZones";
+import ProfileLayout from "../home/ProfileLayout";
 import { ProfileLink } from "../profile/ProfileLink";
 
 export function SettingsHub() {

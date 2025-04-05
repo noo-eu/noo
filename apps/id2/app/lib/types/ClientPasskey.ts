@@ -1,12 +1,6 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
 import { type Passkey } from "~/db/passkeys";
-
-export type ClientPasskey = {
-  id: string;
-  name: string;
-  createdAt: Date;
-  lastUsedAt: Date;
-};
+import type { ClientPasskey } from "./ClientPasskey.client";
 
 export function makeClientPasskey(passkey: Passkey): ClientPasskey {
   return {

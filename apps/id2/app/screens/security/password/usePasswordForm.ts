@@ -1,29 +1,28 @@
-import { updatePassword } from "@/app/security/password/actions";
-import { useAuth } from "@/auth/authContext";
-import { redirect } from "next/navigation";
-import { useActionState } from "react";
+import { useActionData, useFetcher, useNavigate } from "react-router";
 import { toast } from "react-toastify/unstyled";
 import { useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import { useAuth } from "~/auth/context";
+import { useCallbacks } from "~/lib/withCallbacks";
 
 export function usePasswordForm() {
   const t = useTranslations("security");
   const user = useAuth();
+  const fetcher = useFetcher();
+  const isPending = fetcher.state === "submitting";
+  const navigate = useNavigate();
 
-  const [state, formAction, isPending] = useActionState(
-    withCallbacks(updatePassword.bind(null, user.id), {
-      onSuccess: () => {
-        toast.success(t("password.updateSuccess"));
-        redirect(`/security?uid=${user.id}`);
-      },
-    }),
-    { input: { "new-password": "", "new-password-confirmation": "" } },
-  );
+  useCallbacks(fetcher, {
+    onSuccess: () => {
+      toast.success(t("password.updateSuccess"));
+      navigate(`/security?uid=${user.id}`);
+    },
+  });
+
+  const data = useActionData<typeof fetcher.data>();
 
   return {
-    state,
-    errors: state.error,
+    errors: data?.error,
     isPending,
-    formAction,
+    Form: fetcher.Form,
   };
 }

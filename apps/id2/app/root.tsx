@@ -20,22 +20,42 @@ import { getMessages, resolveLocale } from "./utils";
 
 import { ToastContainer } from "react-toastify/unstyled";
 import { Footer } from "~/components/Footer";
+import { AuthProvider } from "./auth/context";
+import { userContext } from "./auth/serverContext";
+import { getAuthenticatedUser } from "./auth/sessions.server";
+import type { User } from "./db/users.server";
+import { makeClientUser } from "./lib/types/ClientUser";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://static.noo.eu" },
 ];
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
-  const locale = await resolveLocale(request, params);
+async function loadUser({ request, context }: LoaderFunctionArgs) {
+  let user: User | undefined;
+  const uid = new URL(request.url).searchParams.get("uid");
+  if (uid) {
+    user = await getAuthenticatedUser(request, uid);
+  }
+
+  context.set(userContext, user);
+  return user;
+}
+
+export async function loader({ request, params, context }: LoaderFunctionArgs) {
+  const localeCtx = context.get(localeContext);
+  const user = context.get(userContext);
 
   return {
-    locale,
-    messages: await getMessages(locale),
+    locale: localeCtx.locale,
+    rawLocale: localeCtx.rawLocale,
+    messages: await getMessages(localeCtx.locale),
+    user: user ? makeClientUser(user) : undefined,
   };
 }
 
 export const localeContext = unstable_createContext<{
   locale: string;
+  rawLocale: string;
   makeT: (ns: string) => ReturnType<typeof createTranslator>;
 }>();
 
@@ -43,26 +63,30 @@ const localeSetter: Route.unstable_MiddlewareFunction = async (
   { request, params, context },
   next,
 ) => {
-  const locale = await resolveLocale(request, params);
+  const user = context.get(userContext);
+
+  const { locale, rawLocale } = await resolveLocale(user, request);
   const messages = await getMessages(locale);
   const makeT = (namespace: string) =>
     createTranslator({ namespace, locale, messages });
 
   context.set(localeContext, {
     locale,
+    rawLocale,
     makeT,
   });
 
   return await next();
 };
 
-export const unstable_middleware = [localeSetter];
+export const unstable_middleware = [loadUser, localeSetter];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const cspNonce = useNonce();
+  const { rawLocale } = useLoaderData<typeof loader>();
 
   return (
-    <html lang="en">
+    <html lang={rawLocale}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -103,14 +127,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { locale, messages } = useLoaderData<typeof loader>();
+  const { locale, messages, user } = useLoaderData<typeof loader>();
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return (
-    <IntlProvider locale={locale} messages={messages}>
-      <Outlet />
-      <Footer />
-      <ToastContainer position="bottom-center" />
-    </IntlProvider>
+    <AuthProvider user={user}>
+      <IntlProvider locale={locale} messages={messages} timeZone={timezone}>
+        <Outlet />
+        <Footer />
+        <ToastContainer position="bottom-center" />
+      </IntlProvider>
+    </AuthProvider>
   );
 }
 

@@ -1,10 +1,6 @@
-import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 
-const PictureDialog = dynamic(
-  () => import("~/components/Profile/PictureDialog"),
-  { ssr: false },
-);
+import PictureDialog from "~/screens/home/PictureDialog";
 
 export function useProfilePictureDialog() {
   const [isOpen, setIsOpen] = useState(false);

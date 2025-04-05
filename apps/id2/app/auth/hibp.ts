@@ -1,7 +1,7 @@
 import { sha1 } from "@noo/lib/crypto";
 import { err, ok, type Result } from "neverthrow";
-import type { User } from "~/db/users";
-import Users from "~/db/users";
+import type { User } from "~/db/users.server";
+import Users from "~/db/users.server";
 
 const PASSWORD_BREACH_CHECK_INTERVAL = 1000 * 60 * 60 * 24 * 7; // 1 week
 

@@ -1,6 +1,3 @@
-"use client";
-
-import { checkBreaches } from "@/app/security/password/actions";
 import { useEffect, useState } from "react";
 import { useTranslations } from "use-intl";
 
@@ -8,6 +5,22 @@ export type PasswordRaterProps = {
   password: string;
   strength: number;
 };
+
+async function checkBreaches(password: string) {
+  const response = await fetch("/private/passwords/breaches", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to generate WebAuthn options");
+  }
+
+  return await response.json();
+}
 
 export function PasswordRater({
   password,

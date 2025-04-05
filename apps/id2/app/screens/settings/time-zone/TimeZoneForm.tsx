@@ -1,12 +1,9 @@
-"use client";
-
-import { updateTimeZone } from "@/app/settings/time-zone/actions";
-import { useAuth } from "@/auth/authContext";
-import { displayTz, getNormalizedTimeZone, getSelect } from "@/lib/timeZones";
-import { CancelLink } from "@/screens/profile/CancelLink";
-import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
 import { Button, SelectField } from "@noo/ui";
 import { useTranslations } from "use-intl";
+import { useAuth } from "~/auth/context";
+import { displayTz, getNormalizedTimeZone, getSelect } from "~/lib/timeZones";
+import { CancelLink } from "~/screens/profile/CancelLink";
+import { ProfileFormLayout } from "~/screens/profile/ProfileFormLayout";
 import { useTimeZoneForm } from "./useTimeZoneForm";
 
 const useDetectedTimeZone = () => {
@@ -16,11 +13,7 @@ const useDetectedTimeZone = () => {
 };
 
 export function TimeZoneForm() {
-  const user = useAuth();
-
-  const { state, formAction, isPending } = useTimeZoneForm(
-    updateTimeZone.bind(null, user.id),
-  );
+  const { Form, isPending } = useTimeZoneForm();
 
   const t = useTranslations("settings.timeZone");
   const commonT = useTranslations("common");
@@ -29,6 +22,7 @@ export function TimeZoneForm() {
 
   const browserTz = useDetectedTimeZone();
   const detected = displayTz(t, browserTz);
+  const user = useAuth();
 
   return (
     <ProfileFormLayout>
@@ -37,15 +31,11 @@ export function TimeZoneForm() {
       <p className="text-sm my-6">{t("description")}</p>
       <p className="text-sm my-6">{t("detected", { detected })}</p>
 
-      <form
-        action={formAction}
-        className="space-y-8"
-        data-testid="timeZone-form"
-      >
+      <Form method="POST" className="space-y-8" data-testid="timeZone-form">
         <SelectField
           label={t("label")}
           name="timeZone"
-          defaultValue={state.input.timeZone}
+          defaultValue={user.timeZone}
           labelProps={{ className: "!sr-only" }}
         >
           <option value="GMT">{t("gmt")}</option>
@@ -67,7 +57,7 @@ export function TimeZoneForm() {
             {commonT("save")}
           </Button>
         </div>
-      </form>
+      </Form>
     </ProfileFormLayout>
   );
 }

@@ -1,6 +1,3 @@
-"use client";
-
-import { useAuth } from "@/auth/authContext";
 import {
   ArrowLeftEndOnRectangleIcon,
   CircleStackIcon,
@@ -9,9 +6,10 @@ import {
   QrCodeIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Noo } from "@noo/ui";
 import { useFormatter, useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
+import { useAuth } from "~/auth/context";
+import ProfileLayout from "../home/ProfileLayout";
 import { ProfileLink } from "../profile/ProfileLink";
 
 type SecurityHomePageProps = {

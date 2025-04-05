@@ -1,10 +1,10 @@
 // @vitest-environment happy-dom
 
-import { AuthProvider } from "@/auth/authContext";
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
 import { JohnDoeClient } from "@/../tests/fixtures/users";
-import { ClientUser } from "@/lib/types/ClientUser";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
+import { ClientUser } from "~/lib/types/ClientUser";
 import { BirthdateForm } from "./BirthdateForm";
 
 function wrapRender(

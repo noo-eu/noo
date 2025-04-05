@@ -1,28 +1,8 @@
 import { Button, TextField } from "@noo/ui";
-import Link from "next/link";
-import { Form, useActionData, useNavigation } from "react-router";
+import { Form, Link, useActionData, useNavigation } from "react-router";
 import { useTranslations } from "use-intl";
 import { action } from "~/routes/signin.otp";
-
-// function useWebauthnAuthentication() {
-//   return async (autofill: boolean) => {
-//     try {
-//       const { options, passkeyChallengeId } = await generateWebauthnOptions();
-//       const authResponse = await startAuthentication({
-//         optionsJSON: options as PublicKeyCredentialRequestOptionsJSON,
-//         useBrowserAutofill: autofill,
-//       });
-//       const verifyResp = await verifyWebauthn(passkeyChallengeId, authResponse);
-//       if ("error" in verifyResp) {
-//         console.error(verifyResp.error);
-//       } else {
-//         redirect(verifyResp.data);
-//       }
-//     } catch (e) {
-//       console.warn(e);
-//     }
-//   };
-// }
+import { useWebauthnAuthentication } from "../SignInForm";
 
 export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
   const t = useTranslations("signin");
@@ -31,7 +11,7 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
   const navigation = useNavigation();
   const pending = !!navigation.formAction;
 
-  // const authenticateWithWebauthn = useWebauthnAuthentication();
+  const authenticateWithWebauthn = useWebauthnAuthentication();
 
   return (
     <>
@@ -56,7 +36,7 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
         </div>
 
         <div className="flex justify-end items-center mt-12">
-          <Link href="/signin" className="py-2.5 px-2 link font-medium me-4">
+          <Link to="/signin" className="py-2.5 px-2 link font-medium me-4">
             {commonT("back")}
           </Link>
           <Button type="submit" pending={pending} data-testid="signinSubmit">
@@ -74,14 +54,14 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
             </span>
           </div>
 
-          {/* <Button
+          <Button
             className="mx-auto"
             size="sm"
             form="outline"
             onClick={() => authenticateWithWebauthn(false)}
           >
             {t("usePasskey")}
-          </Button> */}
+          </Button>
         </>
       )}
     </>

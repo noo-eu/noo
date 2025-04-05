@@ -1,15 +1,14 @@
-import { buildUsername } from "@/app/oidc/consent/page";
-import { switchSubmit } from "@/app/switch/actions";
-import { OidcClient } from "@/db/oidc_clients";
-import { Session } from "@/db/sessions";
-import { User } from "@/db/users";
-import { getLocalizedOidcField } from "@/lib/oidc/clientUtils";
-import { UserIcon } from "@heroicons/react/24/outline";
 import { getLocale, getTranslations } from "next-intl/server";
+import { buildUsername } from "~/app/oidc/consent/page";
+import { switchSubmit } from "~/app/switch/actions";
 import { Legal } from "~/components/Legal";
 import { PageModal } from "~/components/PageModal";
 import { PresentClient } from "~/components/PresentClient";
 import { SignInWithNoo } from "~/components/SignInWithNoo";
+import { type OidcClient } from "~/db/oidc_clients";
+import { type Session } from "~/db/sessions";
+import { type User } from "~/db/users";
+import { getLocalizedOidcField } from "~/lib/oidc/clientUtils";
 
 export async function AccountSwitcher({
   client,
@@ -80,7 +79,6 @@ function SessionItem({
   };
 
   const submit = async () => {
-    "use server";
     await switchSubmit(session.user.id);
   };
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { LANGUAGE_NAMES } from "@noo/lib/i18n";
 import { LanguagePickerSelect } from "./LanguagePickerSelect";
 

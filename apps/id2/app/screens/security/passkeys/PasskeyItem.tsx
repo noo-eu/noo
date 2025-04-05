@@ -1,12 +1,10 @@
-import { removePasskey } from "@/app/security/passkeys/actions";
-import { useAuth } from "@/auth/authContext";
-import { ClientPasskey } from "@/lib/types/ClientPasskey";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@noo/ui";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify/unstyled";
 import { useFormatter, useTranslations } from "use-intl";
+import { useAuth } from "~/auth/context";
 import { useWithConfirmation } from "~/components/Confirmation";
+import { type ClientPasskey } from "~/lib/types/ClientPasskey.client";
 import { PasskeyNameEditor } from "./PasskeyNameEditor";
 
 export function PasskeyItem({ passkey }: Readonly<{ passkey: ClientPasskey }>) {
@@ -15,7 +13,6 @@ export function PasskeyItem({ passkey }: Readonly<{ passkey: ClientPasskey }>) {
   const format = useFormatter();
 
   const withConfirmation = useWithConfirmation();
-  const router = useRouter();
 
   const { id: userId } = useAuth();
 
@@ -24,7 +21,7 @@ export function PasskeyItem({ passkey }: Readonly<{ passkey: ClientPasskey }>) {
       toast.error(t("removeError"));
     } else {
       toast.success(t("removeSuccess"));
-      router.refresh();
+      window.location.reload();
     }
   };
 

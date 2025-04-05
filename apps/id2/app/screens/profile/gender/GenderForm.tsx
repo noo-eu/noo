@@ -1,11 +1,7 @@
-"use client";
-
-import { updateGender } from "@/app/profile/gender/actions";
-import { useAuth } from "@/auth/authContext";
-import { Button, SelectField, TextField } from "@noo/ui";
+import { Button, Noo, SelectField, TextField } from "@noo/ui";
 import { useState } from "react";
 import { useLocale, useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
+import { useAuth } from "~/auth/context";
 import { CancelLink } from "../CancelLink";
 import { ProfileFormLayout } from "../ProfileFormLayout";
 import { useGenderForm } from "./useGenderForm";
@@ -13,9 +9,7 @@ import { useGenderForm } from "./useGenderForm";
 export function GenderForm() {
   const user = useAuth();
 
-  const { formAction, isPending } = useGenderForm(
-    updateGender.bind(null, user.id),
-  );
+  const { isPending, Form } = useGenderForm();
 
   const t = useTranslations("profile");
   const commonT = useTranslations("common");
@@ -37,7 +31,7 @@ export function GenderForm() {
         })}
       </p>
 
-      <form action={formAction} className="space-y-4">
+      <Form method="POST" className="space-y-4">
         <label className="flex items-center gap-2">
           <input
             onChange={(e) => setGender(e.target.value)}
@@ -113,7 +107,7 @@ export function GenderForm() {
             {commonT("save")}
           </Button>
         </div>
-      </form>
+      </Form>
     </ProfileFormLayout>
   );
 }

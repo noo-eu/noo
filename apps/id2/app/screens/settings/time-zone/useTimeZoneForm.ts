@@ -1,31 +1,28 @@
-import { useAuth } from "@/auth/authContext";
-import { BasicFormAction } from "@/lib/types/ActionResult";
-import { redirect } from "next/navigation";
-import { useActionState } from "react";
+import { useActionData, useFetcher, useNavigate } from "react-router";
 import { toast } from "react-toastify/unstyled";
 import { useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import { useAuth } from "~/auth/context";
+import { useCallbacks } from "~/lib/withCallbacks";
 
-export function useTimeZoneForm(
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>,
-) {
+export function useTimeZoneForm() {
   const t = useTranslations("settings");
   const user = useAuth();
+  const fetcher = useFetcher();
+  const isPending = fetcher.state === "submitting";
+  const navigate = useNavigate();
 
-  const [state, formAction, isPending] = useActionState(
-    withCallbacks(action, {
-      onSuccess: () => {
-        toast.success(t("timeZone.updateSuccess"));
-        redirect(`/settings?uid=${user.id}`);
-      },
-    }),
-    { input: { timeZone: user.timeZone } },
-  );
+  useCallbacks(fetcher, {
+    onSuccess: () => {
+      toast.success(t("timeZone.updateSuccess"));
+      navigate(`/settings?uid=${user.id}`);
+    },
+  });
+
+  const data = useActionData<typeof fetcher.data>();
 
   return {
-    errors: state.error,
-    state,
+    errors: data?.errors,
     isPending,
-    formAction,
+    Form: fetcher.Form,
   };
 }

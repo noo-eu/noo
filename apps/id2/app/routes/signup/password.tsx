@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, PasswordField } from "@noo/ui";
 import {
   Form,

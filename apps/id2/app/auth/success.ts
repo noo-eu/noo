@@ -1,12 +1,12 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
 import Tenants from "~/db/tenants";
-import type { User } from "~/db/users";
+import type { User } from "~/db/users.server";
 import { getOidcAuthorizationClient } from "~/lib/oidc";
 import {
   createSession,
   getAuthenticatedSession,
   reauthenticateSession,
-} from "./sessions";
+} from "./sessions.server";
 
 export async function handleSuccessfulAuthentication<Input>(
   request: Request,
@@ -44,7 +44,7 @@ export async function handleSuccessfulAuthentication<Input>(
   };
 }
 
-async function startSession(request: Request, user: User) {
+export async function startSession(request: Request, user: User) {
   let session = await getAuthenticatedSession(request, user.id);
   if (session) {
     // Update the lastAuthenticatedAt timestamp, which is used for the OIDC auth_time claim

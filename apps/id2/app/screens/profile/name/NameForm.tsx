@@ -1,23 +1,20 @@
-"use client";
-
-import { updateName } from "@/app/profile/name/actions";
-import { useAuth } from "@/auth/authContext";
-import { capitalizeName } from "@/lib/name";
 import { Button, TextField } from "@noo/ui";
+import { Noo } from "@noo/ui/Noo";
+import { useFetcher } from "react-router";
 import { useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
+import { capitalizeName } from "~/lib/name";
 import { CancelLink } from "../CancelLink";
 import { ProfileFormLayout } from "../ProfileFormLayout";
 import { useNameForm } from "./useNameForm";
 
 export function NameForm() {
+  const fetcher = useFetcher();
+
   const {
     errors,
-    isPending,
     onSubmit,
-    formAction,
     form: { firstName, setFirstName, lastName, setLastName },
-  } = useNameForm(updateName.bind(null, useAuth().id));
+  } = useNameForm(fetcher);
 
   const t = useTranslations("profile.name");
   const commonT = useTranslations("common");
@@ -32,8 +29,8 @@ export function NameForm() {
         })}
       </p>
 
-      <form
-        action={formAction}
+      <fetcher.Form
+        method="POST"
         onSubmit={onSubmit}
         className="space-y-8"
         data-testid="form"
@@ -54,7 +51,7 @@ export function NameForm() {
         <TextField
           label={t("lastName")}
           name="lastName"
-          value={lastName}
+          value={lastName ?? ""}
           onChange={(e) => {
             setLastName(e.target.value);
           }}
@@ -72,11 +69,11 @@ export function NameForm() {
 
         <div className="flex gap-4 justify-end items-center">
           <CancelLink />
-          <Button type="submit" pending={isPending}>
+          <Button type="submit" pending={fetcher.state !== "idle"}>
             {commonT("save")}
           </Button>
         </div>
-      </form>
+      </fetcher.Form>
     </ProfileFormLayout>
   );
 }

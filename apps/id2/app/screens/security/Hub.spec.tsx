@@ -1,10 +1,10 @@
 // @vitest-environment happy-dom
 
 import { render, screen } from "@testing-library/react";
-import SecurityHub from "./Hub";
-import { AuthContext } from "@/auth/authContext";
 import { describe, expect, it } from "vitest";
+import { AuthContext } from "~/auth/context";
 import { JohnDoeClient } from "../../../tests/fixtures/users";
+import SecurityHub from "./Hub";
 
 describe("SecurityHub", () => {
   const mockUser = JohnDoeClient;

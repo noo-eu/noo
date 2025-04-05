@@ -1,7 +1,5 @@
-"use client";
-
 import { PageModal } from "~/components/PageModal";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
+import ProfileLayout from "../home/ProfileLayout";
 import { ProfileFormHeader } from "./ProfileFormHeader";
 
 export function ProfileFormLayout({

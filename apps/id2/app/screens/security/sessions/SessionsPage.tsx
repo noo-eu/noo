@@ -1,8 +1,6 @@
-"use client";
-
-import { ClientSession } from "@/lib/types/ClientSession";
 import { useTranslations } from "use-intl";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
+import type { ClientSession } from "~/lib/types/ClientSession.client";
+import ProfileLayout from "~/screens/home/ProfileLayout";
 import { SessionsGroup } from "./SessionGroup";
 import { useGroupedSessions } from "./useGroupedSession";
 

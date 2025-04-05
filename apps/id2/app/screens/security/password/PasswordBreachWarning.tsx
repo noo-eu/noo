@@ -1,6 +1,6 @@
-import { useAuth } from "@/auth/authContext";
-import Link from "next/link";
+import { Link } from "react-router";
 import { useFormatter, useTranslations } from "use-intl";
+import { useAuth } from "~/auth/context";
 
 export function PasswordBreachWarning() {
   const user = useAuth();
@@ -13,7 +13,7 @@ export function PasswordBreachWarning() {
         count: format.number(user.passwordBreaches!),
         otp: user.hasOtp ? "true" : "false",
         guide: (children) => (
-          <Link className="link" href={`https://help.noo.eu/`}>
+          <Link className="link" to={`https://help.noo.eu/`}>
             {children}
           </Link>
         ),

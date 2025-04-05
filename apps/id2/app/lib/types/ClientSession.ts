@@ -1,12 +1,6 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
 import { type Session } from "~/db/sessions";
-
-export type ClientSession = {
-  id: string;
-  ip: string;
-  userAgent: string | null;
-  lastUsedAt: Date;
-};
+import type { ClientSession } from "./ClientSession.client";
 
 export function makeClientSession(session: Session): ClientSession {
   return {

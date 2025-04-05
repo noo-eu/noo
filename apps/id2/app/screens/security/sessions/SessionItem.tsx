@@ -1,10 +1,8 @@
-import { terminateSession } from "@/app/security/sessions/actions";
-import { useAuth } from "@/auth/authContext";
-import { ClientSession } from "@/lib/types/ClientSession";
 import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import { useRouter } from "next/navigation";
+import { useFetcher } from "react-router";
 import { useFormatter, useNow, useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import type { ClientSession } from "~/lib/types/ClientSession.client";
+import { useCallbacks } from "~/lib/withCallbacks";
 import { cleanIp } from "./ipUtils";
 import { userAgentToDevice } from "./userAgentUtils";
 
@@ -19,17 +17,13 @@ export function SessionItem({
   const ua = userAgentToDevice(session.userAgent);
   const t = useTranslations("security");
 
-  const userId = useAuth().id;
+  const fetcher = useFetcher();
 
-  const router = useRouter();
-  const action = withCallbacks(
-    terminateSession.bind(null, userId, session.id),
-    {
-      onSuccess: () => {
-        router.refresh();
-      },
+  useCallbacks(fetcher, {
+    onSuccess: () => {
+      window.location.reload();
     },
-  );
+  });
 
   const now = useNow();
 
@@ -56,14 +50,15 @@ export function SessionItem({
       </div>
       <div className="ms-auto">
         {!isActive && (
-          <form action={action}>
+          <fetcher.Form method="POST">
+            <input type="hidden" name="id" value={session.id} />
             <button
               title={t("sessions.terminate")}
               className="cursor-pointer p-2 rounded-full bg-red-700/15 hover:bg-red-700/35 text-red-700 hover:text-white"
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
-          </form>
+          </fetcher.Form>
         )}
       </div>
     </div>

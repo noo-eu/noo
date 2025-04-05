@@ -1,5 +1,9 @@
-import { ClientSession } from "@/lib/types/ClientSession";
-import { Device, userAgentGroup, userAgentToDevice } from "./userAgentUtils";
+import { type ClientSession } from "~/lib/types/ClientSession.client";
+import {
+  type Device,
+  userAgentGroup,
+  userAgentToDevice,
+} from "./userAgentUtils";
 
 export function useGroupedSessions(sessions: ClientSession[]) {
   return sessions.reduce(

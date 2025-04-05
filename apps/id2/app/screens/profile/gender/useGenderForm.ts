@@ -1,36 +1,26 @@
-import { useAuth } from "@/auth/authContext";
-import { BasicFormAction } from "@/lib/types/ActionResult";
-import { redirect } from "next/navigation";
-import { useActionState } from "react";
+import { useFetcher, useNavigate } from "react-router";
 import { toast } from "react-toastify/unstyled";
 import { useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import { useAuth } from "~/auth/context";
+import { useCallbacks } from "~/lib/withCallbacks";
 
-export function useGenderForm(
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>,
-) {
+export function useGenderForm() {
+  const fetcher = useFetcher();
+
   const t = useTranslations("profile");
   const user = useAuth();
+  const navigate = useNavigate();
 
-  const [state, formAction, isPending] = useActionState(
-    withCallbacks(action, {
-      onSuccess: () => {
-        toast.success(t("gender.updateSuccess"));
-        redirect(`/profile?uid=${user.id}`);
-      },
-    }),
-    {
-      input: {
-        gender: user.gender,
-        genderCustom: user.genderCustom ?? "",
-        pronouns: user.pronouns,
-      },
+  useCallbacks(fetcher, {
+    onSuccess: () => {
+      toast.success(t("gender.updateSuccess"));
+      navigate(`/profile?uid=${user.id}`);
     },
-  );
+  });
 
   return {
-    errors: state.error,
-    isPending,
-    formAction,
+    errors: fetcher.data?.error,
+    isPending: fetcher.state === "submitting",
+    Form: fetcher.Form,
   };
 }

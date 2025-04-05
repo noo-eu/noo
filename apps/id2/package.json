@@ -23,6 +23,8 @@
     "@react-router/serve": "^7.4.1",
     "@remix-run/express": "^2.16.4",
     "@sentry/react-router": "^9.11.0",
+    "@simplewebauthn/browser": "^13.1.0",
+    "@simplewebauthn/server": "^13.1.1",
     "accept-language-parser": "^1.5.0",
     "compression": "^1.8.0",
     "express": "^5.1.0",

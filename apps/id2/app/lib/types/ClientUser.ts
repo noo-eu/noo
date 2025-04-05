@@ -1,25 +1,6 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
-import { type User, type UserWithTenant } from "~/db/users";
-
-export type ClientUser = {
-  id: string;
-  username: string;
-  normalizedUsername: string;
-  tenantDomain?: string;
-  firstName: string;
-  lastName: string | null;
-  fullName: string;
-  picture: string | null;
-  birthdate: Date | null;
-  gender: User["gender"];
-  genderCustom: string | null;
-  pronouns: User["pronouns"];
-  passwordBreaches: number | null;
-  passwordChangedAt: Date | null;
-  hasOtp: boolean;
-  timeZone: string;
-  locale: string;
-};
+import { type UserWithTenant } from "~/db/users.server";
+import type { ClientUser } from "./ClientUser.client";
 
 export function makeClientUser(user: UserWithTenant): ClientUser {
   return {

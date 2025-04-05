@@ -1,7 +1,7 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
 import { jwtVerify, SignJWT } from "jose";
 import { createCookie, redirect } from "react-router";
-import type { User } from "~/db/users";
+import type { User } from "~/db/users.server";
 import { getSigningKey } from "~/lib/jwks";
 
 export const totpCookie = createCookie("_noo_totp_session", {

@@ -1,9 +1,9 @@
 // @vitest-environment happy-dom
 
 import { JohnDoeClient } from "@/../tests/fixtures/users";
-import { AuthProvider } from "@/auth/authContext";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
 import { NameForm } from "./NameForm";
 
 function wrapRender(component: React.ReactNode) {

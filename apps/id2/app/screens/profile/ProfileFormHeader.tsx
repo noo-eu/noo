@@ -1,8 +1,8 @@
-import { useAuth } from "@/auth/authContext";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Noo } from "@noo/ui";
+import { Link } from "react-router";
 import { useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
+import { useAuth } from "~/auth/context";
 
 export function ProfileFormHeader() {
   const user = useAuth();
@@ -10,7 +10,7 @@ export function ProfileFormHeader() {
 
   return (
     <div className="text-lg mx-4 mb-2 flex items-center">
-      <Link href={`/profile?uid=${user.id}`} aria-label={t("back")}>
+      <Link to={`/profile?uid=${user.id}`} aria-label={t("back")}>
         <ArrowLeftIcon className="size-6 inline-block me-2" />
       </Link>
       <h1>

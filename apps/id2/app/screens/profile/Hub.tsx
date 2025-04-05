@@ -1,6 +1,3 @@
-"use client";
-
-import { useAuth } from "@/auth/authContext";
 import {
   CakeIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -9,8 +6,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { Noo } from "@noo/ui/Noo";
 import { useFormatter, useTranslations } from "use-intl";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
+import { useAuth } from "~/auth/context";
 import { ProfilePicture } from "~/components/ProfilePicture";
+import ProfileLayout from "../home/ProfileLayout";
 import { ProfileLink } from "./ProfileLink";
 import { useProfilePictureDialog } from "./useProfilePictureDialog";
 import { renderBirthdate, renderGender } from "./utils";

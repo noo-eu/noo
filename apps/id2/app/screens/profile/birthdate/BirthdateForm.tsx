@@ -1,12 +1,7 @@
-"use client";
-
-import { updateBirthdate } from "@/app/profile/birthdate/actions";
-import { useAuth } from "@/auth/authContext";
-import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
-import { Button, SelectField, TextField } from "@noo/ui";
+import { Button, Noo, SelectField, TextField } from "@noo/ui";
 import { useLocale, useTranslations } from "use-intl";
-import { Noo } from "~/components/Noo";
 import { CancelLink } from "../CancelLink";
+import { ProfileFormLayout } from "../ProfileFormLayout";
 import { useBirthdateForm } from "./useBirthdateForm";
 
 function monthsForLocale(locale: string) {
@@ -15,14 +10,10 @@ function monthsForLocale(locale: string) {
 }
 
 export function BirthdateForm() {
-  const user = useAuth();
-
   const locale = useLocale();
   const months = monthsForLocale(locale);
 
-  const { state, errors, formAction, isPending } = useBirthdateForm(
-    updateBirthdate.bind(null, user.id),
-  );
+  const { errors, input, isPending, Form } = useBirthdateForm();
 
   const t = useTranslations("profile");
   const commonT = useTranslations("common");
@@ -37,16 +28,12 @@ export function BirthdateForm() {
         })}
       </p>
 
-      <form
-        action={formAction}
-        className="space-y-8"
-        data-testid="birthdate-form"
-      >
+      <Form method="POST" className="space-y-8" data-testid="birthdate-form">
         <div className="flex gap-3">
           <TextField
             label={t("birthdate.day")}
             name="day"
-            defaultValue={state.input.day}
+            defaultValue={input.day}
             autoFocus
             size={3}
             maxLength={2}
@@ -55,7 +42,7 @@ export function BirthdateForm() {
           <SelectField
             label={t("birthdate.month")}
             name="month"
-            defaultValue={state.input.month}
+            defaultValue={input.month}
             className="flex-3"
             error={errors?.month && t(`birthdate.errors.${errors.month}`)}
           >
@@ -68,7 +55,7 @@ export function BirthdateForm() {
           <TextField
             label={t("birthdate.year")}
             name="year"
-            defaultValue={state.input.year}
+            defaultValue={input.year}
             size={5}
             maxLength={4}
             error={errors?.year && t(`birthdate.errors.${errors.year}`)}
@@ -81,7 +68,7 @@ export function BirthdateForm() {
             {commonT("save")}
           </Button>
         </div>
-      </form>
+      </Form>
     </ProfileFormLayout>
   );
 }

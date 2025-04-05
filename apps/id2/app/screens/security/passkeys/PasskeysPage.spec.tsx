@@ -2,14 +2,14 @@
 
 import { JohnDoeClient } from "@/../tests/fixtures/users";
 import * as actions from "@/app/security/passkeys/actions";
-import { AuthProvider } from "@/auth/authContext";
-import { ClientUser } from "@/lib/types/ClientUser";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockAnimationsApi } from "jsdom-testing-mocks";
 import { NextIntlClientProvider } from "use-intl";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
 import { ConfirmationProvider } from "~/components/Confirmation";
+import { ClientUser } from "~/lib/types/ClientUser";
 import { PasskeyItem } from "./PasskeyItem";
 import { PasskeyNameEditor } from "./PasskeyNameEditor";
 import { PasskeysPage } from "./PasskeysPage";

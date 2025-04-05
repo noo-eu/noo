@@ -10,7 +10,7 @@ import { getTotpSession, totpCookie } from "~/auth/totpSession";
 import { PageModal } from "~/components/PageModal";
 import { SignInWithNoo } from "~/components/SignInWithNoo";
 import Passkeys from "~/db/passkeys";
-import Users from "~/db/users";
+import Users from "~/db/users.server";
 import { getOidcAuthorizationClient } from "~/lib/oidc";
 import type { BasicFormAction } from "~/lib/types/ActionResult";
 import { makeClientOidcClient } from "~/lib/types/ClientOidcClient";

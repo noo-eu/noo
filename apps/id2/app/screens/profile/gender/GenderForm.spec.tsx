@@ -1,11 +1,11 @@
 // @vitest-environment happy-dom
 
 import { GenderlessUserClient } from "@/../tests/fixtures/users";
-import { AuthProvider } from "@/auth/authContext";
-import { ClientUser } from "@/lib/types/ClientUser";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useLocale } from "use-intl";
 import { describe, expect, it, Mock, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
+import { ClientUser } from "~/lib/types/ClientUser";
 import { GenderForm } from "./GenderForm";
 
 function wrapRender(

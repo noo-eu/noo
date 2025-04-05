@@ -1,15 +1,13 @@
-import { useAuth } from "@/auth/authContext";
-import Link from "next/link";
+import { Link } from "react-router";
 import { useTranslations } from "use-intl";
+import { useAuth } from "~/auth/context";
 
-export function CancelLink(
-  { section }: { section?: string } = { section: "profile" },
-) {
+export function CancelLink({ section = "profile" }: { section?: string }) {
   const commonT = useTranslations("common");
   const user = useAuth();
 
   return (
-    <Link className="link p-2.5" href={`/${section}?uid=${user.id}`}>
+    <Link className="link p-2.5" to={`/${section}?uid=${user.id}`}>
       {commonT("cancel")}
     </Link>
   );

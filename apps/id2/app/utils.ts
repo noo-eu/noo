@@ -1,13 +1,14 @@
+import { normalizeLocale } from "@noo/lib/i18n";
 import { loadMessages, localeFromRequest } from "@noo/lib/i18n.server";
 import { redirect, type Params } from "react-router";
+import type { User } from "./db/users.server";
 import { getSession } from "./lib/session";
 
-export async function resolveLocale(request: Request, params: Params) {
+export async function resolveLocale(user: User | undefined, request: Request) {
   // First check from the user session
-  // const session = await loadUserSession(request, params);
-  // if (session) {
-  //   return session.user.locale;
-  // }
+  if (user) {
+    return { locale: normalizeLocale(user.locale), rawLocale: user.locale };
+  }
 
   return localeFromRequest(request);
 }

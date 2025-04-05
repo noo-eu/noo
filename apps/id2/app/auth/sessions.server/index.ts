@@ -3,7 +3,7 @@ import { checkVerifier, createVerifier } from "@noo/lib/verifier";
 import { inArray } from "drizzle-orm";
 import { schema } from "~/db";
 import Sessions, { type Session } from "~/db/sessions";
-import { type UserWithTenant } from "~/db/users";
+import { type UserWithTenant } from "~/db/users.server";
 import { getClientIp } from "~/lib/http";
 import { getSessionCookie, setSessionCookie } from "./store";
 import {

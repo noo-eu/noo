@@ -1,30 +1,25 @@
-import { useAuth } from "@/auth/authContext";
-import { capitalizeName } from "@/lib/name";
-import { BasicFormAction } from "@/lib/types/ActionResult";
-import { redirect } from "next/navigation";
-import { startTransition, useActionState, useState } from "react";
+import { startTransition, useState } from "react";
+import { useNavigate, type FetcherWithComponents } from "react-router";
 import { toast } from "react-toastify/unstyled";
 import { useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import { useAuth } from "~/auth/context";
+import { capitalizeName } from "~/lib/name";
+import { useCallbacks } from "~/lib/withCallbacks";
 
-export function useNameForm(
-  action: (_: unknown, data: FormData) => Promise<BasicFormAction>,
-) {
+export function useNameForm(fetcher: FetcherWithComponents<any>) {
   const t = useTranslations("profile");
   const user = useAuth();
+  const navigate = useNavigate();
 
-  const [state, formAction, isPending] = useActionState(
-    withCallbacks(action, {
-      onSuccess: () => {
-        toast.success(t("name.updateSuccess"));
-        redirect(`/profile?uid=${user.id}`);
-      },
-    }),
-    { input: { firstName: user.firstName, lastName: user.lastName ?? "" } },
-  );
+  useCallbacks(fetcher, {
+    onSuccess: () => {
+      toast.success(t("name.updateSuccess"));
+      navigate(`/profile?uid=${user.id}`);
+    },
+  });
 
-  const [firstName, setFirstName] = useState(state.input.firstName);
-  const [lastName, setLastName] = useState(state.input.lastName);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,15 +33,13 @@ export function useNameForm(
     data.append("lastName", ln);
 
     startTransition(() => {
-      formAction(data);
+      fetcher.submit(data, { method: "POST" });
     });
   };
 
   return {
-    errors: state.error,
-    isPending,
+    errors: fetcher.data?.error,
     form: { firstName, setFirstName, lastName, setLastName },
     onSubmit,
-    formAction,
   };
 }

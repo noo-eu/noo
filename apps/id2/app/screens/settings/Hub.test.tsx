@@ -1,18 +1,18 @@
 // @vitest-environment happy-dom
 
-import { useAuth } from "@/auth/authContext";
 import { LANGUAGE_NAMES } from "@/i18n";
-import { displayTz } from "@/lib/timeZones";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { useAuth } from "~/auth/context";
+import { displayTz } from "~/lib/timeZones";
 import { SettingsHub } from "./Hub";
 
 // Mock the dependencies
-vi.mock("@/auth/authContext", () => ({
+vi.mock("~/auth/context", () => ({
   useAuth: vi.fn(),
 }));
 
-vi.mock("@/lib/timeZones", () => ({
+vi.mock("~/lib/timeZones", () => ({
   displayTz: vi.fn(),
 }));
 

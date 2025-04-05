@@ -1,5 +1,4 @@
-"use client";
-
+import { uuidToHumanId } from "@noo/lib/humanIds";
 import { Button, Noo } from "@noo/ui";
 import {
   Form,
@@ -8,6 +7,8 @@ import {
   type ActionFunctionArgs,
 } from "react-router";
 import { useTranslations } from "use-intl";
+import { startSession } from "~/auth/success";
+import { getOidcAuthorizationClient } from "~/lib/oidc";
 import { signupData, SignupService } from "~/lib/SignupService";
 
 export async function action({ request, context }: ActionFunctionArgs) {
@@ -24,16 +25,18 @@ export async function action({ request, context }: ActionFunctionArgs) {
   const result = await svc.runStep4(data);
 
   if (result.success) {
-    // TODO!!
-    // await startSession(result.user);
-    // const userId = uuidToHumanId(result.user.id, "usr");
+    const cookies = await startSession(request, result.user);
+    const userId = uuidToHumanId(result.user.id, "usr");
 
-    // const oidcAuthorization = await getOidcAuthorizationRequest();
-    // if (oidcAuthorization) {
-    // return redirect("/oidc/consent?uid=" + userId);
-    // } else {
-    return redirect("/");
-    // }
+    const oidcAuthorization = await getOidcAuthorizationClient(request);
+    let target = "/";
+    if (oidcAuthorization) {
+      target = "/oidc/consent?uid=" + userId;
+    }
+
+    return redirect(target, {
+      headers: cookies.map((cookie) => ["Set-Cookie", cookie]),
+    });
   } else {
     return redirect("/signup", {
       headers: {

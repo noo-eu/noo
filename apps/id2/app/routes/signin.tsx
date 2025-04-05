@@ -5,7 +5,7 @@ import { handleSuccessfulAuthentication } from "~/auth/success";
 import { startTotpSession } from "~/auth/totpSession";
 import { PageModal } from "~/components/PageModal";
 import { SignInWithNoo } from "~/components/SignInWithNoo";
-import Users from "~/db/users";
+import Users from "~/db/users.server";
 import { getOidcAuthorizationClient } from "~/lib/oidc";
 import { makeClientOidcClient } from "~/lib/types/ClientOidcClient";
 import { localeContext } from "~/root";

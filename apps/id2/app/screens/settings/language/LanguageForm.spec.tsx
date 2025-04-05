@@ -2,11 +2,11 @@
 
 import { JohnDoeClient } from "@/../tests/fixtures/users";
 import * as actions from "@/app/settings/language/actions";
-import { AuthProvider } from "@/auth/authContext";
-import { ClientUser } from "@/lib/types/ClientUser";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { IntlProvider } from "use-intl";
 import { describe, expect, it, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
+import { ClientUser } from "~/lib/types/ClientUser";
 import { LanguageForm } from "./LanguageForm";
 
 // Mock the server action

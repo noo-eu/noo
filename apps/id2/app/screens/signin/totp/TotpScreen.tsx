@@ -1,6 +1,6 @@
-import { getOidcAuthorizationRequest } from "@/lib/oidc/utils";
 import { PageModal } from "~/components/PageModal";
 import { SignInWithNoo } from "~/components/SignInWithNoo";
+import { getOidcAuthorizationRequest } from "~/lib/oidc/utils";
 import { SignInSidePanel } from "../SignInSidePanel";
 import { TotpForm } from "./TotpForm";
 

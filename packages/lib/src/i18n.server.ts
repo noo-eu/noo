@@ -20,17 +20,20 @@ function localeFromCookies(request: Request): string | undefined {
   return normalizeLocale(locale);
 }
 
-export function localeFromRequest(request: Request): string {
+export function localeFromRequest(request: Request) {
   const fromCookies = localeFromCookies(request);
   if (fromCookies) {
-    return fromCookies;
+    return { rawLocale: fromCookies, locale: normalizeLocale(fromCookies) };
   }
 
   const allLocales = EXTENDED_SUPPORTED_LANGUAGES;
   const header = request.headers.get("accept-language") || "en";
   const locale = acceptLanguage.pick(allLocales, header) || "en";
 
-  return normalizeLocale(locale);
+  return {
+    rawLocale: locale,
+    locale: normalizeLocale(locale),
+  };
 }
 
 /**

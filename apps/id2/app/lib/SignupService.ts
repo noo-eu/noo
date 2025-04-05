@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import { createCookie } from "react-router";
 import { z } from "zod";
-import Users, { type User } from "~/db/users";
+import Users, { type User } from "~/db/users.server";
 import { validateNameForm } from "./validations/name";
 import { isUsernameAllowed } from "./validations/username";
 

@@ -9,8 +9,6 @@ Sentry.init({
   tracesSampleRate: 1,
 });
 
-console.log("client.tsx");
-
 startTransition(() => {
   hydrateRoot(
     document,

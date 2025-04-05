@@ -1,5 +1,5 @@
-import { useAuth } from "@/auth/authContext";
-import Link from "next/link";
+import { Link } from "react-router";
+import { useAuth } from "~/auth/context";
 
 type Props = {
   href: string;
@@ -21,7 +21,7 @@ export function ProfileLink({
   return (
     <Link
       className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2 relative"
-      href={`${href}?uid=${userId}`}
+      to={`${href}?uid=${userId}`}
     >
       <Icon className="size-6 self-start mt-0.5" />
       <div>

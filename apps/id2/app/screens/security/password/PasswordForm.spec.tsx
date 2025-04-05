@@ -1,12 +1,11 @@
 // @vitest-environment happy-dom
 
 import { JohnDoeClient } from "@/../tests/fixtures/users";
-import * as actions from "@/app/security/password/actions";
-import { AuthProvider } from "@/auth/authContext";
-import { ClientUser } from "@/lib/types/ClientUser";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { NextIntlClientProvider } from "use-intl";
 import { describe, expect, it, Mock, vi } from "vitest";
+import { AuthProvider } from "~/auth/context";
+import { ClientUser } from "~/lib/types/ClientUser";
 import { PasswordForm } from "./PasswordForm";
 
 vi.mock("@/app/security/password/actions", async (importOriginal) => ({

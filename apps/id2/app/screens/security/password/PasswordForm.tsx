@@ -1,10 +1,8 @@
-"use client";
-
-import { useAuth } from "@/auth/authContext";
-import { ProfileFormLayout } from "@/screens/profile/ProfileFormLayout";
 import { Button, PasswordField } from "@noo/ui";
 import { useState } from "react";
 import { useTranslations } from "use-intl";
+import { useAuth } from "~/auth/context";
+import { ProfileFormLayout } from "~/screens/profile/ProfileFormLayout";
 import { PasswordBreachWarning } from "./PasswordBreachWarning";
 import { PasswordRater } from "./PasswordRater";
 import { usePasswordForm } from "./usePasswordForm";
@@ -15,7 +13,7 @@ export function PasswordForm() {
 
   useZxcvbnConfig();
 
-  const { errors, formAction, isPending, state } = usePasswordForm();
+  const { errors, Form, isPending } = usePasswordForm();
 
   const t = useTranslations("security");
   const commonT = useTranslations("common");
@@ -36,11 +34,10 @@ export function PasswordForm() {
 
       <p className="mb-4 text-sm">{t("password.description2")}</p>
 
-      <form action={formAction}>
+      <Form method="POST">
         <PasswordField
           label={t("password.label")}
           name="new-password"
-          defaultValue={state.input["new-password"]}
           error={
             errors?.["new-password"] &&
             t(`password.errors.${errors["new-password"]}`)
@@ -78,7 +75,7 @@ export function PasswordForm() {
             {commonT("save")}
           </Button>
         </div>
-      </form>
+      </Form>
     </ProfileFormLayout>
   );
 }

@@ -1,12 +1,9 @@
-import { changePasskeyName } from "@/app/security/passkeys/actions";
-import { useAuth } from "@/auth/authContext";
-import { ClientPasskey } from "@/lib/types/ClientPasskey";
 import { CheckIcon, PencilIcon } from "@heroicons/react/24/solid";
 import { Button, TextInput } from "@noo/ui";
-import { useRouter } from "next/navigation";
-import { useActionState, useState } from "react";
+import { useActionState, useCallback, useState } from "react";
 import { useTranslations } from "use-intl";
-import { withCallbacks } from "~/components/withCallbacks";
+import { useAuth } from "~/auth/authLoader";
+import { type ClientPasskey } from "~/lib/types/ClientPasskey";
 
 export function PasskeyNameEditor({
   passkey,
@@ -21,7 +18,7 @@ export function PasskeyNameEditor({
   const { id: userId } = useAuth();
 
   const [, action, isPending] = useActionState(
-    withCallbacks(changePasskeyName.bind(null, userId, passkey.id), {
+    useCallback(changePasskeyName.bind(null, userId, passkey.id), {
       onSuccess: (data) => {
         router.refresh();
         setEditing(false);

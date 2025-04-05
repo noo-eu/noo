@@ -1,8 +1,8 @@
+import { zxcvbnAsync, zxcvbnOptions } from "@zxcvbn-ts/core";
 import * as zxcvbnCommonPackage from "@zxcvbn-ts/language-common";
 import * as zxcvbnEnPackage from "@zxcvbn-ts/language-en";
 import { useEffect, useState } from "react";
-import { zxcvbnAsync, zxcvbnOptions } from "@zxcvbn-ts/core";
-import { useAuth } from "@/auth/authContext";
+import { useAuth } from "~/auth/context";
 
 export function usePasswordStrength(password: string) {
   const [strength, setStrength] = useState<number>(0);

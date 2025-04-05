@@ -1,28 +1,21 @@
-"use client";
-
-import { ClientPasskey } from "@/lib/types/ClientPasskey";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button } from "@noo/ui";
-import { useRouter } from "next/navigation";
+import { Button, Noo } from "@noo/ui";
 import { useTranslations } from "use-intl";
-import { ConfirmationProvider } from "~/components/Confirmation";
-import { Noo } from "~/components/Noo";
-import ProfileLayout from "~/components/Profile/ProfileLayout";
-import { PasskeyItem } from "./PasskeyItem";
+import type { ClientPasskey } from "~/lib/types/ClientPasskey.client";
+import ProfileLayout from "~/screens/home/ProfileLayout";
 import { usePasskeyRegistration } from "./usePasskeyRegistration";
 
 export function PasskeysPage({
   existingPasskeys,
 }: Readonly<{ existingPasskeys: ClientPasskey[] }>) {
   const t = useTranslations("security.passkeys");
-  const router = useRouter();
 
   const register = usePasskeyRegistration();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const success = await register();
     if (success) {
-      router.refresh();
+      window.location.reload();
     }
   };
 
@@ -44,7 +37,7 @@ export function PasskeysPage({
           </Button>
         </form>
 
-        {existingPasskeys.length > 0 && (
+        {/* {existingPasskeys.length > 0 && (
           <div className="mt-8 border border-black/15 dark:border-white/25 rounded p-8">
             <h2 className="text-2xl font-medium mb-4">{t("yourPasskeys")}</h2>
 
@@ -56,7 +49,7 @@ export function PasskeysPage({
               </ul>
             </ConfirmationProvider>
           </div>
-        )}
+        )} */}
       </div>
     </ProfileLayout>
   );
