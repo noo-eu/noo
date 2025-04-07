@@ -23,6 +23,29 @@ then
     fi
 fi
 
+# check if mkcert is installed
+if ! command -v mkcert &> /dev/null
+then
+    echo "mkcert is not installed."
+    if [ "$(uname)" == "Darwin" ]; then
+        echo "Installing mkcert via Homebrew..."
+        if ! command -v brew &> /dev/null
+        then
+            echo "Homebrew is not installed. Please install Homebrew (https://brew.sh/) and run this script again."
+            exit 1
+        fi
+        brew install mkcert
+    else
+        ARCH=$(dpkg --print-architecture)
+
+        echo "Installing libnss3-tools via apt (you will be asked for your password)..."
+        sudo apt install -yqq libnss3-tools
+        curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/${ARCH}"
+        chmod +x mkcert-v*-linux-amd64
+        sudo mv mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+    fi
+fi
+
 # check if postgres is installed
 if ! command -v psql &> /dev/null
 then

@@ -12,6 +12,16 @@ if (process.env.NODE_ENV !== "production") {
   if (!fs.existsSync("./certificates/localhost.pem")) {
     console.log("Generating development certificates...");
 
+    // Check if mkcert is installed
+    try {
+      execSync("mkcert -version");
+    } catch (error) {
+      console.error(
+        "mkcert is not installed. Please run ./setup.sh at the root of the repository.",
+      );
+      process.exit(1);
+    }
+
     execSync("mkdir -p ./certificates");
     execSync("mkcert -install");
     execSync("mkcert localhost", {

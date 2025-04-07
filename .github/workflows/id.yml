@@ -81,7 +81,7 @@ jobs:
 
   test:
     timeout-minutes: 10
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     defaults:
       run:
         working-directory: apps/id
@@ -103,6 +103,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: pnpm/action-setup@v4
+    - name: Install mkcert
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libnss3-tools
+        curl -JLO https://dl.filippo.io/mkcert/latest?for=linux/arm64
+        chmod +x mkcert-*-arm64
+        sudo mv mkcert-*-arm64 /usr/local/bin/mkcert
     - name: Install dependencies
       run: pnpm install
     - name: Install Playwright Browsers
