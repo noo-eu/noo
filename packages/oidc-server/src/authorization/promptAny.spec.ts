@@ -31,6 +31,8 @@ const createMockClient = (overrides: Partial<Client> = {}): Client => ({
   userinfoSignedResponseAlg: "RS256",
   tokenEndpointAuthMethod: "client_secret_basic",
   subjectType: "public",
+  responseTypes: ["code"],
+  grantTypes: ["authorization_code"],
   ...overrides,
 });
 
@@ -55,10 +57,17 @@ describe("authorizationAny", () => {
   // Rely on global afterEach for restoreAllMocks
 
   it('returns nextStep: "SIGN_IN" when no active sessions are found', async () => {
-    const result = await authorizationAny(testParams, testClient);
+    const result = await authorizationAny(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
-    expect(configuration.getActiveSessions).toHaveBeenCalledWith(undefined); // Called without max_age
+    expect(configuration.getActiveSessions).toHaveBeenCalledWith(
+      expect.any(Object),
+      undefined,
+    ); // Called without max_age
     expect(configuration.getConsent).not.toHaveBeenCalled();
     expect(result).toEqual({ params: testParams, nextStep: "SIGN_IN" });
   });
@@ -68,10 +77,17 @@ describe("authorizationAny", () => {
     testParams = createMockAuthRequest({ max_age: maxAgeSeconds });
     // Default mock returns []
 
-    await authorizationAny(testParams, testClient);
+    await authorizationAny(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
-    expect(configuration.getActiveSessions).toHaveBeenCalledWith(maxAgeSeconds); // Called WITH max_age
+    expect(configuration.getActiveSessions).toHaveBeenCalledWith(
+      expect.any(Object),
+      maxAgeSeconds,
+    ); // Called WITH max_age
     // Result should still be SIGN_IN as no sessions are returned
   });
 
@@ -83,7 +99,11 @@ describe("authorizationAny", () => {
       session2,
     ]);
 
-    const result = await authorizationAny(testParams, testClient);
+    const result = await authorizationAny(
+      new Request("http://localhost/"),
+      testParams,
+      testClient,
+    );
 
     expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
     expect(configuration.getConsent).not.toHaveBeenCalled(); // Shouldn't check consent if multiple sessions
@@ -105,7 +125,11 @@ describe("authorizationAny", () => {
         .spyOn(configuration, "getConsent")
         .mockResolvedValue({ scopes: testParams.scopes!, claims: [] }); // Assuming no specific claims requested
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       // Check that getConsent was called (via internal verifyConsent)
@@ -129,7 +153,11 @@ describe("authorizationAny", () => {
         .spyOn(configuration, "getConsent")
         .mockResolvedValue({ scopes: ["openid", "email"], claims: ["email"] }); // Consent includes scope and claim
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(getConsentMock).toHaveBeenCalledTimes(1);
       // verifyConsent (internal) should compare requested scopes/claims with actual consent
@@ -146,7 +174,11 @@ describe("authorizationAny", () => {
         .spyOn(configuration, "getConsent")
         .mockResolvedValue({ scopes: [], claims: [] });
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(getConsentMock).toHaveBeenCalledTimes(1);
@@ -170,7 +202,11 @@ describe("authorizationAny", () => {
         .spyOn(configuration, "getConsent")
         .mockResolvedValue({ scopes: ["openid", "email"], claims: [] }); // Has scope consent, lacks claim consent
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(getConsentMock).toHaveBeenCalledTimes(1);
       expect(getConsentMock).toHaveBeenCalledWith(testClient, session1.userId);
@@ -201,7 +237,11 @@ describe("authorizationAny", () => {
       vi.spyOn(configuration, "getConsent") // Consent exists for user1
         .mockResolvedValue({ scopes: testParams.scopes!, claims: [] });
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       // Consent check should only happen for the matched session (session1)
@@ -226,7 +266,11 @@ describe("authorizationAny", () => {
       vi.spyOn(configuration, "getConsent") // Consent missing for user1
         .mockResolvedValue({ scopes: [], claims: [] });
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).toHaveBeenCalledTimes(1);
@@ -251,7 +295,11 @@ describe("authorizationAny", () => {
         session2,
       ]);
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).not.toHaveBeenCalled();
@@ -261,7 +309,11 @@ describe("authorizationAny", () => {
     it('returns nextStep: "SIGN_IN" if hint is provided but no sessions exist initially', async () => {
       vi.spyOn(configuration, "getActiveSessions").mockResolvedValue([]);
 
-      const result = await authorizationAny(testParams, testClient);
+      const result = await authorizationAny(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+      );
 
       expect(configuration.getActiveSessions).toHaveBeenCalledTimes(1);
       expect(configuration.getConsent).not.toHaveBeenCalled();
@@ -275,7 +327,13 @@ describe("authorizationAny", () => {
         new Error("Database error"),
       );
 
-      await expect(authorizationAny(testParams, testClient)).resolves.toEqual({
+      await expect(
+        authorizationAny(
+          new Request("http://localhost/"),
+          testParams,
+          testClient,
+        ),
+      ).resolves.toEqual({
         params: testParams,
         nextStep: "SIGN_IN",
       });
@@ -290,7 +348,13 @@ describe("authorizationAny", () => {
         new Error("Database error"),
       );
 
-      await expect(authorizationAny(testParams, testClient)).resolves.toEqual({
+      await expect(
+        authorizationAny(
+          new Request("http://localhost/"),
+          testParams,
+          testClient,
+        ),
+      ).resolves.toEqual({
         params: testParams,
         nextStep: "CONSENT",
         userId: session1.userId,

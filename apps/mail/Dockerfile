@@ -1,37 +1,53 @@
-ARG BUN_VERSION=1.2.8
+ARG NODE_VERSION=22.14.0
+ARG PNPM_VERSION=10.7.1
 ARG SENTRY_AUTH_TOKEN
 
-FROM oven/bun:${BUN_VERSION} AS base
+# Build stage
+FROM node:${NODE_VERSION}-slim AS base
 
 WORKDIR /noo
 ENV NODE_ENV=production
-ENV PORT=3000
 
-# Build stage
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack prepare pnpm@${PNPM_VERSION} --activate
+RUN corepack enable
+RUN pnpm config set inject-workspace-packages=true
+
 FROM base AS build
 
-RUN --mount=type=bind,target=/context \
-  cd /context; \
-  find . -name "package.json" -not -path "./node_modules/*" -maxdepth 4 -exec cp --parents "{}" /noo \;
+# Copy the entire monorepo
+COPY . .
 
-COPY bun.lock bun.lock
-RUN bun install --frozen-lockfile
+RUN pnpm deploy --filter mail dist
 
-COPY packages/ui ./packages/ui
-COPY packages/lib ./packages/lib
-COPY apps/mail ./apps/mail
+WORKDIR /noo/dist
+RUN pnpm build
 
-WORKDIR /noo/apps/mail
+# Compile the main express server file
+RUN pnpm tsc --noEmit false --noCheck --module nodenext \
+  ./server.ts ./instrument.server.ts \
+  ./drizzle.config.prod.ts ./app/db.server/schema.ts
 
-RUN bun run build
+# Clean up unnecessary dependencies
+RUN pnpm prune --prod
 
 # Final stage
 FROM base AS production
 
+ENV PORT=3000
 RUN addgroup --system app && adduser --system app
 
-COPY --from=build --chown=root:root --chmod=555 /noo/apps/mail /noo
-COPY --from=build --chown=root:root --chmod=555 /noo/node_modules /noo/node_modules
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/build ./build
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/server.js /noo/dist/instrument.server.js ./
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/node_modules ./node_modules
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/messages ./messages
+
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/drizzle.config.prod.js ./drizzle.config.js
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/app/db.server/schema.js ./app/db/schema.js
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/drizzle ./drizzle
+
+COPY --from=build --chown=root:root --chmod=555 /noo/dist/docker-entrypoint.sh .
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["bun", "./server.js"]
+CMD ["node", "./server.js"]

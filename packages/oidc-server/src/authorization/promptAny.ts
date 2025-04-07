@@ -1,15 +1,16 @@
-import { Client } from "../configuration";
+import { type Client } from "../configuration";
 import { verifyConsent } from "../consent";
 import { buildSubClaim } from "../idToken";
-import { AuthorizationRequest } from "../types";
+import { type AuthorizationRequest } from "../types";
 import { getActiveSessions } from "../utils";
-import { AuthorizationResult } from "./request";
+import { type AuthorizationResult } from "./request";
 
 export async function authorizationAny(
+  request: Request,
   params: AuthorizationRequest,
   client: Client,
 ): Promise<AuthorizationResult> {
-  let sessions = await getActiveSessions(params.max_age);
+  let sessions = await getActiveSessions(request, params.max_age);
 
   /**
    * No specific requirement.

@@ -12,7 +12,6 @@ export function makeCsp(nonce: string) {
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-    require-trusted-types-for 'script';
 `;
   // Replace newline characters and spaces
   return cspHeader.replace(/\s{2,}/g, " ").trim();

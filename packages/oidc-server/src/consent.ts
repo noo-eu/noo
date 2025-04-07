@@ -1,5 +1,5 @@
-import configuration, { Client } from "./configuration";
-import { Claims } from "./types";
+import configuration, { type Client } from "./configuration";
+import { type Claims } from "./types";
 
 /**
  * Checks if the user has consented to all requested scopes and claims.

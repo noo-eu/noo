@@ -11,7 +11,7 @@ const mockT = vi.fn((key: string) => key);
 mockT.rich = vi.fn((key: string) => key);
 
 // Mock translations
-vi.mock("next-intl", async (importOriginal) => ({
+vi.mock("use-intl", async (importOriginal) => ({
   ...(await importOriginal()),
   useTranslations: vi.fn(() => mockT),
   useFormatter: () => ({
@@ -19,13 +19,6 @@ vi.mock("next-intl", async (importOriginal) => ({
     number: (n: number) => n.toString(),
     relativeTime: (d: Date) => d.toISOString().split("T")[0],
   }),
-  useLocale: vi.fn(() => "en"),
-  createTranslator: vi.fn(() => mockT),
-}));
-
-vi.mock("use-intl", async (importOriginal) => ({
-  ...(await importOriginal()),
-  useTranslations: vi.fn(() => mockT),
   useLocale: vi.fn(() => "en"),
 }));
 

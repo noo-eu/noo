@@ -1,4 +1,4 @@
-import { ReactNode, useId } from "react";
+import { type ReactNode, useEffect, useId, useRef } from "react";
 import { Label } from "./Label";
 import { TextInput } from "./TextInput";
 
@@ -6,6 +6,7 @@ export type TextFieldProps = {
   label: ReactNode;
   suffix?: ReactNode;
   error?: string;
+  focusOnLoad?: boolean;
 
   aroundLabel?: (children: ReactNode) => ReactNode;
 
@@ -13,17 +14,25 @@ export type TextFieldProps = {
     className?: string;
   };
   append?: ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "autoFocus">;
 
 export function TextField(props: TextFieldProps) {
   const inputId = useId();
   const errorId = useId();
 
-  const { aroundLabel, error, suffix, append, ...rest } = props;
+  const { aroundLabel, error, suffix, append, focusOnLoad, ...rest } = props;
   const id = rest.id || inputId;
 
   const label = <Label htmlFor={id}>{props.label}</Label>;
   const wrappedLabel = aroundLabel ? aroundLabel(label) : label;
+
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    // Check if the ref is attached to an element
+    if (ref.current && focusOnLoad) {
+      setTimeout(() => ref.current?.focus(), 100);
+    }
+  }, []);
 
   const input = (
     <TextInput
@@ -32,6 +41,7 @@ export function TextField(props: TextFieldProps) {
       aria-describedby={props.error ? errorId : undefined}
       aria-invalid={!!props.error}
       className={`${rest.className} ${suffix ? "rounded-r-none -me-px" : ""}`}
+      ref={ref}
     />
   );
 

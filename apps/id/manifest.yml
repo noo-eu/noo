@@ -62,6 +62,10 @@ spec:
                 secretKeyRef:
                   name: noo-id-secrets
                   key: PAIRWISE_SALT
+            - name: NONSECRET_PUBLIC_MAIL_DOMAIN
+              value: "noomail.eu"
+            - name: NONSECRET_SENTRY_DSN
+              value: https://dd4b1a47953a8fadd4b1e90d14f7058d@o4508998051037184.ingest.de.sentry.io/4508998052282448
           volumeMounts:
             - name: jwks-volume
               mountPath: /app/keys

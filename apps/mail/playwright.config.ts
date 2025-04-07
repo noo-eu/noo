@@ -41,7 +41,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: "TEST=1 PORT=23001 bun ./server.ts",
+      command: "TEST=1 PORT=23001 pnpm tsx ./server.ts",
       url: "https://localhost:23001",
       reuseExistingServer: !process.env.CI,
       ignoreHTTPSErrors: true,

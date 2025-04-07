@@ -1,5 +1,5 @@
 import configuration from "./configuration";
-import { ProviderMetadata } from "./types";
+import { type ProviderMetadata } from "./types";
 
 export const RESPONSE_TYPES_SUPPORTED = [
   "code",
@@ -79,7 +79,7 @@ export function discoveryMetadata(
 
   if (profile === "tenant") {
     metadata.registration_endpoint = `${issuer}/register`;
-    metadata.end_session_endpoint = `${issuer}/end_session`;
+    metadata.end_session_endpoint = `${issuer}/end-session`;
   } else if (profile === "fapi2") {
     metadata.grant_types_supported = ["authorization_code"];
     metadata.response_types_supported = ["code"];

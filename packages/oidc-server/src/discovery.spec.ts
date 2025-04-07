@@ -1,5 +1,5 @@
+import { describe, expect, test } from "vitest";
 import { discoveryMetadata } from "./discovery";
-import { describe, test, expect } from "vitest";
 
 describe("discoveryMetadata", () => {
   describe("public profile", () => {
@@ -73,7 +73,7 @@ describe("discoveryMetadata", () => {
         jwks_uri: "https://idp.example.com/jwks.json",
         check_session_iframe: "https://idp.example.com/session",
         registration_endpoint: `https://idp.example.com/org_123/register`,
-        end_session_endpoint: `https://idp.example.com/org_123/end_session`,
+        end_session_endpoint: `https://idp.example.com/org_123/end-session`,
       });
     });
   });

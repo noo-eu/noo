@@ -33,6 +33,8 @@ const createMockClient = (overrides: Partial<Client> = {}): Client => ({
   userinfoSignedResponseAlg: "RS256",
   tokenEndpointAuthMethod: "client_secret_basic",
   subjectType: "public",
+  responseTypes: ["code", "id_token", "token"],
+  grantTypes: ["authorization_code", "refresh_token"],
   ...overrides,
 });
 
@@ -120,6 +122,7 @@ describe("buildAuthorizationResponse", () => {
     testParams.response_type = "code";
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -127,18 +130,21 @@ describe("buildAuthorizationResponse", () => {
 
     // Check configuration calls
     expect(configuration.createAuthorizationCode).toHaveBeenCalledTimes(1);
-    expect(configuration.createAuthorizationCode).toHaveBeenCalledWith({
-      clientId: testClient.clientId,
-      userId: testSession.userId,
-      redirectUri: testParams.redirect_uri,
-      scopes: testParams.scopes,
-      claims: testParams.claims, // Pass claims config through
-      nonce: testParams.nonce,
-      authTime: testSession.lastAuthenticatedAt,
-      codeChallenge: testParams.code_challenge,
-      codeChallengeMethod: testParams.code_challenge_method,
-      // Potentially sid if relevant from session
-    });
+    expect(configuration.createAuthorizationCode).toHaveBeenCalledWith(
+      expect.any(Object),
+      {
+        clientId: testClient.clientId,
+        userId: testSession.userId,
+        redirectUri: testParams.redirect_uri,
+        scopes: testParams.scopes,
+        claims: testParams.claims, // Pass claims config through
+        nonce: testParams.nonce,
+        authTime: testSession.lastAuthenticatedAt,
+        codeChallenge: testParams.code_challenge,
+        codeChallengeMethod: testParams.code_challenge_method,
+        // Potentially sid if relevant from session
+      },
+    );
 
     expect(configuration.createAccessToken).not.toHaveBeenCalled();
     expect(configuration.getClaims).not.toHaveBeenCalled(); // Not needed for code-only response data
@@ -164,6 +170,7 @@ describe("buildAuthorizationResponse", () => {
     const expiresIn = 3600; // Standard expiry
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -214,6 +221,7 @@ describe("buildAuthorizationResponse", () => {
     testParams.claims = { id_token: { email: null, name: null } };
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -258,6 +266,7 @@ describe("buildAuthorizationResponse", () => {
     const expiresIn = 3600;
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -302,6 +311,7 @@ describe("buildAuthorizationResponse", () => {
     testParams.claims = { id_token: { email: null, name: null } };
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -337,6 +347,7 @@ describe("buildAuthorizationResponse", () => {
     testParams.scopes = ["openid"]; // Only openid scope
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -373,6 +384,7 @@ describe("buildAuthorizationResponse", () => {
     vi.spyOn(configuration, "getSessionStateValue").mockRejectedValue(error);
 
     const response = await buildAuthorizationResponse(
+      new Request("http://localhost/"),
       testParams,
       testClient,
       testSession,
@@ -389,7 +401,12 @@ describe("buildAuthorizationResponse", () => {
     vi.spyOn(configuration, "getSigningJwk").mockRejectedValue(error);
 
     await expect(
-      buildAuthorizationResponse(testParams, testClient, testSession),
+      buildAuthorizationResponse(
+        new Request("http://localhost/"),
+        testParams,
+        testClient,
+        testSession,
+      ),
     ).rejects.toThrow("Key retrieval failed");
 
     // Check that earlier steps might have run, but token creation didn't complete

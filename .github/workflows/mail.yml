@@ -14,7 +14,6 @@ on:
 
 env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_mail_test
-  NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
   lint:
@@ -24,27 +23,25 @@ jobs:
         working-directory: apps/mail
     steps:
     - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.3
+    - uses: pnpm/action-setup@v4
     - name: Install dependencies
-      run: bun install
+      run: pnpm install
     - name: Run all checks
       run: |
         set +e
         FAIL=0
 
         echo "Running Typecheck..."
-        bun typecheck || FAIL=1
+        pnpm typecheck || FAIL=1
 
         echo "Running Next.js lint..."
-        bun eslint || FAIL=1
+        pnpm eslint || FAIL=1
 
         echo "Running Prettier check..."
-        bun prettier --check . || FAIL=1
+        pnpm prettier --check . || FAIL=1
 
         echo "Check if all translations keys are present..."
-        bun i18n-utils check-missing || FAIL=1
+        pnpm i18n-utils check-missing || FAIL=1
 
         exit $FAIL
 
@@ -70,17 +67,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.3
+    - uses: pnpm/action-setup@v4
     - name: Install dependencies
-      run: bun install
+      run: pnpm install
     - name: Prepare the database
       run: |
-        bun db:test:push
-        bun db:test:fixtures
+        pnpm db:test:push
     - name: Run unit tests
-      run: bun run test:unit
+      run: pnpm test:unit
 
   # test:
   #   timeout-minutes: 10

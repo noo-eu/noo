@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Private provider", () => {
-  test.describe("OpenID Registation", () => {
+  test.describe("OpenID Registration", () => {
     test("Allows self-registration", async ({ request }) => {
       const requestObject = JSON.stringify({
         client_name: "My Client",
@@ -9,7 +9,7 @@ test.describe("Private provider", () => {
       });
 
       // The tenant must have been registered first
-      let response = await request.post("/oidc/org_nonexisting/register", {
+      let response = await request.post("/oidc/org_nonexisting/registration", {
         data: requestObject,
         headers: {
           "Content-Type": "application/json",
@@ -18,7 +18,7 @@ test.describe("Private provider", () => {
       expect(response.status()).toBe(404);
 
       // Failure is expected without a Bearer token
-      response = await request.post("/oidc/org_1/register", {
+      response = await request.post("/oidc/org_1/registration", {
         data: requestObject,
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ test.describe("Private provider", () => {
       expect(response.status()).toBe(401);
 
       // Register a new client
-      response = await request.post("/oidc/org_1/register", {
+      response = await request.post("/oidc/org_1/registration", {
         data: requestObject,
         // See fixtures.ts for the token
         headers: {

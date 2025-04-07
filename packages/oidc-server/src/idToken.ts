@@ -1,7 +1,7 @@
-import { JWTPayload, jwtVerify, SignJWT, UnsecuredJWT } from "jose";
+import { type JWTPayload, jwtVerify, SignJWT, UnsecuredJWT } from "jose";
 import { err, ok, Result } from "neverthrow";
 import crypto from "node:crypto";
-import configuration, { Client } from "./configuration";
+import configuration, { type Client } from "./configuration";
 import { sha256 } from "./utils";
 
 /**
@@ -175,7 +175,7 @@ export function idTokenHash(alg: string, value?: string) {
  * @param idToken - The ID Token to extract the audience from.
  * @returns The audience of the ID Token, or undefined if it is not present.
  */
-export function getUnsecureAudience(idToken: string) {
+export function getInsecureAudience(idToken: string) {
   const parts = idToken.split(".");
   if (parts.length !== 3) {
     throw new Error("Invalid ID Token");

@@ -40,9 +40,9 @@ export async function requestParams(
   return query;
 }
 
-export async function getActiveSessions(maxAge?: number) {
+export async function getActiveSessions(request: Request, maxAge?: number) {
   try {
-    return await configuration.getActiveSessions(maxAge);
+    return await configuration.getActiveSessions(request, maxAge);
   } catch (error) {
     console.error("Error fetching active sessions:", error);
     return [];

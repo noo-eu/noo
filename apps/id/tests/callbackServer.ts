@@ -1,30 +1,42 @@
-Bun.serve({
-  port: 22999,
-  routes: {
-    "/cb": async (req: Request) => {
-      const method = req.method;
-      const params = new URLSearchParams(req.url.split("?")[1]);
-      const formParams =
-        method === "POST" ? new URLSearchParams(await req.text()) : null;
-      const headers = req.headers;
+import express, { type Request, type Response } from "express";
+import fs from "fs";
+import https from "https";
 
-      const response = {
-        method,
-        url: req.url,
-        query: Object.fromEntries(params),
-        formParams: formParams ? Object.fromEntries(formParams) : null,
-        headers: Object.fromEntries(headers),
-      };
+const app = express();
 
-      console.log("=== OIDC Test Callback ===");
-      console.log(response);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-      return Response.json(response);
-    },
-  },
-  // @ts-ignore looks like types are wrong as this works
-  tls: {
-    key: Bun.file("certificates/localhost-key.pem"),
-    cert: Bun.file("certificates/localhost.pem"),
-  },
+app.all("/cb", (req: Request, res: Response) => {
+  const method = req.method;
+  const query = req.query;
+  const headers = req.headers;
+  let formParams = null;
+
+  if (method === "POST" && req.body) {
+    formParams = req.body;
+  }
+
+  const response = {
+    method,
+    url: req.originalUrl,
+    query,
+    formParams,
+    headers,
+  };
+
+  console.log("=== OIDC Test Callback ===");
+  console.log(response);
+
+  res.json(response);
+});
+
+// HTTPS server setup
+const options = {
+  key: fs.readFileSync("certificates/localhost-key.pem"),
+  cert: fs.readFileSync("certificates/localhost.pem"),
+};
+
+https.createServer(options, app).listen(22999, () => {
+  console.log("Server is running on https://localhost:22999");
 });

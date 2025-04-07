@@ -1,4 +1,4 @@
-import { loadMessages, localeFromRequest } from "@noo/lib/i18n";
+import { loadMessages, localeFromRequest } from "@noo/lib/i18n.server";
 import { redirect, type Params } from "react-router";
 import { getSession } from "./lib/session";
 import { getUserProfile } from "./lib/userProfile";

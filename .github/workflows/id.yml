@@ -14,7 +14,6 @@ on:
 
 env:
   DATABASE_URL: postgres://postgres:postgres@localhost:5432/noo_id_test
-  NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
   lint:
@@ -24,27 +23,25 @@ jobs:
         working-directory: apps/id
     steps:
     - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.3
+    - uses: pnpm/action-setup@v4
     - name: Install dependencies
-      run: bun install
+      run: pnpm install
     - name: Run all checks
       run: |
         set +e
         FAIL=0
 
         echo "Running Typecheck..."
-        #bun tsc || FAIL=1
+        pnpm typecheck || FAIL=1
 
         echo "Running Next.js lint..."
-        bun next lint || FAIL=1
+        pnpm eslint || FAIL=1
 
         echo "Running Prettier check..."
-        bun prettier --check . || FAIL=1
+        pnpm prettier --check . || FAIL=1
 
         echo "Check if all translations keys are present..."
-        bun i18n-utils check-missing || FAIL=1
+        pnpm i18n-utils check-missing || FAIL=1
 
         exit $FAIL
 
@@ -70,19 +67,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.3
+    - uses: pnpm/action-setup@v4
     - name: Install dependencies
-      run: bun install
+      run: pnpm install
     - name: Prepare the database
       run: |
-        bun db:test:push
-        bun db:test:fixtures
+        pnpm db:test:push
+        pnpm db:test:fixtures
     - name: Generate key set for testing
-      run: bun run keys:rotate
+      run: pnpm keys:rotate
     - name: Run unit tests
-      run: bun run test:unit
+      run: pnpm test:unit
 
   test:
     timeout-minutes: 10
@@ -107,21 +102,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.3
+    - uses: pnpm/action-setup@v4
+    - name: Install mkcert
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libnss3-tools
+        curl -JLO https://dl.filippo.io/mkcert/latest?for=linux/amd64
+        chmod +x mkcert-*-amd64
+        sudo mv mkcert-*-amd64 /usr/local/bin/mkcert
     - name: Install dependencies
-      run: bun install
+      run: pnpm install
     - name: Install Playwright Browsers
-      run: bun run playwright install --with-deps
+      run: pnpm playwright install --with-deps
     - name: Prepare the database
       run: |
-        bun db:test:push
-        bun db:test:fixtures
+        pnpm db:test:push
+        pnpm db:test:fixtures
     - name: Generate key set for testing
-      run: bun run keys:rotate
+      run: pnpm keys:rotate
     - name: Run Playwright tests
-      run: bun run test:e2e
+      run: pnpm test:e2e
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
@@ -158,3 +158,6 @@ jobs:
         tags: ghcr.io/noo-eu/id:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        build-args: |
+          SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+          NONSECRET_SENTRY_DSN=${{ vars.ID_SENTRY_DSN }}

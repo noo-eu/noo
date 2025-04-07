@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ "${*}" == "bun ./server.js" ]; then
-  bun run drizzle-kit migrate
+set -e
+
+if [ "${*}" == "node ./server.js" ]; then
+  ./node_modules/.bin/drizzle-kit migrate
 fi
 
 exec "$@"
-
