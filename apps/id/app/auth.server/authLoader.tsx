@@ -9,7 +9,7 @@ export function withAuth<T>(
     if (!args.context.get(userContext)) {
       const userId = await getFirstAuthenticatedUserId(args.request);
       if (userId) {
-        throw redirect(`?uid=${userId}`);
+        throw redirect(`?uid=${encodeURIComponent(userId)}`);
       } else {
         throw redirect("/signin");
       }

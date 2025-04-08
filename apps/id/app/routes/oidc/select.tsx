@@ -71,6 +71,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const form = await request.formData();
   const uid = form.get("uid")?.toString();
+  if (!uid) {
+    return redirect("/oidc/switch");
+  }
+
   const user = await getAuthenticatedUser(request, uid);
   if (!user) {
     return redirect("/oidc/switch");
@@ -88,7 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (await needsConsent(client, user, oidcAuthRequest.scopes, claimKeys)) {
-    redirect(`/oidc/consent?uid=${uid}`);
+    redirect(`/oidc/consent?uid=${encodeURIComponent(uid)}`);
   }
 
   // Consent is not needed, fast forward to the authorization response

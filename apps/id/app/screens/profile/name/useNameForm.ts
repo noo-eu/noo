@@ -16,7 +16,7 @@ export function useNameForm(
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("name.updateSuccess"));
-      navigate(`/profile?uid=${user.id}`);
+      navigate(`/profile?uid=${encodeURIComponent(user.id)}`);
     },
   });
 

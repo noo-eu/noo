@@ -31,7 +31,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const oidcAuthorization = await getOidcAuthorizationClient(request);
     let target = "/";
     if (oidcAuthorization) {
-      target = "/oidc/consent?uid=" + userId;
+      target = `/oidc/consent?uid=${encodeURIComponent(userId)}`;
     }
 
     return redirect(target, {

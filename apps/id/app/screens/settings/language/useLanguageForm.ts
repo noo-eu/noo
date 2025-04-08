@@ -13,7 +13,7 @@ export function useLanguageForm() {
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("language.updateSuccess"));
-      window.location.href = "/settings?uid=" + user.id;
+      window.location.href = `/settings?uid=${encodeURIComponent(user.id)}`;
     },
   });
 

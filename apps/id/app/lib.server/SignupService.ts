@@ -209,6 +209,9 @@ export function translateErrors(
   return result;
 }
 
-export const signupData = createCookie("signup", {
+export const signupData = createCookie("_noo-signup", {
   maxAge: 60 * 30,
+  secure: true,
+  httpOnly: true,
+  sameSite: "strict",
 });

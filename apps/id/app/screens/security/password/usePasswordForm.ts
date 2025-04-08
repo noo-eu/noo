@@ -14,7 +14,7 @@ export function usePasswordForm() {
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("password.updateSuccess"));
-      navigate(`/security?uid=${user.id}`);
+      navigate(`/security?uid=${encodeURIComponent(user.id)}`);
     },
   });
 

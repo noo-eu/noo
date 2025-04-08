@@ -60,7 +60,10 @@ async function oidcAuthorization(
       return redirect("/signin", responseArgs);
     case "CONFIRM":
     case "CONSENT":
-      return redirect(`/oidc/consent?uid=${response.userId!}`, responseArgs);
+      return redirect(
+        `/oidc/consent?uid=${encodeURIComponent(response.userId!)}`,
+        responseArgs,
+      );
   }
 }
 

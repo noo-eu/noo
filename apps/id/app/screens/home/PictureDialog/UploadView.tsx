@@ -49,7 +49,7 @@ export function UploadView({
 
             const formData = new FormData();
             formData.append("image", file);
-            fetch("/profile/picture?uid=" + user.id, {
+            fetch(`/profile/picture?uid=${encodeURIComponent(user.id)}`, {
               method: "POST",
               body: formData,
             })

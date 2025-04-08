@@ -14,7 +14,7 @@ export function useGenderForm() {
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("gender.updateSuccess"));
-      navigate(`/profile?uid=${user.id}`);
+      navigate(`/profile?uid=${encodeURIComponent(user.id)}`);
     },
   });
 

@@ -69,7 +69,7 @@ const PAGE = `
 export function loader() {
   return new Response(PAGE, {
     headers: {
-      "Content-Type": "text/html",
+      "Content-Type": "text/html; charset=utf-8",
     },
   });
 }

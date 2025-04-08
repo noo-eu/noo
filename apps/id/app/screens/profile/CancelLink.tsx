@@ -7,7 +7,10 @@ export function CancelLink({ section = "profile" }: { section?: string }) {
   const user = useAuth();
 
   return (
-    <Link className="link p-2.5" to={`/${section}?uid=${user.id}`}>
+    <Link
+      className="link p-2.5"
+      to={`/${section}?uid=${encodeURIComponent(user.id)}`}
+    >
       {commonT("cancel")}
     </Link>
   );

@@ -22,7 +22,7 @@ export function useBirthdateForm() {
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("birthdate.updateSuccess"));
-      navigate(`/profile?uid=${user.id}`);
+      navigate(`/profile?uid=${encodeURIComponent(user.id)}`);
     },
   });
 

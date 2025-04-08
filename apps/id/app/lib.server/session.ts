@@ -2,9 +2,7 @@ import { checkSessionToken } from "@noo/lib/session";
 import { createCookie } from "react-router";
 import Sessions from "~/db.server/sessions";
 
-const SESSION_COOKIE_NAME = "_noo_session";
-
-const sessionCookie = createCookie(SESSION_COOKIE_NAME, {
+const sessionCookie = createCookie("_noo_session", {
   maxAge: 60 * 60 * 24 * 400,
   httpOnly: true,
   secure: true,

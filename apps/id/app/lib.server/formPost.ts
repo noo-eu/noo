@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { encode } from "he";
 
 export async function buildFormPostResponse(
   redirectUri: string,
@@ -7,7 +8,7 @@ export async function buildFormPostResponse(
 ) {
   const params = Object.entries(data).filter(
     ([_, value]) => value !== undefined,
-  );
+  ) as [string, string][];
 
   const cspNonce = crypto.randomBytes(8).toString("base64url");
   const cspHeader = `default-src 'self'; script-src 'nonce-${cspNonce}'; style-src 'nonce-${cspNonce}';`;
@@ -40,8 +41,8 @@ export async function buildFormPostResponse(
         </script>
       </head>
       <body>
-        <form method="post" action="${redirectUri}">
-          ${params.map(([key, value]) => `<input type="hidden" name="${key}" value="${value}">`).join("")}
+        <form method="POST" action="${encode(redirectUri)}">
+          ${params.map(([key, value]) => `<input type="hidden" name="${encode(key)}" value="${encode(value)}">`).join("")}
           <noscript>
             <button type="submit" id="submit">${t("common.continue")}</button>
           </noscript>
@@ -52,7 +53,7 @@ export async function buildFormPostResponse(
 
   return new Response(form, {
     headers: {
-      "Content-Type": "text/html",
+      "Content-Type": "text/html; charset=utf-8",
       "Content-Security-Policy": cspHeader,
     },
   });

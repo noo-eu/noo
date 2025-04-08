@@ -38,7 +38,7 @@ export async function handleSuccessfulAuthentication<Input>(
 
   const uid = uuidToHumanId(user.id, "usr");
   return {
-    data: `/oidc/consent?uid=${uid}`,
+    data: `/oidc/consent?uid=${encodeURIComponent(uid)}`,
     input: { ...input, domain: undefined },
     cookies,
   };

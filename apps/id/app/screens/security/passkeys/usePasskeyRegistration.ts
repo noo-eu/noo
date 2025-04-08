@@ -7,7 +7,7 @@ import { useAuth } from "~/auth.server/context";
 
 async function registrationOptions(userId: string) {
   const response = await fetch(
-    "/private/webauthn/startRegistration?uid=" + userId,
+    `/private/webauthn/startRegistration?uid=${encodeURIComponent(userId)}`,
     {
       method: "POST",
       headers: {
@@ -31,15 +31,18 @@ async function verifyRegistration(
   userId: string,
   registrationResponse: RegistrationResponseJSON,
 ) {
-  const response = await fetch("/private/webauthn/register?uid=" + userId, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `/private/webauthn/register?uid=${encodeURIComponent(userId)}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        registrationResponse,
+      }),
     },
-    body: JSON.stringify({
-      registrationResponse,
-    }),
-  });
+  );
   const data = await response.json();
   if (!response.ok) {
     return {

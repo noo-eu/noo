@@ -1,7 +1,5 @@
 # Threat Model for noo id
 
-**First version:** 2025-04-08
-
 This document is an overview of the threat model for **noo id**, the central authentication and identity management service for the noo ecosystem.
 
 ## Introduction & scope
@@ -118,34 +116,31 @@ Given the application nature and features, we risk becoming a primary target for
 
 ### Infrastructure provider
 
-While our infrastructure provider is a reputable company, we must acknowledge the potential risks associated with using any third-party cloud service. These include the possibility of insider threats or technical compromises at the provider level. These are not easy to mitigate, and we must rely on the provider's security controls and practices. We accept some residual risk, planning for enhanced security controls in the future.
+We choose infrastructure providers from reputable European companies. Nonetheless, we must acknowledge the risks associated with using any third-party hosting provider. These include the possibility of insider threats or technical compromises at the provider level. These are not easy to mitigate, and we must rely on the provider's security controls and employee vetting practices. We accept some residual risk, planning for enhanced security controls in the future.
 
 ### Nation state actors
 
-The dual role nation-states might play as both customers and adversaries is a significant concern.
-
-Legitimate government bodies and public administrations may utilize the noo ecosystem for various purposes, including collaboration, communication, cloud services and identity.
+Nation-states might act as both customers and adversaries, creating an interesting conflict of interest: legitimate government bodies and public administrations may choose to use our ecosystem, for example, for communication or organization of work.
 
 On the other hand, certain state actors may attempt malicious actions. Motivations could include:
 
 - Targeting specific high-profile users (journalists, activists, political figures, employees of specific organizations) for surveillance or to disrupt their activities.
 - Attempting mass data collection.
 - Performing espionage or disruption against specific tenants (enterprises or other government entities using the service).
-- Attempting to compel access to data or system capabilities through legal or extra-legal means.
+- Attempting to compel access to data or system capabilities through legal means.
 
-We are committed to upholding user privacy and trust within the applicable legal frameworks (primarily EU jurisdiction). While we must comply with valid, lawful requests from legitimate authorities, we will:
+We are committed to upholding user privacy and trust within the applicable legal frameworks. While we must comply with valid, lawful requests from legitimate authorities, we will:
 
-- Rigorously scrutinize the legality and scope of any request.
-- Challenge unlawful or overly broad demands through available legal means.
-- Employ technical designs that minimize the data we hold (data minimization) and limit our ability to access user data where possible.
+- Scrutinize the legality and scope of any request.
+- Challenge unlawful or excessively broad demands through any available legal mean.
+- Designs our systems in a way that minimize the data we hold, and more specifically, the data that we could potentially have access to.
 - Maintain transparency about government requests where legally permissible.
 
 ## Threat models by feature
 
-* [01_authentication_flow.md](link_placeholder) - *(In Progress)*
-* [02_registration_flow.md](link_placeholder) - *(TODO)*
-* [03_profile_management.md](link_placeholder) - *(TODO)*
-* [04_oidc_flows.md](link_placeholder) - *(TODO)*
-* [05_tenant_admin_features.md](link_placeholder) - *(TODO)*
-* [06_multi_session_management.md](link_placeholder) - *(TODO)*
-* [07_policy_enforcement.md](link_placeholder) - *(TODO)*
+* [Authentication](01-authentication.md)
+* [Registration](_placeholder)
+* [Profile management](_placeholder)
+* [OIDC](_placeholder)
+* [Tenant administration](_placeholder)
+* [Multi session management](_placeholder)

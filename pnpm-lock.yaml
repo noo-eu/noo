@@ -27,21 +27,15 @@ importers:
       '@heroicons/react':
         specifier: ^2.2.0
         version: 2.2.0(react@19.1.0)
-      '@mjackson/file-storage':
-        specifier: ^0.6.1
-        version: 0.6.1
-      '@mjackson/form-data-parser':
-        specifier: ^0.7.0
-        version: 0.7.0
       '@noo/lib':
         specifier: workspace:*
-        version: link:../../packages/lib
+        version: file:packages/lib
       '@noo/oidc-server':
         specifier: workspace:*
-        version: link:../../packages/oidc-server
+        version: file:packages/oidc-server
       '@noo/ui':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: file:packages/ui
       '@react-router/express':
         specifier: ^7.5.0
         version: 7.5.0(express@5.1.0)(react-router@7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
@@ -96,6 +90,9 @@ importers:
       file-type:
         specifier: ^20.4.1
         version: 20.4.1
+      he:
+        specifier: ^1.2.0
+        version: 1.2.0
       isbot:
         specifier: ^5.1.25
         version: 5.1.25
@@ -153,7 +150,7 @@ importers:
         version: 17.4.4
       '@noo/i18n-utils':
         specifier: workspace:*
-        version: link:../../tools/i18n-utils
+        version: file:tools/i18n-utils(ws@8.18.1)(zod@3.24.2)
       '@playwright/test':
         specifier: ^1.51.1
         version: 1.51.1
@@ -181,6 +178,9 @@ importers:
       '@types/express':
         specifier: ^5.0.1
         version: 5.0.1
+      '@types/he':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@types/morgan':
         specifier: ^1.9.9
         version: 1.9.9
@@ -1688,21 +1688,6 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@mjackson/file-storage@0.6.1':
-    resolution: {integrity: sha512-H3GEVpmfmNryNoYloddIOba5OAwckfVGMvutPeI94Shbv/R+NVh89gIYa8SK3Vfa+ky9PitclP+5XQ6/zlSdQQ==}
-
-  '@mjackson/form-data-parser@0.7.0':
-    resolution: {integrity: sha512-Y8O5+nsTv4K9Q8ziyuoru8JqYTLsP1PRi7xiFDAx4vrXEvO16NtOO7RmvXIJ2ZB59gP/wV3X1OvqdpoeRgsruA==}
-
-  '@mjackson/headers@0.10.0':
-    resolution: {integrity: sha512-U1Eu1gF979k7ZoIBsJyD+T5l9MjtPONsZfoXfktsQHPJD0s7SokBGx+tLKDLsOY+gzVYAWS0yRFDNY8cgbQzWQ==}
-
-  '@mjackson/lazy-file@3.3.1':
-    resolution: {integrity: sha512-BxpNT1KmLx0OLYfgQESx/AKGD2czwfZXh9c0SaDUQY2DRAaVYtAvSQE5EkpATFdQQKqfL+iXVoaQ/SN+w7/CDA==}
-
-  '@mjackson/multipart-parser@0.8.2':
-    resolution: {integrity: sha512-KltttyypazaJ9kD1GpiOTEop9/YA5aZPwKfpbmuMYoYSyJhQc+0pqaQcZSHUJVdJBvIWgx7TTQSDJdnNqP5dxA==}
-
   '@mjackson/node-fetch-server@0.2.0':
     resolution: {integrity: sha512-EMlH1e30yzmTpGLQjlFmaDAjyOeZhng1/XCd7DExR8PNAnG/G1tyruZxEoUe11ClnwGhGrtsdnyyUx1frSzjng==}
 
@@ -1720,6 +1705,19 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@noo/i18n-utils@file:tools/i18n-utils':
+    resolution: {directory: tools/i18n-utils, type: directory}
+    hasBin: true
+
+  '@noo/lib@file:packages/lib':
+    resolution: {directory: packages/lib, type: directory}
+
+  '@noo/oidc-server@file:packages/oidc-server':
+    resolution: {directory: packages/oidc-server, type: directory}
+
+  '@noo/ui@file:packages/ui':
+    resolution: {directory: packages/ui, type: directory}
 
   '@npmcli/git@4.1.0':
     resolution: {integrity: sha512-9hwoB3gStVfa0N31ymBmrX+GuDGdVA/QWShZVqE0HK2Af+7QGGrCTbZia/SW0ImUTjTne7SP91qxDmtXvDHRPQ==}
@@ -3213,6 +3211,9 @@ packages:
 
   '@types/express@5.0.1':
     resolution: {integrity: sha512-UZUw8vjpWFXuDnjFTh7/5c2TWDlQqeXHi6hcN7F2XSVT5P+WmUnnbFS3KA6Jnc6IsEqI2qCVu2bK0R0J4A8ZQQ==}
+
+  '@types/he@1.2.3':
+    resolution: {integrity: sha512-q67/qwlxblDzEDvzHhVkwc1gzVWxaNxeyHUBF4xElrvjL11O+Ytze+1fGpBHlr/H9myiBUaUXNnNPmBHxxfAcA==}
 
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
@@ -4801,6 +4802,10 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
+
+  he@1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
 
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
@@ -8164,24 +8169,6 @@ snapshots:
       '@types/react': 19.1.0
       react: 19.1.0
 
-  '@mjackson/file-storage@0.6.1':
-    dependencies:
-      '@mjackson/lazy-file': 3.3.1
-
-  '@mjackson/form-data-parser@0.7.0':
-    dependencies:
-      '@mjackson/multipart-parser': 0.8.2
-
-  '@mjackson/headers@0.10.0': {}
-
-  '@mjackson/lazy-file@3.3.1':
-    dependencies:
-      mrmime: 2.0.1
-
-  '@mjackson/multipart-parser@0.8.2':
-    dependencies:
-      '@mjackson/headers': 0.10.0
-
   '@mjackson/node-fetch-server@0.2.0': {}
 
   '@napi-rs/wasm-runtime@0.2.8':
@@ -8202,6 +8189,33 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@noo/i18n-utils@file:tools/i18n-utils(ws@8.18.1)(zod@3.24.2)':
+    dependencies:
+      '@noo/lib': file:packages/lib
+      commander: 13.1.0
+      json5: 2.2.3
+      openai: 4.91.1(ws@8.18.1)(zod@3.24.2)
+    transitivePeerDependencies:
+      - encoding
+      - ws
+      - zod
+
+  '@noo/lib@file:packages/lib':
+    dependencies:
+      accept-language-parser: 1.5.0
+
+  '@noo/oidc-server@file:packages/oidc-server':
+    dependencies:
+      jose: 6.0.10
+      neverthrow: 8.2.0
+      zod: 3.24.2
+
+  '@noo/ui@file:packages/ui':
+    dependencies:
+      '@heroicons/react': 2.2.0(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@npmcli/git@4.1.0':
     dependencies:
@@ -10380,6 +10394,8 @@ snapshots:
       '@types/express-serve-static-core': 5.0.6
       '@types/serve-static': 1.15.7
 
+  '@types/he@1.2.3': {}
+
   '@types/http-errors@2.0.4': {}
 
   '@types/json-schema@7.0.15': {}
@@ -12281,6 +12297,8 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  he@1.2.0: {}
 
   hoist-non-react-statics@3.3.2:
     dependencies:

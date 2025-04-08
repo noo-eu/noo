@@ -28,19 +28,17 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  return new Response(
-    JSON.stringify({
-      user: {
-        id: data.id,
-        firstName: session.user.firstName,
-        lastName: session.user.lastName,
-        username: session.user.username,
-        picture: session.user.picture,
-        pronouns: session.user.pronouns,
-        tenant: session.user.tenant?.id,
-        tenantDomain: session.user.tenant?.domain,
-        locale: session.user.locale,
-      },
-    }),
-  );
+  return {
+    user: {
+      id: data.id,
+      firstName: session.user.firstName,
+      lastName: session.user.lastName,
+      username: session.user.username,
+      picture: session.user.picture,
+      pronouns: session.user.pronouns,
+      tenant: session.user.tenant?.id,
+      tenantDomain: session.user.tenant?.domain,
+      locale: session.user.locale,
+    },
+  };
 }

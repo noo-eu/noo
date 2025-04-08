@@ -10,7 +10,10 @@ export function ProfileFormHeader() {
 
   return (
     <div className="text-lg mx-4 mb-2 flex items-center">
-      <Link to={`/profile?uid=${user.id}`} aria-label={t("back")}>
+      <Link
+        to={`/profile?uid=${encodeURIComponent(user.id)}`}
+        aria-label={t("back")}
+      >
         <ArrowLeftIcon className="size-6 inline-block me-2" />
       </Link>
       <h1>

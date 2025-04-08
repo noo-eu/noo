@@ -21,7 +21,7 @@ export function ProfileLink({
   return (
     <Link
       className="dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/15 block border border-black/15 dark:border-white/20 w-full p-4 rounded-md flex items-center gap-2 relative"
-      to={`${href}?uid=${userId}`}
+      to={`${href}?uid=${encodeURIComponent(userId)}`}
       data-testid={`profile-link-${href}`}
     >
       <Icon className="size-6 self-start mt-0.5" />

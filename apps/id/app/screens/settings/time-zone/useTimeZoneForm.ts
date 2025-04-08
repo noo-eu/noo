@@ -14,7 +14,7 @@ export function useTimeZoneForm() {
   useCallbacks(fetcher, {
     onSuccess: () => {
       toast.success(t("timeZone.updateSuccess"));
-      navigate(`/settings?uid=${user.id}`);
+      navigate(`/settings?uid=${encodeURIComponent(user.id)}`);
     },
   });
 
