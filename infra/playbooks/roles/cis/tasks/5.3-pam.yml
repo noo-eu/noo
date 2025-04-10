@@ -1,0 +1,8 @@
+# 5.3.1 Ensure libpam-* is installed
+- name: Ensure libpam-runtime/modules/pwquality is installed
+  apt:
+    pkg:
+      - libpam-runtime
+      - libpam-modules
+      - libpam-pwquality
+    state: present

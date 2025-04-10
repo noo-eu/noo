@@ -6,22 +6,23 @@
       - autofs
       - avahi-daemon
       - bind9
+      - chrony # we're using systemd-timesyncd
       - cups
       - dnsmasq
       - dovecot-imapd
       - dovecot-pop3d
       - isc-dhcp-server
       - nfs-kernel-server
-      - nginx # Re-install later if needed
+      - nginx
       - rpcbind
       - rsync
       - samba
       - slapd
-      - snmpd # Will we want this?
+      - snmpd
       - squid
       - tftpd-hpa
       - vsftpd
-      - x-server-common
+      - xserver-common
       - xinetd
       - ypserv
     state: absent

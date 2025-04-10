@@ -19,3 +19,11 @@
     regexp: '^CLASS="--class gnu-linux --class gnu --class os"'
     line: 'CLASS="--class gnu-linux --class gnu --class os --unrestricted"'
   notify: Update GRUB
+
+# 1.4.2 Ensure access to bootloader config is configured
+- name: Ensure access to bootloader config is configured
+  file:
+    path: /boot/grub/grub.cfg
+    owner: root
+    group: root
+    mode: 0600

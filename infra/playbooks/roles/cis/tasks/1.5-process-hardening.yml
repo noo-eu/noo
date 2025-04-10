@@ -1,5 +1,5 @@
 # 1.5.1: ASLR
-- name: Ensure Address Space Layout Randomization (ASLR) is enabled
+- name: Ensure address space layout randomization is enabled
   sysctl:
     name: kernel.randomize_va_space
     value: 2

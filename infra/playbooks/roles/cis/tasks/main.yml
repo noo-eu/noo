@@ -9,3 +9,5 @@
 - include_tasks: tasks/3.3-network-parameters.yml
 - include_tasks: tasks/4-firewall.yml
 - include_tasks: tasks/5.1-ssh.yml
+- include_tasks: tasks/5.2-privilege-escalation.yml
+- include_tasks: tasks/5.3-pam.yml

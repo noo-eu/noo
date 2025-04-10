@@ -1,3 +1,12 @@
+# 5.1.1 Ensure permissions on /etc/ssh/sshd_config are configured
+- name: Ensure permissions on /etc/ssh/sshd_config are configured
+  file:
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0600
+
+# 5.1.[4-22] SSH configurations
 - name: Install SSH configuration
   copy:
     src: 50-noo-ssh.conf

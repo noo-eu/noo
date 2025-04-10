@@ -1,15 +1,14 @@
 allowed_filesystems:
   - ext4 # Root filesystem
   - jbd2 # ext4 journaling
-  - overlay # Docker
+  - overlayfs # Docker
   - zfs  # Encrypted data storage
 
   # Used by Debian
   - binfmt_misc
   - configfs
   - efivarfs
-  - fat # EFI boot partition
-  - fuse # Used by snapd
+  - fat # required by vfat
   - mbcache
   - vfat # EFI boot partition
 

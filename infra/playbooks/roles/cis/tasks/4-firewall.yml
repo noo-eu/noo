@@ -4,9 +4,10 @@
     name: ufw
     state: present
 
-- name: Allow all traffic from the private network (includes SSH)
+- name: Enable UFW and allow SSH from our management network
   ufw:
     rule: allow
-    from: 10.0.0.0/8
-    proto: any
-    port: any
+    from: 10.255.255.0/24
+    proto: tcp
+    port: 22
+    state: enabled

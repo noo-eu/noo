@@ -16,7 +16,7 @@
     recurse: yes
   register: found_modules
 
-- name: Extract FS module names from paths
+- name: Extract FS module names from paths (exclude Native Language Support)
   set_fact:
     fs_modules: "{{ found_modules.files 
                     | map(attribute='path') 
@@ -71,6 +71,7 @@
 # - Ensure /dev/shm is a separate partition
 # - Ensure nodev/nosuid/noexec options are set on /dev/shm partition
 # This first is already the case with Debian 12, however, noexec is not set.
+# Note: this might break some applications.
 - name: Mark /dev/shm as noexec
   mount:
     path: /dev/shm
@@ -80,22 +81,9 @@
     opts: noexec,rw,nodev,nosuid,inode64
     state: mounted
 
-# 1.1.2.3: Ensure separate partition exists for /home
-# Only required for Level 2 compliance.
-# [Not implemented]
-
-# 1.1.2.4: Ensure separate partition exists for /var
-# Only required for Level 2 compliance.
-# [Not implemented]
-
-# 1.1.2.5: Ensure separate partition exists for /var/tmp
-# Only required for Level 2 compliance.
-# [Not implemented]
-
-# 1.1.2.6: Ensure separate partition exists for /var/log
-# Only required for Level 2 compliance.
-# [Not implemented]
-
-# 1.1.2.7: Ensure separate partition exists for /var/log/audit
-# Only required for Level 2 compliance.
-# [Not implemented]
+# 1.1.2.3: Ensure separate partition exists for /home (nodev,nosuid)
+# 1.1.2.4: Ensure separate partition exists for /var (nodev,nosuid)
+# 1.1.2.5: Ensure separate partition exists for /var/tmp (nodev,nosuid,noexec)
+# 1.1.2.6: Ensure separate partition exists for /var/log (nodev,nosuid,noexec)
+# 1.1.2.7: Ensure separate partition exists for /var/log/audit (nodev,nosuid,noexec)
+# These are not implemented. See README.md.

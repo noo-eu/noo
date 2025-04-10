@@ -2,5 +2,4 @@
   hosts: all
   roles:
     - common
-    - prometheus.prometheus.node_exporter
     - cis
