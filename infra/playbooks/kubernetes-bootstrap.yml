@@ -1,15 +1,11 @@
 # Note: make sure to load your KUBERNETES_MASTER_KEY environment variable before running this playbook
 
-- name: Initialize the first Kubernetes master
-  hosts: kube-master[0]
+- name: Prepare the control-plane nodes
+  hosts: kube-master
   become: yes
   vars:
     kube_version: "1.32.3"
-    pod_network_cidr: "192.168.0.0/16"
-    service_cidr: "10.96.0.0/12"
-    cluster_name: "noo-cluster"
-    control_plane_endpoint: "kube.internal.noo.eu:6443"
-
+  
   pre_tasks:
     - name: Fail if the master key is not set
       fail:
@@ -20,6 +16,16 @@
     - role: kube-prep
       is_k8s_master: true
     - role: kube-install
+
+- name: Initialize the first Kubernetes control-plane node
+  hosts: kube-master[0]
+  become: yes
+  vars:
+    kube_version: "1.32.3"
+    pod_network_cidr: "192.168.0.0/16"
+    service_cidr: "10.96.0.0/12"
+    cluster_name: "noo-cluster"
+    control_plane_endpoint: "kube.internal.noo.eu:6443"
 
   tasks:
     - name: Generate kubeadm config file
@@ -99,11 +105,6 @@
       run_once: true
       changed_when: false
     
-  roles:
-    - role: kube-prep
-      is_k8s_master: true
-    - role: kube-install
-
   tasks:
     - name: Obtain my private IP
       shell: host {{ inventory_hostname }} | awk '{print $4}'

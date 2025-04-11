@@ -36,6 +36,8 @@ resource "hcloud_server" "postgres_nodes" {
 
   network {
     network_id = data.hcloud_network.production.id
+    // .1 is the router, .2 is the nat
+    ip = "10.0.16.${count.index + 3}"
     alias_ips = []
   }
 
@@ -74,6 +76,7 @@ resource "hcloud_server" "app_nodes" {
   network {
     network_id = data.hcloud_network.production.id
     alias_ips = []
+    ip = "10.0.16.${count.index + 6}"
   }
 
   public_net {
@@ -100,6 +103,7 @@ resource "hcloud_server" "monitoring" {
   network {
     network_id = data.hcloud_network.production.id
     alias_ips = []
+    ip = "10.0.16.8"
   }
 
   public_net {

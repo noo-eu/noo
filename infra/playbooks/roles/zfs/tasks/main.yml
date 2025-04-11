@@ -59,17 +59,25 @@
     enabled: yes
     daemon_reload: yes
 
+- name: Create a grafana dataset
+  shell: "zfs create secure/grafana"
+  when: zpool_check.rc != 0 and inventory_hostname == "monitoring.internal.noo.eu"
+
+- name: Create a prometheus dataset
+  shell: "zfs create secure/prometheus"
+  when: zpool_check.rc != 0 and inventory_hostname == "monitoring.internal.noo.eu"
+
 - name: Create a pgdata dataset
   shell: "zfs create secure/pgdata"
-  when: zpool_check.rc != 0
+  when: zpool_check.rc != 0 and inventory_hostname != "monitoring.internal.noo.eu"
 
 - name: Set the pgdata dataset to mountpoint /secure/pgdata
   shell: "zfs set mountpoint=/secure/pgdata secure/pgdata"
-  when: zpool_check.rc != 0
+  when: zpool_check.rc != 0 and inventory_hostname != "monitoring.internal.noo.eu"
 
 - name: Set postgres specific attributes
   shell: "zfs set {{ item }} secure/pgdata"
-  when: zpool_check.rc != 0
+  when: zpool_check.rc != 0 and inventory_hostname != "monitoring.internal.noo.eu"
   with_items:
     - "recordsize=16k"
     - "compression=lz4"
