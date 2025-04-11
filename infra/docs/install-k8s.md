@@ -97,6 +97,17 @@ ansible-playbook -i inventory.ini --ask-become-pass playbooks/kubernetes-bootstr
 ansible-playbook -i inventory.ini --ask-become-pass playbooks/kubernetes-join-workers.yml
 ```
 
+Label the nodes. This will be used to place ingress nodes and to spread the
+Postgres replication.
+
+```bash
+kubectl label node node-1 ingress-ready=true`
+kubectl label node node-2 ingress-ready=true`
+kubectl label node postgres-1 sync-group=a
+kubectl label node postgres-2 sync-group=b
+kubectl label node postgres-3 sync-group=a
+```
+
 ## 6. Install additional tools:
 
 ```bash
@@ -140,33 +151,14 @@ flux bootstrap git \
   --private-key-file=./flux-gitops
 ```
 
-## 8. Install Istio
+At this point Flux will monitor the `infra/flux` directory and periodically
+apply the changes to the cluster. You can check the status of Flux with:
 
-```
-helm repo add istio https://istio-release.storage.googleapis.com/charts
-helm repo update
-helm install istio-base istio/base -n istio-system --create-namespace --wait
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
-helm install istiod istio/istiod --namespace istio-system --set profile=ambient --wait
-helm install istio-cni istio/cni -n istio-system --set profile=ambient --wait
-helm install ztunnel istio/ztunnel -n istio-system --wait
+```bash
+flux get kustomization
 ```
 
-## 8. Label the public nodes
-
-```
-kubectl label node node-1 ingress-ready=true`
-kubectl label node node-2 ingress-ready=true`
-kubectl label node postgres-1 sync-group=a
-kubectl label node postgres-2 sync-group=b
-kubectl label node postgres-3 sync-group=a
-```
-
-## 9. Install the rest of the cluster tools
-
-Run `helmfile apply` in the ./manifests directory.
-
-## 9. CloudNativePG
+<!-- ## 9. CloudNativePG
 
 Create the PV from the encrypted ZFS volumes:
 
@@ -185,4 +177,4 @@ Install the CNPG Grafana dashboard:
 ```
 helm upgrade --install \
   cnpg-grafana-cluster cnpg-grafana/cluster
-```
+``` -->

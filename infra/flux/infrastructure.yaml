@@ -14,13 +14,40 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infra/flux/cert-manager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: configs
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infra/flux/configs
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: controllers
   namespace: flux-system
 spec:
   dependsOn:
     - name: istio
+    - name: cert-manager
   interval: 10m
-  path: ./infra/flux/
+  path: ./infra/flux/controllers
   prune: true
   sourceRef:
     kind: GitRepository
