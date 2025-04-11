@@ -62,6 +62,5 @@ Also IPs 10.255.255.253 and 10.255.255.254 are reserved for emergency access to 
 
 | Network                 | CIDR           | Description                  |
 |-------------------------|----------------|------------------------------|
-| noo-hc-eu-control-plane | 10.0.0.0/17    | Hetzner Europe control plane |
-| noo-hc-eu-production    | 10.0.16.0/17   | Hetzner Europe production    |
+| noo-hc-eu-production    | 10.0.16.0/20   | Hetzner Europe production    |
 | Kubernetes pods         | 192.168.0.0/16 | Kubernetes pods              |

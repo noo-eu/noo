@@ -158,23 +158,4 @@ apply the changes to the cluster. You can check the status of Flux with:
 flux get kustomization
 ```
 
-<!-- ## 9. CloudNativePG
-
-Create the PV from the encrypted ZFS volumes:
-
-```
-kubectl apply -f manifests/postgres-pv.yml
-```
-
-Create the PG cluster:
-
-```
-kubectl apply -f manifests/postgres.yml
-```
-
-Install the CNPG Grafana dashboard:
-
-```
-helm upgrade --install \
-  cnpg-grafana-cluster cnpg-grafana/cluster
-``` -->
+In a few minutes the entire cluster should be up and running.
