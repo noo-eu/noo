@@ -10,3 +10,18 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: controllers
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: istio
+  interval: 10m
+  path: ./infra/flux/
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
