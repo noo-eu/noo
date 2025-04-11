@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   vars:
-    kube_version: "1.32.2"
+    kube_version: "1.32.3"
   tasks: []
   
 - name: Upgrade the control plane packages

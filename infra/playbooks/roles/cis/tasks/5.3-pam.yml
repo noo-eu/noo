@@ -6,3 +6,104 @@
       - libpam-modules
       - libpam-pwquality
     state: present
+
+# 5.3.2.2 Ensure pam_faillock module is enabled
+- name: Create /usr/share/pam-configs/faillock
+  copy:
+    dest: /usr/share/pam-configs/faillock
+    content: |
+      Name: Enable pam_faillock to deny access
+      Default: yes
+      Priority: 0
+      Auth-Type: Primary
+      Auth:
+        [default=die] pam_faillock.so authfail
+    owner: root
+    group: root
+    mode: 0644
+  notify: Enable pam modules
+
+- name: Create /usr/share/pam-configs/faillock_notify
+  copy:
+    dest: /usr/share/pam-configs/faillock_notify
+    content: |
+      Name: Notify of failed login attempts and reset count upon success
+      Default: yes
+      Priority: 1024
+      Auth-Type: Primary
+      Auth:
+        requisite pam_faillock.so preauth
+      Account-Type: Primary
+      Account:
+        required pam_faillock.so
+    owner: root
+    group: root
+    mode: 0644
+  notify: Enable pam modules
+
+# # 5.3.2.3 Ensure pam_pwquality module is enabled
+# - name: Create /usr/share/pam-configs/pwquality
+#   copy:
+#     dest: /usr/share/pam-configs/pwquality
+#     content: |
+#       Name: Pwquality password strength checking
+#       Default: yes
+#       Priority: 1024
+#       Conflicts: cracklib
+#       Password-Type: Primary
+#       Password:
+#         requisite pam_pwquality.so retry=3
+#     owner: root
+#     group: root
+#     mode: 0644
+#   notify: Enable pam modules
+
+# # 5.3.2.4 Ensure pam_pwhistory module is enabled
+# - name: Create /usr/share/pam-configs/pwhistory
+#   copy:
+#     dest: /usr/share/pam-configs/pwhistory
+#     content: |
+#       Name: pwhistory password history checking
+#       Default: yes
+#       Priority: 1024
+#       Password-Type: Primary
+#       Password: requisite pam_pwhistory.so remember=24 enforce_for_root try_first_pass use_authtok
+#     owner: root
+#     group: root
+#     mode: 0644
+#   notify: Enable pam modules
+
+# 5.3.3.1.1 Ensure password failed attempts lockout is configured
+- name: Ensure password failed attempts lockout is configured
+  lineinfile:
+    path: /etc/security/faillock.conf
+    regexp: '^deny'
+    line: 'deny = 5'
+    state: present
+  notify: Enable pam modules
+
+# 5.3.3.1.2 Ensure password unlock time is configured
+- name: Ensure password unlock time is configured
+  lineinfile:
+    path: /etc/security/faillock.conf
+    regexp: '^unlock_time'
+    line: 'unlock_time = 900'
+    state: present
+  notify: Enable pam modules
+
+# 5.3.3.1.3 Ensure password failed attempts lockout includes root account
+- name: Ensure password failed attempts lockout includes root account
+  lineinfile:
+    path: /etc/security/faillock.conf
+    regexp: '^even_deny_root'
+    line: 'even_deny_root'
+    state: present
+  notify: Enable pam modules
+
+# 5.3.3.4.1 Ensure pam_unix does not include nullok
+- name: Remove nullok from pam_unix.so lines
+  ansible.builtin.replace:
+    path: /usr/share/pam-configs/unix
+    regexp: '^(\s*[^#\n]*pam_unix\.so[^\n]*)\bnullok\b([^\n]*)$'
+    replace: '\1\2'
+  notify: Reload pam unix

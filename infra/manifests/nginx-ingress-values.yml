@@ -1,0 +1,19 @@
+controller:
+  ingressClass: nginx
+  ingressClassResource:
+    name: nginx
+    default: true
+
+  kind: DaemonSet
+  nodeSelector:
+    ingress-ready: "true"
+
+  hostPort:
+    enabled: true
+  service:
+    type: ClusterIP
+
+  allowSnippetAnnotations: true
+  config:
+    annotations-risk-level: Critical
+    use-proxy-protocol: "true"

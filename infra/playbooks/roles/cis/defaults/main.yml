@@ -1,7 +1,7 @@
 allowed_filesystems:
   - ext4 # Root filesystem
   - jbd2 # ext4 journaling
-  - overlayfs # Docker
+  - overlay # Docker
   - zfs  # Encrypted data storage
 
   # Used by Debian

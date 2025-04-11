@@ -1,5 +1,5 @@
 - name: Install control plane packages
-  hosts: control_plane
+  hosts: service
   roles:
     - role: tang
       become: yes

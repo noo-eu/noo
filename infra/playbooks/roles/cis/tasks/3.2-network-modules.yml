@@ -6,6 +6,10 @@
   register: unload_result
   changed_when: false
 
+- name: Set fact for modules to disable
+  set_fact:
+    modules_to_disable: "{{ network_modules_denied | sort }}"
+
 - name: Create module denylist for network modules
   template:
     src: block_modules.j2
@@ -13,5 +17,3 @@
     owner: root
     group: root
     mode: 0644
-  vars:
-    modules_to_disable: "{{ network_modules_denied }}"

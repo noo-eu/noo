@@ -1,0 +1,15 @@
+# 5.4.3.2 Ensure default user shell timeout is configured
+# 5.4.3.3 Ensure default user umask is configured
+- name: Create /etc/profile.d configuration file
+  copy:
+    dest: /etc/profile.d/noo.sh
+    content: |
+      #!/bin/sh
+      # Set default umask
+      umask 027
+      # Set default shell timeout
+      readonly TMOUT=600
+      export TMOUT
+    owner: root
+    group: root
+    mode: 0755

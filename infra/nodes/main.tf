@@ -3,7 +3,7 @@ data "hcloud_network" "production" {
 }
 
 data "hcloud_image" "noo_debian12_base" {
-  with_selector = "name=noo-debian12-base"
+  with_selector = "name=noo-debian12-base-20250410"
   with_architecture = "arm"
 }
 
@@ -77,8 +77,8 @@ resource "hcloud_server" "app_nodes" {
   }
 
   public_net {
-    ipv4_enabled = true
-    ipv6_enabled = true
+    ipv4_enabled = false
+    ipv6_enabled = false
   }
 
   user_data = templatefile("${path.module}/userdata.yml.tpl", {

@@ -1,8 +1,8 @@
-# - name: "Check OS version"
-#   assert:
-#     that: ansible_facts.distribution == 'Debian' and ansible_facts.distribution_major_version is version_compare('12', '==')
-#     fail_msg: "This playbook has only been tested against Debian 12. {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported."
-#     success_msg: "This playbook is running against Debian 12."
+- name: "Check OS version"
+  assert:
+    that: ansible_facts.distribution == 'Debian' and ansible_facts.distribution_major_version is version_compare('12', '==')
+    fail_msg: "This playbook has only been tested against Debian 12. {{ ansible_facts.distribution }} {{ ansible_facts.distribution_major_version }} is not supported."
+    success_msg: "This playbook is running against Debian 12."
 
 - name: Set DNS servers
   copy:
@@ -98,6 +98,7 @@
 - name: Create a noo-admin user
   user:
     name: noo-admin
+    password: "{{ noo_admin_password }}"
     groups: noo-admin
     shell: /bin/zsh
     home: /home/noo-admin
@@ -113,10 +114,10 @@
     group: noo-admin
     mode: 0644
 
-- name: Allow passwordless sudo for noo-admin
+- name: Allow sudo for noo-admin
   copy:
     dest: /etc/sudoers.d/noo-admin
-    content: "noo-admin ALL=(ALL) NOPASSWD:ALL\n"
+    content: "noo-admin ALL=(ALL:ALL) ALL\n"
     owner: root
     group: root
     mode: '0440'

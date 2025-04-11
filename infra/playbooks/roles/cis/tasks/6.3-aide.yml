@@ -1,0 +1,13 @@
+# 6.3.1 Ensure AIDE is installed
+- name: Ensure auditd packages are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - aide
+    - aide-common
+  # TODO: Initializing AIDE takes a real long time. Can it be done in the
+  #   background or can we cut down the time?
+  # notify: Initialize AIDE database
+
+# TODO: incomplete

@@ -9,3 +9,19 @@
 
 - name: Reload sysctl
   command: sysctl -p
+
+- name: Enable pam modules
+  shell: |
+    pam-auth-update --enable faillock
+    pam-auth-update --enable faillock_notify
+
+- name: Reload pam unix
+  shell: |
+    pam-auth-update --enable unix
+
+# - name: Initialize AIDE database
+#   shell: |
+#     aideinit
+#     mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+#   args:
+#     creates: /var/lib/aide/aide.db

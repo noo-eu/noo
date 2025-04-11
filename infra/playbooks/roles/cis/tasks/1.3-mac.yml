@@ -11,5 +11,5 @@
   lineinfile:
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="apparmor=1"'
+    line: 'GRUB_CMDLINE_LINUX="apparmor=1 audit=1 audit_backlog_limit=8192"'
   notify: Update GRUB

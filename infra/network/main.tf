@@ -13,13 +13,12 @@ resource "hcloud_network_subnet" "production_1" {
 
 /* Fetch the base image for the production service */
 data "hcloud_image" "noo_debian12_base" {
-  with_selector = "name=noo-debian12-base"
+  with_selector = "name=noo-debian12-base-20250410"
   with_architecture = "arm"
 }
 
 /**
- * Create a NAT server for the production network.
- * Note, this will temporarily host Tang as well.
+ * Create a NAT and Tang server for the production network.
  */
 resource "hcloud_server" "production_service" {
   depends_on = [ hcloud_network_subnet.production_1 ]
@@ -31,6 +30,7 @@ resource "hcloud_server" "production_service" {
 
   network {
     network_id = hcloud_network.production.id
+    ip         = "10.0.16.2"
   }
 
   public_net {

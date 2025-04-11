@@ -1,10 +1,10 @@
 - name: Join additional control-plane nodes to Kubernetes cluster
   hosts:
-    # - postgres-2.internal.noo.eu
-    - postgres-3.internal.noo.eu
+    - kube-master[1]
+    - kube-master[2]
   become: yes
   vars:
-    kube_version: "1.32.2"
+    kube_version: "1.32.3"
     control_plane_endpoint: "kube.internal.noo.eu:6443"
 
   pre_tasks:
@@ -21,9 +21,10 @@
       delegate_to: postgres-1.internal.noo.eu
       run_once: true
       changed_when: false
-
+    
   roles:
     - role: kube-prep
+      is_k8s_master: true
     - role: kube-install
 
   tasks:

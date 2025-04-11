@@ -1,0 +1,17 @@
+# 6.2.1.1 Ensure auditd packages are installed
+- name: Ensure auditd packages are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - auditd
+    - audispd-plugins
+
+# 6.2.1.2 Ensure auditd service is enabled and active
+- name: Ensure auditd service is enabled and active
+  service:
+    name: auditd
+    state: started
+    enabled: true
+
+# TODO: incomplete

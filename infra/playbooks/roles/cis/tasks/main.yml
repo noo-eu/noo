@@ -11,3 +11,6 @@
 - include_tasks: tasks/5.1-ssh.yml
 - include_tasks: tasks/5.2-privilege-escalation.yml
 - include_tasks: tasks/5.3-pam.yml
+- include_tasks: tasks/5.4-user-accounts.yml
+- include_tasks: tasks/6.2-audit.yml
+- include_tasks: tasks/6.3-aide.yml

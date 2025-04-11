@@ -1,7 +1,7 @@
 # 5.2.3 Ensure sudo log file exists
 - name: Ensure sudo log file exists
-  file:
-    path: /etc/sudoers.d/sudo_log_file
+  copy:
+    dest: /etc/sudoers.d/sudo_log_file
     owner: root
     group: root
     mode: 0440

@@ -27,11 +27,11 @@ source "hcloud" "debian12" {
   image          = "debian-12"
   location       = "nbg1"
   ssh_username   = var.ssh_username
-  snapshot_name  = "noo-debian12-base"
+  snapshot_name  = "noo-debian12-base-${formatdate("YYYYMMDD", timestamp())}"
   ssh_timeout    = "5m"
 
   snapshot_labels = {
-    "name" = "noo-debian12-base"
+    "name" = "noo-debian12-base-${formatdate("YYYYMMDD", timestamp())}"
   }
 }
 

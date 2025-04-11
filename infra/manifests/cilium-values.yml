@@ -1,0 +1,25 @@
+k8sServiceHost: kube.internal.noo.eu
+k8sServicePort: 6443
+kubeProxyReplacement: true
+encryption:
+  enabled: true
+  type: wireguard
+  nodeEncryption: true
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+
+cni:
+  # https://docs.cilium.io/en/v1.7/gettingstarted/cni-chaining-portmap/
+  # Necessary for nginx-ingress
+  chainingMode: "portmap"
+  # Allow Cilium and Istio to coexist
+  exclusive: false
+
+# "To ensure that Cilium does not interfere with Istio, it is important to set
+# the bpf-lb-sock-hostns-only parameter in the Cilium ConfigMap to true."
+socketLB:
+  hostNamespaceOnly: "true"

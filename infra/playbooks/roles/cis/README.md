@@ -59,3 +59,21 @@ check and fix the permissions on these files would be pointless.
 
 We rely on the update-motd mechanism to display a banner.
 
+### 5.3.2.3/4 Ensure pam_pwquality / pam_pwhistory module is enabled
+### 5.3.3.2 Configure pam_pwquality module
+### 5.4.1.1 Ensure password expiration is configured
+### 5.4.1.2 Ensure minimum password days is configured
+### 5.4.1.3 Ensure password expiration warning days is configured
+### 5.4.1.5 Ensure inactive password lock is configured
+
+We do not give out unix accounts to our users. There is only one noo-admin user
+configured for emergency access. Its password is securely long and complex and
+stored in a password manager and not changed often.
+
+We have decided not to implement this part of the benchmark. We might revisit
+this decision in the future.
+
+### Chapter 6 on audit and logging
+
+This is only partially implemented and needs more work. Auditd and aide are
+installed, but the configuration has not been checked against the benchmark.

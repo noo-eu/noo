@@ -19,9 +19,12 @@
     proto: tcp
     src: 10.0.0.0/8
 
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
 - name: Enable the tang service
   systemd:
     name: tangd.socket
     enabled: yes
-    state: started
-    daemon_reload: yes
+    state: restarted

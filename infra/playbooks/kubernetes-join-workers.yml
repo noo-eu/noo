@@ -15,6 +15,7 @@
 
   roles:
     - role: kube-prep
+      is_k8s_master: false
     - role: kube-install
   
   tasks:
