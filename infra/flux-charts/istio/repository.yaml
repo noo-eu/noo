@@ -6,3 +6,8 @@ metadata:
 spec:
   url: https://istio-release.storage.googleapis.com/charts
   interval: 5m
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-system

@@ -66,6 +66,7 @@ spec:
   dependsOn:
     - name: istio
     - name: cert-manager-issuer
+    - name: configs
   interval: 5m
   path: ./infra/flux-charts/controllers
   prune: true
