@@ -49,6 +49,16 @@ You should now be able to ssh into the nodes, for example with:
 ssh noo-admin@node-1.internal.noo.eu
 ```
 
+You probably want to add the following to your ~/.ssh/config:
+
+```
+Host *.internal.noo.eu
+	StrictHostKeyChecking no
+```
+
+To avoid answering yes to the host key prompt for each node. (we might use the
+CA to sign the host keys in the future, but for now this is a bit easier).
+
 ## 3. Prepare the service server (Tang)
 
 ```
@@ -74,18 +84,12 @@ data in it.
 
 ## 5. Install Kubernetes
 
-- Run the kubernetes-bootstrap.yml playbook.
-- Run the kubernetes-join.yml playbook.
+- Run the kubernetes-bootstrap.yml playbook. This will also prepare your ~/.kube/config
+  file to interact with the cluster.
 
 ```bash
 ansible-playbook -i inventory.ini --ask-become-pass playbooks/kubernetes-bootstrap.yml
-ansible-playbook -i inventory.ini --ask-become-pass playbooks/kubernetes-join.yml
 ```
-
-Now the control plane is ready. Copy /etc/kubernetes/admin.conf to your ~/.kube/config.
-
-TODO: I'm fairly sure we can merge the kubernetes-bootstrap.yml and
-kubernetes-join.yml playbooks into one and run it on all 3 nodes at once.
 
 - Run the kubernetes-join-worker.yml playbook.
 
@@ -96,11 +100,10 @@ ansible-playbook -i inventory.ini --ask-become-pass playbooks/kubernetes-join-wo
 ## 6. Install additional tools:
 
 ```bash
-brew install helm helmfile
-helm plugin install https://github.com/databus23/helm-diff
+brew install helm fluxcd/tap/flux
 ```
 
-## 7. Install Cilium manually
+## 7. Install Cilium with helm
 
 ```
 helm install cilium cilium/cilium --version 1.17.2 \
@@ -113,6 +116,41 @@ helm install cilium cilium/cilium --version 1.17.2 \
 
 This is a good time to run a `cilium connectivity test` to verify that
 everything is working. This will take around 10 minutes to run.
+
+## 8. Install FluxCD
+
+Flux will be in charge of applying all changes to the cluster from this
+point on.
+
+Generate an SSH key for Flux to read/write the git repository:
+
+```bash
+ssh-keygen -t ed25519 -f ./flux-gitops -C flux-gitops
+```
+
+Create an SSH Deploy Key on this Github repository with the public key file.
+
+Execute:
+
+```bash
+flux bootstrap git \
+  --url=ssh://git@github.com/noo-eu/noo \
+  --branch=main \
+  --path=infra/flux \
+  --private-key-file=./flux-gitops
+```
+
+## 8. Install Istio
+
+```
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm repo update
+helm install istio-base istio/base -n istio-system --create-namespace --wait
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+helm install istiod istio/istiod --namespace istio-system --set profile=ambient --wait
+helm install istio-cni istio/cni -n istio-system --set profile=ambient --wait
+helm install ztunnel istio/ztunnel -n istio-system --wait
+```
 
 ## 8. Label the public nodes
 

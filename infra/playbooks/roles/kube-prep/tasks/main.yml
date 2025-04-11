@@ -77,6 +77,7 @@
     owner: root
     group: root
     mode: 0755
+  when: is_k8s_master
 
 - name: Generate an encryption config
   copy:
@@ -94,64 +95,12 @@
                     secret: {{ lookup('env', 'KUBERNETES_MASTER_KEY') }}
   when: is_k8s_master
 
-- name: Configure the firewall (Cilium TCP)
+# Kubernetes is really hard to lock down at the host level. We will neuter ufw
+# within the cluster, and control the network with Cilium and Istio.
+#
+# If someone can come up with a definitive list of ports to allow, please submit
+# a PR, but up to now it's been a whack-a-mole game.
+- name: Configure the firewall
   ufw:
     rule: allow
-    port: "{{ item }}"
-    proto: tcp
     src: 10.0.0.0/8
-  loop:
-    - 4240 # Cilium health
-    - 4244 # Hubble server
-    - 4245 # Hubble relay
-    - 4250 # Mutual authentication port
-    - 9962 # Cilium prometheus metrics
-    - 9963 # Cilium prometheus metrics
-    - 9964 # Cilium prometheus metrics
-    
-- name: Configure the firewall (Cilium UDP)
-  ufw:
-    rule: allow
-    port: "{{ item }}"
-    proto: udp
-    src: 10.0.0.0/8
-  loop:
-    - 51871 # Cilium WireGuard
-    - 8472 # Cilium VXLAN
-
-- name: Configure the firewall (Kubernetes Control Plane)
-  ufw:
-    rule: allow
-    port: "{{ item }}"
-    proto: tcp
-    src: 10.0.0.0/8
-  loop:
-    - 6443 # Kubernetes API
-    - 2379 # etcd server client API
-    - 2380 # etcd server peer API
-    - 10250 # Kubelet API
-    - 10259 # kube-scheduler
-    - 10257 # kube-controller-manager
-  when: is_k8s_master
-
-- name: Configure the firewall (Kubernetes Worker Nodes)
-  ufw:
-    rule: allow
-    port: "{{ item }}"
-    proto: tcp
-    src: 10.0.0.0/8
-  loop:
-    - 10250 # Kubelet API
-    - 10256 # kube-proxy
-    - 30000:32767 # NodePort services
-  when: not is_k8s_master
-
-- name: Allow 80/443 traffic in the internal network
-  ufw:
-    rule: allow
-    port: "{{ item }}"
-    proto: tcp
-    src: 10.0.0.0/8
-  loop:
-    - 80
-    - 443

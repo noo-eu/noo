@@ -50,6 +50,8 @@
       register: kubeadm_output
       changed_when: "kubeadm_output.rc == 0"
       failed_when: "kubeadm_output.rc != 0"
+      args:
+        creates: /etc/kubernetes/admin.conf
 
     - name: Display join command (safe for manual use)
       debug:
@@ -60,6 +62,73 @@
         mkdir -p /root/.kube && cp -i /etc/kubernetes/admin.conf /root/.kube/config
       args:
         creates: /root/.kube/config
+
+    - name: Enable and start kubelet
+      systemd:
+        name: kubelet
+        enabled: yes
+        state: started
+
+    # Copy the Kubernetes config file to the local machine
+    - fetch:
+        src: /etc/kubernetes/admin.conf
+        dest: ~/.kube/config
+        flat: true
+
+- name: Join additional control-plane nodes to Kubernetes cluster
+  hosts:
+    - kube-master[1]
+    - kube-master[2]
+  become: yes
+  vars:
+    kube_version: "1.32.3"
+    control_plane_endpoint: "kube.internal.noo.eu:6443"
+
+  pre_tasks:
+    - name: Get kubeadm join command (to extract discovery-token-ca-cert-hash)
+      command: kubeadm token create --print-join-command
+      register: join_command
+      delegate_to: postgres-1.internal.noo.eu
+      run_once: true
+      changed_when: false
+
+    - name: Generate a new certificate key
+      command: kubeadm init phase upload-certs --upload-certs
+      register: certificate_key
+      delegate_to: postgres-1.internal.noo.eu
+      run_once: true
+      changed_when: false
+    
+  roles:
+    - role: kube-prep
+      is_k8s_master: true
+    - role: kube-install
+
+  tasks:
+    - name: Obtain my private IP
+      shell: host {{ inventory_hostname }} | awk '{print $4}'
+      register: my_ip
+      changed_when: false
+
+    - name: Set --node-ip in kubelet configuration
+      lineinfile:
+        line: "KUBELET_EXTRA_ARGS=--node-ip={{ my_ip.stdout }}"
+        regexp: "^KUBELET_EXTRA_ARGS="
+        path: /etc/default/kubelet
+        state: present
+
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Join node to Kubernetes control plane
+      shell: |
+        {{ join_command.stdout_lines[0] }} \
+          --control-plane \
+          --certificate-key {{ certificate_key.stdout_lines[2] }}
+      register: join_result
+      changed_when: "join_result.rc == 0"
+      failed_when: "join_result.rc != 0"
 
     - name: Enable and start kubelet
       systemd:
