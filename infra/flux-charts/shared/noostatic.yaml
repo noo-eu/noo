@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: noousr-bucket
+  namespace: noo-shared
+spec:
+  type: ExternalName
+  externalName: noousr.fsn1.your-objectstorage.com
+  ports:
+    - port: 443
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: noousr-bucket
+  namespace: noo-shared
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "noousr.fsn1.your-objectstorage.com"
+spec:
+  tls:
+    - hosts:
+        - noousr.noo.eu
+      secretName: noousr-bucket-tls
+  rules:
+    - host: noousr.noo.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: noousr-bucket
+                port:
+                  number: 443
