@@ -101,8 +101,8 @@ Label the nodes. This will be used to place ingress nodes and to spread the
 Postgres replication.
 
 ```bash
-kubectl label node node-1 ingress-ready=true`
-kubectl label node node-2 ingress-ready=true`
+kubectl label node node-1 ingress-ready=true
+kubectl label node node-2 ingress-ready=true
 kubectl label node postgres-1 sync-group=a
 kubectl label node postgres-2 sync-group=b
 kubectl label node postgres-3 sync-group=a
@@ -133,7 +133,7 @@ everything is working. This will take around 10 minutes to run.
 Flux will be in charge of applying all changes to the cluster from this
 point on.
 
-Generate an SSH key for Flux to read/write the git repository:
+1. Generate an SSH key for Flux to read/write the git repository:
 
 ```bash
 ssh-keygen -t ed25519 -f ./flux-gitops -C flux-gitops
@@ -141,7 +141,19 @@ ssh-keygen -t ed25519 -f ./flux-gitops -C flux-gitops
 
 Create an SSH Deploy Key on this Github repository with the public key file.
 
-Execute:
+2. Install the SOPS-age secret to decrypt the secrets in the git repository.
+
+```bash
+kubectl create namespace flux-system
+cat age.agekey |
+  kubectl create secret generic sops-age \
+  --namespace=flux-system \
+  --from-file=age.agekey=/dev/stdin
+```
+
+You can find the Private key in Bitwarden.
+
+3. Execute:
 
 ```bash
 flux bootstrap git \

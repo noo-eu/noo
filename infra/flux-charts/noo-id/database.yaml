@@ -1,0 +1,121 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: db
+  namespace: noo-id
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.4-9@sha256:507376cb4fb29498d767fbc1ed5c3a9ee6099136d3519be69bdb463b92b5120e
+  instances: 3
+
+  minSyncReplicas: 1
+  maxSyncReplicas: 1
+
+  bootstrap:
+    initdb:
+      database: noo_id
+      owner: app
+      secret:
+        name: database-credentials
+
+  postgresql:
+    parameters:
+      timezone: UTC
+
+    # We label pg-1 and pg-2 as different sync-groups.
+    # While pg-3 (finland) has the same sync-group as pg-1.
+    # This setup forces CNPG to only consider pg-1 + pg-2 as sync-replicas.
+    # Or, should pg-1 fail, pg-2 + pg-3.
+    syncReplicaElectionConstraint:
+      enabled: true
+      nodeLabelsAntiAffinity:
+        - sync-group
+
+  storage:
+    size: 10Gi
+    storageClass: zfs-manual
+
+  monitoring:
+    enablePodMonitor: true
+
+  affinity:
+    podAntiAffinityType: required
+
+    # For a while...
+    tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pgdata-postgres-1
+  namespace: noo-id
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "zfs-manual"
+  local:
+    path: /secure/pgdata/id
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - postgres-1
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pgdata-postgres-2
+  namespace: noo-id
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "zfs-manual"
+  local:
+    path: /secure/pgdata/id
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - postgres-2
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pgdata-postgres-3
+  namespace: noo-id
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "zfs-manual"
+  local:
+    path: /secure/pgdata/id
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - postgres-3

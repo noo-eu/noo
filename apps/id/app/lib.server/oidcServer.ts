@@ -33,7 +33,7 @@ function setup() {
       throw new Error("PAIRWISE_SALT is not set");
     } else {
       console.warn("PAIRWISE_SALT is not set, using a random salt");
-      salt = crypto.randomBytes(32).toString("base64");
+      salt = crypto.randomBytes(32).toString("base64url");
     }
   }
 

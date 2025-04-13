@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noo-id
+  namespace: noo-id
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: noo-id
+  template:
+    metadata:
+      labels:
+        app: noo-id
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - image: ghcr.io/noo-eu/id:latest
+          name: noo-id
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NONSECRET_PUBLIC_MAIL_DOMAIN
+              value: "noomail.eu"
+            - name: NONSECRET_SENTRY_DSN
+              value: https://dd4b1a47953a8fadd4b1e90d14f7058d@o4508998051037184.ingest.de.sentry.io/4508998052282448
+            - name: S3_PUBLIC_URL_noousr
+              value: "https://noousr.noo.eu"
+            - name: PAIRWISE_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: noo-id-secrets
+                  key: PAIRWISE_SALT
+
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: password
+            - name: DATABASE_URL
+              value: "postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@db-rw:5432/noo_id"
+
+            - name: S3_ENDPOINT
+              value: fsn1.your-objectstorage.com
+            - name: S3_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: noo-id-secrets
+                  key: S3_ACCESS_KEY_ID
+            - name: S3_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: noo-id-secrets
+                  key: S3_SECRET_ACCESS_KEY
+
+          volumeMounts:
+            - name: jwks-volume
+              mountPath: /app/keys
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: /signin
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+              ephemeral-storage: "100Mi"
+            limits:
+              memory: "512Mi"
+      volumes:
+        - name: jwks-volume
+          secret:
+            secretName: jwks
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noo-id
+  namespace: noo-id
+spec:
+  selector:
+    app: noo-id
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
