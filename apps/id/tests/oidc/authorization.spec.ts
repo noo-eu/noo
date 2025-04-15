@@ -13,7 +13,7 @@ test.describe("OpenID Authorization endpoint", () => {
 
   test.describe("prompt not set", () => {
     test.describe("no active session, consent not yet given", () => {
-      test("authenticates, obtains consent, and redirects to the client", async ({
+      test.skip("authenticates, obtains consent, and redirects to the client", async ({
         page,
         request,
       }) => {

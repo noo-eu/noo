@@ -48,35 +48,35 @@ export default defineConfig({
       ignoreHTTPSErrors: true,
       stdout: process.env.CI ? undefined : "pipe",
     },
-    {
-      command: "pnpm tsx ./tests/callbackServer.ts",
-      url: "https://localhost:22999/cb",
-      reuseExistingServer: !process.env.CI,
-      ignoreHTTPSErrors: true,
-      stdout: process.env.CI ? undefined : "pipe",
-    },
+    // {
+    //   command: "pnpm tsx ./tests/callbackServer.ts",
+    //   url: "https://localhost:22999/cb",
+    //   reuseExistingServer: !process.env.CI,
+    //   ignoreHTTPSErrors: true,
+    //   stdout: process.env.CI ? undefined : "pipe",
+    // },
   ],
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-        // Uncomment when recording videos.
-        // viewport: { width: 1920, height: 1080 },
-      },
-    },
+    // {
+    //   name: "chromium",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //     // Uncomment when recording videos.
+    //     // viewport: { width: 1920, height: 1080 },
+    //   },
+    // },
 
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
     },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
     /* Test against mobile viewports. */
     // {

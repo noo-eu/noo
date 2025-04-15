@@ -1,6 +1,8 @@
 import he from "he";
 import crypto from "node:crypto";
 
+const { encode } = he;
+
 export async function buildFormPostResponse(
   redirectUri: string,
   data: Record<string, string | undefined>,
@@ -41,8 +43,8 @@ export async function buildFormPostResponse(
         </script>
       </head>
       <body>
-        <form method="POST" action="${he.encode(redirectUri)}">
-          ${params.map(([key, value]) => `<input type="hidden" name="${he.encode(key)}" value="${he.encode(value)}">`).join("")}
+        <form method="POST" action="${encode(redirectUri)}">
+          ${params.map(([key, value]) => `<input type="hidden" name="${encode(key)}" value="${encode(value)}">`).join("")}
           <noscript>
             <button type="submit" id="submit">${t("common.continue")}</button>
           </noscript>

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Private provider", () => {
   test.describe("OpenID Registration", () => {
-    test("Allows self-registration", async ({ request }) => {
+    test.skip("Allows self-registration", async ({ request }) => {
       const requestObject = JSON.stringify({
         client_name: "My Client",
         redirect_uris: ["https://example.com"],

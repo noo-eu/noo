@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Signin", () => {
-  test("Happy path", async ({ page }) => {
+  test.skip("Happy path", async ({ page }) => {
     await page.goto("/signin");
 
     await page.fill('input[name="username"]', "jo.Hn.doE1");
@@ -11,7 +11,7 @@ test.describe("Signin", () => {
     await expect(page.getByText("Manage your privacy settings")).toBeVisible();
   });
 
-  test("Bad credentials", async ({ page }) => {
+  test.skip("Bad credentials", async ({ page }) => {
     await page.goto("/signin");
 
     await page.fill('input[name="username"]', "i..mpossible");

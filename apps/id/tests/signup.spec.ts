@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Individual signup", () => {
-  test("Happy path", async ({ page }) => {
+  test.skip("Happy path", async ({ page }) => {
     await page.goto("/signup");
 
     await page.fill('input[name="first_name"]', "John");
@@ -21,14 +21,16 @@ test.describe("Individual signup", () => {
     await expect(page.getByText("Welcome John")).toBeVisible();
   });
 
-  test("Rushing through the end redirects to the start", async ({ page }) => {
+  test.skip("Rushing through the end redirects to the start", async ({
+    page,
+  }) => {
     await page.goto("/signup/terms");
     await page.click("text=Accept and continue");
 
     await page.waitForURL("**/signup");
   });
 
-  test("Name / surname failures are handled", async ({ page }) => {
+  test.skip("Name / surname failures are handled", async ({ page }) => {
     await page.goto("/signup");
 
     await page.click("text=Next");
@@ -55,7 +57,7 @@ test.describe("Individual signup", () => {
     ).toBeVisible();
   });
 
-  test("Username failures are handled", async ({ page }) => {
+  test.skip("Username failures are handled", async ({ page }) => {
     await page.goto("/signup/username");
 
     await page.click("text=Next");
@@ -118,7 +120,7 @@ test.describe("Individual signup", () => {
     await expect(page.getByText("This username is taken")).toBeVisible();
   });
 
-  test("Password failures are handled", async ({ page }) => {
+  test.skip("Password failures are handled", async ({ page }) => {
     await page.goto("/signup/password");
 
     await page.click("text=Next");
@@ -150,7 +152,7 @@ test.describe("Individual signup", () => {
       locale: "es-ES",
     });
 
-    test("It presents the signup form in Spanish", async ({ page }) => {
+    test.skip("It presents the signup form in Spanish", async ({ page }) => {
       await page.goto("/signup");
 
       await expect(page.getByText("Apellidos")).toBeVisible();

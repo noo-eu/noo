@@ -29,13 +29,13 @@ importers:
         version: 2.2.0(react@19.1.0)
       '@noo/lib':
         specifier: workspace:*
-        version: file:packages/lib
+        version: link:../../packages/lib
       '@noo/oidc-server':
         specifier: workspace:*
-        version: file:packages/oidc-server
+        version: link:../../packages/oidc-server
       '@noo/ui':
         specifier: workspace:*
-        version: file:packages/ui
+        version: link:../../packages/ui
       '@react-router/express':
         specifier: ^7.5.0
         version: 7.5.0(express@5.1.0)(react-router@7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
@@ -150,7 +150,7 @@ importers:
         version: 17.4.4
       '@noo/i18n-utils':
         specifier: workspace:*
-        version: file:tools/i18n-utils(ws@8.18.1)(zod@3.24.2)
+        version: link:../../tools/i18n-utils
       '@playwright/test':
         specifier: ^1.51.1
         version: 1.51.1
@@ -1705,19 +1705,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@noo/i18n-utils@file:tools/i18n-utils':
-    resolution: {directory: tools/i18n-utils, type: directory}
-    hasBin: true
-
-  '@noo/lib@file:packages/lib':
-    resolution: {directory: packages/lib, type: directory}
-
-  '@noo/oidc-server@file:packages/oidc-server':
-    resolution: {directory: packages/oidc-server, type: directory}
-
-  '@noo/ui@file:packages/ui':
-    resolution: {directory: packages/ui, type: directory}
 
   '@npmcli/git@4.1.0':
     resolution: {integrity: sha512-9hwoB3gStVfa0N31ymBmrX+GuDGdVA/QWShZVqE0HK2Af+7QGGrCTbZia/SW0ImUTjTne7SP91qxDmtXvDHRPQ==}
@@ -8189,33 +8176,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
-
-  '@noo/i18n-utils@file:tools/i18n-utils(ws@8.18.1)(zod@3.24.2)':
-    dependencies:
-      '@noo/lib': file:packages/lib
-      commander: 13.1.0
-      json5: 2.2.3
-      openai: 4.91.1(ws@8.18.1)(zod@3.24.2)
-    transitivePeerDependencies:
-      - encoding
-      - ws
-      - zod
-
-  '@noo/lib@file:packages/lib':
-    dependencies:
-      accept-language-parser: 1.5.0
-
-  '@noo/oidc-server@file:packages/oidc-server':
-    dependencies:
-      jose: 6.0.10
-      neverthrow: 8.2.0
-      zod: 3.24.2
-
-  '@noo/ui@file:packages/ui':
-    dependencies:
-      '@heroicons/react': 2.2.0(react@19.1.0)
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   '@npmcli/git@4.1.0':
     dependencies:

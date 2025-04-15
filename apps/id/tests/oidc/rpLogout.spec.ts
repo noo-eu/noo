@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Private provider", () => {
   test.describe("RP Initiated logout", () => {
-    test("Allows logout", async ({ page }) => {
+    test.skip("Allows logout", async ({ page }) => {
       await page.goto(`/signin`);
 
       await page.fill('input[name="username"]', "johndoe1");

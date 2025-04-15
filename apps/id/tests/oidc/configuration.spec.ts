@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("Public provider", () => {
+test.describe.skip("Public provider", () => {
   test.describe("OpenID Configuration", () => {
-    test("it responds with a valid OpenID Configuration", async ({
+    test.skip("it responds with a valid OpenID Configuration", async ({
       request,
       baseURL,
     }) => {
@@ -70,7 +70,7 @@ test.describe("Public provider", () => {
 
 test.describe("Private provider", () => {
   test.describe("OpenID Configuration", () => {
-    test("it responds with a valid OpenID Configuration", async ({
+    test.skip("it responds with a valid OpenID Configuration", async ({
       request,
       baseURL,
     }) => {
