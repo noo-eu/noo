@@ -73,9 +73,9 @@ export function SignInForm() {
   const authenticateWithWebauthn = useWebauthnAuthentication();
 
   useEffect(() => {
-    authenticateWithWebauthn(true).catch((e) => {
-      console.warn(e);
-    });
+    // authenticateWithWebauthn(true).catch((e) => {
+    //   console.warn(e);
+    // });
   }, [authenticateWithWebauthn]);
 
   return (

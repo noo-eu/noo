@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { redirect, useLoaderData, type ActionFunctionArgs } from "react-router";
 import { z } from "zod";
 import { maybeCheckPwnedPassword } from "~/auth.server/hibp";
@@ -12,6 +13,8 @@ import { SignInForm } from "~/screens/signin/SignInForm";
 import { SignInSidePanel } from "~/screens/signin/SignInSidePanel";
 import { makeClientOidcClient } from "~/types/ClientOidcClient";
 
+import Worker from "~/routes/pow-worker.ts?worker";
+
 export async function loader({ request, context }: ActionFunctionArgs) {
   const oidcClient = await getOidcAuthorizationClient(request);
   const { locale } = context.get(localeContext);
@@ -25,6 +28,21 @@ export async function loader({ request, context }: ActionFunctionArgs) {
 
 export default function SignIn() {
   const { oidcClient } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    const worker = new Worker();
+
+    worker.onmessage = (event) => {
+      console.log("Worker response:", event.data);
+    };
+
+    console.log("Worker created:", worker);
+    worker.postMessage("Hello from main thread!");
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
 
   return (
     <PageModal>
