@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "production") {
     // Check if mkcert is installed
     try {
       execSync("mkcert -version");
-    } catch (error) {
+    } catch {
       console.error(
         "mkcert is not installed. Please run ./setup.sh at the root of the repository.",
       );

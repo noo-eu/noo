@@ -14,8 +14,8 @@ export default defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+
+  retries: process.env.CI ? 3 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -29,13 +29,13 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
 
-    video: {
-      mode: "on",
-      size: {
-        width: 1920,
-        height: 1080,
-      },
-    },
+    // video: {
+    //   mode: "on",
+    //   size: {
+    //     width: 1920,
+    //     height: 1080,
+    //   },
+    // },
   },
 
   /* Run your local dev server before starting the tests */
@@ -48,44 +48,37 @@ export default defineConfig({
       ignoreHTTPSErrors: true,
       stdout: process.env.CI ? undefined : "pipe",
     },
-    // {
-    //   command: "pnpm tsx ./tests/callbackServer.ts",
-    //   url: "https://localhost:22999/cb",
-    //   reuseExistingServer: !process.env.CI,
-    //   ignoreHTTPSErrors: true,
-    //   stdout: process.env.CI ? undefined : "pipe",
-    // },
   ],
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: "chromium",
-    //   use: {
-    //     ...devices["Desktop Chrome"],
-    //     // Uncomment when recording videos.
-    //     // viewport: { width: 1920, height: 1080 },
-    //   },
-    // },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        // Uncomment when recording videos.
+        // viewport: { width: 1920, height: 1080 },
+      },
+    },
 
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
     },
 
-    // {
-    //   name: "webkit",
-    //   use: { ...devices["Desktop Safari"] },
-    // },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
 
     /* Test against mobile viewports. */
     // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   name: "Mobile Chrome",
+    //   use: { ...devices["Pixel 5"] },
     // },
     // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
+    //   name: "Mobile Safari",
+    //   use: { ...devices["iPhone 12"] },
     // },
   ],
 });

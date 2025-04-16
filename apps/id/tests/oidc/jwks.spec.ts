@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("JWKs Endpoint", () => {
-  test.skip("it responds with a valid JWK Set", async ({ request }) => {
+  test("it responds with a valid JWK Set", async ({ request }) => {
     const response = await request.get("/oidc/jwks.json");
 
     // A successful response MUST use the 200 OK HTTP status code

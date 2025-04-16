@@ -2,7 +2,7 @@ import { uuidToHumanId } from "@noo/lib/humanIds";
 import { jwtVerify, SignJWT } from "jose";
 import { createCookie, redirect } from "react-router";
 import type { User } from "~/db.server/users.server";
-import { getSigningKey } from "~/lib.server/jwks";
+import { getSigningKey, getVerifyingKeyForJwt } from "~/lib.server/jwks";
 
 export const totpCookie = createCookie("_noo_totp_session", {
   maxAge: 60 * 15,
@@ -43,8 +43,7 @@ export async function getTotpSession(request: Request) {
     return undefined;
   }
 
-  const { key } = (await getSigningKey("EdDSA"))!;
-  const { payload } = await jwtVerify(cookieHeader, key, {
+  const { payload } = await jwtVerify(cookieHeader, getVerifyingKeyForJwt, {
     audience: "totp",
     algorithms: ["EdDSA"],
   });

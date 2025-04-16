@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test.describe.skip("Public provider", () => {
+test.describe("Public provider", () => {
   test.describe("OpenID Configuration", () => {
-    test.skip("it responds with a valid OpenID Configuration", async ({
+    test("it responds with a valid OpenID Configuration", async ({
       request,
       baseURL,
     }) => {
@@ -10,15 +10,12 @@ test.describe.skip("Public provider", () => {
         "/oidc/.well-known/openid-configuration",
       );
 
-      // A successful response MUST use the 200 OK HTTP status code
       expect(response.status()).toBe(200);
 
-      // and return a JSON object using the application/json content type
       expect(response.headers()["content-type"]).toMatch(
         /^application\/json\b/,
       );
 
-      // Issuer is required to be an https URL
       expect(baseURL).toEqual(expect.stringMatching(/^https?:\/\/[^/]+$/));
       if (!baseURL) {
         // Convince TypeScript that baseURL is defined
@@ -70,7 +67,7 @@ test.describe.skip("Public provider", () => {
 
 test.describe("Private provider", () => {
   test.describe("OpenID Configuration", () => {
-    test.skip("it responds with a valid OpenID Configuration", async ({
+    test("it responds with a valid OpenID Configuration", async ({
       request,
       baseURL,
     }) => {
@@ -78,7 +75,6 @@ test.describe("Private provider", () => {
         "/oidc/org_1/.well-known/openid-configuration",
       );
 
-      // A successful response MUST use the 200 OK HTTP status code
       expect(response.status()).toBe(200);
 
       const config = await response.json();

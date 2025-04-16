@@ -14,8 +14,6 @@ export async function action({ request, params }: ActionFunctionArgs) {
 }
 
 export async function createOidcClient(request: Request, tenantId: string) {
-  console.log("createOidcClient", tenantId);
-
   const tenant = await getTenant(tenantId);
   if (!tenant) {
     return new Response("Not Found", { status: 404 });

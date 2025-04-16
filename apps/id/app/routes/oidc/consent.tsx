@@ -83,11 +83,12 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     client: clientFields,
     missingClaims: cleanupClaims(missingClaims),
     missingScopes,
+    isFormPost: oidcAuthRequest.response_mode === "form_post",
   };
 }
 
 export default function OidcConsentPage() {
-  const { client, missingClaims } = useLoaderData<typeof loader>();
+  const { client, missingClaims, isFormPost } = useLoaderData<typeof loader>();
   const user = useAuth();
   const t = useTranslations();
   const navigation = useNavigation();
@@ -129,7 +130,14 @@ export default function OidcConsentPage() {
               </ul>
             </>
           )}
-          <Form method="POST">
+
+          {/*
+            In case of form_post response_types we must reload the page as
+            the regular CSP header will forbid redirects to third party
+            origins. Forcing a reload post-redirect will load the CSP header
+            of the form-post route, which does allow open form submissions.
+          */}
+          <Form method="POST" reloadDocument={isFormPost}>
             <div className="flex gap-4 justify-end">
               <Button
                 type="submit"
@@ -258,7 +266,7 @@ async function handleConsent(
     return redirect(result.url!, responseArgs);
   } else if (result.nextStep === "FORM_POST") {
     const escapedUrl = encodeURIComponent(oidcAuthRequest.redirect_uri);
-    const escapedParams = encodeURIComponent(JSON.stringify(responseParams));
+    const escapedParams = encodeURIComponent(JSON.stringify(result.data));
 
     return redirect(
       `/oidc/form-post?redirect_uri=${escapedUrl}&params=${escapedParams}`,

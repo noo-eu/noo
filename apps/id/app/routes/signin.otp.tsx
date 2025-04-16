@@ -24,7 +24,8 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     return redirect("/signin");
   }
 
-  const hasPasskeys = (await Passkeys.listForUser(userId)).length > 0;
+  const rawUserId = humanIdToUuid(userId, "usr")!;
+  const hasPasskeys = (await Passkeys.listForUser(rawUserId)).length > 0;
 
   const oidcClient = await getOidcAuthorizationClient(request);
   const { locale } = context.get(localeContext);
@@ -80,9 +81,12 @@ export async function action({
   const result = await handleSuccessfulAuthentication(request, user, {});
   if (result.data) {
     throw redirect(result.data, {
-      headers: {
-        "Set-Cookie": await totpCookie.serialize("", { maxAge: 0 }),
-      },
+      headers: [
+        ["Set-Cookie", await totpCookie.serialize("", { maxAge: 0 })],
+        ...result.cookies.map(
+          (cookie) => ["Set-Cookie", cookie] as [string, string],
+        ),
+      ],
     });
   }
 

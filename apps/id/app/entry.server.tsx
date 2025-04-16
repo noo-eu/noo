@@ -48,7 +48,9 @@ export default function handleRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html; charset=utf-8");
-          responseHeaders.set("Content-Security-Policy", makeCsp(nonce));
+          if (!responseHeaders.has("Content-Security-Policy")) {
+            responseHeaders.set("Content-Security-Policy", makeCsp(nonce));
+          }
 
           resolve(
             new Response(stream, {

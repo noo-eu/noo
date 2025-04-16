@@ -8,7 +8,6 @@ export class UserinfoEndpoint {
   }
 
   async get(accessToken: string) {
-    console.log("accessToken", accessToken);
     const userinfoResponse = await this.request.get("/oidc/userinfo", {
       headers: {
         Authorization: `Bearer ${accessToken}`,

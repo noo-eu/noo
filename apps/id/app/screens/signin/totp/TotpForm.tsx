@@ -17,7 +17,10 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
     <>
       <p>{t("totpDescription")}</p>
       {state?.error && (
-        <div className="bg-red-100 text-red-800 p-4 rounded mb-6">
+        <div
+          className="bg-red-100 text-red-800 p-4 rounded mb-6"
+          data-testid="signinTotpErrorMessage"
+        >
           {state.error.totp == "credentials" && t("error")}
         </div>
       )}
@@ -39,7 +42,7 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
           <Link to="/signin" className="py-2.5 px-2 link font-medium me-4">
             {commonT("back")}
           </Link>
-          <Button type="submit" pending={pending} data-testid="signinSubmit">
+          <Button type="submit" pending={pending} data-testid="totpSubmit">
             {t("submit")}
           </Button>
         </div>

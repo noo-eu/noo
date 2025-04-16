@@ -5,7 +5,9 @@ export class SignInPage {
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly signinButton: Locator;
+  readonly signinPasskeyButton: Locator;
   readonly heading: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +18,13 @@ export class SignInPage {
     this.usernameInput = page.getByLabel("Username");
     this.passwordInput = page.getByLabel("Password", { exact: true });
     this.signinButton = page.getByTestId("signinSubmit");
+    this.signinPasskeyButton = page.getByTestId("signinPasskey");
+    this.errorMessage = page.getByTestId("signinErrorMessage");
+  }
+
+  async visit() {
+    await this.page.goto("/signin");
+    await this.expectToBeVisible();
   }
 
   async expectToBeVisible() {
@@ -29,5 +38,14 @@ export class SignInPage {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     await this.signinButton.click();
+  }
+
+  async signInWithPasskey() {
+    await this.signinPasskeyButton.click();
+  }
+
+  async expectError(message: string) {
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toHaveText(message);
   }
 }

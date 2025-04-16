@@ -7,7 +7,6 @@ import {
 } from "react-router";
 import { getActiveSessions } from "~/auth.server/sessions";
 import OidcClients from "~/db.server/oidc_clients";
-import { buildFormPostResponse } from "~/lib.server/formPost";
 import { dbClientToClient, dbSessionToSession } from "~/lib.server/interface";
 import { setOidcAuthorizationCookie } from "~/lib.server/oidc";
 import {
@@ -15,20 +14,26 @@ import {
   performOidcAuthorization,
   returnToClient,
 } from "~/lib.server/oidcServer";
-import { localeContext } from "~/root";
+import type { Route } from "./+types/authorize";
+import FormPost from "~/screens/formPost";
 
-export async function loader({ request, context }: LoaderFunctionArgs) {
-  return await oidcAuthorization(request, context);
+export async function loader({ request }: LoaderFunctionArgs) {
+  return await oidcAuthorization(request);
 }
 
-export async function action({ request, context }: ActionFunctionArgs) {
-  return await oidcAuthorization(request, context);
+export async function action({ request }: ActionFunctionArgs) {
+  return await oidcAuthorization(request);
 }
 
-async function oidcAuthorization(
-  request: Request,
-  context: LoaderFunctionArgs["context"],
-) {
+// In case of FORM_POST, we need to set the CSP header
+// to allow the form to be submitted to any URL
+export function headers(_: Route.HeadersArgs) {
+  return {
+    "Content-Security-Policy": "form-action *",
+  };
+}
+
+async function oidcAuthorization(request: Request) {
   const result = await performOidcAuthorization(request);
   if (result.isErr()) {
     return fatalError(result.error);
@@ -42,11 +47,11 @@ async function oidcAuthorization(
   }
 
   if (response.nextStep === "FORM_POST") {
-    const t = context.get(localeContext).makeT;
-    return buildFormPostResponse(
-      response.params.redirect_uri,
-      response.data!,
-      t,
+    return (
+      <FormPost
+        redirectUri={response.params.redirect_uri}
+        params={response.data!}
+      />
     );
   }
 

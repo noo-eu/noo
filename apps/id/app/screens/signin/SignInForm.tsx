@@ -81,7 +81,10 @@ export function SignInForm() {
   return (
     <>
       {state?.error && (
-        <div className="bg-red-100 text-red-800 p-4 rounded mb-6">
+        <div
+          className="bg-red-100 text-red-800 p-4 rounded mb-6"
+          data-testid="signinErrorMessage"
+        >
           {state.error == "credentials" && t("error")}
           {state.error == "tenant" &&
             t("tenant_error", { domain: state.input.domain! })}
@@ -133,6 +136,7 @@ export function SignInForm() {
         size="sm"
         form="outline"
         onClick={() => authenticateWithWebauthn(false)}
+        data-testid="signinPasskey"
       >
         {t("usePasskey")}
       </Button>

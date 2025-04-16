@@ -1,25 +1,58 @@
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
+import { SignInPage } from "./pages/SignInPage";
+import { ProfileHubPage } from "./pages/ProfileHubPage";
+import { SignInTotpPage } from "./pages/SignInTotpPage";
+import { generateTotp } from "~/lib.server/totp";
 
-test.describe("Signin", () => {
-  test.skip("Happy path", async ({ page }) => {
-    await page.goto("/signin");
+test.describe("Signing in", () => {
+  test("Happy path", async ({ page }) => {
+    const signInPage = new SignInPage(page);
+    const profileHubPage = new ProfileHubPage(page);
 
-    await page.fill('input[name="username"]', "jo.Hn.doE1");
-    await page.fill('input[name="password"]', "super-s3cret");
-    await page.getByTestId("signinSubmit").click();
+    await signInPage.visit();
+    await signInPage.signIn("johndoe1", "super-s3cret");
 
-    await expect(page.getByText("Manage your privacy settings")).toBeVisible();
+    await profileHubPage.expectToBeVisible();
   });
 
-  test.skip("Bad credentials", async ({ page }) => {
-    await page.goto("/signin");
+  test("Bad credentials", async ({ page }) => {
+    const signInPage = new SignInPage(page);
 
-    await page.fill('input[name="username"]', "i..mpossible");
-    await page.fill('input[name="password"]', "badpassword");
-    await page.getByTestId("signinSubmit").click();
+    await signInPage.visit();
+    await signInPage.signIn("i..mpossible", "wrongpassword");
 
-    await expect(
-      page.getByText("The details you entered are incorrect"),
-    ).toBeVisible();
+    await signInPage.expectError("The details you entered are incorrect");
+  });
+
+  test.describe("When the user has an OTP device", () => {
+    test("Happy path", async ({ page }) => {
+      const signInPage = new SignInPage(page);
+      const totpPage = new SignInTotpPage(page);
+      const profileHubPage = new ProfileHubPage(page);
+
+      await signInPage.visit();
+      await signInPage.signIn("janetotp", "super-s3cret");
+
+      await totpPage.expectToBeVisible();
+
+      const secret = "AAAAAAAABBBBBBBB";
+      const code = generateTotp(secret);
+      await totpPage.enterCode(code);
+
+      await profileHubPage.expectToBeVisible();
+    });
+
+    test("Bad OTP", async ({ page }) => {
+      const signInPage = new SignInPage(page);
+      const totpPage = new SignInTotpPage(page);
+
+      await signInPage.visit();
+      await signInPage.signIn("janetotp", "super-s3cret");
+
+      await totpPage.expectToBeVisible();
+      await totpPage.enterCode("123");
+
+      await totpPage.expectError();
+    });
   });
 });
