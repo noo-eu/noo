@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import db from ".";
+import db, { type Tx } from ".";
 import type { PgTransaction } from "drizzle-orm/pg-core";
 import type { NodePgQueryResultHKT } from "drizzle-orm/node-postgres";
 
@@ -16,11 +16,7 @@ import type { NodePgQueryResultHKT } from "drizzle-orm/node-postgres";
  *    namespace is used, the first 4 bits of the lock ID must be set to 0.
  * @returns returns once the lock is acquired.
  */
-export async function acquireLock(
-  tx: PgTransaction<NodePgQueryResultHKT>,
-  lockId: number,
-  namespace?: number,
-) {
+export async function acquireLock(tx: Tx, lockId: number, namespace?: number) {
   // We have 64 bits for the lock. Postgres allows us to give a single 64-bit
   // number or two 32-bit numbers.
 
@@ -58,7 +54,7 @@ export async function acquireLock(
  * @returns returns once the lock is acquired.
  */
 export function acquireLockWithUUID(
-  tx: PgTransaction<NodePgQueryResultHKT>,
+  tx: Tx,
   lockId: string,
   namespace?: number,
 ) {

@@ -1,7 +1,7 @@
 import { and, eq, gt, isNull, lt, or } from "drizzle-orm";
 import db, { schema } from ".";
 
-async function get(key: string) {
+async function get<T>(key: string): Promise<T | undefined> {
   const row = await db.query.kv.findFirst({
     where: and(
       eq(schema.kv.key, key),
@@ -9,11 +9,34 @@ async function get(key: string) {
     ),
   });
 
-  return row?.value;
+  return row?.value as T;
 }
 
-async function set(key: string, value: unknown, expiresAt?: Date) {
-  return db.insert(schema.kv).values({ key, value, expiresAt });
+/**
+ * Set a key-value pair in the database.
+ *
+ * @param key unique key to store the value under. This must be unique.
+ * @param value arbitrary value to store. This will be serialized to JSON.
+ * @param ttl TTL in seconds. If not provided, the value will not expire.
+ */
+async function set(key: string, value: unknown, ttl?: number) {
+  const expiresAt = ttl ? new Date(Date.now() + ttl * 1000) : null;
+
+  return db
+    .insert(schema.kv)
+    .values({
+      key,
+      value,
+      expiresAt,
+    })
+    .onConflictDoUpdate({
+      target: schema.kv.key,
+      set: { value, expiresAt },
+    });
+}
+
+async function destroy(key: string) {
+  return db.delete(schema.kv).where(eq(schema.kv.key, key));
 }
 
 async function cleanup() {
@@ -23,6 +46,7 @@ async function cleanup() {
 const KeyValueStore = {
   get,
   set,
+  destroy,
   cleanup,
 };
 

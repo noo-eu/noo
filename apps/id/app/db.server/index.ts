@@ -44,4 +44,6 @@ const client = drizzle(databaseUrl, { schema });
   sql`SET TIME ZONE 'UTC';`,
 );
 
+export type Tx = Parameters<Parameters<typeof client.transaction>[0]>[0];
+
 export default client;

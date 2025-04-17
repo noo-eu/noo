@@ -78,6 +78,12 @@ export async function startOidcFlow(
   // Wait for the callback request to be made
   await waitForCondition(() => callbackRequest !== null);
 
+  // Wait for the URL to settle to /cb (to avoid some flaky tests). Even if we
+  // intercepted an HTTP request to /cb, the browser internal URL may still be
+  // /oidc/authorize, because the page has not yet been reloaded. If the tests
+  // then try to navigate, it may cause race conditions.
+  await page.waitForURL("**/cb*");
+
   return callbackRequest!;
 }
 

@@ -30,7 +30,7 @@ export function TextField(props: TextFieldProps) {
   useEffect(() => {
     // Check if the ref is attached to an element
     if (ref.current && focusOnLoad) {
-      setTimeout(() => ref.current?.focus(), 100);
+      setTimeout(() => ref.current?.focus(), 1);
     }
   }, []);
 
