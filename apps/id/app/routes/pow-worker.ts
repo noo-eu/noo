@@ -44,9 +44,9 @@ async function startPow(request: PowRequest) {
   }
 
   // Construct a 256-bit target value based on the difficulty.
-  const targetBigInt = BigInt(2) ** BigInt(256 - difficulty);
-
-  console.log("Target:", targetBigInt.toString(16));
+  // 2^N is represented exactly in double precision (up to N = 1023),
+  // so there's no need to use BigInt for the math.
+  const target = BigInt(2 ** (256 - difficulty));
 
   let nonce = 0;
   while (true) {
@@ -63,7 +63,7 @@ async function startPow(request: PowRequest) {
     }
 
     // Check if the hash is less than the target.
-    if (hashBigInt < targetBigInt) {
+    if (hashBigInt < target) {
       // If the hash is less than the target, return the nonce.
       return {
         nonce,

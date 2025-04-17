@@ -22,12 +22,12 @@ export function verifyTotpWithTolerance(
 }
 
 const TOTP_TIMESTEP = 30;
-const TOTP_DIGITS = 6;
 
 // https://www.ietf.org/rfc/rfc4226.txt
 export function generateTotp(
   secret: string,
   timestamp: number = Date.now(),
+  digits: number = 6,
 ): string {
   // Get the current counter value, which is the number of TOTP_TIMESTEP
   // intervals that have passed since the Unix epoch
@@ -53,12 +53,12 @@ export function generateTotp(
     ((hmac[offset + 2] & 0xff) << 8) |
     (hmac[offset + 3] & 0xff);
 
-  // Calculate the TOTP value by taking the binary value modulo 10^TOTP_DIGITS
-  const modulo = 10 ** TOTP_DIGITS;
+  // Calculate the TOTP value by taking the binary value modulo 10^digits
+  const modulo = 10 ** digits;
   const totp = binary % modulo;
 
   // Return the TOTP value as a zero-padded string
-  return totp.toString().padStart(TOTP_DIGITS, "0");
+  return totp.toString().padStart(digits, "0");
 }
 
 function base32ToBuffer(base32: string): Buffer {
