@@ -24,22 +24,24 @@ Specifically for OIDC flows, the [OAuth 2.0 Threat Model and Security Considerat
 For a detailed description of **noo id** please refer to its documentation.
 
 **Key features:**
-  - User registration (Sign up)
-  - User authentication (Sign in - Password, Passkeys, TOTP)
-  - Profile management
-  - Session Management
-  - OIDC Provider Endpoints (Authorization, Token, UserInfo, JWKS, Discovery, etc.)
-  - (Private OP): Tenant, User/Group, Client, Policy Management
+
+- User registration (Sign up)
+- User authentication (Sign in - Password, Passkeys, TOTP)
+- Profile management
+- Session Management
+- OIDC Provider Endpoints (Authorization, Token, UserInfo, JWKS, Discovery, etc.)
+- (Private OP): Tenant, User/Group, Client, Policy Management
 
 **Architecture summary:**
-  - Monolithic service (node.js, react-router Framework, express)
-  - PostgreSQL database
-  - React frontend, server-side rendered
-  - Deployed on Kubernetes as a docker image, hosted on Hetzner Cloud
-  - External Dependencies:
-    - Sentry for error tracking and monitoring
-    - Have I Been Pwned API for password breach checks
-    - Hetzner Object Storage (S3) for static assets storage, backups and user photos
+
+- Monolithic service (node.js, react-router Framework, express)
+- PostgreSQL database
+- React frontend, server-side rendered
+- Deployed on Kubernetes as a docker image, hosted on Hetzner Cloud
+- External Dependencies:
+  - Sentry for error tracking and monitoring
+  - Have I Been Pwned API for password breach checks
+  - Hetzner Object Storage (S3) for static assets storage, backups and user photos
 
 ## Key assets
 
@@ -110,9 +112,9 @@ flowchart LR;
 
 Given the application nature and features, we risk becoming a primary target for a variety of threat actors. The following list outlines the most relevant threat actors we need to consider:
 
-* **Internet-wide vulnerability scanners:** these are automated tools that scan the internet for known vulnerabilities (CVEs) and misconfigurations. They can be used by both white-hat security researchers, as well as malicious actors.
-* **Script kiddies:** individuals with limited technical skills, usually motivated by curiosity, notoriety or minor personal gain. They may use widely available tools to exploit known vulnerabilities.
-* **Organized crime:** attempting theft of PII, identity fraud or the installation of resident malware for cryptocurrency mining, data exfiltration or ransomware.
+- **Internet-wide vulnerability scanners:** these are automated tools that scan the internet for known vulnerabilities (CVEs) and misconfigurations. They can be used by both white-hat security researchers, as well as malicious actors.
+- **Script kiddies:** individuals with limited technical skills, usually motivated by curiosity, notoriety or minor personal gain. They may use widely available tools to exploit known vulnerabilities.
+- **Organized crime:** attempting theft of PII, identity fraud or the installation of resident malware for cryptocurrency mining, data exfiltration or ransomware.
 
 ### Infrastructure provider
 
@@ -138,9 +140,9 @@ We are committed to upholding user privacy and trust within the applicable legal
 
 ## Threat models by feature
 
-* [Authentication](01-authentication.md)
-* [Registration](_placeholder)
-* [Profile management](_placeholder)
-* [OIDC](_placeholder)
-* [Tenant administration](_placeholder)
-* [Multi session management](_placeholder)
+- [Authentication](01-authentication.md)
+- [Registration](_placeholder)
+- [Profile management](_placeholder)
+- [OIDC](_placeholder)
+- [Tenant administration](_placeholder)
+- [Multi session management](_placeholder)
