@@ -1,4 +1,12 @@
+import { err, ok, type Result, type ResultAsync } from "neverthrow";
 import crypto from "node:crypto";
+import db from "~/db.server";
+import {
+  acquireLockWithUUID,
+  TOTP_LOCK_NAMESPACE,
+} from "~/db.server/advisoryLocks";
+import KeyValueStore from "~/db.server/key_value_store";
+import type { User } from "~/db.server/users.server";
 
 export function verifyTotpWithTolerance(
   secret: string,
@@ -22,12 +30,12 @@ export function verifyTotpWithTolerance(
 }
 
 const TOTP_TIMESTEP = 30;
-const TOTP_DIGITS = 6;
 
 // https://www.ietf.org/rfc/rfc4226.txt
 export function generateTotp(
   secret: string,
   timestamp: number = Date.now(),
+  digits: number = 6,
 ): string {
   // Get the current counter value, which is the number of TOTP_TIMESTEP
   // intervals that have passed since the Unix epoch
@@ -53,12 +61,12 @@ export function generateTotp(
     ((hmac[offset + 2] & 0xff) << 8) |
     (hmac[offset + 3] & 0xff);
 
-  // Calculate the TOTP value by taking the binary value modulo 10^TOTP_DIGITS
-  const modulo = 10 ** TOTP_DIGITS;
+  // Calculate the TOTP value by taking the binary value modulo 10^digits
+  const modulo = 10 ** digits;
   const totp = binary % modulo;
 
   // Return the TOTP value as a zero-padded string
-  return totp.toString().padStart(TOTP_DIGITS, "0");
+  return totp.toString().padStart(digits, "0");
 }
 
 function base32ToBuffer(base32: string): Buffer {
@@ -82,4 +90,56 @@ function base32ToBuffer(base32: string): Buffer {
 
 function hmacSha1(key: Buffer | string, input: Buffer | string) {
   return crypto.createHmac("sha1", key).update(input);
+}
+
+const TOTP_RATE_LIMIT_DELAYS = [0, 0, 2, 5, 10, 20, 30, 60, 120, 240, 600, 900];
+
+export async function verifyTotpRateLimited(
+  user: User,
+  code: string,
+): Promise<
+  Result<void, { error: "rate_limit" | "invalid_totp"; lockedUntil?: Date }>
+> {
+  return await db.transaction(async (tx) => {
+    await acquireLockWithUUID(tx, user.id, TOTP_LOCK_NAMESPACE);
+
+    const now = new Date();
+
+    let { failures, lock_until } = (await KeyValueStore.get<{
+      failures: number;
+      lock_until: string;
+    }>(`${user.id}:totp_rate_limit`)) || {
+      failures: 0,
+      lock_until: now,
+    };
+
+    if (typeof lock_until === "string") {
+      lock_until = new Date(lock_until);
+    }
+
+    if (lock_until > now) {
+      console.log("Rate limit exceeded");
+      return err({ error: "rate_limit", lockedUntil: lock_until });
+    }
+
+    if (verifyTotpWithTolerance(user.otpSecret!, code)) {
+      await KeyValueStore.destroy(`${user.id}:totp_rate_limit`);
+      return ok();
+    } else {
+      console.log("Invalid TOTP code");
+      const delay = TOTP_RATE_LIMIT_DELAYS[failures] ?? 900;
+
+      await KeyValueStore.set(
+        `${user.id}:totp_rate_limit`,
+        {
+          failures: failures + 1,
+          lock_until: new Date(now.getTime() + delay * 1000),
+        },
+        // expire in 2 hours
+        60 * 60 * 2,
+      );
+
+      return err({ error: "invalid_totp" });
+    }
+  });
 }

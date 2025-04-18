@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { SignInPage } from "./pages/SignInPage";
 import { ProfileHubPage } from "./pages/ProfileHubPage";
 import { SignInTotpPage } from "./pages/SignInTotpPage";
@@ -47,12 +47,35 @@ test.describe("Signing in", () => {
       const totpPage = new SignInTotpPage(page);
 
       await signInPage.visit();
-      await signInPage.signIn("janetotp", "super-s3cret");
+
+      // Use a different user for failing TOTP, to avoid getting rate limited on
+      // the Happy path test.
+      await signInPage.signIn("janetotp2", "super-s3cret");
 
       await totpPage.expectToBeVisible();
       await totpPage.enterCode("123");
 
       await totpPage.expectError();
+    });
+
+    test.only("Bad OTP eventually triggers rate limiting", async ({ page }) => {
+      const signInPage = new SignInPage(page);
+      const totpPage = new SignInTotpPage(page);
+
+      await signInPage.visit();
+
+      // Use a different user for failing TOTP, to avoid getting rate limited on
+      // the Happy path test.
+      await signInPage.signIn("janetotp2", "super-s3cret");
+
+      await totpPage.expectToBeVisible();
+
+      for (let i = 0; i < 5; i++) {
+        await totpPage.enterCode("123");
+      }
+
+      await totpPage.expectError();
+      await expect(totpPage.errorMessage).toHaveText(/Please try again in/);
     });
   });
 });

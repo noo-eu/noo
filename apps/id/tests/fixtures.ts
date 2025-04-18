@@ -31,6 +31,17 @@ async function main() {
     otpSecret: "AAAAAAAABBBBBBBB",
   });
 
+  await Users.create({
+    username: "jane.totp2",
+    normalizedUsername: "janetotp2",
+    firstName: "John",
+    lastName: "Totp",
+    // super-s3cr3t
+    passwordDigest:
+      "$argon2id$v=19$m=65536,t=3,p=4$9TQmMdbZltXuRxsUSrrOEw$b4iWu+Qcc9WybZYKLnw14LSM6D5IJ9oks6LHj8jqD9M",
+    otpSecret: "AAAAAAAABBBBBBBB",
+  });
+
   const tenant = await Tenants.create({
     id: "00000000-0000-0000-0000-000000000001",
     name: "Acme Sarl",

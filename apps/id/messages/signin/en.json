@@ -2,6 +2,7 @@
   "signin": {
     "create_account": "Create an account",
     "error": "The details you entered are incorrect",
+    "rateLimit": "Too many sign in attempts. Please try again {time}.",
     "metaTitle": "Sign in - noo",
     "or": "or",
     "password": "Password",

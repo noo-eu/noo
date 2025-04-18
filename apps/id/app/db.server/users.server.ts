@@ -1,9 +1,10 @@
 import argon2 from "argon2";
 import { and, eq, isNull } from "drizzle-orm";
-import { verifyTotpWithTolerance } from "~/lib.server/totp";
+import { verifyTotpRateLimited } from "~/lib.server/totp";
 import db, { schema } from ".";
 import { type OidcClient } from "./oidc_clients";
 import Tenants, { type Tenant } from "./tenants";
+import { err, Result, ResultAsync } from "neverthrow";
 
 async function find(userId: string) {
   return db.query.users.findFirst({
@@ -180,12 +181,19 @@ async function authenticate(
   return null;
 }
 
-async function verifyTotp(user: User, totp: string) {
+async function verifyTotp(
+  user: User,
+  totp: string,
+): Promise<
+  Result<void, { error: "invalid_totp" | "rate_limit"; lockedUntil?: Date }>
+> {
   if (!user.otpSecret) {
-    return false;
+    return err({
+      error: "invalid_totp",
+    });
   }
 
-  return verifyTotpWithTolerance(user.otpSecret, totp);
+  return verifyTotpRateLimited(user, totp);
 }
 
 const Users = {
