@@ -118,7 +118,6 @@ export async function verifyTotpRateLimited(
     }
 
     if (lock_until > now) {
-      console.log("Rate limit exceeded");
       return err({ error: "rate_limit", lockedUntil: lock_until });
     }
 
@@ -126,7 +125,6 @@ export async function verifyTotpRateLimited(
       await KeyValueStore.destroy(`${user.id}:totp_rate_limit`);
       return ok();
     } else {
-      console.log("Invalid TOTP code");
       const delay = TOTP_RATE_LIMIT_DELAYS[failures] ?? 900;
 
       await KeyValueStore.set(

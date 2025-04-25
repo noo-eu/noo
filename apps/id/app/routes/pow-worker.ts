@@ -1,12 +1,27 @@
 self.onmessage = async (event) => {
-  console.log("Worker received message:", event.data);
-
-  const result = await startPow({
-    challenge: "we3imeceonvwcriounsiwuencoiun",
-    difficulty: 18,
-    algorithm: "sha256",
+  // Decode the JWT, no need to verify the signature here.
+  const payload = event.data.split(".")[1];
+  const decodedPayload = JSON.parse(
+    decodeURIComponent(
+      atob(payload)
+        .split("")
+        .map((c) => `%${("00" + c.charCodeAt(0).toString(16)).slice(-2)}`)
+        .join(""),
+    ),
+  );
+  const { challenge, difficulty, algorithm } = decodedPayload;
+  console.log("Worker received PoW request:", {
+    difficulty,
+    algorithm,
   });
 
+  const result = await startPow({
+    challenge,
+    difficulty,
+    algorithm,
+  });
+
+  console.log("Worker finished PoW:", result);
   self.postMessage(result);
 };
 
@@ -43,6 +58,8 @@ async function startPow(request: PowRequest) {
     buffer[offset + 3] = nonce & 0xff;
   }
 
+  const t0 = performance.now();
+
   // Construct a 256-bit target value based on the difficulty.
   // 2^N is represented exactly in double precision (up to N = 1023),
   // so there's no need to use BigInt for the math.
@@ -63,10 +80,13 @@ async function startPow(request: PowRequest) {
     }
 
     // Check if the hash is less than the target.
+    // If the hash is less than the target, return the nonce.
     if (hashBigInt < target) {
-      // If the hash is less than the target, return the nonce.
+      const t1 = performance.now();
+
       return {
         nonce,
+        time: t1 - t0,
       };
     }
 

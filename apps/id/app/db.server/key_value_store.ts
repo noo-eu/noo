@@ -1,8 +1,10 @@
 import { and, eq, gt, isNull, lt, or } from "drizzle-orm";
-import db, { schema } from ".";
+import db, { schema, type Tx } from ".";
 
-async function get<T>(key: string): Promise<T | undefined> {
-  const row = await db.query.kv.findFirst({
+async function get<T>(key: string, tx?: Tx): Promise<T | undefined> {
+  const conn = tx ?? db;
+
+  const row = await conn.query.kv.findFirst({
     where: and(
       eq(schema.kv.key, key),
       or(isNull(schema.kv.expiresAt), gt(schema.kv.expiresAt, new Date())),
@@ -19,10 +21,12 @@ async function get<T>(key: string): Promise<T | undefined> {
  * @param value arbitrary value to store. This will be serialized to JSON.
  * @param ttl TTL in seconds. If not provided, the value will not expire.
  */
-async function set(key: string, value: unknown, ttl?: number) {
+async function set(key: string, value: unknown, ttl?: number, tx?: Tx) {
+  const conn = tx ?? db;
+
   const expiresAt = ttl ? new Date(Date.now() + ttl * 1000) : null;
 
-  return db
+  return conn
     .insert(schema.kv)
     .values({
       key,
