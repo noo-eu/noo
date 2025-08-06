@@ -42,16 +42,22 @@ type PowRequest = {
 async function startPow(request: PowRequest) {
   const { challenge, difficulty, algorithm } = request;
 
+  // Convert hex challenge to bytes
+  const challengeBytes = new Uint8Array(challenge.length / 2);
+  for (let i = 0; i < challenge.length; i += 2) {
+    challengeBytes[i / 2] = parseInt(challenge.substr(i, 2), 16);
+  }
+
   // Set a few bytes aside for the nonce.
   const nonceSize = 4;
-  const buffer = new Uint8Array(challenge.length + nonceSize);
+  const buffer = new Uint8Array(challengeBytes.length + nonceSize);
 
   // Write the challenge bytes to the buffer.
-  buffer.set(new TextEncoder().encode(challenge), 0);
+  buffer.set(challengeBytes, 0);
 
   // Helper to update the nonce portion of the buffer in big-endian.
   function updateNonce(nonce: number) {
-    const offset = challenge.length;
+    const offset = challengeBytes.length;
     buffer[offset] = (nonce >> 24) & 0xff;
     buffer[offset + 1] = (nonce >> 16) & 0xff;
     buffer[offset + 2] = (nonce >> 8) & 0xff;

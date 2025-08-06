@@ -1,12 +1,11 @@
-import db, { type Tx } from "~/db.server";
-import { getClientIp } from "./http";
-import { acquireLock, acquireLockWithUUID } from "~/db.server/advisoryLocks";
-import KeyValueStore from "~/db.server/key_value_store";
+import { randomBytes, sha256 } from "@noo/lib/crypto";
 import { jwtVerify, SignJWT, type JWTPayload } from "jose";
-import { getSigningKey, getVerifyingKeyForJwt } from "./jwks";
-import { sha256, randomBytes } from "@noo/lib/crypto";
 import type { ActionFunctionArgs } from "react-router";
-import { fail } from "assert";
+import db, { type Tx } from "~/db.server";
+import { acquireLock } from "~/db.server/advisoryLocks";
+import KeyValueStore from "~/db.server/key_value_store";
+import { getClientIp } from "./http";
+import { getSigningKey, getVerifyingKeyForJwt } from "./jwks";
 
 // Failed attempts before PoW kicks in
 const POW_TRIGGER_THRESHOLD = 3;
@@ -214,11 +213,65 @@ async function verifyPow(
 ) {
   console.log("Verifying PoW challenge", challenge, solution, difficulty);
 
-  const nonce = challenge.nonce;
-  const digest = sha256(nonce + solution).digest("binary");
+  const challengeBytes = challenge.challenge;
+  if (typeof challengeBytes !== "string") {
+    console.error("Invalid challenge format");
+    return false;
+  }
 
-  // TODO: check that digest starts with `difficulty` zeros.
-  return false;
+  try {
+    // Parse the solution as an integer (the nonce from client)
+    const nonce = parseInt(solution, 10);
+    if (isNaN(nonce)) {
+      console.error("Invalid nonce format");
+      return false;
+    }
+
+    // Create buffer matching client implementation: challenge + 4-byte nonce (big-endian)
+    const challengeBuffer = Buffer.from(challengeBytes, "hex");
+    const nonceBuffer = Buffer.allocUnsafe(4);
+    nonceBuffer.writeUInt32BE(nonce, 0);
+
+    const combined = Buffer.concat([challengeBuffer, nonceBuffer]);
+
+    // Compute SHA-256 hash
+    const hash = sha256(combined);
+    const hashBuffer = Buffer.from(hash.digest("binary"), "binary");
+
+    // Check if hash has required number of leading zero bits
+    const requiredZeroBits = difficulty;
+    let zeroBits = 0;
+
+    for (let i = 0; i < hashBuffer.length; i++) {
+      const byte = hashBuffer[i];
+      if (byte === 0) {
+        zeroBits += 8;
+      } else {
+        // Count leading zeros in this byte
+        let mask = 0x80;
+        while (mask && !(byte & mask)) {
+          zeroBits++;
+          mask >>= 1;
+        }
+        break;
+      }
+
+      // Early exit if we already have enough zeros
+      if (zeroBits >= requiredZeroBits) {
+        break;
+      }
+    }
+
+    const isValid = zeroBits >= requiredZeroBits;
+    console.log(
+      `PoW verification: ${zeroBits}/${requiredZeroBits} zero bits, valid: ${isValid}`,
+    );
+
+    return isValid;
+  } catch (error) {
+    console.error("Error verifying PoW:", error);
+    return false;
+  }
 }
 
 function getIp(request: Request): string | undefined {
