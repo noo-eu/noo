@@ -129,6 +129,7 @@ test.describe("Signing in", () => {
       // Clean up PoW state for the test IPs to avoid test interference
       await KeyValueStore.destroy("127.0.0.1:pow");
       await KeyValueStore.destroy("::1:pow");
+      await KeyValueStore.destroy("0.0.0.0:pow");
     });
   });
 });

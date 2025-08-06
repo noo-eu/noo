@@ -93,7 +93,7 @@ Ensure the schema is up to date:
 pnpm db:test:push
 ```
 
-Load the test fixtures:
+Load the test fixtures. Tests will fail if the fixtures are not loaded:
 
 ```bash
 pnpm db:test:fixtures

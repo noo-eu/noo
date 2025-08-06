@@ -144,9 +144,8 @@ export function SignInForm({ powRequest }: { powRequest: string | undefined }) {
           {state.error == "credentials" && t("error")}
           {state.error == "tenant" &&
             t("tenant_error", { domain: state.input.domain! })}
-          {state.error == "pow_invalid" || state.error == "pow_missing"
-            ? t("error")
-            : ""}
+          {(state.error == "pow_invalid" || state.error == "pow_missing") &&
+            t("error")}
         </div>
       )}
       <Form method="POST" className="space-y-8" ref={formRef}>
