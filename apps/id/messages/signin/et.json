@@ -5,6 +5,7 @@
     "metaTitle": "Logi sisse – noo",
     "or": "või",
     "password": "Parool",
+    "rateLimit": "Üks liiga palju sisselogimise katseid. Proovi uuesti {time} pärast.",
     "submit": "Logi sisse",
     "tenant_error": "Palun logi sisse {domain} kontoga",
     "title": "Logi sisse oma <noo></noo> kontole",

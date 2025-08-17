@@ -5,6 +5,7 @@
     "metaTitle": "Zaloguj się – noo",
     "or": "lub",
     "password": "Hasło",
+    "rateLimit": "Zbyt wiele prób logowania. Spróbuj ponownie za {time}.",
     "submit": "Zaloguj się",
     "tenant_error": "Zaloguj się przy użyciu konta {domain}",
     "title": "Zaloguj się na swoje konto <noo></noo>",

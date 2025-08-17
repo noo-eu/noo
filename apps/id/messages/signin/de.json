@@ -5,6 +5,7 @@
     "metaTitle": "Anmelden - noo",
     "or": "oder",
     "password": "Passwort",
+    "rateLimit": "Zu viele Anmeldeversuche. Bitte versuch's nochmal in {time}.",
     "submit": "Anmelden",
     "tenant_error": "Bitte melde dich mit einem {domain}-Konto an",
     "title": "Melde dich bei deinem <noo></noo> Konto an",

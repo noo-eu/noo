@@ -7,7 +7,7 @@ import Sessions from "~/db.server/sessions";
 import SecurityHub from "~/screens/security/Hub";
 
 export const loader = withAuth(async ({ context }: LoaderFunctionArgs) => {
-  const user = context.get(userContext);
+  const user = context.get(userContext)!;
 
   const activeSessions = await Sessions.countBy(
     eq(schema.sessions.userId, user.id),

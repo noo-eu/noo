@@ -68,8 +68,8 @@ protect our users:
   - TOTP codes
   - software and hardware tokens (Passkeys), which may have a biometric unlock
   - push notifications with number matching
-  can effectively prevent an attacker from accessing the account, even in
-  scenarios where the password is compromised.
+    can effectively prevent an attacker from accessing the account, even in
+    scenarios where the password is compromised.
 - **Education**: the best security practices cannot save a user from themselves.
   Password-sharing, reuse, using search engines to open our website (maybe
   clicking on an Ad), installing malware, etc are all common practices that

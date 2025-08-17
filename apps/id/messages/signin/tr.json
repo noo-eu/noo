@@ -5,6 +5,7 @@
     "metaTitle": "Giriş yap – noo",
     "or": "veya",
     "password": "Şifre",
+    "rateLimit": "Çok fazla giriş denemesi yaptın. Lütfen {time} sonra tekrar dene.",
     "submit": "Giriş yap",
     "tenant_error": "Lütfen {domain} hesabınla giriş yap",
     "title": "<noo></noo> hesabına giriş yap",

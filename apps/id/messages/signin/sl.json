@@ -5,6 +5,7 @@
     "metaTitle": "Prijava – noo",
     "or": "ali",
     "password": "Geslo",
+    "rateLimit": "Preveč poskusov prijave. Poskusi ponovno čez {time}.",
     "submit": "Prijavi se",
     "tenant_error": "Prijavi se z računom {domain}",
     "title": "Prijavi se v svoj račun <noo></noo>",

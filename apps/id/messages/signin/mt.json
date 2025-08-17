@@ -5,6 +5,7 @@
     "metaTitle": "Idħol - noo",
     "or": "jew",
     "password": "Password",
+    "rateLimit": "Ħafna tentattivi biex tidħol. Erġa' pprova {time}.",
     "submit": "Idħol",
     "tenant_error": "Jekk jogħġbok idħol b’kont {domain}",
     "title": "Idħol fil-kont tiegħek ta’ <noo></noo>",

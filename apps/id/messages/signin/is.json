@@ -5,6 +5,7 @@
     "metaTitle": "Innskráning - noo",
     "or": "eða",
     "password": "Lykilorð",
+    "rateLimit": "Of margar reynsluaðgerðum. Vinsamlegast reyndu aftur eftir {time}.",
     "submit": "Innskrá",
     "tenant_error": "Vinsamlegast skráðu þig inn með {domain} aðgangi",
     "title": "Skráðu þig inn á <noo></noo> aðganginn þinn",

@@ -1,8 +1,7 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
-import { err, ok } from "neverthrow";
-import { checkPwnedPassword, maybeCheckPwnedPassword } from "./hibp";
-import Users from "~/db.server/users.server";
 import { sha1 } from "@noo/lib/crypto";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import Users from "~/db.server/users.server";
+import { checkPwnedPassword, maybeCheckPwnedPassword } from "./hibp";
 
 vi.mock("~/db.server/users.server");
 vi.mock("@noo/lib/crypto");
@@ -175,7 +174,7 @@ describe("hibp", () => {
     };
 
     beforeEach(() => {
-      vi.mocked(Users.update).mockResolvedValue();
+      vi.mocked(Users.update).mockResolvedValue({} as any);
     });
 
     it("checks password when never checked before", async () => {

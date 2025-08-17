@@ -39,7 +39,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
     })
     .toBuffer();
 
-  const user = context.get(userContext);
+  const user = context.get(userContext)!;
   if (user.picture) {
     const store = getObjectStorage("noousr");
     await store.delete(user.picture);

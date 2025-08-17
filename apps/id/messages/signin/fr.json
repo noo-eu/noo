@@ -5,6 +5,7 @@
     "metaTitle": "Connexion – noo",
     "or": "ou",
     "password": "Mot de passe",
+    "rateLimit": "Trop de tentatives de connexion. Essaie encore dans {time}.",
     "submit": "Se connecter",
     "tenant_error": "Veuillez vous connecter avec un compte {domain}",
     "title": "Connecte-toi à ton compte <noo></noo>",

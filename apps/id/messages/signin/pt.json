@@ -5,6 +5,7 @@
     "metaTitle": "Iniciar sessão - noo",
     "or": "ou",
     "password": "Palavra-passe",
+    "rateLimit": "Fizeste muitas tentativas de entrada. Tenta de novo em {time}.",
     "submit": "Entrar",
     "tenant_error": "Por favor, entra com uma conta {domain}",
     "title": "Entra na tua conta <noo></noo>",

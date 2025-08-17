@@ -11,7 +11,7 @@ import { makeClientSession } from "~/types/ClientSession";
 
 export const loader = withAuth(
   async ({ request, context }: LoaderFunctionArgs) => {
-    const user = context.get(userContext);
+    const user = context.get(userContext)!;
 
     const allSessions = await Sessions.findManyBy(eq(sessions.userId, user.id));
     const clientSessions = allSessions.map(makeClientSession);

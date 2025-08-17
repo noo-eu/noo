@@ -5,6 +5,7 @@
     "metaTitle": "Pieteikties - noo",
     "or": "vai",
     "password": "Parole",
+    "rateLimit": "Pārāk daudz pierakstīšanās mēģinājumu. Lūdzu, izmēģiniet vēlreiz {time}.",
     "submit": "Iestāties",
     "tenant_error": "Lūdzu, iestājieties ar {domain} kontu",
     "title": "Iestāties savam <noo></noo> kontam",
