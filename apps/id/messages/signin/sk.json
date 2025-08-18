@@ -5,6 +5,7 @@
     "metaTitle": "Prihlásenie – noo",
     "or": "alebo",
     "password": "Heslo",
+    "rateLimit": "Príliš veľa pokusov o prihlásenie. Skús to znova o {time}.",
     "submit": "Prihlásiť sa",
     "tenant_error": "Prihlás sa pomocou účtu {domain}",
     "title": "Prihlás sa do svojho účtu <noo></noo>",

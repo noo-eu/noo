@@ -5,6 +5,7 @@
     "metaTitle": "Prisijungimas - noo",
     "or": "arba",
     "password": "Slaptažodis",
+    "rateLimit": "Per daug bandymų prisijungti. Bandykite dar kartą po {time}.",
     "submit": "Prisijungti",
     "tenant_error": "Prisijunkite naudodami {domain} paskyrą",
     "title": "Prisijunk prie savo <noo></noo> paskyros",

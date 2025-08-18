@@ -5,6 +5,7 @@
     "metaTitle": "Logga in – noo",
     "or": "eller",
     "password": "Lösenord",
+    "rateLimit": "För många inloggningsförsök. Försök igen om {time}.",
     "submit": "Logga in",
     "tenant_error": "Logga in med ett {domain}-konto",
     "title": "Logga in på ditt <noo></noo>-konto",

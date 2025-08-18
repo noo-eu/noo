@@ -55,9 +55,7 @@ export default function Page() {
   );
 }
 
-export async function action({
-  request,
-}: ActionFunctionArgs): Promise<BasicFormAction> {
+export async function action({ request }: ActionFunctionArgs) {
   const totpUserId = await getTotpSession(request);
   if (!totpUserId) {
     throw redirect("/signin");
@@ -74,8 +72,13 @@ export async function action({
     return { error: { totp: "credentials" }, input: {} };
   }
 
-  if (!(await Users.verifyTotp(user, totpCode))) {
-    return { error: { totp: "credentials" }, input: {} };
+  const totpResult = await Users.verifyTotp(user, totpCode);
+  if (totpResult.isErr()) {
+    const error = totpResult.error;
+    return {
+      error: { code: error.error, lockedUntil: error.lockedUntil },
+      input: {},
+    };
   }
 
   const result = await handleSuccessfulAuthentication(request, user, {});

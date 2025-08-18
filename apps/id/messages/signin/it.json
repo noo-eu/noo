@@ -5,6 +5,7 @@
     "metaTitle": "Accedi - noo",
     "or": "oppure",
     "password": "Password",
+    "rateLimit": "Hai fatto troppi tentativi di accesso. Riprova tra {time}.",
     "submit": "Accedi",
     "tenant_error": "Per favore, accedi con un account {domain}",
     "title": "Accedi al tuo account <noo></noo>",

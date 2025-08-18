@@ -5,7 +5,7 @@ export class OpenAITranslator implements LLM {
   client: OpenAI;
   model: string;
 
-  constructor(model = "gpt-4o") {
+  constructor(model = "gpt-5-nano") {
     if (!process.env.OPENAI_API_KEY) {
       throw new Error("Missing OPENAI_API_KEY environment variable");
     }

@@ -5,6 +5,7 @@
     "metaTitle": "Přihlášení - noo",
     "or": "nebo",
     "password": "Heslo",
+    "rateLimit": "Příliš mnoho pokusů o přihlášení. Zkus to prosím znovu za {time}.",
     "submit": "Přihlásit se",
     "tenant_error": "Přihlas se prosím pomocí účtu {domain}",
     "title": "Přihlas se ke svému účtu <noo></noo>",

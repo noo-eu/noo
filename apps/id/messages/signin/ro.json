@@ -5,6 +5,7 @@
     "metaTitle": "Autentificare - noo",
     "or": "sau",
     "password": "Parolă",
+    "rateLimit": "Ai încercat prea multe ori să te conectezi. Te rugăm să încerci din nou {time}.",
     "submit": "Autentifică-te",
     "tenant_error": "Te rog autentifică-te cu un cont {domain}",
     "title": "Autentifică-te în contul tău <noo></noo>",

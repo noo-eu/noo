@@ -13,7 +13,7 @@ import {
 } from "./token";
 
 export function getCookieSessionTokens(cookie: string): SessionToken[] {
-  if (!cookie) {
+  if (!cookie || typeof cookie !== "string") {
     return [];
   }
 

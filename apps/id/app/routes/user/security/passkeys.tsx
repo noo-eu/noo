@@ -7,7 +7,7 @@ import { PasskeysPage } from "~/screens/security/passkeys/PasskeysPage";
 import { makeClientPasskey } from "~/types/ClientPasskey";
 
 export const loader = withAuth(async ({ context }: LoaderFunctionArgs) => {
-  const user = context.get(userContext);
+  const user = context.get(userContext)!;
 
   const existingPasskeys = (await Passkeys.listForUser(user.id)).map(
     makeClientPasskey,
@@ -25,7 +25,7 @@ export default function Page() {
 }
 
 export async function action({ request, context }: LoaderFunctionArgs) {
-  const user = context.get(userContext);
+  const user = context.get(userContext)!;
   const formData = await request.formData();
   const humanPasskeyId = formData.get("passkeyId")!.toString();
   const passkeyId = humanIdToUuid(humanPasskeyId, "idpsk")!;

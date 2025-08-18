@@ -12,27 +12,49 @@ import { SignInForm } from "~/screens/signin/SignInForm";
 import { SignInSidePanel } from "~/screens/signin/SignInSidePanel";
 import { makeClientOidcClient } from "~/types/ClientOidcClient";
 
+import {
+  buildPowRequest,
+  getCurrentPowStatus,
+  markSigninFailure,
+  withPow,
+} from "~/lib.server/signin.pow";
+import type { Tx } from "~/db.server";
+
 export async function loader({ request, context }: ActionFunctionArgs) {
   const oidcClient = await getOidcAuthorizationClient(request);
   const { locale } = context.get(localeContext);
+
+  const { difficulty: powDifficulty } = await getCurrentPowStatus(request);
+  let powRequest: string | undefined;
+  if (powDifficulty > 0) {
+    powRequest = await buildPowRequest(powDifficulty);
+  }
 
   return {
     oidcClient: oidcClient
       ? makeClientOidcClient(oidcClient, locale)
       : undefined,
+    powRequest,
   };
 }
 
 export default function SignIn() {
-  const { oidcClient } = useLoaderData<typeof loader>();
+  const { oidcClient, powRequest } = useLoaderData<typeof loader>();
 
   return (
     <PageModal>
+      {powRequest && (
+        <noscript>
+          To allow us to verify that you are not an attacker, we kindly ask you
+          to enable JavaScript in your browser.
+        </noscript>
+      )}
+
       {oidcClient && <SignInWithNoo />}
       <PageModal.Modal>
         <SignInSidePanel oidcClient={oidcClient} />
         <div>
-          <SignInForm />
+          <SignInForm powRequest={powRequest} />
         </div>
       </PageModal.Modal>
     </PageModal>
@@ -44,8 +66,11 @@ const signinSchema = z.object({
   password: z.string(),
 });
 
-export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
+async function signinAction(
+  { request }: ActionFunctionArgs,
+  formData: FormData,
+  tx: Tx,
+) {
   if (formData.get("captcha")) {
     // This is a bot, don't even bother
     return { error: "validation", input: { username: "" } };
@@ -68,6 +93,7 @@ export async function action({ request }: ActionFunctionArgs) {
   );
 
   if (!user) {
+    await markSigninFailure(request, tx);
     return { error: "credentials", input: { username } };
   }
 
@@ -91,3 +117,6 @@ export async function action({ request }: ActionFunctionArgs) {
     return result;
   }
 }
+
+const action = withPow(signinAction);
+export { action };

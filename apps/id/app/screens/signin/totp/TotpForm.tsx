@@ -1,11 +1,12 @@
 import { Button, TextField } from "@noo/ui";
 import { Form, Link, useActionData, useNavigation } from "react-router";
-import { useTranslations } from "use-intl";
+import { useFormatter, useNow, useTranslations } from "use-intl";
 import { useWebauthnAuthentication } from "../SignInForm";
 
 export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
   const t = useTranslations("signin");
   const commonT = useTranslations("common");
+  const format = useFormatter();
   const navigation = useNavigation();
   const pending = !!navigation.formAction;
 
@@ -13,15 +14,30 @@ export function TotpForm({ hasPasskeys }: { hasPasskeys: boolean }) {
 
   const authenticateWithWebauthn = useWebauthnAuthentication();
 
+  const now = useNow({
+    updateInterval: 1000,
+  });
+
   return (
     <>
-      <p>{t("totpDescription")}</p>
+      <p className="mb-4">{t("totpDescription")}</p>
       {state?.error && (
         <div
           className="bg-red-100 text-red-800 p-4 rounded mb-6"
           data-testid="signinTotpErrorMessage"
         >
-          {state.error.totp == "credentials" && t("error")}
+          {state.error.code == "invalid_totp" && t("error")}
+          {state.error.code == "rate_limit" &&
+            now <= state.error.lockedUntil && (
+              <p>
+                {t("rateLimit", {
+                  time: format.relativeTime(state.error.lockedUntil, {
+                    style: "narrow",
+                    now,
+                  }),
+                })}
+              </p>
+            )}
         </div>
       )}
       <Form method="POST" className="space-y-8">

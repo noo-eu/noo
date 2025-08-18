@@ -71,6 +71,13 @@
       "when": 1743606112376,
       "tag": "0009_slippery_kronos",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1744819552348,
+      "tag": "0010_deep_hulk",
+      "breakpoints": true
     }
   ]
 }

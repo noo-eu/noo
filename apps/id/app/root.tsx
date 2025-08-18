@@ -23,7 +23,7 @@ import { Footer } from "~/components/Footer";
 import { AuthProvider } from "./auth.server/context";
 import { userContext } from "./auth.server/serverContext";
 import { getAuthenticatedUser } from "./auth.server/sessions";
-import type { User } from "./db.server/users.server";
+import type { UserWithTenant } from "./db.server/users.server";
 import { makeClientUser } from "./types/ClientUser";
 
 export const links: Route.LinksFunction = () => [
@@ -31,7 +31,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 async function loadUser({ request, context }: LoaderFunctionArgs) {
-  let user: User | undefined;
+  let user: UserWithTenant | undefined;
   const uid = new URL(request.url).searchParams.get("uid");
   if (uid) {
     user = await getAuthenticatedUser(request, uid);

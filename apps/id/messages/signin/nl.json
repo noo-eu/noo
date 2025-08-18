@@ -5,6 +5,7 @@
     "metaTitle": "Inloggen - noo",
     "or": "of",
     "password": "Wachtwoord",
+    "rateLimit": "Te veel aanmeldpogingen. Probeer het opnieuw over {time}.",
     "submit": "Inloggen",
     "tenant_error": "Log in met een {domain} account",
     "title": "Log in op je <noo></noo> account",

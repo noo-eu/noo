@@ -300,3 +300,10 @@ export const userRelations = relations(users, ({ one, many }) => ({
 export const tenantRelations = relations(tenants, ({ many }) => ({
   users: many(users),
 }));
+
+// Temporary cheaper alternative to a Redis store
+export const kv = pgTable("kv", {
+  key: text().primaryKey(),
+  value: jsonb().notNull(),
+  expiresAt: timestamp("expires_at"),
+});

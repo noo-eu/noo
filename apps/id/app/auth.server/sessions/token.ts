@@ -4,10 +4,14 @@ export type SessionToken = {
 };
 
 export function decodeSessionToken(token: string): SessionToken | null {
-  if (token.length !== 64) return null;
+  if (token.length !== 64) {
+    return null;
+  }
 
   const buf = Buffer.from(token, "base64url");
-  if (buf.length !== 48) return null;
+  if (buf.length !== 48) {
+    return null;
+  }
 
   return {
     sid: bufferToUUID(buf.subarray(0, 16)),

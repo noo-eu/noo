@@ -5,6 +5,7 @@
     "metaTitle": "Sínigh isteach – noo",
     "or": "nó",
     "password": "Focal faire",
+    "rateLimit": "Tá níos mó Iarratais logála isteach ann. Déan triail arís {time}.",
     "submit": "Sínigh isteach",
     "tenant_error": "Sínigh isteach le cuntas {domain}, le do thoil",
     "title": "Sínigh isteach i do chuntas <noo></noo>",

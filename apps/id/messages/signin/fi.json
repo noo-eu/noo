@@ -5,6 +5,7 @@
     "metaTitle": "Kirjaudu sisään – noo",
     "or": "tai",
     "password": "Salasana",
+    "rateLimit": "Liian monta kirjautumisyritystä. Kokeile uudelleen {time} päästäksesi sisään.",
     "submit": "Kirjaudu",
     "tenant_error": "Kirjaudu sisään käyttämällä {domain} tiliä",
     "title": "Kirjaudu <noo></noo>-tilillesi",

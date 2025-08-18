@@ -7,3 +7,7 @@ export function sha256(input: Buffer | string) {
 export function sha1(input: Buffer | string) {
   return crypto.createHash("sha1").update(input);
 }
+
+export function randomBytes(size: number) {
+  return crypto.randomBytes(size);
+}

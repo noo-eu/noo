@@ -5,6 +5,7 @@
     "metaTitle": "Bejelentkezés – noo",
     "or": "vagy",
     "password": "Jelszó",
+    "rateLimit": "Túl sok bejelentkezési kísérlet. Kérlek, próbáld újra {time} múlva.",
     "submit": "Bejelentkezés",
     "tenant_error": "Kérlek, {domain} fiókkal jelentkezz be",
     "title": "Jelentkezz be a <noo></noo> fiókodba",
