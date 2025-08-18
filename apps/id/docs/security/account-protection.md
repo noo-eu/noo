@@ -132,11 +132,13 @@ We also test the password against the [Have I Been
 Pwned](https://haveibeenpwned.com/) API to check if the password has ever been
 found in a data breach.
 
-Depending on the context, the results of these tests may simply be used to warn
-the user, allowing them to proceed nonetheless (a user may decide to require a
-passkey for example, and be satisfied with a weaker password), {{ todo }}or they
-may be used to prevent the user from setting a password that doesn't meet the
-minimum strength requirements.{{ /todo }}
+To reduce sign-up friction, we will allow users to set a weaker password initially,
+as long as it's at least 10 characters long and have at least two classes of
+character (uppercase, lowercase, number, symbol). We will however require users
+to strengthen their password within 60 days.
+
+For tenants, administrative settings may be used to prevent the user from
+setting a password that doesn't meet the minimum strength requirements.
 
 ### Password storage
 
