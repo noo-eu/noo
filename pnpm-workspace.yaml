@@ -6,7 +6,10 @@ onlyBuiltDependencies:
   - '@sentry/cli'
   - argon2
   - esbuild
+  - puppeteer
   - sharp
   - unrs-resolver
 injectWorkspacePackages: true
 strictDepBuilds: true
+ignoredBuiltDependencies:
+  - '@tailwindcss/oxide'
