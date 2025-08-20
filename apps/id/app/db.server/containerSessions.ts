@@ -1,7 +1,19 @@
 import { humanIdToUuid } from "@noo/lib/humanIds";
 import { eq, SQL } from "drizzle-orm";
+import { DrizzleQueryError } from "drizzle-orm/errors";
 import { err, ok, ResultAsync } from "neverthrow";
 import db, { schema } from ".";
+
+function fromDatabasePromise<T>(
+  promise: Promise<T>,
+): ResultAsync<T, "NOT_FOUND"> {
+  return ResultAsync.fromPromise(promise, (e) => {
+    if (e instanceof DrizzleQueryError) {
+      return err("NOT_FOUND" as const);
+    }
+    throw e;
+  });
+}
 
 export function findOneOrNotFound<T>(
   query: Promise<T | undefined>,

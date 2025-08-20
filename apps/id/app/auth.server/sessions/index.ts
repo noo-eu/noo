@@ -1,13 +1,6 @@
 import { humanIdToUuid, uuidToHumanId } from "@noo/lib/humanIds";
 import { checkVerifier, createVerifier } from "@noo/lib/verifier";
-import {
-  err,
-  errAsync,
-  ok,
-  okAsync,
-  ResultAsync,
-  type Result,
-} from "neverthrow";
+import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import ContainerSessions, {
   type ContainerSession,
 } from "~/db.server/containerSessions";
@@ -58,12 +51,12 @@ function ensureContainerSession(request: Request) {
 function verifySession(
   session: ContainerSession,
   verifier: string,
-): Result<ContainerSession, string> {
+): ResultAsync<ContainerSession, string> {
   if (checkVerifier(verifier, session.verifierDigest)) {
-    return ok(session);
+    return okAsync(session);
   }
 
-  return err("Invalid session verifier. Tampered?");
+  return errAsync("Invalid session verifier. Tampered?");
 }
 
 export function createSession(request: Request, userId: string) {
