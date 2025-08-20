@@ -46,9 +46,9 @@ export async function handleSuccessfulAuthentication<Input>(
 
 export async function startSession(request: Request, user: User) {
   const session = await getAuthenticatedSession(request, user.id);
-  if (session) {
+  if (session.isOk()) {
     // Update the lastAuthenticatedAt timestamp, which is used for the OIDC auth_time claim
-    return await reauthenticateSession(request, session.id);
+    return await reauthenticateSession(request, session.value.id);
   } else {
     return await createSession(request, user.id);
   }

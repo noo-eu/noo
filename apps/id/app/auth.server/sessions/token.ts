@@ -1,22 +1,26 @@
+import { err, ok, type Result } from "neverthrow";
+
 export type SessionToken = {
   sid: string;
   verifier: string;
 };
 
-export function decodeSessionToken(token: string): SessionToken | null {
+export function decodeSessionToken(
+  token: string,
+): Result<SessionToken, string> {
   if (token.length !== 64) {
-    return null;
+    return err("Invalid session token length");
   }
 
   const buf = Buffer.from(token, "base64url");
   if (buf.length !== 48) {
-    return null;
+    return err("Invalid session token buffer length");
   }
 
-  return {
+  return ok({
     sid: bufferToUUID(buf.subarray(0, 16)),
     verifier: buf.subarray(16).toString("base64url"),
-  };
+  });
 }
 
 export function encodeSessionToken({ sid, verifier }: SessionToken): string {

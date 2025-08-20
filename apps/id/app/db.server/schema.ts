@@ -78,15 +78,27 @@ export const users = pgTable(
   ],
 );
 
+export const containerSessions = pgTable("container_sessions", {
+  id: uuid().primaryKey().defaultRandom(),
+  verifierDigest: text("verifier_digest").notNull(),
+  version: integer("version").notNull().default(0),
+  lastUsedAt: timestamp("last_used_at").notNull().defaultNow(),
+});
+
 export const sessions = pgTable("sessions", {
   id: uuid().primaryKey().defaultRandom(),
+  containerSessionId: uuid("container_session_id")
+    .notNull()
+    .references(() => containerSessions.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   userId: uuid("user_id")
     .notNull()
     .references(() => users.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     }),
-  verifierDigest: text("verifier_digest").notNull(),
   ip: inet().notNull(),
   userAgent: text("user_agent"),
   lastAuthenticatedAt: timestamp("last_authenticated_at")
@@ -280,6 +292,13 @@ export const passkeyRelations = relations(passkeys, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const containerSessionsRelations = relations(
+  containerSessions,
+  ({ many }) => ({
+    sessions: many(sessions),
+  }),
+);
 
 export const sessionRelations = relations(sessions, ({ one }) => ({
   user: one(users, {

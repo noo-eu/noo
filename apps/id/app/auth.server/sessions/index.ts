@@ -1,206 +1,170 @@
 import { humanIdToUuid, uuidToHumanId } from "@noo/lib/humanIds";
 import { checkVerifier, createVerifier } from "@noo/lib/verifier";
-import { inArray } from "drizzle-orm";
-import { schema } from "~/db.server";
+import {
+  err,
+  errAsync,
+  ok,
+  okAsync,
+  ResultAsync,
+  type Result,
+} from "neverthrow";
+import ContainerSessions, {
+  type ContainerSession,
+} from "~/db.server/containerSessions";
 import Sessions, { type Session } from "~/db.server/sessions";
 import { type UserWithTenant } from "~/db.server/users.server";
 import { getClientIp } from "~/lib.server/http";
-import { getSessionCookie, setSessionCookie } from "./store";
-import {
-  decodeSessionToken,
-  encodeSessionToken,
-  type SessionToken,
-} from "./token";
+import { sessionCookie, setSessionCookie } from "./store";
+import { decodeSessionToken, encodeSessionToken } from "./token";
 
-export function getCookieSessionTokens(cookie: string): SessionToken[] {
-  if (!cookie || typeof cookie !== "string") {
-    return [];
-  }
-
-  return cookie
-    .split(" ")
-    .map(decodeSessionToken)
-    .filter(Boolean) as SessionToken[];
-}
-
-export async function parseValidTokens(cookie: string): Promise<{
-  tokens: SessionToken[];
-  sessions: Session[];
-}> {
-  const parsed = getCookieSessionTokens(cookie);
-  if (parsed.length === 0) {
-    return { tokens: [], sessions: [] };
-  }
-
-  const sids = parsed.map((t) => t.sid);
-  const db = await Sessions.select(inArray(schema.sessions.id, sids));
-
-  const verified = parsed.filter((token) => {
-    const session = db.find((s) => s.id === token.sid);
-    return session && checkVerifier(token.verifier, session.verifierDigest);
-  });
-
-  return {
-    tokens: verified,
-    sessions: verified.map((t) => db.find((s) => t.sid === s.id)!),
-  };
-}
-
-export async function createSession(
+export function getSessionCookie(
   request: Request,
-  userId: string,
-  cookie?: string,
-): Promise<string[]> {
-  cookie ??= await getSessionCookie(request);
+): ResultAsync<string, string> {
+  return ResultAsync.fromPromise(
+    sessionCookie.parse(request.headers.get("cookie")),
+    () => "BAD_COOKIE",
+  ).andThen((cookie) => (cookie ? okAsync(cookie) : errAsync("NO_COOKIE")));
+}
 
+export function loadContainerSession(
+  request: Request,
+): ResultAsync<ContainerSession, string> {
+  return getSessionCookie(request)
+    .andThen(decodeSessionToken)
+    .andThen(({ sid, verifier }) =>
+      ContainerSessions.find(sid).map((container) => ({
+        container,
+        verifier,
+      })),
+    )
+    .andThen(({ container, verifier }) => verifySession(container, verifier));
+}
+
+export function startContainerSession() {
   const sid = crypto.randomUUID();
   const { verifier, digest } = createVerifier();
 
-  await Sessions.create({
+  return ContainerSessions.create({
     id: sid,
-    userId,
     verifierDigest: digest,
-    ip: getClientIp(request),
-    userAgent: request.headers.get("user-agent") ?? "",
-    lastAuthenticatedAt: new Date(),
     lastUsedAt: new Date(),
-  });
-
-  const { tokens } = await parseValidTokens(cookie);
-  tokens.push({ sid, verifier });
-
-  const newCookie = tokens.map(encodeSessionToken).join(" ");
-  return await setSessionCookie(newCookie);
+  }).andTee(() => setSessionCookie(encodeSessionToken({ sid, verifier })));
 }
 
-export async function reauthenticateSession(
-  request: Request,
-  sid: string,
-): Promise<string[]> {
-  await Sessions.refresh(
-    sid,
-    getClientIp(request),
-    request.headers.get("user-agent") ?? "",
-    new Date(),
+function ensureContainerSession(request: Request) {
+  return loadContainerSession(request).orElse(startContainerSession);
+}
+
+function verifySession(
+  session: ContainerSession,
+  verifier: string,
+): Result<ContainerSession, string> {
+  if (checkVerifier(verifier, session.verifierDigest)) {
+    return ok(session);
+  }
+
+  return err("Invalid session verifier. Tampered?");
+}
+
+export function createSession(request: Request, userId: string) {
+  return ensureContainerSession(request).andThen((container) =>
+    Sessions.create({
+      id: crypto.randomUUID(),
+      containerSessionId: container.id,
+      userId,
+      ip: getClientIp(request),
+      userAgent: request.headers.get("user-agent") ?? "",
+      lastAuthenticatedAt: new Date(),
+      lastUsedAt: new Date(),
+    }),
   );
-
-  const val = await getSessionCookie(request);
-  return await setSessionCookie(val);
 }
 
-export async function endSession(
-  request: Request,
-  sid: string,
-  cookie?: string,
-) {
-  cookie ??= await getSessionCookie(request);
-  const { tokens } = await parseValidTokens(cookie);
-  const remaining = tokens.filter((t) => t.sid !== sid);
+export function reauthenticateSession(request: Request, sid: string) {
+  return ensureContainerSession(request).andThen((container) => {
+    if (!container.sessions.some((s) => s.id === sid)) {
+      return errAsync("Session not found");
+    }
 
-  await Sessions.destroy(sid);
-
-  const newCookie = remaining.map(encodeSessionToken).join(" ");
-  return await setSessionCookie(newCookie);
+    return Sessions.refresh(
+      sid,
+      getClientIp(request),
+      request.headers.get("user-agent") ?? "",
+      new Date(),
+    );
+  });
 }
 
-export async function endAllSessions(request: Request, cookie?: string) {
-  cookie ??= await getSessionCookie(request);
-  const { tokens } = await parseValidTokens(cookie);
-  await Promise.all(tokens.map((t) => Sessions.destroy(t.sid)));
-  return await setSessionCookie("");
+export function endSession(request: Request, sid: string) {
+  return ensureContainerSession(request).andThen((container) => {
+    if (!container.sessions.some((s) => s.id === sid)) {
+      return errAsync("Session not found");
+    }
+
+    return Sessions.destroy(sid);
+  });
 }
 
-/**
- * Returns all currently active and verified sessions from the session cookie.
- *
- * Each session is validated against the verifier digest before being returned.
- *
- * @param maxAge - (Optional) The maximum age of the session in milliseconds. If
- * provided, only sessions that have been active within the last `maxAge`
- * seconds are returned.
- *
- * @returns A list of `Session` objects the user currently has active.
- */
-export async function getActiveSessions(
+export function endAllSessions(request: Request) {
+  return loadContainerSession(request).andThen((container) =>
+    ContainerSessions.destroy(container.id),
+  );
+}
+
+export function getActiveSessions(
   request: Request,
   maxAge?: number,
-): Promise<Session[]> {
-  const cookie = await getSessionCookie(request);
-  const { sessions } = await parseValidTokens(cookie);
+): ResultAsync<Session[], never> {
+  return loadContainerSession(request)
+    .map((container) => {
+      if (maxAge !== undefined) {
+        const now = new Date();
+        return container.sessions.filter((s) => {
+          const diff = now.getTime() - s.lastUsedAt.getTime();
+          return diff < maxAge * 1000;
+        });
+      }
 
-  if (maxAge !== undefined) {
-    const now = new Date();
-    return sessions.filter((s) => {
-      const diff = now.getTime() - s.lastUsedAt.getTime();
-      return diff < maxAge;
-    });
-  }
-
-  return sessions;
+      return container.sessions;
+    })
+    .orElse(() => okAsync([]));
 }
 
-/**
- * Returns the authenticated User object for a given user ID, but only if that
- * user has an active, verified session.
- *
- * @param userId - The user ID to look up. This can be in human-readable
- * format (e.g., "usr_abc123") or UUID format.
- * @param cookie - (Optional) Raw session cookie string. If not provided, the
- * function reads it via `getSessionCookie()`.
- *
- * @returns The authenticated User object if a valid session exists for the
- * given user ID, or `undefined` otherwise.
- *
- * Notes:
- * - This function performs session token validation, including verifier digest
- *   checks.
- * - Returns `undefined` if no matching valid session is found.
- */
-export async function getAuthenticatedUser(
+export function getAuthenticatedUser(
   request: Request,
   userId: string | undefined,
-  cookie?: string,
-): Promise<UserWithTenant | undefined> {
-  return (await getAuthenticatedSession(request, userId, cookie))?.user;
+): ResultAsync<UserWithTenant | undefined, string> {
+  return getAuthenticatedSession(request, userId).map(
+    (session) => session.user,
+  );
 }
 
-/**
- * Returns the authenticated session object for a given user ID,
- * but only if that user has an active, verified session in the current cookie.
- *
- * @param userId - The user ID to look up. This can be in human-readable
- * format (e.g., "usr_abc123") or UUID format.
- * @param cookie - (Optional) Raw session cookie string. If not provided, the
- * function reads it via `getSessionCookie()`.
- *
- * @returns The full `Session` object if a verified session exists for the given
- * user ID, or `undefined` otherwise.
- *
- * Notes:
- * - This function validates the session tokens in the cookie and performs
- *   verifier digest checks.
- * - Returns the full session, including timestamps and associated `user`.
- */
-export async function getAuthenticatedSession(
+export function getAuthenticatedSession(
   request: Request,
   userId: string | undefined,
-  cookie?: string,
-): Promise<Session | undefined> {
-  cookie ??= await getSessionCookie(request);
+): ResultAsync<Session, string> {
   userId = normalizeUserId(userId);
   if (!userId) {
-    return;
+    return errAsync("Invalid user ID");
   }
 
-  const { sessions } = await parseValidTokens(cookie);
-  return sessions.find((s) => s.userId === userId);
+  return loadContainerSession(request).andThen((container) => {
+    const { sessions } = container;
+    const session = sessions.find((s) => s.userId === userId);
+    if (!session) {
+      return errAsync("Session not found");
+    }
+    return okAsync(session);
+  });
 }
 
-export async function getFirstAuthenticatedUserId(request: Request) {
-  const cookie = await getSessionCookie(request);
-  const { sessions } = await parseValidTokens(cookie);
-  const first = sessions[0];
-  return first ? uuidToHumanId(first.userId, "usr") : undefined;
+export function getFirstAuthenticatedUserId(request: Request) {
+  return getActiveSessions(request).andThen((sessions) => {
+    const first = sessions[0];
+    return first
+      ? okAsync(uuidToHumanId(first.userId, "usr"))
+      : errAsync("No active session");
+  });
 }
 
 function normalizeUserId(userId?: string): string | undefined {

@@ -1,5 +1,6 @@
 import { humanIdToUuid } from "@noo/lib/humanIds";
 import { count, eq, SQL } from "drizzle-orm";
+import { ResultAsync } from "neverthrow";
 import db, { schema } from ".";
 
 function find(sessionId: string) {
@@ -29,10 +30,17 @@ async function select(conditions: SQL) {
   });
 }
 
-async function create(attributes: typeof schema.sessions.$inferInsert) {
-  return (
-    await db.insert(schema.sessions).values(attributes).returning()
-  ).pop()!;
+function create(attributes: typeof schema.sessions.$inferInsert) {
+  return ResultAsync.fromPromise(
+    db
+      .insert(schema.sessions)
+      .values(attributes)
+      .returning()
+      .then((rows) => rows[0]),
+    (e: any) => {
+      throw e;
+    },
+  );
 }
 
 function refresh(
@@ -48,10 +56,15 @@ function refresh(
     lastAuthenticatedAt: authenticatedAt,
   };
 
-  return db
-    .update(schema.sessions)
-    .set(attributes)
-    .where(eq(schema.sessions.id, sessionId));
+  return ResultAsync.fromPromise(
+    db
+      .update(schema.sessions)
+      .set(attributes)
+      .where(eq(schema.sessions.id, sessionId)),
+    (e: any) => {
+      throw e;
+    },
+  );
 }
 
 function destroy(sessionId: string) {
@@ -59,7 +72,12 @@ function destroy(sessionId: string) {
     sessionId = humanIdToUuid(sessionId, "sess")!;
   }
 
-  return db.delete(schema.sessions).where(eq(schema.sessions.id, sessionId));
+  return ResultAsync.fromPromise(
+    db.delete(schema.sessions).where(eq(schema.sessions.id, sessionId)),
+    (e: any) => {
+      throw e;
+    },
+  );
 }
 
 function destroyBy(conditions: SQL) {

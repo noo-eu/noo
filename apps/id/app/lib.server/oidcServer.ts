@@ -63,7 +63,9 @@ function setup() {
         maxAge *= 1000;
       }
 
-      const activeSessions = await getActiveSessions(request, maxAge);
+      const activeSessions = (
+        await getActiveSessions(request, maxAge)
+      ).unwrapOr([]);
       return activeSessions.map((session) => {
         const userId = uuidToHumanId(session.userId, "usr");
 
@@ -89,7 +91,7 @@ function setup() {
       let context = {};
       const client = (await OidcClients.find(rawClientId))!;
       if (client.internalClient) {
-        const allSessions = await getActiveSessions(request);
+        const allSessions = (await getActiveSessions(request)).unwrapOr([]);
         context = {
           sessions: allSessions.map((session) => ({
             sessionId: uuidToHumanId(session.id, "sess"),
