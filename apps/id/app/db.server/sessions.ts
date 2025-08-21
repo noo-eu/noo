@@ -8,25 +8,28 @@ import {
   updateOne,
   type RecordShape,
 } from "./utils";
+import { useDbCtx } from "./repository";
 
-export const makeSessionsRepository = (dbc: DbCtx) => {
+export const makeSessionsRepository = (dbc?: DbCtx) => {
+  const getDbc = () => dbc ?? useDbCtx();
+
   const find = (sessionId: string) =>
     findOneOrNotFound(
-      dbc.query.sessions.findFirst({
+      getDbc().query.sessions.findFirst({
         where: eq(schema.sessions.id, sessionId),
         with: { user: { with: { tenant: true } } },
       }),
     );
 
   const findManyBy = (conditions: SQL) =>
-    dbc.query.sessions.findMany({
+    getDbc().query.sessions.findMany({
       where: conditions,
       with: { user: { with: { tenant: true } } },
     });
 
   const countBy = (conditions: SQL) =>
     handleDriverErrors(
-      dbc
+      getDbc()
         .select({ count: count() })
         .from(schema.sessions)
         .where(conditions)
@@ -34,14 +37,14 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
     );
 
   const select = (conditions: SQL) =>
-    dbc.query.sessions.findMany({
+    getDbc().query.sessions.findMany({
       where: conditions,
       with: { user: { with: { tenant: true } } },
     });
 
   const create = (attributes: typeof schema.sessions.$inferInsert) =>
     handleDriverErrors(
-      dbc
+      getDbc()
         .insert(schema.sessions)
         .values(attributes)
         .returning()
@@ -56,7 +59,7 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
     authenticatedAt?: Date,
   ) =>
     updateOne(
-      dbc
+      getDbc()
         .update(schema.sessions)
         .set({
           ip,
@@ -79,7 +82,7 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
     }
 
     return destroyUpToOne(
-      dbc
+      getDbc()
         .delete(schema.sessions)
         .where(
           and(
@@ -92,7 +95,7 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
   };
 
   const destroyBy = (conditions: SQL) =>
-    dbc.delete(schema.sessions).where(conditions);
+    getDbc().delete(schema.sessions).where(conditions);
 
   return {
     find,

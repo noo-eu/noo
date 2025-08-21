@@ -7,11 +7,14 @@ import {
   updateOne,
   type RecordShape,
 } from "./utils";
+import { useDbCtx } from "./repository";
 
-export const makeContainerSessionsRepository = (dbc: DbCtx) => {
+export const makeContainerSessionsRepository = (dbc?: DbCtx) => {
+  const getDbc = () => dbc ?? useDbCtx();
+
   const find = (containerSessionId: string) =>
     findOneOrNotFound(
-      dbc.query.containerSessions.findFirst({
+      getDbc().query.containerSessions.findFirst({
         where: eq(schema.containerSessions.id, containerSessionId),
         with: { sessions: { with: { user: { with: { tenant: true } } } } },
       }),
@@ -19,7 +22,7 @@ export const makeContainerSessionsRepository = (dbc: DbCtx) => {
 
   const select = (conditions: SQL) =>
     handleDriverErrors(
-      dbc.query.containerSessions.findMany({
+      getDbc().query.containerSessions.findMany({
         where: conditions,
         with: { sessions: { with: { user: { with: { tenant: true } } } } },
       }),
@@ -27,7 +30,7 @@ export const makeContainerSessionsRepository = (dbc: DbCtx) => {
 
   const create = (attributes: typeof schema.containerSessions.$inferInsert) =>
     handleDriverErrors(
-      dbc
+      getDbc()
         .insert(schema.containerSessions)
         .values({
           id: crypto.randomUUID(),
@@ -45,7 +48,7 @@ export const makeContainerSessionsRepository = (dbc: DbCtx) => {
     expectedVersion: number,
   ) =>
     updateOne(
-      dbc
+      getDbc()
         .update(schema.containerSessions)
         .set({
           lastUsedAt: new Date(),
@@ -63,7 +66,7 @@ export const makeContainerSessionsRepository = (dbc: DbCtx) => {
 
   const destroy = (containerSessionId: string) =>
     destroyUpToOne(
-      dbc
+      getDbc()
         .delete(schema.containerSessions)
         .where(eq(schema.containerSessions.id, containerSessionId))
         .returning(),

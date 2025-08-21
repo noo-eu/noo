@@ -11,6 +11,7 @@ export const sessionCookie = createCookie("__Host-noo-auth", {
   secure: true,
   sameSite: "lax",
   path: "/",
+  priority: "high",
 });
 
 export const sessionCheckCookie = createCookie("_noo-auth-check", {
