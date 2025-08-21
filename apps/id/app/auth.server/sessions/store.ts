@@ -1,10 +1,12 @@
 import { sha256 } from "@noo/lib/crypto";
 import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { createCookie } from "react-router";
-import type { SessionError } from ".";
+import type { SessionError } from "./errors";
+
+export const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 400;
 
 export const sessionCookie = createCookie("__Host-noo-auth", {
-  maxAge: 60 * 60 * 24 * 400,
+  maxAge: COOKIE_MAX_AGE_SECONDS,
   httpOnly: true,
   secure: true,
   sameSite: "lax",
@@ -12,7 +14,7 @@ export const sessionCookie = createCookie("__Host-noo-auth", {
 });
 
 export const sessionCheckCookie = createCookie("_noo-auth-check", {
-  maxAge: 60 * 60 * 24 * 400,
+  maxAge: COOKIE_MAX_AGE_SECONDS,
   httpOnly: false,
   secure: true,
   sameSite: "none",
@@ -24,7 +26,7 @@ export function getSessionCookie(
   return ResultAsync.fromPromise(
     sessionCookie.parse(request.headers.get("cookie")),
     () => ({
-      code: "INVALID_SESSION" as const,
+      code: "NO_SESSION" as const,
       message: "Cookie could not be parsed",
     }),
   ).andThen((cookie) =>
@@ -45,7 +47,7 @@ export function getSessionCheckCookie(
   return ResultAsync.fromPromise(
     sessionCheckCookie.parse(cookieHeader),
     () => ({
-      code: "INVALID_SESSION" as const,
+      code: "NO_SESSION" as const,
       message: "Cookie could not be parsed",
     }),
   ).andThen((cookie) =>

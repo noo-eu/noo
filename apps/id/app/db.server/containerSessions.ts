@@ -29,7 +29,12 @@ export const makeContainerSessionsRepository = (dbc: DbCtx) => {
     handleDriverErrors(
       dbc
         .insert(schema.containerSessions)
-        .values(attributes)
+        .values({
+          id: crypto.randomUUID(),
+          version: 0,
+          lastUsedAt: new Date(),
+          ...attributes,
+        })
         .returning()
         .then((rows) => ({ ...rows[0], sessions: [] })),
     );

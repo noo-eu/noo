@@ -1,39 +1,50 @@
 import { err, ok, type Result } from "neverthrow";
-import type { SessionError } from ".";
+import type { SessionError } from "./errors";
+
+const TOKEN_VERSION = "v1";
 
 export type SessionToken = {
-  sid: string;
+  id: string;
   verifier: string;
 };
 
 export function decodeSessionToken(
   token: string,
 ): Result<SessionToken, SessionError> {
-  if (token.length !== 64) {
+  const [ver, raw] = token.split(".", 2);
+
+  if (ver !== TOKEN_VERSION) {
     return err({
-      code: "INVALID_SESSION",
+      code: "NO_SESSION",
+      message: "Invalid session token version",
+    });
+  }
+
+  if (raw.length !== 64) {
+    return err({
+      code: "NO_SESSION",
       message: "Invalid session token length",
     });
   }
 
-  const buf = Buffer.from(token, "base64url");
+  const buf = Buffer.from(raw, "base64url");
   if (buf.length !== 48) {
     return err({
-      code: "INVALID_SESSION",
+      code: "NO_SESSION",
       message: "Invalid session token blob",
     });
   }
 
   return ok({
-    sid: bufferToUUID(buf.subarray(0, 16)),
+    id: bufferToUUID(buf.subarray(0, 16)),
     verifier: buf.subarray(16).toString("base64url"),
   });
 }
 
-export function encodeSessionToken({ sid, verifier }: SessionToken): string {
-  const sidBuf = Buffer.from(sid.replace(/-/g, ""), "hex");
+export function encodeSessionToken({ id, verifier }: SessionToken): string {
+  const idBuf = Buffer.from(id.replace(/-/g, ""), "hex");
   const verifierBuf = Buffer.from(verifier, "base64url");
-  return Buffer.concat([sidBuf, verifierBuf]).toString("base64url");
+  return `${TOKEN_VERSION}.${Buffer.concat([idBuf, verifierBuf]).toString("base64url")}`;
 }
 
 export function bufferToUUID(buf: Buffer): string {

@@ -33,7 +33,7 @@ const mockSession = {
 };
 
 const encodedToken = encodeSessionToken({
-  sid: mockSession.id,
+  id: mockSession.id,
   verifier: "yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE",
 });
 

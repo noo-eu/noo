@@ -8,7 +8,7 @@ import {
 describe("Session token encoding/decoding", () => {
   it("round-trips encode/decode", () => {
     const token = {
-      sid: "00000000-0000-0000-0000-000000000001",
+      id: "00000000-0000-0000-0000-000000000001",
       verifier: "yzS-Cx1NFjQlRFiUem8B6zn3S63-kq_XCBnXcoV5YYE",
     };
 
@@ -16,7 +16,7 @@ describe("Session token encoding/decoding", () => {
     const decoded = decodeSessionToken(encoded);
 
     expect(decoded).not.toBeNull();
-    expect(decoded?.sid).toBe(token.sid);
+    expect(decoded?.id).toBe(token.id);
     expect(decoded?.verifier).toBe(token.verifier);
   });
 

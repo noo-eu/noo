@@ -1,5 +1,5 @@
 import { humanIdToUuid } from "@noo/lib/humanIds";
-import { count, eq, SQL } from "drizzle-orm";
+import { and, count, eq, SQL } from "drizzle-orm";
 import { schema, type DbCtx } from ".";
 import {
   destroyUpToOne,
@@ -49,6 +49,7 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
     ).andThen((session) => find(session.id));
 
   const refresh = (
+    containerId: string,
     sessionId: string,
     ip: string,
     userAgent: string,
@@ -63,11 +64,16 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
           lastUsedAt: new Date(),
           lastAuthenticatedAt: authenticatedAt,
         })
-        .where(eq(schema.sessions.id, sessionId))
+        .where(
+          and(
+            eq(schema.sessions.containerSessionId, containerId),
+            eq(schema.sessions.id, sessionId),
+          ),
+        )
         .returning(),
     ).andThen(() => find(sessionId));
 
-  const destroy = (sessionId: string) => {
+  const destroy = (containerId: string, sessionId: string) => {
     if (sessionId.startsWith("sess_")) {
       sessionId = humanIdToUuid(sessionId, "sess")!;
     }
@@ -75,7 +81,12 @@ export const makeSessionsRepository = (dbc: DbCtx) => {
     return destroyUpToOne(
       dbc
         .delete(schema.sessions)
-        .where(eq(schema.sessions.id, sessionId))
+        .where(
+          and(
+            eq(schema.sessions.containerSessionId, containerId),
+            eq(schema.sessions.id, sessionId),
+          ),
+        )
         .returning(),
     );
   };
