@@ -58,14 +58,9 @@ function setup() {
     getJwk: getVerifyingKeyForJwt,
     getSigningJwk: async ({ alg }) => (await getSigningKey(alg))!,
     getActiveSessions: async (request: Request, maxAge?: number) => {
-      // We're given seconds, but we use milliseconds
-      if (maxAge !== undefined) {
-        maxAge *= 1000;
-      }
-
-      const activeSessions = (
-        await getActiveSessions(request, maxAge)
-      ).unwrapOr([]);
+      const activeSessions = await getActiveSessions(request, maxAge).unwrapOr(
+        [],
+      );
       return activeSessions.map((session) => {
         const userId = uuidToHumanId(session.userId, "usr");
 

@@ -8,16 +8,16 @@ import type { SessionError } from "./errors";
 
 export function getActiveSessions(
   request: Request,
-  maxAge?: number,
+  maxAgeSeconds?: number,
   tx?: Repository,
 ): ResultAsync<Session[], SessionError> {
   return loadContainerSession(tx ?? repository, request)
     .map((container) => {
-      if (maxAge !== undefined) {
+      if (maxAgeSeconds !== undefined) {
         const now = Date.now();
         return container.sessions.filter((s) => {
           const diff = now - s.lastUsedAt.getTime();
-          return diff < maxAge * 1000;
+          return diff < maxAgeSeconds * 1000;
         });
       }
 
