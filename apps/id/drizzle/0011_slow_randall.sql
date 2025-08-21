@@ -1,6 +1,7 @@
 CREATE TABLE "container_sessions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"verifier_digest" text NOT NULL,
+	"version" integer DEFAULT 0 NOT NULL,
 	"last_used_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint

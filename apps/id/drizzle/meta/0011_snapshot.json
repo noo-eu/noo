@@ -1,5 +1,5 @@
 {
-  "id": "81aca5cd-62d3-4c67-bdd0-e4b5107388c3",
+  "id": "5e79a080-be5e-4384-9fa8-075e43e80b2b",
   "prevId": "07a62605-c314-458b-b721-123d7a9e7c8c",
   "version": "7",
   "dialect": "postgresql",
@@ -20,6 +20,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         },
         "last_used_at": {
           "name": "last_used_at",
