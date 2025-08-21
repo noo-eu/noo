@@ -1,27 +1,6 @@
-import { humanIdToUuid } from "@noo/lib/humanIds";
 import { eq, SQL } from "drizzle-orm";
-import { DrizzleQueryError } from "drizzle-orm/errors";
-import { err, ok, ResultAsync } from "neverthrow";
 import db, { schema } from ".";
-
-function fromDatabasePromise<T>(
-  promise: Promise<T>,
-): ResultAsync<T, "NOT_FOUND"> {
-  return ResultAsync.fromPromise(promise, (e) => {
-    if (e instanceof DrizzleQueryError) {
-      return err("NOT_FOUND" as const);
-    }
-    throw e;
-  });
-}
-
-export function findOneOrNotFound<T>(
-  query: Promise<T | undefined>,
-): ResultAsync<T, "NOT_FOUND"> {
-  return ResultAsync.fromPromise(query, (e) => {
-    throw e;
-  }).andThen((row) => (row ? ok(row) : err("NOT_FOUND" as const)));
-}
+import { findOneOrNotFound, fromDatabasePromise, type OkType } from "./utils";
 
 function find(containerSessionId: string) {
   return findOneOrNotFound(
@@ -32,49 +11,49 @@ function find(containerSessionId: string) {
   );
 }
 
-async function select(conditions: SQL) {
-  return db.query.containerSessions.findMany({
-    where: conditions,
-    with: { sessions: { with: { user: { with: { tenant: true } } } } },
-  });
-}
+const select = (conditions: SQL) => {
+  fromDatabasePromise(
+    db.query.containerSessions.findMany({
+      where: conditions,
+      with: { sessions: { with: { user: { with: { tenant: true } } } } },
+    }),
+  );
+};
 
-function create(attributes: typeof schema.containerSessions.$inferInsert) {
-  return ResultAsync.fromPromise(
+const create = (attributes: typeof schema.containerSessions.$inferInsert) => {
+  fromDatabasePromise(
     db
       .insert(schema.containerSessions)
       .values(attributes)
       .returning()
       .then((rows) => ({ ...rows[0], sessions: [] })),
-    (e) => {
-      throw e;
-    },
   );
-}
+};
 
-function refresh(containerSessionId: string) {
-  return db
-    .update(schema.containerSessions)
-    .set({
-      lastUsedAt: new Date(),
-    })
-    .where(eq(schema.containerSessions.id, containerSessionId));
-}
+const refresh = (
+  containerSessionId: string,
+  verifierDigest: string,
+  version: number,
+) => {
+  fromDatabasePromise(
+    db
+      .update(schema.containerSessions)
+      .set({
+        lastUsedAt: new Date(),
+        verifierDigest,
+        version,
+      })
+      .where(eq(schema.containerSessions.id, containerSessionId)),
+  );
+};
 
-function destroy(containerSessionId: string) {
-  if (containerSessionId.startsWith("csess_")) {
-    containerSessionId = humanIdToUuid(containerSessionId, "csess")!;
-  }
-
-  return ResultAsync.fromPromise(
+const destroy = (containerSessionId: string) => {
+  fromDatabasePromise(
     db
       .delete(schema.containerSessions)
       .where(eq(schema.containerSessions.id, containerSessionId)),
-    (e) => {
-      throw e;
-    },
   );
-}
+};
 
 const ContainerSessions = {
   find,
@@ -83,8 +62,6 @@ const ContainerSessions = {
   destroy,
   refresh,
 };
-
-type OkType<R> = R extends ResultAsync<infer T, unknown> ? T : never;
 
 export default ContainerSessions;
 export type ContainerSession = Awaited<
