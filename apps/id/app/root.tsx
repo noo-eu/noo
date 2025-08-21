@@ -34,7 +34,7 @@ async function loadUser({ request, context }: LoaderFunctionArgs) {
   let user: UserWithTenant | undefined;
   const uid = new URL(request.url).searchParams.get("uid");
   if (uid) {
-    user = await getAuthenticatedUser(request, uid);
+    user = await getAuthenticatedUser(request, uid).unwrapOr(undefined);
   }
 
   context.set(userContext, user);

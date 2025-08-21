@@ -12,13 +12,13 @@ import { SignInForm } from "~/screens/signin/SignInForm";
 import { SignInSidePanel } from "~/screens/signin/SignInSidePanel";
 import { makeClientOidcClient } from "~/types/ClientOidcClient";
 
+import type { Tx } from "~/db.server";
 import {
   buildPowRequest,
   getCurrentPowStatus,
   markSigninFailure,
   withPow,
 } from "~/lib.server/signin.pow";
-import type { Tx } from "~/db.server";
 
 export async function loader({ request, context }: ActionFunctionArgs) {
   const oidcClient = await getOidcAuthorizationClient(request);
@@ -110,7 +110,7 @@ async function signinAction(
 
     if (result.data) {
       return redirect(result.data, {
-        headers: result.cookies.map((cookie) => ["Set-Cookie", cookie]),
+        headers: result.cookies,
       });
     }
 

@@ -37,7 +37,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
   }
 
   const sessions = await getActiveSessions(request);
-  if (sessions.length === 0) {
+  if (sessions.isErr()) {
     return redirect("/");
   }
 
@@ -45,7 +45,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 
   return {
     client: makeClientOidcClient(client, locale),
-    sessions: sessions.map(makeClientSession),
+    sessions: sessions.value.map(makeClientSession),
   };
 }
 
@@ -76,12 +76,12 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   const user = await getAuthenticatedUser(request, uid);
-  if (!user) {
+  if (user.isErr()) {
     return redirect("/oidc/switch");
   }
 
   // Check that the user is allowed to use this OIDC client
-  if (client.tenantId && client.tenantId !== user.tenantId) {
+  if (client.tenantId && client.tenantId !== user.value.tenantId) {
     return redirect("/oidc/switch");
   }
 
@@ -91,12 +91,14 @@ export async function action({ request }: ActionFunctionArgs) {
     ...oidcAuthRequest.claims.userinfo,
   });
 
-  if (await needsConsent(client, user, oidcAuthRequest.scopes, claimKeys)) {
+  if (
+    await needsConsent(client, user.value, oidcAuthRequest.scopes, claimKeys)
+  ) {
     redirect(`/oidc/consent?uid=${encodeURIComponent(uid)}`);
   }
 
   // Consent is not needed, fast forward to the authorization response
-  await finishOidcAuthorization(request, client, user, oidcAuthRequest);
+  await finishOidcAuthorization(request, client, user.value, oidcAuthRequest);
 }
 
 async function finishOidcAuthorization(
@@ -112,7 +114,9 @@ async function finishOidcAuthorization(
     oidcAuthRequest.claims,
   );
 
-  const session = (await getAuthenticatedSession(request, user.id))!;
+  const session = (
+    await getAuthenticatedSession(request, user.id)
+  )._unsafeUnwrap();
 
   const responseParams = await buildAuthorizationResponse(
     request,

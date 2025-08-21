@@ -15,7 +15,6 @@ import { getOidcAuthorizationClient } from "~/lib.server/oidc";
 import { localeContext } from "~/root";
 import { SignInSidePanel } from "~/screens/signin/SignInSidePanel";
 import { TotpForm } from "~/screens/signin/totp/TotpForm";
-import type { BasicFormAction } from "~/types/ActionResult";
 import { makeClientOidcClient } from "~/types/ClientOidcClient";
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
@@ -83,13 +82,11 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const result = await handleSuccessfulAuthentication(request, user, {});
   if (result.data) {
+    const jar = result.cookies;
+    jar.append("Set-Cookie", await totpCookie.serialize("", { maxAge: 0 }));
+
     throw redirect(result.data, {
-      headers: [
-        ["Set-Cookie", await totpCookie.serialize("", { maxAge: 0 })],
-        ...result.cookies.map(
-          (cookie) => ["Set-Cookie", cookie] as [string, string],
-        ),
-      ],
+      headers: jar,
     });
   }
 

@@ -137,7 +137,7 @@ function setup() {
       }
       return requestedUserClaims(user, claimKeys);
     },
-    getSessionStateValue: getSessionCheckCookie,
+    getSessionStateValue: (r) => getSessionCheckCookie(r).unwrapOr(""),
     enrichTokenResponse: async (client: Client, code: AuthorizationCode) => {
       const rawClientId = humanIdToUuid(client.clientId, "oidc")!;
       const dbClient = (await OidcClients.find(rawClientId))!;

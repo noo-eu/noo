@@ -1,12 +1,14 @@
 import { sha256 } from "@noo/lib/crypto";
-import { err, ok, ResultAsync } from "neverthrow";
+import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { createCookie } from "react-router";
+import type { SessionError } from ".";
 
 export const sessionCookie = createCookie("__Host-noo-auth", {
   maxAge: 60 * 60 * 24 * 400,
   httpOnly: true,
   secure: true,
   sameSite: "lax",
+  path: "/",
 });
 
 export const sessionCheckCookie = createCookie("_noo-auth-check", {
@@ -18,23 +20,58 @@ export const sessionCheckCookie = createCookie("_noo-auth-check", {
 
 export function getSessionCookie(
   request: Request,
-): ResultAsync<string, string> {
+): ResultAsync<string, SessionError> {
   return ResultAsync.fromPromise(
     sessionCookie.parse(request.headers.get("cookie")),
-    () => "BAD_COOKIE",
-  ).andThen((cookie) => (cookie ? ok(cookie) : err("NO_COOKIE")));
+    () => ({
+      code: "INVALID_SESSION" as const,
+      message: "Cookie could not be parsed",
+    }),
+  ).andThen((cookie) =>
+    cookie
+      ? okAsync(cookie)
+      : errAsync({
+          code: "NO_SESSION" as const,
+          message: "Cookie is blank",
+          cause: undefined,
+        }),
+  );
 }
 
-export async function getSessionCheckCookie(request: Request): Promise<string> {
+export function getSessionCheckCookie(
+  request: Request,
+): ResultAsync<string, SessionError> {
   const cookieHeader = request.headers.get("cookie");
-  return await sessionCheckCookie.parse(cookieHeader);
+  return ResultAsync.fromPromise(
+    sessionCheckCookie.parse(cookieHeader),
+    () => ({
+      code: "INVALID_SESSION" as const,
+      message: "Cookie could not be parsed",
+    }),
+  ).andThen((cookie) =>
+    cookie
+      ? okAsync(cookie)
+      : errAsync({
+          code: "NO_SESSION" as const,
+          message: "Cookie is blank",
+          cause: undefined,
+        }),
+  );
 }
 
-export async function setSessionCookie(value: string) {
-  const hash = sha256(value).digest("base64url");
+export async function writeSessionCookies(
+  jar: Headers,
+  value: string,
+  version: number,
+) {
+  const hash = sha256(`${value}:${version}`).digest("base64url");
 
-  return [
-    await sessionCookie.serialize(value),
-    await sessionCheckCookie.serialize(hash),
-  ];
+  jar.append("Set-Cookie", await sessionCookie.serialize(value));
+  jar.append("Set-Cookie", await sessionCheckCookie.serialize(hash));
+}
+
+export async function clearAuthCookies(jar: Headers) {
+  const expired = { expires: new Date(0) };
+  jar.append("Set-Cookie", await sessionCookie.serialize("", expired));
+  jar.append("Set-Cookie", await sessionCheckCookie.serialize("", expired));
 }

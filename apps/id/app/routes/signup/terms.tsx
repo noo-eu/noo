@@ -25,7 +25,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const result = await svc.runStep4(data);
 
   if (result.success) {
-    const cookies = await startSession(request, result.user);
+    const cookies = (await startSession(request, result.user))._unsafeUnwrap();
     const userId = uuidToHumanId(result.user.id, "usr");
 
     const oidcAuthorization = await getOidcAuthorizationClient(request);
@@ -35,7 +35,7 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     return redirect(target, {
-      headers: cookies.map((cookie) => ["Set-Cookie", cookie]),
+      headers: cookies,
     });
   } else {
     return redirect("/signup", {

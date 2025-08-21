@@ -14,8 +14,8 @@ import {
   performOidcAuthorization,
   returnToClient,
 } from "~/lib.server/oidcServer";
-import type { Route } from "./+types/authorize";
 import FormPost from "~/screens/formPost";
+import type { Route } from "./+types/authorize";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return await oidcAuthorization(request);
@@ -89,7 +89,7 @@ async function handleInternalApps(
   }
 
   // Just redirect to the client
-  const session = (await getActiveSessions(request))[0];
+  const session = (await getActiveSessions(request))._unsafeUnwrap()[0];
 
   const responseParams = await buildAuthorizationResponse(
     request,

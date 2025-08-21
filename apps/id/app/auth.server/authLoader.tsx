@@ -7,12 +7,14 @@ export function withAuth<T>(
 ): (args: LoaderFunctionArgs) => Promise<T> {
   return async (args: LoaderFunctionArgs): Promise<T> => {
     if (!args.context.get(userContext)) {
-      const userId = await getFirstAuthenticatedUserId(args.request);
-      if (userId) {
-        throw redirect(`?uid=${encodeURIComponent(userId)}`);
-      } else {
-        throw redirect("/signin");
-      }
+      await getFirstAuthenticatedUserId(args.request).match(
+        (userId) => {
+          throw redirect(`?uid=${encodeURIComponent(userId)}`);
+        },
+        () => {
+          throw redirect("/signin");
+        },
+      );
     }
 
     return loader(args);

@@ -1,99 +1,99 @@
 import { humanIdToUuid } from "@noo/lib/humanIds";
 import { count, eq, SQL } from "drizzle-orm";
-import { ResultAsync } from "neverthrow";
-import db, { schema } from ".";
+import { schema, type DbCtx } from ".";
+import {
+  destroyUpToOne,
+  findOneOrNotFound,
+  handleDriverErrors,
+  updateOne,
+  type RecordShape,
+} from "./utils";
 
-function find(sessionId: string) {
-  return db.query.sessions.findFirst({
-    where: eq(schema.sessions.id, sessionId),
-    with: { user: { with: { tenant: true } } },
-  });
-}
+export const makeSessionsRepository = (dbc: DbCtx) => {
+  const find = (sessionId: string) =>
+    findOneOrNotFound(
+      dbc.query.sessions.findFirst({
+        where: eq(schema.sessions.id, sessionId),
+        with: { user: { with: { tenant: true } } },
+      }),
+    );
 
-function findManyBy(conditions: SQL) {
-  return db.query.sessions.findMany({
-    where: conditions,
-    with: { user: { with: { tenant: true } } },
-  });
-}
+  const findManyBy = (conditions: SQL) =>
+    dbc.query.sessions.findMany({
+      where: conditions,
+      with: { user: { with: { tenant: true } } },
+    });
 
-async function countBy(conditions: SQL) {
-  return (
-    await db.select({ count: count() }).from(schema.sessions).where(conditions)
-  )[0].count;
-}
+  const countBy = (conditions: SQL) =>
+    handleDriverErrors(
+      dbc
+        .select({ count: count() })
+        .from(schema.sessions)
+        .where(conditions)
+        .then((rows) => rows[0].count),
+    );
 
-async function select(conditions: SQL) {
-  return db.query.sessions.findMany({
-    where: conditions,
-    with: { user: { with: { tenant: true } } },
-  });
-}
+  const select = (conditions: SQL) =>
+    dbc.query.sessions.findMany({
+      where: conditions,
+      with: { user: { with: { tenant: true } } },
+    });
 
-function create(attributes: typeof schema.sessions.$inferInsert) {
-  return ResultAsync.fromPromise(
-    db
-      .insert(schema.sessions)
-      .values(attributes)
-      .returning()
-      .then((rows) => rows[0]),
-    (e: any) => {
-      throw e;
-    },
-  );
-}
+  const create = (attributes: typeof schema.sessions.$inferInsert) =>
+    handleDriverErrors(
+      dbc
+        .insert(schema.sessions)
+        .values(attributes)
+        .returning()
+        .then((rows) => rows[0]),
+    ).andThen((session) => find(session.id));
 
-function refresh(
-  sessionId: string,
-  ip: string,
-  userAgent: string,
-  authenticatedAt?: Date,
-) {
-  const attributes = {
-    ip,
-    userAgent,
-    lastUsedAt: new Date(),
-    lastAuthenticatedAt: authenticatedAt,
+  const refresh = (
+    sessionId: string,
+    ip: string,
+    userAgent: string,
+    authenticatedAt?: Date,
+  ) =>
+    updateOne(
+      dbc
+        .update(schema.sessions)
+        .set({
+          ip,
+          userAgent,
+          lastUsedAt: new Date(),
+          lastAuthenticatedAt: authenticatedAt,
+        })
+        .where(eq(schema.sessions.id, sessionId))
+        .returning(),
+    ).andThen(() => find(sessionId));
+
+  const destroy = (sessionId: string) => {
+    if (sessionId.startsWith("sess_")) {
+      sessionId = humanIdToUuid(sessionId, "sess")!;
+    }
+
+    return destroyUpToOne(
+      dbc
+        .delete(schema.sessions)
+        .where(eq(schema.sessions.id, sessionId))
+        .returning(),
+    );
   };
 
-  return ResultAsync.fromPromise(
-    db
-      .update(schema.sessions)
-      .set(attributes)
-      .where(eq(schema.sessions.id, sessionId)),
-    (e: any) => {
-      throw e;
-    },
-  );
-}
+  const destroyBy = (conditions: SQL) =>
+    dbc.delete(schema.sessions).where(conditions);
 
-function destroy(sessionId: string) {
-  if (sessionId.startsWith("sess_")) {
-    sessionId = humanIdToUuid(sessionId, "sess")!;
-  }
-
-  return ResultAsync.fromPromise(
-    db.delete(schema.sessions).where(eq(schema.sessions.id, sessionId)),
-    (e: any) => {
-      throw e;
-    },
-  );
-}
-
-function destroyBy(conditions: SQL) {
-  return db.delete(schema.sessions).where(conditions);
-}
-
-const Sessions = {
-  find,
-  findManyBy,
-  countBy,
-  select,
-  create,
-  destroy,
-  destroyBy,
-  refresh,
+  return {
+    find,
+    findManyBy,
+    countBy,
+    select,
+    create,
+    destroy,
+    destroyBy,
+    refresh,
+  };
 };
 
-export default Sessions;
-export type Session = NonNullable<Awaited<ReturnType<typeof Sessions.find>>>;
+export type SessionsRepo = ReturnType<typeof makeSessionsRepository>;
+export type Session = RecordShape<SessionsRepo, "find">;

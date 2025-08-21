@@ -1,4 +1,5 @@
 import { err, ok, type Result } from "neverthrow";
+import type { SessionError } from ".";
 
 export type SessionToken = {
   sid: string;
@@ -7,14 +8,20 @@ export type SessionToken = {
 
 export function decodeSessionToken(
   token: string,
-): Result<SessionToken, string> {
+): Result<SessionToken, SessionError> {
   if (token.length !== 64) {
-    return err("Invalid session token length");
+    return err({
+      code: "INVALID_SESSION",
+      message: "Invalid session token length",
+    });
   }
 
   const buf = Buffer.from(token, "base64url");
   if (buf.length !== 48) {
-    return err("Invalid session token buffer length");
+    return err({
+      code: "INVALID_SESSION",
+      message: "Invalid session token blob",
+    });
   }
 
   return ok({

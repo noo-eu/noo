@@ -1,69 +1,79 @@
-import { eq, SQL } from "drizzle-orm";
-import db, { schema } from ".";
-import { findOneOrNotFound, fromDatabasePromise, type OkType } from "./utils";
+import { and, eq, SQL } from "drizzle-orm";
+import { schema, type DbCtx } from ".";
+import {
+  destroyUpToOne,
+  findOneOrNotFound,
+  handleDriverErrors,
+  updateOne,
+  type RecordShape,
+} from "./utils";
 
-function find(containerSessionId: string) {
-  return findOneOrNotFound(
-    db.query.containerSessions.findFirst({
-      where: eq(schema.containerSessions.id, containerSessionId),
-      with: { sessions: { with: { user: { with: { tenant: true } } } } },
-    }),
-  );
-}
+export const makeContainerSessionsRepository = (dbc: DbCtx) => {
+  const find = (containerSessionId: string) =>
+    findOneOrNotFound(
+      dbc.query.containerSessions.findFirst({
+        where: eq(schema.containerSessions.id, containerSessionId),
+        with: { sessions: { with: { user: { with: { tenant: true } } } } },
+      }),
+    );
 
-const select = (conditions: SQL) => {
-  fromDatabasePromise(
-    db.query.containerSessions.findMany({
-      where: conditions,
-      with: { sessions: { with: { user: { with: { tenant: true } } } } },
-    }),
-  );
+  const select = (conditions: SQL) =>
+    handleDriverErrors(
+      dbc.query.containerSessions.findMany({
+        where: conditions,
+        with: { sessions: { with: { user: { with: { tenant: true } } } } },
+      }),
+    );
+
+  const create = (attributes: typeof schema.containerSessions.$inferInsert) =>
+    handleDriverErrors(
+      dbc
+        .insert(schema.containerSessions)
+        .values(attributes)
+        .returning()
+        .then((rows) => ({ ...rows[0], sessions: [] })),
+    );
+
+  const refresh = (
+    containerSessionId: string,
+    verifierDigest: string,
+    expectedVersion: number,
+  ) =>
+    updateOne(
+      dbc
+        .update(schema.containerSessions)
+        .set({
+          lastUsedAt: new Date(),
+          verifierDigest,
+          version: expectedVersion + 1,
+        })
+        .where(
+          and(
+            eq(schema.containerSessions.id, containerSessionId),
+            eq(schema.containerSessions.version, expectedVersion),
+          ),
+        )
+        .returning(),
+    ).map((record) => ({ ...record, sessions: [] }));
+
+  const destroy = (containerSessionId: string) =>
+    destroyUpToOne(
+      dbc
+        .delete(schema.containerSessions)
+        .where(eq(schema.containerSessions.id, containerSessionId))
+        .returning(),
+    );
+
+  return {
+    find,
+    select,
+    create,
+    destroy,
+    refresh,
+  };
 };
 
-const create = (attributes: typeof schema.containerSessions.$inferInsert) => {
-  fromDatabasePromise(
-    db
-      .insert(schema.containerSessions)
-      .values(attributes)
-      .returning()
-      .then((rows) => ({ ...rows[0], sessions: [] })),
-  );
-};
-
-const refresh = (
-  containerSessionId: string,
-  verifierDigest: string,
-  version: number,
-) => {
-  fromDatabasePromise(
-    db
-      .update(schema.containerSessions)
-      .set({
-        lastUsedAt: new Date(),
-        verifierDigest,
-        version,
-      })
-      .where(eq(schema.containerSessions.id, containerSessionId)),
-  );
-};
-
-const destroy = (containerSessionId: string) => {
-  fromDatabasePromise(
-    db
-      .delete(schema.containerSessions)
-      .where(eq(schema.containerSessions.id, containerSessionId)),
-  );
-};
-
-const ContainerSessions = {
-  find,
-  select,
-  create,
-  destroy,
-  refresh,
-};
-
-export default ContainerSessions;
-export type ContainerSession = Awaited<
-  OkType<ReturnType<typeof ContainerSessions.find>>
+export type ContainerSessionsRepo = ReturnType<
+  typeof makeContainerSessionsRepository
 >;
+export type ContainerSession = RecordShape<ContainerSessionsRepo, "find">;

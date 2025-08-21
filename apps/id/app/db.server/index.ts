@@ -45,5 +45,7 @@ const client = drizzle(databaseUrl, { schema });
 );
 
 export type Tx = Parameters<Parameters<typeof client.transaction>[0]>[0];
+export type RootDb = typeof client;
+export type DbCtx = RootDb | Tx;
 
 export default client;

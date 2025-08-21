@@ -84,7 +84,7 @@ export async function action({ request, context, params }: ActionFunctionArgs) {
       return finish(client, reqParams.postLogoutRedirectUri, reqParams.state);
     }
 
-    const sessions = await getActiveSessions(request);
+    const sessions = (await getActiveSessions(request))._unsafeUnwrap();
 
     let matchingSession: Session | undefined;
     if (reqParams.sub && client) {
@@ -98,13 +98,19 @@ export async function action({ request, context, params }: ActionFunctionArgs) {
       }
     }
 
+    const jar = new Headers();
     if (!matchingSession) {
-      await endAllSessions(request);
+      await endAllSessions(request, jar);
     } else {
-      await endSession(request, matchingSession.id);
+      await endSession(request, jar, matchingSession.id);
     }
 
-    return finish(client, reqParams.postLogoutRedirectUri, reqParams.state);
+    return finish(
+      client,
+      reqParams.postLogoutRedirectUri,
+      reqParams.state,
+      jar,
+    );
   }
 }
 
@@ -222,9 +228,10 @@ function finish(
   client: OidcClient | undefined,
   postLogoutRedirectUri: string | undefined,
   state: string | undefined,
+  headers?: Headers,
 ) {
   if (!isValidRedirectUri(client, postLogoutRedirectUri)) {
-    return redirect("/");
+    return redirect("/", { headers });
   }
 
   const postRedirect = new URL(postLogoutRedirectUri!);
@@ -232,7 +239,7 @@ function finish(
     postRedirect.searchParams.set("state", state);
   }
 
-  return redirect(postRedirect.toString());
+  return redirect(postRedirect.toString(), { headers });
 }
 
 const isValidRedirectUri = (

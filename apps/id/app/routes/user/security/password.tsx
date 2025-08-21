@@ -5,7 +5,7 @@ import { emptyAuthLoader } from "~/auth.server/authLoader";
 import { userContext } from "~/auth.server/serverContext";
 import { getAuthenticatedSession } from "~/auth.server/sessions";
 import { schema } from "~/db.server";
-import Sessions from "~/db.server/sessions";
+import repository from "~/db.server/repository";
 import Users from "~/db.server/users.server";
 import { hashPassword } from "~/lib.server/SignupService";
 import { PasswordForm } from "~/screens/security/password/PasswordForm";
@@ -63,9 +63,11 @@ export async function action({
     passwordBreachesCheckedAt: undefined,
   });
 
-  const currentSession = (await getAuthenticatedSession(request, user.id))!;
+  const currentSession = (
+    await getAuthenticatedSession(request, user.id)
+  )._unsafeUnwrap();
   // Terminate all other sessions
-  await Sessions.destroyBy(
+  await repository.sessions.destroyBy(
     and(
       not(eq(schema.sessions.id, currentSession.id)),
       eq(schema.sessions.userId, user.id),

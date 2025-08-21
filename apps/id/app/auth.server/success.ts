@@ -1,4 +1,5 @@
 import { uuidToHumanId } from "@noo/lib/humanIds";
+import type { ResultAsync } from "neverthrow";
 import Tenants from "~/db.server/tenants";
 import type { User } from "~/db.server/users.server";
 import { getOidcAuthorizationClient } from "~/lib.server/oidc";
@@ -6,6 +7,7 @@ import {
   createSession,
   getAuthenticatedSession,
   reauthenticateSession,
+  type SessionError,
 } from "./sessions";
 
 export async function handleSuccessfulAuthentication<Input>(
@@ -30,7 +32,7 @@ export async function handleSuccessfulAuthentication<Input>(
     }
   }
 
-  const cookies = await startSession(request, user);
+  const cookies = (await startSession(request, user))._unsafeUnwrap();
 
   if (!oidcAuthorizationClient) {
     return { data: "/", input: { ...input, domain: undefined }, cookies };
@@ -44,12 +46,14 @@ export async function handleSuccessfulAuthentication<Input>(
   };
 }
 
-export async function startSession(request: Request, user: User) {
-  const session = await getAuthenticatedSession(request, user.id);
-  if (session.isOk()) {
-    // Update the lastAuthenticatedAt timestamp, which is used for the OIDC auth_time claim
-    return await reauthenticateSession(request, session.value.id);
-  } else {
-    return await createSession(request, user.id);
-  }
+export function startSession(
+  request: Request,
+  user: User,
+): ResultAsync<Headers, SessionError> {
+  const jar = new Headers();
+
+  return getAuthenticatedSession(request, user.id)
+    .andThen((session) => reauthenticateSession(request, jar, session.id))
+    .orElse(() => createSession(request, jar, user.id))
+    .map(() => jar);
 }

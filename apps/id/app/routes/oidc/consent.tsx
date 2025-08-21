@@ -227,7 +227,9 @@ async function handleConsent(
   oidcAuthRequest: AuthorizationRequest,
   user: UserWithTenant,
 ) {
-  const session = (await getAuthenticatedSession(request, user.id))!;
+  const session = (
+    await getAuthenticatedSession(request, user.id)
+  )._unsafeUnwrap();
 
   const clientId = humanIdToUuid(oidcAuthRequest.client_id, "oidc")!;
   const client = await OidcClients.find(clientId);
