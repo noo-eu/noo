@@ -4,8 +4,10 @@ packages:
   - tools/*
 onlyBuiltDependencies:
   - '@sentry/cli'
+  - '@tailwindcss/oxide'
   - argon2
   - esbuild
+  - puppeteer
   - sharp
   - unrs-resolver
 injectWorkspacePackages: true
