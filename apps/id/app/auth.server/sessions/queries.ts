@@ -1,5 +1,5 @@
 import { humanIdToUuid } from "@noo/lib/humanIds";
-import { ResultAsync, errAsync, okAsync } from "neverthrow";
+import { ResultAsync, err, errAsync, okAsync } from "neverthrow";
 import type { Session } from "~/db.server/sessions";
 import type { UserWithTenant } from "~/db.server/users.server";
 import { loadContainerSession } from "./container";
@@ -93,6 +93,20 @@ export function getAuthenticatedSession(
     }
     return okAsync(session);
   });
+}
+
+export function getFirstAuthenticatedUserId(
+  request: Request,
+): ResultAsync<string, SessionError> {
+  return getActiveSessions(request).andThen((sessions) =>
+    sessions.length > 0
+      ? okAsync(sessions[0].userId)
+      : errAsync({
+          code: "NO_SESSION" as const,
+          message: "No active session found",
+          cause: undefined,
+        }),
+  );
 }
 
 function normalizeUserId(userId?: string): string | undefined {

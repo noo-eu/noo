@@ -140,9 +140,9 @@ export function endAllSessions(
       .andThen((container) =>
         repository.containerSessions.destroy(container.id),
       )
+      .orElse((e) => (e.code === "NO_SESSION" ? okAsync() : errAsync(e)))
       .andTee(() => {
         afterCommit(() => clearAuthCookies(jar));
-      })
-      .orElse((e) => (e.code === "NO_SESSION" ? okAsync() : errAsync(e))),
+      }),
   ).mapErr(repoToSession);
 }

@@ -305,6 +305,10 @@ export const sessionRelations = relations(sessions, ({ one }) => ({
     fields: [sessions.userId],
     references: [users.id],
   }),
+  containerSession: one(containerSessions, {
+    fields: [sessions.containerSessionId],
+    references: [containerSessions.id],
+  }),
 }));
 
 export const userRelations = relations(users, ({ one, many }) => ({

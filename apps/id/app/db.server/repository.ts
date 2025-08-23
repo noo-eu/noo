@@ -108,29 +108,27 @@ export function withTransaction<T, E>(
 
   const runOnce = (dbc: DbCtx, queue: PostCommit[]) =>
     ResultAsync.fromPromise(
-      dbc.transaction(async (tx) => {
-        return await databaseContext.run({ txn: tx, queue }, async () => {
-          const result = await fn();
-          if (result.isErr()) {
-            err = result.error;
-            tx.rollback();
+      dbc.transaction(
+        async (tx) =>
+          await databaseContext.run({ txn: tx, queue }, async () =>
+            (await fn()).match(
+              (value) => value,
+              (error) => {
+                err = error;
+                tx.rollback();
 
-            throw new Error("unreachable"); // helps with type inference
-          } else {
-            return result.value;
-          }
-        });
-      }),
-      (ex) => {
-        if (err) {
-          return err;
-        }
-        return {
+                throw new Error("unreachable"); // helps with type inference
+              },
+            ),
+          ),
+      ),
+      (ex) =>
+        err ??
+        ({
           code: "DB_DRIVER_ERROR" as const,
           message: "Transaction failed",
           cause: ex,
-        };
-      },
+        } as RepositoryError),
     );
 
   if (parent) {
@@ -138,13 +136,13 @@ export function withTransaction<T, E>(
   }
 
   const queue: PostCommit<E | RepositoryError>[] = [];
-  const result = runOnce(db, []);
-
-  return queue.reduce<ResultAsync<T, E | RepositoryError>>(
-    (acc, cb) =>
-      acc.andThrough(() =>
-        normalizePostCommit(cb).mapErr<E | RepositoryError>((e) => e),
-      ),
-    result,
+  return runOnce(db, queue).andThrough((result) =>
+    queue.reduce<ResultAsync<T, E | RepositoryError>>(
+      (acc, cb) =>
+        acc.andThrough(() =>
+          normalizePostCommit(cb).mapErr<E | RepositoryError>((e) => e),
+        ),
+      okAsync(result),
+    ),
   );
 }
